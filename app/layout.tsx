@@ -25,8 +25,8 @@ const inter = Inter({
   display: 'swap',
 })
 
-const siteUrl    = process.env.SITE_URL    ?? 'https://tomaszmalczyk.pl'
-const authorName = process.env.AUTHOR_NAME ?? 'Tomasz Malczyk'
+const siteUrl    = process.env.SITE_URL    ?? 'https://example.com'
+const authorName = process.env.AUTHOR_NAME ?? 'Autor'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
