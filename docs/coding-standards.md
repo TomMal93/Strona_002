@@ -21,7 +21,8 @@ components/
   ui/                       # Reużywalne komponenty UI (Button, Card, Tag…)
   layout/                   # Header, Footer, Navigation, SmoothScroll
 lib/                        # Helpery, konfiguracja, stałe
-  cn.ts                     # clsx + tailwind-merge helper
+  utils.ts                  # clsx + tailwind-merge helper (cn)
+  site-content.ts           # centralne teksty strony (env + fallback)
 public/                     # Zasoby statyczne (obrazy, wideo, fonty)
 docs/                       # Dokumentacja projektu
 ```
@@ -29,9 +30,10 @@ docs/                       # Dokumentacja projektu
 ### Zasady
 
 - Jeden komponent = jeden plik. Nazwy plików w **PascalCase** (`Hero.tsx`, `ServiceCard.tsx`).
-- Helpery i utile w katalogu `lib/`, nazwy w **camelCase** (`cn.ts`, `formatDate.ts`).
+- Helpery i utile w katalogu `lib/`, nazwy w **camelCase** (`utils.ts`, `formatDate.ts`).
 - Nie tworzyć plików `index.ts` barrel exports — importy mają wskazywać bezpośrednio na plik.
 - Każdy nowy komponent sekcji trafia do `components/sections/`, każdy reużywalny element UI do `components/ui/`.
+- Jeśli wzorzec UI (markup + style + stany) występuje w >=2 miejscach, przenieść go do `components/ui/` (np. `Button`, `Card`, `Tag`).
 
 ---
 
@@ -84,7 +86,7 @@ import { useEffect, useRef } from 'react'
 // 1. Zewnętrzne importy
 import { gsap } from 'gsap'
 // 2. Wewnętrzne importy
-import { cn } from '@/lib/cn'
+import { cn } from '@/lib/utils'
 // 3. Import stylów modułu
 import styles from './Hero.module.css'
 
@@ -163,7 +165,7 @@ export default function Hero({ title }: HeroProps) {
 Projekt używa helpera `cn()` (`clsx` + `tailwind-merge`):
 
 ```ts
-// lib/cn.ts
+// lib/utils.ts
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
@@ -176,6 +178,13 @@ Używać `cn()` gdy:
 - Klasy są warunkowe (`cn('base', isActive && 'active-class')`)
 - Komponent przyjmuje `className` z zewnątrz (`cn(styles.root, className)`)
 - Trzeba mergować klasy Tailwind bez konfliktów
+
+### Reużywalne komponenty UI
+
+- Każdy reużywalny komponent UI trzymamy w `components/ui/` i eksportujemy jako domyślny komponent z pojedynczego pliku (np. `components/ui/Button.tsx`).
+- Komponenty UI przyjmują `className` i łączą klasy przez `cn()`; to umożliwia lokalne rozszerzenia bez duplikowania bazowych klas.
+- Dla wariantów wizualnych stosować jawne API propsów (`variant`, `size`), zamiast wielu flag bool i kopiowanych utility classes.
+- Nie duplikować globalnych klas typu `.btn-*` jeśli ten sam wzorzec jest już zamknięty w komponencie UI.
 
 ### globals.css — co może tam być
 
@@ -306,6 +315,8 @@ Konfiguracja w `next.config.mjs`. Wymagane nagłówki:
 - `.env.example` — template ze wszystkimi wymaganymi zmiennymi (bez wartości).
 - Zmienne publiczne (widoczne w kliencie) — prefix `NEXT_PUBLIC_`.
 - Zmienne serwerowe (bez prefixu) — dostępne tylko w Server Components i API Routes.
+- Treści marketingowe/SEO/CTA trzymać centralnie (np. `lib/site-content.ts`) i zasilać z env + fallbacków.
+- Teksty używane w Client Components muszą pochodzić ze zmiennych `NEXT_PUBLIC_*` albo statycznego źródła w repo (bez bezpośredniego czytania serwerowych env po stronie klienta).
 
 ### `dangerouslySetInnerHTML`
 
