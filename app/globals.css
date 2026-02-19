@@ -23,27 +23,6 @@
   .ui-overline {
     @apply font-inter text-xs uppercase tracking-overline text-khaki;
   }
-
-  .btn-base {
-    @apply font-inter text-sm font-semibold uppercase tracking-widest;
-    @apply px-6 py-3 transition-colors duration-300;
-    @apply focus-visible:outline focus-visible:outline-2;
-    @apply focus-visible:outline-khaki focus-visible:outline-offset-2;
-  }
-
-  .btn-primary {
-    @apply bg-khaki text-black-deep hover:bg-military-green;
-  }
-
-  .btn-outline {
-    @apply border border-khaki text-khaki;
-    @apply hover:bg-khaki hover:text-black-deep;
-  }
-
-  .btn-hero {
-    @apply rounded-micro bg-khaki px-8 py-4 text-warm-white;
-    @apply hover:bg-military-green;
-  }
 }
 
 /* Lenis smooth scroll — required styles (lenis/dist/lenis.css v1.1.x) */

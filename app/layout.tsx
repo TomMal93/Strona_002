@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Bebas_Neue, Inter } from 'next/font/google'
 import './globals.css'
 import SmoothScroll from '@/components/layout/SmoothScroll'
+import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 
 // --- Typography (design.md) ---
@@ -28,8 +29,7 @@ export const metadata: Metadata = {
     default: `Portfolio Fotograficzno-Wideo | ${authorName}`,
     template: `%s | ${authorName}`,
   },
-  description:
-    'Portfolio fotografa i operatora wideo — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
+  description: siteContent.seoDescription,
   robots: { index: true, follow: true },
   openGraph: {
     type: 'website',
@@ -37,8 +37,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: `${authorName} — Fotografia i Film`,
     title: `Portfolio Fotograficzno-Wideo | ${authorName}`,
-    description:
-      'Portfolio fotografa i operatora wideo — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
+    description: siteContent.seoDescription,
     images: [
       {
         url: '/og-image.jpg',
@@ -51,8 +50,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Portfolio Fotograficzno-Wideo | ${authorName}`,
-    description:
-      'Portfolio fotografa i operatora wideo — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
+    description: siteContent.seoDescription,
     images: ['/og-image.jpg'],
   },
   icons: {
@@ -66,8 +64,7 @@ const jsonLd = {
   '@type': 'ProfessionalService',
   name: authorName,
   url: siteUrl,
-  description:
-    'Fotografia i film — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
+  description: siteContent.structuredDataDescription,
   serviceType: ['Fotografia', 'Film', 'Drony'],
   areaServed: { '@type': 'Country', name: 'Poland' },
 }

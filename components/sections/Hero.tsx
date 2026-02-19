@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { cn } from '@/lib/utils'
+import { siteContent } from '@/lib/site-content'
+import Button from '@/components/ui/Button'
 import styles from './Hero.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -40,7 +42,7 @@ const heroClassNames = {
   contentWrapper: 'relative z-20 mx-auto flex h-full max-w-content flex-col justify-center px-6 lg:px-20',
   headline: 'font-bebas uppercase tracking-wider text-display sm:text-display-sm lg:text-display-lg text-warm-white',
   subtitle: 'mt-6 max-w-lg font-inter text-lg font-light text-warm-gray lg:text-xl',
-  cta: 'btn-base btn-hero mt-10 self-start inline-block',
+  cta: 'mt-10 self-start inline-block',
   scrollIndicator: 'absolute bottom-10 left-1/2 z-20 -translate-x-1/2 flex flex-col items-center gap-2',
 }
 
@@ -208,9 +210,9 @@ export default function Hero() {
           ref={headlineRef}
           className={heroClassNames.headline}
         >
-          <SplitLetters text="Zamrażam" />
+          <SplitLetters text={siteContent.hero.headlineLine1} />
           <br />
-          <SplitLetters text="Chwile" className="text-khaki" />
+          <SplitLetters text={siteContent.hero.headlineLine2} className="text-khaki" />
         </h1>
 
         {/* Subtitle — Inter Light */}
@@ -218,19 +220,21 @@ export default function Hero() {
           ref={subtitleRef}
           className={heroClassNames.subtitle}
         >
-          Fotografia i film — wydarzenia militarne, drony, ślub,
-          off&#8209;road i sesje rodzinne.
+          {siteContent.hero.subtitle}
         </p>
 
         {/* FR-04 — CTA button → #contact */}
         {/* design.md §5: "border-radius 2px, uppercase" */}
-        <a
+        <Button
+          as="a"
           ref={ctaRef}
           href="#contact"
+          variant="hero"
+          size="lg"
           className={heroClassNames.cta}
         >
-          Skontaktuj się
-        </a>
+          {siteContent.hero.ctaLabel}
+        </Button>
       </div>
 
       {/* ── Scroll indicator ──────────────────────────────────────────── */}

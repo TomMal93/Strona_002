@@ -1,5 +1,7 @@
 'use client'
 
+import Button from '@/components/ui/Button'
+
 type ErrorPageProps = {
   error: Error & { digest?: string }
   reset: () => void
@@ -19,19 +21,19 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <button
+          <Button
             type="button"
             onClick={reset}
-            className="btn-base btn-primary"
           >
             Sprobuj ponownie
-          </button>
-          <a
+          </Button>
+          <Button
+            as="a"
             href="/"
-            className="btn-base btn-outline"
+            variant="outline"
           >
             Wroc na start
-          </a>
+          </Button>
         </div>
       </div>
     </main>

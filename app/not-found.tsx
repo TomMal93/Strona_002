@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Button from '@/components/ui/Button'
 
 export default function NotFoundPage() {
   return (
@@ -9,12 +9,9 @@ export default function NotFoundPage() {
         <p className="mt-4 font-inter text-base text-warm-white/85">
           Adres jest niepoprawny albo strona zostala przeniesiona.
         </p>
-        <Link
-          href="/"
-          className="btn-base btn-primary mt-8 inline-block"
-        >
+        <Button as="a" href="/" className="mt-8 inline-block">
           Wroc na strone glowna
-        </Link>
+        </Button>
       </div>
     </main>
   )
