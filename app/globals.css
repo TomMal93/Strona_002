@@ -40,6 +40,10 @@
   90%  { transform: translate(-8%, 8%); }
 }
 
+.grain-overlay {
+  overflow: hidden;
+}
+
 .grain-overlay::before {
   content: '';
   position: absolute;
