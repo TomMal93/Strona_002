@@ -24,5 +24,9 @@ Strona portfolio dla fotografa i operatora wideo specjalizującego się w eventa
 Pełna dokumentacja projektu znajduje się w folderze [`docs/`](./docs/README.md):
 
 - [`docs/tech-spec.md`](./docs/tech-spec.md) — specyfikacja techniczna
+- [`docs/sections-order.md`](./docs/sections-order.md) — kolejność sekcji i wymagania funkcjonalne (FR)
+- [`docs/non-functional-requirements.md`](./docs/non-functional-requirements.md) — wymagania niefunkcjonalne (NFR)
+- [`docs/integrations.md`](./docs/integrations.md) — integracje zewnętrzne
+- [`docs/open-questions.md`](./docs/open-questions.md) — otwarte kwestie
 - [`docs/design.md`](./docs/design.md) — system designu
 - [`docs/decisions/`](./docs/decisions/) — decyzje architektoniczne (ADR)
