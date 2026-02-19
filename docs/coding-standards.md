@@ -156,6 +156,7 @@ export default function Hero({ title }: HeroProps) {
 - W module trafiają: `@keyframes`, pseudo-elementy (`::before`, `::after`), złożone selektory, animacje CSS.
 - Nazwy klas w **camelCase**: `.grainOverlay`, nie `.grain-overlay`.
 - Nie umieszczać w module tego, co robi Tailwind (spacing, kolory, flexbox).
+- Elementy z `inset` negatywnym (np. grain `::before` z `inset: -50%`) **muszą** mieć `overflow: hidden` na rodzicu — inaczej renderują się poza widocznym obszarem i marnują GPU (aud_001 #3).
 
 ### `cn()` helper
 
@@ -183,6 +184,12 @@ Używać `cn()` gdy:
 - Style Lenis (globalny smooth scroll)
 - `@media (prefers-reduced-motion: reduce)` — globalna reguła
 - **Nic więcej** — style komponentów idą do CSS Modules
+
+### Unikanie kolizji CSS (aud_001 #2, #7)
+
+- **Nie** deklarować `scroll-behavior: smooth` w CSS gdy Lenis jest aktywny — powoduje podwójne wygładzanie i jank. Lenis jest jedynym źródłem smooth scroll.
+- **Nie** pisać ręcznego resetu (`*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }`) — Tailwind Preflight (`@tailwind base`) robi to samo. Podwójna deklaracja to redundancja.
+- Przed dodaniem reguły do `globals.css` sprawdzić, czy Tailwind Preflight lub `@layer base` nie obsługuje tego już domyślnie.
 
 ---
 
@@ -221,11 +228,14 @@ if (prefersReducedMotion) {
 - Ustawiać w JS przez `gsap.set()`, **nie** w CSS.
 - Powód: SSR HTML musi być widoczny przed hydracją. Jeśli CSS ukryje elementy, użytkownik bez JS zobaczy pustą stronę.
 
-### ScrollTrigger + Lenis
+### ScrollTrigger + Lenis (aud_001 #1)
 
 - Lenis jest zintegrowany z GSAP ticker w `SmoothScroll.tsx`.
 - Nie tworzyć własnej instancji Lenis — używać globalnej.
 - ScrollTrigger działa automatycznie dzięki `lenis.on('scroll', ScrollTrigger.update)`.
+- Lenis **musi** być podpięty do GSAP ticker (`gsap.ticker.add`) i mieć wyłączony `lagSmoothing(0)`.
+  Bez tego ScrollTrigger widzi natywną pozycję scrolla, a Lenis ją przechwytuje — parallax i scroll-triggered animacje się rozjadą.
+- Integrację utrzymywać w jednym miejscu (`SmoothScroll.tsx`) — nie rozpraszać po komponentach.
 
 ### Easing i timing
 
@@ -236,7 +246,50 @@ if (prefersReducedMotion) {
 
 ---
 
-## 6. Bezpieczeństwo
+## 6. Next.js — konfiguracja i metadane (aud_001 #5, #6)
+
+### `next.config.mjs`
+
+Plik nie może być pusty. Wymagane minimum:
+
+```js
+const nextConfig = {
+  poweredByHeader: false,              // ukryj fingerprint
+  images: { remotePatterns: [...] },   // CDN / Cloudinary
+  async headers() { return [...] },    // nagłówki bezpieczeństwa
+}
+```
+
+Przy dodawaniu nowych zasobów zewnętrznych (CDN, API, embed) — aktualizować `images.remotePatterns` i `Content-Security-Policy`.
+
+### Metadata API
+
+Używać pełnego Metadata API Next.js w `layout.tsx`:
+
+```ts
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: { default: '...', template: '%s | ...' },
+  description: '...',
+  robots: { index: true, follow: true },
+  openGraph: { type: 'website', locale: 'pl_PL', ... },
+  twitter: { card: 'summary_large_image', ... },
+  icons: { icon: '/favicon.ico', apple: '/apple-touch-icon.png' },
+}
+```
+
+**Obowiązkowe pola:** `title`, `description`, `openGraph`, `twitter`, `robots`, `icons`, `metadataBase`.
+Przy dodawaniu nowej strony — uzupełniać `metadata` w `page.tsx` (dziedziczenie z layoutu + nadpisania).
+
+### Structured Data (JSON-LD) (aud_001 #11)
+
+- Każda strona publiczna powinna mieć schemat JSON-LD (np. `ProfessionalService`, `ImageGallery`).
+- JSON-LD renderować w `<head>` przez `<script type="application/ld+json">`.
+- Walidować schemat przez [Google Rich Results Test](https://search.google.com/test/rich-results).
+
+---
+
+## 7. Bezpieczeństwo
 
 ### Nagłówki HTTP
 
@@ -264,7 +317,7 @@ Konfiguracja w `next.config.mjs`. Wymagane nagłówki:
 
 ---
 
-## 7. Dostępność (a11y)
+## 8. Dostępność (a11y)
 
 ### Obowiązkowe
 
@@ -284,7 +337,7 @@ Konfiguracja w `next.config.mjs`. Wymagane nagłówki:
 
 ---
 
-## 8. Wydajność
+## 9. Wydajność
 
 ### Obrazy
 
@@ -293,21 +346,35 @@ Konfiguracja w `next.config.mjs`. Wymagane nagłówki:
 - `priority` na obrazach above the fold (Hero). Reszta — lazy loading (domyślnie).
 - Zawsze podawać `width` i `height` lub `fill` — zapobiega layout shift (CLS).
 
-### Fonty
+### Fonty (aud_001 #8)
 
 - Ładowanie przez `next/font/google` z `display: 'swap'`.
-- Nie dodawać fontów, których projekt nie używa.
+- **Nie** importować fontów na zapas — każdy font w `layout.tsx` musi być aktualnie używany w kodzie. Nieużywany font to 20–40 KB dodane do initial load.
 - CSS variables (`--font-bebas`, `--font-inter`) — zdefiniowane w `layout.tsx`, używane w `tailwind.config.ts`.
+- `font-mocks.js` (CI) musi odpowiadać aktualnym fontom — po usunięciu fontu usunąć też mock.
 
 ### Bundle
 
-- Nie instalować paczek "na zapas" — każda zależność w `package.json` musi być używana w kodzie.
+- Nie instalować paczek "na zapas" — każda zależność w `package.json` musi być używana w kodzie. Nieużywana paczka to martwy balast w `node_modules` i potencjalne ryzyko bezpieczeństwa.
 - `'use client'` tylko tam, gdzie potrzebne — Server Components nie trafiają do client bundle.
 - Dynamiczne importy (`next/dynamic`) dla ciężkich komponentów below the fold.
 
+### GPU i compositing (aud_001 #10)
+
+- Elementy animowane przez GSAP (`transform`, `opacity`) powinny mieć `will-change: transform` jako hint dla GPU compositing.
+- Dodawać `will-change` **tylko** na elementach faktycznie animowanych — nadużywanie powoduje nadmierny memory overhead.
+- Elementy poza viewport nie powinny animować się ciągle — używać `ScrollTrigger` do aktywacji/deaktywacji.
+
+### Zewnętrzne biblioteki CSS (aud_001 #9)
+
+- Gdy paczka wymaga własnych stylów (np. Lenis `lenis/dist/lenis.css`), zaimportować je w odpowiednim scope:
+  - Globalne style → `globals.css` lub `layout.tsx`
+  - Komponentowe style → odpowiedni CSS Module lub Client Component
+- Nie odtwarzać ręcznie stylów biblioteki — mogą się zmienić przy aktualizacji paczki.
+
 ---
 
-## 9. Git i wersjonowanie
+## 10. Git i wersjonowanie
 
 ### Commit messages
 
@@ -341,7 +408,7 @@ Typy: `feat`, `fix`, `refactor`, `docs`, `chore`, `test`, `perf`.
 
 ---
 
-## 10. Struktura pliku konfiguracyjnego Tailwind
+## 11. Struktura pliku konfiguracyjnego Tailwind
 
 ```ts
 // tailwind.config.ts
@@ -384,3 +451,11 @@ export default config
 ```
 
 **Zasada:** Jeśli wartość pojawia się w więcej niż jednym miejscu — trafia do configa jako token. Jeśli pojawia się raz — dopuszczalny arbitrary value, ale preferowany jest token.
+
+---
+
+## Źródła
+
+Zasady oparte na wnioskach z audytów projektu:
+- `docs/audits/aud_001_2026-02-19.md` — audyt optymalizacyjny (Lenis/GSAP sync, CSS kolizje, metadane, wydajność)
+- `docs/audits/aud_002_code-review_2026-02-19.md` — code review (Tailwind inline, CSS Modules, bezpieczeństwo, a11y)
