@@ -26,9 +26,42 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Portfolio Fotograficzno-Wideo',
+  metadataBase: new URL('https://tomaszmalczyk.pl'),
+  title: {
+    default: 'Portfolio Fotograficzno-Wideo | Tomasz Malczyk',
+    template: '%s | Tomasz Malczyk',
+  },
   description:
     'Portfolio fotografa i operatora wideo — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
+  robots: { index: true, follow: true },
+  openGraph: {
+    type: 'website',
+    locale: 'pl_PL',
+    url: 'https://tomaszmalczyk.pl',
+    siteName: 'Tomasz Malczyk — Fotografia i Film',
+    title: 'Portfolio Fotograficzno-Wideo | Tomasz Malczyk',
+    description:
+      'Portfolio fotografa i operatora wideo — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Tomasz Malczyk — Fotografia i Film',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Portfolio Fotograficzno-Wideo | Tomasz Malczyk',
+    description:
+      'Portfolio fotografa i operatora wideo — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
+    images: ['/og-image.jpg'],
+  },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
