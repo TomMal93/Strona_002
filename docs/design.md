@@ -71,7 +71,7 @@ Strona ma łączyć dwa światy: **twardy, terenowy klimat** (survival, drony, o
 ### Zasady ogólne
 - Animacje mają być **celowe** — wzmacniają narrację, nie rozpraszają
 - Czas trwania: **300–800ms** dla elementów UI, **1000–2000ms** dla efektów cinematic
-- Easing: preferujemy `power2.out` (GSAP) i `easeOut` (Framer Motion)
+- Easing: preferujemy `power2.out` (GSAP)
 - Szanujemy `prefers-reduced-motion` — animacje wyłączone gdy użytkownik tego wymaga
 
 ### Efekty globalne
@@ -81,7 +81,6 @@ Strona ma łączyć dwa światy: **twardy, terenowy klimat** (survival, drony, o
 | Smooth scroll      | Lenis         | Płynne, "maślane" przewijanie całej strony        |
 | Grain texture      | CSS / Canvas  | Subtelny szum filmowy na hero i ciemnych sekcjach |
 | Custom cursor      | CSS + JS      | Crosshair zamiast domyślnego kursora (opcjonalnie)|
-| Page transition    | Framer Motion | Płynne przejście przy starcie strony              |
 
 ### Animacje sekcji
 

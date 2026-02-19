@@ -1,7 +1,7 @@
 # ADR-002: Wybór stosu technologicznego
 
 **Data:** 2026-02-19
-**Status:** Zaakceptowana
+**Status:** Zaakceptowana (zaktualizowana)
 
 ---
 
@@ -26,7 +26,7 @@ Projekt to strona portfolio dla fotografa i operatora wideo. Wymagania kluczowe:
 
 2. **Astro**
    - Zalety: Minimalny JS, bardzo szybkie ładowanie, Islands Architecture
-   - Wady: Słabsza integracja z bibliotekami React (GSAP, Framer Motion), mniej zasobów community
+   - Wady: Słabsza integracja z bibliotekami React (GSAP), mniej zasobów community
 
 3. **Nuxt.js (Vue)**
    - Zalety: Analogiczne możliwości do Next.js
@@ -38,11 +38,7 @@ Projekt to strona portfolio dla fotografa i operatora wideo. Wymagania kluczowe:
    - Zalety: Industry standard, niesamowita precyzja, timeline animations, scroll-triggered, używany przez Awwwards-level studia
    - Wady: Licencja biznesowa dla niektórych pluginów (ScrollTrigger jest darmowy)
 
-2. **Framer Motion**
-   - Zalety: Natywna integracja z React, proste deklaratywne API, page transitions
-   - Wady: Słabszy dla zaawansowanych timeline i scroll-triggered efektów
-
-3. **CSS Animations + Intersection Observer**
+2. **CSS Animations + Intersection Observer**
    - Zalety: Zero zależności, szybkie
    - Wady: Ograniczone możliwości, brak płynnych timeline
 
@@ -60,13 +56,12 @@ Projekt to strona portfolio dla fotografa i operatora wideo. Wymagania kluczowe:
 
 ## Decyzja
 
-Wybraliśmy **Next.js 14+ + GSAP + Framer Motion + Lenis**, ponieważ:
+Wybraliśmy **Next.js 14+ + GSAP + Lenis**, ponieważ:
 
 1. **Next.js** zapewnia optymalizację obrazów out-of-the-box (kluczowe dla galerii fotograficznej) oraz SEO przez SSG — bez dodatkowej konfiguracji
-2. **GSAP** daje pełną kontrolę nad złożonymi animacjami scroll-based, których nie osiągniemy CSS-em ani Framer Motion
-3. **Framer Motion** uzupełnia GSAP dla animacji komponentów React (mount/unmount, page transitions) — obie biblioteki dobrze współpracują
-4. **Lenis** to standard de facto dla portfolio premium — efekt przewijania bezpośrednio wpływa na postrzeganie jakości strony
-5. **Vercel** jako deploy — zero konfiguracji, darmowy plan wystarczający, automatyczny CI/CD z git
+2. **GSAP** daje pełną kontrolę nad złożonymi animacjami scroll-based, których nie osiągniemy samym CSS-em
+3. **Lenis** to standard de facto dla portfolio premium — efekt przewijania bezpośrednio wpływa na postrzeganie jakości strony
+4. **Vercel** jako deploy — zero konfiguracji, darmowy plan wystarczający, automatyczny CI/CD z git
 
 ---
 
@@ -79,5 +74,4 @@ Wybraliśmy **Next.js 14+ + GSAP + Framer Motion + Lenis**, ponieważ:
   - Szybki deployment i iteracja
 - Negatywne / kompromisy:
   - Wyższy próg wejścia niż Astro (Next.js + TypeScript)
-  - GSAP wymaga znajomości API (nie deklaratywny jak Framer Motion)
-  - Dwie biblioteki animacyjne wymagają świadomego podziału odpowiedzialności
+  - GSAP wymaga znajomości API (bardziej imperatywny model pracy)

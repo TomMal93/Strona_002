@@ -37,7 +37,6 @@ Strona portfolio dla fotografa i operatora wideo specjalizującego się w eventa
 | Język          | TypeScript             | Bezpieczeństwo typów, lepsza maintainability              |
 | Styling        | Tailwind CSS           | Szybkie budowanie UI, pełna kontrola nad wyglądem         |
 | Animacje       | GSAP + ScrollTrigger   | Industry standard, animacje scroll-based i timelines      |
-| Animacje       | Framer Motion          | Animacje React komponentów, page transitions              |
 | Smooth scroll  | Lenis                  | Premium efekt przewijania (jak Apple.com)                 |
 | Media hosting  | Cloudinary / Vercel Blob | CDN, automatyczna optymalizacja zdjęć i wideo            |
 | Deploy         | Vercel                 | Natywna integracja z Next.js, darmowy plan na start       |

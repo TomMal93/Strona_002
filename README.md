@@ -6,7 +6,7 @@ Strona portfolio dla fotografa i operatora wideo specjalizującego się w eventa
 
 - **Framework:** Next.js 14+ (App Router, TypeScript)
 - **Styling:** Tailwind CSS
-- **Animacje:** GSAP + ScrollTrigger, Framer Motion, Lenis
+- **Animacje:** GSAP + ScrollTrigger, Lenis
 - **Deploy:** Vercel
 
 ## Sekcje strony
