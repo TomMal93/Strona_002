@@ -72,22 +72,48 @@
 
 ### WAŻNE
 
-#### W1. `package-lock.json` w `.gitignore`
+#### W1. Rozbudowane łańcuchy klas Tailwind inline — brak abstrakcji
+- **Pliki:** `components/sections/Hero.tsx`, `app/layout.tsx`
+- Długie className strings (do 9 linii na jednym elemencie) utrudniają czytelność
+  i będą się powtarzać w kolejnych sekcjach (Services, About, Portfolio).
+- Przykład — CTA button (`Hero.tsx:161-170`):
+  ```
+  className="mt-10 self-start inline-block
+             font-inter font-semibold text-sm uppercase tracking-widest
+             px-8 py-4 bg-khaki text-warm-white rounded-[2px]
+             transition-colors duration-300 hover:bg-military-green
+             focus-visible:outline focus-visible:outline-2
+             focus-visible:outline-khaki focus-visible:outline-offset-2"
+  ```
+- Arbitrary values (`rounded-[2px]`, `text-[80px]`, `leading-[0.9]`) łamią system
+  design tokenów Tailwind — powinny być w `tailwind.config.ts` jako rozszerzenia.
+- Brak `cn()` helpera (`clsx` + `tailwind-merge`) — warunkowe klasy i merge propsów
+  będą problematyczne przy rozbudowie komponentów.
+- **Fix:**
+  1. Powtarzalne wzorce (button, heading) wydzielić przez `@apply` lub `cva` (class-variance-authority).
+  2. Arbitrary values przenieść do `tailwind.config.ts`:
+     ```ts
+     borderRadius: { sm: '2px' },
+     fontSize: { display: ['80px', { lineHeight: '0.9' }] },
+     ```
+  3. Dodać `cn()` helper: `npm install clsx tailwind-merge`.
+
+#### W2. `package-lock.json` w `.gitignore`
 - **Plik:** `.gitignore` (ostatnia linia)
 - Bez lockfile buildy nie są deterministyczne. `npm ci` nie zadziała.
 - **Fix:** Usunąć `package-lock.json` z `.gitignore`, wygenerować i scommitować lockfile.
 
-#### W2. `.gitignore` z szablonu Visual Studio (~250+ linii zbędnych reguł)
+#### W3. `.gitignore` z szablonu Visual Studio (~250+ linii zbędnych reguł)
 - **Plik:** `.gitignore`
 - Reguły dla C#, VB.NET, Azure, NuGet, Silverlight, F# — nieużywane.
 - **Fix:** Zastąpić czystym `.gitignore` dla Next.js (~20-30 linii).
 
-#### W3. `SplitLetters` nie obsługuje spacji
+#### W4. `SplitLetters` nie obsługuje spacji
 - **Plik:** `components/sections/Hero.tsx:17-29`
 - `inline-block` na spacji kolapsuje ją wizualnie.
 - **Fix:** `{char === ' ' ? '\u00A0' : char}` lub warunek na `&nbsp;`.
 
-#### W4. Brak `Content-Security-Policy`
+#### W5. Brak `Content-Security-Policy`
 - **Plik:** `next.config.mjs`
 - Pozostałe nagłówki bezpieczeństwa są, ale CSP — najważniejszy — brakuje.
 - **Fix:** Dodać bazowy CSP header.
@@ -141,7 +167,7 @@
 | Dostępność | Bardzo dobra |
 | Typografia / Fonty | Bardzo dobra |
 | Animacje / GSAP | Dobra |
-| CSS / Tailwind | Dobra |
+| CSS / Tailwind | Średnia (inline classes, arbitrary values) |
 | TypeScript | Dobra |
 | Konfiguracja buildu | Średnia |
 | Testy | Brak |
@@ -149,8 +175,9 @@
 
 ### Priorytety napraw
 1. Usunąć `framer-motion` z dependencies (K1)
-2. Commitować `package-lock.json` (W1)
-3. Wyczyścić `.gitignore` (W2)
-4. Dodać `Content-Security-Policy` (W4)
-5. Dodać `error.tsx` i `not-found.tsx` (S2)
-6. Usunąć Oswald z `font-mocks.js` (K2)
+2. Wydzielić powtarzalne klasy Tailwind — `cn()` helper, `@apply` / `cva`, tokeny w config (W1)
+3. Commitować `package-lock.json` (W2)
+4. Wyczyścić `.gitignore` (W3)
+5. Dodać `Content-Security-Policy` (W5)
+6. Dodać `error.tsx` i `not-found.tsx` (S2)
+7. Usunąć Oswald z `font-mocks.js` (K2)
