@@ -98,22 +98,39 @@
      ```
   3. Dodać `cn()` helper: `npm install clsx tailwind-merge`.
 
-#### W2. `package-lock.json` w `.gitignore`
+#### W2. Brak CSS Modules — style komponentów w `globals.css`
+- **Pliki:** `app/globals.css`, `components/sections/Hero.tsx`
+- `@keyframes grain`, `.grain-overlay` i `::before` to style specyficzne dla Hero,
+  ale żyją w `globals.css`. Przy kolejnych sekcjach (Services, About, Portfolio, Contact)
+  globals stanie się workiem na style wszystkich komponentów.
+- Next.js natywnie wspiera CSS Modules — brak dodatkowych zależności.
+- **Fix:** Przenieść style komponentowe do plików `*.module.css` przy komponentach:
+  ```
+  components/sections/
+    Hero.tsx
+    Hero.module.css      ← @keyframes grain, .grain-overlay, ::before
+    Services.tsx
+    Services.module.css
+  ```
+  W `globals.css` zostawić tylko: Tailwind directives, base body styles, Lenis styles,
+  `prefers-reduced-motion`.
+
+#### W3. `package-lock.json` w `.gitignore`
 - **Plik:** `.gitignore` (ostatnia linia)
 - Bez lockfile buildy nie są deterministyczne. `npm ci` nie zadziała.
 - **Fix:** Usunąć `package-lock.json` z `.gitignore`, wygenerować i scommitować lockfile.
 
-#### W3. `.gitignore` z szablonu Visual Studio (~250+ linii zbędnych reguł)
+#### W4. `.gitignore` z szablonu Visual Studio (~250+ linii zbędnych reguł)
 - **Plik:** `.gitignore`
 - Reguły dla C#, VB.NET, Azure, NuGet, Silverlight, F# — nieużywane.
 - **Fix:** Zastąpić czystym `.gitignore` dla Next.js (~20-30 linii).
 
-#### W4. `SplitLetters` nie obsługuje spacji
+#### W5. `SplitLetters` nie obsługuje spacji
 - **Plik:** `components/sections/Hero.tsx:17-29`
 - `inline-block` na spacji kolapsuje ją wizualnie.
 - **Fix:** `{char === ' ' ? '\u00A0' : char}` lub warunek na `&nbsp;`.
 
-#### W5. Brak `Content-Security-Policy`
+#### W6. Brak `Content-Security-Policy`
 - **Plik:** `next.config.mjs`
 - Pozostałe nagłówki bezpieczeństwa są, ale CSP — najważniejszy — brakuje.
 - **Fix:** Dodać bazowy CSP header.
@@ -176,8 +193,9 @@
 ### Priorytety napraw
 1. Usunąć `framer-motion` z dependencies (K1)
 2. Wydzielić powtarzalne klasy Tailwind — `cn()` helper, `@apply` / `cva`, tokeny w config (W1)
-3. Commitować `package-lock.json` (W2)
-4. Wyczyścić `.gitignore` (W3)
-5. Dodać `Content-Security-Policy` (W5)
-6. Dodać `error.tsx` i `not-found.tsx` (S2)
-7. Usunąć Oswald z `font-mocks.js` (K2)
+3. Przenieść style komponentowe do CSS Modules — odchudzić `globals.css` (W2)
+4. Commitować `package-lock.json` (W3)
+5. Wyczyścić `.gitignore` (W4)
+6. Dodać `Content-Security-Policy` (W6)
+7. Dodać `error.tsx` i `not-found.tsx` (S2)
+8. Usunąć Oswald z `font-mocks.js` (K2)
