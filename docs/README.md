@@ -7,13 +7,11 @@ Ten folder przechowuje całą dokumentację techniczną i operacyjną projektu *
 ```
 docs/
 ├── README.md              # Ten plik – przegląd dokumentacji
-├── tech-spec.md           # Specyfikacja techniczna projektu
-├── architecture.md        # Architektura systemu i diagramy
-├── api.md                 # Dokumentacja API (endpointy, schematy)
-├── deployment.md          # Instrukcja wdrożenia i konfiguracji środowisk
+├── tech-spec.md           # Specyfikacja techniczna projektu (stack, sekcje, wymagania)
+├── design.md              # System designu (kolory, typografia, animacje)
 ├── decisions/             # Architecture Decision Records (ADR)
-│   └── 001-example.md
-└── changelog.md           # Historia zmian projektu
+│   ├── 001-template-adr.md
+│   └── 002-stack-technologiczny.md
 ```
 
 ## Jak używać
