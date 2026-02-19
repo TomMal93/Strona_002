@@ -2,11 +2,15 @@
 
 import { useEffect } from 'react'
 import Lenis from 'lenis'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 /**
  * SmoothScroll — wraps the app with Lenis smooth-scroll.
- * Integrates with the global requestAnimationFrame loop so GSAP
- * ScrollTrigger can hook in seamlessly (tech-spec.md / ADR-002).
+ * Integrates with GSAP ticker so ScrollTrigger always receives
+ * Lenis scroll position (fix: aud_001 punkt 1).
  */
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -15,18 +19,18 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       smoothWheel: true,
     })
 
-    let frameId: number
+    lenis.on('scroll', ScrollTrigger.update)
 
-    function raf(time: number) {
-      lenis.raf(time)
-      frameId = requestAnimationFrame(raf)
+    function rafHandler(time: number) {
+      lenis.raf(time * 1000)
     }
 
-    frameId = requestAnimationFrame(raf)
+    gsap.ticker.add(rafHandler)
+    gsap.ticker.lagSmoothing(0)
 
     return () => {
-      cancelAnimationFrame(frameId)
       lenis.destroy()
+      gsap.ticker.remove(rafHandler)
     }
   }, [])
 
