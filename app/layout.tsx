@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Bebas_Neue, Oswald, Inter } from 'next/font/google'
+import { Bebas_Neue, Inter } from 'next/font/google'
 import './globals.css'
 import SmoothScroll from '@/components/layout/SmoothScroll'
 
@@ -8,13 +8,6 @@ const bebasNeue = Bebas_Neue({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-bebas',
-  display: 'swap',
-})
-
-const oswald = Oswald({
-  weight: ['500', '700'],
-  subsets: ['latin', 'latin-ext'],
-  variable: '--font-oswald',
   display: 'swap',
 })
 
@@ -73,7 +66,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`
           ${bebasNeue.variable}
-          ${oswald.variable}
           ${inter.variable}
           font-inter bg-black-deep text-warm-white
         `}

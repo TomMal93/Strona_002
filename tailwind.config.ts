@@ -20,7 +20,6 @@ const config: Config = {
       },
       fontFamily: {
         bebas:  ['var(--font-bebas)',  'sans-serif'],
-        oswald: ['var(--font-oswald)', 'sans-serif'],
         inter:  ['var(--font-inter)',  'sans-serif'],
       },
     },
