@@ -25,11 +25,14 @@ const inter = Inter({
   display: 'swap',
 })
 
+const siteUrl    = process.env.SITE_URL    ?? 'https://tomaszmalczyk.pl'
+const authorName = process.env.AUTHOR_NAME ?? 'Tomasz Malczyk'
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tomaszmalczyk.pl'),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: 'Portfolio Fotograficzno-Wideo | Tomasz Malczyk',
-    template: '%s | Tomasz Malczyk',
+    default: `Portfolio Fotograficzno-Wideo | ${authorName}`,
+    template: `%s | ${authorName}`,
   },
   description:
     'Portfolio fotografa i operatora wideo — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
@@ -37,9 +40,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'pl_PL',
-    url: 'https://tomaszmalczyk.pl',
-    siteName: 'Tomasz Malczyk — Fotografia i Film',
-    title: 'Portfolio Fotograficzno-Wideo | Tomasz Malczyk',
+    url: siteUrl,
+    siteName: `${authorName} — Fotografia i Film`,
+    title: `Portfolio Fotograficzno-Wideo | ${authorName}`,
     description:
       'Portfolio fotografa i operatora wideo — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
     images: [
@@ -47,13 +50,13 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Tomasz Malczyk — Fotografia i Film',
+        alt: `${authorName} — Fotografia i Film`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Portfolio Fotograficzno-Wideo | Tomasz Malczyk',
+    title: `Portfolio Fotograficzno-Wideo | ${authorName}`,
     description:
       'Portfolio fotografa i operatora wideo — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
     images: ['/og-image.jpg'],
