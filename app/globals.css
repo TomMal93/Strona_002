@@ -17,6 +17,28 @@
   }
 }
 
+/* Lenis smooth scroll — required styles (lenis/dist/lenis.css v1.1.x) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 /* Grain texture animation — used in Hero overlay (FR-02) */
 @keyframes grain {
   0%,
