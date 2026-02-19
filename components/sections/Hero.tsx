@@ -1,50 +1,10 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import Image from 'next/image'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { cn } from '@/lib/utils'
-import { siteContent } from '@/lib/site-content'
-import Button from '@/components/ui/Button'
-import styles from './Hero.module.css'
-
-gsap.registerPlugin(ScrollTrigger)
-
-/**
- * SplitLetters — renderuje każdą literę tekstu w osobnym <span>,
- * co pozwala na GSAP stagger per litera (design.md §4: "Litery/słowa
- * wjeżdżają od dołu — GSAP stagger").
- */
-function SplitLetters({
-  text,
-  className,
-}: {
-  text: string
-  className?: string
-}) {
-  return (
-    <>
-      {text.split('').map((char, i) => (
-        <span key={i} className={cn('inline-block split-char', className)}>
-          {char === ' ' ? '\u00A0' : char}
-        </span>
-      ))}
-    </>
-  )
-}
-
-const heroClassNames = {
-  section: 'relative w-full h-screen overflow-hidden bg-black-deep',
-  media: 'absolute inset-0 h-hero-media w-full will-change-transform',
-  gradientOverlay: 'absolute inset-0 bg-gradient-to-b from-black-deep/50 via-transparent to-black-deep/85',
-  grainOverlay: 'absolute inset-0 z-10 pointer-events-none',
-  contentWrapper: 'relative z-20 mx-auto flex h-full max-w-content flex-col justify-center px-6 lg:px-20',
-  headline: 'font-bebas uppercase tracking-wider text-display sm:text-display-sm lg:text-display-lg text-warm-white',
-  subtitle: 'mt-6 max-w-lg font-inter text-lg font-light text-warm-gray lg:text-xl',
-  cta: 'mt-10 self-start inline-block',
-  scrollIndicator: 'absolute bottom-10 left-1/2 z-20 -translate-x-1/2 flex flex-col items-center gap-2',
-}
+import { useRef } from 'react'
+import { heroClassNames } from './hero/classNames'
+import HeroBackground from './hero/HeroBackground'
+import HeroContent from './hero/HeroContent'
+import { useHeroAnimations } from './hero/useHeroAnimations'
 
 /**
  * Hero — sekcja pełnoekranowa (FR-01 … FR-04, tech-spec.md).
@@ -66,90 +26,14 @@ export default function Hero() {
   const heroVideoSrc = '/video/hero.mp4'
   const hasHeroVideo = false
 
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    // GSAP context scoped to this component — safe cleanup on unmount
-    const ctx = gsap.context(() => {
-      const chars = headlineRef.current?.querySelectorAll('.split-char')
-
-      if (prefersReducedMotion) {
-        // Skip all animations — reveal elements immediately (WCAG 2.1 SC 2.3.3)
-        gsap.set(chars ?? [], { autoAlpha: 1, y: 0 })
-        gsap.set([subtitleRef.current, ctaRef.current], { autoAlpha: 1, y: 0 })
-        gsap.set(scrollRef.current, { autoAlpha: 1 })
-        gsap.set(mediaRef.current, { opacity: 0.6 })
-        return
-      }
-
-      // Set initial hidden state (done here, not in CSS, so SSR HTML stays visible)
-      gsap.set(chars ?? [], { autoAlpha: 0, y: 50 })
-      gsap.set([subtitleRef.current, ctaRef.current], {
-        autoAlpha: 0,
-        y: 50,
-      })
-      gsap.set(scrollRef.current, { autoAlpha: 0 })
-
-      // FR-01 — Video fade-in: start hidden, reveal with delay
-      // (design.md §4: "Tło wideo pojawia się z opóźnieniem po załadowaniu")
-      gsap.set(mediaRef.current, { opacity: 0 })
-
-      // FR-03 — cinematic text reveal sequence
-      const tl = gsap.timeline({ delay: 0.4 })
-
-      // Video fade-in — runs first, overlaps with text reveal
-      tl.to(mediaRef.current, {
-        opacity: 0.6,
-        duration: 1.5,
-        ease: 'power2.out',
-      })
-        // Stagger per letter (design.md §4: "Litery/słowa wjeżdżają od dołu")
-        .to(
-          chars ?? [],
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.04,
-            ease: 'power2.out',
-          },
-          '-=1.0',
-        )
-        .to(
-          subtitleRef.current,
-          { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power2.out' },
-          '-=0.5',
-        )
-        .to(
-          ctaRef.current,
-          { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power2.out' },
-          '-=0.5',
-        )
-        .to(
-          scrollRef.current,
-          { autoAlpha: 1, duration: 0.6, ease: 'power2.out' },
-          '-=0.3',
-        )
-
-      // Parallax (design.md §4: "Tło przesuwa się wolniej niż scroll — efekt głębi")
-      gsap.fromTo(
-        mediaRef.current,
-        { yPercent: -5 },
-        {
-          yPercent: 15,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true,
-          },
-        },
-      )
-    })
-
-    return () => ctx.revert()
-  }, [])
+  useHeroAnimations({
+    sectionRef,
+    mediaRef,
+    headlineRef,
+    subtitleRef,
+    ctaRef,
+    scrollRef,
+  })
 
   return (
     <section
@@ -157,85 +41,17 @@ export default function Hero() {
       id="hero"
       className={heroClassNames.section}
     >
-      {/* ── FR-01: Video background + fallback image ───────────────────── */}
-      {/*
-       * h-hero-media daje zapas na ruch parallax (yPercent -5 → 15).
-       * Opacity sterowane przez GSAP (fade-in 0→0.6), nie przez CSS.
-       */}
-      <div
-        ref={mediaRef}
-        className={heroClassNames.media}
-        aria-hidden="true"
-      >
-        {hasHeroVideo ? (
-          <video
-            className="h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/video/hero-poster.jpg"
-          >
-            <source src={heroVideoSrc} type="video/mp4" />
-          </video>
-        ) : (
-          <Image
-            src="/video/hero-poster.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-        )}
-      </div>
-
-      {/* ── Gradient overlay (depth) ───────────────────────────────────── */}
-      <div
-        aria-hidden="true"
-        className={heroClassNames.gradientOverlay}
+      <HeroBackground
+        mediaRef={mediaRef}
+        hasHeroVideo={hasHeroVideo}
+        heroVideoSrc={heroVideoSrc}
       />
 
-      {/* ── FR-02: Grain texture overlay ──────────────────────────────── */}
-      <div
-        aria-hidden="true"
-        className={cn(heroClassNames.grainOverlay, styles.grainOverlay)}
+      <HeroContent
+        headlineRef={headlineRef}
+        subtitleRef={subtitleRef}
+        ctaRef={ctaRef}
       />
-
-      {/* ── FR-03 + FR-04: Content ─────────────────────────────────────── */}
-      <div className={heroClassNames.contentWrapper}>
-
-        {/* Headline — Bebas Neue, 96–120 px (design.md §3) */}
-        <h1
-          ref={headlineRef}
-          className={heroClassNames.headline}
-        >
-          <SplitLetters text={siteContent.hero.headlineLine1} />
-          <br />
-          <SplitLetters text={siteContent.hero.headlineLine2} className="text-khaki" />
-        </h1>
-
-        {/* Subtitle — Inter Light */}
-        <p
-          ref={subtitleRef}
-          className={heroClassNames.subtitle}
-        >
-          {siteContent.hero.subtitle}
-        </p>
-
-        {/* FR-04 — CTA button → #contact */}
-        {/* design.md §5: "border-radius 2px, uppercase" */}
-        <Button
-          as="a"
-          ref={ctaRef}
-          href="#contact"
-          variant="hero"
-          size="lg"
-          className={heroClassNames.cta}
-        >
-          {siteContent.hero.ctaLabel}
-        </Button>
-      </div>
 
       {/* ── Scroll indicator ──────────────────────────────────────────── */}
       <div
