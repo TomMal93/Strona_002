@@ -21,8 +21,17 @@ const config: Config = {
         bebas:  ['var(--font-bebas)',  'sans-serif'],
         inter:  ['var(--font-inter)',  'sans-serif'],
       },
+      maxWidth: {
+        content: '1280px',
+      },
+      height: {
+        'hero-media': '120%',
+      },
       borderRadius: {
         micro: '2px',
+      },
+      letterSpacing: {
+        overline: '0.2em',
       },
       fontSize: {
         display: ['80px', { lineHeight: '0.9' }],

@@ -34,13 +34,13 @@ function SplitLetters({
 
 const heroClassNames = {
   section: 'relative w-full h-screen overflow-hidden bg-black-deep',
-  media: 'absolute inset-0 h-[120%] w-full will-change-transform',
+  media: 'absolute inset-0 h-hero-media w-full will-change-transform',
   gradientOverlay: 'absolute inset-0 bg-gradient-to-b from-black-deep/50 via-transparent to-black-deep/85',
   grainOverlay: 'absolute inset-0 z-10 pointer-events-none',
-  contentWrapper: 'relative z-20 flex h-full max-w-[1280px] mx-auto flex-col justify-center px-6 lg:px-20',
+  contentWrapper: 'relative z-20 mx-auto flex h-full max-w-content flex-col justify-center px-6 lg:px-20',
   headline: 'font-bebas uppercase tracking-wider text-display sm:text-display-sm lg:text-display-lg text-warm-white',
   subtitle: 'mt-6 max-w-lg font-inter text-lg font-light text-warm-gray lg:text-xl',
-  cta: 'mt-10 self-start inline-block rounded-micro bg-khaki px-8 py-4 font-inter text-sm font-semibold uppercase tracking-widest text-warm-white transition-colors duration-300 hover:bg-military-green focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2',
+  cta: 'btn-base btn-hero mt-10 self-start inline-block',
   scrollIndicator: 'absolute bottom-10 left-1/2 z-20 -translate-x-1/2 flex flex-col items-center gap-2',
 }
 
@@ -157,7 +157,7 @@ export default function Hero() {
     >
       {/* ── FR-01: Video background + fallback image ───────────────────── */}
       {/*
-       * h-[120%] daje zapas na ruch parallax (yPercent -5 → 15).
+       * h-hero-media daje zapas na ruch parallax (yPercent -5 → 15).
        * Opacity sterowane przez GSAP (fade-in 0→0.6), nie przez CSS.
        */}
       <div
