@@ -22,6 +22,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     lenis.on('scroll', ScrollTrigger.update)
 
     function rafHandler(time: number) {
+      // GSAP ticker time is in seconds, Lenis expects milliseconds.
       lenis.raf(time * 1000)
     }
 
