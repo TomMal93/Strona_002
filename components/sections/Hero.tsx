@@ -51,9 +51,20 @@ export default function Hero() {
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
     // GSAP context scoped to this component — safe cleanup on unmount
     const ctx = gsap.context(() => {
       const chars = headlineRef.current?.querySelectorAll('.split-char')
+
+      if (prefersReducedMotion) {
+        // Skip all animations — reveal elements immediately (WCAG 2.1 SC 2.3.3)
+        gsap.set(chars ?? [], { autoAlpha: 1, y: 0 })
+        gsap.set([subtitleRef.current, ctaRef.current], { autoAlpha: 1, y: 0 })
+        gsap.set(scrollRef.current, { autoAlpha: 1 })
+        gsap.set(videoRef.current, { opacity: 0.6 })
+        return
+      }
 
       // Set initial hidden state (done here, not in CSS, so SSR HTML stays visible)
       gsap.set(chars ?? [], { autoAlpha: 0, y: 50 })
