@@ -152,7 +152,7 @@ export default function Hero() {
        */}
       <video
         ref={videoRef}
-        className="absolute inset-0 h-[120%] w-full object-cover"
+        className="absolute inset-0 h-[120%] w-full object-cover will-change-transform"
         autoPlay
         muted
         loop

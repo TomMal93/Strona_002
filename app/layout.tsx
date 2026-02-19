@@ -60,9 +60,26 @@ export const metadata: Metadata = {
   },
 }
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: authorName,
+  url: siteUrl,
+  description:
+    'Fotografia i film — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
+  serviceType: ['Fotografia', 'Film', 'Drony'],
+  areaServed: { '@type': 'Country', name: 'Poland' },
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pl">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`
           ${bebasNeue.variable}
