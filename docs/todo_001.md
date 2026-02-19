@@ -45,3 +45,20 @@ Po audycie:
 - Zaktualizować `docs/tech-spec.md` o nowe decyzje techniczne
 - Zaktualizować `docs/design.md` jeśli zmieniły się założenia UI
 - Dodać nowy plik `docs/audits/aud_002_RRRR-MM-DD.md` z wnioskami
+
+---
+
+## 4. Testy — migracja na Vitest (gdy wróci dostęp do npm)
+
+Aktualnie działają bramki jakości bez dodatkowych paczek:
+- `npm run typecheck`
+- `npm run lint`
+- `npm run test` (Node `node:test` + `--experimental-strip-types`)
+- `npm run check` (typecheck + lint + test)
+
+Powód: podczas próby instalacji Vitest środowisko zwracało `EAI_AGAIN` dla `registry.npmjs.org`.
+
+Po przywróceniu dostępu do internetu:
+- Zainstalować `vitest`, `jsdom`, `@testing-library/react`, `@testing-library/jest-dom`
+- Przenieść testy smoke z `node:test` do Vitest + Testing Library
+- Dodać konfigurację `vitest.config.ts` oraz `test/setup.ts`
