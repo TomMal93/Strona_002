@@ -51,7 +51,7 @@ Strona ma łączyć dwa światy: **twardy, terenowy klimat** (survival, drony, o
 |--------------|---------------|-------------|------------------------------------------|
 | Nagłówki H1  | `Bebas Neue`  | 400 (regular) | Hero hasło, tytuły sekcji              |
 | Nagłówki H2–H3 | `Oswald`   | 500–700     | Podtytuły sekcji, nazwy usług            |
-| Body / tekst | `Inter`       | 300–400     | Opisy, treść formularza, akapity         |
+| Body / tekst | `Inter`       | 300–400     | Opisy, akapity                           |
 | Akcenty      | `Inter`       | 600         | Etykiety, przyciski, tagi               |
 
 ### Skala typografii (desktop)
@@ -113,8 +113,7 @@ Strona ma łączyć dwa światy: **twardy, terenowy klimat** (survival, drony, o
 - **Cinematic reveal:** Sekcja otwiera się jak obiektyw (clip-path circle)
 
 #### Kontakt
-- **Form entrance:** Pola formularza wjeżdżają z lewej strony
-- **Submit animation:** Przycisk z efektem wypełnienia + potwierdzenie
+- **Entrance:** Dane kontaktowe i ikony social media wjeżdżają z dołu (stagger)
 
 ---
 

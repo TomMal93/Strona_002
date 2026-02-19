@@ -17,7 +17,7 @@ Strona portfolio dla fotografa i operatora wideo specjalizującego się w eventa
 - [ ] Prezentacja portfolio w formie wizualnej galerii z filtrowaniem
 - [ ] Pokazanie zakresu usług i specjalizacji fotografa
 - [ ] Budowanie zaufania przez oprawę wizualną i spójny branding
-- [ ] Generowanie zapytań ofertowych przez formularz kontaktowy
+- [ ] Udostępnienie danych kontaktowych i linków do social media
 - [ ] Integracja z mediami społecznościowymi (Instagram)
 
 ### Poza zakresem
@@ -52,7 +52,7 @@ Strona_002/
 │   ├── layout.tsx          # Root layout (font, meta, Lenis)
 │   ├── page.tsx            # Strona główna (wszystkie sekcje)
 │   └── api/
-│       └── contact/        # API route — formularz kontaktowy
+│       └── contact/        # Sekcja kontaktowa (dane, social media)
 ├── components/
 │   ├── sections/           # Sekcje strony (Hero, Services, About…)
 │   ├── ui/                 # Komponenty wielokrotnego użytku
@@ -101,10 +101,8 @@ Strona składa się z 7 sekcji w następującej kolejności:
 - **FR-20:** Możliwość dodania wielu filmów (demo reel, highlight)
 
 ### 5.7 Kontakt
-- **FR-21:** Formularz z polami: imię, e-mail, telefon, typ usługi, wiadomość
-- **FR-22:** Walidacja formularza (client-side + server-side)
-- **FR-23:** Linki do social media (Instagram, Facebook, YouTube)
-- **FR-24:** Opcjonalnie: numer telefonu i e-mail bezpośredni
+- **FR-21:** Linki do social media (Instagram, Facebook, YouTube)
+- **FR-22:** Numer telefonu i e-mail bezpośredni
 
 ---
 
@@ -118,7 +116,7 @@ Strona składa się z 7 sekcji w następującej kolejności:
 | Obrazy         | Automatyczna konwersja do WebP, lazy-loading           |
 | Responsywność  | Pełna responsywność: mobile, tablet, desktop           |
 | Animacje       | Redukcja animacji przy `prefers-reduced-motion`        |
-| Bezpieczeństwo | HTTPS, walidacja formularza, ochrona przed spam (honeypot) |
+| Bezpieczeństwo | HTTPS                                                  |
 
 ---
 
@@ -129,7 +127,6 @@ Strona składa się z 7 sekcji w następującej kolejności:
 | Instagram Basic API  | Live feed z ostatnich postów      |
 | YouTube / Vimeo      | Embed filmów w sekcji Pokaz wideo |
 | Cloudinary / Vercel  | Hosting i CDN dla mediów          |
-| Nodemailer / Resend  | Wysyłka e-maili z formularza      |
 
 ---
 
