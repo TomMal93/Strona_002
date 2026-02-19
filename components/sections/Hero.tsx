@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -25,7 +26,7 @@ function SplitLetters({
           key={i}
           className={`inline-block split-char${className ? ` ${className}` : ''}`}
         >
-          {char}
+          {char === ' ' ? '\u00A0' : char}
         </span>
       ))}
     </>
@@ -35,7 +36,7 @@ function SplitLetters({
 /**
  * Hero — sekcja pełnoekranowa (FR-01 … FR-04, tech-spec.md).
  *
- * FR-01  tło wideo: autoplay / mute / loop (element <video> z placeholderem)
+ * FR-01  tło wideo: autoplay / mute / loop + fallback statycznego obrazu
  *        + fade-in po załadowaniu (design.md §4)
  *        + parallax scroll (design.md §4: "Tło przesuwa się wolniej niż scroll")
  * FR-02  overlay z teksturą ziarna — animowany CSS (globals.css .grain-overlay)
@@ -44,11 +45,13 @@ function SplitLetters({
  */
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const mediaRef = useRef<HTMLDivElement>(null)
   const headlineRef = useRef<HTMLHeadingElement>(null)
   const subtitleRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLAnchorElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const heroVideoSrc = '/video/hero.mp4'
+  const hasHeroVideo = false
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -62,7 +65,7 @@ export default function Hero() {
         gsap.set(chars ?? [], { autoAlpha: 1, y: 0 })
         gsap.set([subtitleRef.current, ctaRef.current], { autoAlpha: 1, y: 0 })
         gsap.set(scrollRef.current, { autoAlpha: 1 })
-        gsap.set(videoRef.current, { opacity: 0.6 })
+        gsap.set(mediaRef.current, { opacity: 0.6 })
         return
       }
 
@@ -76,13 +79,13 @@ export default function Hero() {
 
       // FR-01 — Video fade-in: start hidden, reveal with delay
       // (design.md §4: "Tło wideo pojawia się z opóźnieniem po załadowaniu")
-      gsap.set(videoRef.current, { opacity: 0 })
+      gsap.set(mediaRef.current, { opacity: 0 })
 
       // FR-03 — cinematic text reveal sequence
       const tl = gsap.timeline({ delay: 0.4 })
 
       // Video fade-in — runs first, overlaps with text reveal
-      tl.to(videoRef.current, {
+      tl.to(mediaRef.current, {
         opacity: 0.6,
         duration: 1.5,
         ease: 'power2.out',
@@ -117,7 +120,7 @@ export default function Hero() {
 
       // Parallax (design.md §4: "Tło przesuwa się wolniej niż scroll — efekt głębi")
       gsap.fromTo(
-        videoRef.current,
+        mediaRef.current,
         { yPercent: -5 },
         {
           yPercent: 15,
@@ -141,27 +144,38 @@ export default function Hero() {
       id="hero"
       className="relative w-full h-screen overflow-hidden bg-black-deep"
     >
-      {/* ── FR-01: Video background ────────────────────────────────────── */}
+      {/* ── FR-01: Video background + fallback image ───────────────────── */}
       {/*
-       * UWAGA: brak pliku wideo — element <video> jest przygotowany
-       * strukturalnie. Dodaj plik /public/video/hero.mp4 (<10 MB, H.264)
-       * i odkomentuj <source>. Poster zastępuje obraz do czasu załadowania.
-       *
        * h-[120%] daje zapas na ruch parallax (yPercent -5 → 15).
        * Opacity sterowane przez GSAP (fade-in 0→0.6), nie przez CSS.
        */}
-      <video
-        ref={videoRef}
-        className="absolute inset-0 h-[120%] w-full object-cover will-change-transform"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="/video/hero-poster.jpg"
+      <div
+        ref={mediaRef}
+        className="absolute inset-0 h-[120%] w-full will-change-transform"
         aria-hidden="true"
       >
-        {/* <source src="/video/hero.mp4" type="video/mp4" /> */}
-      </video>
+        {hasHeroVideo ? (
+          <video
+            className="h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/video/hero-poster.jpg"
+          >
+            <source src={heroVideoSrc} type="video/mp4" />
+          </video>
+        ) : (
+          <Image
+            src="/video/hero-poster.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        )}
+      </div>
 
       {/* ── Gradient overlay (depth) ───────────────────────────────────── */}
       <div

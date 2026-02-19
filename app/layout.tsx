@@ -70,6 +70,7 @@ const jsonLd = {
   serviceType: ['Fotografia', 'Film', 'Drony'],
   areaServed: { '@type': 'Country', name: 'Poland' },
 }
+const jsonLdString = JSON.stringify(jsonLd).replace(/<\//g, '<\\/')
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -77,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdString }}
         />
       </head>
       <body
