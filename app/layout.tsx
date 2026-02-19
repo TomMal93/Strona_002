@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Bebas_Neue, Inter } from 'next/font/google'
 import './globals.css'
 import SmoothScroll from '@/components/layout/SmoothScroll'
+import { cn } from '@/lib/utils'
 
 // --- Typography (design.md) ---
 const bebasNeue = Bebas_Neue({
@@ -71,6 +72,11 @@ const jsonLd = {
   areaServed: { '@type': 'Country', name: 'Poland' },
 }
 const jsonLdString = JSON.stringify(jsonLd).replace(/<\//g, '<\\/')
+const bodyClassName = cn(
+  bebasNeue.variable,
+  inter.variable,
+  'font-inter bg-black-deep text-warm-white',
+)
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -81,13 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: jsonLdString }}
         />
       </head>
-      <body
-        className={`
-          ${bebasNeue.variable}
-          ${inter.variable}
-          font-inter bg-black-deep text-warm-white
-        `}
-      >
+      <body className={bodyClassName}>
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

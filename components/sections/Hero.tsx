@@ -4,6 +4,8 @@ import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { cn } from '@/lib/utils'
+import styles from './Hero.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -22,15 +24,24 @@ function SplitLetters({
   return (
     <>
       {text.split('').map((char, i) => (
-        <span
-          key={i}
-          className={`inline-block split-char${className ? ` ${className}` : ''}`}
-        >
+        <span key={i} className={cn('inline-block split-char', className)}>
           {char === ' ' ? '\u00A0' : char}
         </span>
       ))}
     </>
   )
+}
+
+const heroClassNames = {
+  section: 'relative w-full h-screen overflow-hidden bg-black-deep',
+  media: 'absolute inset-0 h-[120%] w-full will-change-transform',
+  gradientOverlay: 'absolute inset-0 bg-gradient-to-b from-black-deep/50 via-transparent to-black-deep/85',
+  grainOverlay: 'absolute inset-0 z-10 pointer-events-none',
+  contentWrapper: 'relative z-20 flex h-full max-w-[1280px] mx-auto flex-col justify-center px-6 lg:px-20',
+  headline: 'font-bebas uppercase tracking-wider text-display sm:text-display-sm lg:text-display-lg text-warm-white',
+  subtitle: 'mt-6 max-w-lg font-inter text-lg font-light text-warm-gray lg:text-xl',
+  cta: 'mt-10 self-start inline-block rounded-micro bg-khaki px-8 py-4 font-inter text-sm font-semibold uppercase tracking-widest text-warm-white transition-colors duration-300 hover:bg-military-green focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2',
+  scrollIndicator: 'absolute bottom-10 left-1/2 z-20 -translate-x-1/2 flex flex-col items-center gap-2',
 }
 
 /**
@@ -39,7 +50,7 @@ function SplitLetters({
  * FR-01  tło wideo: autoplay / mute / loop + fallback statycznego obrazu
  *        + fade-in po załadowaniu (design.md §4)
  *        + parallax scroll (design.md §4: "Tło przesuwa się wolniej niż scroll")
- * FR-02  overlay z teksturą ziarna — animowany CSS (globals.css .grain-overlay)
+ * FR-02  overlay z teksturą ziarna — animowany CSS (Hero.module.css)
  * FR-03  animowane hasło/podtytuł — GSAP stagger per litera (design.md §4)
  * FR-04  przycisk CTA → sekcja #contact, border-radius 2px (design.md §5)
  */
@@ -142,7 +153,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative w-full h-screen overflow-hidden bg-black-deep"
+      className={heroClassNames.section}
     >
       {/* ── FR-01: Video background + fallback image ───────────────────── */}
       {/*
@@ -151,7 +162,7 @@ export default function Hero() {
        */}
       <div
         ref={mediaRef}
-        className="absolute inset-0 h-[120%] w-full will-change-transform"
+        className={heroClassNames.media}
         aria-hidden="true"
       >
         {hasHeroVideo ? (
@@ -180,24 +191,22 @@ export default function Hero() {
       {/* ── Gradient overlay (depth) ───────────────────────────────────── */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-b from-black-deep/50 via-transparent to-black-deep/85"
+        className={heroClassNames.gradientOverlay}
       />
 
       {/* ── FR-02: Grain texture overlay ──────────────────────────────── */}
       <div
         aria-hidden="true"
-        className="grain-overlay absolute inset-0 z-10 pointer-events-none"
+        className={cn(heroClassNames.grainOverlay, styles.grainOverlay)}
       />
 
       {/* ── FR-03 + FR-04: Content ─────────────────────────────────────── */}
-      <div className="relative z-20 flex h-full flex-col justify-center max-w-[1280px] mx-auto px-6 lg:px-20">
+      <div className={heroClassNames.contentWrapper}>
 
         {/* Headline — Bebas Neue, 96–120 px (design.md §3) */}
         <h1
           ref={headlineRef}
-          className="font-bebas uppercase leading-[0.9] tracking-wider
-                     text-[80px] sm:text-[100px] lg:text-[120px]
-                     text-warm-white"
+          className={heroClassNames.headline}
         >
           <SplitLetters text="Zamrażam" />
           <br />
@@ -207,7 +216,7 @@ export default function Hero() {
         {/* Subtitle — Inter Light */}
         <p
           ref={subtitleRef}
-          className="mt-6 max-w-lg font-inter font-light text-lg lg:text-xl text-warm-gray"
+          className={heroClassNames.subtitle}
         >
           Fotografia i film — wydarzenia militarne, drony, ślub,
           off&#8209;road i sesje rodzinne.
@@ -218,15 +227,7 @@ export default function Hero() {
         <a
           ref={ctaRef}
           href="#contact"
-          className="mt-10 self-start inline-block
-                     font-inter font-semibold text-sm uppercase tracking-widest
-                     px-8 py-4
-                     bg-khaki text-warm-white
-                     rounded-[2px]
-                     transition-colors duration-300
-                     hover:bg-military-green
-                     focus-visible:outline focus-visible:outline-2
-                     focus-visible:outline-khaki focus-visible:outline-offset-2"
+          className={heroClassNames.cta}
         >
           Skontaktuj się
         </a>
@@ -236,8 +237,7 @@ export default function Hero() {
       <div
         ref={scrollRef}
         aria-hidden="true"
-        className="absolute bottom-10 left-1/2 z-20 -translate-x-1/2
-                   flex flex-col items-center gap-2"
+        className={heroClassNames.scrollIndicator}
       >
         <span className="font-inter text-xs uppercase tracking-widest text-warm-gray">
           Przewiń

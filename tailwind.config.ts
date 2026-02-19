@@ -22,6 +22,14 @@ const config: Config = {
         bebas:  ['var(--font-bebas)',  'sans-serif'],
         inter:  ['var(--font-inter)',  'sans-serif'],
       },
+      borderRadius: {
+        micro: '2px',
+      },
+      fontSize: {
+        display: ['80px', { lineHeight: '0.9' }],
+        'display-sm': ['100px', { lineHeight: '0.9' }],
+        'display-lg': ['120px', { lineHeight: '0.9' }],
+      },
     },
   },
   plugins: [],
