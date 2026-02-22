@@ -129,7 +129,7 @@ function ServiceCard({ item, desktopStartClassName }: ServiceCardProps) {
     <li
       data-service-card
       className={cn(
-        'h-full rounded-micro p-6 md:col-span-1 lg:col-span-2',
+        'h-full md:h-auto rounded-micro p-6 md:col-span-1 lg:col-span-2',
         desktopStartClassName,
         variantClassNames.card,
         styles.serviceCard,
@@ -144,13 +144,19 @@ function ServiceCard({ item, desktopStartClassName }: ServiceCardProps) {
 
         <h3
           className={cn(
-            'font-oswald text-3xl uppercase leading-[1.2] tracking-wide text-warm-white',
+            'font-oswald text-2xl md:text-3xl uppercase leading-[1.2] tracking-wide text-warm-white',
             variantClassNames.title,
             styles.cardTitle,
           )}
         >
           {item.title}
         </h3>
+
+        <span className={styles.iconDock}>
+          <span className={cn(styles.iconBadge, variantClassNames.badge)}>
+            <ServiceIcon icon={item.icon} className={variantClassNames.icon} />
+          </span>
+        </span>
 
         <p
           className={cn(
@@ -162,12 +168,6 @@ function ServiceCard({ item, desktopStartClassName }: ServiceCardProps) {
           {item.description}
         </p>
       </div>
-
-      <span className={styles.iconDock}>
-        <span className={cn(styles.iconBadge, variantClassNames.badge)}>
-          <ServiceIcon icon={item.icon} className={variantClassNames.icon} />
-        </span>
-      </span>
     </li>
   )
 }
@@ -179,7 +179,7 @@ type ServiceCardsRowProps = {
 
 function ServiceCardsRow({ items, startClassNames }: ServiceCardsRowProps) {
   return (
-    <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-6">
+    <ul className={cn('grid gap-5 md:gap-y-0 md:grid-cols-2 lg:grid-cols-6', styles.cardsGrid)}>
       {items.map((item, index) => (
         <ServiceCard
           key={item.title}
@@ -253,7 +253,7 @@ export default function Services() {
 
           <p
             className={cn(
-              'mt-5 max-w-2xl font-inter text-base leading-relaxed text-warm-gray sm:text-lg',
+              'mt-5 max-w-2xl font-oswald text-base tracking-wide leading-relaxed text-warm-gray sm:text-lg',
               styles.sectionIntro,
             )}
           >
