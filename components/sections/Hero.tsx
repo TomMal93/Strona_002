@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { useHeroAnimations } from './hero/useHeroAnimations'
+import styles from './Hero.module.css'
 
 /**
  * Hero — fullscreen two-column grid section (45 % / 55 %).
@@ -36,7 +37,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative h-screen w-full overflow-hidden bg-gradient-to-r from-[#0f0f12] to-[#1a1a1f]"
+      className={`h-screen w-full ${styles.sectionBackground}`}
     >
       <div className="flex h-full flex-col md:grid md:grid-cols-[45%_55%]">
         {/* ── Left Column — Content ─────────────────────────────────────── */}
