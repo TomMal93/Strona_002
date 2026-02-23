@@ -11,6 +11,7 @@
     ),
     radial-gradient(52% 45% at 90% 108%, rgb(74 82 64 / 0.18), rgb(74 82 64 / 0) 58%),
     linear-gradient(180deg, rgb(26 26 26) 0%, rgb(13 13 13) 100%);
+  background-attachment: fixed, scroll, scroll;
 }
 
 /* Grain texture overlay */
