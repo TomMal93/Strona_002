@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Bebas_Neue, Inter, Oswald } from 'next/font/google'
 import './globals.css'
+import Navbar from '@/components/layout/Navbar'
 import SmoothScroll from '@/components/layout/SmoothScroll'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={bodyClassName}>
+        <Navbar />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
