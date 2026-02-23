@@ -1,6 +1,7 @@
 .sectionBackground {
   position: relative;
   overflow: hidden;
+  /* Zaczyna od rgb(13 13 13) — dokładnie tam gdzie kończy Hero — brak skoku koloru */
   background:
     repeating-linear-gradient(
       45deg,
@@ -10,7 +11,7 @@
       rgb(74 82 64 / 0) 22px
     ),
     radial-gradient(52% 45% at 90% 108%, rgb(74 82 64 / 0.18), rgb(74 82 64 / 0) 58%),
-    linear-gradient(180deg, rgb(26 26 26) 0%, rgb(13 13 13) 100%);
+    linear-gradient(180deg, rgb(13 13 13) 0%, rgb(20 20 20) 35%, rgb(13 13 13) 100%);
 }
 
 /* Grain texture — ta sama rodzina co Hero */
@@ -26,14 +27,14 @@
   opacity: 0.55;
 }
 
-/* Winieting góra/dół */
+/* Winieting dół-only — brak ciemnienia góry, żeby nie duplikować cienia z Hero */
 .sectionBackground::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgb(0 0 0 / 0.22) 0%, transparent 16%, transparent 80%, rgb(0 0 0 / 0.3) 100%);
+    linear-gradient(180deg, transparent 0%, transparent 78%, rgb(0 0 0 / 0.32) 100%);
 }
 
 .sectionHeaderShell {

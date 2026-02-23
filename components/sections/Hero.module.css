@@ -26,12 +26,12 @@
   opacity: 0.55;
 }
 
-/* Vignette top/bottom */
+/* Vignette top-only — brak ciemnienia dołu, żeby płynnie przechodzić w sekcję Services */
 .sectionBackground::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgb(0 0 0 / 0.22) 0%, transparent 16%, transparent 80%, rgb(0 0 0 / 0.3) 100%);
+    linear-gradient(180deg, rgb(0 0 0 / 0.28) 0%, transparent 22%);
 }
