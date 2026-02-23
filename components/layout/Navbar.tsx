@@ -115,7 +115,7 @@ export default function Navbar() {
               key={item.href}
               href={item.href}
               className={[
-                'relative font-bebas text-[16px] tracking-[0.2em] uppercase',
+                'relative font-bebas text-[16px] tracking-[0.15em] uppercase',
                 'text-white/60 hover:text-white transition-colors duration-300',
                 'after:absolute after:bottom-[-2px] after:left-0 after:h-px after:w-0 after:bg-[#ff3b3b]',
                 'after:transition-[width] after:duration-300 hover:after:w-full',
@@ -167,7 +167,7 @@ export default function Navbar() {
             <a
               key={item.href}
               href={item.href}
-              className="font-bebas text-[28px] tracking-[0.2em] uppercase py-2 text-white/70 hover:text-white transition-colors duration-200"
+              className="font-bebas text-[28px] tracking-[0.15em] uppercase py-2 text-white/70 hover:text-white transition-colors duration-200"
               onClick={() => setMobileOpen(false)}
             >
               {item.label}
