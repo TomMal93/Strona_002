@@ -105,7 +105,7 @@ export default function Hero() {
         </div>
 
         {/* ── Right Column — Image + Decorative Circles ── */}
-        <div ref={mediaRef} className="relative h-[30vh] shrink-0 overflow-hidden md:h-full">
+        <div ref={mediaRef} className="relative h-[30vh] shrink-0 md:h-full">
           {/* Mobile: simple image, no circle */}
           <div className="relative z-[2] h-full md:hidden">
             <Image
@@ -144,15 +144,14 @@ export default function Hero() {
                   sizes="55vw"
                 />
               </div>
-
-              {/* Small decorative circle — positioned relative to large circle */}
-              <div
-                className="absolute z-[0] h-[38%] w-[38%] rounded-full bg-[#ff3b3b]"
-                style={{ bottom: '-20%', right: '-10%' }}
-                aria-hidden="true"
-              />
             </div>
           </div>
+
+          {/* Small decorative circle — original position relative to right column */}
+          <div
+            className="absolute bottom-[-120px] right-[20%] z-[1] hidden h-[250px] w-[250px] rounded-full bg-[#ff3b3b] md:block"
+            aria-hidden="true"
+          />
         </div>
       </div>
     </section>
