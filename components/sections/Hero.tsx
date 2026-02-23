@@ -104,31 +104,54 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── Right Column — Image + Decorative Circles (jeden element) ── */}
-        <div ref={mediaRef} className="relative h-[30vh] shrink-0 md:h-full">
-          {/* Large decorative circle */}
-          <div
-            className="absolute right-[10%] top-1/2 z-[1] hidden h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-[#ff3b3b] md:block"
-            aria-hidden="true"
-          />
-
-          {/* Small decorative circle */}
-          <div
-            className="absolute bottom-[-120px] right-[20%] z-[1] hidden h-[250px] w-[250px] rounded-full bg-[#ff3b3b] md:block"
-            aria-hidden="true"
-          />
-
-          {/* Hero image */}
-          <div className="relative z-[2] h-full">
+        {/* ── Right Column — Image + Decorative Circles ── */}
+        <div ref={mediaRef} className="relative h-[30vh] shrink-0 overflow-hidden md:h-full">
+          {/* Mobile: simple image, no circle */}
+          <div className="relative z-[2] h-full md:hidden">
             <Image
               src="/images/hero.png"
               alt=""
               fill
-              className="object-contain object-right-bottom"
+              className="object-contain object-center"
               priority
               quality={90}
-              sizes="55vw"
+              sizes="100vw"
             />
+          </div>
+
+          {/* Desktop: circle centered in column with image on top */}
+          <div className="absolute inset-0 hidden items-center justify-center md:flex">
+            {/* Reference box — same dimensions as large circle, responsive */}
+            <div
+              className="relative"
+              style={{ width: 'min(600px, 65vh)', height: 'min(600px, 65vh)' }}
+            >
+              {/* Large decorative circle */}
+              <div
+                className="absolute inset-0 z-[1] rounded-full bg-[#ff3b3b]"
+                aria-hidden="true"
+              />
+
+              {/* Hero image — 30% larger than circle (−15% on each side), centered */}
+              <div className="absolute -inset-[15%] z-[2]">
+                <Image
+                  src="/images/hero.png"
+                  alt=""
+                  fill
+                  className="object-contain object-center"
+                  priority
+                  quality={90}
+                  sizes="55vw"
+                />
+              </div>
+
+              {/* Small decorative circle — positioned relative to large circle */}
+              <div
+                className="absolute z-[0] h-[38%] w-[38%] rounded-full bg-[#ff3b3b]"
+                style={{ bottom: '-20%', right: '-10%' }}
+                aria-hidden="true"
+              />
+            </div>
           </div>
         </div>
       </div>
