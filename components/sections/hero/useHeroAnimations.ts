@@ -2,91 +2,111 @@
 
 import { useEffect } from 'react'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import type { HeroRefs } from './types'
 
-gsap.registerPlugin(ScrollTrigger)
-
+/**
+ * GSAP entrance animation for the hero section.
+ *
+ * Sequence: eyebrow → heading → description → CTA → image → circles
+ * Each element fades in and translates from y:40 → 0 with power3.out easing.
+ * Respects prefers-reduced-motion.
+ */
 export function useHeroAnimations({
   sectionRef,
-  mediaRef,
-  headlineRef,
-  subtitleRef,
+  eyebrowRef,
+  headingRef,
+  descriptionRef,
   ctaRef,
-  scrollRef,
+  imageRef,
+  largeCircleRef,
+  smallCircleRef,
 }: HeroRefs) {
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches
 
     const ctx = gsap.context(() => {
-      const chars = headlineRef.current?.querySelectorAll('.split-char')
+      const allTargets = [
+        eyebrowRef.current,
+        headingRef.current,
+        descriptionRef.current,
+        ctaRef.current,
+        imageRef.current,
+        largeCircleRef.current,
+        smallCircleRef.current,
+      ].filter(Boolean)
 
       if (prefersReducedMotion) {
-        gsap.set(chars ?? [], { autoAlpha: 1, y: 0 })
-        gsap.set([subtitleRef.current, ctaRef.current], { autoAlpha: 1, y: 0 })
-        gsap.set(scrollRef.current, { autoAlpha: 1 })
-        gsap.set(mediaRef.current, { opacity: 0.6 })
+        gsap.set(allTargets, { autoAlpha: 1, y: 0 })
         return
       }
 
-      gsap.set(chars ?? [], { autoAlpha: 0, y: 50 })
-      gsap.set([subtitleRef.current, ctaRef.current], {
-        autoAlpha: 0,
-        y: 50,
+      // Initial state — hidden & shifted down
+      gsap.set(allTargets, { autoAlpha: 0, y: 40 })
+
+      const tl = gsap.timeline({ delay: 0.3 })
+
+      // 1. Eyebrow
+      tl.to(eyebrowRef.current, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out',
       })
-      gsap.set(scrollRef.current, { autoAlpha: 0 })
-      gsap.set(mediaRef.current, { opacity: 0 })
 
-      const tl = gsap.timeline({ delay: 0.4 })
-
-      tl.to(mediaRef.current, {
-        opacity: 0.6,
-        duration: 1.5,
-        ease: 'power2.out',
-      })
-        .to(
-          chars ?? [],
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.04,
-            ease: 'power2.out',
-          },
-          '-=1.0',
-        )
-        .to(
-          subtitleRef.current,
-          { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power2.out' },
-          '-=0.5',
-        )
-        .to(
-          ctaRef.current,
-          { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power2.out' },
-          '-=0.5',
-        )
-        .to(
-          scrollRef.current,
-          { autoAlpha: 1, duration: 0.6, ease: 'power2.out' },
-          '-=0.3',
-        )
-
-      gsap.fromTo(
-        mediaRef.current,
-        { yPercent: -5 },
-        {
-          yPercent: 15,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true,
-          },
-        },
+      // 2. Heading
+      tl.to(
+        headingRef.current,
+        { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' },
+        '-=0.7',
       )
-    })
+
+      // 3. Description
+      tl.to(
+        descriptionRef.current,
+        { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' },
+        '-=0.7',
+      )
+
+      // 4. CTA
+      tl.to(
+        ctaRef.current,
+        { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' },
+        '-=0.7',
+      )
+
+      // 5. Image
+      tl.to(
+        imageRef.current,
+        { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' },
+        '-=0.7',
+      )
+
+      // 6. Circles (may be hidden on mobile via CSS — GSAP handles gracefully)
+      const circles = [
+        largeCircleRef.current,
+        smallCircleRef.current,
+      ].filter(Boolean)
+
+      if (circles.length > 0) {
+        tl.to(
+          circles,
+          { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' },
+          '-=0.7',
+        )
+      }
+    }, sectionRef)
 
     return () => ctx.revert()
-  }, [sectionRef, mediaRef, headlineRef, subtitleRef, ctaRef, scrollRef])
+  }, [
+    sectionRef,
+    eyebrowRef,
+    headingRef,
+    descriptionRef,
+    ctaRef,
+    imageRef,
+    largeCircleRef,
+    smallCircleRef,
+  ])
 }
