@@ -121,7 +121,7 @@ export default function Hero() {
         {/* ── Desktop image column ─────────────────────────────────────────── */}
         <div ref={mediaRef} className="hidden md:relative md:block md:h-full">
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="relative h-full w-full">
+            <div className="relative h-1/2 w-1/2">
               <Image
                 src="/images/hero.png"
                 alt=""
@@ -129,7 +129,7 @@ export default function Hero() {
                 className="object-contain object-center"
                 priority
                 quality={90}
-                sizes="55vw"
+                sizes="27vw"
               />
             </div>
           </div>
