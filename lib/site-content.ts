@@ -6,6 +6,7 @@ export const siteContent = {
     process.env.NEXT_PUBLIC_STRUCTURED_DATA_DESCRIPTION
     ?? 'Fotografia i film — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
   hero: {
+    eyebrow: process.env.NEXT_PUBLIC_HERO_EYEBROW ?? 'Fotografia & Film',
     headlineLine1: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_1 ?? 'Zamrażam',
     headlineLine2: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_2 ?? 'Chwile',
     subtitle:
