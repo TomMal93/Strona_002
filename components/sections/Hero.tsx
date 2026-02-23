@@ -7,14 +7,13 @@ import { useHeroAnimations } from './hero/useHeroAnimations'
 import styles from './Hero.module.css'
 
 /**
- * Hero — fullscreen two-column grid section (45 % / 55 %).
+ * Hero — fullscreen section.
  *
- * Left column:  eyebrow · heading · description · CTA row
- * Right column: hero image
+ * Mobile:    full-bleed image as background, content overlay at ~2/3 height.
+ * Desktop:   two-column grid (45 % / 55 %): content left, image right.
  *
- * Responsive:   single-column on mobile.
- * Scroll:       overflow-hidden — compatible with Lenis smooth scroll.
- * Animations:   GSAP entrance sequence on initial load.
+ * Scroll:    overflow-hidden — compatible with Lenis smooth scroll.
+ * Animations: GSAP entrance sequence on initial load.
  */
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -39,9 +38,24 @@ export default function Hero() {
       id="hero"
       className={`h-screen w-full ${styles.sectionBackground}`}
     >
-      <div className="flex h-full flex-col md:grid md:grid-cols-[45%_55%]">
-        {/* ── Left Column — Content ─────────────────────────────────────── */}
-        <div className="flex flex-1 flex-col justify-center px-6 py-10 md:px-12 md:py-0 lg:px-20">
+      {/* ── Mobile: full-bleed background image ─────────────────────────── */}
+      <div className="absolute inset-0 md:hidden">
+        <Image
+          src="/images/hero.png"
+          alt=""
+          fill
+          className="object-cover object-center"
+          priority
+          quality={90}
+          sizes="100vw"
+        />
+        {/* Gradient od dołu — czytelność tekstu */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+      </div>
+
+      <div className="relative z-10 flex h-full flex-col md:grid md:grid-cols-[45%_55%]">
+        {/* ── Content column ───────────────────────────────────────────────── */}
+        <div className="flex flex-1 flex-col justify-end px-6 pb-[22vh] md:justify-center md:px-12 md:py-0 lg:px-20">
           <div className="max-w-[500px]">
             {/* Eyebrow */}
             <span
@@ -79,7 +93,6 @@ export default function Hero() {
                 className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/40 transition-colors hover:border-white/70"
                 aria-label={siteContent.hero.ctaLabel}
               >
-                {/* Arrow icon */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -105,23 +118,9 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── Right Column — Image ── */}
-        <div ref={mediaRef} className="relative h-[30vh] shrink-0 md:h-full">
-          {/* Mobile */}
-          <div className="relative z-[2] h-full md:hidden">
-            <Image
-              src="/images/hero.png"
-              alt=""
-              fill
-              className="object-contain object-center"
-              priority
-              quality={90}
-              sizes="100vw"
-            />
-          </div>
-
-          {/* Desktop */}
-          <div className="absolute inset-0 hidden items-center justify-center md:flex">
+        {/* ── Desktop image column ─────────────────────────────────────────── */}
+        <div ref={mediaRef} className="hidden md:relative md:block md:h-full">
+          <div className="absolute inset-0 flex items-center justify-center">
             <div className="relative h-full w-full">
               <Image
                 src="/images/hero.png"
