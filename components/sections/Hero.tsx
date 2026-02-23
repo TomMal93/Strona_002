@@ -21,9 +21,7 @@ export default function Hero() {
   const headingRef = useRef<HTMLHeadingElement>(null)
   const descriptionRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
-  const imageRef = useRef<HTMLDivElement>(null)
-  const largeCircleRef = useRef<HTMLDivElement>(null)
-  const smallCircleRef = useRef<HTMLDivElement>(null)
+  const mediaRef = useRef<HTMLDivElement>(null)
 
   useHeroAnimations({
     sectionRef,
@@ -31,9 +29,7 @@ export default function Hero() {
     headingRef,
     descriptionRef,
     ctaRef,
-    imageRef,
-    largeCircleRef,
-    smallCircleRef,
+    mediaRef,
   })
 
   return (
@@ -108,24 +104,22 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── Right Column — Image + Decorative Circles ─────────────────── */}
-        <div className="relative h-[30vh] shrink-0 md:h-full">
+        {/* ── Right Column — Image + Decorative Circles (jeden element) ── */}
+        <div ref={mediaRef} className="relative h-[30vh] shrink-0 md:h-full">
           {/* Large decorative circle */}
           <div
-            ref={largeCircleRef}
             className="absolute right-[10%] top-1/2 z-[1] hidden h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-[#ff3b3b] md:block"
             aria-hidden="true"
           />
 
           {/* Small decorative circle */}
           <div
-            ref={smallCircleRef}
             className="absolute bottom-[-120px] right-[20%] z-[1] hidden h-[250px] w-[250px] rounded-full bg-[#ff3b3b] md:block"
             aria-hidden="true"
           />
 
           {/* Hero image */}
-          <div ref={imageRef} className="relative z-[2] h-full">
+          <div className="relative z-[2] h-full">
             <Image
               src="/images/hero.png"
               alt=""

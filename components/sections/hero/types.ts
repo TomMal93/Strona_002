@@ -6,7 +6,5 @@ export type HeroRefs = {
   headingRef: RefObject<HTMLHeadingElement>
   descriptionRef: RefObject<HTMLParagraphElement>
   ctaRef: RefObject<HTMLDivElement>
-  imageRef: RefObject<HTMLDivElement>
-  largeCircleRef: RefObject<HTMLDivElement>
-  smallCircleRef: RefObject<HTMLDivElement>
+  mediaRef: RefObject<HTMLDivElement>
 }

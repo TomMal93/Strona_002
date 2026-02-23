@@ -7,7 +7,7 @@ import type { HeroRefs } from './types'
 /**
  * GSAP entrance animation for the hero section.
  *
- * Sequence: eyebrow → heading → description → CTA → image → circles
+ * Sequence: eyebrow → heading → description → CTA → media (image + circles)
  * Each element fades in and translates from y:40 → 0 with power3.out easing.
  * Respects prefers-reduced-motion.
  */
@@ -17,9 +17,7 @@ export function useHeroAnimations({
   headingRef,
   descriptionRef,
   ctaRef,
-  imageRef,
-  largeCircleRef,
-  smallCircleRef,
+  mediaRef,
 }: HeroRefs) {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
@@ -32,9 +30,7 @@ export function useHeroAnimations({
         headingRef.current,
         descriptionRef.current,
         ctaRef.current,
-        imageRef.current,
-        largeCircleRef.current,
-        smallCircleRef.current,
+        mediaRef.current,
       ].filter(Boolean)
 
       if (prefersReducedMotion) {
@@ -76,26 +72,12 @@ export function useHeroAnimations({
         '-=0.7',
       )
 
-      // 5. Image
+      // 5. Media — image + circles as one element
       tl.to(
-        imageRef.current,
+        mediaRef.current,
         { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' },
         '-=0.7',
       )
-
-      // 6. Circles (may be hidden on mobile via CSS — GSAP handles gracefully)
-      const circles = [
-        largeCircleRef.current,
-        smallCircleRef.current,
-      ].filter(Boolean)
-
-      if (circles.length > 0) {
-        tl.to(
-          circles,
-          { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' },
-          '-=0.7',
-        )
-      }
     }, sectionRef)
 
     return () => ctx.revert()
@@ -105,8 +87,6 @@ export function useHeroAnimations({
     headingRef,
     descriptionRef,
     ctaRef,
-    imageRef,
-    largeCircleRef,
-    smallCircleRef,
+    mediaRef,
   ])
 }
