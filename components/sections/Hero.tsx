@@ -38,17 +38,21 @@ export default function Hero() {
       id="hero"
       className={`h-screen w-full ${styles.sectionBackground}`}
     >
-      {/* ── Mobile: full-bleed background image ─────────────────────────── */}
+      {/* ── Mobile: half-size centered image ────────────────────────────── */}
       <div className="absolute inset-0 md:hidden">
-        <Image
-          src="/images/hero.png"
-          alt=""
-          fill
-          className="object-cover object-center"
-          priority
-          quality={90}
-          sizes="100vw"
-        />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative h-1/2 w-1/2">
+            <Image
+              src="/images/hero.png"
+              alt=""
+              fill
+              className="object-contain object-center"
+              priority
+              quality={90}
+              sizes="50vw"
+            />
+          </div>
+        </div>
         {/* Gradient od dołu — czytelność tekstu */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
       </div>
@@ -120,8 +124,8 @@ export default function Hero() {
 
         {/* ── Desktop image column ─────────────────────────────────────────── */}
         <div ref={mediaRef} className="hidden md:relative md:block md:h-full">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="relative h-1/2 w-1/2">
+          <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+            <div className="relative h-[150%] w-[150%]">
               <Image
                 src="/images/hero.png"
                 alt=""
@@ -129,7 +133,7 @@ export default function Hero() {
                 className="object-contain object-center"
                 priority
                 quality={90}
-                sizes="27vw"
+                sizes="55vw"
               />
             </div>
           </div>
