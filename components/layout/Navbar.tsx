@@ -95,13 +95,13 @@ export default function Navbar() {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className="fixed top-0 left-0 right-0 z-50"
+    >
+      <div className={`flex items-center justify-between px-6 py-5 md:px-12 lg:px-20 transition-all duration-500 ${
         scrolled || mobileOpen
           ? 'bg-[#0f0f12]/90 backdrop-blur-md'
           : 'bg-transparent'
-      }`}
-    >
-      <div className="flex items-center justify-between px-6 py-5 md:px-12 lg:px-20">
+      }`}>
 
         {/* Logo */}
         <a href="#hero" aria-label="Strona główna" className="flex-shrink-0">
@@ -156,7 +156,7 @@ export default function Navbar() {
       <div
         ref={mobileMenuRef}
         id="mobile-menu"
-        className="invisible md:hidden border-t border-white/10"
+        className="invisible md:hidden border-t border-white/10 bg-[#0f0f12]/90 backdrop-blur-md"
         aria-hidden={!mobileOpen}
       >
         <nav
