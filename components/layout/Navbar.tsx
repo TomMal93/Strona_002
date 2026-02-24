@@ -1,40 +1,15 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import { gsap } from 'gsap'
+import logoImage from '@/public/images/logo_m.png'
 
 const NAV_ITEMS = [
   { label: 'O MNIE', href: '#about' },
   { label: 'GALERIA', href: '#portfolio' },
   { label: 'KONTAKT', href: '#contact' },
 ] as const
-
-function LogoMark() {
-  return (
-    <svg
-      width="40"
-      height="40"
-      viewBox="0 0 40 40"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      {/* Outer triangle — outline */}
-      <polygon
-        points="20,3 37,34 3,34"
-        fill="none"
-        stroke="#ff3b3b"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      {/* Inner triangle — filled */}
-      <polygon
-        points="20,14 30,32 10,32"
-        fill="#ff3b3b"
-      />
-    </svg>
-  )
-}
 
 export default function Navbar() {
   const [scrolled, setScrolled]       = useState(false)
@@ -104,15 +79,23 @@ export default function Navbar() {
       ref={headerRef}
       className="fixed top-0 left-0 right-0 z-50"
     >
-      <div className={`flex items-center justify-between px-6 py-5 md:px-12 lg:px-20 transition-all duration-500 ${
+      <div className={`flex items-center justify-between px-6 py-2 md:px-12 lg:px-20 transition-all duration-500 ${
         scrolled || mobileOpen
           ? 'bg-[#0f0f12]/90 backdrop-blur-md'
           : 'bg-transparent'
       }`}>
 
         {/* Logo */}
-        <a href="#hero" aria-label="Strona główna" className="flex-shrink-0">
-          <LogoMark />
+        <a href="#hero" aria-label="Strona główna" className="relative h-10 w-10 flex-shrink-0 md:h-12 md:w-12">
+          <Image
+            src={logoImage}
+            alt=""
+            width={192}
+            height={192}
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[192px] w-[192px] -translate-x-1/2 -translate-y-1/2 object-contain"
+            priority
+            aria-hidden="true"
+          />
         </a>
 
         {/* Desktop navigation */}
