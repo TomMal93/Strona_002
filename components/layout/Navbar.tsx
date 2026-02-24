@@ -42,18 +42,16 @@ export default function Navbar() {
   const headerRef                      = useRef<HTMLElement>(null)
   const mobileMenuRef                  = useRef<HTMLDivElement>(null)
 
-  /* Darken background after scrolling past the fold */
+  /* Darken background when Hero scrolls out of view */
   useEffect(() => {
-    let rafId: number
-    const onScroll = () => {
-      cancelAnimationFrame(rafId)
-      rafId = requestAnimationFrame(() => setScrolled(window.scrollY > 40))
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      cancelAnimationFrame(rafId)
-    }
+    const hero = document.getElementById('hero')
+    if (!hero) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { threshold: 0.1 },
+    )
+    observer.observe(hero)
+    return () => observer.disconnect()
   }, [])
 
   /* GSAP entrance — slides in from top */
