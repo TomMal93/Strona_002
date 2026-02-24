@@ -266,7 +266,7 @@ export default function Services() {
         <div className="mt-12 space-y-7 lg:mt-14 lg:space-y-9">
           <ServiceCardsRow items={topRowItems} startClassNames={TOP_ROW_START_CLASS_NAMES} colsClass="sm:grid-cols-2" />
           <div className={styles.rowDivider} aria-hidden="true" />
-          <ServiceCardsRow items={bottomRowItems} startClassNames={BOTTOM_ROW_START_CLASS_NAMES} colsClass="md:grid-cols-3" />
+          <ServiceCardsRow items={bottomRowItems} startClassNames={BOTTOM_ROW_START_CLASS_NAMES} colsClass="sm:grid-cols-2 md:grid-cols-3" />
         </div>
       </div>
     </section>

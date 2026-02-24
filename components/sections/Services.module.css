@@ -396,6 +396,13 @@
   }
 }
 
+/* Samotna 3. karta w dolnym rzędzie (2-kol sm) — pełna szerokość */
+@media (min-width: 640px) and (max-width: 767px) {
+  .serviceCard:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .serviceCard,
   .serviceCard::before,
