@@ -6,7 +6,7 @@ import { siteContent } from '@/lib/site-content'
 import { useHeroAnimations } from './hero/useHeroAnimations'
 import styles from './Hero.module.css'
 
-const HERO_IMAGE = '/images/hero.png'
+const HERO_IMAGE = '/images/hero.webp'
 
 /**
  * Hero — fullscreen section.
