@@ -254,7 +254,7 @@ export default function Services() {
 
           <p
             className={cn(
-              'mt-5 max-w-2xl font-inter text-base leading-relaxed text-warm-gray sm:text-lg',
+              'mt-5 max-w-2xl whitespace-pre-line font-inter font-light text-[16px] leading-[1.75] text-white/60',
               styles.sectionIntro,
             )}
           >

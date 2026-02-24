@@ -67,7 +67,7 @@ export default function Hero() {
             </h1>
 
             <div className="max-w-[34ch]">
-              <p className="mt-6 whitespace-pre-line pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/70">
+              <p className="mt-6 whitespace-pre-line pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/60">
                 {siteContent.hero.subtitle}
               </p>
                 <span aria-hidden="true" className="block h-px w-full bg-khaki/70" />
@@ -126,7 +126,7 @@ export default function Hero() {
             <div className="max-w-[34ch]">
               <p
                 ref={descriptionRef}
-                className="mt-6 whitespace-pre-line pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/70"
+                className="mt-6 whitespace-pre-line pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/60"
               >
                 {siteContent.hero.subtitle}
               </p>

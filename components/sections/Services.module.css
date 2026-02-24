@@ -43,14 +43,13 @@
   height: 2px;
   width: clamp(8rem, 18vw, 13rem);
   background:
-    linear-gradient(90deg, rgb(74 82 64 / 0.1) 0%, rgb(139 115 85 / 0.95) 50%, rgb(74 82 64 / 0.1) 100%);
+    linear-gradient(90deg, rgb(139 115 85 / 0.2) 0%, rgb(139 115 85 / 0.95) 50%, rgb(139 115 85 / 0.2) 100%);
   box-shadow:
     0 0 0 1px rgb(139 115 85 / 0.25),
     0 8px 20px rgb(139 115 85 / 0.2);
 }
 
 .sectionIntro {
-  color: rgb(197 184 172);
   max-width: 62ch;
 }
 
