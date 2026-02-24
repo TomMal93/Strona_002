@@ -33,3 +33,32 @@
   /* Removed mix-blend-mode: overlay — expensive pixel-by-pixel compositing */
 }
 
+.mobileTextHalo {
+  position: relative;
+  isolation: isolate;
+}
+
+.mobileTextHalo::after {
+  content: '';
+  position: absolute;
+  inset: -1.8rem -1.08rem -0.54rem;
+  z-index: -1;
+  border-radius: 0.9rem;
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    rgb(139 115 85 / 0.2) 0%,
+    rgb(139 115 85 / 0.08) 50%,
+    rgb(139 115 85 / 0.2) 100%
+  );
+  filter: blur(35px);
+}
+
+.mobileTextPanel {
+  background: rgb(8 8 8 / 0.38);
+  backdrop-filter: blur(4px);
+}
+
+.mobileTextPanel :is(h1, p, span, a) {
+  text-shadow: 0 2px 8px rgb(0 0 0 / 0.55);
+}

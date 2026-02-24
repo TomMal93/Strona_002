@@ -55,7 +55,7 @@ export default function Hero() {
         </div>
 
         <div className="ml-[70px] -mt-[380px] w-fit">
-          <div className="max-w-[500px] rounded-xl p-4 text-left backdrop-blur-md">
+          <div className={`max-w-[500px] rounded-xl p-4 text-left ${styles.mobileTextHalo} ${styles.mobileTextPanel}`}>
             <span className="block font-bebas text-[18px] uppercase tracking-heading text-white/60">
               {siteContent.hero.eyebrow}
             </span>
