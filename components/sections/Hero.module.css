@@ -9,9 +9,7 @@
       rgb(74 82 64 / 0) 1px,
       rgb(74 82 64 / 0) 22px
     ),
-    radial-gradient(52% 45% at 90% 108%, rgb(74 82 64 / 0.18), rgb(74 82 64 / 0) 58%),
-    linear-gradient(180deg, rgb(26 26 26) 0%, rgb(13 13 13) 100%);
-  /* Removed background-attachment: fixed — causes repaint on every scroll frame */
+    rgb(13 13 13);
 }
 
 /*
@@ -35,13 +33,3 @@
   /* Removed mix-blend-mode: overlay — expensive pixel-by-pixel compositing */
 }
 
-/* Vignette top-only — brak ciemnienia dołu, żeby płynnie przechodzić w sekcję Services */
-.sectionBackground::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgb(0 0 0 / 0.28) 0%, transparent 22%);
-}
