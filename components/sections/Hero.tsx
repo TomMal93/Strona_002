@@ -23,7 +23,6 @@ export default function Hero() {
   const headingRef = useRef<HTMLHeadingElement>(null)
   const descriptionRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLAnchorElement>(null)
-  const mediaRef = useRef<HTMLDivElement>(null)
 
   useHeroAnimations({
     sectionRef,
@@ -31,7 +30,6 @@ export default function Hero() {
     headingRef,
     descriptionRef,
     ctaRef,
-    mediaRef,
   })
 
   return (
@@ -124,7 +122,7 @@ export default function Hero() {
         </div>
 
         {/* ── Desktop image column ─────────────────────────────────────────── */}
-        <div ref={mediaRef} className="relative hidden h-full md:block">
+        <div className="relative hidden h-full md:block">
           <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
             <div className="relative h-[150%] w-[150%]">
               <Image
