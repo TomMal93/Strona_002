@@ -340,6 +340,8 @@
 
 .cardDescription {
   margin: 0;
+  justify-self: center;
+  text-align: center;
 }
 
 .iconDock {
@@ -369,26 +371,6 @@
     background:
       linear-gradient(90deg, rgb(214 155 132 / 0) 0%, rgb(214 155 132 / 0.58) 28%, rgb(160 171 122 / 0.58) 72%, rgb(160 171 122 / 0) 100%);
     box-shadow: 0 0 24px rgb(214 155 132 / 0.2);
-  }
-}
-
-@media (min-width: 640px) {
-  .cardsGrid {
-    grid-template-rows: auto auto auto auto 1fr;
-  }
-
-  .serviceCard {
-    grid-row: span 5;
-    display: grid;
-    grid-template-rows: subgrid;
-  }
-
-  .contentLayer {
-    grid-row: 1 / -1;
-    grid-column: 1;
-    grid-template-rows: subgrid;
-    min-height: unset;
-    padding-bottom: 0;
   }
 }
 
