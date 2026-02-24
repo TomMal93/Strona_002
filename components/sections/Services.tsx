@@ -144,7 +144,7 @@ function ServiceCard({ item, desktopStartClassName }: ServiceCardProps) {
 
         <h3
           className={cn(
-            'font-oswald text-2xl md:text-3xl uppercase leading-[1.2] tracking-wide text-warm-white',
+            'font-bebas text-2xl md:text-3xl uppercase leading-[1.0] tracking-wide text-warm-white',
             variantClassNames.title,
             styles.cardTitle,
           )}
@@ -243,7 +243,7 @@ export default function Services() {
           <h2
             id="services-heading"
             className={cn(
-              'text-center font-oswald text-5xl uppercase leading-[1.1] tracking-wide text-warm-white sm:text-6xl',
+              'text-center font-bebas text-5xl uppercase leading-[0.9] tracking-wide text-warm-white sm:text-6xl',
               styles.sectionTitle,
             )}
           >
@@ -253,7 +253,7 @@ export default function Services() {
 
           <p
             className={cn(
-              'mt-5 max-w-2xl font-oswald text-base tracking-wide leading-relaxed text-warm-gray sm:text-lg',
+              'mt-5 max-w-2xl font-inter text-base leading-relaxed text-warm-gray sm:text-lg',
               styles.sectionIntro,
             )}
           >

@@ -45,20 +45,8 @@
 }
 
 .sectionTitle {
-  font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  -webkit-text-stroke: 2px rgb(74 82 64);
-  -webkit-text-fill-color: transparent;
-  background-color: rgb(160 135 100 / 0.42);
-  background-image:
-    radial-gradient(ellipse 38% 65% at 12% 28%, rgb(46 51 38 / 0.55), rgb(46 51 38 / 0) 100%),
-    radial-gradient(ellipse 32% 72% at 72% 18%, rgb(74 82 64 / 0.52), rgb(74 82 64 / 0) 100%),
-    radial-gradient(ellipse 48% 58% at 48% 85%, rgb(61 43 31 / 0.5), rgb(61 43 31 / 0) 100%),
-    radial-gradient(ellipse 28% 68% at 88% 52%, rgb(90 105 72 / 0.48), rgb(90 105 72 / 0) 100%),
-    radial-gradient(ellipse 42% 52% at 32% 62%, rgb(46 51 38 / 0.46), rgb(46 51 38 / 0) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
 }
 
 .sectionTitleAccent {
@@ -71,8 +59,6 @@
   box-shadow:
     0 0 0 1px rgb(139 115 85 / 0.25),
     0 8px 20px rgb(139 115 85 / 0.2);
-  transform-origin: center;
-  animation: accentPulse 3.8s ease-in-out infinite;
 }
 
 .sectionIntro {
@@ -84,16 +70,6 @@
   display: none;
 }
 
-@keyframes accentPulse {
-  0%, 100% {
-    transform: scaleX(0.86);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-}
 
 .serviceCard {
   position: relative;
@@ -413,13 +389,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sectionTitleAccent,
   .serviceCard,
   .serviceCard::before,
   .cardTopLine,
   .iconBadge,
   .iconDock {
     transition: none;
-    animation: none;
   }
 }
