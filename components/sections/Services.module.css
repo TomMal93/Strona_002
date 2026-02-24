@@ -1,7 +1,6 @@
 .sectionBackground {
   position: relative;
   overflow: hidden;
-  /* Zaczyna od rgb(13 13 13) — dokładnie tam gdzie kończy Hero — brak skoku koloru */
   background:
     repeating-linear-gradient(
       45deg,
@@ -10,9 +9,7 @@
       rgb(74 82 64 / 0) 1px,
       rgb(74 82 64 / 0) 22px
     ),
-    radial-gradient(52% 45% at 90% 108%, rgb(74 82 64 / 0.18), rgb(74 82 64 / 0) 58%),
-    linear-gradient(180deg, rgb(13 13 13) 0%, rgb(20 20 20) 35%, rgb(13 13 13) 100%);
-  /* Removed background-attachment: fixed — causes repaint on every scroll frame */
+    rgb(13 13 13);
 }
 
 /* Grain texture — lightweight CSS noise instead of expensive SVG feTurbulence */
@@ -28,15 +25,6 @@
   /* Removed mix-blend-mode: overlay — expensive pixel-by-pixel compositing */
 }
 
-/* Winieting dół-only — brak ciemnienia góry, żeby nie duplikować cienia z Hero */
-.sectionBackground::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, transparent 0%, transparent 78%, rgb(0 0 0 / 0.32) 100%);
-}
 
 .sectionHeaderShell {
   position: relative;

@@ -54,8 +54,6 @@ export default function Hero() {
             />
           </div>
         </div>
-        {/* Gradient from bottom — text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
       </div>
 
       <div className="relative z-10 flex h-full flex-col md:grid md:grid-cols-[45%_55%]">
