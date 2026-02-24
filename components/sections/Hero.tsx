@@ -40,7 +40,7 @@ export default function Hero() {
     >
       {/* ── Mobile: fixed composition (no absolute positioning) ─────────── */}
       <div className="relative z-10 mx-auto h-full w-[766px] origin-top-left scale-[calc(100vw/766px)] px-[10px] pt-[55px] md:hidden">
-        <div className="ml-auto w-[72%]">
+        <div className="ml-auto mr-[40px] w-[72%]">
           <div className="relative aspect-[3/4] w-full">
             <Image
               src={heroImage}
@@ -54,7 +54,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="ml-[110px] -mt-[380px] w-fit">
+        <div className="ml-[70px] -mt-[380px] w-fit">
           <div className="max-w-[500px] rounded-xl p-4 text-left backdrop-blur-md">
             <span className="block font-bebas text-[18px] uppercase tracking-heading text-white/60">
               {siteContent.hero.eyebrow}
