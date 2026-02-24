@@ -2,36 +2,37 @@
 
 import { useEffect } from 'react'
 import Lenis from 'lenis'
-import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 /**
  * SmoothScroll — wraps the app with Lenis smooth-scroll.
- * Integrates with GSAP ticker so ScrollTrigger always receives
- * Lenis scroll position (fix: aud_001 punkt 1).
+ * Uses a dedicated requestAnimationFrame loop to avoid
+ * GSAP global ticker side effects and random scroll stalls.
  */
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) return
+
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.9,
       smoothWheel: true,
     })
 
     lenis.on('scroll', ScrollTrigger.update)
 
-    function rafHandler(time: number) {
-      // GSAP ticker time is in seconds, Lenis expects milliseconds.
-      lenis.raf(time * 1000)
+    let rafId = 0
+    const rafHandler = (time: number) => {
+      lenis.raf(time)
+      rafId = window.requestAnimationFrame(rafHandler)
     }
 
-    gsap.ticker.add(rafHandler)
-    gsap.ticker.lagSmoothing(0)
+    rafId = window.requestAnimationFrame(rafHandler)
 
     return () => {
+      window.cancelAnimationFrame(rafId)
+      lenis.off('scroll', ScrollTrigger.update)
       lenis.destroy()
-      gsap.ticker.remove(rafHandler)
     }
   }, [])
 

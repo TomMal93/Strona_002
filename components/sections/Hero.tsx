@@ -12,7 +12,7 @@ const HERO_IMAGE = '/images/hero.webp'
  * Hero — fullscreen section.
  *
  * Mobile:    half-size centered image, text content overlaid at the bottom.
- * Desktop:   two-column grid (45 % / 55 %): content left, image right.
+ * Desktop:   centered two-column grid: content left, image right.
  *
  * Scroll:    overflow-hidden — compatible with Lenis smooth scroll.
  * Animations: GSAP entrance sequence on initial load.
@@ -37,7 +37,7 @@ export default function Hero() {
       ref={sectionRef}
       id="hero"
       aria-labelledby="hero-heading"
-      className={`h-screen w-full ${styles.sectionBackground}`}
+      className={`h-screen h-[100svh] md:h-[100dvh] w-full ${styles.sectionBackground}`}
     >
       {/* ── Mobile: half-size centered image ────────────────────────────── */}
       <div className="absolute inset-0 md:hidden">
@@ -56,9 +56,9 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 flex h-full flex-col md:grid md:grid-cols-[45%_55%]">
+      <div className="relative z-10 flex h-full flex-col md:grid md:grid-cols-[minmax(320px,500px)_minmax(360px,700px)] md:items-center md:justify-center md:gap-8 lg:gap-14">
         {/* ── Content column ───────────────────────────────────────────────── */}
-        <div className="flex flex-1 flex-col justify-end px-6 pb-[22vh] md:justify-center md:px-12 md:py-0 lg:px-20">
+        <div className="flex flex-1 flex-col justify-end px-6 pb-[22vh] md:flex-none md:items-end md:justify-center md:px-0 md:py-0">
           <div className="max-w-[500px]">
             {/* Eyebrow */}
             <span
@@ -115,19 +115,17 @@ export default function Hero() {
         </div>
 
         {/* ── Desktop image column ─────────────────────────────────────────── */}
-        <div className="relative hidden h-full md:block">
-          <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-            <div className="relative h-[150%] w-[150%]">
-              <Image
-                src={HERO_IMAGE}
-                alt=""
-                fill
-                className="object-contain object-center"
-                priority
-                quality={75}
-                sizes="(min-width: 768px) 55vw, 1px"
-              />
-            </div>
+        <div className="relative hidden md:flex md:h-full md:items-center md:justify-center">
+          <div className="relative h-[90%] w-full">
+            <Image
+              src={HERO_IMAGE}
+              alt=""
+              fill
+              className="object-contain object-center"
+              priority
+              quality={75}
+              sizes="(min-width: 768px) 55vw, 1px"
+            />
           </div>
         </div>
       </div>
