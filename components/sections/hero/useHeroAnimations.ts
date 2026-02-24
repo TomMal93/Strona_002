@@ -7,9 +7,9 @@ import type { HeroRefs } from './types'
 /**
  * GSAP entrance animation for the hero section.
  *
- * All five elements (eyebrow → heading → description → CTA → media) fade in
- * and translate from y:40 → 0 with a 0.3 s stagger — equivalent to the
- * previous 5 × tl.to(…, '-=0.7') pattern (duration:1 − offset:0.7 = 0.3 s gap).
+ * Four elements (eyebrow → heading → description → CTA) fade in
+ * and translate from y:40 → 0 with a 0.3 s stagger.
+ * The hero image (media) is excluded so it renders immediately — important for LCP.
  * Respects prefers-reduced-motion.
  */
 export function useHeroAnimations({
@@ -18,7 +18,6 @@ export function useHeroAnimations({
   headingRef,
   descriptionRef,
   ctaRef,
-  mediaRef,
 }: HeroRefs) {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
@@ -31,7 +30,6 @@ export function useHeroAnimations({
         headingRef.current,
         descriptionRef.current,
         ctaRef.current,
-        mediaRef.current,
       ].filter((el): el is HTMLElement => el !== null)
 
       if (prefersReducedMotion) {
