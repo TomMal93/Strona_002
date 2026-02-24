@@ -40,25 +40,23 @@ export default function Hero() {
     >
       {/* ── Mobile: half-size centered image ────────────────────────────── */}
       <div className="absolute inset-0 md:hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative h-1/2 w-1/2">
-            <Image
-              src={heroImage}
-              alt=""
-              fill
-              className="object-contain object-center"
-              priority
-              quality={75}
-              sizes="50vw"
-            />
-          </div>
+        <div className="absolute right-[10px] top-[55px] h-[58%] w-[72%] translate-y-4">
+          <Image
+            src={heroImage}
+            alt=""
+            fill
+            className="object-contain object-center"
+            priority
+            quality={75}
+            sizes="50vw"
+          />
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1400px] flex-col px-6 md:grid md:grid-cols-[minmax(320px,500px)_minmax(360px,700px)] md:items-center md:justify-center md:gap-8 md:px-10 lg:gap-14 lg:px-16">
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1400px] flex-col px-[10px] md:grid md:grid-cols-[minmax(320px,500px)_minmax(360px,700px)] md:items-center md:justify-center md:gap-8 md:px-10 lg:gap-14 lg:px-16">
         {/* ── Content column ───────────────────────────────────────────────── */}
-        <div className="flex flex-1 flex-col justify-end pb-[22vh] md:flex-none md:items-end md:justify-center md:py-0">
-          <div className="max-w-[500px]">
+        <div className="absolute left-[110px] top-[460px] w-fit translate-y-4 md:relative md:left-auto md:top-auto md:w-auto md:translate-y-0 md:flex md:flex-none md:flex-col md:items-end md:justify-center md:py-0">
+          <div className="max-w-[500px] rounded-xl p-4 text-left backdrop-blur-md md:p-0 md:backdrop-blur-0">
             {/* Eyebrow */}
             <span
               ref={eyebrowRef}
@@ -79,12 +77,15 @@ export default function Hero() {
             </h1>
 
             {/* Description */}
-            <p
-              ref={descriptionRef}
-              className="mt-6 whitespace-pre-line border-b border-white/25 pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/70"
-            >
-              {siteContent.hero.subtitle}
-            </p>
+            <div className="max-w-[34ch]">
+              <p
+                ref={descriptionRef}
+                className="mt-6 whitespace-pre-line pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/70"
+              >
+                {siteContent.hero.subtitle}
+              </p>
+              <span aria-hidden="true" className="block h-px w-full bg-white/25" />
+            </div>
 
             {/* CTA */}
             <a
