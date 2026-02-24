@@ -21,8 +21,12 @@ const nextConfig = {
   // Ukryj nagłówek "X-Powered-By: Next.js"
   poweredByHeader: false,
 
-  // Konfiguracja Next.js Image — domeny zewnętrzne (np. Cloudinary)
+  // Konfiguracja Next.js Image
   images: {
+    // Serwuj AVIF (priority) i WebP — znacząco mniejsze pliki niż PNG/JPEG
+    formats: ['image/avif', 'image/webp'],
+    // Cache'uj zoptymalizowane obrazy przez 30 dni (domyślnie: 60 s)
+    minimumCacheTTL: 60 * 60 * 24 * 30,
     remotePatterns: [
       // Odkomentuj i uzupełnij gdy będziesz używać Cloudinary lub innego CDN:
       // {
@@ -33,9 +37,29 @@ const nextConfig = {
     ],
   },
 
-  // Nagłówki bezpieczeństwa — dodawane do każdej odpowiedzi
+  // Nagłówki HTTP — cache dla statycznych zasobów + bezpieczeństwo
   async headers() {
     return [
+      // Statyczne pliki Next.js (JS/CSS bundles) — immutable, 1 rok
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Publiczne obrazy — 30 dni, rewalidacja w tle
+      {
+        source: '/images/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2592000, stale-while-revalidate=86400',
+          },
+        ],
+      },
       {
         source: '/(.*)',
         headers: [
