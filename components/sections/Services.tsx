@@ -129,7 +129,7 @@ function ServiceCard({ item, desktopStartClassName }: ServiceCardProps) {
     <li
       data-service-card
       className={cn(
-        'h-full md:h-auto rounded-micro p-6 md:col-span-1 lg:col-span-2',
+        'rounded-micro p-5 sm:p-6 md:h-auto md:col-span-1 lg:col-span-2',
         desktopStartClassName,
         variantClassNames.card,
         styles.serviceCard,
@@ -175,11 +175,12 @@ function ServiceCard({ item, desktopStartClassName }: ServiceCardProps) {
 type ServiceCardsRowProps = {
   items: ServiceItem[]
   startClassNames: readonly string[]
+  colsClass?: string
 }
 
-function ServiceCardsRow({ items, startClassNames }: ServiceCardsRowProps) {
+function ServiceCardsRow({ items, startClassNames, colsClass = '' }: ServiceCardsRowProps) {
   return (
-    <ul className={cn('grid gap-5 md:gap-y-0 md:grid-cols-2 lg:grid-cols-6', styles.cardsGrid)}>
+    <ul className={cn('grid gap-5 md:gap-y-0 lg:grid-cols-6', colsClass, styles.cardsGrid)}>
       {items.map((item, index) => (
         <ServiceCard
           key={item.title}
@@ -263,9 +264,9 @@ export default function Services() {
 
         {/* --- Services cards list -------------------------------------------- */}
         <div className="mt-12 space-y-7 lg:mt-14 lg:space-y-9">
-          <ServiceCardsRow items={topRowItems} startClassNames={TOP_ROW_START_CLASS_NAMES} />
+          <ServiceCardsRow items={topRowItems} startClassNames={TOP_ROW_START_CLASS_NAMES} colsClass="sm:grid-cols-2" />
           <div className={styles.rowDivider} aria-hidden="true" />
-          <ServiceCardsRow items={bottomRowItems} startClassNames={BOTTOM_ROW_START_CLASS_NAMES} />
+          <ServiceCardsRow items={bottomRowItems} startClassNames={BOTTOM_ROW_START_CLASS_NAMES} colsClass="md:grid-cols-3" />
         </div>
       </div>
     </section>

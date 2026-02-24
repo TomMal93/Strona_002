@@ -376,7 +376,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .cardsGrid {
     grid-template-rows: auto auto auto auto 1fr;
   }
