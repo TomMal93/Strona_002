@@ -131,6 +131,7 @@ export default function Hero() {
                 alt=""
                 fill
                 className="object-contain object-center"
+                priority
                 quality={75}
                 sizes="(min-width: 768px) 55vw, 1px"
               />

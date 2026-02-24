@@ -44,9 +44,16 @@ export default function Navbar() {
 
   /* Darken background after scrolling past the fold */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    let rafId: number
+    const onScroll = () => {
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => setScrolled(window.scrollY > 40))
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      cancelAnimationFrame(rafId)
+    }
   }, [])
 
   /* GSAP entrance — slides in from top */
