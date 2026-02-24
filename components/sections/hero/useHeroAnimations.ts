@@ -32,7 +32,7 @@ export function useHeroAnimations({
         descriptionRef.current,
         ctaRef.current,
         mediaRef.current,
-      ].filter(Boolean)
+      ].filter((el): el is HTMLElement => el !== null)
 
       if (prefersReducedMotion) {
         gsap.set(targets, { autoAlpha: 1, y: 0 })

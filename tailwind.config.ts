@@ -31,7 +31,8 @@ const config: Config = {
         micro: '2px',
       },
       letterSpacing: {
-        overline: '0.2em',
+        overline: '0.2em', // Inter small caps — used via .ui-overline utility
+        heading: '0.15em', // Bebas Neue display/eyebrow contexts
       },
       fontSize: {
         display: ['80px', { lineHeight: '0.9' }],
