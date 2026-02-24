@@ -5,8 +5,7 @@ import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { useHeroAnimations } from './hero/useHeroAnimations'
 import styles from './Hero.module.css'
-
-const HERO_IMAGE = '/images/hero.webp'
+import heroImage from '@/public/images/hero.webp'
 
 /**
  * Hero — fullscreen section.
@@ -44,7 +43,7 @@ export default function Hero() {
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="relative h-1/2 w-1/2">
             <Image
-              src={HERO_IMAGE}
+              src={heroImage}
               alt=""
               fill
               className="object-contain object-center"
@@ -118,7 +117,7 @@ export default function Hero() {
         <div className="relative hidden md:flex md:h-full md:items-center md:justify-center">
           <div className="relative h-[90%] w-full">
             <Image
-              src={HERO_IMAGE}
+              src={heroImage}
               alt=""
               fill
               className="object-contain object-center"
