@@ -167,38 +167,38 @@
 }
 
 .serviceCardHighlight {
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(1.5px);
   background:
-    radial-gradient(120% 95% at 10% -12%, rgb(255 255 255 / 0.92), transparent 52%),
-    radial-gradient(110% 80% at 100% 100%, rgb(201 142 123 / 0.35), transparent 62%),
-    linear-gradient(160deg, rgb(255 248 242 / 0.99) 0%, rgb(242 223 209 / 0.97) 100%);
-  border-color: rgb(229 182 157 / 0.95);
+    radial-gradient(130% 90% at 12% -8%, rgb(180 120 80 / 0.22), transparent 55%),
+    radial-gradient(120% 80% at 100% 100%, rgb(139 115 85 / 0.18), transparent 60%),
+    linear-gradient(145deg, rgb(80 55 35 / 0.18) 0%, transparent 40%),
+    linear-gradient(160deg, rgb(28 20 16 / 0.97) 0%, rgb(22 15 11 / 0.98) 100%);
+  border-color: rgb(180 130 90 / 0.52);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.9),
-    0 18px 38px rgb(64 38 26 / 0.2);
+    inset 0 1px 0 rgb(220 190 160 / 0.10),
+    0 18px 38px rgb(0 0 0 / 0.38);
 }
 
 .serviceCardHighlight::before {
   background:
-    radial-gradient(circle at 82% 15%, rgb(255 255 255 / 0.65) 0%, transparent 38%),
-    radial-gradient(circle at 20% 82%, rgb(212 157 136 / 0.34) 0%, transparent 50%);
-  opacity: 0.74;
-  transform: none;
+    linear-gradient(120deg, transparent 10%, rgb(180 140 100 / 0.12) 50%, transparent 90%),
+    radial-gradient(circle at 86% 12%, rgb(160 120 80 / 0.28) 0%, transparent 44%);
+  opacity: 0.7;
   transition:
     opacity 320ms ease,
     filter 380ms ease;
 }
 
 .serviceCardHighlight::after {
-  border-image: linear-gradient(135deg, rgb(255 255 255 / 0.92), rgb(214 155 132 / 0.56), rgb(148 94 74 / 0.45)) 1;
+  border-image: linear-gradient(135deg, rgb(200 155 105 / 0.50), transparent 48%, rgb(139 115 85 / 0.32)) 1;
 }
 
 .serviceCardHighlight:hover {
-  border-color: rgb(236 166 137 / 0.98);
+  border-color: rgb(200 155 110 / 0.78);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.95),
-    0 24px 48px rgb(86 47 30 / 0.28);
-  filter: saturate(1.09) contrast(1.05);
+    inset 0 1px 0 rgb(230 200 170 / 0.18),
+    0 24px 48px rgb(0 0 0 / 0.46);
+  filter: saturate(1.08);
 }
 
 .serviceCardHighlight:hover::before {
@@ -224,8 +224,8 @@
 }
 
 .cardTopLineHighlight {
-  background: linear-gradient(90deg, rgb(166 92 61 / 0.95), rgb(214 155 132 / 0.92), rgb(255 255 255 / 0.55));
-  opacity: 0.9;
+  background: linear-gradient(90deg, rgb(180 130 85 / 0.95), rgb(210 165 110 / 0.88), rgb(139 115 85 / 0.30));
+  opacity: 0.88;
 }
 
 .serviceCardHighlight:hover .cardTopLineHighlight {
@@ -256,19 +256,19 @@
 }
 
 .iconBadgeHighlight {
-  border-color: rgb(168 98 70 / 0.58);
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.9), rgb(219 164 143 / 0.42));
+  border-color: rgb(175 135 90 / 0.60);
+  background: linear-gradient(180deg, rgb(160 115 70 / 0.28), rgb(80 55 35 / 0.48));
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.98),
-    0 5px 16px rgb(128 73 47 / 0.24);
+    inset 0 1px 0 rgb(230 190 155 / 0.20),
+    0 5px 16px rgb(0 0 0 / 0.32);
 }
 
 .serviceCardHighlight:hover .iconBadgeHighlight {
   transform: scale(1.05);
-  border-color: rgb(174 95 63 / 0.72);
+  border-color: rgb(195 155 105 / 0.75);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.96),
-    0 10px 20px rgb(128 73 47 / 0.28);
+    inset 0 1px 0 rgb(240 200 165 / 0.25),
+    0 10px 20px rgb(0 0 0 / 0.38);
 }
 
 .iconBadgeMilitary {
@@ -280,16 +280,17 @@
 }
 
 .highlightTitle {
-  color: rgb(84 45 30);
+  color: rgb(230 218 200);
   letter-spacing: 0.03em;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 0.2);
 }
 
 .highlightText {
-  color: rgb(114 75 58);
+  color: rgb(190 175 158);
 }
 
 .iconHighlight {
-  color: rgb(150 83 57);
+  color: rgb(195 155 110);
 }
 
 .militaryTitle {
