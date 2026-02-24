@@ -172,6 +172,13 @@
     radial-gradient(130% 90% at 12% -8%, rgb(180 120 80 / 0.22), transparent 55%),
     radial-gradient(120% 80% at 100% 100%, rgb(139 115 85 / 0.18), transparent 60%),
     linear-gradient(145deg, rgb(80 55 35 / 0.18) 0%, transparent 40%),
+    repeating-linear-gradient(
+      125deg,
+      rgb(38 28 18 / 0.28) 0,
+      rgb(38 28 18 / 0.28) 10px,
+      rgb(28 20 12 / 0.34) 10px,
+      rgb(28 20 12 / 0.34) 20px
+    ),
     linear-gradient(160deg, rgb(28 20 16 / 0.97) 0%, rgb(22 15 11 / 0.98) 100%);
   border-color: rgb(180 130 90 / 0.52);
   box-shadow:
