@@ -23,6 +23,7 @@ export function useHeroAnimations({
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     ).matches
+    const isMobileViewport = window.matchMedia('(max-width: 767px)').matches
 
     const ctx = gsap.context(() => {
       const targets = [
@@ -32,7 +33,7 @@ export function useHeroAnimations({
         ctaRef.current,
       ].filter((el): el is HTMLElement => el !== null)
 
-      if (prefersReducedMotion) {
+      if (prefersReducedMotion || isMobileViewport) {
         gsap.set(targets, { autoAlpha: 1, y: 0 })
         return
       }
