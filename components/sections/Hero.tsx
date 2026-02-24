@@ -55,9 +55,9 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 flex h-full flex-col md:grid md:grid-cols-[minmax(320px,500px)_minmax(360px,700px)] md:items-center md:justify-center md:gap-8 lg:gap-14">
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1400px] flex-col px-6 md:grid md:grid-cols-[minmax(320px,500px)_minmax(360px,700px)] md:items-center md:justify-center md:gap-8 md:px-10 lg:gap-14 lg:px-16">
         {/* ── Content column ───────────────────────────────────────────────── */}
-        <div className="flex flex-1 flex-col justify-end px-6 pb-[22vh] md:flex-none md:items-end md:justify-center md:px-0 md:py-0">
+        <div className="flex flex-1 flex-col justify-end pb-[22vh] md:flex-none md:items-end md:justify-center md:py-0">
           <div className="max-w-[500px]">
             {/* Eyebrow */}
             <span
