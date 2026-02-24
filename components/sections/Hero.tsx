@@ -48,7 +48,7 @@ export default function Hero() {
               fill
               className="object-contain object-center"
               priority
-              quality={90}
+              quality={75}
               sizes="50vw"
             />
           </div>
@@ -131,9 +131,8 @@ export default function Hero() {
                 alt=""
                 fill
                 className="object-contain object-center"
-                priority
-                quality={90}
-                sizes="55vw"
+                quality={75}
+                sizes="(min-width: 768px) 55vw, 1px"
               />
             </div>
           </div>

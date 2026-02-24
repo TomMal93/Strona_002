@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Bebas_Neue, Inter, Oswald } from 'next/font/google'
+import { Bebas_Neue, Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import SmoothScroll from '@/components/layout/SmoothScroll'
@@ -18,13 +18,6 @@ const inter = Inter({
   weight: ['300', '400', '600'],
   subsets: ['latin', 'latin-ext'],
   variable: '--font-inter',
-  display: 'swap',
-})
-
-const oswald = Oswald({
-  weight: ['500', '600', '700'],
-  subsets: ['latin', 'latin-ext'],
-  variable: '--font-oswald',
   display: 'swap',
 })
 
@@ -80,7 +73,6 @@ const jsonLdString = JSON.stringify(jsonLd).replace(/<\//g, '<\\/')
 const bodyClassName = cn(
   bebasNeue.variable,
   inter.variable,
-  oswald.variable,
   'font-inter bg-black-deep text-warm-white',
 )
 
