@@ -70,12 +70,12 @@ export default function Hero() {
               <p className="mt-6 whitespace-pre-line pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/70">
                 {siteContent.hero.subtitle}
               </p>
-              <span aria-hidden="true" className="block h-px w-full bg-white/25" />
+                <span aria-hidden="true" className="block h-px w-full bg-khaki/70" />
             </div>
 
             <a
               href="#contact"
-              className="group mt-8 inline-flex items-center gap-3 rounded-full border border-white/50 px-7 py-3.5 font-inter text-[18px] font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              className="group mt-8 inline-flex items-center gap-3 rounded-full border border-khaki/70 px-7 py-3.5 font-inter text-[18px] font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
               {siteContent.hero.ctaLabel}
               <svg
@@ -130,14 +130,14 @@ export default function Hero() {
               >
                 {siteContent.hero.subtitle}
               </p>
-              <span aria-hidden="true" className="block h-px w-full bg-white/25" />
+              <span aria-hidden="true" className="block h-px w-full bg-khaki/70" />
             </div>
 
             {/* CTA */}
             <a
               ref={ctaRef}
               href="#contact"
-              className="group mt-8 inline-flex items-center gap-3 rounded-full border border-white/50 px-7 py-3.5 font-inter text-[18px] font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              className="group mt-8 inline-flex items-center gap-3 rounded-full border border-khaki/70 px-7 py-3.5 font-inter text-[18px] font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
               {siteContent.hero.ctaLabel}
               <svg
