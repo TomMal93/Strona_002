@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Bebas_Neue, Inter } from 'next/font/google'
+import { Bebas_Neue, Inter, Space_Mono } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import SmoothScroll from '@/components/layout/SmoothScroll'
@@ -18,6 +18,13 @@ const inter = Inter({
   weight: ['300', '400', '600'],
   subsets: ['latin', 'latin-ext'],
   variable: '--font-inter',
+  display: 'swap',
+})
+
+const spaceMono = Space_Mono({
+  weight: ['400'],
+  subsets: ['latin'],
+  variable: '--font-space-mono',
   display: 'swap',
 })
 
@@ -73,6 +80,7 @@ const jsonLdString = JSON.stringify(jsonLd).replace(/<\//g, '<\\/')
 const bodyClassName = cn(
   bebasNeue.variable,
   inter.variable,
+  spaceMono.variable,
   'font-inter bg-black-deep text-warm-white',
 )
 
