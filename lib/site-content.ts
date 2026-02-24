@@ -1,18 +1,19 @@
 export const siteContent = {
+  // Using || instead of ?? so that empty-string env vars also fall back to defaults.
   seoDescription:
     process.env.NEXT_PUBLIC_SITE_DESCRIPTION
-    ?? 'Portfolio fotografa i operatora wideo — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
+    || 'Portfolio fotografa i operatora wideo — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
   structuredDataDescription:
     process.env.NEXT_PUBLIC_STRUCTURED_DATA_DESCRIPTION
-    ?? 'Fotografia i film — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
+    || 'Fotografia i film — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
   hero: {
-    eyebrow: process.env.NEXT_PUBLIC_HERO_EYEBROW ?? 'Fotografia & Film',
-    headlineLine1: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_1 ?? 'Zamrażam',
-    headlineLine2: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_2 ?? 'Chwile',
+    eyebrow: process.env.NEXT_PUBLIC_HERO_EYEBROW || 'Fotografia & Film',
+    headlineLine1: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_1 || 'Zamrażam',
+    headlineLine2: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_2 || 'Chwile',
     subtitle:
       process.env.NEXT_PUBLIC_HERO_SUBTITLE
-      ?? 'Fotografia i film — wydarzenia militarne, drony, ślub, off-road i sesje rodzinne.',
-    ctaLabel: process.env.NEXT_PUBLIC_HERO_CTA_LABEL ?? 'Skontaktuj się',
+      || 'Fotografia i film — wydarzenia militarne, drony, ślub, off-road i sesje rodzinne.',
+    ctaLabel: process.env.NEXT_PUBLIC_HERO_CTA_LABEL || 'Skontaktuj się',
   },
   services: {
     title: process.env.NEXT_PUBLIC_SERVICES_TITLE ?? 'Oferta',

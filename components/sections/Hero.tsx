@@ -36,6 +36,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
+      aria-labelledby="hero-heading"
       className={`h-screen w-full ${styles.sectionBackground}`}
     >
       {/* ── Mobile: half-size centered image ────────────────────────────── */}
@@ -71,6 +72,7 @@ export default function Hero() {
 
             {/* Heading */}
             <h1
+              id="hero-heading"
               ref={headingRef}
               className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-[80px] lg:text-[110px]"
             >
@@ -82,7 +84,7 @@ export default function Hero() {
             {/* Description */}
             <p
               ref={descriptionRef}
-              className="mt-6 max-w-[500px] font-inter text-[20px] leading-[1.6] text-white/[0.65]"
+              className="mt-6 font-inter text-[20px] leading-[1.6] text-white/[0.65]"
             >
               {siteContent.hero.subtitle}
             </p>
@@ -94,30 +96,31 @@ export default function Hero() {
             >
               <a
                 href="#contact"
-                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/40 transition-colors hover:border-white/70"
-                aria-label={siteContent.hero.ctaLabel}
+                className="group flex items-center gap-4 rounded focus-visible:outline-none"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-white"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14" />
-                  <path d="m12 5 7 7-7 7" />
-                </svg>
-              </a>
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/40 transition-colors group-hover:border-white/70 group-focus-visible:border-white group-focus-visible:ring-2 group-focus-visible:ring-white group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-black">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-white"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </span>
 
-              <span className="font-inter text-[18px] font-medium text-white">
-                {siteContent.hero.ctaLabel}
-              </span>
+                <span className="font-inter text-[18px] font-medium text-white">
+                  {siteContent.hero.ctaLabel}
+                </span>
+              </a>
             </div>
           </div>
         </div>
