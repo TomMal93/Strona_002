@@ -82,7 +82,7 @@ export default function Hero() {
             {/* Description */}
             <p
               ref={descriptionRef}
-              className="mt-6 border-l-[2px] border-[#8a9a7a] pl-4 font-space-mono text-[13px] leading-[1.8] text-white/65"
+              className="mt-6 rounded bg-white/5 px-5 py-4 font-inter font-light text-[16px] leading-[1.75] text-white/70"
             >
               {siteContent.hero.subtitle}
             </p>

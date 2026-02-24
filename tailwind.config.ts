@@ -18,9 +18,8 @@ const config: Config = {
         'military-green': '#4A5240', // secondary accent — hover, tags
       },
       fontFamily: {
-        bebas:       ['var(--font-bebas)',       'sans-serif'],
-        inter:       ['var(--font-inter)',       'sans-serif'],
-        'space-mono': ['var(--font-space-mono)', 'monospace'],
+        bebas: ['var(--font-bebas)', 'sans-serif'],
+        inter: ['var(--font-inter)', 'sans-serif'],
       },
       maxWidth: {
         content: '1280px',
