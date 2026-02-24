@@ -12,7 +12,7 @@ export const siteContent = {
     headlineLine2: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_2 || 'Chwile',
     subtitle:
       process.env.NEXT_PUBLIC_HERO_SUBTITLE
-      || 'Fotografia i film — wydarzenia militarne, drony, ślub, off-road i sesje rodzinne.',
+      || 'Dokumentuję to, co warto pamiętać — od pola bitwy po ślubny taniec.',
     ctaLabel: process.env.NEXT_PUBLIC_HERO_CTA_LABEL || 'Skontaktuj się',
   },
   services: {
