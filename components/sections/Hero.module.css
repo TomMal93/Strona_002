@@ -11,20 +11,20 @@
     ),
     radial-gradient(52% 45% at 90% 108%, rgb(74 82 64 / 0.18), rgb(74 82 64 / 0) 58%),
     linear-gradient(180deg, rgb(26 26 26) 0%, rgb(13 13 13) 100%);
-  background-attachment: fixed, scroll, scroll;
+  /* Removed background-attachment: fixed — causes repaint on every scroll frame */
 }
 
-/* Grain texture overlay */
+/* Grain texture overlay — lightweight CSS noise instead of expensive SVG feTurbulence */
 .sectionBackground::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  background-size: 180px 180px;
-  mix-blend-mode: overlay;
-  opacity: 0.55;
+  background-size: 256px 256px;
+  opacity: 0.5;
+  /* Removed mix-blend-mode: overlay — expensive pixel-by-pixel compositing */
 }
 
 /* Vignette top-only — brak ciemnienia dołu, żeby płynnie przechodzić w sekcję Services */
