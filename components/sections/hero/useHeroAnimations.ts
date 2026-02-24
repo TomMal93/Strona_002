@@ -7,8 +7,9 @@ import type { HeroRefs } from './types'
 /**
  * GSAP entrance animation for the hero section.
  *
- * Sequence: eyebrow → heading → description → CTA → media (image + circles)
- * Each element fades in and translates from y:40 → 0 with power3.out easing.
+ * All five elements (eyebrow → heading → description → CTA → media) fade in
+ * and translate from y:40 → 0 with a 0.3 s stagger — equivalent to the
+ * previous 5 × tl.to(…, '-=0.7') pattern (duration:1 − offset:0.7 = 0.3 s gap).
  * Respects prefers-reduced-motion.
  */
 export function useHeroAnimations({
@@ -25,68 +26,34 @@ export function useHeroAnimations({
     ).matches
 
     const ctx = gsap.context(() => {
-      const allTargets = [
+      const targets = [
         eyebrowRef.current,
         headingRef.current,
         descriptionRef.current,
         ctaRef.current,
         mediaRef.current,
-      ].filter(Boolean)
+      ].filter((el): el is HTMLElement => el !== null)
 
       if (prefersReducedMotion) {
-        gsap.set(allTargets, { autoAlpha: 1, y: 0 })
+        gsap.set(targets, { autoAlpha: 1, y: 0 })
         return
       }
 
-      // Initial state — hidden & shifted down
-      gsap.set(allTargets, { autoAlpha: 0, y: 40 })
+      gsap.set(targets, { autoAlpha: 0, y: 40 })
 
-      const tl = gsap.timeline({ delay: 0.3 })
-
-      // 1. Eyebrow
-      tl.to(eyebrowRef.current, {
+      gsap.to(targets, {
         autoAlpha: 1,
         y: 0,
         duration: 1,
         ease: 'power3.out',
+        stagger: 0.3,
+        delay: 0.3,
       })
-
-      // 2. Heading
-      tl.to(
-        headingRef.current,
-        { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' },
-        '-=0.7',
-      )
-
-      // 3. Description
-      tl.to(
-        descriptionRef.current,
-        { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' },
-        '-=0.7',
-      )
-
-      // 4. CTA
-      tl.to(
-        ctaRef.current,
-        { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' },
-        '-=0.7',
-      )
-
-      // 5. Media — image + circles as one element
-      tl.to(
-        mediaRef.current,
-        { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' },
-        '-=0.7',
-      )
     }, sectionRef)
 
     return () => ctx.revert()
-  }, [
-    sectionRef,
-    eyebrowRef,
-    headingRef,
-    descriptionRef,
-    ctaRef,
-    mediaRef,
-  ])
+  // Refs are stable objects returned by useRef — they never change between
+  // renders, so there are no reactive values to list as dependencies.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 }

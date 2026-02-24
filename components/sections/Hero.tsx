@@ -6,10 +6,12 @@ import { siteContent } from '@/lib/site-content'
 import { useHeroAnimations } from './hero/useHeroAnimations'
 import styles from './Hero.module.css'
 
+const HERO_IMAGE = '/images/hero.png'
+
 /**
  * Hero — fullscreen section.
  *
- * Mobile:    full-bleed image as background, content overlay at ~2/3 height.
+ * Mobile:    half-size centered image, text content overlaid at the bottom.
  * Desktop:   two-column grid (45 % / 55 %): content left, image right.
  *
  * Scroll:    overflow-hidden — compatible with Lenis smooth scroll.
@@ -20,7 +22,7 @@ export default function Hero() {
   const eyebrowRef = useRef<HTMLSpanElement>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const descriptionRef = useRef<HTMLParagraphElement>(null)
-  const ctaRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLAnchorElement>(null)
   const mediaRef = useRef<HTMLDivElement>(null)
 
   useHeroAnimations({
@@ -36,6 +38,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
+      aria-labelledby="hero-heading"
       className={`h-screen w-full ${styles.sectionBackground}`}
     >
       {/* ── Mobile: half-size centered image ────────────────────────────── */}
@@ -43,7 +46,7 @@ export default function Hero() {
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="relative h-1/2 w-1/2">
             <Image
-              src="/images/hero.png"
+              src={HERO_IMAGE}
               alt=""
               fill
               className="object-contain object-center"
@@ -53,7 +56,7 @@ export default function Hero() {
             />
           </div>
         </div>
-        {/* Gradient od dołu — czytelność tekstu */}
+        {/* Gradient from bottom — text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
       </div>
 
@@ -64,13 +67,14 @@ export default function Hero() {
             {/* Eyebrow */}
             <span
               ref={eyebrowRef}
-              className="block font-bebas text-[18px] uppercase tracking-[0.15em] text-white/60"
+              className="block font-bebas text-[18px] uppercase tracking-heading text-white/60"
             >
               {siteContent.hero.eyebrow}
             </span>
 
             {/* Heading */}
             <h1
+              id="hero-heading"
               ref={headingRef}
               className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-[80px] lg:text-[110px]"
             >
@@ -82,21 +86,18 @@ export default function Hero() {
             {/* Description */}
             <p
               ref={descriptionRef}
-              className="mt-6 max-w-[500px] font-inter text-[20px] leading-[1.6] text-white/[0.65]"
+              className="mt-6 font-inter text-[20px] leading-[1.6] text-white/[0.65]"
             >
               {siteContent.hero.subtitle}
             </p>
 
-            {/* CTA Row */}
-            <div
+            {/* CTA */}
+            <a
               ref={ctaRef}
-              className="mt-8 flex items-center gap-4"
+              href="#contact"
+              className="group mt-8 flex items-center gap-4 rounded focus-visible:outline-none"
             >
-              <a
-                href="#contact"
-                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/40 transition-colors hover:border-white/70"
-                aria-label={siteContent.hero.ctaLabel}
-              >
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/40 transition-colors group-hover:border-white/70 group-focus-visible:border-white group-focus-visible:ring-2 group-focus-visible:ring-white group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-black">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -113,21 +114,21 @@ export default function Hero() {
                   <path d="M5 12h14" />
                   <path d="m12 5 7 7-7 7" />
                 </svg>
-              </a>
+              </span>
 
               <span className="font-inter text-[18px] font-medium text-white">
                 {siteContent.hero.ctaLabel}
               </span>
-            </div>
+            </a>
           </div>
         </div>
 
         {/* ── Desktop image column ─────────────────────────────────────────── */}
-        <div ref={mediaRef} className="hidden md:relative md:block md:h-full">
+        <div ref={mediaRef} className="relative hidden h-full md:block">
           <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
             <div className="relative h-[150%] w-[150%]">
               <Image
-                src="/images/hero.png"
+                src={HERO_IMAGE}
                 alt=""
                 fill
                 className="object-contain object-center"
