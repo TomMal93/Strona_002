@@ -238,4 +238,116 @@ Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia 
 
 ---
 
+## 6. Co przenieść do `globals.css`
+
+### 6.1 CSS custom properties → `:root` [SILNY KANDYDAT]
+
+**Teraz:** `--c-gold`, `--c-olive`, `--c-khaki`, `--c-warm` zdefiniowane są na selektorze `.sectionBackground` w `Services.module.css`. Przez to `Hero.module.css` nie ma do nich dostępu i używa tych samych wartości hardkodowanych.
+
+**Przenieść do `globals.css`:**
+
+```css
+/* globals.css — dodać przed @tailwind base lub w @layer base */
+:root {
+  --c-gold:  139 115 85;
+  --c-olive:  74  82 64;
+  --c-khaki: 146 154 117;
+  --c-warm:  180 130 90;
+}
+```
+
+Po tej zmianie `Hero.module.css` może używać `rgb(var(--c-olive) / 0.09)` zamiast hardkodowanego `rgb(74 82 64 / 0.09)`, co rozwiązuje problem z § 3.1.
+
+---
+
+### 6.2 Klasa bazowa sekcji (diagonal pattern + grain texture) → `@layer components` [SILNY KANDYDAT]
+
+**Teraz:** Blok `.sectionBackground` i jego `::before` (grain texture) jest skopiowany identycznie w `Hero.module.css` i `Services.module.css`. Każda nowa sekcja musiałaby kopiować te ~25 linii po raz kolejny.
+
+**Przenieść do `globals.css` jako reużywalna klasa:**
+
+```css
+/* globals.css */
+@layer components {
+  .section-dark-bg {
+    position: relative;
+    overflow: hidden;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgb(var(--c-olive) / 0.09) 0,
+        rgb(var(--c-olive) / 0.09) 1px,
+        rgb(var(--c-olive) / 0) 1px,
+        rgb(var(--c-olive) / 0) 22px
+      ),
+      rgb(13 13 13);
+  }
+
+  /*
+   * Grain texture overlay — SVG feTurbulence jako statyczny background-image.
+   * Efektywna opacity = 0.12 (SVG rect) × 0.5 (CSS) ≈ 6%.
+   */
+  .section-dark-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,...");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    opacity: 0.5;
+  }
+}
+```
+
+Komponenty usuwają własny `.sectionBackground` i używają `className={`... section-dark-bg`}`. Każdy może nadal dodawać wariant CSS Module nadpisujący tylko to co potrzebuje.
+
+**Drobna niezgodność do rozstrzygnięcia przed implementacją:** `Hero.module.css` ma `z-index: 1` na `::before`, `Services.module.css` nie ma — trzeba wybrać jedną wersję dla klasy globalnej.
+
+---
+
+### 6.3 Blok `@media (prefers-reduced-motion)` z `Services.module.css` → do usunięcia [ZBĘDNY]
+
+**Teraz:** `Services.module.css` ma własny blok (linie 401–409):
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  .serviceCard,
+  .serviceCard::before,
+  .cardTopLine,
+  .iconBadge,
+  .iconDock {
+    transition: none;
+  }
+}
+```
+
+**Problem:** `globals.css` już zawiera regułę globalną z `!important`:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+```
+
+Reguła globalna z `!important` pokrywa selector `*`, czyli wszystkie elementy z Services. Blok w module jest **redundantny** — można go usunąć bez zmiany zachowania w przeglądarce.
+
+---
+
+### Podsumowanie zmian w globals.css
+
+| Co | Akcja | Efekt |
+|---|---|---|
+| `--c-gold`, `--c-olive`, `--c-khaki`, `--c-warm` | Dodać do `:root` | Jeden punkt prawdy dla palety |
+| Diagonal pattern + grain texture `::before` | Dodać jako `.section-dark-bg` w `@layer components` | Usunąć duplikat z Hero i Services |
+| `@media (prefers-reduced-motion)` w Services | Usunąć z modułu | Globalny reset już to robi |
+
+**Co zostaje w modułach bez zmian:** wszystkie style specyficzne dla kart (warianty Military/Highlight), `.mobileTextPanel`, `.mobileTextHalo`, `.sectionHeaderShell` i pozostałe klasy Hero — mają tylko jedno miejsce użycia i nie zyskują nic na globalizacji.
+
+---
+
 *Audyt nie zawiera żadnych zmian w kodzie. Wszystkie sugestie wymagają osobnej decyzji przed implementacją.*
