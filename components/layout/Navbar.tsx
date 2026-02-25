@@ -79,7 +79,7 @@ export default function Navbar() {
       ref={headerRef}
       className="fixed top-0 left-0 right-0 z-50"
     >
-      <div className={`flex items-center justify-between px-6 py-2 md:px-12 lg:px-20 transition-all duration-500 ${
+      <div className={`flex items-center justify-between px-6 py-2 md:px-12 lg:px-20 transition-[background-color,backdrop-filter] duration-500 ${
         scrolled || mobileOpen
           ? 'bg-[#0f0f12]/90 backdrop-blur-md'
           : 'bg-transparent'
@@ -107,7 +107,7 @@ export default function Navbar() {
               className={[
                 'relative font-bebas text-[16px] tracking-heading uppercase',
                 'text-white/60 hover:text-white transition-colors duration-300',
-                'after:absolute after:bottom-[-2px] after:left-0 after:h-px after:w-0 after:bg-[#ff3b3b]',
+                'after:absolute after:bottom-[-2px] after:left-0 after:h-px after:w-0 after:bg-khaki',
                 'after:transition-[width] after:duration-300 hover:after:w-full',
               ].join(' ')}
             >
