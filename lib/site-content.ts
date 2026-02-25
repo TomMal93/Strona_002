@@ -1,3 +1,5 @@
+export type ServiceIconName = 'heart' | 'drone' | 'crosshair' | 'wheel' | 'flag'
+
 export const siteContent = {
   // Using || instead of ?? so that empty-string env vars also fall back to defaults.
   seoDescription:

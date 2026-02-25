@@ -3,14 +3,13 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { siteContent } from '@/lib/site-content'
+import { siteContent, type ServiceIconName } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './Services.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
 type ServiceItem = (typeof siteContent.services.items)[number]
-type ServiceIconName = ServiceItem['icon']
 type CardVariant = 'highlight' | 'military'
 type CardStyleClassNames = {
   card: string
@@ -119,8 +118,6 @@ function ServiceIcon({ icon, className }: { icon: ServiceIconName, className?: s
           <path d="M6 3v18M6 4h10l-2 4 2 4H6" stroke="currentColor" strokeWidth="1.8" />
         </svg>
       )
-    default:
-      return null
   }
 }
 
