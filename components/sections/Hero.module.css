@@ -62,3 +62,13 @@
 .mobileTextPanel :is(h1, p, span, a) {
   text-shadow: 0 2px 8px rgb(0 0 0 / 0.55);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileTextHalo::after {
+    filter: none;
+  }
+
+  .mobileTextPanel {
+    backdrop-filter: none;
+  }
+}
