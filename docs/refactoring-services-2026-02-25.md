@@ -53,7 +53,7 @@ Zmiana jednej wartości koloru w brandingu (np. z `139 115 85` na `145 120 88`) 
 
 ---
 
-## RF-02 — CSS: niespójna indentacja w regule hover
+## RF-02 — CSS: niespójna indentacja w regule hover ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `Services.module.css`, linia 358
@@ -91,7 +91,7 @@ Pogrupować reguły hover przy odpowiadających im blokach wariantów. Stworzyć
 
 ---
 
-## RF-04 — TS: niespójność operatorów `||` i `??` w `site-content.ts`
+## RF-04 — TS: niespójność operatorów `||` i `??` w `site-content.ts` ✅ ZROBIONE
 
 **Priorytet: Średni**
 **Plik:** `lib/site-content.ts`
@@ -294,21 +294,21 @@ const ANIMATION = {
 
 | ID    | Opis                                            | Priorytet | Ryzyko |
 |-------|-------------------------------------------------|-----------|--------|
-| RF-01 | CSS custom properties dla kolorów               | Wysoki    | Niskie |
-| RF-02 | Naprawa indentacji w hover (linia 358)          | Niski     | Brak   |
-| RF-03 | Symetryczne reguły hover dla wariantów CSS      | Niski     | Niskie |
-| RF-04 | Zunifikowanie `||` / `??` w site-content.ts     | Średni    | Niskie |
-| RF-05 | Jawny typ unii `ServiceIconName`                | Średni    | Niskie |
-| RF-06 | Lookup table zamiast if-else w getCardStyle…    | Niski     | Brak   |
-| RF-07 | Custom hook `useServicesAnimation`              | Średni    | Niskie |
-| RF-08 | Ekstrakcja `ServiceIcon` do osobnego pliku      | Niski     | Brak   |
-| RF-09 | Nazwane stałe dla wartości animacji             | Niski     | Brak   |
+| RF-01 | CSS custom properties dla kolorów               | Wysoki    | Niskie | ✅ |
+| RF-02 | Naprawa indentacji w hover (linia 358)          | Niski     | Brak   | ✅ |
+| RF-03 | Symetryczne reguły hover dla wariantów CSS      | Niski     | Niskie |    |
+| RF-04 | Zunifikowanie `||` / `??` w site-content.ts     | Średni    | Niskie | ✅ |
+| RF-05 | Jawny typ unii `ServiceIconName`                | Średni    | Niskie |    |
+| RF-06 | Lookup table zamiast if-else w getCardStyle…    | Niski     | Brak   |    |
+| RF-07 | Custom hook `useServicesAnimation`              | Średni    | Niskie |    |
+| RF-08 | Ekstrakcja `ServiceIcon` do osobnego pliku      | Niski     | Brak   |    |
+| RF-09 | Nazwane stałe dla wartości animacji             | Niski     | Brak   |    |
 
 ### Rekomendowana kolejność wdrożenia
 
-1. **RF-02** — poprawka kosmetyczna, bez ryzyka, 1 linia
-2. **RF-04** — eliminacja nieczytelnej niespójności, 1–2 linie
-3. **RF-01** — największy zwrot z utrzymania, ~20 linii CSS
+1. ~~**RF-02**~~ ✅ — poprawka kosmetyczna, bez ryzyka, 1 linia
+2. ~~**RF-04**~~ ✅ — eliminacja nieczytelnej niespójności, 1–2 linie
+3. ~~**RF-01**~~ ✅ — największy zwrot z utrzymania, ~20 linii CSS
 4. **RF-05** + **RF-06** — spójne usprawnienie systemu typów
 5. **RF-07** + **RF-08** — strukturalna separacja odpowiedzialności, wykonać razem
 6. **RF-09** — opcjonalne, po RF-07
