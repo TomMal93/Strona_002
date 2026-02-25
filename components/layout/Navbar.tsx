@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { gsap } from 'gsap'
-import logoImage from '@/public/images/logo_m.png'
+import logoImage from '@/public/images/logo_m.webp'
 
 const NAV_ITEMS = [
   { label: 'O MNIE', href: '#about' },
