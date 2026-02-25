@@ -16,10 +16,10 @@ export const siteContent = {
     ctaLabel: process.env.NEXT_PUBLIC_HERO_CTA_LABEL || 'Skontaktuj się',
   },
   services: {
-    title: process.env.NEXT_PUBLIC_SERVICES_TITLE ?? 'Oferta',
+    title: process.env.NEXT_PUBLIC_SERVICES_TITLE || 'Oferta',
     subtitle:
       process.env.NEXT_PUBLIC_SERVICES_SUBTITLE
-      ?? 'Od reportażu eventowego po ujęcia z drona. Każdy materiał realizuję z naciskiem na dynamikę, klimat i historię.',
+      || 'Od reportażu eventowego po ujęcia z drona. Każdy materiał realizuję z naciskiem na dynamikę, klimat i historię.',
     items: [
       {
         icon: 'heart',
