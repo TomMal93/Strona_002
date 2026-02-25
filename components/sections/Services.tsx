@@ -50,26 +50,27 @@ function orderServiceItems(items: readonly ServiceItem[]): ServiceItem[] {
   return [...highlightItems, ...regularItems]
 }
 
-function getCardStyleClassNames(variant: CardVariant): CardStyleClassNames {
-  if (variant === 'highlight') {
-    return {
-      card: styles.serviceCardHighlight,
-      line: styles.cardTopLineHighlight,
-      title: styles.highlightTitle,
-      text: styles.highlightText,
-      badge: styles.iconBadgeHighlight,
-      icon: styles.iconHighlight,
-    }
-  }
-
-  return {
+const CARD_STYLE_MAP: Record<CardVariant, CardStyleClassNames> = {
+  highlight: {
+    card: styles.serviceCardHighlight,
+    line: styles.cardTopLineHighlight,
+    title: styles.highlightTitle,
+    text: styles.highlightText,
+    badge: styles.iconBadgeHighlight,
+    icon: styles.iconHighlight,
+  },
+  military: {
     card: styles.serviceCardMilitary,
     line: styles.cardTopLineMilitary,
     title: styles.militaryTitle,
     text: styles.militaryText,
     badge: styles.iconBadgeMilitary,
     icon: styles.iconMilitary,
-  }
+  },
+}
+
+function getCardStyleClassNames(variant: CardVariant): CardStyleClassNames {
+  return CARD_STYLE_MAP[variant]
 }
 
 // --- Service icons ----------------------------------------------------------
