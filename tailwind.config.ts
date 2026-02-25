@@ -37,7 +37,7 @@ const config: Config = {
       fontSize: {
         display: ['80px', { lineHeight: '0.9' }],
         'display-sm': ['100px', { lineHeight: '0.9' }],
-        'display-lg': ['120px', { lineHeight: '0.9' }],
+        'display-lg': ['110px', { lineHeight: '0.9' }],
       },
     },
   },

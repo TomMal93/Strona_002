@@ -136,26 +136,21 @@ Ten sam blok 16 linii SVG (ikona strzałki w CTA) był skopiowany dosłownie do 
 
 ---
 
-### AH-07 — Custom font sizes z Tailwind config nieużywane w Hero
+### AH-07 — Custom font sizes z Tailwind config nieużywane w Hero ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `Hero.tsx:118`, `tailwind.config.ts`
 
-Konfiguracja Tailwind definiuje klasy typograficzne `display`, `display-sm`, `display-lg` przeznaczone dla nagłówków, ale `<h1>` w Hero używa inline wartości:
+### Problem
 
-```tsx
-/* Aktualny stan */
-className="… text-[48px] … md:text-[80px] lg:text-[110px]"
+Konfiguracja Tailwind definiowała klasy `display`, `display-sm`, `display-lg`, ale `<h1>` w Hero używał inline wartości `text-[80px]` i `text-[110px]`. `display-lg` miał wartość 120px — niezgodną z faktycznym użyciem.
 
-/* Dostępne w tailwind.config.ts */
-fontSize: {
-  'display-sm': ['4.5rem', …],   /* 72px */
-  'display':    ['6rem', …],     /* 96px */
-  'display-lg': ['8rem', …],     /* 128px */
-}
-```
+### Fix
 
-Powoduje rozbieżność między systemem typografii a jego użyciem. Zmiana skali czcionek nagłówków wymaga modyfikacji w obu miejscach.
+1. `tailwind.config.ts` — skorygowano `display-lg` z `120px` na `110px` (token odzwierciedla faktyczne użycie; był nigdzie indziej nieużywany)
+2. `Hero.tsx` — zastąpiono `md:text-[80px]` → `md:text-display`, `lg:text-[110px]` → `lg:text-display-lg`
+
+`text-[48px]` na mobile pozostaje jako wartość arbitralna — brak odpowiedniego tokenu w skali display.
 
 ---
 
@@ -188,5 +183,5 @@ Dodatkowo `baseClassName` w `Button.tsx` zawierał `text-sm font-semibold upperc
 | AH-04 | Dwa `<h1>` w DOM jednocześnie (SEO)                 | Niski      | Otwarte  |
 | AH-05 | `alt=""` na hero image                              | Niski      | Otwarte  |
 | AH-06 | Zduplikowany SVG arrow w mobile/desktop             | Niski      | ✅ ZROBIONE |
-| AH-07 | Custom font sizes z Tailwind nieużywane w Hero      | Niski      | Otwarte  |
+| AH-07 | Custom font sizes z Tailwind nieużywane w Hero      | Niski      | ✅ ZROBIONE |
 | AH-08 | `Button.tsx` nieużywany — surowy `<a>` zamiast niego | Niski     | ✅ ZROBIONE |

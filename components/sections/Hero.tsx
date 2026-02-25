@@ -121,7 +121,7 @@ export default function Hero() {
             {/* Heading */}
             <h1
               ref={headingRef}
-              className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-[80px] lg:text-[110px]"
+              className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-display lg:text-display-lg"
             >
               {siteContent.hero.headlineLine1}
               <br />
