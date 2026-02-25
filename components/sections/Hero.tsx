@@ -35,7 +35,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      aria-labelledby="hero-heading"
+      aria-label="Sekcja główna"
       className={`h-[100svh] md:h-[100dvh] w-full ${styles.sectionBackground}`}
     >
       {/* ── Mobile: fixed composition (no absolute positioning) ─────────── */}
@@ -49,7 +49,7 @@ export default function Hero() {
               className="object-contain object-center"
               priority
               quality={75}
-              sizes="50vw"
+              sizes="(max-width: 767px) 72vw, 1px"
             />
           </div>
         </div>
@@ -113,7 +113,6 @@ export default function Hero() {
 
             {/* Heading */}
             <h1
-              id="hero-heading"
               ref={headingRef}
               className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-[80px] lg:text-[110px]"
             >
