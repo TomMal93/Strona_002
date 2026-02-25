@@ -3,14 +3,13 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { siteContent } from '@/lib/site-content'
+import { siteContent, type ServiceIconName } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './Services.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
 type ServiceItem = (typeof siteContent.services.items)[number]
-type ServiceIconName = ServiceItem['icon']
 type CardVariant = 'highlight' | 'military'
 type CardStyleClassNames = {
   card: string
@@ -22,6 +21,14 @@ type CardStyleClassNames = {
 }
 
 const HIGHLIGHT_ICONS = new Set<ServiceIconName>(['heart', 'flag'])
+
+const ANIMATION = {
+  INITIAL_Y: 40,
+  DURATION: 0.7,
+  EASE: 'power2.out',
+  STAGGER: 0.08,
+  SCROLL_START: 'top 75%',
+} as const
 const DESKTOP_START_CLASS_NAMES = [
   'lg:col-start-2',
   'lg:col-start-4',
@@ -43,26 +50,27 @@ function orderServiceItems(items: readonly ServiceItem[]): ServiceItem[] {
   return [...highlightItems, ...regularItems]
 }
 
-function getCardStyleClassNames(variant: CardVariant): CardStyleClassNames {
-  if (variant === 'highlight') {
-    return {
-      card: styles.serviceCardHighlight,
-      line: styles.cardTopLineHighlight,
-      title: styles.highlightTitle,
-      text: styles.highlightText,
-      badge: styles.iconBadgeHighlight,
-      icon: styles.iconHighlight,
-    }
-  }
-
-  return {
+const CARD_STYLE_MAP: Record<CardVariant, CardStyleClassNames> = {
+  highlight: {
+    card: styles.serviceCardHighlight,
+    line: styles.cardTopLineHighlight,
+    title: styles.highlightTitle,
+    text: styles.highlightText,
+    badge: styles.iconBadgeHighlight,
+    icon: styles.iconHighlight,
+  },
+  military: {
     card: styles.serviceCardMilitary,
     line: styles.cardTopLineMilitary,
     title: styles.militaryTitle,
     text: styles.militaryText,
     badge: styles.iconBadgeMilitary,
     icon: styles.iconMilitary,
-  }
+  },
+}
+
+function getCardStyleClassNames(variant: CardVariant): CardStyleClassNames {
+  return CARD_STYLE_MAP[variant]
 }
 
 // --- Service icons ----------------------------------------------------------
@@ -111,8 +119,6 @@ function ServiceIcon({ icon, className }: { icon: ServiceIconName, className?: s
           <path d="M6 3v18M6 4h10l-2 4 2 4H6" stroke="currentColor" strokeWidth="1.8" />
         </svg>
       )
-    default:
-      return null
   }
 }
 
@@ -210,16 +216,16 @@ export default function Services() {
         return
       }
 
-      gsap.set(cards, { autoAlpha: 0, y: 40 })
+      gsap.set(cards, { autoAlpha: 0, y: ANIMATION.INITIAL_Y })
       gsap.to(cards, {
         autoAlpha: 1,
         y: 0,
-        duration: 0.7,
-        ease: 'power2.out',
-        stagger: 0.08,
+        duration: ANIMATION.DURATION,
+        ease: ANIMATION.EASE,
+        stagger: ANIMATION.STAGGER,
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 75%',
+          start: ANIMATION.SCROLL_START,
           once: true,
         },
       })
