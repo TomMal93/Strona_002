@@ -94,7 +94,6 @@
     transform 460ms cubic-bezier(0.19, 1, 0.22, 1),
     border-color 340ms cubic-bezier(0.22, 1, 0.36, 1);
   /* Removed box-shadow and filter transitions — cause layout recalculations during scroll */
-  will-change: transform;
 }
 
 .serviceCard::before {
@@ -122,6 +121,7 @@
 }
 
 .serviceCard:hover {
+  will-change: transform;
   transform: translateY(-6px) scale(1.01);
   border-color: rgb(var(--c-gold) / 0.7);
   box-shadow:

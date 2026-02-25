@@ -128,7 +128,7 @@ type ServiceCardsRowProps = {
 
 function ServiceCardsRow({ items, startClassNames, colsClass = '' }: ServiceCardsRowProps) {
   return (
-    <ul className={cn('grid gap-5 md:gap-y-0 lg:grid-cols-6', colsClass, styles.cardsGrid)}>
+    <ul className={cn('grid gap-5 md:gap-y-0 lg:grid-cols-6', colsClass)}>
       {items.map((item, index) => (
         <ServiceCard
           key={item.title}
