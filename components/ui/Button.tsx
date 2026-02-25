@@ -25,7 +25,7 @@ type AnchorButtonProps = CommonProps &
 type ButtonProps = NativeButtonProps | AnchorButtonProps
 
 const baseClassName = [
-  'font-inter text-sm font-semibold uppercase tracking-widest',
+  'font-inter',
   'transition-colors duration-300',
   'focus-visible:outline focus-visible:outline-2',
   'focus-visible:outline-khaki focus-visible:outline-offset-2',
@@ -37,9 +37,16 @@ const sizeClassName: Record<ButtonSize, string> = {
 }
 
 const variantClassName: Record<ButtonVariant, string> = {
-  primary: 'bg-khaki text-black-deep hover:bg-military-green',
-  outline: 'border border-khaki text-khaki hover:bg-khaki hover:text-black-deep',
-  hero: 'rounded-micro bg-khaki text-warm-white hover:bg-military-green',
+  primary: 'text-sm font-semibold uppercase tracking-widest bg-khaki text-black-deep hover:bg-military-green',
+  outline: 'text-sm font-semibold uppercase tracking-widest border border-khaki text-khaki hover:bg-khaki hover:text-black-deep',
+  hero: [
+    'inline-flex items-center gap-3',
+    'rounded-full border border-khaki/70 px-7 py-3.5',
+    'text-[18px] font-medium text-white',
+    'hover:bg-white/10',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white',
+    'focus-visible:ring-offset-2 focus-visible:ring-offset-black',
+  ].join(' '),
 }
 
 const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(

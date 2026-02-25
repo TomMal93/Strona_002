@@ -100,81 +100,78 @@ Wartość `72vw` odpowiada faktycznej szerokości obrazu na mobile: kontener `w-
 
 ## DROBNE
 
-### AH-04 — Dwa elementy `<h1>` w DOM jednocześnie
+### AH-04 — Dwa elementy `<h1>` w DOM jednocześnie ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `Hero.tsx:63`, `Hero.tsx:115`
 
-Oba layouty (mobilny i desktopowy) mają własny `<h1>` z identyczną treścią. Oba istnieją w DOM w tym samym czasie — tylko jeden jest widoczny wizualnie przez CSS. Crawlery SEO (Google) nie uwzględniają `display:none`, więc widzą dwie sekcje `<h1>` na stronie.
+### Problem
 
-Aktualnie treść jest identyczna, więc efektywna szkoda jest minimalna. Przy zmianie treści nagłówka istnieje ryzyko rozjazdu.
+Oba layouty miały własny `<h1>`. Oba istniały w DOM jednocześnie — tylko jeden widoczny przez CSS (`display:none`). Crawlery SEO nie uwzględniają `display:none`, więc widziały dwie sekcje `<h1>`.
 
-**Propozycja:** Rozważyć jedno `<h1>` ze wspólną treścią, a różnice layoutu uzyskiwać wyłącznie przez CSS (pozycjonowanie, typografia responsywna). Wymaga głębszego refactoringu.
+### Fix
+
+1. Dodano jeden `<h1 className="sr-only">` bezpośrednio w `<section>` — zawsze w drzewie dostępności i widoczny dla crawlerów SEO
+2. Oba wizualne nagłówki zmieniono na `<p aria-hidden="true">` — zachowują wygląd i animację GSAP, wykluczone z AT
+3. `types.ts` / `Hero.tsx` — typ `headingRef` zaktualizowany z `HTMLHeadingElement` na `HTMLParagraphElement`
 
 ---
 
-### AH-05 — `alt=""` na hero image (oba layouty)
+### AH-05 — `alt=""` na hero image (oba layouty) ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `Hero.tsx:47`, `Hero.tsx:168`
 
-Oba obrazy hero mają `alt=""`, traktując je jako dekoracyjne. Dla portfolio fotografa/operatora wideo główne zdjęcie hero prawdopodobnie przekazuje informację (styl, klimat, tematykę). Pusty `alt` ukrywa tę informację przed użytkownikami screen readerów i przed crawler Google Images.
-
-**Propozycja:** Dodać opisowy `alt` po ustaleniu treści zdjęcia, np.:
+Oba obrazy hero miały `alt=""`. Zdjęcie przedstawia autora z dronem i kontrolerem — portret marki, nie obraz dekoracyjny. Dodano opisowy alt na obu instancjach:
 ```tsx
-alt="Fotoreportaż z eventu militarnego — dynamiczne ujęcie w terenie"
+alt="Fotograf i operator drona — portret z dronem i kontrolerem"
 ```
 
 ---
 
-### AH-06 — Zduplikowany SVG arrow w obu layoutach
+### AH-06 — Zduplikowany SVG arrow w obu layoutach ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `Hero.tsx:81-96`, `Hero.tsx:143-158`
 
-Ten sam blok 16 linii SVG (ikona strzałki w CTA) jest skopiowany dosłownie do mobilnego i desktopowego wariantu przycisku. Zmiana ikony wymaga edycji w dwóch miejscach.
-
-**Propozycja:** Wyodrębnić ikonę do lokalnej stałej lub komponentu:
-```tsx
-const ArrowIcon = () => (
-  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" … >
-    <path d="M5 12h14" />
-    <path d="m12 5 7 7-7 7" />
-  </svg>
-)
-```
+Ten sam blok 16 linii SVG (ikona strzałki w CTA) był skopiowany dosłownie do mobilnego i desktopowego wariantu przycisku. Rozwiązane razem z AH-08 — wyodrębniono do stałej `ArrowIcon` na górze pliku, obie instancje `<a>` (→ `<Button>`) korzystają z tej samej ikony.
 
 ---
 
-### AH-07 — Custom font sizes z Tailwind config nieużywane w Hero
+### AH-07 — Custom font sizes z Tailwind config nieużywane w Hero ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `Hero.tsx:118`, `tailwind.config.ts`
 
-Konfiguracja Tailwind definiuje klasy typograficzne `display`, `display-sm`, `display-lg` przeznaczone dla nagłówków, ale `<h1>` w Hero używa inline wartości:
+### Problem
 
-```tsx
-/* Aktualny stan */
-className="… text-[48px] … md:text-[80px] lg:text-[110px]"
+Konfiguracja Tailwind definiowała klasy `display`, `display-sm`, `display-lg`, ale `<h1>` w Hero używał inline wartości `text-[80px]` i `text-[110px]`. `display-lg` miał wartość 120px — niezgodną z faktycznym użyciem.
 
-/* Dostępne w tailwind.config.ts */
-fontSize: {
-  'display-sm': ['4.5rem', …],   /* 72px */
-  'display':    ['6rem', …],     /* 96px */
-  'display-lg': ['8rem', …],     /* 128px */
-}
-```
+### Fix
 
-Powoduje rozbieżność między systemem typografii a jego użyciem. Zmiana skali czcionek nagłówków wymaga modyfikacji w obu miejscach.
+1. `tailwind.config.ts` — skorygowano `display-lg` z `120px` na `110px` (token odzwierciedla faktyczne użycie; był nigdzie indziej nieużywany)
+2. `Hero.tsx` — zastąpiono `md:text-[80px]` → `md:text-display`, `lg:text-[110px]` → `lg:text-display-lg`
+
+`text-[48px]` na mobile pozostaje jako wartość arbitralna — brak odpowiedniego tokenu w skali display.
 
 ---
 
-### AH-08 — Komponent `Button.tsx` nieużywany w Hero
+### AH-08 — Komponent `Button.tsx` nieużywany w Hero ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `Hero.tsx:76`, `Hero.tsx:137`, `components/ui/Button.tsx`
 
-`Button.tsx` zawiera wariant `hero`, ale CTA w Hero jest surowym `<a>` ze stylem zdefiniowanym inline. Style różnią się (`rounded-full` vs brak, rozmiary, focus ring). Może być celową decyzją designerską — do potwierdzenia.
+### Problem
+
+`Button.tsx` zawierał wariant `hero`, ale jego styl (`bg-khaki rounded-micro`) całkowicie odbiegał od faktycznego designu CTA (`border border-khaki/70 rounded-full`). CTA były surowym `<a>` z ręcznie wpisanymi klasami.
+
+Dodatkowo `baseClassName` w `Button.tsx` zawierał `text-sm font-semibold uppercase tracking-widest` — właściwości typograficzne specyficzne dla `primary`/`outline`, które kolidowały z wymaganiami wariantu `hero` (`text-[18px] font-medium`, bez uppercase).
+
+### Fix
+
+1. `Button.tsx` — wyjęto `text-sm font-semibold uppercase tracking-widest` z `baseClassName` do wariantów `primary` i `outline`
+2. `Button.tsx` — zaktualizowano wariant `hero` do faktycznego designu CTA: `rounded-full border border-khaki/70 px-7 py-3.5 text-[18px] font-medium text-white hover:bg-white/10` z prawidłowym focus ring dla ciemnego tła
+3. `Hero.tsx` — oba surowe `<a>` zastąpiono `<Button as="a" variant="hero">`; przy okazji rozwiązano AH-06 (wyodrębniona stała `ArrowIcon`)
 
 ---
 
@@ -185,8 +182,8 @@ Powoduje rozbieżność między systemem typografii a jego użyciem. Zmiana skal
 | AH-01 | `aria-labelledby` wskazuje na ukryty element        | Krytyczny  | ✅ ZROBIONE |
 | AH-02 | `'use client'` na pliku custom hooka                | Średni     | ✅ ZROBIONE |
 | AH-03 | `sizes="50vw"` na ukrytym obrazku — zbędny preload  | Ważny      | ✅ ZROBIONE |
-| AH-04 | Dwa `<h1>` w DOM jednocześnie (SEO)                 | Niski      | Otwarte  |
-| AH-05 | `alt=""` na hero image                              | Niski      | Otwarte  |
-| AH-06 | Zduplikowany SVG arrow w mobile/desktop             | Niski      | Otwarte  |
-| AH-07 | Custom font sizes z Tailwind nieużywane w Hero      | Niski      | Otwarte  |
-| AH-08 | `Button.tsx` nieużywany — surowy `<a>` zamiast niego | Niski     | Otwarte  |
+| AH-04 | Dwa `<h1>` w DOM jednocześnie (SEO)                 | Niski      | ✅ ZROBIONE |
+| AH-05 | `alt=""` na hero image                              | Niski      | ✅ ZROBIONE |
+| AH-06 | Zduplikowany SVG arrow w mobile/desktop             | Niski      | ✅ ZROBIONE |
+| AH-07 | Custom font sizes z Tailwind nieużywane w Hero      | Niski      | ✅ ZROBIONE |
+| AH-08 | `Button.tsx` nieużywany — surowy `<a>` zamiast niego | Niski     | ✅ ZROBIONE |
