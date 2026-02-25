@@ -127,22 +127,12 @@ alt="Fotoreportaż z eventu militarnego — dynamiczne ujęcie w terenie"
 
 ---
 
-### AH-06 — Zduplikowany SVG arrow w obu layoutach
+### AH-06 — Zduplikowany SVG arrow w obu layoutach ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `Hero.tsx:81-96`, `Hero.tsx:143-158`
 
-Ten sam blok 16 linii SVG (ikona strzałki w CTA) jest skopiowany dosłownie do mobilnego i desktopowego wariantu przycisku. Zmiana ikony wymaga edycji w dwóch miejscach.
-
-**Propozycja:** Wyodrębnić ikonę do lokalnej stałej lub komponentu:
-```tsx
-const ArrowIcon = () => (
-  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" … >
-    <path d="M5 12h14" />
-    <path d="m12 5 7 7-7 7" />
-  </svg>
-)
-```
+Ten sam blok 16 linii SVG (ikona strzałki w CTA) był skopiowany dosłownie do mobilnego i desktopowego wariantu przycisku. Rozwiązane razem z AH-08 — wyodrębniono do stałej `ArrowIcon` na górze pliku, obie instancje `<a>` (→ `<Button>`) korzystają z tej samej ikony.
 
 ---
 
@@ -169,12 +159,22 @@ Powoduje rozbieżność między systemem typografii a jego użyciem. Zmiana skal
 
 ---
 
-### AH-08 — Komponent `Button.tsx` nieużywany w Hero
+### AH-08 — Komponent `Button.tsx` nieużywany w Hero ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `Hero.tsx:76`, `Hero.tsx:137`, `components/ui/Button.tsx`
 
-`Button.tsx` zawiera wariant `hero`, ale CTA w Hero jest surowym `<a>` ze stylem zdefiniowanym inline. Style różnią się (`rounded-full` vs brak, rozmiary, focus ring). Może być celową decyzją designerską — do potwierdzenia.
+### Problem
+
+`Button.tsx` zawierał wariant `hero`, ale jego styl (`bg-khaki rounded-micro`) całkowicie odbiegał od faktycznego designu CTA (`border border-khaki/70 rounded-full`). CTA były surowym `<a>` z ręcznie wpisanymi klasami.
+
+Dodatkowo `baseClassName` w `Button.tsx` zawierał `text-sm font-semibold uppercase tracking-widest` — właściwości typograficzne specyficzne dla `primary`/`outline`, które kolidowały z wymaganiami wariantu `hero` (`text-[18px] font-medium`, bez uppercase).
+
+### Fix
+
+1. `Button.tsx` — wyjęto `text-sm font-semibold uppercase tracking-widest` z `baseClassName` do wariantów `primary` i `outline`
+2. `Button.tsx` — zaktualizowano wariant `hero` do faktycznego designu CTA: `rounded-full border border-khaki/70 px-7 py-3.5 text-[18px] font-medium text-white hover:bg-white/10` z prawidłowym focus ring dla ciemnego tła
+3. `Hero.tsx` — oba surowe `<a>` zastąpiono `<Button as="a" variant="hero">`; przy okazji rozwiązano AH-06 (wyodrębniona stała `ArrowIcon`)
 
 ---
 
@@ -187,6 +187,6 @@ Powoduje rozbieżność między systemem typografii a jego użyciem. Zmiana skal
 | AH-03 | `sizes="50vw"` na ukrytym obrazku — zbędny preload  | Ważny      | ✅ ZROBIONE |
 | AH-04 | Dwa `<h1>` w DOM jednocześnie (SEO)                 | Niski      | Otwarte  |
 | AH-05 | `alt=""` na hero image                              | Niski      | Otwarte  |
-| AH-06 | Zduplikowany SVG arrow w mobile/desktop             | Niski      | Otwarte  |
+| AH-06 | Zduplikowany SVG arrow w mobile/desktop             | Niski      | ✅ ZROBIONE |
 | AH-07 | Custom font sizes z Tailwind nieużywane w Hero      | Niski      | Otwarte  |
-| AH-08 | `Button.tsx` nieużywany — surowy `<a>` zamiast niego | Niski     | Otwarte  |
+| AH-08 | `Button.tsx` nieużywany — surowy `<a>` zamiast niego | Niski     | ✅ ZROBIONE |

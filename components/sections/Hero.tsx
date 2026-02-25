@@ -4,8 +4,28 @@ import { useRef } from 'react'
 import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { useHeroAnimations } from './hero/useHeroAnimations'
+import Button from '@/components/ui/Button'
 import styles from './Hero.module.css'
 import heroImage from '@/public/images/hero.webp'
+
+const ArrowIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="transition-transform group-hover:translate-x-1"
+    aria-hidden="true"
+  >
+    <path d="M5 12h14" />
+    <path d="m12 5 7 7-7 7" />
+  </svg>
+)
 
 /**
  * Hero — fullscreen section.
@@ -73,28 +93,15 @@ export default function Hero() {
                 <span aria-hidden="true" className="block h-px w-full bg-khaki/70" />
             </div>
 
-            <a
+            <Button
+              as="a"
               href="#contact"
-              className="group mt-8 inline-flex items-center gap-3 rounded-full border border-khaki/70 px-7 py-3.5 font-inter text-[18px] font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              variant="hero"
+              className="group mt-8"
             >
               {siteContent.hero.ctaLabel}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="transition-transform group-hover:translate-x-1"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </a>
+              <ArrowIcon />
+            </Button>
           </div>
         </div>
       </div>
@@ -133,29 +140,16 @@ export default function Hero() {
             </div>
 
             {/* CTA */}
-            <a
+            <Button
+              as="a"
               ref={ctaRef}
               href="#contact"
-              className="group mt-8 inline-flex items-center gap-3 rounded-full border border-khaki/70 px-7 py-3.5 font-inter text-[18px] font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              variant="hero"
+              className="group mt-8"
             >
               {siteContent.hero.ctaLabel}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="transition-transform group-hover:translate-x-1"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </a>
+              <ArrowIcon />
+            </Button>
           </div>
         </div>
 
