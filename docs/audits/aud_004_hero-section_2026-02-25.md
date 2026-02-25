@@ -124,7 +124,7 @@ Oba layouty miały własny `<h1>`. Oba istniały w DOM jednocześnie — tylko j
 
 Oba obrazy hero miały `alt=""`. Zdjęcie przedstawia autora z dronem i kontrolerem — portret marki, nie obraz dekoracyjny. Dodano opisowy alt na obu instancjach:
 ```tsx
-alt="Tomasz Malec — fotograf i operator drona"
+alt="Fotograf i operator drona — portret z dronem i kontrolerem"
 ```
 
 ---

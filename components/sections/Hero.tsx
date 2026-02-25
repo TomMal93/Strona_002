@@ -69,7 +69,7 @@ export default function Hero() {
           <div className="relative aspect-[3/4] w-full">
             <Image
               src={heroImage}
-              alt="Tomasz Malec — fotograf i operator drona"
+              alt="Fotograf i operator drona — portret z dronem i kontrolerem"
               fill
               className="object-contain object-center"
               priority
@@ -164,7 +164,7 @@ export default function Hero() {
           <div className="relative h-[90%] w-full">
             <Image
               src={heroImage}
-              alt="Tomasz Malec — fotograf i operator drona"
+              alt="Fotograf i operator drona — portret z dronem i kontrolerem"
               fill
               className="object-contain object-center"
               priority
