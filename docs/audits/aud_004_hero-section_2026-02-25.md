@@ -1,0 +1,192 @@
+# Audyt sekcji Hero
+
+**Data:** 2026-02-25
+**Dotyczy plików:**
+- `components/sections/Hero.tsx` (181 linii)
+- `components/sections/Hero.module.css` (65 linii)
+- `components/sections/hero/useHeroAnimations.ts`
+- `components/sections/hero/types.ts`
+- `lib/site-content.ts`
+
+---
+
+## KRYTYCZNY
+
+### AH-01 — `aria-labelledby` wskazuje na element ukryty na mobile ✅ ZROBIONE
+
+**Priorytet: Krytyczny**
+**Plik:** `Hero.tsx:39`
+
+### Problem
+
+Sekcja używała `aria-labelledby="hero-heading"`, które wskazywało wyłącznie na desktop `<h1>`:
+
+```tsx
+/* Hero.tsx */
+<section aria-labelledby="hero-heading">  {/* ← referuje desktop h1 */}
+
+{/* Layout mobilny — md:hidden */}
+<h1>Zamrażam Chwile</h1>  {/* brak id="hero-heading" */}
+
+{/* Layout desktopowy — hidden md:grid */}
+<h1 id="hero-heading">Zamrażam Chwile</h1>  {/* display:none na mobile */}
+```
+
+Na urządzeniu mobilnym desktop-div ma `display:none` — element z `id="hero-heading"` jest niewidoczny dla technologii wspomagających (screen readerów). Referencja `aria-labelledby` pozostaje nierozwiązana, sekcja traci dostępną nazwę.
+
+### Fix
+
+Zamieniono na `aria-label="Sekcja główna"` — bezpośredni atrybut niezależny od layoutu. Usunięto `id="hero-heading"` z desktop `<h1>` jako nieużywany.
+
+```tsx
+<section aria-label="Sekcja główna">
+```
+
+---
+
+## WAŻNE
+
+### AH-02 — `'use client'` na pliku custom hooka ✅ ZROBIONE
+
+**Priorytet: Średni**
+**Plik:** `components/sections/hero/useHeroAnimations.ts:1`
+
+### Problem
+
+Plik zawierał dyrektywę `'use client'` mimo że jest custom hookiem, a nie komponentem:
+
+```ts
+'use client'          // ← nie jest potrzebne w hooku
+
+import { useEffect } from 'react'
+```
+
+Custom hooki nie wyznaczają granicy Server/Client Components — robi to komponent, który je wywołuje. Dyrektywa na hooku jest semantycznie błędna, wprowadza w błąd i może sugerować nieprawidłowy wzorzec przy tworzeniu kolejnych hooków.
+
+### Fix
+
+Usunięto dyrektywę `'use client'` z `useHeroAnimations.ts`. Granica SSR pozostaje poprawnie zdefiniowana w `Hero.tsx`.
+
+---
+
+### AH-03 — Nieprawidłowe `sizes` na mobilnym obrazku ✅ ZROBIONE
+
+**Priorytet: Ważny**
+**Plik:** `Hero.tsx:52`
+
+### Problem
+
+Mobilny `<Image>` miał `priority` i `sizes="50vw"`. Na desktopie ten obraz jest ukryty (`md:hidden` → `display:none`), ale Next.js nadal generował `<link rel="preload">` bazując na `sizes="50vw"`. W rezultacie na desktopie 1920px przeglądarka preloadowała zdjęcie o szerokości ~960px mimo że nie jest renderowane.
+
+```tsx
+<Image
+  src={heroImage}
+  priority          {/* preload na każdym urządzeniu */}
+  sizes="50vw"      {/* ← 960px preload na desktopie 1920px */}
+/>
+```
+
+### Fix
+
+Zmieniono na `sizes="(max-width: 767px) 72vw, 1px"`. Wartość `1px` na desktopie sprawia, że Next.js wybiera najmniejszy wariant z srcset — eliminując kosztowny zbędny transfer.
+
+```tsx
+sizes="(max-width: 767px) 72vw, 1px"
+```
+
+Wartość `72vw` odpowiada faktycznej szerokości obrazu na mobile: kontener `w-[72%]` ze skalowanej ramki `766px` ≈ 72% viewport.
+
+---
+
+## DROBNE
+
+### AH-04 — Dwa elementy `<h1>` w DOM jednocześnie
+
+**Priorytet: Niski**
+**Plik:** `Hero.tsx:63`, `Hero.tsx:115`
+
+Oba layouty (mobilny i desktopowy) mają własny `<h1>` z identyczną treścią. Oba istnieją w DOM w tym samym czasie — tylko jeden jest widoczny wizualnie przez CSS. Crawlery SEO (Google) nie uwzględniają `display:none`, więc widzą dwie sekcje `<h1>` na stronie.
+
+Aktualnie treść jest identyczna, więc efektywna szkoda jest minimalna. Przy zmianie treści nagłówka istnieje ryzyko rozjazdu.
+
+**Propozycja:** Rozważyć jedno `<h1>` ze wspólną treścią, a różnice layoutu uzyskiwać wyłącznie przez CSS (pozycjonowanie, typografia responsywna). Wymaga głębszego refactoringu.
+
+---
+
+### AH-05 — `alt=""` na hero image (oba layouty)
+
+**Priorytet: Niski**
+**Plik:** `Hero.tsx:47`, `Hero.tsx:168`
+
+Oba obrazy hero mają `alt=""`, traktując je jako dekoracyjne. Dla portfolio fotografa/operatora wideo główne zdjęcie hero prawdopodobnie przekazuje informację (styl, klimat, tematykę). Pusty `alt` ukrywa tę informację przed użytkownikami screen readerów i przed crawler Google Images.
+
+**Propozycja:** Dodać opisowy `alt` po ustaleniu treści zdjęcia, np.:
+```tsx
+alt="Fotoreportaż z eventu militarnego — dynamiczne ujęcie w terenie"
+```
+
+---
+
+### AH-06 — Zduplikowany SVG arrow w obu layoutach
+
+**Priorytet: Niski**
+**Plik:** `Hero.tsx:81-96`, `Hero.tsx:143-158`
+
+Ten sam blok 16 linii SVG (ikona strzałki w CTA) jest skopiowany dosłownie do mobilnego i desktopowego wariantu przycisku. Zmiana ikony wymaga edycji w dwóch miejscach.
+
+**Propozycja:** Wyodrębnić ikonę do lokalnej stałej lub komponentu:
+```tsx
+const ArrowIcon = () => (
+  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" … >
+    <path d="M5 12h14" />
+    <path d="m12 5 7 7-7 7" />
+  </svg>
+)
+```
+
+---
+
+### AH-07 — Custom font sizes z Tailwind config nieużywane w Hero
+
+**Priorytet: Niski**
+**Plik:** `Hero.tsx:118`, `tailwind.config.ts`
+
+Konfiguracja Tailwind definiuje klasy typograficzne `display`, `display-sm`, `display-lg` przeznaczone dla nagłówków, ale `<h1>` w Hero używa inline wartości:
+
+```tsx
+/* Aktualny stan */
+className="… text-[48px] … md:text-[80px] lg:text-[110px]"
+
+/* Dostępne w tailwind.config.ts */
+fontSize: {
+  'display-sm': ['4.5rem', …],   /* 72px */
+  'display':    ['6rem', …],     /* 96px */
+  'display-lg': ['8rem', …],     /* 128px */
+}
+```
+
+Powoduje rozbieżność między systemem typografii a jego użyciem. Zmiana skali czcionek nagłówków wymaga modyfikacji w obu miejscach.
+
+---
+
+### AH-08 — Komponent `Button.tsx` nieużywany w Hero
+
+**Priorytet: Niski**
+**Plik:** `Hero.tsx:76`, `Hero.tsx:137`, `components/ui/Button.tsx`
+
+`Button.tsx` zawiera wariant `hero`, ale CTA w Hero jest surowym `<a>` ze stylem zdefiniowanym inline. Style różnią się (`rounded-full` vs brak, rozmiary, focus ring). Może być celową decyzją designerską — do potwierdzenia.
+
+---
+
+## Zestawienie
+
+| ID    | Opis                                                | Priorytet  | Status   |
+|-------|-----------------------------------------------------|------------|----------|
+| AH-01 | `aria-labelledby` wskazuje na ukryty element        | Krytyczny  | ✅ ZROBIONE |
+| AH-02 | `'use client'` na pliku custom hooka                | Średni     | ✅ ZROBIONE |
+| AH-03 | `sizes="50vw"` na ukrytym obrazku — zbędny preload  | Ważny      | ✅ ZROBIONE |
+| AH-04 | Dwa `<h1>` w DOM jednocześnie (SEO)                 | Niski      | Otwarte  |
+| AH-05 | `alt=""` na hero image                              | Niski      | Otwarte  |
+| AH-06 | Zduplikowany SVG arrow w mobile/desktop             | Niski      | Otwarte  |
+| AH-07 | Custom font sizes z Tailwind nieużywane w Hero      | Niski      | Otwarte  |
+| AH-08 | `Button.tsx` nieużywany — surowy `<a>` zamiast niego | Niski     | Otwarte  |
