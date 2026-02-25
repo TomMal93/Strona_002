@@ -1,13 +1,17 @@
 .sectionBackground {
+  --c-gold: 139 115 85;    /* bazowy kolor złota */
+  --c-olive: 74 82 64;     /* oliwkowy akcent tła */
+  --c-khaki: 146 154 117;  /* militarny khaki */
+  --c-warm: 180 130 90;    /* ciepły akcent wariantu highlight */
   position: relative;
   overflow: hidden;
   background:
     repeating-linear-gradient(
       45deg,
-      rgb(74 82 64 / 0.09) 0,
-      rgb(74 82 64 / 0.09) 1px,
-      rgb(74 82 64 / 0) 1px,
-      rgb(74 82 64 / 0) 22px
+      rgb(var(--c-olive) / 0.09) 0,
+      rgb(var(--c-olive) / 0.09) 1px,
+      rgb(var(--c-olive) / 0) 1px,
+      rgb(var(--c-olive) / 0) 22px
     ),
     rgb(13 13 13);
 }
@@ -41,9 +45,9 @@
   pointer-events: none;
   background: linear-gradient(
     120deg,
-    rgb(139 115 85 / 0.2) 0%,
-    rgb(139 115 85 / 0.08) 50%,
-    rgb(139 115 85 / 0.2) 100%
+    rgb(var(--c-gold) / 0.2) 0%,
+    rgb(var(--c-gold) / 0.08) 50%,
+    rgb(var(--c-gold) / 0.2) 100%
   );
   filter: blur(35px);
 }
@@ -59,10 +63,10 @@
   height: 2px;
   width: clamp(8rem, 18vw, 13rem);
   background:
-    linear-gradient(90deg, rgb(139 115 85 / 0.2) 0%, rgb(139 115 85 / 0.95) 50%, rgb(139 115 85 / 0.2) 100%);
+    linear-gradient(90deg, rgb(var(--c-gold) / 0.2) 0%, rgb(var(--c-gold) / 0.95) 50%, rgb(var(--c-gold) / 0.2) 100%);
   box-shadow:
-    0 0 0 1px rgb(139 115 85 / 0.25),
-    0 8px 20px rgb(139 115 85 / 0.2);
+    0 0 0 1px rgb(var(--c-gold) / 0.25),
+    0 8px 20px rgb(var(--c-gold) / 0.2);
 }
 
 .sectionIntro {
@@ -80,9 +84,9 @@
   isolation: isolate;
   min-height: 14rem;
   background:
-    radial-gradient(120% 80% at 100% 0%, rgb(139 115 85 / 0.16), transparent 60%),
+    radial-gradient(120% 80% at 100% 0%, rgb(var(--c-gold) / 0.16), transparent 60%),
     linear-gradient(160deg, rgb(26 26 26 / 0.96) 0%, rgb(18 18 18 / 0.98) 100%);
-  border: 1px solid rgb(139 115 85 / 0.32);
+  border: 1px solid rgb(var(--c-gold) / 0.32);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.04),
     0 16px 34px rgb(0 0 0 / 0.26);
@@ -99,8 +103,8 @@
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(circle at 85% 12%, rgb(139 115 85 / 0.14) 0%, transparent 46%),
-    linear-gradient(120deg, transparent 12%, rgb(139 115 85 / 0.08) 50%, transparent 88%);
+    radial-gradient(circle at 85% 12%, rgb(var(--c-gold) / 0.14) 0%, transparent 46%),
+    linear-gradient(120deg, transparent 12%, rgb(var(--c-gold) / 0.08) 50%, transparent 88%);
   opacity: 0.7;
   transform: none;
   transition: opacity 320ms ease;
@@ -113,13 +117,13 @@
   inset: 0;
   z-index: 0;
   border: 1px solid transparent;
-  border-image: linear-gradient(135deg, rgb(139 115 85 / 0.45), transparent 45%, rgb(139 115 85 / 0.22)) 1;
+  border-image: linear-gradient(135deg, rgb(var(--c-gold) / 0.45), transparent 45%, rgb(var(--c-gold) / 0.22)) 1;
   pointer-events: none;
 }
 
 .serviceCard:hover {
   transform: translateY(-6px) scale(1.01);
-  border-color: rgb(139 115 85 / 0.7);
+  border-color: rgb(var(--c-gold) / 0.7);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.08),
     0 24px 45px rgb(0 0 0 / 0.42);
@@ -133,7 +137,7 @@
   /* Removed backdrop-filter: blur — expensive GPU compositing during scroll */
   background:
     radial-gradient(130% 90% at 12% -8%, rgb(156 165 128 / 0.25), transparent 55%),
-    radial-gradient(120% 80% at 100% 100%, rgb(139 115 85 / 0.2), transparent 60%),
+    radial-gradient(120% 80% at 100% 100%, rgb(var(--c-gold) / 0.2), transparent 60%),
     linear-gradient(145deg, rgb(78 84 63 / 0.22) 0%, transparent 40%),
     repeating-linear-gradient(
       125deg,
@@ -143,7 +147,7 @@
       rgb(28 31 24 / 0.34) 20px
     ),
     linear-gradient(160deg, rgb(20 22 18 / 0.97) 0%, rgb(15 17 13 / 0.98) 100%);
-  border-color: rgb(146 154 117 / 0.62);
+  border-color: rgb(var(--c-khaki) / 0.62);
   box-shadow:
     inset 0 1px 0 rgb(218 208 183 / 0.12),
     0 18px 38px rgb(0 0 0 / 0.35);
@@ -156,7 +160,7 @@
 }
 
 .serviceCardMilitary::after {
-  border-image: linear-gradient(130deg, rgb(177 186 146 / 0.46), transparent 48%, rgb(139 115 85 / 0.36)) 1;
+  border-image: linear-gradient(130deg, rgb(177 186 146 / 0.46), transparent 48%, rgb(var(--c-gold) / 0.36)) 1;
 }
 
 .serviceCardMilitary:hover {
@@ -170,7 +174,7 @@
   /* Removed backdrop-filter: blur — expensive GPU compositing during scroll */
   background:
     radial-gradient(130% 90% at 12% -8%, rgb(180 120 80 / 0.22), transparent 55%),
-    radial-gradient(120% 80% at 100% 100%, rgb(139 115 85 / 0.18), transparent 60%),
+    radial-gradient(120% 80% at 100% 100%, rgb(var(--c-gold) / 0.18), transparent 60%),
     linear-gradient(145deg, rgb(80 55 35 / 0.18) 0%, transparent 40%),
     repeating-linear-gradient(
       125deg,
@@ -180,7 +184,7 @@
       rgb(28 20 12 / 0.34) 20px
     ),
     linear-gradient(160deg, rgb(28 20 16 / 0.97) 0%, rgb(22 15 11 / 0.98) 100%);
-  border-color: rgb(180 130 90 / 0.52);
+  border-color: rgb(var(--c-warm) / 0.52);
   box-shadow:
     inset 0 1px 0 rgb(220 190 160 / 0.10),
     0 18px 38px rgb(0 0 0 / 0.38);
@@ -195,7 +199,7 @@
 }
 
 .serviceCardHighlight::after {
-  border-image: linear-gradient(135deg, rgb(200 155 105 / 0.50), transparent 48%, rgb(139 115 85 / 0.32)) 1;
+  border-image: linear-gradient(135deg, rgb(200 155 105 / 0.50), transparent 48%, rgb(var(--c-gold) / 0.32)) 1;
 }
 
 .serviceCardHighlight:hover {
@@ -212,7 +216,7 @@
 .cardTopLine {
   height: 2px;
   width: 100%;
-  background: linear-gradient(90deg, rgb(139 115 85 / 0.95), rgb(74 82 64 / 0.8), rgb(139 115 85 / 0.15));
+  background: linear-gradient(90deg, rgb(var(--c-gold) / 0.95), rgb(var(--c-olive) / 0.8), rgb(var(--c-gold) / 0.15));
   transform-origin: left center;
   opacity: 0.88;
   transform: scaleX(0.72) translateX(0);
@@ -227,7 +231,7 @@
 }
 
 .cardTopLineHighlight {
-  background: linear-gradient(90deg, rgb(180 130 85 / 0.95), rgb(210 165 110 / 0.88), rgb(139 115 85 / 0.30));
+  background: linear-gradient(90deg, rgb(180 130 85 / 0.95), rgb(210 165 110 / 0.88), rgb(var(--c-gold) / 0.30));
   opacity: 0.88;
 }
 
@@ -237,7 +241,7 @@
 }
 
 .cardTopLineMilitary {
-  background: linear-gradient(90deg, rgb(151 159 121 / 0.9), rgb(139 115 85 / 0.78), rgb(73 81 57 / 0.32));
+  background: linear-gradient(90deg, rgb(151 159 121 / 0.9), rgb(var(--c-gold) / 0.78), rgb(73 81 57 / 0.32));
 }
 
 .iconBadge {
@@ -246,9 +250,9 @@
   justify-content: center;
   height: 2.2rem;
   width: 2.2rem;
-  border: 1px solid rgb(139 115 85 / 0.5);
+  border: 1px solid rgb(var(--c-gold) / 0.5);
   border-radius: 2px;
-  background: linear-gradient(180deg, rgb(139 115 85 / 0.2), rgb(74 82 64 / 0.14));
+  background: linear-gradient(180deg, rgb(var(--c-gold) / 0.2), rgb(var(--c-olive) / 0.14));
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08);
   margin-inline: auto;
   transition:
