@@ -100,16 +100,20 @@ Wartość `72vw` odpowiada faktycznej szerokości obrazu na mobile: kontener `w-
 
 ## DROBNE
 
-### AH-04 — Dwa elementy `<h1>` w DOM jednocześnie
+### AH-04 — Dwa elementy `<h1>` w DOM jednocześnie ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `Hero.tsx:63`, `Hero.tsx:115`
 
-Oba layouty (mobilny i desktopowy) mają własny `<h1>` z identyczną treścią. Oba istnieją w DOM w tym samym czasie — tylko jeden jest widoczny wizualnie przez CSS. Crawlery SEO (Google) nie uwzględniają `display:none`, więc widzą dwie sekcje `<h1>` na stronie.
+### Problem
 
-Aktualnie treść jest identyczna, więc efektywna szkoda jest minimalna. Przy zmianie treści nagłówka istnieje ryzyko rozjazdu.
+Oba layouty miały własny `<h1>`. Oba istniały w DOM jednocześnie — tylko jeden widoczny przez CSS (`display:none`). Crawlery SEO nie uwzględniają `display:none`, więc widziały dwie sekcje `<h1>`.
 
-**Propozycja:** Rozważyć jedno `<h1>` ze wspólną treścią, a różnice layoutu uzyskiwać wyłącznie przez CSS (pozycjonowanie, typografia responsywna). Wymaga głębszego refactoringu.
+### Fix
+
+1. Dodano jeden `<h1 className="sr-only">` bezpośrednio w `<section>` — zawsze w drzewie dostępności i widoczny dla crawlerów SEO
+2. Oba wizualne nagłówki zmieniono na `<p aria-hidden="true">` — zachowują wygląd i animację GSAP, wykluczone z AT
+3. `types.ts` / `Hero.tsx` — typ `headingRef` zaktualizowany z `HTMLHeadingElement` na `HTMLParagraphElement`
 
 ---
 
@@ -180,7 +184,7 @@ Dodatkowo `baseClassName` w `Button.tsx` zawierał `text-sm font-semibold upperc
 | AH-01 | `aria-labelledby` wskazuje na ukryty element        | Krytyczny  | ✅ ZROBIONE |
 | AH-02 | `'use client'` na pliku custom hooka                | Średni     | ✅ ZROBIONE |
 | AH-03 | `sizes="50vw"` na ukrytym obrazku — zbędny preload  | Ważny      | ✅ ZROBIONE |
-| AH-04 | Dwa `<h1>` w DOM jednocześnie (SEO)                 | Niski      | Otwarte  |
+| AH-04 | Dwa `<h1>` w DOM jednocześnie (SEO)                 | Niski      | ✅ ZROBIONE |
 | AH-05 | `alt=""` na hero image                              | Niski      | Otwarte  |
 | AH-06 | Zduplikowany SVG arrow w mobile/desktop             | Niski      | ✅ ZROBIONE |
 | AH-07 | Custom font sizes z Tailwind nieużywane w Hero      | Niski      | ✅ ZROBIONE |

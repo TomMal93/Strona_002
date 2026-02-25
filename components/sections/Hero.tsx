@@ -39,7 +39,7 @@ const ArrowIcon = () => (
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const eyebrowRef = useRef<HTMLSpanElement>(null)
-  const headingRef = useRef<HTMLHeadingElement>(null)
+  const headingRef = useRef<HTMLParagraphElement>(null)
   const descriptionRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLAnchorElement>(null)
 
@@ -58,6 +58,11 @@ export default function Hero() {
       aria-label="Sekcja główna"
       className={`h-[100svh] md:h-[100dvh] w-full ${styles.sectionBackground}`}
     >
+      {/* Semantic heading — single h1 for SEO and screen readers */}
+      <h1 className="sr-only">
+        {siteContent.hero.headlineLine1} {siteContent.hero.headlineLine2}
+      </h1>
+
       {/* ── Mobile: fixed composition (no absolute positioning) ─────────── */}
       <div className="relative z-10 mx-auto h-full w-[766px] origin-top-left scale-[calc(100vw/766px)] px-[10px] pt-[55px] md:hidden">
         <div className="ml-auto mr-[40px] w-[72%]">
@@ -80,11 +85,11 @@ export default function Hero() {
               {siteContent.hero.eyebrow}
             </span>
 
-            <h1 className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white">
+            <p aria-hidden="true" className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white">
               {siteContent.hero.headlineLine1}
               <br />
               {siteContent.hero.headlineLine2}
-            </h1>
+            </p>
 
             <div className="max-w-[34ch]">
               <p className="mt-6 whitespace-pre-line pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/60">
@@ -118,15 +123,16 @@ export default function Hero() {
               {siteContent.hero.eyebrow}
             </span>
 
-            {/* Heading */}
-            <h1
+            {/* Heading — visual only, semantic h1 is sr-only above */}
+            <p
               ref={headingRef}
+              aria-hidden="true"
               className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-display lg:text-display-lg"
             >
               {siteContent.hero.headlineLine1}
               <br />
               {siteContent.hero.headlineLine2}
-            </h1>
+            </p>
 
             {/* Description */}
             <div className="max-w-[34ch]">
