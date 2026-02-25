@@ -117,16 +117,14 @@ Oba layouty miały własny `<h1>`. Oba istniały w DOM jednocześnie — tylko j
 
 ---
 
-### AH-05 — `alt=""` na hero image (oba layouty)
+### AH-05 — `alt=""` na hero image (oba layouty) ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `Hero.tsx:47`, `Hero.tsx:168`
 
-Oba obrazy hero mają `alt=""`, traktując je jako dekoracyjne. Dla portfolio fotografa/operatora wideo główne zdjęcie hero prawdopodobnie przekazuje informację (styl, klimat, tematykę). Pusty `alt` ukrywa tę informację przed użytkownikami screen readerów i przed crawler Google Images.
-
-**Propozycja:** Dodać opisowy `alt` po ustaleniu treści zdjęcia, np.:
+Oba obrazy hero miały `alt=""`. Zdjęcie przedstawia autora z dronem i kontrolerem — portret marki, nie obraz dekoracyjny. Dodano opisowy alt na obu instancjach:
 ```tsx
-alt="Fotoreportaż z eventu militarnego — dynamiczne ujęcie w terenie"
+alt="Tomasz Malec — fotograf i operator drona"
 ```
 
 ---
@@ -185,7 +183,7 @@ Dodatkowo `baseClassName` w `Button.tsx` zawierał `text-sm font-semibold upperc
 | AH-02 | `'use client'` na pliku custom hooka                | Średni     | ✅ ZROBIONE |
 | AH-03 | `sizes="50vw"` na ukrytym obrazku — zbędny preload  | Ważny      | ✅ ZROBIONE |
 | AH-04 | Dwa `<h1>` w DOM jednocześnie (SEO)                 | Niski      | ✅ ZROBIONE |
-| AH-05 | `alt=""` na hero image                              | Niski      | Otwarte  |
+| AH-05 | `alt=""` na hero image                              | Niski      | ✅ ZROBIONE |
 | AH-06 | Zduplikowany SVG arrow w mobile/desktop             | Niski      | ✅ ZROBIONE |
 | AH-07 | Custom font sizes z Tailwind nieużywane w Hero      | Niski      | ✅ ZROBIONE |
 | AH-08 | `Button.tsx` nieużywany — surowy `<a>` zamiast niego | Niski     | ✅ ZROBIONE |
