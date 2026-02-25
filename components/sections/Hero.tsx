@@ -111,7 +111,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto hidden h-full w-full max-w-[1400px] md:grid md:grid-cols-[minmax(320px,500px)_minmax(360px,700px)] md:items-center md:justify-center md:gap-8 md:px-10 lg:gap-14 lg:px-16">
+      <div className="relative z-10 mx-auto hidden h-full w-full max-w-[1400px] md:grid md:grid-cols-[minmax(320px,500px)_minmax(360px,700px)] md:grid-rows-1 md:items-center md:justify-center md:gap-8 md:px-10 lg:gap-14 lg:px-16">
         {/* ── Content column ───────────────────────────────────────────────── */}
         <div className="md:flex md:flex-none md:flex-col md:items-end md:justify-center md:py-0">
           <div className="max-w-[500px] text-left">
