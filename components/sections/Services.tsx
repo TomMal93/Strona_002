@@ -1,13 +1,11 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useRef } from 'react'
 import { siteContent, type ServiceIconName } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './Services.module.css'
-
-gsap.registerPlugin(ScrollTrigger)
+import { ServiceIcon } from './services/ServiceIcon'
+import { useServicesAnimation } from './services/useServicesAnimation'
 
 type ServiceItem = (typeof siteContent.services.items)[number]
 type CardVariant = 'highlight' | 'military'
@@ -22,13 +20,6 @@ type CardStyleClassNames = {
 
 const HIGHLIGHT_ICONS = new Set<ServiceIconName>(['heart', 'flag'])
 
-const ANIMATION = {
-  INITIAL_Y: 40,
-  DURATION: 0.7,
-  EASE: 'power2.out',
-  STAGGER: 0.08,
-  SCROLL_START: 'top 75%',
-} as const
 const DESKTOP_START_CLASS_NAMES = [
   'lg:col-start-2',
   'lg:col-start-4',
@@ -71,55 +62,6 @@ const CARD_STYLE_MAP: Record<CardVariant, CardStyleClassNames> = {
 
 function getCardStyleClassNames(variant: CardVariant): CardStyleClassNames {
   return CARD_STYLE_MAP[variant]
-}
-
-// --- Service icons ----------------------------------------------------------
-const iconClassName = 'h-5 w-5 text-khaki'
-
-function ServiceIcon({ icon, className }: { icon: ServiceIconName, className?: string }) {
-  switch (icon) {
-    case 'crosshair':
-      return (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={cn(iconClassName, className)}>
-          <circle cx="12" cy="12" r="6" stroke="currentColor" strokeWidth="1.8" />
-          <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" strokeWidth="1.8" />
-        </svg>
-      )
-    case 'heart':
-      return (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={cn(iconClassName, className)}>
-          <path
-            d="M12 20s-7-4.6-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.4-7 10-7 10Z"
-            stroke="currentColor"
-            strokeWidth="1.8"
-          />
-        </svg>
-      )
-    case 'drone':
-      return (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={cn(iconClassName, className)}>
-          <circle cx="6" cy="6" r="3" stroke="currentColor" strokeWidth="1.8" />
-          <circle cx="18" cy="6" r="3" stroke="currentColor" strokeWidth="1.8" />
-          <circle cx="6" cy="18" r="3" stroke="currentColor" strokeWidth="1.8" />
-          <circle cx="18" cy="18" r="3" stroke="currentColor" strokeWidth="1.8" />
-          <path d="M9 9l6 6M15 9l-6 6" stroke="currentColor" strokeWidth="1.8" />
-        </svg>
-      )
-    case 'wheel':
-      return (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={cn(iconClassName, className)}>
-          <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.8" />
-          <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.8" />
-          <path d="M12 4v5M20 12h-5M12 20v-5M4 12h5" stroke="currentColor" strokeWidth="1.8" />
-        </svg>
-      )
-    case 'flag':
-      return (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={cn(iconClassName, className)}>
-          <path d="M6 3v18M6 4h10l-2 4 2 4H6" stroke="currentColor" strokeWidth="1.8" />
-        </svg>
-      )
-  }
 }
 
 type ServiceCardProps = {
@@ -204,35 +146,7 @@ export default function Services() {
   const topRowItems = orderedItems.slice(0, TOP_ROW_COUNT)
   const bottomRowItems = orderedItems.slice(TOP_ROW_COUNT)
 
-  // --- Card entrance animation (FR-07) --------------------------------------
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>('[data-service-card]')
-
-      if (prefersReducedMotion) {
-        gsap.set(cards, { autoAlpha: 1, y: 0 })
-        return
-      }
-
-      gsap.set(cards, { autoAlpha: 0, y: ANIMATION.INITIAL_Y })
-      gsap.to(cards, {
-        autoAlpha: 1,
-        y: 0,
-        duration: ANIMATION.DURATION,
-        ease: ANIMATION.EASE,
-        stagger: ANIMATION.STAGGER,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: ANIMATION.SCROLL_START,
-          once: true,
-        },
-      })
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
+  useServicesAnimation(sectionRef)
 
   return (
     // --- Services section: heading + intro + cards grid ---------------------

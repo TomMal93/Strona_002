@@ -76,7 +76,7 @@ Reguła `.serviceCard:hover .iconBadge` ma zbędną wiodącą spację, co narusz
 
 ---
 
-## RF-03 — CSS: reguły hover wariantu highlight rozdzielone od bazy
+## RF-03 — CSS: reguły hover wariantu highlight rozdzielone od bazy ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `Services.module.css`
@@ -197,7 +197,7 @@ function getCardStyleClassNames(variant: CardVariant): CardStyleClassNames {
 
 ---
 
-## RF-07 — TS: wyodrębnienie logiki animacji do custom hooka
+## RF-07 — TS: wyodrębnienie logiki animacji do custom hooka ✅ ZROBIONE
 
 **Priorytet: Średni**
 **Plik:** `components/sections/Services.tsx`, linie 202–229
@@ -246,7 +246,7 @@ Komponent `Services` staje się czysto deklaratywny.
 
 ---
 
-## RF-08 — TS: wyodrębnienie `ServiceIcon` do osobnego pliku
+## RF-08 — TS: wyodrębnienie `ServiceIcon` do osobnego pliku ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `components/sections/Services.tsx`, linie 68–117
@@ -296,12 +296,12 @@ const ANIMATION = {
 |-------|-------------------------------------------------|-----------|--------|
 | RF-01 | CSS custom properties dla kolorów               | Wysoki    | Niskie | ✅ |
 | RF-02 | Naprawa indentacji w hover (linia 358)          | Niski     | Brak   | ✅ |
-| RF-03 | Symetryczne reguły hover dla wariantów CSS      | Niski     | Niskie |    |
+| RF-03 | Symetryczne reguły hover dla wariantów CSS      | Niski     | Niskie | ✅ |
 | RF-04 | Zunifikowanie `||` / `??` w site-content.ts     | Średni    | Niskie | ✅ |
 | RF-05 | Jawny typ unii `ServiceIconName`                | Średni    | Niskie | ✅ |
 | RF-06 | Lookup table zamiast if-else w getCardStyle…    | Niski     | Brak   | ✅ |
-| RF-07 | Custom hook `useServicesAnimation`              | Średni    | Niskie |    |
-| RF-08 | Ekstrakcja `ServiceIcon` do osobnego pliku      | Niski     | Brak   |    |
+| RF-07 | Custom hook `useServicesAnimation`              | Średni    | Niskie | ✅ |
+| RF-08 | Ekstrakcja `ServiceIcon` do osobnego pliku      | Niski     | Brak   | ✅ |
 | RF-09 | Nazwane stałe dla wartości animacji             | Niski     | Brak   | ✅ |
 
 ### Rekomendowana kolejność wdrożenia
@@ -310,7 +310,7 @@ const ANIMATION = {
 2. ~~**RF-04**~~ ✅ — eliminacja nieczytelnej niespójności, 1–2 linie
 3. ~~**RF-01**~~ ✅ — największy zwrot z utrzymania, ~20 linii CSS
 4. ~~**RF-05**~~ ✅ + ~~**RF-06**~~ ✅ — spójne usprawnienie systemu typów
-5. **RF-07** + **RF-08** — strukturalna separacja odpowiedzialności, wykonać razem
+5. ~~**RF-07**~~ ✅ + ~~**RF-08**~~ ✅ — strukturalna separacja odpowiedzialności, wykonać razem
 6. ~~**RF-09**~~ ✅ — opcjonalne, po RF-07
 
 ### Czego celowo NIE ujęto
