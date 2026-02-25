@@ -261,7 +261,7 @@ Przenieść do `components/sections/services/ServiceIcon.tsx`. Efekt uboczny: zm
 
 ---
 
-## RF-09 — TS: nazwane stałe dla wartości magicznych animacji
+## RF-09 — TS: nazwane stałe dla wartości magicznych animacji ✅ ZROBIONE
 
 **Priorytet: Niski**
 **Plik:** `components/sections/Services.tsx`, linie 213–225
@@ -302,7 +302,7 @@ const ANIMATION = {
 | RF-06 | Lookup table zamiast if-else w getCardStyle…    | Niski     | Brak   |    |
 | RF-07 | Custom hook `useServicesAnimation`              | Średni    | Niskie |    |
 | RF-08 | Ekstrakcja `ServiceIcon` do osobnego pliku      | Niski     | Brak   |    |
-| RF-09 | Nazwane stałe dla wartości animacji             | Niski     | Brak   |    |
+| RF-09 | Nazwane stałe dla wartości animacji             | Niski     | Brak   | ✅ |
 
 ### Rekomendowana kolejność wdrożenia
 
@@ -311,7 +311,7 @@ const ANIMATION = {
 3. ~~**RF-01**~~ ✅ — największy zwrot z utrzymania, ~20 linii CSS
 4. **RF-05** + **RF-06** — spójne usprawnienie systemu typów
 5. **RF-07** + **RF-08** — strukturalna separacja odpowiedzialności, wykonać razem
-6. **RF-09** — opcjonalne, po RF-07
+6. ~~**RF-09**~~ ✅ — opcjonalne, po RF-07
 
 ### Czego celowo NIE ujęto
 

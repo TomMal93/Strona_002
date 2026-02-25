@@ -22,6 +22,14 @@ type CardStyleClassNames = {
 }
 
 const HIGHLIGHT_ICONS = new Set<ServiceIconName>(['heart', 'flag'])
+
+const ANIMATION = {
+  INITIAL_Y: 40,
+  DURATION: 0.7,
+  EASE: 'power2.out',
+  STAGGER: 0.08,
+  SCROLL_START: 'top 75%',
+} as const
 const DESKTOP_START_CLASS_NAMES = [
   'lg:col-start-2',
   'lg:col-start-4',
@@ -210,16 +218,16 @@ export default function Services() {
         return
       }
 
-      gsap.set(cards, { autoAlpha: 0, y: 40 })
+      gsap.set(cards, { autoAlpha: 0, y: ANIMATION.INITIAL_Y })
       gsap.to(cards, {
         autoAlpha: 1,
         y: 0,
-        duration: 0.7,
-        ease: 'power2.out',
-        stagger: 0.08,
+        duration: ANIMATION.DURATION,
+        ease: ANIMATION.EASE,
+        stagger: ANIMATION.STAGGER,
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 75%',
+          start: ANIMATION.SCROLL_START,
           once: true,
         },
       })
