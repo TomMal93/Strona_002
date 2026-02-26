@@ -4,8 +4,8 @@ import { useRef, type Ref } from 'react'
 import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { useHeroAnimations } from './hero/useHeroAnimations'
+import MobileHeroLayout from './hero/MobileHeroLayout'
 import Button from '@/components/ui/Button'
-import styles from './Hero.module.css'
 
 const ArrowIcon = () => (
   <svg
@@ -130,33 +130,12 @@ export default function Hero() {
         {siteContent.hero.headlineLine1} {siteContent.hero.headlineLine2}
       </h1>
 
-      {/* ── Mobile: fixed composition (no absolute positioning) ─────────── */}
-      <div className={`relative z-10 mx-auto h-full origin-top-left scale-[calc(100vw/766px)] px-[10px] md:hidden ${styles.mobileFrame}`}>
-        <div className={`relative ${styles.mobileGroupCenter}`}>
-          <div className={`ml-auto ${styles.mobileImageWrap}`}>
-            <div className="relative aspect-[3/4] w-full">
-              <Image
-                src="/images/hero.webp"
-                alt="Fotograf i operator drona — portret z dronem i kontrolerem"
-                fill
-                className="object-contain object-center"
-                priority
-                quality={75}
-                sizes="(max-width: 767px) 72vw, 1px"
-              />
-            </div>
-          </div>
-
-          <div className={`w-fit ${styles.mobileTextWrap}`}>
-            <div className={`max-w-[500px] rounded-xl p-4 text-left ${styles.mobileTextHalo} ${styles.mobileTextPanel}`}>
-              <HeroTextBlock
-                headingClassName="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white"
-                underlineClassName="block h-px w-full bg-gradient-to-r from-khaki/70 to-transparent"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      <MobileHeroLayout>
+        <HeroTextBlock
+          headingClassName="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white"
+          underlineClassName="block h-px w-full bg-gradient-to-r from-khaki/70 to-transparent"
+        />
+      </MobileHeroLayout>
 
       <div className="relative z-10 mx-auto hidden h-full w-full max-w-[1400px] md:grid md:grid-cols-[minmax(320px,500px)_minmax(360px,700px)] md:grid-rows-1 md:items-center md:justify-center md:gap-8 md:px-10 lg:gap-14 lg:px-16">
         {/* ── Content column ───────────────────────────────────────────────── */}
