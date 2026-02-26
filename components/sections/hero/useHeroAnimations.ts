@@ -5,8 +5,8 @@ import type { HeroRefs } from './types'
 /**
  * GSAP entrance animation for the hero section.
  *
- * Sequence: eyebrow → heading → underline (scaleX) → description → CTA.
- * Underline animates as a horizontal draw from left to right after the heading.
+ * Sequence: eyebrow → heading → description → underline (scaleX draw) → CTA.
+ * Underline is the separator line below the description — draws left to right.
  * The hero image (media) is excluded so it renders immediately — important for LCP.
  * Respects prefers-reduced-motion.
  */
@@ -35,7 +35,7 @@ export function useHeroAnimations({
       if (prefersReducedMotion || isMobileViewport) {
         gsap.set(fadeTargets, { autoAlpha: 1, y: 0 })
         if (underlineRef.current) {
-          gsap.set(underlineRef.current, { scaleX: 1, autoAlpha: 1 })
+          gsap.set(underlineRef.current, { scaleX: 1 })
         }
         return
       }
@@ -43,13 +43,13 @@ export function useHeroAnimations({
       gsap.set(fadeTargets, { autoAlpha: 0, y: 40 })
 
       if (underlineRef.current) {
-        gsap.set(underlineRef.current, { scaleX: 0, autoAlpha: 1 })
+        gsap.set(underlineRef.current, { scaleX: 0 })
       }
 
       const tl = gsap.timeline({ delay: 0.3 })
 
-      // eyebrow + heading fade in with stagger
-      tl.to([eyebrowRef.current, headingRef.current].filter(Boolean), {
+      // eyebrow → heading → description fade + slide
+      tl.to([eyebrowRef.current, headingRef.current, descriptionRef.current].filter(Boolean), {
         autoAlpha: 1,
         y: 0,
         duration: 1,
@@ -57,22 +57,21 @@ export function useHeroAnimations({
         stagger: 0.3,
       })
 
-      // underline draws from left to right
+      // separator line draws from left to right after description
       if (underlineRef.current) {
         tl.to(underlineRef.current, {
           scaleX: 1,
-          duration: 0.7,
+          duration: 0.6,
           ease: 'power2.out',
-        }, '-=0.4')
+        }, '-=0.5')
       }
 
-      // description + CTA continue with stagger
-      tl.to([descriptionRef.current, ctaRef.current].filter(Boolean), {
+      // CTA fades in last
+      tl.to(ctaRef.current, {
         autoAlpha: 1,
         y: 0,
         duration: 1,
         ease: 'power3.out',
-        stagger: 0.3,
       }, '-=0.3')
     }, sectionRef)
 

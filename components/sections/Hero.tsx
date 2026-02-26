@@ -136,13 +136,6 @@ export default function Hero() {
               {siteContent.hero.headlineLine2}
             </p>
 
-            {/* Animated underline */}
-            <span
-              ref={underlineRef}
-              aria-hidden="true"
-              className="mt-5 block h-px w-full origin-left bg-gradient-to-r from-khaki/80 via-khaki/40 to-transparent"
-            />
-
             {/* Description */}
             <div className="max-w-[34ch]">
               <p
@@ -151,7 +144,7 @@ export default function Hero() {
               >
                 {siteContent.hero.subtitle}
               </p>
-              <span aria-hidden="true" className="block h-px w-full bg-khaki/70" />
+              <span ref={underlineRef} aria-hidden="true" className="block h-px w-full origin-left bg-khaki/70" />
             </div>
 
             {/* CTA */}
