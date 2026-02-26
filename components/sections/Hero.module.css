@@ -8,7 +8,7 @@
   position: absolute;
   /* bleed poza rodzica — bazuje na border-radius 0.9rem: góra ×2.0, boki ×1.2, dół ×0.6; glow mocniejszy powyżej */
   inset: -1.8rem -1.08rem -0.54rem;
-  z-index: -1;
+  z-index: var(--z-below);
   border-radius: 0.9rem;
   pointer-events: none;
   background: linear-gradient(

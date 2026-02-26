@@ -6,12 +6,20 @@
  * Paleta kolorów — raw channel values (format "R G B" bez rgb()).
  * Używane jako: rgb(var(--c-gold) / 0.5).
  * --c-gold  i --c-olive pokrywają się z tokenami Tailwind `khaki` i `military-green`.
+ *
+ * Z-index scale — dokumentacja hierarchii stackowania w projekcie.
+ * Wartości --z-* dotyczą lokalnych stacking contexts wewnątrz sekcji.
+ * Globalny kontekst (Tailwind utilities): z-10 = layout divs Hero, z-50 = Navbar.
  */
 :root {
   --c-gold:   139 115 85;   /* złoto / khaki — #8B7355 */
   --c-olive:   74  82 64;   /* oliwka — #4A5240 */
   --c-khaki:  146 154 117;  /* militarny khaki jasny */
   --c-warm:   180 130 90;   /* ciepły akcent wariantu highlight */
+
+  --z-below:  -1;  /* pseudo-elementy za rodzicem: glows (mobileTextHalo::after, sectionHeaderShell::after) */
+  --z-base:    0;  /* pseudo-elementy w tle karty: gradient overlays (serviceCard::before/::after) */
+  --z-above:   1;  /* treść nad tłem sekcji: contentLayer kart, grain texture (section-dark-bg::before) */
 }
 
 @layer base {
@@ -66,7 +74,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: var(--z-above);
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
   background-repeat: repeat;

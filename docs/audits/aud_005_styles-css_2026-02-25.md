@@ -101,42 +101,32 @@ Na urządzeniach z aktywną preferencją reduced motion te efekty nadal będą r
 
 ---
 
-### 3.4 Magic numbers bez dokumentacji [NISKI]
+### 3.4 Magic numbers bez dokumentacji [NISKI] ✅ ZREALIZOWANE (2026-02-26)
 
-**Problem:** Kilka wartości w kodzie nie ma wyjaśnienia skąd pochodzi:
+**Problem:** Kilka wartości w kodzie nie miało wyjaśnienia skąd pochodzi.
 
-```css
-/* Hero.module.css */
-inset: -1.8rem -1.08rem -0.54rem;  /* co to jest? jaka logika? */
-
-/* Services.module.css */
-inset: -1.8rem -1.08rem -0.54rem;  /* to samo — znowu zduplikowane */
-rgb(0 0 0 / 0) 22px                /* 22px — dlaczego nie 20 ani 24? */
-
-/* Services.module.css */
-height: 2.2rem; width: 2.2rem;     /* .iconBadge — niestandardowy rozmiar */
-min-height: 14rem;                  /* .serviceCard — skąd ta liczba? */
-```
-
-**Sugestia:** Komentarz wyjaśniający obliczenia lub ekstrakcja do nazwanych zmiennych CSS.
+**Rozwiązanie:** Dodano komentarze inline wyjaśniające logikę obliczeń:
+- `inset: -1.8rem -1.08rem -0.54rem` — bleed bazuje na `border-radius: 0.9rem` (×2.0 / ×1.2 / ×0.6)
+- `22px` — okres paska diagonal: 1px linia co 22px ≈ 15,5px rozstaw wizualny przy 45°
+- `height/width: 2.2rem` na `.iconBadge` — 2× rozmiar ikony (≈1rem) + margines wzrokowy
+- `min-height: 14rem` na `.serviceCard` — zapobiega zapadaniu przy krótkim tekście w siatce 3-kol
+- `scaleX(0.72)` na `.cardTopLine` — linia startuje w 72% szerokości, hover → 100%
 
 ---
 
-### 3.5 Brak zdefiniowanej hierarchii z-index [NISKI]
+### 3.5 Brak zdefiniowanej hierarchii z-index [NISKI] ✅ ZREALIZOWANE (2026-02-26)
 
-**Problem:** Wartości z-index są ad-hoc, bez systemu:
+**Problem:** Wartości z-index były ad-hoc, bez systemu i dokumentacji.
 
-| Element | z-index |
-|---|---|
-| `.sectionBackground::before` | 1 (Hero) / brak (Services) |
-| `.contentLayer` | 1 |
-| pseudo-elementy kart | 0 |
-| `z-index: -1` | `.sectionHeaderShell::after`, `.mobileTextHalo::after` |
-| Tailwind klasy | `z-10`, `z-50` (Navbar) |
+**Rozwiązanie:** Dodano tokeny CSS do `:root` w `globals.css` i zastąpiono wszystkie hardkodowane wartości:
 
-Brak dokumentacji stacking contexts może prowadzić do trudnych do debugowania konfliktów przy dodawaniu nowych sekcji.
+```css
+--z-below:  -1;  /* pseudo-elementy za rodzicem: glows (mobileTextHalo::after, sectionHeaderShell::after) */
+--z-base:    0;  /* pseudo-elementy w tle karty: gradient overlays (serviceCard::before/::after) */
+--z-above:   1;  /* treść nad tłem sekcji: contentLayer kart, grain texture (section-dark-bg::before) */
+```
 
-**Sugestia:** Token z-index w `:root` lub Tailwind config.
+Globalny kontekst (Tailwind, bez zmian): `z-10` = layout divs w Hero, `z-50` = Navbar.
 
 ---
 
@@ -208,9 +198,9 @@ Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia 
 |---|---|---|---|---|
 | 3.1 | Niespójny system kolorów | ŚREDNI | Średni | Maintainability | ✅ Tailwind + CSS Modules przez :root |
 | 3.2 | Zduplikowany grain texture | NISKI | Mały | DRY | ✅ |
-| 3.3 | Brak reduced-motion w Hero | NISKI | Bardzo mały | Dostępność |
-| 3.4 | Magic numbers | NISKI | Mały | Czytelność |
-| 3.5 | Brak z-index scale | NISKI | Mały | Maintainability |
+| 3.3 | Brak reduced-motion w Hero | NISKI | Bardzo mały | Dostępność | ✅ |
+| 3.4 | Magic numbers | NISKI | Mały | Czytelność | ✅ |
+| 3.5 | Brak z-index scale | NISKI | Mały | Maintainability | ✅ |
 | 3.6 | Statyczna typografia display | NISKI | Średni | UX |
 | 3.7 | Gradient complexity | DO MONITOROWANIA | — | Perf (mobile) |
 | 3.8 | rowDivider DOM na mobile | KOSMETYCZNY | Mały | Bundle |
