@@ -127,7 +127,7 @@ export default function Hero() {
             <p
               ref={headingRef}
               aria-hidden="true"
-              className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-display lg:text-display-lg"
+              className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-display"
             >
               {siteContent.hero.headlineLine1}
               <br />

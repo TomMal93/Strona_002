@@ -37,9 +37,9 @@ const config: Config = {
         heading: '0.15em', // Bebas Neue display/eyebrow contexts
       },
       fontSize: {
-        display: ['80px', { lineHeight: '0.9' }],
-        'display-sm': ['100px', { lineHeight: '0.9' }],
-        'display-lg': ['110px', { lineHeight: '0.9' }],
+        // Płynne skalowanie między md (768px) a ~1100px.
+        // clamp(80px, 10vw, 110px): 10vw = 76.8px przy 768px → min=80px; 110px przy 1100px → max.
+        display: ['clamp(80px, 10vw, 110px)', { lineHeight: '0.9' }],
       },
     },
   },

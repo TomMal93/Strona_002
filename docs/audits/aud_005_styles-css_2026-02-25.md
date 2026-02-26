@@ -130,21 +130,22 @@ Globalny kontekst (Tailwind, bez zmian): `z-10` = layout divs w Hero, `z-50` = N
 
 ---
 
-### 3.6 Responsywna typografia bez płynnego skalowania [NISKI]
+### 3.6 Responsywna typografia bez płynnego skalowania [NISKI] ✅ ZREALIZOWANE (2026-02-26)
 
-**Problem:** `tailwind.config.ts` definiuje stałe rozmiary display:
+**Problem:** `tailwind.config.ts` definiowało trzy statyczne rozmiary (`80px`, `100px`, `110px`) bez płynnego skalowania. `display-sm` (100px) był nieużywany. Hero skakał z 80px na 110px przy przekroczeniu breakpointu lg.
+
+**Rozwiązanie:** Trzy tokeny zastąpiono jednym fluid tokenem:
 
 ```typescript
 fontSize: {
-  display:    ['80px',  { lineHeight: '0.9' }],
-  'display-sm': ['100px', { lineHeight: '0.9' }],
-  'display-lg': ['110px', { lineHeight: '0.9' }],
+  // clamp(80px, 10vw, 110px): min=80px @ 768px → fluid → max=110px @ ~1100px
+  display: ['clamp(80px, 10vw, 110px)', { lineHeight: '0.9' }],
 }
 ```
 
-Te rozmiary są statyczne — nie skalują się płynnie między breakpointami. Dla porównania, `.sectionTitleAccent` już używa `clamp()`, ale tytuły Hero nie.
+W `Hero.tsx` usunięto `lg:text-display-lg` — `md:text-display` teraz obsługuje cały zakres płynnie.
 
-**Uwaga:** Mobile layout Hero używa `scale-[calc(100vw/766px)]` (scale-trick), co skutecznie skaluje wizualnie, ale nie jest typowym podejściem i może powodować problemy z `text-overflow` i selectable text.
+**Uwaga (bez zmian):** Mobile layout Hero nadal używa `scale-[calc(100vw/766px)]` (scale-trick). Zmiana tego podejścia wykracza poza zakres tego audytu.
 
 ---
 
@@ -201,7 +202,7 @@ Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia 
 | 3.3 | Brak reduced-motion w Hero | NISKI | Bardzo mały | Dostępność | ✅ |
 | 3.4 | Magic numbers | NISKI | Mały | Czytelność | ✅ |
 | 3.5 | Brak z-index scale | NISKI | Mały | Maintainability | ✅ |
-| 3.6 | Statyczna typografia display | NISKI | Średni | UX |
+| 3.6 | Statyczna typografia display | NISKI | Średni | UX | ✅ |
 | 3.7 | Gradient complexity | DO MONITOROWANIA | — | Perf (mobile) |
 | 3.8 | rowDivider DOM na mobile | KOSMETYCZNY | Mały | Bundle |
 | 3.9 | border-image animowalność | INFORMACYJNY | — | — |
