@@ -176,14 +176,16 @@ Nie jest to problem CSS, ale wskazuje na możliwość warunkowego renderowania w
 
 ---
 
-### 3.9 border-image i kompatybilność [INFORMACYJNY]
+### 3.9 border-image i kompatybilność [INFORMACYJNY] ✅ ZREALIZOWANE (2026-02-26)
 
 **Użycie:**
 ```css
 border-image: linear-gradient(...) 1;
 ```
 
-Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia `border-color` na `.serviceCard`, ale `::after` z `border-image` pozostaje statyczny — efekt jest prawidłowy wizualnie, ale może być mylący przy czytaniu kodu.
+Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmieniał `border-color` na `.serviceCard`, ale `::after` z `border-image` zakrywał solid border — `transition: border-color` był bezużyteczny.
+
+**Rozwiązanie:** `.serviceCard::after` dostał `opacity: 0` w stanie spoczynku i `transition: opacity 340ms`. Na hover `opacity: 1` — gradient border płynnie się pojawia. Solid `border-color` jest teraz widoczny w spoczynku i faktycznie animuje transition przy hover (::after go nie zakrywa). Warianty Military i Highlight dziedziczą te same właściwości przez kaskadę CSS.
 
 ---
 
@@ -205,7 +207,7 @@ Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia 
 | 3.6 | Statyczna typografia display | NISKI | Średni | UX | ✅ |
 | 3.7 | Gradient complexity | DO MONITOROWANIA | — | Perf (mobile) |
 | 3.8 | rowDivider DOM na mobile | KOSMETYCZNY | Mały | Bundle |
-| 3.9 | border-image animowalność | INFORMACYJNY | — | — |
+| 3.9 | border-image animowalność | INFORMACYJNY | — | — | ✅ |
 | 3.10 | CSP unsafe-inline | INFORMACYJNY | — | Security trade-off |
 
 ---
