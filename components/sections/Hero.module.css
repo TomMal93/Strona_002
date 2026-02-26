@@ -1,3 +1,23 @@
+.mobileFrame {
+  width: 766px;
+  padding-top: 55px;
+}
+
+.mobileGroupCenter {
+  top: 50%;
+  transform: translateY(-58%);
+}
+
+.mobileImageWrap {
+  margin-right: 40px;
+  width: 72%;
+}
+
+.mobileTextWrap {
+  margin-left: 70px;
+  margin-top: -380px;
+}
+
 .mobileTextHalo {
   position: relative;
   isolation: isolate;

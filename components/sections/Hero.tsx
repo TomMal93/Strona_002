@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, type Ref } from 'react'
 import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { useHeroAnimations } from './hero/useHeroAnimations'
@@ -25,6 +25,72 @@ const ArrowIcon = () => (
     <path d="m12 5 7 7-7 7" />
   </svg>
 )
+
+type HeroTextBlockProps = {
+  headingClassName: string
+  underlineClassName: string
+  eyebrowRef?: Ref<HTMLSpanElement>
+  headingRef?: Ref<HTMLParagraphElement>
+  descriptionRef?: Ref<HTMLParagraphElement>
+  underlineRef?: Ref<HTMLSpanElement>
+  ctaRef?: Ref<HTMLAnchorElement>
+}
+
+function HeroTextBlock({
+  headingClassName,
+  underlineClassName,
+  eyebrowRef,
+  headingRef,
+  descriptionRef,
+  underlineRef,
+  ctaRef,
+}: HeroTextBlockProps) {
+  return (
+    <>
+      <span
+        ref={eyebrowRef}
+        className="block font-bebas text-[18px] uppercase tracking-heading text-white/60"
+      >
+        {siteContent.hero.eyebrow}
+      </span>
+
+      <p
+        ref={headingRef}
+        aria-hidden="true"
+        className={headingClassName}
+      >
+        {siteContent.hero.headlineLine1}
+        <br />
+        {siteContent.hero.headlineLine2}
+      </p>
+
+      <div className="max-w-[34ch]">
+        <p
+          ref={descriptionRef}
+          className="mt-6 whitespace-pre-line pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/60"
+        >
+          {siteContent.hero.subtitle}
+        </p>
+        <span
+          ref={underlineRef}
+          aria-hidden="true"
+          className={underlineClassName}
+        />
+      </div>
+
+      <Button
+        as="a"
+        ref={ctaRef}
+        href="#contact"
+        variant="hero"
+        className="group mt-8"
+      >
+        {siteContent.hero.ctaLabel}
+        <ArrowIcon />
+      </Button>
+    </>
+  )
+}
 
 /**
  * Hero — fullscreen section.
@@ -65,9 +131,9 @@ export default function Hero() {
       </h1>
 
       {/* ── Mobile: fixed composition (no absolute positioning) ─────────── */}
-      <div className="relative z-10 mx-auto h-full w-[766px] origin-top-left scale-[calc(100vw/766px)] px-[10px] pt-[55px] md:hidden">
-        <div className="relative top-1/2 -translate-y-[58%]">
-          <div className="ml-auto mr-[40px] w-[72%]">
+      <div className={`relative z-10 mx-auto h-full origin-top-left scale-[calc(100vw/766px)] px-[10px] md:hidden ${styles.mobileFrame}`}>
+        <div className={`relative ${styles.mobileGroupCenter}`}>
+          <div className={`ml-auto ${styles.mobileImageWrap}`}>
             <div className="relative aspect-[3/4] w-full">
               <Image
                 src="/images/hero.webp"
@@ -81,34 +147,12 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="ml-[70px] -mt-[380px] w-fit">
+          <div className={`w-fit ${styles.mobileTextWrap}`}>
             <div className={`max-w-[500px] rounded-xl p-4 text-left ${styles.mobileTextHalo} ${styles.mobileTextPanel}`}>
-              <span className="block font-bebas text-[18px] uppercase tracking-heading text-white/60">
-                {siteContent.hero.eyebrow}
-              </span>
-
-              <p aria-hidden="true" className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white">
-                {siteContent.hero.headlineLine1}
-                <br />
-                {siteContent.hero.headlineLine2}
-              </p>
-
-              <div className="max-w-[34ch]">
-                <p className="mt-6 whitespace-pre-line pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/60">
-                  {siteContent.hero.subtitle}
-                </p>
-                <span aria-hidden="true" className="block h-px w-full bg-gradient-to-r from-khaki/70 to-transparent" />
-              </div>
-
-              <Button
-                as="a"
-                href="#contact"
-                variant="hero"
-                className="group mt-8"
-              >
-                {siteContent.hero.ctaLabel}
-                <ArrowIcon />
-              </Button>
+              <HeroTextBlock
+                headingClassName="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white"
+                underlineClassName="block h-px w-full bg-gradient-to-r from-khaki/70 to-transparent"
+              />
             </div>
           </div>
         </div>
@@ -118,47 +162,15 @@ export default function Hero() {
         {/* ── Content column ───────────────────────────────────────────────── */}
         <div className="md:flex md:flex-none md:flex-col md:items-end md:justify-center md:py-0">
           <div className="max-w-[500px] text-left">
-            {/* Eyebrow */}
-            <span
-              ref={eyebrowRef}
-              className="block font-bebas text-[18px] uppercase tracking-heading text-white/60"
-            >
-              {siteContent.hero.eyebrow}
-            </span>
-
-            {/* Heading — visual only, semantic h1 is sr-only above */}
-            <p
-              ref={headingRef}
-              aria-hidden="true"
-              className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-display"
-            >
-              {siteContent.hero.headlineLine1}
-              <br />
-              {siteContent.hero.headlineLine2}
-            </p>
-
-            {/* Description */}
-            <div className="max-w-[34ch]">
-              <p
-                ref={descriptionRef}
-                className="mt-6 whitespace-pre-line pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/60"
-              >
-                {siteContent.hero.subtitle}
-              </p>
-              <span ref={underlineRef} aria-hidden="true" className="block h-px w-full origin-left bg-gradient-to-r from-khaki/70 to-transparent" />
-            </div>
-
-            {/* CTA */}
-            <Button
-              as="a"
-              ref={ctaRef}
-              href="#contact"
-              variant="hero"
-              className="group mt-8"
-            >
-              {siteContent.hero.ctaLabel}
-              <ArrowIcon />
-            </Button>
+            <HeroTextBlock
+              eyebrowRef={eyebrowRef}
+              headingRef={headingRef}
+              descriptionRef={descriptionRef}
+              underlineRef={underlineRef}
+              ctaRef={ctaRef}
+              headingClassName="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-display"
+              underlineClassName="block h-px w-full origin-left bg-gradient-to-r from-khaki/70 to-transparent"
+            />
           </div>
         </div>
 
