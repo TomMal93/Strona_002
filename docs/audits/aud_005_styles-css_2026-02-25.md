@@ -53,21 +53,25 @@ Autor świadomie usunął kosztowne właściwości i zostawił komentarze:
 
 ## 3. Problemy i obszary do optymalizacji
 
-### 3.1 Niespójność systemu kolorów [ŚREDNI] ✅ ZREALIZOWANE (2026-02-26)
+### 3.1 Niespójność systemu kolorów [ŚREDNI] ✅ ZREALIZOWANE CAŁKOWICIE (2026-02-26)
 
 **Problem:** Kolory zdefiniowane są w trzech miejscach, różnymi metodami, bez jednego źródła prawdy.
 
 | Miejsce | Definicja | Format |
 |---|---|---|
-| `tailwind.config.ts` | `khaki: '#8B7355'` | HEX |
-| `Services.module.css` | `--c-gold: 139 115 85` | RGB channel (bez `rgb()`) |
-| `Hero.module.css` | `rgb(74 82 64 / 0.09)` | hardkodowane wartości |
+| ~~`tailwind.config.ts`~~ | ~~`khaki: '#8B7355'`~~ | ~~HEX~~ |
+| ~~`Services.module.css`~~ | ~~`--c-gold: 139 115 85`~~ | ~~RGB channel (bez `rgb()`)~~ |
+| ~~`Hero.module.css`~~ | ~~`rgb(74 82 64 / 0.09)`~~ | ~~hardkodowane wartości~~ |
 
-`--c-gold` (`139 115 85`) i kolor `khaki` z Tailwind (`#8B7355` = `139 115 85`) to **ta sama wartość**, ale zdefiniowana dwukrotnie, niezależnie. Jeśli paleta zostanie zmieniona, trzeba pamiętać o aktualizacji w obu miejscach.
-
-**Ryzyko:** Desync kolorów przy przyszłych zmianach palety.
-
-**Sugestia:** Przenieść raw channel values do zmiennych CSS w `:root` (np. w `globals.css`), a tokeny Tailwind generować z tych samych wartości.
+**Rozwiązanie (2026-02-26):**
+1. CSS variables `--c-gold`, `--c-olive`, `--c-khaki`, `--c-warm` przeniesione do `:root` w `globals.css`
+2. Oba moduły CSS (`Hero`, `Services`) używają `rgb(var(--c-gold) / …)` — brak hardkodowanych wartości
+3. Tokeny Tailwind (`khaki`, `military-green`) referencjonują te same zmienne CSS przez `<alpha-value>` pattern:
+   ```ts
+   'khaki': 'rgb(var(--c-gold) / <alpha-value>)'
+   'military-green': 'rgb(var(--c-olive) / <alpha-value>)'
+   ```
+   Zmiana jednej wartości w `:root` aktualizuje wszystkie użycia — w CSS Modules i w klasach Tailwind.
 
 ```css
 /* globals.css — propozycja */
@@ -207,7 +211,7 @@ Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia 
 
 | # | Problem | Priorytet | Wysiłek | Wpływ |
 |---|---|---|---|---|
-| 3.1 | Niespójny system kolorów | ŚREDNI | Średni | Maintainability | ✅ |
+| 3.1 | Niespójny system kolorów | ŚREDNI | Średni | Maintainability | ✅ Tailwind + CSS Modules przez :root |
 | 3.2 | Zduplikowany grain texture | NISKI | Mały | DRY |
 | 3.3 | Brak reduced-motion w Hero | NISKI | Bardzo mały | Dostępność |
 | 3.4 | Magic numbers | NISKI | Mały | Czytelność |
@@ -226,9 +230,9 @@ Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia 
    - Dodać `@media (prefers-reduced-motion)` do `Hero.module.css` (§ 3.3)
    - Dodać komentarze do magic numbers (§ 3.4)
 
-2. **Refactoring systemu kolorów** (§ 3.1): ✅ ZREALIZOWANE
+2. **Refactoring systemu kolorów** (§ 3.1): ✅ ZREALIZOWANE CAŁKOWICIE
    - ~~Zdefiniować CSS custom properties w `:root` dla raw channel values~~
-   - Zsynchronizować z tokenami Tailwind (opcjonalne — do decyzji)
+   - ~~Zsynchronizować z tokenami Tailwind (opcjonalne — do decyzji)~~
 
 3. **DRY — grain texture** (§ 3.2):
    - Wydzielić do wspólnej klasy lub pliku

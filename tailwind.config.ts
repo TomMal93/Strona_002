@@ -14,8 +14,10 @@ const config: Config = {
         'ecru':           '#F5F0EB', // light section backgrounds
         'warm-white':     '#FFFFFF',
         'warm-gray':      '#C8C0B4', // secondary text
-        'khaki':          '#8B7355', // main accent — buttons, lines
-        'military-green': '#4A5240', // secondary accent — hover, tags
+        // Kolory referencjonują CSS custom properties z :root (globals.css).
+        // Składnia <alpha-value> pozwala na modyfikatory opacity: khaki/30, khaki/70 itp.
+        'khaki':          'rgb(var(--c-gold) / <alpha-value>)',          // #8B7355 — main accent
+        'military-green': 'rgb(var(--c-olive) / <alpha-value>)',         // #4A5240 — secondary accent
       },
       fontFamily: {
         bebas: ['var(--font-bebas)', 'sans-serif'],
