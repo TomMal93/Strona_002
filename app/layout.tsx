@@ -3,6 +3,7 @@ import { Bebas_Neue, Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import SmoothScroll from '@/components/layout/SmoothScroll'
+import WebVitalsReporter from '@/components/analytics/WebVitalsReporter'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={bodyClassName}>
+        <WebVitalsReporter />
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>
       </body>

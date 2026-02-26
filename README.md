@@ -30,3 +30,10 @@ Pełna dokumentacja projektu znajduje się w folderze [`docs/`](./docs/README.md
 - [`docs/open-questions.md`](./docs/open-questions.md) — otwarte kwestie
 - [`docs/design.md`](./docs/design.md) — system designu
 - [`docs/decisions/`](./docs/decisions/) — decyzje architektoniczne (ADR)
+
+## Performance (pkt 6)
+
+- `npm run perf:report` — build + raport największych chunków JS (gzip i raw)
+- Web Vitals logują się w przeglądarce jako `[WebVitals]` (CLS, FCP, INP, LCP, TTFB)
+- Opcjonalnie wyślij Web Vitals do endpointu przez `NEXT_PUBLIC_WEB_VITALS_ENDPOINT`
+- Lighthouse: uruchom lokalnie po `npm run build && npm run start` i audytuj `http://localhost:3000`

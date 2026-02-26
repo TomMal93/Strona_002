@@ -5,6 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "perf:build": "next build",
+    "perf:bundle": "node scripts/analyze-bundle.mjs",
+    "perf:report": "npm run perf:build && npm run perf:bundle",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
