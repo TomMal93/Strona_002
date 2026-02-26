@@ -85,16 +85,11 @@ Autor świadomie usunął kosztowne właściwości i zostawił komentarze:
 
 ---
 
-### 3.2 Zduplikowany kod grain texture [NISKI]
+### 3.2 Zduplikowany kod grain texture [NISKI] ✅ ZREALIZOWANE (2026-02-26)
 
-**Problem:** Identyczny blok grain texture (SVG data-URI + background-size + opacity) powtarza się niezmieniony w dwóch plikach:
+**Problem:** Identyczny blok grain texture (SVG data-URI + background-size + opacity) powtarzał się niezmieniony w dwóch plikach (`Hero.module.css` i `Services.module.css`), z drobną niekonsekwencją (`z-index: 1` tylko w Hero).
 
-- `Hero.module.css` linia 21–33
-- `Services.module.css` linia 18–28
-
-Różnica: brak `z-index: 1` i `pointer-events: none` w wersji Services (drobna niekonsekwencja).
-
-**Sugestia:** Wydzielić do reużywalnej klasy Tailwind (np. `@apply` w globals.css) lub CSS Module dziedziczonego przez oba komponenty.
+**Rozwiązanie:** Wydzielono klasę `.section-dark-bg` (diagonal pattern + grain texture `::before`) do `globals.css` poza `@layer` — analogicznie do CSS Modules, nadpisuje utility classes Tailwind. Oba moduły CSS i komponenty (`Hero.tsx`, `Services.tsx`) używają teraz `section-dark-bg`. Niekonsekwencja z-index rozwiązana na korzyść wersji Hero (`z-index: 1`).
 
 ---
 
@@ -212,7 +207,7 @@ Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia 
 | # | Problem | Priorytet | Wysiłek | Wpływ |
 |---|---|---|---|---|
 | 3.1 | Niespójny system kolorów | ŚREDNI | Średni | Maintainability | ✅ Tailwind + CSS Modules przez :root |
-| 3.2 | Zduplikowany grain texture | NISKI | Mały | DRY |
+| 3.2 | Zduplikowany grain texture | NISKI | Mały | DRY | ✅ |
 | 3.3 | Brak reduced-motion w Hero | NISKI | Bardzo mały | Dostępność |
 | 3.4 | Magic numbers | NISKI | Mały | Czytelność |
 | 3.5 | Brak z-index scale | NISKI | Mały | Maintainability |
@@ -234,8 +229,8 @@ Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia 
    - ~~Zdefiniować CSS custom properties w `:root` dla raw channel values~~
    - ~~Zsynchronizować z tokenami Tailwind (opcjonalne — do decyzji)~~
 
-3. **DRY — grain texture** (§ 3.2):
-   - Wydzielić do wspólnej klasy lub pliku
+3. **DRY — grain texture** (§ 3.2): ✅ ZREALIZOWANE
+   - ~~Wydzielić do wspólnej klasy lub pliku~~
 
 4. **Monitoring wydajności** (§ 3.7):
    - Sprawdzić Paint Flashing na urządzeniach mobilnych przy scrollu
@@ -347,7 +342,7 @@ Reguła globalna z `!important` pokrywa selector `*`, czyli wszystkie elementy z
 | Co | Akcja | Efekt |
 |---|---|---|
 | `--c-gold`, `--c-olive`, `--c-khaki`, `--c-warm` | Dodać do `:root` | Jeden punkt prawdy dla palety |
-| Diagonal pattern + grain texture `::before` | Dodać jako `.section-dark-bg` w `@layer components` | Usunąć duplikat z Hero i Services |
+| Diagonal pattern + grain texture `::before` | ~~Dodać jako `.section-dark-bg` w `@layer components`~~ Dodano poza `@layer` | ✅ Usunięto duplikat z Hero i Services |
 | `@media (prefers-reduced-motion)` w Services | Usunąć z modułu | Globalny reset już to robi |
 
 **Co zostaje w modułach bez zmian:** wszystkie style specyficzne dla kart (warianty Military/Highlight), `.mobileTextPanel`, `.mobileTextHalo`, `.sectionHeaderShell` i pozostałe klasy Hero — mają tylko jedno miejsce użycia i nie zyskują nic na globalizacji.
