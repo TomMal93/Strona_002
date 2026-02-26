@@ -40,6 +40,7 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const eyebrowRef = useRef<HTMLSpanElement>(null)
   const headingRef = useRef<HTMLParagraphElement>(null)
+  const underlineRef = useRef<HTMLSpanElement>(null)
   const descriptionRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLAnchorElement>(null)
 
@@ -47,6 +48,7 @@ export default function Hero() {
     sectionRef,
     eyebrowRef,
     headingRef,
+    underlineRef,
     descriptionRef,
     ctaRef,
   })
@@ -95,7 +97,7 @@ export default function Hero() {
               <p className="mt-6 whitespace-pre-line pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/60">
                 {siteContent.hero.subtitle}
               </p>
-                <span aria-hidden="true" className="block h-px w-full bg-khaki/70" />
+                <span aria-hidden="true" className="block h-px w-full bg-gradient-to-r from-khaki/70 to-transparent" />
             </div>
 
             <Button
@@ -142,7 +144,7 @@ export default function Hero() {
               >
                 {siteContent.hero.subtitle}
               </p>
-              <span aria-hidden="true" className="block h-px w-full bg-khaki/70" />
+              <span ref={underlineRef} aria-hidden="true" className="block h-px w-full origin-left bg-gradient-to-r from-khaki/70 to-transparent" />
             </div>
 
             {/* CTA */}
