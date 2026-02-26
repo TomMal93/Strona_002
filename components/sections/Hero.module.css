@@ -49,6 +49,38 @@
   text-shadow: 0 2px 8px rgb(0 0 0 / 0.55);
 }
 
+@media (max-width: 767px) {
+  .mobileImageEntrance {
+    animation: mobile-image-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .mobilePanelEntrance {
+    animation: mobile-panel-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+  }
+}
+
+@keyframes mobile-image-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes mobile-panel-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* filter: blur i backdrop-filter są nadal renderowane domyślnie — wyłącz dla użytkowników preferujących redukcję ruchu */
   .mobileTextHalo::after {
@@ -57,5 +89,10 @@
 
   .mobileTextPanel {
     backdrop-filter: none;
+  }
+
+  .mobileImageEntrance,
+  .mobilePanelEntrance {
+    animation: none;
   }
 }
