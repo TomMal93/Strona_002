@@ -12,12 +12,14 @@ Strona portfolio dla fotografa i operatora wideo specjalizującego się w eventa
 ## Sekcje strony
 
 1. Hero
-2. Usługi
-3. O mnie
-4. Portfolio / Galeria
-5. Instagram Feed
-6. Pokaz wideo
-7. Kontakt
+2. Kim jestem
+3. Korzyści
+4. Oferta
+5. Portfolio / Galeria
+6. Instagram Feed
+7. Proces
+8. Opinie
+9. FAQ + mocne CTA
 
 ## Dokumentacja
 
@@ -30,3 +32,11 @@ Pełna dokumentacja projektu znajduje się w folderze [`docs/`](./docs/README.md
 - [`docs/open-questions.md`](./docs/open-questions.md) — otwarte kwestie
 - [`docs/design.md`](./docs/design.md) — system designu
 - [`docs/decisions/`](./docs/decisions/) — decyzje architektoniczne (ADR)
+
+## Performance (pkt 6)
+
+- `npm run perf:report` — build + raport największych chunków JS (gzip i raw)
+- Web Vitals logują się w przeglądarce jako `[WebVitals]` (CLS, FCP, INP, LCP, TTFB)
+- Reporter Web Vitals jest domyślnie wyłączony; włącz przez `NEXT_PUBLIC_ENABLE_WEB_VITALS=true`
+- Opcjonalnie wyślij Web Vitals do endpointu przez `NEXT_PUBLIC_WEB_VITALS_ENDPOINT`
+- Lighthouse: uruchom lokalnie po `npm run build && npm run start` i audytuj `http://localhost:3000`

@@ -3,6 +3,7 @@ import { Bebas_Neue, Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import SmoothScroll from '@/components/layout/SmoothScroll'
+import WebVitalsReporter from '@/components/analytics/WebVitalsReporter'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 
@@ -53,8 +54,8 @@ export const metadata: Metadata = {
     images: ['/images/hero.webp'],
   },
   icons: {
-    icon: '/images/menu_icon.jpg',
-    apple: '/images/logo_m.png',
+    icon: '/images/logo_m.webp',
+    apple: '/images/logo_m.webp',
   },
 }
 
@@ -68,6 +69,7 @@ const jsonLd = {
   areaServed: { '@type': 'Country', name: 'Poland' },
 }
 const jsonLdString = JSON.stringify(jsonLd).replace(/<\//g, '<\\/')
+const enableWebVitals = process.env.NEXT_PUBLIC_ENABLE_WEB_VITALS === 'true'
 const bodyClassName = cn(
   bebasNeue.variable,
   inter.variable,
@@ -84,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={bodyClassName}>
+        {enableWebVitals ? <WebVitalsReporter /> : null}
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>
       </body>

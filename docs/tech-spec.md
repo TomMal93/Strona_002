@@ -53,7 +53,7 @@ Strona_002/
 │   └── api/
 │       └── contact/        # Sekcja kontaktowa (dane, social media)
 ├── components/
-│   ├── sections/           # Sekcje strony (Hero, Services, About…)
+│   ├── sections/           # Sekcje strony (Hero, About, Benefits, Services…)
 │   ├── ui/                 # Komponenty wielokrotnego użytku
 │   └── layout/             # Header, Footer, Navigation
 ├── lib/                    # Helpery, konfiguracja
@@ -65,7 +65,7 @@ Strona_002/
 
 ## 5. Wymagania funkcjonalne — sekcje strony
 
-Szczegółowa kolejność sekcji oraz lista FR-01 ... FR-22:
+Szczegółowa kolejność sekcji oraz lista FR-01 ... FR-27:
 
 - [`docs/sections-order.md`](./sections-order.md)
 

@@ -13,6 +13,7 @@ docs/
 ├── integrations.md        # Integracje zewnętrzne (API/serwisy)
 ├── open-questions.md      # Otwarte kwestie projektowe
 ├── design.md              # System designu (kolory, typografia, animacje)
+├── branding.md            # Fundament marki, tone of voice i brandbook
 ├── decisions/             # Architecture Decision Records (ADR)
 │   ├── 001-template-adr.md
 │   └── 002-stack-technologiczny.md
@@ -25,6 +26,7 @@ docs/
 - [`non-functional-requirements.md`](./non-functional-requirements.md) — cele jakościowe i ograniczenia
 - [`integrations.md`](./integrations.md) — zewnętrzne API i media hosting
 - [`open-questions.md`](./open-questions.md) — tematy do domknięcia przed wdrożeniem
+- [`branding.md`](./branding.md) — definicja marki i zasady komunikacji
 
 ## Jak używać
 

@@ -6,5 +6,5 @@ export type HeroRefs = {
   headingRef: RefObject<HTMLParagraphElement>
   underlineRef: RefObject<HTMLSpanElement>
   descriptionRef: RefObject<HTMLParagraphElement>
-  ctaRef: RefObject<HTMLAnchorElement>
+  ctaRef: RefObject<HTMLElement>
 }
