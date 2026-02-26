@@ -11,7 +11,7 @@
       rgb(var(--c-olive) / 0.09) 0,
       rgb(var(--c-olive) / 0.09) 1px,
       rgb(var(--c-olive) / 0) 1px,
-      rgb(var(--c-olive) / 0) 22px
+      rgb(var(--c-olive) / 0) 22px  /* okres paska: 1px linia co 22px ≈ 15,5px wizualny rozstaw przy 45deg */
     ),
     rgb(13 13 13);
 }
@@ -39,6 +39,7 @@
 .sectionHeaderShell::after {
   content: '';
   position: absolute;
+  /* bleed poza rodzica — bazuje na border-radius 0.9rem: góra ×2.0, boki ×1.2, dół ×0.6; glow mocniejszy powyżej */
   inset: -1.8rem -1.08rem -0.54rem;
   z-index: -1;
   border-radius: 0.9rem;
@@ -82,7 +83,7 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  min-height: 14rem;
+  min-height: 14rem; /* minimalna wysokość karty — zapobiega zapadaniu przy krótkim tekście w siatce 3-kol */
   background:
     radial-gradient(120% 80% at 100% 0%, rgb(var(--c-gold) / 0.16), transparent 60%),
     linear-gradient(160deg, rgb(26 26 26 / 0.96) 0%, rgb(18 18 18 / 0.98) 100%);
@@ -253,7 +254,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 2.2rem;
+  height: 2.2rem; /* kontener ikony: 2× rozmiar ikony (≈1rem) + margines wzrokowy */
   width: 2.2rem;
   border: 1px solid rgb(var(--c-gold) / 0.5);
   border-radius: 2px;

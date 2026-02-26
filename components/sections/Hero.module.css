@@ -7,7 +7,7 @@
       rgb(74 82 64 / 0.09) 0,
       rgb(74 82 64 / 0.09) 1px,
       rgb(74 82 64 / 0) 1px,
-      rgb(74 82 64 / 0) 22px
+      rgb(74 82 64 / 0) 22px  /* okres paska: 1px linia co 22px ≈ 15,5px wizualny rozstaw przy 45deg */
     ),
     rgb(13 13 13);
 }
@@ -41,6 +41,7 @@
 .mobileTextHalo::after {
   content: '';
   position: absolute;
+  /* bleed poza rodzica — bazuje na border-radius 0.9rem: góra ×2.0, boki ×1.2, dół ×0.6; glow mocniejszy powyżej */
   inset: -1.8rem -1.08rem -0.54rem;
   z-index: -1;
   border-radius: 0.9rem;
@@ -61,4 +62,15 @@
 
 .mobileTextPanel :is(h1, p, span, a) {
   text-shadow: 0 2px 8px rgb(0 0 0 / 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* filter: blur i backdrop-filter są nadal renderowane domyślnie — wyłącz dla użytkowników preferujących redukcję ruchu */
+  .mobileTextHalo::after {
+    filter: none;
+  }
+
+  .mobileTextPanel {
+    backdrop-filter: none;
+  }
 }
