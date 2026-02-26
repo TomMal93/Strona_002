@@ -17,6 +17,6 @@ test('tailwind config contains required design tokens used by UI', () => {
   assert.equal(extend?.letterSpacing?.overline, '0.2em')
   assert.equal(extend?.borderRadius?.micro, '2px')
 
-  assert.equal(extend?.colors?.khaki, '#8B7355')
-  assert.equal(extend?.colors?.['military-green'], '#4A5240')
+  assert.equal(extend?.colors?.khaki, 'rgb(var(--c-gold) / <alpha-value>)')
+  assert.equal(extend?.colors?.['military-green'], 'rgb(var(--c-olive) / <alpha-value>)')
 })

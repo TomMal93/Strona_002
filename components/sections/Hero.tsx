@@ -56,7 +56,7 @@ export default function Hero() {
       ref={sectionRef}
       id="hero"
       aria-label="Sekcja główna"
-      className={`h-[100svh] md:h-[100dvh] w-full ${styles.sectionBackground}`}
+      className="h-[100svh] md:h-[100dvh] w-full section-dark-bg"
     >
       {/* Semantic heading — single h1 for SEO and screen readers */}
       <h1 className="sr-only">
@@ -127,7 +127,7 @@ export default function Hero() {
             <p
               ref={headingRef}
               aria-hidden="true"
-              className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-display lg:text-display-lg"
+              className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-display"
             >
               {siteContent.hero.headlineLine1}
               <br />

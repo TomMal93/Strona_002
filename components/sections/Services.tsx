@@ -156,7 +156,7 @@ export default function Services() {
       aria-labelledby="services-heading"
       className={cn(
         'bg-anthracite px-6 py-20 sm:py-24 lg:px-20 lg:py-32',
-        styles.sectionBackground,
+        'section-dark-bg',
       )}
     >
       <div className="mx-auto max-w-content">
