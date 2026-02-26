@@ -20,6 +20,8 @@ const contentSecurityPolicy = `
 const nextConfig = {
   // Ukryj nagłówek "X-Powered-By: Next.js"
   poweredByHeader: false,
+  // Włącz kompresję odpowiedzi (gzip/brotli zależnie od środowiska serwera)
+  compress: true,
 
   // Konfiguracja Next.js Image
   images: {
@@ -47,6 +49,26 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Fonty z next/font (self-hosted w _next/static/media) — immutable, 1 rok
+      {
+        source: '/_next/static/media/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Zoptymalizowane obrazy Next Image — cache 30 dni + SWR
+      {
+        source: '/_next/image',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2592000, stale-while-revalidate=86400',
           },
         ],
       },
