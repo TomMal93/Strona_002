@@ -1,38 +1,3 @@
-.sectionBackground {
-  position: relative;
-  overflow: hidden;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      rgb(74 82 64 / 0.09) 0,
-      rgb(74 82 64 / 0.09) 1px,
-      rgb(74 82 64 / 0) 1px,
-      rgb(74 82 64 / 0) 22px
-    ),
-    rgb(13 13 13);
-}
-
-/*
- * Grain texture overlay.
- * The SVG uses feTurbulence rendered as a static background-image (not a live CSS filter),
- * so the browser tiles it as a cached texture — cheaper than filter: url(#n) on a live element.
- *
- * Effective opacity = rect opacity (0.12) × CSS opacity (0.5) = ~6 %.
- * Adjust only the CSS opacity here to change intensity; the SVG rect value is fixed.
- */
-.sectionBackground::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
-  opacity: 0.5;
-  /* Removed mix-blend-mode: overlay — expensive pixel-by-pixel compositing */
-}
-
 .mobileTextHalo {
   position: relative;
   isolation: isolate;
@@ -41,15 +6,16 @@
 .mobileTextHalo::after {
   content: '';
   position: absolute;
+  /* bleed poza rodzica — bazuje na border-radius 0.9rem: góra ×2.0, boki ×1.2, dół ×0.6; glow mocniejszy powyżej */
   inset: -1.8rem -1.08rem -0.54rem;
-  z-index: -1;
+  z-index: var(--z-below);
   border-radius: 0.9rem;
   pointer-events: none;
   background: linear-gradient(
     120deg,
-    rgb(139 115 85 / 0.2) 0%,
-    rgb(139 115 85 / 0.08) 50%,
-    rgb(139 115 85 / 0.2) 100%
+    rgb(var(--c-gold) / 0.2) 0%,
+    rgb(var(--c-gold) / 0.08) 50%,
+    rgb(var(--c-gold) / 0.2) 100%
   );
   filter: blur(35px);
 }
@@ -64,6 +30,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* filter: blur i backdrop-filter są nadal renderowane domyślnie — wyłącz dla użytkowników preferujących redukcję ruchu */
   .mobileTextHalo::after {
     filter: none;
   }

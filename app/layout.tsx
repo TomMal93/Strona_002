@@ -41,9 +41,7 @@ export const metadata: Metadata = {
     description: siteContent.seoDescription,
     images: [
       {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
+        url: '/images/hero.webp',
         alt: `${authorName} — Fotografia i Film`,
       },
     ],
@@ -52,11 +50,11 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `Portfolio Fotograficzno-Wideo | ${authorName}`,
     description: siteContent.seoDescription,
-    images: ['/og-image.jpg'],
+    images: ['/images/hero.webp'],
   },
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: '/images/menu_icon.jpg',
+    apple: '/images/logo_m.png',
   },
 }
 

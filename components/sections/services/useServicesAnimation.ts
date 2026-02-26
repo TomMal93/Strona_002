@@ -1,11 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import type { RefObject } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const ANIMATION = {
   INITIAL_Y: 40,
@@ -23,33 +19,87 @@ const ANIMATION = {
  * Respects prefers-reduced-motion.
  */
 export function useServicesAnimation(sectionRef: RefObject<HTMLElement>) {
-  useEffect(() => {
+  useLayoutEffect(() => {
+    let shouldCleanup = false
+    let observer: IntersectionObserver | undefined
+    let revertContext: (() => void) | undefined
+
+    const cards = sectionRef.current
+      ? Array.from(sectionRef.current.querySelectorAll<HTMLElement>('[data-service-card]'))
+      : []
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>('[data-service-card]')
-
-      if (prefersReducedMotion) {
-        gsap.set(cards, { autoAlpha: 1, y: 0 })
-        return
-      }
-
-      gsap.set(cards, { autoAlpha: 0, y: ANIMATION.INITIAL_Y })
-      gsap.to(cards, {
-        autoAlpha: 1,
-        y: 0,
-        duration: ANIMATION.DURATION,
-        ease: ANIMATION.EASE,
-        stagger: ANIMATION.STAGGER,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: ANIMATION.SCROLL_START,
-          once: true,
-        },
+    if (!prefersReducedMotion) {
+      cards.forEach((card) => {
+        card.style.opacity = '0'
+        card.style.visibility = 'hidden'
+        card.style.transform = `translate3d(0, ${ANIMATION.INITIAL_Y}px, 0)`
       })
-    }, sectionRef)
+    }
 
-    return () => ctx.revert()
+    const initAnimations = async () => {
+      const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+      ])
+
+      if (shouldCleanup) return
+
+      gsap.registerPlugin(ScrollTrigger)
+
+      const ctx = gsap.context(() => {
+        const cards = gsap.utils.toArray<HTMLElement>('[data-service-card]')
+
+        if (prefersReducedMotion) {
+          cards.forEach((card) => {
+            card.style.opacity = '1'
+            card.style.visibility = 'visible'
+            card.style.transform = 'none'
+          })
+          return
+        }
+
+        gsap.to(cards, {
+          autoAlpha: 1,
+          y: 0,
+          duration: ANIMATION.DURATION,
+          ease: ANIMATION.EASE,
+          stagger: ANIMATION.STAGGER,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: ANIMATION.SCROLL_START,
+            once: true,
+          },
+        })
+      }, sectionRef)
+
+      revertContext = () => ctx.revert()
+    }
+
+    if (sectionRef.current) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          const hasIntersectingEntry = entries.some((entry) => entry.isIntersecting)
+          if (!hasIntersectingEntry) return
+
+          observer?.disconnect()
+          void initAnimations()
+        },
+        {
+          root: null,
+          threshold: 0,
+          rootMargin: '0px 0px -25% 0px',
+        },
+      )
+
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      shouldCleanup = true
+      observer?.disconnect()
+      revertContext?.()
+    }
   // Refs are stable objects returned by useRef — they never change between
   // renders, so there are no reactive values to list as dependencies.
   // eslint-disable-next-line react-hooks/exhaustive-deps

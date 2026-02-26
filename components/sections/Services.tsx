@@ -156,7 +156,7 @@ export default function Services() {
       aria-labelledby="services-heading"
       className={cn(
         'bg-anthracite px-6 py-20 sm:py-24 lg:px-20 lg:py-32',
-        styles.sectionBackground,
+        'section-dark-bg',
       )}
     >
       <div className="mx-auto max-w-content">
@@ -185,7 +185,7 @@ export default function Services() {
         {/* --- Services cards list -------------------------------------------- */}
         <div className="mt-12 space-y-7 lg:mt-14 lg:space-y-9">
           <ServiceCardsRow items={topRowItems} startClassNames={TOP_ROW_START_CLASS_NAMES} colsClass="sm:grid-cols-2" />
-          <div className={styles.rowDivider} aria-hidden="true" />
+          <div className={cn('hidden lg:block', styles.rowDivider)} aria-hidden="true" />
           <ServiceCardsRow items={bottomRowItems} startClassNames={BOTTOM_ROW_START_CLASS_NAMES} colsClass="sm:grid-cols-2 md:grid-cols-3" />
         </div>
       </div>

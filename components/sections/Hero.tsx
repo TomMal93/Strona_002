@@ -6,7 +6,6 @@ import { siteContent } from '@/lib/site-content'
 import { useHeroAnimations } from './hero/useHeroAnimations'
 import Button from '@/components/ui/Button'
 import styles from './Hero.module.css'
-import heroImage from '@/public/images/hero.webp'
 
 const ArrowIcon = () => (
   <svg
@@ -40,6 +39,7 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const eyebrowRef = useRef<HTMLSpanElement>(null)
   const headingRef = useRef<HTMLParagraphElement>(null)
+  const underlineRef = useRef<HTMLSpanElement>(null)
   const descriptionRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLAnchorElement>(null)
 
@@ -47,6 +47,7 @@ export default function Hero() {
     sectionRef,
     eyebrowRef,
     headingRef,
+    underlineRef,
     descriptionRef,
     ctaRef,
   })
@@ -56,7 +57,7 @@ export default function Hero() {
       ref={sectionRef}
       id="hero"
       aria-label="Sekcja główna"
-      className={`h-[100svh] md:h-[100dvh] w-full ${styles.sectionBackground}`}
+      className="h-[100svh] md:h-[100dvh] w-full section-dark-bg"
     >
       {/* Semantic heading — single h1 for SEO and screen readers */}
       <h1 className="sr-only">
@@ -68,7 +69,7 @@ export default function Hero() {
         <div className="ml-auto mr-[40px] w-[72%]">
           <div className="relative aspect-[3/4] w-full">
             <Image
-              src={heroImage}
+              src="/images/hero.webp"
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"
               fill
               className="object-contain object-center"
@@ -95,7 +96,7 @@ export default function Hero() {
               <p className="mt-6 whitespace-pre-line pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/60">
                 {siteContent.hero.subtitle}
               </p>
-                <span aria-hidden="true" className="block h-px w-full bg-khaki/70" />
+                <span aria-hidden="true" className="block h-px w-full bg-gradient-to-r from-khaki/70 to-transparent" />
             </div>
 
             <Button
@@ -127,7 +128,7 @@ export default function Hero() {
             <p
               ref={headingRef}
               aria-hidden="true"
-              className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-display lg:text-display-lg"
+              className="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-display"
             >
               {siteContent.hero.headlineLine1}
               <br />
@@ -142,7 +143,7 @@ export default function Hero() {
               >
                 {siteContent.hero.subtitle}
               </p>
-              <span aria-hidden="true" className="block h-px w-full bg-khaki/70" />
+              <span ref={underlineRef} aria-hidden="true" className="block h-px w-full origin-left bg-gradient-to-r from-khaki/70 to-transparent" />
             </div>
 
             {/* CTA */}
@@ -163,7 +164,7 @@ export default function Hero() {
         <div className="relative hidden md:flex md:h-full md:items-center md:justify-center">
           <div className="relative h-[90%] w-full">
             <Image
-              src={heroImage}
+              src="/images/hero.webp"
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"
               fill
               className="object-contain object-center"
