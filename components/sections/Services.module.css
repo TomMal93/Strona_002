@@ -396,12 +396,4 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .serviceCard,
-  .serviceCard::before,
-  .cardTopLine,
-  .iconBadge,
-  .iconDock {
-    transition: none;
-  }
-}
+/* prefers-reduced-motion: globalny reset w globals.css (* z !important) pokrywa wszystkie selektory poniżej */
