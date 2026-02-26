@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { siteContent, type ServiceIconName } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './Services.module.css'
@@ -146,15 +146,6 @@ export default function Services() {
   const topRowItems = orderedItems.slice(0, TOP_ROW_COUNT)
   const bottomRowItems = orderedItems.slice(TOP_ROW_COUNT)
 
-  const [isLg, setIsLg] = useState(false)
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 1024px)')
-    setIsLg(mq.matches)
-    const handler = (e: MediaQueryListEvent) => setIsLg(e.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
-
   useServicesAnimation(sectionRef)
 
   return (
@@ -194,7 +185,7 @@ export default function Services() {
         {/* --- Services cards list -------------------------------------------- */}
         <div className="mt-12 space-y-7 lg:mt-14 lg:space-y-9">
           <ServiceCardsRow items={topRowItems} startClassNames={TOP_ROW_START_CLASS_NAMES} colsClass="sm:grid-cols-2" />
-          {isLg && <div className={styles.rowDivider} aria-hidden="true" />}
+          <div className={cn('hidden lg:block', styles.rowDivider)} aria-hidden="true" />
           <ServiceCardsRow items={bottomRowItems} startClassNames={BOTTOM_ROW_START_CLASS_NAMES} colsClass="sm:grid-cols-2 md:grid-cols-3" />
         </div>
       </div>

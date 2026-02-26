@@ -6,7 +6,6 @@ import { siteContent } from '@/lib/site-content'
 import { useHeroAnimations } from './hero/useHeroAnimations'
 import Button from '@/components/ui/Button'
 import styles from './Hero.module.css'
-import heroImage from '@/public/images/hero.webp'
 
 const ArrowIcon = () => (
   <svg
@@ -70,7 +69,7 @@ export default function Hero() {
         <div className="ml-auto mr-[40px] w-[72%]">
           <div className="relative aspect-[3/4] w-full">
             <Image
-              src={heroImage}
+              src="/images/hero.webp"
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"
               fill
               className="object-contain object-center"
@@ -165,7 +164,7 @@ export default function Hero() {
         <div className="relative hidden md:flex md:h-full md:items-center md:justify-center">
           <div className="relative h-[90%] w-full">
             <Image
-              src={heroImage}
+              src="/images/hero.webp"
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"
               fill
               className="object-contain object-center"
