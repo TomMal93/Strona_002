@@ -41,6 +41,35 @@ const nextConfig = {
 
   // Nagłówki HTTP — cache dla statycznych zasobów + bezpieczeństwo
   async headers() {
+    const securityHeaders = {
+      source: '/(.*)',
+      headers: [
+        {
+          key: 'X-Content-Type-Options',
+          value: 'nosniff',
+        },
+        {
+          key: 'X-Frame-Options',
+          value: 'DENY',
+        },
+        {
+          key: 'Referrer-Policy',
+          value: 'strict-origin-when-cross-origin',
+        },
+        {
+          key: 'Permissions-Policy',
+          value: 'camera=(), microphone=(), geolocation=()',
+        },
+        {
+          key: 'Content-Security-Policy',
+          value: contentSecurityPolicy,
+        },
+      ],
+    }
+
+    // Dev: bez agresywnego cache, żeby uniknąć konfliktów chunków po rebuildach.
+    if (isDev) return [securityHeaders]
+
     return [
       // Statyczne pliki Next.js (JS/CSS bundles) — immutable, 1 rok
       {
@@ -82,31 +111,7 @@ const nextConfig = {
           },
         ],
       },
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
-          },
-          {
-            key: 'Content-Security-Policy',
-            value: contentSecurityPolicy,
-          },
-        ],
-      },
+      securityHeaders,
     ]
   },
 }

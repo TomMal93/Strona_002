@@ -69,6 +69,7 @@ const jsonLd = {
   areaServed: { '@type': 'Country', name: 'Poland' },
 }
 const jsonLdString = JSON.stringify(jsonLd).replace(/<\//g, '<\\/')
+const enableWebVitals = process.env.NEXT_PUBLIC_ENABLE_WEB_VITALS === 'true'
 const bodyClassName = cn(
   bebasNeue.variable,
   inter.variable,
@@ -85,7 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={bodyClassName}>
-        <WebVitalsReporter />
+        {enableWebVitals ? <WebVitalsReporter /> : null}
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
