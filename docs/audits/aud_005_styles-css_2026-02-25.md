@@ -53,7 +53,7 @@ Autor świadomie usunął kosztowne właściwości i zostawił komentarze:
 
 ## 3. Problemy i obszary do optymalizacji
 
-### 3.1 Niespójność systemu kolorów [ŚREDNI]
+### 3.1 Niespójność systemu kolorów [ŚREDNI] ✅ ZREALIZOWANE (2026-02-26)
 
 **Problem:** Kolory zdefiniowane są w trzech miejscach, różnymi metodami, bez jednego źródła prawdy.
 
@@ -207,7 +207,7 @@ Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia 
 
 | # | Problem | Priorytet | Wysiłek | Wpływ |
 |---|---|---|---|---|
-| 3.1 | Niespójny system kolorów | ŚREDNI | Średni | Maintainability |
+| 3.1 | Niespójny system kolorów | ŚREDNI | Średni | Maintainability | ✅ |
 | 3.2 | Zduplikowany grain texture | NISKI | Mały | DRY |
 | 3.3 | Brak reduced-motion w Hero | NISKI | Bardzo mały | Dostępność |
 | 3.4 | Magic numbers | NISKI | Mały | Czytelność |
@@ -226,9 +226,9 @@ Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia 
    - Dodać `@media (prefers-reduced-motion)` do `Hero.module.css` (§ 3.3)
    - Dodać komentarze do magic numbers (§ 3.4)
 
-2. **Refactoring systemu kolorów** (§ 3.1):
-   - Zdefiniować CSS custom properties w `:root` dla raw channel values
-   - Zsynchronizować z tokenami Tailwind
+2. **Refactoring systemu kolorów** (§ 3.1): ✅ ZREALIZOWANE
+   - ~~Zdefiniować CSS custom properties w `:root` dla raw channel values~~
+   - Zsynchronizować z tokenami Tailwind (opcjonalne — do decyzji)
 
 3. **DRY — grain texture** (§ 3.2):
    - Wydzielić do wspólnej klasy lub pliku
@@ -240,7 +240,7 @@ Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia 
 
 ## 6. Co przenieść do `globals.css`
 
-### 6.1 CSS custom properties → `:root` [SILNY KANDYDAT]
+### 6.1 CSS custom properties → `:root` [SILNY KANDYDAT] ✅ ZREALIZOWANE (2026-02-26)
 
 **Teraz:** `--c-gold`, `--c-olive`, `--c-khaki`, `--c-warm` zdefiniowane są na selektorze `.sectionBackground` w `Services.module.css`. Przez to `Hero.module.css` nie ma do nich dostępu i używa tych samych wartości hardkodowanych.
 

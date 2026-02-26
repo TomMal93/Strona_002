@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Paleta kolorów — raw channel values (format "R G B" bez rgb()).
+ * Używane jako: rgb(var(--c-gold) / 0.5).
+ * --c-gold  i --c-olive pokrywają się z tokenami Tailwind `khaki` i `military-green`.
+ */
+:root {
+  --c-gold:   139 115 85;   /* złoto / khaki — #8B7355 */
+  --c-olive:   74  82 64;   /* oliwka — #4A5240 */
+  --c-khaki:  146 154 117;  /* militarny khaki jasny */
+  --c-warm:   180 130 90;   /* ciepły akcent wariantu highlight */
+}
+
 @layer base {
   body {
     overflow-x: hidden;
