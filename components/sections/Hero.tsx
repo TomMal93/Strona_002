@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { useHeroAnimations } from './hero/useHeroAnimations'
 import MobileHeroLayout from './hero/MobileHeroLayout'
+import styles from './Hero.module.css'
+import { cn } from '@/lib/utils'
 
 const socialIcons: Record<string, JSX.Element> = {
   facebook: (
@@ -87,13 +89,13 @@ function HeroTextBlock({
         <div className="flex flex-wrap items-center gap-8">
           <a
             href="#contact"
-            className="rounded-full border border-khaki/60 px-6 py-3 font-inter text-[18px] font-medium text-white transition-colors duration-300 hover:border-khaki hover:bg-khaki/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2"
+            className={cn(styles.ctaButton, 'px-6 py-3 font-inter text-[18px] font-medium text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2')}
           >
             {siteContent.hero.ctaLabel}
           </a>
           <a
             href="#about"
-            className="rounded-full border border-military-green/40 px-6 py-3 font-inter text-[18px] font-medium text-white/55 transition-colors duration-300 hover:border-military-green/70 hover:bg-military-green/15 hover:text-white/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2"
+            className={cn(styles.ctaButton, styles.ctaButtonSecondary, 'px-6 py-3 font-inter text-[18px] font-medium text-white/55 hover:text-white/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2')}
           >
             {siteContent.hero.aboutLabel}
           </a>
