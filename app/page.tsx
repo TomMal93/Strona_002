@@ -10,7 +10,6 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <div id="nav-scroll-sentinel" aria-hidden="true" className="h-px w-full" />
       <Services />
 
       {/* Tymczasowy anchor docelowy dla CTA — FR-04 */}

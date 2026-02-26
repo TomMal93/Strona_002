@@ -16,24 +16,29 @@ export default function Navbar() {
   const headerRef                      = useRef<HTMLElement>(null)
   const mobileMenuRef                  = useRef<HTMLDivElement>(null)
 
-  /* Darken background after crossing hero threshold */
+  /* Enable blurred background shortly after user starts scrolling */
   useEffect(() => {
-    const sentinel = document.getElementById('nav-scroll-sentinel')
-    if (!sentinel) return
+    let rafId = 0
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setScrolled(!entry.isIntersecting)
-      },
-      {
-        root: null,
-        threshold: 0,
-        rootMargin: '-40px 0px 0px 0px',
-      },
-    )
+    const updateScrolled = () => {
+      setScrolled(window.scrollY > 8)
+    }
 
-    observer.observe(sentinel)
-    return () => observer.disconnect()
+    const onScroll = () => {
+      if (rafId) return
+      rafId = window.requestAnimationFrame(() => {
+        updateScrolled()
+        rafId = 0
+      })
+    }
+
+    updateScrolled()
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (rafId) window.cancelAnimationFrame(rafId)
+    }
   }, [])
 
   /* GSAP entrance — slides in from top */
