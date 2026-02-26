@@ -168,11 +168,11 @@ Obecne GPU mogą to obsłużyć bez problemu, ale warto profilować na mid-range
 
 ---
 
-### 3.8 Nieużywany styl `.rowDivider` na mobile [KOSMETYCZNY]
+### 3.8 Nieużywany styl `.rowDivider` na mobile [KOSMETYCZNY] ✅ ZREALIZOWANE (2026-02-26)
 
-**Problem:** `.rowDivider` ma `display: none` jako default, a `display: block` dopiero od `min-width: 1024px`. Nie ma żadnego CSS zapamiętującego ten element na mobile, ale komponent renderuje element DOM niezależnie od breakpointa.
+**Problem:** `.rowDivider` ma `display: none` jako default, a `display: block` dopiero od `min-width: 1024px`. Komponent renderował element DOM niezależnie od breakpointa.
 
-Nie jest to problem CSS, ale wskazuje na możliwość warunkowego renderowania w React (`{isLg && <div className={styles.rowDivider} />}`).
+**Rozwiązanie:** Warunkowe renderowanie w `Services.tsx` — `useState(false)` + `useEffect` nasłuchujący `matchMedia('(min-width: 1024px)')`. Element renderowany tylko gdy `isLg === true`. SSR-safe: startuje jako `false`, aktualizuje się po mount. Element jest `aria-hidden` i czysto dekoracyjny, więc przejście SSR→CSR bez efektów ubocznych.
 
 ---
 
@@ -206,7 +206,7 @@ Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia�
 | 3.5 | Brak z-index scale | NISKI | Mały | Maintainability | ✅ |
 | 3.6 | Statyczna typografia display | NISKI | Średni | UX | ✅ |
 | 3.7 | Gradient complexity | DO MONITOROWANIA | — | Perf (mobile) |
-| 3.8 | rowDivider DOM na mobile | KOSMETYCZNY | Mały | Bundle |
+| 3.8 | rowDivider DOM na mobile | KOSMETYCZNY | Mały | Bundle | ✅ |
 | 3.9 | border-image animowalność | INFORMACYJNY | — | — | ✅ |
 | 3.10 | CSP unsafe-inline | INFORMACYJNY | — | Security trade-off |
 
