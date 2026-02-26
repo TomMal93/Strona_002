@@ -4,10 +4,10 @@
   background:
     repeating-linear-gradient(
       45deg,
-      rgb(74 82 64 / 0.09) 0,
-      rgb(74 82 64 / 0.09) 1px,
-      rgb(74 82 64 / 0) 1px,
-      rgb(74 82 64 / 0) 22px  /* okres paska: 1px linia co 22px ≈ 15,5px wizualny rozstaw przy 45deg */
+      rgb(var(--c-olive) / 0.09) 0,
+      rgb(var(--c-olive) / 0.09) 1px,
+      rgb(var(--c-olive) / 0) 1px,
+      rgb(var(--c-olive) / 0) 22px  /* okres paska: 1px linia co 22px ≈ 15,5px wizualny rozstaw przy 45deg */
     ),
     rgb(13 13 13);
 }
@@ -48,9 +48,9 @@
   pointer-events: none;
   background: linear-gradient(
     120deg,
-    rgb(139 115 85 / 0.2) 0%,
-    rgb(139 115 85 / 0.08) 50%,
-    rgb(139 115 85 / 0.2) 100%
+    rgb(var(--c-gold) / 0.2) 0%,
+    rgb(var(--c-gold) / 0.08) 50%,
+    rgb(var(--c-gold) / 0.2) 100%
   );
   filter: blur(35px);
 }

@@ -1,8 +1,5 @@
 .sectionBackground {
-  --c-gold: 139 115 85;    /* bazowy kolor złota */
-  --c-olive: 74 82 64;     /* oliwkowy akcent tła */
-  --c-khaki: 146 154 117;  /* militarny khaki */
-  --c-warm: 180 130 90;    /* ciepły akcent wariantu highlight */
+  /* --c-gold/olive/khaki/warm zdefiniowane globalnie w :root (globals.css) */
   position: relative;
   overflow: hidden;
   background:
