@@ -168,22 +168,24 @@ Obecne GPU mogą to obsłużyć bez problemu, ale warto profilować na mid-range
 
 ---
 
-### 3.8 Nieużywany styl `.rowDivider` na mobile [KOSMETYCZNY]
+### 3.8 Nieużywany styl `.rowDivider` na mobile [KOSMETYCZNY] ✅ ZREALIZOWANE (2026-02-26)
 
-**Problem:** `.rowDivider` ma `display: none` jako default, a `display: block` dopiero od `min-width: 1024px`. Nie ma żadnego CSS zapamiętującego ten element na mobile, ale komponent renderuje element DOM niezależnie od breakpointa.
+**Problem:** `.rowDivider` ma `display: none` jako default, a `display: block` dopiero od `min-width: 1024px`. Komponent renderował element DOM niezależnie od breakpointa.
 
-Nie jest to problem CSS, ale wskazuje na możliwość warunkowego renderowania w React (`{isLg && <div className={styles.rowDivider} />}`).
+**Rozwiązanie:** Warunkowe renderowanie w `Services.tsx` — `useState(false)` + `useEffect` nasłuchujący `matchMedia('(min-width: 1024px)')`. Element renderowany tylko gdy `isLg === true`. SSR-safe: startuje jako `false`, aktualizuje się po mount. Element jest `aria-hidden` i czysto dekoracyjny, więc przejście SSR→CSR bez efektów ubocznych.
 
 ---
 
-### 3.9 border-image i kompatybilność [INFORMACYJNY]
+### 3.9 border-image i kompatybilność [INFORMACYJNY] ✅ ZREALIZOWANE (2026-02-26)
 
 **Użycie:**
 ```css
 border-image: linear-gradient(...) 1;
 ```
 
-Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia `border-color` na `.serviceCard`, ale `::after` z `border-image` pozostaje statyczny — efekt jest prawidłowy wizualnie, ale może być mylący przy czytaniu kodu.
+Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmieniał `border-color` na `.serviceCard`, ale `::after` z `border-image` zakrywał solid border — `transition: border-color` był bezużyteczny.
+
+**Rozwiązanie:** `.serviceCard::after` dostał `opacity: 0` w stanie spoczynku i `transition: opacity 340ms`. Na hover `opacity: 1` — gradient border płynnie się pojawia. Solid `border-color` jest teraz widoczny w spoczynku i faktycznie animuje transition przy hover (::after go nie zakrywa). Warianty Military i Highlight dziedziczą te same właściwości przez kaskadę CSS.
 
 ---
 
@@ -204,8 +206,8 @@ Border-image nie jest animowalny (brak płynnej tranzycji). Hover state zmienia 
 | 3.5 | Brak z-index scale | NISKI | Mały | Maintainability | ✅ |
 | 3.6 | Statyczna typografia display | NISKI | Średni | UX | ✅ |
 | 3.7 | Gradient complexity | DO MONITOROWANIA | — | Perf (mobile) |
-| 3.8 | rowDivider DOM na mobile | KOSMETYCZNY | Mały | Bundle |
-| 3.9 | border-image animowalność | INFORMACYJNY | — | — |
+| 3.8 | rowDivider DOM na mobile | KOSMETYCZNY | Mały | Bundle | ✅ |
+| 3.9 | border-image animowalność | INFORMACYJNY | — | — | ✅ |
 | 3.10 | CSP unsafe-inline | INFORMACYJNY | — | Security trade-off |
 
 ---
