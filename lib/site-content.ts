@@ -16,6 +16,13 @@ export const siteContent = {
       process.env.NEXT_PUBLIC_HERO_SUBTITLE
       || 'Dokumentuję to, co warto pamiętać.\nOd pola bitwy po ślubny taniec.',
     ctaLabel: process.env.NEXT_PUBLIC_HERO_CTA_LABEL || 'Skontaktuj się',
+    aboutLabel: process.env.NEXT_PUBLIC_HERO_ABOUT_LABEL || 'O mnie',
+    social: [
+      { platform: 'facebook', href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || '#' },
+      { platform: 'instagram', href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || '#' },
+      { platform: 'tiktok', href: process.env.NEXT_PUBLIC_SOCIAL_TIKTOK || '#' },
+      { platform: 'youtube', href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || '#' },
+    ],
   },
   services: {
     title: process.env.NEXT_PUBLIC_SERVICES_TITLE || 'Oferta',
