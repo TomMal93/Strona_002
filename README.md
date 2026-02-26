@@ -12,12 +12,14 @@ Strona portfolio dla fotografa i operatora wideo specjalizującego się w eventa
 ## Sekcje strony
 
 1. Hero
-2. Usługi
-3. O mnie
-4. Portfolio / Galeria
-5. Instagram Feed
-6. Pokaz wideo
-7. Kontakt
+2. Kim jestem
+3. Korzyści
+4. Oferta
+5. Portfolio / Galeria
+6. Instagram Feed
+7. Proces
+8. Opinie
+9. FAQ + mocne CTA
 
 ## Dokumentacja
 

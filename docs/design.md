@@ -16,7 +16,7 @@ Strona ma łączyć dwa światy: **twardy, terenowy klimat** (survival, drony, o
 
 | Nazwa            | Hex       | Zastosowanie                                      |
 |------------------|-----------|---------------------------------------------------|
-| Czerń / Antracyt | `#0D0D0D` | Tło sekcji ciemnych (Hero, Usługi, Instagram, Kontakt) |
+| Czerń / Antracyt | `#0D0D0D` | Tło sekcji ciemnych (Hero, Kim jestem, Proces, FAQ) |
 | Antracyt jasny   | `#1A1A1A` | Karty, tła pomocnicze w sekcjach dark             |
 | Ecru / Ciepła biel | `#F5F0EB` | Tło sekcji jasnych (Portfolio)                  |
 | Biel             | `#FFFFFF` | Teksty na ciemnym tle, ikony                      |
@@ -31,15 +31,17 @@ Strona ma łączyć dwa światy: **twardy, terenowy klimat** (survival, drony, o
 
 ### Użycie kolorów w sekcjach
 
-| Sekcja         | Tło         | Akcent      |
-|----------------|-------------|-------------|
-| Hero           | `#0D0D0D`   | `#8B7355`   |
-| Usługi         | `#1A1A1A`   | `#8B7355`   |
-| O mnie         | `#0D0D0D`   | `#8B7355`   |
-| Portfolio      | `#F5F0EB`   | `#4A5240`   |
-| Instagram Feed | `#1A1A1A`   | `#8B7355`   |
-| Pokaz wideo    | `#0D0D0D`   | `#8B7355`   |
-| Kontakt        | `#1A1A1A`   | `#8B7355`   |
+| Sekcja             | Tło         | Akcent      |
+|--------------------|-------------|-------------|
+| Hero               | `#0D0D0D`   | `#8B7355`   |
+| Kim jestem         | `#1A1A1A`   | `#8B7355`   |
+| Korzyści           | `#0D0D0D`   | `#8B7355`   |
+| Oferta             | `#1A1A1A`   | `#8B7355`   |
+| Portfolio / Galeria| `#F5F0EB`   | `#4A5240`   |
+| Instagram Feed     | `#1A1A1A`   | `#8B7355`   |
+| Proces             | `#0D0D0D`   | `#8B7355`   |
+| Opinie             | `#1A1A1A`   | `#8B7355`   |
+| FAQ + mocne CTA    | `#0D0D0D`   | `#8B7355`   |
 
 ---
 
@@ -90,13 +92,17 @@ Strona ma łączyć dwa światy: **twardy, terenowy klimat** (survival, drony, o
 - **Scroll indicator:** Animowana strzałka / linia pulsująca w dół
 - **Parallax:** Tło przesuwa się wolniej niż scroll (efekt głębi)
 
-#### Usługi
-- **Card entrance:** Karty wjeżdżają z dołu po wejściu w widok (`ScrollTrigger`)
-- **Hover effect:** Podświetlenie krawędzi w kolorze `#8B7355` + lekkie uniesienie
-
-#### O mnie
+#### Kim jestem
 - **Image reveal:** Zdjęcie odsłaniane przez "kurtynę" (clip-path animation)
 - **Counter animation:** Liczby (np. "500+ eventów") animują się przy scroll
+
+#### Korzyści
+- **Card entrance:** Bloki korzyści wjeżdżają sekwencyjnie po wejściu w widok (`ScrollTrigger`)
+- **Hover effect:** Podświetlenie krawędzi i delikatne uniesienie
+
+#### Oferta
+- **Card entrance:** Karty wjeżdżają z dołu po wejściu w widok (`ScrollTrigger`)
+- **Hover effect:** Podświetlenie krawędzi w kolorze `#8B7355` + lekkie uniesienie
 
 #### Portfolio
 - **Filter transition:** Płynne przetasowanie zdjęć przy zmianie kategorii (GSAP flip)
@@ -107,12 +113,17 @@ Strona ma łączyć dwa światy: **twardy, terenowy klimat** (survival, drony, o
 - **Stagger reveal:** Miniatury wjeżdżają jedna po drugiej
 - **Hover:** Lekkie powiększenie + overlay z ikoną Instagrama
 
-#### Pokaz wideo
-- **Scroll-triggered play:** Odtwarzacz staje się widoczny przy scroll
-- **Cinematic reveal:** Sekcja otwiera się jak obiektyw (clip-path circle)
+#### Proces
+- **Step reveal:** Kroki pojawiają się jeden po drugim w rytmie scrolla
+- **Connector animation:** Linia łącząca kroki rysuje się progresywnie
 
-#### Kontakt
-- **Entrance:** Dane kontaktowe i ikony social media wjeżdżają z dołu (stagger)
+#### Opinie
+- **Quote reveal:** Cytaty klientów pojawiają się z lekkim staggerem
+- **Card focus:** Aktywna opinia ma subtelne podbicie kontrastu
+
+#### FAQ + mocne CTA
+- **Accordion animation:** Płynne rozwijanie odpowiedzi (height + opacity)
+- **CTA emphasis:** Końcowy przycisk z wyraźnym akcentem i delikatnym pulse
 
 ---
 
