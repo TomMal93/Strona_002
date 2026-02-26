@@ -53,8 +53,8 @@ export const metadata: Metadata = {
     images: ['/images/hero.webp'],
   },
   icons: {
-    icon: '/images/menu_icon.jpg',
-    apple: '/images/logo_m.png',
+    icon: '/images/logo_m.webp',
+    apple: '/images/logo_m.webp',
   },
 }
 

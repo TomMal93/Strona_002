@@ -93,7 +93,7 @@ export default function Navbar() {
         {/* Logo */}
         <a href="#hero" aria-label="Strona główna" className="relative h-10 w-10 flex-shrink-0 md:h-12 md:w-12">
           <Image
-            src="/images/logo_m.png"
+            src="/images/logo_m.webp"
             alt=""
             width={96}
             height={96}
