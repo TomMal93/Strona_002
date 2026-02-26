@@ -22,6 +22,8 @@ Projekt ma dobrą bazę pod wydajność (optymalizacja obrazów przez `next/imag
 
 ## 2.1 [WYSOKI] Zbyt szeroki zakres komponentów `use client`
 
+**Status realizacji (2026-02-26):** ❌ Niezrealizowane
+
 ### Obserwacja
 `Hero` i `Services` są komponentami klienckimi, mimo że tylko część ich logiki (animacje) wymaga klienta. Obecnie cała struktura HTML tych sekcji jest hydratowana po stronie przeglądarki. W `Hero` i `Services` dużo treści jest statyczne i mogłoby być renderowane jako Server Components. 
 
@@ -41,6 +43,8 @@ Rozdzielić warstwę prezentacji od animacji:
 
 ## 2.2 [WYSOKI] GSAP + ScrollTrigger ładowane globalnie dla sekcji, które można leniwie uruchamiać
 
+**Status realizacji (2026-02-26):** ✅ Zrealizowane
+
 ### Obserwacja
 Hooki animacji importują GSAP bezpośrednio i uruchamiają go od razu po montażu komponentu. Przy rozbudowie strony (kolejne sekcje) to zwiększy koszt startowy.
 
@@ -53,6 +57,8 @@ Hooki animacji importują GSAP bezpośrednio i uruchamiają go od razu po monta�
 ---
 
 ## 2.3 [ŚREDNI] Dodatkowy re-render sekcji `Services` przez `matchMedia` + `useState`
+
+**Status realizacji (2026-02-26):** ✅ Zrealizowane
 
 ### Obserwacja
 W `Services` wartość `isLg` jest utrzymywana w stanie i aktualizowana listenerem `matchMedia`, ale służy tylko do warunkowego renderowania separatora między rzędami kart. To wymusza logikę JS dla efektu, który może być w pełni CSS-owy.
@@ -67,6 +73,8 @@ W `Services` wartość `isLg` jest utrzymywana w stanie i aktualizowana listener
 
 ## 2.4 [ŚREDNI] `Navbar` stale nasłuchuje scroll, mimo że zmiana progu jest binarna
 
+**Status realizacji (2026-02-26):** ✅ Zrealizowane
+
 ### Obserwacja
 `Navbar` używa handlera `scroll` + `requestAnimationFrame` tylko po to, by ustawić `scrolled` przy progu `window.scrollY > 40`.
 
@@ -79,8 +87,10 @@ Zastąpić to IntersectionObserverem z 1px sentinel elementem pod hero. Observer
 
 ## 2.5 [ŚREDNI] Braki w zasobach SEO deklarowanych w metadata
 
+**Status realizacji (2026-02-26):** ✅ Zrealizowane
+
 ### Obserwacja
-Layout deklaruje `og-image.jpg`, `favicon.ico`, `apple-touch-icon.png`, ale w repo widać tylko obrazy sekcji (`hero.webp`, `logo_m.png`, `menu_icon.jpg`).
+Pierwotnie layout deklarował `og-image.jpg`, `favicon.ico`, `apple-touch-icon.png`, mimo że w repo dostępne były głównie obrazy sekcji (`hero.webp`, `logo_m.png`, `menu_icon.jpg`).
 
 ### Ryzyko
 - 404 dla części assetów SEO,
@@ -93,6 +103,8 @@ Dodać brakujące pliki do `public/` albo skorygować ścieżki w metadata.
 
 ## 2.6 [NISKI] `Navbar` używa `<a href="#...">` zamiast `next/link`
 
+**Status realizacji (2026-02-26):** ❌ Niezrealizowane
+
 ### Obserwacja
 Dla anchorów na tej samej stronie to nie jest błąd krytyczny. Jednak przy przyszłym przejściu do tras wielostronicowych i prefetchingu lepiej zachować spójność przez `Link`.
 
@@ -103,6 +115,8 @@ Dla nawigacji sekcyjnej można zostawić `<a>`, ale dla przyszłych linków mię
 
 ## 2.7 [NISKI] Możliwa dalsza optymalizacja obrazu logo
 
+**Status realizacji (2026-02-26):** ✅ Zrealizowane
+
 ### Obserwacja
 Logo w `Navbar` renderowane jest jako obraz 192×192 upakowany w kontener 40–48 px. Na większości urządzeń to lekki overfetch.
 
@@ -110,6 +124,12 @@ Logo w `Navbar` renderowane jest jako obraz 192×192 upakowany w kontener 40–4
 Dla logo użyć mniejszego pliku źródłowego (np. 96×96 webp/avif) lub doprecyzować `sizes`/warianty.
 
 ---
+
+### Zbiorczy status realizacji (2026-02-26)
+
+- **Zrealizowane:** 5 / 7
+- **Częściowo zrealizowane:** 0 / 7
+- **Niezrealizowane:** 2 / 7
 
 ## 3. Plan wdrożenia (kolejność)
 

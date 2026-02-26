@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { gsap } from 'gsap'
-import logoImage from '@/public/images/logo_m.png'
 
 const NAV_ITEMS = [
   { label: 'O MNIE', href: '#about' },
@@ -17,18 +16,24 @@ export default function Navbar() {
   const headerRef                      = useRef<HTMLElement>(null)
   const mobileMenuRef                  = useRef<HTMLDivElement>(null)
 
-  /* Darken background after scrolling past the fold */
+  /* Darken background after crossing hero threshold */
   useEffect(() => {
-    let rafId: number
-    const onScroll = () => {
-      cancelAnimationFrame(rafId)
-      rafId = requestAnimationFrame(() => setScrolled(window.scrollY > 40))
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      cancelAnimationFrame(rafId)
-    }
+    const sentinel = document.getElementById('nav-scroll-sentinel')
+    if (!sentinel) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setScrolled(!entry.isIntersecting)
+      },
+      {
+        root: null,
+        threshold: 0,
+        rootMargin: '-40px 0px 0px 0px',
+      },
+    )
+
+    observer.observe(sentinel)
+    return () => observer.disconnect()
   }, [])
 
   /* GSAP entrance — slides in from top */
@@ -88,11 +93,12 @@ export default function Navbar() {
         {/* Logo */}
         <a href="#hero" aria-label="Strona główna" className="relative h-10 w-10 flex-shrink-0 md:h-12 md:w-12">
           <Image
-            src={logoImage}
+            src="/images/logo_m.png"
             alt=""
-            width={192}
-            height={192}
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[192px] w-[192px] -translate-x-1/2 -translate-y-1/2 object-contain"
+            width={96}
+            height={96}
+            className="pointer-events-none absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 object-contain"
+            sizes="(max-width: 767px) 40px, 48px"
             priority
             aria-hidden="true"
           />
