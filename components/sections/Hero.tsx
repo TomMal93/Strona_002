@@ -40,6 +40,7 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const eyebrowRef = useRef<HTMLSpanElement>(null)
   const headingRef = useRef<HTMLParagraphElement>(null)
+  const underlineRef = useRef<HTMLSpanElement>(null)
   const descriptionRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLAnchorElement>(null)
 
@@ -47,6 +48,7 @@ export default function Hero() {
     sectionRef,
     eyebrowRef,
     headingRef,
+    underlineRef,
     descriptionRef,
     ctaRef,
   })
@@ -133,6 +135,13 @@ export default function Hero() {
               <br />
               {siteContent.hero.headlineLine2}
             </p>
+
+            {/* Animated underline */}
+            <span
+              ref={underlineRef}
+              aria-hidden="true"
+              className="mt-5 block h-px w-full origin-left bg-gradient-to-r from-khaki/80 via-khaki/40 to-transparent"
+            />
 
             {/* Description */}
             <div className="max-w-[34ch]">
