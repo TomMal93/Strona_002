@@ -67,4 +67,28 @@ export const siteContent = {
       },
     ],
   },
+  about: {
+    heading: process.env.NEXT_PUBLIC_ABOUT_HEADING || 'Kim jestem',
+    description:
+      process.env.NEXT_PUBLIC_ABOUT_DESCRIPTION
+      || 'Jestem fotografem i operatorem wideo z pasją do uchwycenia prawdziwych emocji.\nOd eventów militarnych po ślubny taniec — każde zlecenie realizuję z pełnym zaangażowaniem i okiem do detalu.\nMoja praca to nie tylko zdjęcia — to historia opowiedziana kadrem.',
+    cta: process.env.NEXT_PUBLIC_ABOUT_CTA || 'Sprawdź ofertę',
+    counters: [
+      {
+        value: 500,
+        suffix: '+',
+        label: process.env.NEXT_PUBLIC_ABOUT_COUNTER_1_LABEL || 'Zrealizowanych eventów',
+      },
+      {
+        value: 8,
+        suffix: '+',
+        label: process.env.NEXT_PUBLIC_ABOUT_COUNTER_2_LABEL || 'Lat doświadczenia',
+      },
+      {
+        value: 100,
+        suffix: '%',
+        label: process.env.NEXT_PUBLIC_ABOUT_COUNTER_3_LABEL || 'Pasji w każdym kadrze',
+      },
+    ],
+  },
 } as const
