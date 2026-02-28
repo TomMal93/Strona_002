@@ -14,6 +14,7 @@ export function useHeroAnimations({
   eyebrowRef,
   headingRef,
   underlineRef,
+  verticalLineRef,
   descriptionRef,
   ctaRef,
 }: HeroRefs) {
@@ -40,17 +41,15 @@ export function useHeroAnimations({
 
         if (prefersReducedMotion || isMobileViewport) {
           gsap.set(fadeTargets, { autoAlpha: 1, y: 0 })
-          if (underlineRef.current) {
-            gsap.set(underlineRef.current, { scaleX: 1 })
-          }
+          if (underlineRef.current) gsap.set(underlineRef.current, { scaleX: 1 })
+          if (verticalLineRef.current) gsap.set(verticalLineRef.current, { scaleY: 1 })
           return
         }
 
         gsap.set(fadeTargets, { autoAlpha: 0, y: 40 })
 
-        if (underlineRef.current) {
-          gsap.set(underlineRef.current, { scaleX: 0 })
-        }
+        if (underlineRef.current) gsap.set(underlineRef.current, { scaleX: 0 })
+        if (verticalLineRef.current) gsap.set(verticalLineRef.current, { scaleY: 0 })
 
         const tl = gsap.timeline({ delay: 0.3 })
 
@@ -63,13 +62,20 @@ export function useHeroAnimations({
           stagger: 0.3,
         })
 
-        // separator line draws from left to right after description
+        // obie kreski rysują się równocześnie — pionowa z góry na dół, pozioma od lewej
+        if (verticalLineRef.current) {
+          tl.to(verticalLineRef.current, {
+            scaleY: 1,
+            duration: 0.6,
+            ease: 'power2.out',
+          }, '-=0.5')
+        }
         if (underlineRef.current) {
           tl.to(underlineRef.current, {
             scaleX: 1,
             duration: 0.6,
             ease: 'power2.out',
-          }, '-=0.5')
+          }, '<')
         }
 
         // CTA fades in last

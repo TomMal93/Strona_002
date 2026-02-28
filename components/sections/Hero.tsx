@@ -40,6 +40,7 @@ type HeroTextBlockProps = {
   headingRef?: Ref<HTMLParagraphElement>
   descriptionRef?: Ref<HTMLParagraphElement>
   underlineRef?: Ref<HTMLSpanElement>
+  verticalLineRef?: Ref<HTMLSpanElement>
   ctaRef?: Ref<HTMLDivElement>
 }
 
@@ -50,41 +51,45 @@ function HeroTextBlock({
   headingRef,
   descriptionRef,
   underlineRef,
+  verticalLineRef,
   ctaRef,
 }: HeroTextBlockProps) {
   const ctaBase = 'px-4 py-2 text-center font-bebas text-[18px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2'
 
   return (
     <>
-      <span
-        ref={eyebrowRef}
-        className="block font-bebas text-[18px] uppercase tracking-heading text-white/60"
-      >
-        {siteContent.hero.eyebrow}
-      </span>
-
-      <p
-        ref={headingRef}
-        aria-hidden="true"
-        className={cn(styles.gradientTextPrimary, headingClassName)}
-      >
-        {siteContent.hero.headlineLine1}
-        <br />
-        {siteContent.hero.headlineLine2}
-      </p>
-
-      <div className="max-w-[34ch]">
-        <p
-          ref={descriptionRef}
-          className={cn(styles.gradientTextSecondary, "mt-6 whitespace-pre-line pb-3 font-bebas text-[16px] leading-[1.5] tracking-heading")}
-        >
-          {siteContent.hero.subtitle}
-        </p>
+      <div className={styles.textBlock}>
+        <span ref={verticalLineRef} aria-hidden="true" className={styles.verticalLine} />
         <span
-          ref={underlineRef}
+          ref={eyebrowRef}
+          className="block font-bebas text-[18px] uppercase tracking-heading text-white/60"
+        >
+          {siteContent.hero.eyebrow}
+        </span>
+
+        <p
+          ref={headingRef}
           aria-hidden="true"
-          className={underlineClassName}
-        />
+          className={cn(styles.gradientTextPrimary, headingClassName)}
+        >
+          {siteContent.hero.headlineLine1}
+          <br />
+          {siteContent.hero.headlineLine2}
+        </p>
+
+        <div className="max-w-[34ch]">
+          <p
+            ref={descriptionRef}
+            className={cn(styles.gradientTextSecondary, "mt-6 whitespace-pre-line pb-5 font-bebas text-[16px] leading-[1.5] tracking-heading")}
+          >
+            {siteContent.hero.subtitle}
+          </p>
+          <span
+            ref={underlineRef}
+            aria-hidden="true"
+            className={cn(styles.separatorLine, underlineClassName)}
+          />
+        </div>
       </div>
 
       <div ref={ctaRef} className="mt-8 flex flex-col gap-5">
@@ -129,6 +134,7 @@ export default function Hero() {
   const eyebrowRef = useRef<HTMLSpanElement>(null)
   const headingRef = useRef<HTMLParagraphElement>(null)
   const underlineRef = useRef<HTMLSpanElement>(null)
+  const verticalLineRef = useRef<HTMLSpanElement>(null)
   const descriptionRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
 
@@ -137,6 +143,7 @@ export default function Hero() {
     eyebrowRef,
     headingRef,
     underlineRef,
+    verticalLineRef,
     descriptionRef,
     ctaRef,
   })
@@ -169,9 +176,10 @@ export default function Hero() {
               headingRef={headingRef}
               descriptionRef={descriptionRef}
               underlineRef={underlineRef}
+              verticalLineRef={verticalLineRef}
               ctaRef={ctaRef}
               headingClassName="mt-4 font-bebas text-[48px] uppercase leading-[0.9] md:text-display"
-              underlineClassName="block h-px w-full origin-left bg-gradient-to-r from-khaki/70 to-transparent"
+              underlineClassName="block h-px w-full origin-right bg-gradient-to-r from-khaki/70 to-transparent"
             />
           </div>
         </div>

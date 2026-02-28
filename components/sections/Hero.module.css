@@ -82,6 +82,41 @@
   }
 }
 
+/* ── Pionowa kreska — od eyebrow do separatora ───────────────────────────── */
+
+.textBlock {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.separatorLine {
+  margin-left: -1.25rem;
+  width: calc(100% + 1.25rem);
+}
+
+.verticalLine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 1px;
+  width: 1px;
+  transform-origin: top center;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.35) 25%,
+    rgb(var(--c-gold) / 0.60) 85%,
+    rgb(var(--c-gold) / 0.70) 100%
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .verticalLine {
+    display: none;
+  }
+}
+
 /* ── Gradient text — współdzielony przez opis i buttony ──────────────────── */
 
 .gradientTextPrimary {
