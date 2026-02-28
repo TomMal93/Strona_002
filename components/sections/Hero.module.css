@@ -1,5 +1,6 @@
 .mobileFrame {
-  width: 766px;
+  --mobile-frame-w: 766px; /* musi odpowiadać breakpointowi md:hidden (767px) */
+  width: var(--mobile-frame-w);
   padding-top: 55px;
 }
 
