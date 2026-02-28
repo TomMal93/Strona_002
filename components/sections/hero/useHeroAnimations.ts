@@ -40,7 +40,8 @@ export function useHeroAnimations({
         ].filter((el): el is HTMLElement => el !== null)
 
         if (prefersReducedMotion || isMobileViewport) {
-          gsap.set(fadeTargets, { autoAlpha: 1, y: 0 })
+          gsap.set([headingRef.current, descriptionRef.current, ctaRef.current].filter((el): el is HTMLElement => el !== null), { autoAlpha: 1, y: 0 })
+          if (eyebrowRef.current) gsap.set(eyebrowRef.current, { opacity: 0.5, visibility: 'visible', y: 0 })
           if (underlineRef.current) gsap.set(underlineRef.current, { scaleX: 1 })
           if (verticalLineRef.current) gsap.set(verticalLineRef.current, { scaleY: 1 })
           return
@@ -54,13 +55,20 @@ export function useHeroAnimations({
         const tl = gsap.timeline({ delay: 0.3 })
 
         // eyebrow → heading → description fade + slide
-        tl.to([eyebrowRef.current, headingRef.current, descriptionRef.current].filter(Boolean), {
+        tl.to([headingRef.current, descriptionRef.current].filter(Boolean), {
           autoAlpha: 1,
           y: 0,
           duration: 1,
           ease: 'power3.out',
           stagger: 0.3,
         })
+        tl.to(eyebrowRef.current, {
+          opacity: 0.5,
+          visibility: 'visible',
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+        }, '<')
 
         // obie kreski rysują się równocześnie — pionowa z góry na dół, pozioma od lewej
         if (verticalLineRef.current) {

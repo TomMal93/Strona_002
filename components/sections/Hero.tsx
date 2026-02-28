@@ -62,7 +62,7 @@ function HeroTextBlock({
         <span ref={verticalLineRef} aria-hidden="true" className={styles.verticalLine} />
         <span
           ref={eyebrowRef}
-          className="block font-bebas text-[18px] uppercase tracking-heading text-white/60"
+          className={cn(styles.gradientTextSecondary, "block font-bebas text-[18px] uppercase tracking-heading")}
         >
           {siteContent.hero.eyebrow}
         </span>
