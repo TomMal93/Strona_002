@@ -89,13 +89,13 @@ function HeroTextBlock({
         <div className="flex flex-wrap items-center gap-8">
           <a
             href="#contact"
-            className={cn(styles.ctaButton, 'px-6 py-3 font-inter text-[18px] font-medium text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2')}
+            className={cn(styles.ctaButton, 'min-w-[180px] px-6 py-3 text-center font-inter text-[18px] font-medium text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2')}
           >
             {siteContent.hero.ctaLabel}
           </a>
           <a
             href="#about"
-            className={cn(styles.ctaButton, styles.ctaButtonSecondary, 'px-6 py-3 font-inter text-[18px] font-medium text-white/55 hover:text-white/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2')}
+            className={cn(styles.ctaButton, styles.ctaButtonSecondary, 'min-w-[180px] px-6 py-3 text-center font-inter text-[18px] font-medium text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2')}
           >
             {siteContent.hero.aboutLabel}
           </a>
