@@ -82,12 +82,37 @@
   }
 }
 
+/* ── Gradient text — współdzielony przez opis i buttony ──────────────────── */
+
+.gradientTextPrimary {
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-warm)) 0%,
+    rgb(255 238 175) 45%,
+    rgb(var(--c-gold)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradientTextSecondary {
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-khaki)) 0%,
+    rgb(218 226 192) 50%,
+    rgb(var(--c-khaki)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* ── Hero CTA buttons — text gradient + underline ────────────────────────── */
 
 .ctaButton {
   position: relative;
   letter-spacing: 0.10em;
-  /* Gradient metaliczny na tekście */
   background: linear-gradient(
     130deg,
     rgb(var(--c-warm)) 0%,

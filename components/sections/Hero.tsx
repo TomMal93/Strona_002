@@ -66,7 +66,7 @@ function HeroTextBlock({
       <p
         ref={headingRef}
         aria-hidden="true"
-        className={headingClassName}
+        className={cn(styles.gradientTextPrimary, headingClassName)}
       >
         {siteContent.hero.headlineLine1}
         <br />
@@ -76,7 +76,7 @@ function HeroTextBlock({
       <div className="max-w-[34ch]">
         <p
           ref={descriptionRef}
-          className="mt-6 whitespace-pre-line pb-3 font-inter font-light text-[16px] leading-[1.75] text-white/60"
+          className={cn(styles.gradientTextSecondary, "mt-6 whitespace-pre-line pb-3 font-bebas text-[16px] leading-[1.5] tracking-heading")}
         >
           {siteContent.hero.subtitle}
         </p>
@@ -155,7 +155,7 @@ export default function Hero() {
 
       <MobileHeroLayout>
         <HeroTextBlock
-          headingClassName="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white"
+          headingClassName="mt-4 font-bebas text-[48px] uppercase leading-[0.9]"
           underlineClassName="block h-px w-full bg-gradient-to-r from-khaki/70 to-transparent"
         />
       </MobileHeroLayout>
@@ -170,7 +170,7 @@ export default function Hero() {
               descriptionRef={descriptionRef}
               underlineRef={underlineRef}
               ctaRef={ctaRef}
-              headingClassName="mt-4 font-bebas text-[48px] uppercase leading-[0.9] text-white md:text-display"
+              headingClassName="mt-4 font-bebas text-[48px] uppercase leading-[0.9] md:text-display"
               underlineClassName="block h-px w-full origin-left bg-gradient-to-r from-khaki/70 to-transparent"
             />
           </div>
