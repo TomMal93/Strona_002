@@ -36,6 +36,7 @@ const socialIcons: Record<string, JSX.Element> = {
 type HeroTextBlockProps = {
   headingClassName: string
   underlineClassName: string
+  animated?: boolean
   eyebrowRef?: Ref<HTMLSpanElement>
   headingRef?: Ref<HTMLParagraphElement>
   descriptionRef?: Ref<HTMLParagraphElement>
@@ -47,6 +48,7 @@ type HeroTextBlockProps = {
 function HeroTextBlock({
   headingClassName,
   underlineClassName,
+  animated = false,
   eyebrowRef,
   headingRef,
   descriptionRef,
@@ -59,10 +61,10 @@ function HeroTextBlock({
   return (
     <>
       <div className={styles.textBlock}>
-        <span ref={verticalLineRef} aria-hidden="true" className={styles.verticalLine} />
+        <span ref={verticalLineRef} aria-hidden="true" className={cn(styles.verticalLine, animated && styles.animScaleYZero)} />
         <span
           ref={eyebrowRef}
-          className={cn(styles.gradientTextSecondary, "block font-bebas text-[18px] uppercase tracking-heading")}
+          className={cn(styles.gradientTextSecondary, "block font-bebas text-[18px] uppercase tracking-heading", animated && styles.animHide)}
         >
           {siteContent.hero.eyebrow}
         </span>
@@ -70,7 +72,7 @@ function HeroTextBlock({
         <p
           ref={headingRef}
           aria-hidden="true"
-          className={cn(styles.gradientTextPrimary, headingClassName)}
+          className={cn(styles.gradientTextPrimary, headingClassName, animated && styles.animHide)}
         >
           {siteContent.hero.headlineLine1}
           <br />
@@ -80,19 +82,19 @@ function HeroTextBlock({
         <div className="max-w-[34ch]">
           <p
             ref={descriptionRef}
-            className={cn(styles.gradientTextSecondary, "mt-6 whitespace-pre-line pb-5 font-bebas text-[16px] leading-[1.5] tracking-heading")}
+            className={cn(styles.gradientTextSecondary, "mt-6 whitespace-pre-line pb-5 font-bebas text-[16px] leading-[1.5] tracking-heading", animated && styles.animHide)}
           >
             {siteContent.hero.subtitle}
           </p>
           <span
             ref={underlineRef}
             aria-hidden="true"
-            className={cn(styles.separatorLine, underlineClassName)}
+            className={cn(styles.separatorLine, underlineClassName, animated && styles.animScaleXZero)}
           />
         </div>
       </div>
 
-      <div ref={ctaRef} className="mt-8 flex flex-col gap-5">
+      <div ref={ctaRef} className={cn("mt-8 flex flex-col gap-5", animated && styles.animHide)}>
         <div className="flex flex-wrap items-center gap-8">
           <a href="#contact" className={cn(styles.ctaButton, ctaBase)}>
             {siteContent.hero.ctaLabel}
@@ -172,6 +174,7 @@ export default function Hero() {
         <div className="md:flex md:flex-none md:flex-col md:items-end md:justify-center md:py-0">
           <div className="max-w-[500px] text-left">
             <HeroTextBlock
+              animated
               eyebrowRef={eyebrowRef}
               headingRef={headingRef}
               descriptionRef={descriptionRef}
@@ -186,7 +189,7 @@ export default function Hero() {
 
         {/* ── Desktop image column ─────────────────────────────────────────── */}
         <div className="relative hidden md:flex md:h-full md:items-center md:justify-center">
-          <div className="relative h-[90%] w-full">
+          <div className={cn("relative h-[90%] w-full", styles.desktopImageEntrance)}>
             <Image
               src="/images/hero.webp"
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"

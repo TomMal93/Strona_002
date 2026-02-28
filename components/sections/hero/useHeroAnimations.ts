@@ -52,7 +52,7 @@ export function useHeroAnimations({
         if (underlineRef.current) gsap.set(underlineRef.current, { scaleX: 0 })
         if (verticalLineRef.current) gsap.set(verticalLineRef.current, { scaleY: 0 })
 
-        const tl = gsap.timeline({ delay: 0.3 })
+        const tl = gsap.timeline({ delay: 0.45 })
 
         // eyebrow → heading → description fade + slide
         tl.to([headingRef.current, descriptionRef.current].filter(Boolean), {
