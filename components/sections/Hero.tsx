@@ -52,7 +52,7 @@ function HeroTextBlock({
   underlineRef,
   ctaRef,
 }: HeroTextBlockProps) {
-  const ctaBase = 'min-w-[180px] px-6 py-3 text-center font-inter text-[18px] font-medium text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2'
+  const ctaBase = 'min-w-[180px] px-6 py-3 text-center font-bebas text-[20px] text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2'
 
   return (
     <>
