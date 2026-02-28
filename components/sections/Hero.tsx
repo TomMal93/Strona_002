@@ -52,6 +52,8 @@ function HeroTextBlock({
   underlineRef,
   ctaRef,
 }: HeroTextBlockProps) {
+  const ctaBase = 'min-w-[180px] px-6 py-3 text-center font-inter text-[18px] font-medium text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2'
+
   return (
     <>
       <span
@@ -87,16 +89,10 @@ function HeroTextBlock({
 
       <div ref={ctaRef} className="mt-8 flex flex-col gap-5">
         <div className="flex flex-wrap items-center gap-8">
-          <a
-            href="#contact"
-            className={cn(styles.ctaButton, 'px-6 py-3 font-inter text-[18px] font-medium text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2')}
-          >
+          <a href="#contact" className={cn(styles.ctaButton, ctaBase)}>
             {siteContent.hero.ctaLabel}
           </a>
-          <a
-            href="#about"
-            className={cn(styles.ctaButton, styles.ctaButtonSecondary, 'px-6 py-3 font-inter text-[18px] font-medium text-white/55 hover:text-white/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2')}
-          >
+          <a href="#about" className={cn(styles.ctaButton, styles.ctaButtonSecondary, ctaBase)}>
             {siteContent.hero.aboutLabel}
           </a>
         </div>
@@ -188,7 +184,7 @@ export default function Hero() {
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"
               fill
               className="object-contain object-center"
-              priority
+              loading="eager"
               quality={75}
               sizes="(min-width: 768px) 55vw, 1px"
             />
