@@ -52,23 +52,32 @@ export function useHeroAnimations({
         if (underlineRef.current) gsap.set(underlineRef.current, { scaleX: 0 })
         if (verticalLineRef.current) gsap.set(verticalLineRef.current, { scaleY: 0 })
 
-        const tl = gsap.timeline({ delay: 0.45 })
+        const tl = gsap.timeline({ delay: 0.7 })
 
-        // eyebrow → heading → description fade + slide
-        tl.to([headingRef.current, descriptionRef.current].filter(Boolean), {
-          autoAlpha: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power3.out',
-          stagger: 0.3,
-        })
+        // 1. eyebrow wchodzi pierwszy
         tl.to(eyebrowRef.current, {
           opacity: 0.5,
           visibility: 'visible',
           y: 0,
-          duration: 1,
+          duration: 0.7,
           ease: 'power3.out',
-        }, '<')
+        })
+
+        // 2. heading wchodzi po eyebrow z małym opóźnieniem
+        tl.to(headingRef.current, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+        }, '-=0.3')
+
+        // 3. description wchodzi zaraz po headingu
+        tl.to(descriptionRef.current, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+        }, '-=0.35')
 
         // obie kreski rysują się równocześnie — pionowa z góry na dół, pozioma od lewej
         if (verticalLineRef.current) {
@@ -76,7 +85,7 @@ export function useHeroAnimations({
             scaleY: 1,
             duration: 0.6,
             ease: 'power2.out',
-          }, '-=0.5')
+          }, '-=0.1')
         }
         if (underlineRef.current) {
           tl.to(underlineRef.current, {
