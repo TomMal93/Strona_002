@@ -5,6 +5,7 @@ export type HeroRefs = {
   eyebrowRef: RefObject<HTMLSpanElement>
   headingRef: RefObject<HTMLParagraphElement>
   underlineRef: RefObject<HTMLSpanElement>
+  verticalLineRef: RefObject<HTMLSpanElement>
   descriptionRef: RefObject<HTMLParagraphElement>
   ctaRef: RefObject<HTMLElement>
 }

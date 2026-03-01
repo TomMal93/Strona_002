@@ -24,6 +24,33 @@ export const siteContent = {
       { platform: 'youtube', href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || '#' },
     ],
   },
+  about: {
+    title: process.env.NEXT_PUBLIC_ABOUT_TITLE || 'O MNIE',
+    lead:
+      process.env.NEXT_PUBLIC_ABOUT_LEAD
+      || 'Jestem fotografem i operatorem wideo. Pracuję tam, gdzie tempo jest wysokie, a emocje prawdziwe.',
+    description:
+      process.env.NEXT_PUBLIC_ABOUT_DESCRIPTION
+      || 'Od eventów militarno-survivalowych i off-roadu po śluby i sesje rodzinne. Niezależnie od kontekstu dostajesz ten sam standard: reportaż, który oddaje klimat wydarzenia bez sztucznego pozowania.',
+    highlights: [
+      {
+        title: 'Dwa światy, jeden styl',
+        description: 'Akcja, teren i ruch łączę z uważnością na relacje i emocje ludzi.',
+      },
+      {
+        title: 'Praca w warunkach dynamicznych',
+        description: 'Sprawnie działam pod presją czasu, zmiennego światła i nieprzewidywalnego przebiegu wydarzeń.',
+      },
+      {
+        title: 'Materiał gotowy do publikacji',
+        description: 'Dostarczam kadry i ujęcia przygotowane pod social media, stronę i materiały promocyjne.',
+      },
+    ],
+    ctaLabel: process.env.NEXT_PUBLIC_ABOUT_CTA_LABEL || 'Sprawdź ofertę',
+    imageAlt:
+      process.env.NEXT_PUBLIC_ABOUT_IMAGE_ALT
+      || 'Fotograf i operator drona — portret z dronem i kontrolerem',
+  },
   services: {
     title: process.env.NEXT_PUBLIC_SERVICES_TITLE || 'Oferta',
     subtitle:

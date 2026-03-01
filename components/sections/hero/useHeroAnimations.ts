@@ -14,6 +14,7 @@ export function useHeroAnimations({
   eyebrowRef,
   headingRef,
   underlineRef,
+  verticalLineRef,
   descriptionRef,
   ctaRef,
 }: HeroRefs) {
@@ -39,37 +40,59 @@ export function useHeroAnimations({
         ].filter((el): el is HTMLElement => el !== null)
 
         if (prefersReducedMotion || isMobileViewport) {
-          gsap.set(fadeTargets, { autoAlpha: 1, y: 0 })
-          if (underlineRef.current) {
-            gsap.set(underlineRef.current, { scaleX: 1 })
-          }
+          gsap.set([headingRef.current, descriptionRef.current, ctaRef.current].filter((el): el is HTMLElement => el !== null), { autoAlpha: 1, y: 0 })
+          if (eyebrowRef.current) gsap.set(eyebrowRef.current, { opacity: 0.5, visibility: 'visible', y: 0 })
+          if (underlineRef.current) gsap.set(underlineRef.current, { scaleX: 1 })
+          if (verticalLineRef.current) gsap.set(verticalLineRef.current, { scaleY: 1 })
           return
         }
 
         gsap.set(fadeTargets, { autoAlpha: 0, y: 40 })
 
-        if (underlineRef.current) {
-          gsap.set(underlineRef.current, { scaleX: 0 })
-        }
+        if (underlineRef.current) gsap.set(underlineRef.current, { scaleX: 0 })
+        if (verticalLineRef.current) gsap.set(verticalLineRef.current, { scaleY: 0 })
 
-        const tl = gsap.timeline({ delay: 0.3 })
+        const tl = gsap.timeline({ delay: 0.7 })
 
-        // eyebrow → heading → description fade + slide
-        tl.to([eyebrowRef.current, headingRef.current, descriptionRef.current].filter(Boolean), {
-          autoAlpha: 1,
+        // 1. eyebrow wchodzi pierwszy
+        tl.to(eyebrowRef.current, {
+          opacity: 0.5,
+          visibility: 'visible',
           y: 0,
-          duration: 1,
+          duration: 0.7,
           ease: 'power3.out',
-          stagger: 0.3,
         })
 
-        // separator line draws from left to right after description
+        // 2. heading wchodzi po eyebrow z małym opóźnieniem
+        tl.to(headingRef.current, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+        }, '-=0.3')
+
+        // 3. description wchodzi zaraz po headingu
+        tl.to(descriptionRef.current, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+        }, '-=0.35')
+
+        // obie kreski rysują się równocześnie — pionowa z góry na dół, pozioma od lewej
+        if (verticalLineRef.current) {
+          tl.to(verticalLineRef.current, {
+            scaleY: 1,
+            duration: 0.6,
+            ease: 'power2.out',
+          }, '-=0.1')
+        }
         if (underlineRef.current) {
           tl.to(underlineRef.current, {
             scaleX: 1,
             duration: 0.6,
             ease: 'power2.out',
-          }, '-=0.5')
+          }, '<')
         }
 
         // CTA fades in last

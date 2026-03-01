@@ -1,5 +1,6 @@
 .mobileFrame {
-  width: 766px;
+  --mobile-frame-w: 766px; /* musi odpowiadać breakpointowi md:hidden (767px) */
+  width: var(--mobile-frame-w);
   padding-top: 55px;
 }
 
@@ -70,6 +71,17 @@
   }
 }
 
+@keyframes desktop-image-in {
+  from {
+    opacity: 0;
+    transform: translate3d(12px, 16px, 0) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
 @keyframes mobile-panel-in {
   from {
     opacity: 0;
@@ -81,110 +93,163 @@
   }
 }
 
-/* ── Hero CTA buttons — styl nawiązuje do kart z sekcji Services ─────────── */
+/* ── Ukrycie przed GSAP — zapobiega FOUC ────────────────────────────────── */
+
+/* autoAlpha: 0 odpowiada opacity:0 + visibility:hidden — GSAP to nadpisze */
+.animHide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.animScaleXZero {
+  transform: scaleX(0);
+}
+
+.animScaleYZero {
+  transform: scaleY(0);
+}
+
+/* ── Pionowa kreska — od eyebrow do separatora ───────────────────────────── */
+
+.textBlock {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.separatorLine {
+  margin-left: -1.25rem;
+  width: calc(100% + 1.25rem);
+}
+
+.verticalLine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 1px;
+  width: 1px;
+  transform-origin: top center;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.35) 25%,
+    rgb(var(--c-gold) / 0.60) 85%,
+    rgb(var(--c-gold) / 0.70) 100%
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .verticalLine {
+    display: none;
+  }
+}
+
+/* ── Gradient text — współdzielony przez opis i buttony ──────────────────── */
+
+.gradientTextPrimary {
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-warm)) 0%,
+    rgb(255 238 175) 45%,
+    rgb(var(--c-gold)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradientTextSecondary {
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-khaki)) 0%,
+    rgb(218 226 192) 50%,
+    rgb(var(--c-khaki)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Hero CTA buttons — text gradient + underline ────────────────────────── */
 
 .ctaButton {
   position: relative;
-  isolation: isolate;
-  border-radius: 2px;
-  background:
-    radial-gradient(130% 90% at 12% -8%, rgb(180 120 80 / 0.52), transparent 55%),
-    radial-gradient(120% 80% at 100% 100%, rgb(var(--c-gold) / 0.42), transparent 60%),
-    linear-gradient(145deg, rgb(80 55 35 / 0.40) 0%, transparent 40%),
-    repeating-linear-gradient(
-      125deg,
-      rgb(38 28 18 / 0.55) 0,
-      rgb(38 28 18 / 0.55) 10px,
-      rgb(28 20 12 / 0.65) 10px,
-      rgb(28 20 12 / 0.65) 20px
-    ),
-    linear-gradient(160deg, rgb(28 20 16 / 0.97) 0%, rgb(22 15 11 / 0.98) 100%);
-  border: 1px solid rgb(var(--c-gold) / 0.58);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.06),
-    0 0 16px rgb(var(--c-gold) / 0.14),
-    0 8px 20px rgb(0 0 0 / 0.40);
-  transition:
-    transform 380ms cubic-bezier(0.19, 1, 0.22, 1),
-    border-color 280ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 280ms ease;
+  letter-spacing: 0.10em;
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-warm)) 0%,
+    rgb(255 238 175) 45%,
+    rgb(var(--c-gold)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: opacity 280ms ease, transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.ctaButton::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, rgb(var(--c-gold) / 0.95), rgb(var(--c-olive) / 0.8), rgb(var(--c-gold) / 0.15));
-  transform-origin: left center;
-  transform: scaleX(0.72);
-  opacity: 0.88;
-  transition:
-    transform 460ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 320ms ease;
-}
-
-.ctaButton:hover::before {
-  opacity: 1;
-  transform: scaleX(1);
-}
-
+/* Underline — wjeżdża od lewej na hover */
 .ctaButton::after {
   content: '';
   position: absolute;
-  inset: 0;
-  border: 1px solid transparent;
-  border-image: linear-gradient(135deg, rgb(var(--c-gold) / 0.45), transparent 45%, rgb(var(--c-gold) / 0.22)) 1;
-  pointer-events: none;
-  opacity: 0.55;
-  transition: opacity 280ms ease;
-}
-
-.ctaButton:hover {
-  transform: translateY(-2px);
-  border-color: rgb(var(--c-gold) / 0.65);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.09),
-    0 14px 30px rgb(0 0 0 / 0.42);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.55) 15%,
+    rgb(255 238 175 / 0.90) 50%,
+    rgb(var(--c-gold) / 0.55) 85%,
+    transparent 100%
+  );
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .ctaButton:hover::after {
-  opacity: 1;
+  transform: scaleX(1);
 }
+
+.ctaButton:hover {
+  opacity: 0.80;
+  transform: translateY(-1px);
+}
+
+/* ── Secondary — khaki gradient text ─────────────────────────────────────── */
 
 .ctaButtonSecondary {
-  background:
-    radial-gradient(130% 90% at 12% -8%, rgb(156 165 128 / 0.52), transparent 55%),
-    radial-gradient(120% 80% at 100% 100%, rgb(var(--c-gold) / 0.42), transparent 60%),
-    linear-gradient(145deg, rgb(78 84 63 / 0.40) 0%, transparent 40%),
-    repeating-linear-gradient(
-      125deg,
-      rgb(38 41 33 / 0.55) 0,
-      rgb(38 41 33 / 0.55) 10px,
-      rgb(28 31 24 / 0.65) 10px,
-      rgb(28 31 24 / 0.65) 20px
-    ),
-    linear-gradient(160deg, rgb(20 22 18 / 0.97) 0%, rgb(15 17 13 / 0.98) 100%);
-  border: 1px solid rgb(var(--c-khaki) / 0.52);
-  box-shadow:
-    inset 0 1px 0 rgb(218 208 183 / 0.06),
-    0 0 16px rgb(var(--c-gold) / 0.10),
-    0 8px 20px rgb(0 0 0 / 0.38);
-}
-
-.ctaButtonSecondary::before {
-  background: linear-gradient(90deg, rgb(151 159 121 / 0.9), rgb(var(--c-gold) / 0.78), rgb(73 81 57 / 0.32));
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-khaki)) 0%,
+    rgb(218 226 192) 50%,
+    rgb(var(--c-khaki)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .ctaButtonSecondary::after {
-  border-image: linear-gradient(130deg, rgb(177 186 146 / 0.44), transparent 48%, rgb(var(--c-gold) / 0.20)) 1;
-  opacity: 0.55;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-khaki) / 0.50) 15%,
+    rgb(218 226 192 / 0.85) 50%,
+    rgb(var(--c-khaki) / 0.50) 85%,
+    transparent 100%
+  );
 }
 
 .ctaButtonSecondary:hover {
-  border-color: rgb(177 186 146 / 0.72);
+  opacity: 0.70;
+}
+
+@media (min-width: 768px) {
+  .desktopImageEntrance {
+    animation: desktop-image-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -198,7 +263,12 @@
   }
 
   .mobileImageEntrance,
-  .mobilePanelEntrance {
+  .mobilePanelEntrance,
+  .desktopImageEntrance {
     animation: none;
+  }
+
+  .ctaButton::after {
+    transition: none;
   }
 }

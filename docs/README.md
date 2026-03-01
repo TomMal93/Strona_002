@@ -14,6 +14,7 @@ docs/
 ├── open-questions.md      # Otwarte kwestie projektowe
 ├── design.md              # System designu (kolory, typografia, animacje)
 ├── branding.md            # Fundament marki, tone of voice i brandbook
+├── git-commit.md          # Instrukcja tworzenia commitów (Conventional Commits)
 ├── decisions/             # Architecture Decision Records (ADR)
 │   ├── 001-template-adr.md
 │   └── 002-stack-technologiczny.md
@@ -27,6 +28,7 @@ docs/
 - [`integrations.md`](./integrations.md) — zewnętrzne API i media hosting
 - [`open-questions.md`](./open-questions.md) — tematy do domknięcia przed wdrożeniem
 - [`branding.md`](./branding.md) — definicja marki i zasady komunikacji
+- [`git-commit.md`](./git-commit.md) — workflow tworzenia commitów
 
 ## Jak używać
 

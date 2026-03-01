@@ -24,18 +24,7 @@ export function useServicesAnimation(sectionRef: RefObject<HTMLElement>) {
     let observer: IntersectionObserver | undefined
     let revertContext: (() => void) | undefined
 
-    const cards = sectionRef.current
-      ? Array.from(sectionRef.current.querySelectorAll<HTMLElement>('[data-service-card]'))
-      : []
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    if (!prefersReducedMotion) {
-      cards.forEach((card) => {
-        card.style.opacity = '0'
-        card.style.visibility = 'hidden'
-        card.style.transform = `translate3d(0, ${ANIMATION.INITIAL_Y}px, 0)`
-      })
-    }
 
     const initAnimations = async () => {
       const [{ gsap }, { ScrollTrigger }] = await Promise.all([
@@ -51,13 +40,11 @@ export function useServicesAnimation(sectionRef: RefObject<HTMLElement>) {
         const cards = gsap.utils.toArray<HTMLElement>('[data-service-card]')
 
         if (prefersReducedMotion) {
-          cards.forEach((card) => {
-            card.style.opacity = '1'
-            card.style.visibility = 'visible'
-            card.style.transform = 'none'
-          })
+          gsap.set(cards, { autoAlpha: 1, y: 0, clearProps: 'transform' })
           return
         }
+
+        gsap.set(cards, { autoAlpha: 0, y: ANIMATION.INITIAL_Y })
 
         gsap.to(cards, {
           autoAlpha: 1,
