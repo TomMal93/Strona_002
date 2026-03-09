@@ -1,40 +1,48 @@
+'use client'
+
+import { useRef } from 'react'
 import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
+import { cn } from '@/lib/utils'
+import { useAboutAnimation } from './about/useAboutAnimation'
 import styles from './About.module.css'
 
 export default function About() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useAboutAnimation(sectionRef)
+
+  const [col1, col2, col3] = siteContent.about.highlights
+
   return (
     <section
+      ref={sectionRef}
       id="about"
       aria-labelledby="about-heading"
       className="section-dark-bg px-6 py-20 sm:py-24 lg:px-20 lg:py-28"
     >
       <div className="relative z-10 mx-auto max-w-content">
-        <header className="mx-auto max-w-3xl text-center">
+        <div className={cn('mx-auto flex max-w-3xl flex-col items-center text-center', styles.sectionHeaderShell)}>
           <h2
             id="about-heading"
-            className="mt-3 font-bebas text-[38px] uppercase leading-[0.9] md:text-[64px]"
+            className={cn('font-bebas text-[38px] uppercase leading-[0.9] tracking-wide md:text-[64px]', styles.headingGradient)}
           >
-            <span className={styles.heroHeadingText}>{siteContent.about.title}</span>
+            {siteContent.about.title}
           </h2>
-          <span aria-hidden="true" className={styles.titleAccent} />
-        </header>
+          <span aria-hidden="true" className={styles.headingAccent} />
+        </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3 lg:items-stretch">
-          <article className={styles.textColumn}>
+          <article data-about-item className={styles.textColumn}>
             <h3 className="font-bebas text-[30px] uppercase leading-[1.0] tracking-wide text-warm-white">
-              Działam w dynamice
+              {col1.title}
             </h3>
             <p className="mt-4 font-inter text-[15px] leading-relaxed text-warm-gray">
-              Pracuję tam, gdzie plan wydarzenia zmienia się z minuty na minutę. Szybko reaguję i łapię kadry wtedy,
-              kiedy naprawdę się dzieją.
-            </p>
-            <p className="mt-3 font-inter text-[15px] leading-relaxed text-white/80">
-              To podejście sprawdza się zarówno w terenie, jak i podczas rodzinnych uroczystości.
+              {col1.description}
             </p>
           </article>
 
-          <div className={styles.imageFrame}>
+          <div data-about-item className={styles.imageFrame}>
             <Image
               src="/images/about_me_001.webp"
               alt={siteContent.about.imageAlt}
@@ -45,16 +53,15 @@ export default function About() {
             />
           </div>
 
-          <article className={styles.textColumn}>
+          <article data-about-item className={styles.textColumn}>
             <h3 className="font-bebas text-[30px] uppercase leading-[1.0] tracking-wide text-warm-white">
-              Emocje i detale
+              {col2.title}
             </h3>
             <p className="mt-4 font-inter text-[15px] leading-relaxed text-warm-gray">
-              Zależy mi, żeby materiał oddawał atmosferę, a nie tylko poprawną technikę. Pokazuję relacje, gesty,
-              energię i klimat miejsca.
+              {col2.description}
             </p>
             <p className="mt-3 font-inter text-[15px] leading-relaxed text-white/80">
-              Dostajesz gotowe zdjęcia i ujęcia, które możesz od razu wykorzystać na stronie i w social media.
+              {col3.description}
             </p>
           </article>
         </div>

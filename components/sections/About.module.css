@@ -1,3 +1,57 @@
+/* ── Section header — glow wrapper (matches Services.module.css pattern) ─── */
+
+.sectionHeaderShell {
+  position: relative;
+  isolation: isolate;
+  padding: 0 1rem 1rem;
+}
+
+.sectionHeaderShell::after {
+  content: '';
+  position: absolute;
+  inset: -1.8rem -1.08rem -0.54rem;
+  z-index: var(--z-below);
+  border-radius: 0.9rem;
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    rgb(var(--c-gold) / 0.2) 0%,
+    rgb(var(--c-gold) / 0.08) 50%,
+    rgb(var(--c-gold) / 0.2) 100%
+  );
+  filter: blur(35px);
+}
+
+/* ── Heading gradient — matches Hero gradientTextPrimary ─────────────────── */
+
+.headingGradient {
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-warm)) 0%,
+    rgb(255 238 175) 45%,
+    rgb(var(--c-gold)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Accent line below heading — matches Services sectionTitleAccent ──────── */
+
+.headingAccent {
+  margin-top: 0.95rem;
+  display: block;
+  height: 2px;
+  width: clamp(8rem, 18vw, 13rem);
+  background:
+    linear-gradient(90deg, rgb(var(--c-gold) / 0.2) 0%, rgb(var(--c-gold) / 0.95) 50%, rgb(var(--c-gold) / 0.2) 100%);
+  box-shadow:
+    0 0 0 1px rgb(var(--c-gold) / 0.25),
+    0 8px 20px rgb(var(--c-gold) / 0.2);
+}
+
+/* ── Image frame ─────────────────────────────────────────────────────────── */
+
 .imageFrame {
   position: relative;
   overflow: hidden;
@@ -23,30 +77,21 @@
   transition: opacity 320ms ease;
 }
 
-.titleAccent {
-  margin-inline: auto;
-  margin-top: 0.95rem;
-  display: block;
-  height: 2px;
-  width: clamp(8rem, 18vw, 13rem);
-  background:
-    linear-gradient(90deg, rgb(var(--c-gold) / 0.2) 0%, rgb(var(--c-gold) / 0.95) 50%, rgb(var(--c-gold) / 0.2) 100%);
-  box-shadow:
-    0 0 0 1px rgb(var(--c-gold) / 0.25),
-    0 8px 20px rgb(var(--c-gold) / 0.2);
+.imageFrame:hover::after {
+  opacity: 1;
 }
 
-.heroHeadingText {
-  background: linear-gradient(
-    130deg,
-    rgb(var(--c-warm)) 0%,
-    rgb(255 238 175) 45%,
-    rgb(var(--c-gold)) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.imageFrame:hover .imageMedia {
+  transform: scale(1.035);
 }
+
+@media (min-width: 1024px) {
+  .imageFrame {
+    min-height: 28rem;
+  }
+}
+
+/* ── Text columns ────────────────────────────────────────────────────────── */
 
 .textColumn {
   isolation: isolate;
@@ -100,8 +145,6 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: none;
-  mix-blend-mode: normal;
   opacity: 0;
   transition: opacity 280ms ease;
 }
@@ -116,26 +159,4 @@
 .textColumn:hover::before {
   transform: scaleX(1);
   opacity: 1;
-}
-
-.textColumn:hover::after {
-  opacity: 0;
-}
-
-.imageFrame:hover {
-  transform: none;
-}
-
-.imageFrame:hover::after {
-  opacity: 1;
-}
-
-.imageFrame:hover .imageMedia {
-  transform: scale(1.035);
-}
-
-@media (min-width: 1024px) {
-  .imageFrame {
-    min-height: 28rem;
-  }
 }
