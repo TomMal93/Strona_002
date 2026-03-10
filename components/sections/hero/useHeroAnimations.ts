@@ -58,7 +58,7 @@ export function useHeroAnimations({
           filmGrainRef.current,
           particlesRef.current,
           ringGlowRef.current,
-        ].filter((el): el is HTMLElement => el !== null)
+        ].filter((el): el is HTMLDivElement => el !== null)
 
         // ── Reduced motion / mobile: skip to final state immediately ────────
         if (prefersReducedMotion || isMobileViewport) {
