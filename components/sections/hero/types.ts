@@ -8,4 +8,11 @@ export type HeroRefs = {
   verticalLineRef: RefObject<HTMLSpanElement>
   descriptionRef: RefObject<HTMLParagraphElement>
   ctaRef: RefObject<HTMLElement>
+  cinematicOverlayRef: RefObject<HTMLDivElement>
+  blurOverlayRef: RefObject<HTMLDivElement>
+  lightSweepRef: RefObject<HTMLDivElement>
+  filmGrainRef: RefObject<HTMLDivElement>
+  particlesRef: RefObject<HTMLDivElement>
+  ringGlowRef: RefObject<HTMLDivElement>
+  imageRef: RefObject<HTMLDivElement>
 }

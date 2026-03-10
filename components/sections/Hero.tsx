@@ -1,12 +1,34 @@
 'use client'
 
-import { useRef, type JSX, type Ref } from 'react'
+import { useRef, type CSSProperties, type JSX, type Ref } from 'react'
 import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { useHeroAnimations } from './hero/useHeroAnimations'
 import MobileHeroLayout from './hero/MobileHeroLayout'
 import styles from './Hero.module.css'
 import { cn } from '@/lib/utils'
+
+// Floating particles — clustered in the lower-right (image column) area
+const PARTICLES: ReadonlyArray<{
+  left: string
+  bottom: string
+  w: number
+  h: number
+  delay: number
+  dur: number
+  dx: number
+}> = [
+  { left: '62%', bottom: '14%', w: 2,   h: 2,   delay: 0.3, dur: 3.8, dx:  6 },
+  { left: '68%', bottom: '9%',  w: 1.5, h: 1.5, delay: 0.7, dur: 4.2, dx: -5 },
+  { left: '73%', bottom: '19%', w: 2.5, h: 2.5, delay: 1.0, dur: 3.3, dx:  9 },
+  { left: '57%', bottom: '11%', w: 1,   h: 1,   delay: 1.4, dur: 4.7, dx: -7 },
+  { left: '76%', bottom: '7%',  w: 1.5, h: 1.5, delay: 0.5, dur: 3.9, dx:  4 },
+  { left: '65%', bottom: '24%', w: 1,   h: 1,   delay: 0.9, dur: 4.4, dx: -4 },
+  { left: '70%', bottom: '5%',  w: 2,   h: 2,   delay: 1.6, dur: 3.5, dx:  7 },
+  { left: '60%', bottom: '17%', w: 1.5, h: 1.5, delay: 1.1, dur: 4.9, dx: -3 },
+  { left: '78%', bottom: '15%', w: 1,   h: 1,   delay: 0.2, dur: 5.1, dx:  5 },
+  { left: '64%', bottom: '28%', w: 2,   h: 2,   delay: 1.3, dur: 3.6, dx: -8 },
+] as const
 
 const socialIcons: Record<string, JSX.Element> = {
   facebook: (
@@ -139,6 +161,14 @@ export default function Hero() {
   const verticalLineRef = useRef<HTMLSpanElement>(null)
   const descriptionRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
+  // Cinematic intro overlay refs
+  const cinematicOverlayRef = useRef<HTMLDivElement>(null)
+  const blurOverlayRef = useRef<HTMLDivElement>(null)
+  const lightSweepRef = useRef<HTMLDivElement>(null)
+  const filmGrainRef = useRef<HTMLDivElement>(null)
+  const particlesRef = useRef<HTMLDivElement>(null)
+  const ringGlowRef = useRef<HTMLDivElement>(null)
+  const imageRef = useRef<HTMLDivElement>(null)
 
   useHeroAnimations({
     sectionRef,
@@ -148,6 +178,13 @@ export default function Hero() {
     verticalLineRef,
     descriptionRef,
     ctaRef,
+    cinematicOverlayRef,
+    blurOverlayRef,
+    lightSweepRef,
+    filmGrainRef,
+    particlesRef,
+    ringGlowRef,
+    imageRef,
   })
 
   return (
@@ -155,8 +192,32 @@ export default function Hero() {
       ref={sectionRef}
       id="hero"
       aria-label="Sekcja główna"
-      className="h-[100svh] md:h-[100dvh] w-full section-dark-bg"
+      className="relative overflow-hidden h-[100svh] md:h-[100dvh] w-full section-dark-bg"
     >
+      {/* ── Cinematic intro overlays (desktop only, pointer-events: none) ─── */}
+      <div ref={cinematicOverlayRef} className={styles.cinematicOverlay} aria-hidden="true" />
+      <div ref={blurOverlayRef} className={styles.blurOverlay} aria-hidden="true" />
+      <div ref={lightSweepRef} className={styles.lightSweep} aria-hidden="true" />
+      <div ref={ringGlowRef} className={styles.ringGlow} aria-hidden="true" />
+      <div ref={filmGrainRef} className={styles.filmGrain} aria-hidden="true" />
+      <div ref={particlesRef} className={styles.particlesWrap} aria-hidden="true">
+        {PARTICLES.map(({ left, bottom, w, h, delay, dur, dx }, i) => (
+          <div
+            key={i}
+            className={styles.particle}
+            style={{
+              left,
+              bottom,
+              width: `${w}px`,
+              height: `${h}px`,
+              '--delay': `${delay}s`,
+              '--dur': `${dur}s`,
+              '--dx': `${dx}px`,
+            } as CSSProperties}
+          />
+        ))}
+      </div>
+
       {/* Semantic heading — single h1 for SEO and screen readers */}
       <h1 className="sr-only">
         {siteContent.hero.headlineLine1} {siteContent.hero.headlineLine2}
@@ -189,7 +250,7 @@ export default function Hero() {
 
         {/* ── Desktop image column ─────────────────────────────────────────── */}
         <div className="relative hidden md:flex md:h-full md:items-center md:justify-center">
-          <div className={cn("relative h-[90%] w-full", styles.desktopImageEntrance)}>
+          <div ref={imageRef} className="relative h-[90%] w-full">
             <Image
               src="/images/hero.webp"
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"
