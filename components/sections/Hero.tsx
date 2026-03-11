@@ -189,7 +189,7 @@ export default function Hero() {
 
         {/* ── Desktop image column ─────────────────────────────────────────── */}
         <div className="relative hidden md:flex md:h-full md:items-center md:justify-center md:overflow-visible">
-          <div className={cn("relative h-[200%] w-full", styles.desktopImageEntrance)}>
+          <div className={cn(styles.desktopPortraitStage, styles.desktopImageEntrance)}>
 
             {/* SVG definitions — body-fade mask + halo filters */}
             <svg
@@ -222,24 +222,26 @@ export default function Hero() {
               </defs>
             </svg>
 
-            {/* Outer halo — large warm ellipse behind head, Gaussian blur */}
-            <div className={styles.haloOuter} aria-hidden="true" />
+            <div className={styles.portraitFrame}>
+              {/* Outer halo — large warm ellipse behind head, Gaussian blur */}
+              <div className={styles.haloOuter} aria-hidden="true" />
 
-            {/* Inner halo — tight bright glow at ear level, less blur */}
-            <div className={styles.haloInner} aria-hidden="true" />
+              {/* Inner halo — tight bright glow at ear level, less blur */}
+              <div className={styles.haloInner} aria-hidden="true" />
 
-            {/* Rim light — narrow golden edge highlight on figure silhouette */}
-            <div className={styles.rimLight} aria-hidden="true" />
+              {/* Rim light — narrow golden edge highlight on figure silhouette */}
+              <div className={styles.rimLight} aria-hidden="true" />
 
-            <Image
-              src="/images/Hero_v4.png"
-              alt="Fotograf i operator drona — portret z dronem i kontrolerem"
-              fill
-              className={cn("relative z-10 object-contain object-center", styles.imageBodyFade)}
-              loading="eager"
-              quality={85}
-              sizes="(min-width: 1440px) 68vw, (min-width: 768px) 63vw, 1px"
-            />
+              <Image
+                src="/images/Hero_v4.png"
+                alt="Fotograf i operator drona — portret z dronem i kontrolerem"
+                fill
+                className={cn("relative z-10 object-contain object-center", styles.imageBodyFade)}
+                loading="eager"
+                quality={85}
+                sizes="(min-width: 1440px) 46vw, (min-width: 768px) 44vw, 1px"
+              />
+            </div>
           </div>
         </div>
       </div>
