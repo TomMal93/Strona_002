@@ -189,36 +189,13 @@ export default function Hero() {
 
         {/* ── Desktop image column ─────────────────────────────────────────── */}
         <div className="relative hidden md:flex md:h-full md:items-center md:justify-center md:overflow-visible">
-          <div className={cn(styles.desktopPortraitStage, styles.desktopImageEntrance)}>
-
-            {/* SVG definitions — body-fade mask for portrait image */}
-            <svg
-              aria-hidden="true"
-              focusable="false"
-              xmlns="http://www.w3.org/2000/svg"
-              className={styles.svgDefs}
-            >
-              <defs>
-                {/* Vertical gradient: full opacity → transparent from neck down */}
-                <linearGradient id="heroBodyFadeGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="52%" stopColor="white" stopOpacity="1" />
-                  <stop offset="66%" stopColor="white" stopOpacity="0.5" />
-                  <stop offset="80%" stopColor="white" stopOpacity="0.1" />
-                  <stop offset="90%" stopColor="white" stopOpacity="0" />
-                </linearGradient>
-                {/* SVG mask — applied to the portrait image */}
-                <mask id="heroBodyFade" maskContentUnits="objectBoundingBox">
-                  <rect x="0" y="0" width="1" height="1" fill="url(#heroBodyFadeGrad)" />
-                </mask>
-              </defs>
-            </svg>
-
+          <div className={styles.desktopPortraitStage}>
             <div className={styles.portraitFrame}>
               <Image
                 src="/images/Hero_v4.png"
                 alt="Fotograf i operator drona — portret z dronem i kontrolerem"
                 fill
-                className={cn("relative z-10 object-contain object-center", styles.imageBodyFade)}
+                className="relative z-10 object-contain object-center"
                 loading="eager"
                 quality={85}
                 sizes="(min-width: 1440px) 46vw, (min-width: 768px) 44vw, 1px"
