@@ -323,87 +323,6 @@
   -webkit-mask-composite: source-in;
 }
 
-/* ── Outer halo — large warm ellipse behind head, heavily blurred ──────────── */
-/*
- * Halos są pozycjonowane względem .portraitFrame, więc zostają związane
- * z rzeczywistym kontenerem obrazu zamiast z wysokim wrapperem sekcji.
- */
-
-.haloOuter {
-  position: absolute;
-  width: 64%;
-  height: 30%;
-  top: 16%;
-  left: 58%;
-  transform: translateX(-50%);
-  z-index: 2;
-  pointer-events: none;
-  border-radius: 999px;
-  clip-path: ellipse(50% 50% at 50% 50%);
-  background:
-    radial-gradient(
-      ellipse at 40% 52%,
-      rgb(255 241 188 / 0.34) 0%,
-      rgb(var(--c-warm) / 0.22) 34%,
-      rgb(var(--c-gold) / 0.12) 58%,
-      transparent 82%
-    ),
-    radial-gradient(
-      ellipse at 52% 50%,
-      rgb(var(--c-gold) / 0.08) 0%,
-      transparent 72%
-    );
-}
-
-/* ── Inner halo — mocniejszy rdzeń, osadzony na wysokości ucha ─────────────── */
-
-.haloInner {
-  position: absolute;
-  width: 34%;
-  height: 14%;
-  top: 20.5%;
-  left: 56.5%;
-  transform: translateX(-50%);
-  z-index: 3;
-  pointer-events: none;
-  border-radius: 999px;
-  clip-path: ellipse(50% 50% at 50% 50%);
-  background: radial-gradient(
-    ellipse at 36% 50%,
-    rgb(255 247 211 / 0.72) 0%,
-    rgb(255 234 155 / 0.44) 28%,
-    rgb(var(--c-warm) / 0.22) 56%,
-    transparent 78%
-  );
-}
-
-/* ── Rim light — złota poświata krawędziowa spójna z halo ──────────────────── */
-
-.rimLight {
-  position: absolute;
-  width: 6.5%;
-  height: 17%;
-  top: 22%;
-  left: calc(50% - 15.8%);
-  z-index: 4;
-  pointer-events: none;
-  background:
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgb(255 243 197 / 0.28) 16%,
-      rgb(255 224 122 / 0.58) 45%,
-      rgb(var(--c-warm) / 0.50) 70%,
-      transparent 100%
-    ),
-    linear-gradient(
-      to right,
-      transparent 0%,
-      rgb(var(--c-gold) / 0.24) 52%,
-      transparent 100%
-    );
-}
-
 @media (prefers-reduced-motion: reduce) {
   /* filter: blur i backdrop-filter są nadal renderowane domyślnie — wyłącz dla użytkowników preferujących redukcję ruchu */
   .mobileTextHalo::after {
@@ -424,10 +343,4 @@
     transition: none;
   }
 
-  /* Disable heavy blur filters on halo layers */
-  .haloOuter,
-  .haloInner,
-  .rimLight {
-    filter: none;
-  }
 }
