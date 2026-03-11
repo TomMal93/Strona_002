@@ -189,14 +189,14 @@ export default function Hero() {
         </div>
 
         {/* ── Desktop image column ─────────────────────────────────────────── */}
-        <div className="relative hidden md:flex md:h-full md:items-start md:justify-center md:overflow-visible">
+        <div className="relative hidden md:flex md:h-full md:items-center md:justify-center md:overflow-visible">
           <div className={cn("relative h-[200%] w-full", styles.desktopImageEntrance)}>
             <HeroGlowScene />
             <Image
               src="/images/hero_example.png"
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"
               fill
-              className={cn("relative z-10 object-contain object-top", styles.imageFadeCorner)}
+              className={cn("relative z-10 object-contain object-center", styles.imageFadeCorner)}
               loading="eager"
               quality={85}
               sizes="(min-width: 1440px) 68vw, (min-width: 768px) 63vw, 1px"
