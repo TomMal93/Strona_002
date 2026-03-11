@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { useHeroAnimations } from './hero/useHeroAnimations'
 import MobileHeroLayout from './hero/MobileHeroLayout'
-import HeroGlowScene from './hero/HeroGlowScene'
 import styles from './Hero.module.css'
 import { cn } from '@/lib/utils'
 
@@ -191,7 +190,6 @@ export default function Hero() {
         {/* ── Desktop image column ─────────────────────────────────────────── */}
         <div className="relative hidden md:flex md:h-full md:items-center md:justify-center md:overflow-visible">
           <div className={cn("relative h-[200%] w-full", styles.desktopImageEntrance)}>
-            <HeroGlowScene />
             <Image
               src="/images/hero_example.png"
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"
