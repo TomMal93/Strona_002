@@ -52,7 +52,8 @@ export function useHeroAnimations({
         if (underlineRef.current) gsap.set(underlineRef.current, { scaleX: 0 })
         if (verticalLineRef.current) gsap.set(verticalLineRef.current, { scaleY: 0 })
 
-        const tl = gsap.timeline({ delay: 0.7 })
+        // Delay increased to sync with cinematic reveal letterbox opening (1.2s)
+        const tl = gsap.timeline({ delay: 1.4 })
 
         // 1. eyebrow wchodzi pierwszy
         tl.to(eyebrowRef.current, {

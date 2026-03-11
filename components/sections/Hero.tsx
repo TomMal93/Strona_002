@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { useHeroAnimations } from './hero/useHeroAnimations'
 import MobileHeroLayout from './hero/MobileHeroLayout'
+import CinematicReveal from './hero/CinematicReveal'
+import FilmGrain from './hero/FilmGrain'
 import styles from './Hero.module.css'
 import { cn } from '@/lib/utils'
 
@@ -157,6 +159,10 @@ export default function Hero() {
       aria-label="Sekcja główna"
       className="h-[100svh] md:h-[100dvh] w-full section-dark-bg"
     >
+      {/* ── Cinematic overlays ─────────────────────────────────────────────── */}
+      <CinematicReveal />
+      <FilmGrain />
+
       {/* Semantic heading — single h1 for SEO and screen readers */}
       <h1 className="sr-only">
         {siteContent.hero.headlineLine1} {siteContent.hero.headlineLine2}
@@ -190,8 +196,16 @@ export default function Hero() {
         {/* ── Desktop image column ─────────────────────────────────────────── */}
         <div className="relative hidden md:flex md:h-full md:items-center md:justify-center md:overflow-visible">
           <div className={styles.desktopPortraitStage}>
-            <div className={styles.portraitFrame}>
+            {/* Volumetric god rays — behind everything */}
+            <div aria-hidden="true" className={styles.godRays} />
+
+            <div className={cn(styles.portraitFrame, styles.kenBurns)}>
               <div aria-hidden="true" className={styles.portraitHalo} />
+
+              {/* Anamorphic lens flare — horizontal streak */}
+              <div aria-hidden="true" className={styles.anamorphicFlare} />
+              <div aria-hidden="true" className={styles.flareChroma} />
+
               <Image
                 src="/images/Hero_v4.png"
                 alt="Fotograf i operator drona — portret z dronem i kontrolerem"

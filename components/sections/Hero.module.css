@@ -316,14 +316,313 @@
   height: 100%;
 }
 
+/* ══════════════════════════════════════════════════════════════════════════════
+   CINEMATIC PACK — Premium hero effects
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Cinematic Reveal — letterbox bars ──────────────────────────────────── */
+
+.cinematicReveal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.letterboxBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: rgb(0 0 0);
+}
+
+.letterboxBarBottom {
+  top: auto;
+  bottom: 0;
+}
+
+/* ── 2. Volumetric God Rays ────────────────────────────────────────────────── */
+
+.godRays {
+  position: absolute;
+  inset: -20% -10%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  animation: god-rays-in 2.4s ease-out 1.0s forwards;
+}
+
+.godRays::before {
+  content: '';
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  width: 120%;
+  height: 110%;
+  transform: translate(-50%, -15%);
+  background: conic-gradient(
+    from 180deg at 50% 35%,
+    transparent 0deg,
+    rgb(var(--c-gold) / 0.06) 15deg,
+    transparent 30deg,
+    rgb(255 238 175 / 0.04) 55deg,
+    transparent 72deg,
+    rgb(var(--c-warm) / 0.07) 100deg,
+    transparent 120deg,
+    rgb(var(--c-gold) / 0.05) 150deg,
+    transparent 168deg,
+    rgb(255 238 175 / 0.06) 195deg,
+    transparent 215deg,
+    rgb(var(--c-warm) / 0.04) 248deg,
+    transparent 270deg,
+    rgb(var(--c-gold) / 0.06) 300deg,
+    transparent 325deg,
+    rgb(255 238 175 / 0.04) 345deg,
+    transparent 360deg
+  );
+  filter: blur(18px);
+  animation: god-rays-rotate 45s linear infinite;
+}
+
+/* Secondary ray layer — offset rotation, slightly different tint */
+.godRays::after {
+  content: '';
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  width: 110%;
+  height: 100%;
+  transform: translate(-50%, -12%);
+  background: conic-gradient(
+    from 90deg at 50% 38%,
+    transparent 0deg,
+    rgb(var(--c-warm) / 0.04) 20deg,
+    transparent 45deg,
+    rgb(var(--c-gold) / 0.05) 80deg,
+    transparent 105deg,
+    rgb(255 238 175 / 0.03) 140deg,
+    transparent 165deg,
+    rgb(var(--c-warm) / 0.05) 200deg,
+    transparent 230deg,
+    rgb(var(--c-gold) / 0.04) 270deg,
+    transparent 300deg,
+    rgb(255 238 175 / 0.03) 335deg,
+    transparent 360deg
+  );
+  filter: blur(24px);
+  animation: god-rays-rotate-reverse 60s linear infinite;
+}
+
+@keyframes god-rays-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes god-rays-rotate {
+  from { transform: translate(-50%, -15%) rotate(0deg); }
+  to   { transform: translate(-50%, -15%) rotate(360deg); }
+}
+
+@keyframes god-rays-rotate-reverse {
+  from { transform: translate(-50%, -12%) rotate(0deg); }
+  to   { transform: translate(-50%, -12%) rotate(-360deg); }
+}
+
+/* ── 3. Dynamic Breathing Halo ─────────────────────────────────────────────── */
+
+.portraitHalo {
+  animation:
+    halo-breathe 6s ease-in-out infinite,
+    halo-morph 12s ease-in-out infinite;
+}
+
+@keyframes halo-breathe {
+  0%, 100% {
+    opacity: 0.88;
+    filter: blur(24px);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(30px);
+  }
+}
+
+@keyframes halo-morph {
+  0%, 100% {
+    border-radius: 46% 54% 44% 56% / 52% 44% 56% 48%;
+    inset: 9% 16% 18%;
+  }
+  25% {
+    border-radius: 50% 50% 48% 52% / 48% 52% 50% 50%;
+    inset: 8% 15% 17%;
+  }
+  50% {
+    border-radius: 44% 56% 50% 50% / 54% 46% 52% 48%;
+    inset: 10% 14% 19%;
+  }
+  75% {
+    border-radius: 48% 52% 46% 54% / 50% 50% 48% 52%;
+    inset: 9% 17% 17%;
+  }
+}
+
+/* ── 4. Anamorphic Lens Flare ──────────────────────────────────────────────── */
+
+.anamorphicFlare {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160%;
+  height: 3px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  animation: flare-in 1.8s ease-out 1.4s forwards;
+}
+
+.anamorphicFlare::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.0) 10%,
+    rgb(255 238 175 / 0.15) 25%,
+    rgb(var(--c-warm) / 0.35) 40%,
+    rgb(255 245 210 / 0.7) 48%,
+    rgb(255 255 255 / 0.9) 50%,
+    rgb(255 245 210 / 0.7) 52%,
+    rgb(var(--c-warm) / 0.35) 60%,
+    rgb(255 238 175 / 0.15) 75%,
+    rgb(var(--c-gold) / 0.0) 90%,
+    transparent 100%
+  );
+  filter: blur(1.5px);
+  animation: flare-shimmer 4s ease-in-out infinite;
+}
+
+/* Wide soft glow behind the sharp flare line */
+.anamorphicFlare::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 5%;
+  right: 5%;
+  height: 28px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.0) 15%,
+    rgb(var(--c-warm) / 0.12) 35%,
+    rgb(255 238 175 / 0.22) 48%,
+    rgb(255 255 255 / 0.28) 50%,
+    rgb(255 238 175 / 0.22) 52%,
+    rgb(var(--c-warm) / 0.12) 65%,
+    rgb(var(--c-gold) / 0.0) 85%,
+    transparent 100%
+  );
+  filter: blur(8px);
+  animation: flare-shimmer 4s ease-in-out infinite reverse;
+}
+
+/* Subtle rainbow edge — chromatic aberration hint */
+.flareChroma {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 6px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  animation: flare-in 2s ease-out 1.6s forwards;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(100 160 255 / 0.0) 20%,
+    rgb(100 160 255 / 0.06) 35%,
+    rgb(180 130 255 / 0.08) 42%,
+    transparent 50%,
+    rgb(255 160 80 / 0.08) 58%,
+    rgb(255 100 100 / 0.06) 65%,
+    rgb(255 100 100 / 0.0) 80%,
+    transparent 100%
+  );
+  filter: blur(3px);
+}
+
+@keyframes flare-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+}
+
+@keyframes flare-shimmer {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ── 5. Film Grain Overlay ─────────────────────────────────────────────────── */
+
+.filmGrain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  image-rendering: pixelated;
+}
+
+/* ── 6. Ken Burns — subtle slow zoom on portrait ───────────────────────────── */
+
+.kenBurns {
+  animation: ken-burns 20s ease-in-out infinite alternate;
+}
+
+@keyframes ken-burns {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.04) translate3d(-0.5%, -0.8%, 0);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   Reduced motion — disable all cinematic effects
+   ══════════════════════════════════════════════════════════════════════════════ */
+
 @media (prefers-reduced-motion: reduce) {
-  /* filter: blur i backdrop-filter są nadal renderowane domyślnie — wyłącz dla użytkowników preferujących redukcję ruchu */
   .mobileTextHalo::after {
     filter: none;
   }
 
   .portraitHalo {
     filter: none;
+    animation: none;
   }
 
   .mobileTextPanel {
@@ -339,4 +638,15 @@
     transition: none;
   }
 
+  .godRays,
+  .anamorphicFlare,
+  .flareChroma,
+  .filmGrain,
+  .cinematicReveal {
+    display: none;
+  }
+
+  .kenBurns {
+    animation: none;
+  }
 }
