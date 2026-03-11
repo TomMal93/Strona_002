@@ -170,7 +170,7 @@ export default function Hero() {
         />
       </MobileHeroLayout>
 
-      <div className="relative z-10 mx-auto hidden h-full w-full max-w-[1600px] md:grid md:grid-cols-[minmax(280px,440px)_minmax(360px,950px)] md:grid-rows-1 md:items-center md:justify-center md:gap-4 md:px-8 lg:gap-8 lg:px-12">
+      <div className="relative z-10 mx-auto hidden h-full w-full max-w-[1700px] md:grid md:grid-cols-[minmax(280px,440px)_minmax(360px,1050px)] md:grid-rows-1 md:items-center md:justify-center md:gap-4 md:px-8 lg:gap-8 lg:px-12">
         {/* ── Content column ───────────────────────────────────────────────── */}
         <div className="md:flex md:flex-none md:flex-col md:items-end md:justify-center md:py-0">
           <div className="max-w-[500px] text-left">
@@ -189,23 +189,17 @@ export default function Hero() {
         </div>
 
         {/* ── Desktop image column ─────────────────────────────────────────── */}
-        <div className="relative hidden md:flex md:h-full md:items-center md:justify-center">
-          <div className="relative h-full w-full">
-            {/* Złoty rozbłysk — faza 1 */}
-            <div className={styles.goldenBloomOverlay} aria-hidden="true" />
-            {/* Gwiazdy i halo — faza 1 */}
-            <div className={cn("absolute inset-0 z-0", styles.glowSceneEntrance)} aria-hidden="true">
-              <HeroGlowScene />
-            </div>
-            {/* Portret — faza 2 */}
+        <div className="relative hidden md:flex md:h-full md:items-center md:justify-center md:overflow-visible">
+          <div className={cn("relative h-[130%] w-full", styles.desktopImageEntrance)}>
+            <HeroGlowScene />
             <Image
               src="/images/hero_example.png"
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"
               fill
-              className={cn("relative z-10 object-contain object-center", styles.imageFadeCorner, styles.imageGoldenBloom)}
+              className={cn("relative z-10 object-contain object-center", styles.imageFadeCorner)}
               loading="eager"
-              quality={75}
-              sizes="(min-width: 768px) 60vw, 1px"
+              quality={85}
+              sizes="(min-width: 1280px) 62vw, (min-width: 768px) 58vw, 1px"
             />
           </div>
         </div>
