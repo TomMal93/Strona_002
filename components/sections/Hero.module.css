@@ -290,16 +290,20 @@
 
 .imageHalo {
   position: absolute;
-  inset: 0;
+  width: 68%;
+  height: 42%;
+  top: 23%;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1;
   pointer-events: none;
   background: radial-gradient(
-    ellipse 52% 55% at 50% 26%,
-    rgb(var(--c-warm) / 0.30) 0%,
-    rgb(var(--c-gold) / 0.17) 38%,
-    transparent 68%
+    ellipse at center,
+    rgb(var(--c-warm) / 0.38) 0%,
+    rgb(var(--c-gold) / 0.20) 45%,
+    transparent 70%
   );
-  filter: blur(28px);
+  filter: blur(38px);
 }
 
 /* Prawy dolny róg obrazka wchodzi w przeźroczystość */
