@@ -15,7 +15,7 @@ export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
           <HeroGlowScene />
           <div className="relative z-10 aspect-[3/4] w-full">
             <Image
-              src="/images/hero_example.png"
+              src="/images/Hero_v4.png"
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"
               fill
               className="object-contain object-center"
