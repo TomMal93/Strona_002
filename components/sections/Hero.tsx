@@ -190,12 +190,52 @@ export default function Hero() {
         {/* ── Desktop image column ─────────────────────────────────────────── */}
         <div className="relative hidden md:flex md:h-full md:items-center md:justify-center md:overflow-visible">
           <div className={cn("relative h-[200%] w-full", styles.desktopImageEntrance)}>
-            <div className={styles.imageHalo} aria-hidden="true" />
+
+            {/* SVG definitions — body-fade mask + halo filters */}
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              className={styles.svgDefs}
+            >
+              <defs>
+                {/* Vertical gradient: full opacity → transparent from neck down */}
+                <linearGradient id="heroBodyFadeGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="52%" stopColor="white" stopOpacity="1" />
+                  <stop offset="66%" stopColor="white" stopOpacity="0.5" />
+                  <stop offset="80%" stopColor="white" stopOpacity="0.1" />
+                  <stop offset="90%" stopColor="white" stopOpacity="0" />
+                </linearGradient>
+                {/* SVG mask — applied to the portrait image */}
+                <mask id="heroBodyFade" maskContentUnits="objectBoundingBox">
+                  <rect x="0" y="0" width="1" height="1" fill="url(#heroBodyFadeGrad)" />
+                </mask>
+
+                {/* Gaussian blur filter for outer halo */}
+                <filter id="haloBlurOuter" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur stdDeviation="18" />
+                </filter>
+                {/* Gaussian blur filter for inner halo */}
+                <filter id="haloBlurInner" x="-40%" y="-40%" width="180%" height="180%">
+                  <feGaussianBlur stdDeviation="7" />
+                </filter>
+              </defs>
+            </svg>
+
+            {/* Outer halo — large warm ellipse behind head, Gaussian blur */}
+            <div className={styles.haloOuter} aria-hidden="true" />
+
+            {/* Inner halo — tight bright glow at ear level, less blur */}
+            <div className={styles.haloInner} aria-hidden="true" />
+
+            {/* Rim light — narrow golden edge highlight on figure silhouette */}
+            <div className={styles.rimLight} aria-hidden="true" />
+
             <Image
               src="/images/Hero_v4.png"
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"
               fill
-              className={cn("relative z-10 object-contain object-center", styles.imageFadeCorner)}
+              className={cn("relative z-10 object-contain object-center", styles.imageBodyFade)}
               loading="eager"
               quality={85}
               sizes="(min-width: 1440px) 68vw, (min-width: 768px) 63vw, 1px"

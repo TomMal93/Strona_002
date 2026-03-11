@@ -286,36 +286,100 @@
   height: 100%;
 }
 
-/* ── Desktop image halo — warm glow behind the portrait ─────────────────── */
+/* ── SVG defs container — visually hidden, supplies mask + filter ids ─────── */
 
-.imageHalo {
+.svgDefs {
   position: absolute;
-  width: 68%;
-  height: 42%;
-  top: 23%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
+  width: 0;
+  height: 0;
+  overflow: hidden;
   pointer-events: none;
-  background: radial-gradient(
-    ellipse at center,
-    rgb(var(--c-warm) / 0.38) 0%,
-    rgb(var(--c-gold) / 0.20) 45%,
-    transparent 70%
-  );
-  filter: blur(38px);
 }
 
-/* Prawy dolny róg obrazka wchodzi w przeźroczystość */
-.imageFadeCorner {
-  -webkit-mask-image:
-    linear-gradient(to bottom, black 48%, transparent 88%),
-    linear-gradient(to right, black 55%, transparent 92%);
-  -webkit-mask-composite: source-in;
+/* ── Image body fade — SVG mask (neck → feet) + right-edge CSS gradient ───── */
+
+.imageBodyFade {
+  /* SVG <mask id="heroBodyFade"> handles vertical neck-to-feet dissolution;
+     second layer fades the right edge to blend into the dark background.     */
   mask-image:
-    linear-gradient(to bottom, black 48%, transparent 88%),
+    url(#heroBodyFade),
     linear-gradient(to right, black 55%, transparent 92%);
   mask-composite: intersect;
+  -webkit-mask-image:
+    url(#heroBodyFade),
+    linear-gradient(to right, black 55%, transparent 92%);
+  -webkit-mask-composite: source-in;
+}
+
+/* ── Outer halo — large warm ellipse behind head, heavily blurred ──────────── */
+
+.haloOuter {
+  position: absolute;
+  /* Wide ellipse: covers head + shoulder region */
+  width: 76%;
+  height: 44%;
+  /* top:13% centres the glow at ~27% of the 200%-height container
+     (ear-level of a typical portrait with object-contain centering)       */
+  top: 13%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 52%,
+    rgb(var(--c-warm) / 0.34) 0%,
+    rgb(var(--c-gold) / 0.17) 40%,
+    rgb(var(--c-gold) / 0.06) 62%,
+    transparent 75%
+  );
+  filter: blur(45px);
+}
+
+/* ── Inner halo — bright tight glow centred at ear level ───────────────────── */
+
+.haloInner {
+  position: absolute;
+  /* Narrower ellipse: just around the head */
+  width: 46%;
+  height: 26%;
+  top: 17%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 46%,
+    /* Cream-white peak at the centre → warm gold → transparent */
+    rgb(255 238 175 / 0.58) 0%,
+    rgb(var(--c-warm) / 0.30) 38%,
+    rgb(var(--c-gold) / 0.10) 60%,
+    transparent 72%
+  );
+  filter: blur(16px);
+}
+
+/* ── Rim light — narrow golden highlight on the figure's left silhouette ────── */
+
+.rimLight {
+  position: absolute;
+  /* 8% wide × 34% tall strip; left edge of the centred figure is ≈28% from
+     the container left → calc(50% - 22%) sits on the shoulder/head rim.   */
+  width: 8%;
+  height: 34%;
+  top: 20%;
+  left: calc(50% - 22%);
+  z-index: 11;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    /* Colour matched to inner halo cream + warm gold palette */
+    rgb(255 238 175 / 0.18) 15%,
+    rgb(var(--c-warm) / 0.52) 40%,
+    rgb(var(--c-gold) / 0.38) 65%,
+    transparent 100%
+  );
+  filter: blur(5px);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -336,5 +400,12 @@
 
   .ctaButton::after {
     transition: none;
+  }
+
+  /* Disable heavy blur filters on halo layers */
+  .haloOuter,
+  .haloInner,
+  .rimLight {
+    filter: none;
   }
 }
