@@ -338,6 +338,8 @@
   transform: translateX(-50%);
   z-index: 2;
   pointer-events: none;
+  border-radius: 999px;
+  clip-path: ellipse(50% 50% at 50% 50%);
   background:
     radial-gradient(
       ellipse at 40% 52%,
@@ -364,6 +366,8 @@
   transform: translateX(-50%);
   z-index: 3;
   pointer-events: none;
+  border-radius: 999px;
+  clip-path: ellipse(50% 50% at 50% 50%);
   background: radial-gradient(
     ellipse at 36% 50%,
     rgb(255 247 211 / 0.72) 0%,
