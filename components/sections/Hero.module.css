@@ -258,6 +258,30 @@
   height: 100%;
 }
 
+.portraitHalo {
+  position: absolute;
+  inset: 9% 16% 18%;
+  z-index: 0;
+  border-radius: 46% 54% 44% 56% / 52% 44% 56% 48%;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at 52% 34%,
+      rgb(255 238 175 / 0.34) 0%,
+      rgb(var(--c-gold) / 0.24) 30%,
+      rgb(var(--c-gold) / 0.11) 52%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse at 50% 62%,
+      rgb(var(--c-khaki) / 0.16) 0%,
+      rgb(var(--c-gold) / 0.08) 34%,
+      transparent 66%
+    );
+  filter: blur(24px);
+  opacity: 0.88;
+}
+
 /* ── HeroGlowScene — canvas star field ──────────────────────────────────── */
 
 .glowScene {
@@ -295,6 +319,10 @@
 @media (prefers-reduced-motion: reduce) {
   /* filter: blur i backdrop-filter są nadal renderowane domyślnie — wyłącz dla użytkowników preferujących redukcję ruchu */
   .mobileTextHalo::after {
+    filter: none;
+  }
+
+  .portraitHalo {
     filter: none;
   }
 

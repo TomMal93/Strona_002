@@ -191,6 +191,7 @@ export default function Hero() {
         <div className="relative hidden md:flex md:h-full md:items-center md:justify-center md:overflow-visible">
           <div className={styles.desktopPortraitStage}>
             <div className={styles.portraitFrame}>
+              <div aria-hidden="true" className={styles.portraitHalo} />
               <Image
                 src="/images/Hero_v4.png"
                 alt="Fotograf i operator drona — portret z dronem i kontrolerem"
