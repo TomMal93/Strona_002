@@ -170,7 +170,7 @@ export default function Hero() {
         />
       </MobileHeroLayout>
 
-      <div className="relative z-10 mx-auto hidden h-full w-full max-w-[1400px] md:grid md:grid-cols-[minmax(320px,500px)_minmax(360px,700px)] md:grid-rows-1 md:items-center md:justify-center md:gap-8 md:px-10 lg:gap-14 lg:px-16">
+      <div className="relative z-10 mx-auto hidden h-full w-full max-w-[2000px] md:grid md:grid-cols-[minmax(280px,380px)_minmax(360px,1300px)] md:grid-rows-1 md:items-center md:justify-center md:gap-4 md:px-8 lg:gap-8 lg:px-12">
         {/* ── Content column ───────────────────────────────────────────────── */}
         <div className="md:flex md:flex-none md:flex-col md:items-end md:justify-center md:py-0">
           <div className="max-w-[500px] text-left">
@@ -189,8 +189,8 @@ export default function Hero() {
         </div>
 
         {/* ── Desktop image column ─────────────────────────────────────────── */}
-        <div className="relative hidden md:flex md:h-full md:items-center md:justify-center">
-          <div className={cn("relative h-[90%] w-full", styles.desktopImageEntrance)}>
+        <div className="relative hidden md:flex md:h-full md:items-center md:justify-center md:overflow-visible">
+          <div className={cn("relative h-[200%] w-full", styles.desktopImageEntrance)}>
             <HeroGlowScene />
             <Image
               src="/images/hero_example.png"
@@ -198,8 +198,8 @@ export default function Hero() {
               fill
               className={cn("relative z-10 object-contain object-center", styles.imageFadeCorner)}
               loading="eager"
-              quality={75}
-              sizes="(min-width: 768px) 55vw, 1px"
+              quality={85}
+              sizes="(min-width: 1440px) 68vw, (min-width: 768px) 63vw, 1px"
             />
           </div>
         </div>
