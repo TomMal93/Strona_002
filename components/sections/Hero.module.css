@@ -312,74 +312,80 @@
 }
 
 /* ── Outer halo — large warm ellipse behind head, heavily blurred ──────────── */
+/*
+ * Container is h-[200%] = 200vh.  Percentages here are of that 200vh height.
+ * Head sits at ~30% of the container (≈60% of viewport).
+ * Outer ellipse: height 20% = 40vh, centred at 30% → top = 30% − 10% = 20%.
+ */
 
 .haloOuter {
   position: absolute;
-  /* Wide ellipse: covers head + shoulder region */
-  width: 76%;
-  height: 44%;
-  /* top:13% centres the glow at ~27% of the 200%-height container
-     (ear-level of a typical portrait with object-contain centering)       */
-  top: 13%;
+  width: 62%;
+  height: 20%;
+  top: 20%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
   pointer-events: none;
   background: radial-gradient(
-    ellipse at 50% 52%,
-    rgb(var(--c-warm) / 0.34) 0%,
-    rgb(var(--c-gold) / 0.17) 40%,
-    rgb(var(--c-gold) / 0.06) 62%,
-    transparent 75%
+    ellipse at 50% 50%,
+    rgb(var(--c-warm) / 0.38) 0%,
+    rgb(var(--c-gold) / 0.18) 42%,
+    rgb(var(--c-gold) / 0.06) 64%,
+    transparent 78%
   );
-  filter: blur(45px);
+  filter: blur(38px);
 }
 
 /* ── Inner halo — bright tight glow centred at ear level ───────────────────── */
+/*
+ * Inner ellipse: height 11% = 22vh, centred at 29% → top = 29% − 5.5% = 23.5%.
+ * Lekko wyżej niż outer (na wysokości ucha — nieco ponad środek głowy).
+ */
 
 .haloInner {
   position: absolute;
-  /* Narrower ellipse: just around the head */
-  width: 46%;
-  height: 26%;
-  top: 17%;
+  width: 36%;
+  height: 11%;
+  top: 24%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
   pointer-events: none;
   background: radial-gradient(
-    ellipse at 50% 46%,
-    /* Cream-white peak at the centre → warm gold → transparent */
-    rgb(255 238 175 / 0.58) 0%,
-    rgb(var(--c-warm) / 0.30) 38%,
-    rgb(var(--c-gold) / 0.10) 60%,
+    ellipse at 50% 48%,
+    rgb(255 238 175 / 0.62) 0%,
+    rgb(var(--c-warm) / 0.32) 36%,
+    rgb(var(--c-gold) / 0.10) 58%,
     transparent 72%
   );
-  filter: blur(16px);
+  filter: blur(12px);
 }
 
 /* ── Rim light — narrow golden highlight on the figure's left silhouette ────── */
+/*
+ * z-index: 4 — rendered BEHIND the image (image = z-10).
+ * PNG transparency at silhouette edges lets the glow bleed through.
+ * height 14% = 28vh, top 24%.
+ */
 
 .rimLight {
   position: absolute;
-  /* 8% wide × 34% tall strip; left edge of the centred figure is ≈28% from
-     the container left → calc(50% - 22%) sits on the shoulder/head rim.   */
-  width: 8%;
-  height: 34%;
-  top: 20%;
-  left: calc(50% - 22%);
-  z-index: 11;
+  width: 6%;
+  height: 14%;
+  top: 25%;
+  left: calc(50% - 20%);
+  z-index: 4;
   pointer-events: none;
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    /* Colour matched to inner halo cream + warm gold palette */
-    rgb(255 238 175 / 0.18) 15%,
-    rgb(var(--c-warm) / 0.52) 40%,
-    rgb(var(--c-gold) / 0.38) 65%,
+    rgb(255 238 175 / 0.20) 18%,
+    rgb(var(--c-warm) / 0.55) 42%,
+    rgb(var(--c-gold) / 0.40) 68%,
     transparent 100%
   );
-  filter: blur(5px);
+  filter: blur(4px);
 }
 
 @media (prefers-reduced-motion: reduce) {
