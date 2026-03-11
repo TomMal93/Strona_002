@@ -246,12 +246,6 @@
   opacity: 0.70;
 }
 
-@media (min-width: 768px) {
-  .desktopImageEntrance {
-    animation: desktop-image-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
-  }
-}
-
 .desktopPortraitStage {
   position: relative;
   width: min(100%, 920px);
@@ -298,31 +292,6 @@
   height: 100%;
 }
 
-/* ── SVG defs container — visually hidden, supplies mask + filter ids ─────── */
-
-.svgDefs {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-/* ── Image body fade — SVG mask (neck → feet) + right-edge CSS gradient ───── */
-
-.imageBodyFade {
-  /* SVG <mask id="heroBodyFade"> handles vertical neck-to-feet dissolution;
-     second layer fades the right edge to blend into the dark background.     */
-  mask-image:
-    url(#heroBodyFade),
-    linear-gradient(to right, black 55%, transparent 92%);
-  mask-composite: intersect;
-  -webkit-mask-image:
-    url(#heroBodyFade),
-    linear-gradient(to right, black 55%, transparent 92%);
-  -webkit-mask-composite: source-in;
-}
-
 @media (prefers-reduced-motion: reduce) {
   /* filter: blur i backdrop-filter są nadal renderowane domyślnie — wyłącz dla użytkowników preferujących redukcję ruchu */
   .mobileTextHalo::after {
@@ -334,8 +303,7 @@
   }
 
   .mobileImageEntrance,
-  .mobilePanelEntrance,
-  .desktopImageEntrance {
+  .mobilePanelEntrance {
     animation: none;
   }
 
