@@ -252,6 +252,56 @@
   }
 }
 
+/* ── HeroGlowScene — canvas star field ──────────────────────────────────── */
+
+.glowScene {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.starHalo {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 55%;
+  background: radial-gradient(
+    ellipse at center,
+    rgb(var(--c-warm) / 0.24) 0%,
+    rgb(var(--c-gold) / 0.13) 42%,
+    transparent 70%
+  );
+  filter: blur(22px);
+  pointer-events: none;
+}
+
+.dustCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Desktop image halo — warm glow behind the portrait ─────────────────── */
+
+.imageHalo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 52% 55% at 50% 26%,
+    rgb(var(--c-warm) / 0.30) 0%,
+    rgb(var(--c-gold) / 0.17) 38%,
+    transparent 68%
+  );
+  filter: blur(28px);
+}
+
 /* Prawy dolny róg obrazka wchodzi w przeźroczystość */
 .imageFadeCorner {
   -webkit-mask-image:
