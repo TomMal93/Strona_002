@@ -190,6 +190,7 @@ export default function Hero() {
         {/* ── Desktop image column ─────────────────────────────────────────── */}
         <div className="relative hidden md:flex md:h-full md:items-center md:justify-center md:overflow-visible">
           <div className={cn("relative h-[200%] w-full", styles.desktopImageEntrance)}>
+            <div className={styles.imageHalo} aria-hidden="true" />
             <Image
               src="/images/hero_example.png"
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"
