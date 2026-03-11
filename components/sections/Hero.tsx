@@ -191,7 +191,7 @@ export default function Hero() {
         <div className="relative hidden md:flex md:h-full md:items-center md:justify-center md:overflow-visible">
           <div className={cn(styles.desktopPortraitStage, styles.desktopImageEntrance)}>
 
-            {/* SVG definitions — body-fade mask + halo filters */}
+            {/* SVG definitions — body-fade mask for portrait image */}
             <svg
               aria-hidden="true"
               focusable="false"
@@ -210,28 +210,10 @@ export default function Hero() {
                 <mask id="heroBodyFade" maskContentUnits="objectBoundingBox">
                   <rect x="0" y="0" width="1" height="1" fill="url(#heroBodyFadeGrad)" />
                 </mask>
-
-                {/* Gaussian blur filter for outer halo */}
-                <filter id="haloBlurOuter" x="-60%" y="-60%" width="220%" height="220%">
-                  <feGaussianBlur stdDeviation="18" />
-                </filter>
-                {/* Gaussian blur filter for inner halo */}
-                <filter id="haloBlurInner" x="-40%" y="-40%" width="180%" height="180%">
-                  <feGaussianBlur stdDeviation="7" />
-                </filter>
               </defs>
             </svg>
 
             <div className={styles.portraitFrame}>
-              {/* Outer halo — large warm ellipse behind head, Gaussian blur */}
-              <div className={styles.haloOuter} aria-hidden="true" />
-
-              {/* Inner halo — tight bright glow at ear level, less blur */}
-              <div className={styles.haloInner} aria-hidden="true" />
-
-              {/* Rim light — narrow golden edge highlight on figure silhouette */}
-              <div className={styles.rimLight} aria-hidden="true" />
-
               <Image
                 src="/images/Hero_v4.png"
                 alt="Fotograf i operator drona — portret z dronem i kontrolerem"

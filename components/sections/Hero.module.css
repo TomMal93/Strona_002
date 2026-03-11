@@ -323,81 +323,6 @@
   -webkit-mask-composite: source-in;
 }
 
-/* ── Outer halo — large warm ellipse behind head, heavily blurred ──────────── */
-/*
- * Halos są pozycjonowane względem .portraitFrame, więc zostają związane
- * z rzeczywistym kontenerem obrazu zamiast z wysokim wrapperem sekcji.
- */
-
-.haloOuter {
-  position: absolute;
-  width: 58%;
-  height: 22%;
-  top: 19%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse at 50% 50%,
-    rgb(var(--c-warm) / 0.38) 0%,
-    rgb(var(--c-gold) / 0.18) 42%,
-    rgb(var(--c-gold) / 0.06) 64%,
-    transparent 78%
-  );
-  filter: blur(38px);
-}
-
-/* ── Inner halo — bright tight glow centred at ear level ───────────────────── */
-/*
- * Lekko wyżej niż outer (na wysokości ucha — nieco ponad środek głowy).
- */
-
-.haloInner {
-  position: absolute;
-  width: 33%;
-  height: 12%;
-  top: 22%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse at 50% 48%,
-    rgb(255 238 175 / 0.62) 0%,
-    rgb(var(--c-warm) / 0.32) 36%,
-    rgb(var(--c-gold) / 0.10) 58%,
-    transparent 72%
-  );
-  filter: blur(12px);
-}
-
-/* ── Rim light — narrow golden highlight on the figure's left silhouette ────── */
-/*
- * z-index: 4 — rendered BEHIND the image (image = z-10).
- * PNG transparency at silhouette edges lets the glow bleed through.
- * Pozycja spięta z figurą w obrębie .portraitFrame.
- */
-
-.rimLight {
-  position: absolute;
-  width: 6%;
-  height: 14%;
-  top: 24%;
-  left: calc(50% - 18%);
-  z-index: 4;
-  pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgb(255 238 175 / 0.20) 18%,
-    rgb(var(--c-warm) / 0.55) 42%,
-    rgb(var(--c-gold) / 0.40) 68%,
-    transparent 100%
-  );
-  filter: blur(4px);
-}
-
 @media (prefers-reduced-motion: reduce) {
   /* filter: blur i backdrop-filter są nadal renderowane domyślnie — wyłącz dla użytkowników preferujących redukcję ruchu */
   .mobileTextHalo::after {
@@ -418,10 +343,4 @@
     transition: none;
   }
 
-  /* Disable heavy blur filters on halo layers */
-  .haloOuter,
-  .haloInner,
-  .rimLight {
-    filter: none;
-  }
 }
