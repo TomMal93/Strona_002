@@ -258,12 +258,6 @@
   margin-inline: auto;
 }
 
-@media (min-width: 768px) {
-  .desktopPortraitStage {
-    transform: translateX(-6rem);
-  }
-}
-
 .portraitFrame {
   position: relative;
   width: 100%;
