@@ -25,7 +25,7 @@ export const siteContent = {
     ],
   },
   about: {
-    title: process.env.NEXT_PUBLIC_ABOUT_TITLE || 'Pracuję tam gdzie dzieje się akcja',
+    title: process.env.NEXT_PUBLIC_ABOUT_TITLE || 'O mnie',
     lead:
       process.env.NEXT_PUBLIC_ABOUT_LEAD
       || 'Człowiek od zawsze opowiadał historie.\nNajpierw słowem.\nPotem obrazem.\nZ czasem nauczyliśmy się pisać.\nA dziś…',

@@ -3,7 +3,9 @@
 import { useRef, useCallback } from 'react'
 import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
+import { cn } from '@/lib/utils'
 import styles from './About.module.css'
+import heroStyles from './Hero.module.css'
 import { useAboutAnimations } from './about/useAboutAnimations'
 
 export default function About() {
@@ -43,8 +45,9 @@ export default function About() {
       aria-label="O mnie"
       className="section-dark-bg px-6 py-20 md:py-28 lg:px-10"
     >
-      <div className="grid gap-8 md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
-          <div className="md:col-span-6">
+      <div className="mx-auto max-w-content">
+        <div className="grid gap-8 md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
+          <div className="order-2 md:order-1 md:col-span-5">
             <div className={styles.mediaShell}>
               <div aria-hidden="true" className={styles.mediaHalo} />
               <div className={styles.mediaFrame}>
@@ -60,17 +63,20 @@ export default function About() {
             </div>
           </div>
 
-          <div className="md:col-span-5">
+          <div className="order-1 md:order-2 md:col-span-7 md:pl-4 lg:pl-8">
             {/* Title */}
-            <div className="w-fit">
+            <div className="w-full text-center">
               <h2
                 ref={titleRef}
                 id="about-heading"
-                className="font-bebas text-5xl uppercase leading-[0.92] tracking-wide text-warm-white sm:text-6xl"
+                className={cn(
+                  heroStyles.gradientTextPrimary,
+                  'font-bebas text-3xl uppercase leading-[0.96] tracking-wide sm:text-4xl',
+                )}
               >
                 {siteContent.about.title}
               </h2>
-              <span ref={titleAccentRef} aria-hidden="true" className={styles.sectionTitleAccent} />
+              <span aria-hidden="true" className={styles.sectionTitleAccentSoft} />
             </div>
 
             {/* Viewfinder frame */}
@@ -86,13 +92,39 @@ export default function About() {
                 <span className={styles.viewfinderOverline}>REC</span>
 
                 <p ref={leadRef} className={styles.viewfinderLead}>
-                  {siteContent.about.lead}
+                  {siteContent.about.lead
+                    .split('historie.')
+                    .flatMap((part, index, array) => {
+                      if (index === array.length - 1) return [part.trimStart()]
+                      return [part, 'historie.', <br key={`lead-break-historie-${index}`} />]
+                    })
+                    .flatMap((part, index, array) => {
+                      if (typeof part !== 'string') return [part]
+                      const chunks = part.split('pisać.')
+                      return chunks.flatMap((chunk, chunkIndex) => {
+                        if (chunkIndex === chunks.length - 1) return [chunk]
+                        return [chunk, 'pisać.', <br key={`lead-break-pisac-${index}-${chunkIndex}`} />]
+                      })
+                    })}
                 </p>
 
                 <span aria-hidden="true" className={styles.viewfinderDivider} />
 
                 <p ref={descriptionRef} className={styles.viewfinderDesc}>
-                  {siteContent.about.description}
+                  {siteContent.about.description
+                    .split('filmem.')
+                    .flatMap((part, index, array) => {
+                      if (index === array.length - 1) return [part.trimStart()]
+                      return [part, 'filmem.', <br key={`desc-break-filmem-${index}`} />]
+                    })
+                    .flatMap((part, index, array) => {
+                      if (typeof part !== 'string') return [part]
+                      const chunks = part.split('wspomnień.')
+                      return chunks.flatMap((chunk, chunkIndex) => {
+                        if (chunkIndex === chunks.length - 1) return [chunk]
+                        return [chunk, 'wspomnień.', <br key={`desc-break-wspomnien-${index}-${chunkIndex}`} />]
+                      })
+                    })}
                 </p>
               </div>
             </div>
@@ -117,6 +149,7 @@ export default function About() {
               </a>
             </div>
           </div>
+        </div>
       </div>
     </section>
   )

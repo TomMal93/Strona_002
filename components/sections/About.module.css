@@ -40,12 +40,27 @@
   );
 }
 
+.sectionTitleAccentSoft {
+  margin: 0.45rem auto 0;
+  display: block;
+  height: 1px;
+  width: min(100%, 8rem);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.2) 20%,
+    rgb(255 238 175 / 0.45) 50%,
+    rgb(var(--c-gold) / 0.2) 80%,
+    transparent 100%
+  );
+}
+
 /* ── Viewfinder frame ──────────────────────────────────────────────────── */
 
 .viewfinder {
   position: relative;
   margin-top: 1.6rem;
-  padding: 1.6rem 1.4rem;
+  padding: 2.8rem 1.4rem 1.6rem;
 }
 
 /* Corner marks — camera framing guides */
@@ -87,14 +102,20 @@
 
 .viewfinderContent {
   position: relative;
+  display: grid;
+  gap: 0.95rem;
+  font-style: italic;
+  text-align: center;
 }
 
 /* "REC" indicator — camera-style overline */
 .viewfinderOverline {
+  position: absolute;
+  top: -1.2rem;
+  right: 0;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  margin-bottom: 1rem;
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
   font-size: 0.8rem;
   letter-spacing: 0.18em;
@@ -114,42 +135,52 @@
 
 /* Lead text — prominent, warm tint */
 .viewfinderLead {
-  white-space: pre-line;
   font-family: var(--font-inter, 'Inter', sans-serif);
-  font-size: 1.35rem;
+  font-size: 1rem;
   font-weight: 300;
   line-height: 1.65;
   color: rgb(255 255 255 / 0.92);
   letter-spacing: 0.01em;
+  width: 100%;
+  max-width: none;
 }
 
 @media (width >= 48rem) {
   .viewfinderLead {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
 }
 
 /* Divider — subtle gold line between lead and description */
 .viewfinderDivider {
   display: block;
-  margin: 1.1rem 0;
+  margin-inline: auto;
   height: 1px;
-  width: 40%;
+  width: min(100%, 14rem);
   background: linear-gradient(
     90deg,
-    rgb(var(--c-gold) / 0.45) 0%,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.45) 50%,
     transparent 100%
   );
 }
 
 /* Description — muted, supporting text */
 .viewfinderDesc {
-  white-space: pre-line;
   font-family: var(--font-inter, 'Inter', sans-serif);
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 300;
-  line-height: 1.7;
-  color: rgb(200 192 180 / 0.78);
+  line-height: 1.65;
+  color: rgb(255 255 255 / 0.92);
+  letter-spacing: 0.01em;
+  width: 100%;
+  max-width: none;
+}
+
+@media (width >= 48rem) {
+  .viewfinderDesc {
+    font-size: 1.1rem;
+  }
 }
 
 /* ── Camera-style parameters ───────────────────────────────────────────── */
@@ -198,8 +229,8 @@
 @media (width >= 48rem) {
   .cameraParams {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem 1rem;
   }
 
   .paramDesc {
