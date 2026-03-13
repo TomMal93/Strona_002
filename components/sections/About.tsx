@@ -58,8 +58,12 @@ export default function About() {
             </p>
 
             <ul className={styles.highlightsGrid} aria-label="Wyróżniki" data-about-highlights>
-              {highlights.map((highlight) => (
-                <li key={highlight.title} className={styles.highlightItem} data-about-highlight>
+              {highlights.map((highlight, index) => (
+                <li
+                  key={highlight.title}
+                  className={`${styles.highlightItem} ${index < 2 ? styles.highlightItemPrimary : styles.highlightItemSecondary}`}
+                  data-about-highlight
+                >
                   <div className={styles.highlightTopLine} aria-hidden="true" />
                   <h3 className="font-bebas text-[1.1rem] uppercase leading-[1.05] tracking-[0.02em] text-warm-white sm:text-[1.2rem]">{highlight.title}</h3>
                   <p className="mt-1.5 font-inter text-[0.8125rem] leading-6 text-warm-gray/95 sm:text-sm">{highlight.description}</p>
