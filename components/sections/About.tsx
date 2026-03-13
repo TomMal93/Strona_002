@@ -50,31 +50,33 @@ export default function About() {
               <span aria-hidden="true" className={styles.sectionTitleAccent} />
             </div>
 
-            <p className="max-w-[34ch] font-inter text-lg leading-relaxed text-warm-white/95">
-              {siteContent.about.lead}
-            </p>
-            <p className="mt-4 max-w-[50ch] font-inter text-base leading-relaxed text-warm-gray">
-              {siteContent.about.description}
-            </p>
+            <div className={styles.glassPanel}>
+              <p className="max-w-[34ch] font-inter text-lg leading-relaxed text-warm-white/95">
+                {siteContent.about.lead}
+              </p>
+              <p className="mt-4 max-w-[50ch] font-inter text-base leading-relaxed text-warm-gray">
+                {siteContent.about.description}
+              </p>
 
-            <ul className={styles.highlightsGrid} aria-label="Wyróżniki" data-about-highlights>
-              {highlights.map((highlight, index) => (
-                <li
-                  key={highlight.title}
-                  className={`${styles.highlightItem} ${index < 2 ? styles.highlightItemPrimary : styles.highlightItemSecondary}`}
-                  data-about-highlight
-                >
-                  <div className={styles.highlightTopLine} aria-hidden="true" />
-                  <h3 className="font-bebas text-[1.1rem] uppercase leading-[1.05] tracking-[0.02em] text-warm-white sm:text-[1.2rem]">{highlight.title}</h3>
-                  <p className="mt-1.5 font-inter text-[0.8125rem] leading-6 text-warm-gray/95 sm:text-sm">{highlight.description}</p>
-                </li>
-              ))}
-            </ul>
+              <ul className={styles.highlightsGrid} aria-label="Wyróżniki" data-about-highlights>
+                {highlights.map((highlight, index) => (
+                  <li
+                    key={highlight.title}
+                    className={`${styles.highlightItem} ${index < 2 ? styles.highlightItemPrimary : styles.highlightItemSecondary}`}
+                    data-about-highlight
+                  >
+                    <div className={styles.highlightTopLine} aria-hidden="true" />
+                    <h3 className="font-bebas text-[1.1rem] uppercase leading-[1.05] tracking-[0.02em] text-warm-white sm:text-[1.2rem]">{highlight.title}</h3>
+                    <p className="mt-1.5 font-inter text-[0.8125rem] leading-6 text-warm-gray/95 sm:text-sm">{highlight.description}</p>
+                  </li>
+                ))}
+              </ul>
 
-            <div className="mt-8">
-              <a href="#services" className={styles.ctaLink}>
-                {siteContent.about.ctaLabel}
-              </a>
+              <div className="mt-8">
+                <a href="#services" className={styles.ctaLink}>
+                  {siteContent.about.ctaLabel}
+                </a>
+              </div>
             </div>
           </div>
         </div>
