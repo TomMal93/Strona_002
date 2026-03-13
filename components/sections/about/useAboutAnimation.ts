@@ -65,6 +65,7 @@ export function useAboutAnimation(sectionRef: RefObject<HTMLElement>) {
             once: true,
           },
         })
+
       }, sectionRef)
 
       revertContext = () => ctx.revert()
