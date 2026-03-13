@@ -7,11 +7,9 @@ import { cn } from '@/lib/utils'
 import styles from './About.module.css'
 import { useAboutAnimation } from './about/useAboutAnimation'
 
-const ABOUT_HIGHLIGHTS_LIMIT = 3
-
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null)
-  const highlights = siteContent.about.highlights.slice(0, ABOUT_HIGHLIGHTS_LIMIT)
+  const highlights = siteContent.about.highlights
 
   useAboutAnimation(sectionRef)
 
@@ -59,11 +57,16 @@ export default function About() {
               {siteContent.about.description}
             </p>
 
-            <ul className="mt-8 space-y-4" aria-label="Wyróżniki" data-about-highlights>
-              {highlights.map((highlight) => (
-                <li key={highlight.title} className={styles.highlightItem} data-about-highlight>
-                  <h3 className="font-bebas text-[1.35rem] uppercase tracking-wide text-warm-white">{highlight.title}</h3>
-                  <p className="mt-1 font-inter text-sm leading-relaxed text-warm-gray">{highlight.description}</p>
+            <ul className={styles.highlightsGrid} aria-label="Wyróżniki" data-about-highlights>
+              {highlights.map((highlight, index) => (
+                <li
+                  key={highlight.title}
+                  className={`${styles.highlightItem} ${index < 2 ? styles.highlightItemPrimary : styles.highlightItemSecondary}`}
+                  data-about-highlight
+                >
+                  <div className={styles.highlightTopLine} aria-hidden="true" />
+                  <h3 className="font-bebas text-[1.1rem] uppercase leading-[1.05] tracking-[0.02em] text-warm-white sm:text-[1.2rem]">{highlight.title}</h3>
+                  <p className="mt-1.5 font-inter text-[0.8125rem] leading-6 text-warm-gray/95 sm:text-sm">{highlight.description}</p>
                 </li>
               ))}
             </ul>

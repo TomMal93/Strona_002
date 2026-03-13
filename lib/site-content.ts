@@ -45,6 +45,10 @@ export const siteContent = {
         title: 'Materiał gotowy do publikacji',
         description: 'Dostarczam kadry i ujęcia przygotowane pod social media, stronę i materiały promocyjne.',
       },
+      {
+        title: 'Sprawny proces współpracy',
+        description: 'Przed realizacją ustalamy plan i priorytety, a po wydarzeniu otrzymujesz materiał w uzgodnionym terminie.',
+      },
     ],
     ctaLabel: process.env.NEXT_PUBLIC_ABOUT_CTA_LABEL || 'Sprawdź ofertę',
     imageAlt:
