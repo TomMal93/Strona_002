@@ -40,7 +40,7 @@ export default function About() {
               <div aria-hidden="true" className={styles.mediaHalo} />
               <div className={styles.mediaFrame}>
                 <Image
-                  src="/images/hero.webp"
+                  src="/images/about_me_001.png"
                   alt={siteContent.about.imageAlt}
                   width={680}
                   height={1020}
