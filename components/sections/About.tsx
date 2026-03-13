@@ -23,7 +23,7 @@ export default function About() {
       className={cn('section-dark-bg px-6 py-20 md:py-28 lg:px-20')}
     >
       <div className="mx-auto max-w-content">
-        <div className={cn('mx-auto flex max-w-3xl flex-col items-center text-center', styles.sectionHeader)} data-about-item>
+        <div className={cn('mx-auto flex max-w-3xl flex-col items-center text-center', styles.sectionHeaderShell)} data-about-item>
           <span className="ui-overline">POZNAJMY SIĘ</span>
           <h2
             id="about-heading"
@@ -31,11 +31,11 @@ export default function About() {
           >
             {siteContent.about.title}
           </h2>
-          <span aria-hidden="true" className={styles.headingDivider} />
+          <span aria-hidden="true" className={styles.sectionTitleAccent} />
         </div>
 
         <div className="mt-10 grid gap-8 md:mt-12 md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
-          <div className="order-2 md:order-1 md:col-span-5" data-about-item>
+          <div className="md:col-span-5" data-about-item>
             <div className={styles.mediaShell}>
               <div aria-hidden="true" className={styles.mediaHalo} />
               <div className={styles.mediaFrame}>
@@ -51,7 +51,7 @@ export default function About() {
             </div>
           </div>
 
-          <div className="order-1 md:order-2 md:col-span-7" data-about-item>
+          <div className="md:col-span-7" data-about-item>
             <p className="max-w-[34ch] font-inter text-lg leading-relaxed text-warm-white/95">
               {siteContent.about.lead}
             </p>
