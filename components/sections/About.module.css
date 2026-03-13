@@ -1,3 +1,7 @@
+.sectionHeader {
+  position: relative;
+}
+
 .mediaShell {
   position: relative;
   isolation: isolate;
@@ -25,8 +29,8 @@
   margin-top: 0.95rem;
   display: block;
   height: 1px;
-  width: min(100%, 19rem);
-  background: linear-gradient(90deg, rgb(var(--c-gold) / 0.7), transparent);
+  width: clamp(8rem, 18vw, 13rem);
+  background: linear-gradient(90deg, rgb(var(--c-gold) / 0.2) 0%, rgb(var(--c-gold) / 0.95) 50%, rgb(var(--c-gold) / 0.2) 100%);
 }
 
 .highlightItem {
