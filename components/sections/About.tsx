@@ -61,8 +61,8 @@ export default function About() {
               {highlights.map((highlight) => (
                 <li key={highlight.title} className={styles.highlightItem} data-about-highlight>
                   <div className={styles.highlightTopLine} aria-hidden="true" />
-                  <h3 className="font-bebas text-[1.35rem] uppercase tracking-wide text-warm-white">{highlight.title}</h3>
-                  <p className="mt-2 font-inter text-sm leading-relaxed text-warm-gray">{highlight.description}</p>
+                  <h3 className="font-bebas text-[1.1rem] uppercase leading-[1.05] tracking-[0.02em] text-warm-white sm:text-[1.2rem]">{highlight.title}</h3>
+                  <p className="mt-1.5 font-inter text-[0.8125rem] leading-6 text-warm-gray/95 sm:text-sm">{highlight.description}</p>
                 </li>
               ))}
             </ul>
