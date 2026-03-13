@@ -10,8 +10,8 @@ export const siteContent = {
     || 'Fotografia i film — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
   hero: {
     eyebrow: process.env.NEXT_PUBLIC_HERO_EYEBROW || 'Fotografia & Film',
-    headlineLine1: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_1 || 'Zamrażam',
-    headlineLine2: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_2 || 'Chwile',
+    headlineLine1: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_1 || 'Moje kadry,',
+    headlineLine2: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_2 || 'Wasze emocje',
     subtitle:
       process.env.NEXT_PUBLIC_HERO_SUBTITLE
       || 'Dokumentuję to, co warto pamiętać.\nOd pola bitwy po ślubny taniec.',

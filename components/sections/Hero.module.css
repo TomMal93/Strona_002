@@ -158,6 +158,11 @@
   color: transparent;
 }
 
+.heroHeading {
+  display: block;
+  padding-top: 0.12em;
+}
+
 .gradientTextSecondary {
   background: linear-gradient(
     130deg,

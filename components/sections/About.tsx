@@ -1,14 +1,44 @@
+'use client'
+
+import { useRef, useCallback } from 'react'
 import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
-import { cn } from '@/lib/utils'
 import styles from './About.module.css'
-import { getHighlightVariant } from './about/highlightLayout'
+import { useAboutAnimations } from './about/useAboutAnimations'
 
 export default function About() {
   const highlights = siteContent.about.highlights
 
+  const sectionRef = useRef<HTMLElement>(null!)
+  const titleRef = useRef<HTMLHeadingElement>(null!)
+  const titleAccentRef = useRef<HTMLSpanElement>(null!)
+  const viewfinderRef = useRef<HTMLDivElement>(null!)
+  const leadRef = useRef<HTMLParagraphElement>(null!)
+  const descriptionRef = useRef<HTMLParagraphElement>(null!)
+  const highlightRefs = useRef<(HTMLLIElement | null)[]>([])
+  const ctaRef = useRef<HTMLDivElement>(null!)
+
+  const setHighlightRef = useCallback(
+    (index: number) => (el: HTMLLIElement | null) => {
+      highlightRefs.current[index] = el
+    },
+    [],
+  )
+
+  useAboutAnimations({
+    sectionRef,
+    titleRef,
+    titleAccentRef,
+    viewfinderRef,
+    leadRef,
+    descriptionRef,
+    highlightRefs,
+    ctaRef,
+  })
+
   return (
     <section
+      ref={sectionRef}
       id="about"
       aria-label="O mnie"
       className="section-dark-bg px-6 py-20 md:py-28 lg:px-10"
@@ -31,50 +61,60 @@ export default function About() {
           </div>
 
           <div className="md:col-span-5">
+            {/* Title */}
             <div className="w-fit">
               <h2
+                ref={titleRef}
                 id="about-heading"
                 className="font-bebas text-5xl uppercase leading-[0.92] tracking-wide text-warm-white sm:text-6xl"
               >
                 {siteContent.about.title}
               </h2>
-              <span aria-hidden="true" className={styles.sectionTitleAccent} />
+              <span ref={titleAccentRef} aria-hidden="true" className={styles.sectionTitleAccent} />
             </div>
 
-            <div className={styles.glassPanel}>
-              <span className="ui-overline mb-3 block">POZNAJMY SIĘ</span>
-              <p className="whitespace-pre-line font-inter text-2xl leading-relaxed text-warm-white/95">
-                {siteContent.about.lead}
-              </p>
-              <p className="mt-4 whitespace-pre-line font-inter text-xl leading-relaxed text-warm-gray">
-                {siteContent.about.description}
-              </p>
+            {/* Viewfinder frame */}
+            <div ref={viewfinderRef} className={styles.viewfinder}>
+              {/* Corner marks */}
+              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />
+              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR}`} />
+              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL}`} />
+              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR}`} />
 
-              <ul className={styles.highlightsGrid} aria-label="Wyróżniki">
-                {highlights.map((highlight, index) => {
-                  const variant = getHighlightVariant(index)
+              {/* Content inside the viewfinder */}
+              <div className={styles.viewfinderContent}>
+                <span className={styles.viewfinderOverline}>REC</span>
 
-                  return (
-                  <li
-                    key={highlight.title}
-                    className={cn(
-                      styles.highlightItem,
-                      variant === 'primary' ? styles.highlightItemPrimary : styles.highlightItemSecondary,
-                    )}
-                  >
-                    <div className={styles.highlightTopLine} aria-hidden="true" />
-                    <h3 className="font-bebas text-[1.5rem] uppercase leading-[1.05] tracking-[0.02em] text-warm-white sm:text-[1.65rem]">{highlight.title}</h3>
-                    <p className="mt-1.5 font-inter text-base leading-relaxed text-warm-gray/95 sm:text-[1.0625rem]">{highlight.description}</p>
-                  </li>
-                  )
-                })}
-              </ul>
+                <p ref={leadRef} className={styles.viewfinderLead}>
+                  {siteContent.about.lead}
+                </p>
 
-              <div className="mt-8">
-                <a href="#services" className={styles.ctaLink}>
-                  {siteContent.about.ctaLabel}
-                </a>
+                <span aria-hidden="true" className={styles.viewfinderDivider} />
+
+                <p ref={descriptionRef} className={styles.viewfinderDesc}>
+                  {siteContent.about.description}
+                </p>
               </div>
+            </div>
+
+            {/* Camera-style parameters */}
+            <ul className={styles.cameraParams} aria-label="Wyróżniki">
+              {highlights.map((highlight, index) => (
+                <li
+                  key={highlight.title}
+                  ref={setHighlightRef(index)}
+                  className={styles.paramItem}
+                >
+                  <span className={styles.paramLabel}>{highlight.title}</span>
+                  <span className={styles.paramDesc}>{highlight.description}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div ref={ctaRef} className="mt-6">
+              <a href="#services" className={styles.ctaLink}>
+                {siteContent.about.ctaLabel}
+              </a>
             </div>
           </div>
       </div>

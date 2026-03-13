@@ -50,7 +50,7 @@ export default function Hero() {
 
       <MobileHeroLayout>
         <HeroTextBlock
-          headingClassName="mt-4 font-bebas text-[48px] uppercase leading-[0.9]"
+          headingClassName="mt-4 font-bebas text-[44px] uppercase leading-[0.96]"
           underlineClassName="block h-px w-full bg-gradient-to-r from-khaki/70 to-transparent"
         />
       </MobileHeroLayout>
@@ -67,7 +67,7 @@ export default function Hero() {
               underlineRef={underlineRef}
               verticalLineRef={verticalLineRef}
               ctaRef={ctaRef}
-              headingClassName="mt-4 font-bebas text-[48px] uppercase leading-[0.9] md:text-display"
+              headingClassName="mt-4 font-bebas text-[44px] uppercase leading-[0.96] md:text-[72px] lg:text-[96px]"
               underlineClassName="block h-px w-full origin-right bg-gradient-to-r from-khaki/70 to-transparent"
             />
           </div>
