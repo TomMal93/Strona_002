@@ -1,6 +1,23 @@
 # Branding Guidelines — Strona_002
 
 > Dokument opisuje branding użyty w sekcji **Hero** oraz zawiera wytyczne projektowe dla kolejnych sekcji strony. Stanowi punkt odniesienia dla zachowania spójności wizualnej i tonalnej całego projektu.
+>
+> **Powiązane dokumenty:**
+> - `docs/branding.md` — strategia marki, archetyp, tone of voice (źródło narracyjne)
+> - `docs/design.md` — design system (plan wyjściowy; zawiera rozbieżności z implementacją — patrz sekcja 5)
+
+---
+
+## 0. Fundament marki (za `branding.md`)
+
+> Sekcja skrócona — pełna wersja w `docs/branding.md`.
+
+- **Nazwa kierunku wizualnego:** `Tactical Elegance`
+- **Obietnica marki:** "Prawdziwe emocje i prawdziwa dynamika, bez sztuczności."
+- **Archetyp:** Odkrywca (akcja, teren, ruch) + Opiekun (uważność na emocje i relacje)
+- **Claim:** `Kadry z charakterem. Historie z emocją.`
+- **Tone of voice:** konkretny, prosty, obrazowy; pewny i spokojny; bez patosu i korpo-słownictwa
+- **Zasady copy:** krótkie zdania, czasowniki czynne, mniej przymiotników — więcej scen i efektu; każda sekcja odpowiada: "co z tego ma klient?"
 
 ---
 
@@ -226,4 +243,46 @@ Mobile: wejście przez CSS keyframes (`translate3d + scale`, `cubic-bezier(0.22,
 
 ---
 
-*Dokument wygenerowany na podstawie analizy kodu źródłowego projektu (Next.js 14, Tailwind CSS, GSAP). Aktualizuj przy każdej zmianie design tokenów lub komponentów bazowych.*
+## 5. Rozbieżności między `design.md` a implementacją
+
+> Poniższe różnice wykryto przez porównanie dokumentu `docs/design.md` z kodem źródłowym. Dane poniżej opisują **aktualny stan kodu** — `design.md` wymaga aktualizacji.
+
+### 5.1 Typografia — niezgodności
+
+| Element       | `design.md` (plan)                   | Kod (rzeczywistość)                                  |
+|---------------|---------------------------------------|------------------------------------------------------|
+| H2–H3         | **Oswald** 500–700                    | **Bebas Neue** — font Oswald nie jest zainstalowany  |
+| Opis / body   | Inter 300–400, domyślna wielkość liter| **Bebas Neue** uppercase, `tracking-heading: 0.15em` |
+| H1 rozmiar    | 96–120px                              | `clamp(80px, 10vw, 110px)` = 80–110px                |
+| CTA Primary   | Tło `#8B7355`, biały tekst (solid)    | Gradient tekst na transparent + animated underline   |
+
+### 5.2 Paleta — tokeny nieudokumentowane w `design.md`
+
+`design.md` definiuje 7 kolorów, kod używa 9 tokenów. Brakuje:
+
+| Token CSS    | Hex        | Użycie                                               |
+|--------------|------------|------------------------------------------------------|
+| `--c-khaki`  | `#929A75`  | Gradient secondary (eyebrow, opis, CTA secondary)    |
+| `--c-warm`   | `#B4825A`  | Punkt startowy gradientu primary (headline, CTA)     |
+
+### 5.3 Techniki wizualne nieudokumentowane w żadnym dokumencie
+
+Kluczowe efekty obecne w kodzie, nieopisane ani w `design.md` ani w `branding.md`:
+
+- **Gradient-text** (`-webkit-background-clip: text`) — główna technika kolorowania nagłówków i CTA
+- **Diagonal stripe background** (`.section-dark-bg`) — faktura tła sekcji ciemnych (45°, 1px / 22px, oliwka 9%)
+- **Portrait halo** — radial-gradient za portretem, `blur(24px)`, nieregularny `border-radius`
+- **Star field canvas** (`HeroGlowScene`) — animowane gwiazdki z fazą sinusoidalną
+- **Mobile text panel** — `backdrop-filter: blur(4px)` + glow `::after` z `blur(35px)`
+- **Vertical line** — 1px gradient z animacją `scaleY` przy wejściu GSAP
+- **Dokładne wartości letter-spacing:** `0.10em` (CTA), `0.15em` (heading/eyebrow), `0.20em` (overline)
+
+### 5.4 Rekomendacje
+
+1. Zaktualizować `design.md` sekcję 3 (Typografia) — zastąpić Oswald → Bebas Neue, poprawić opis CTA.
+2. Zaktualizować `design.md` sekcję 2 (Paleta) — dodać `--c-khaki` i `--c-warm`.
+3. Dodać do `design.md` sekcję opisującą techniki efektów wizualnych (gradient-text, glows, canvas).
+
+---
+
+*Dokument wygenerowany na podstawie analizy kodu źródłowego projektu (Next.js 14, Tailwind CSS, GSAP). Weryfikuje i uzupełnia `docs/branding.md` oraz `docs/design.md`. Aktualizuj przy każdej zmianie design tokenów lub komponentów bazowych.*
