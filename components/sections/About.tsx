@@ -9,15 +9,9 @@ import { useAboutAnimation } from './about/useAboutAnimation'
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null)
-  const verticalLineRef = useRef<HTMLSpanElement>(null)
-  const horizontalLineRef = useRef<HTMLSpanElement>(null)
   const highlights = siteContent.about.highlights
 
-  useAboutAnimation({
-    sectionRef,
-    verticalLineRef,
-    horizontalLineRef,
-  })
+  useAboutAnimation(sectionRef)
 
   return (
     <section
@@ -45,56 +39,42 @@ export default function About() {
           </div>
 
           <div className="md:col-span-7" data-about-item>
-            <div className={styles.textBlockWrap}>
-              <span
-                ref={verticalLineRef}
-                aria-hidden="true"
-                className={styles.verticalLine}
-              />
+            <div className="flex max-w-3xl flex-col items-center text-center" data-about-item>
+              <span className="ui-overline">POZNAJMY SIĘ</span>
+              <h2
+                id="about-heading"
+                className="mt-4 font-bebas text-5xl uppercase leading-[0.92] tracking-wide text-warm-white sm:text-6xl"
+              >
+                {siteContent.about.title}
+              </h2>
+              <span aria-hidden="true" className={styles.sectionTitleAccent} />
+            </div>
 
-              <span
-                ref={horizontalLineRef}
-                aria-hidden="true"
-                className={styles.horizontalLine}
-              />
+            <p className="max-w-[34ch] font-inter text-lg leading-relaxed text-warm-white/95">
+              {siteContent.about.lead}
+            </p>
+            <p className="mt-4 max-w-[50ch] font-inter text-base leading-relaxed text-warm-gray">
+              {siteContent.about.description}
+            </p>
 
-              <div className="flex max-w-3xl flex-col items-center text-center" data-about-item>
-                <span className="ui-overline">POZNAJMY SIĘ</span>
-                <h2
-                  id="about-heading"
-                  className="mt-4 font-bebas text-5xl uppercase leading-[0.92] tracking-wide text-warm-white sm:text-6xl"
+            <ul className={styles.highlightsGrid} aria-label="Wyróżniki" data-about-highlights>
+              {highlights.map((highlight, index) => (
+                <li
+                  key={highlight.title}
+                  className={`${styles.highlightItem} ${index < 2 ? styles.highlightItemPrimary : styles.highlightItemSecondary}`}
+                  data-about-highlight
                 >
-                  {siteContent.about.title}
-                </h2>
-                <span aria-hidden="true" className={styles.sectionTitleAccent} />
-              </div>
+                  <div className={styles.highlightTopLine} aria-hidden="true" />
+                  <h3 className="font-bebas text-[1.1rem] uppercase leading-[1.05] tracking-[0.02em] text-warm-white sm:text-[1.2rem]">{highlight.title}</h3>
+                  <p className="mt-1.5 font-inter text-[0.8125rem] leading-6 text-warm-gray/95 sm:text-sm">{highlight.description}</p>
+                </li>
+              ))}
+            </ul>
 
-              <p className="max-w-[34ch] font-inter text-lg leading-relaxed text-warm-white/95">
-                {siteContent.about.lead}
-              </p>
-              <p className="mt-4 max-w-[50ch] font-inter text-base leading-relaxed text-warm-gray">
-                {siteContent.about.description}
-              </p>
-
-              <ul className={styles.highlightsGrid} aria-label="Wyróżniki" data-about-highlights>
-                {highlights.map((highlight, index) => (
-                  <li
-                    key={highlight.title}
-                    className={`${styles.highlightItem} ${index < 2 ? styles.highlightItemPrimary : styles.highlightItemSecondary}`}
-                    data-about-highlight
-                  >
-                    <div className={styles.highlightTopLine} aria-hidden="true" />
-                    <h3 className="font-bebas text-[1.1rem] uppercase leading-[1.05] tracking-[0.02em] text-warm-white sm:text-[1.2rem]">{highlight.title}</h3>
-                    <p className="mt-1.5 font-inter text-[0.8125rem] leading-6 text-warm-gray/95 sm:text-sm">{highlight.description}</p>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-8">
-                <a href="#services" className={styles.ctaLink}>
-                  {siteContent.about.ctaLabel}
-                </a>
-              </div>
+            <div className="mt-8">
+              <a href="#services" className={styles.ctaLink}>
+                {siteContent.about.ctaLabel}
+              </a>
             </div>
           </div>
         </div>

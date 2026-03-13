@@ -11,17 +11,7 @@ const ANIMATION = {
   SCROLL_START: 'top 85%',
 } as const
 
-type AboutAnimationRefs = {
-  sectionRef: RefObject<HTMLElement>
-  verticalLineRef: RefObject<HTMLSpanElement>
-  horizontalLineRef: RefObject<HTMLSpanElement>
-}
-
-export function useAboutAnimation({
-  sectionRef,
-  verticalLineRef,
-  horizontalLineRef,
-}: AboutAnimationRefs) {
+export function useAboutAnimation(sectionRef: RefObject<HTMLElement>) {
   useLayoutEffect(() => {
     let shouldCleanup = false
     let observer: IntersectionObserver | undefined
@@ -42,19 +32,14 @@ export function useAboutAnimation({
       const ctx = gsap.context(() => {
         const items = gsap.utils.toArray<HTMLElement>('[data-about-item]')
         const highlights = gsap.utils.toArray<HTMLElement>('[data-about-highlight]')
-        const lineTargets = [verticalLineRef.current, horizontalLineRef.current].filter((el): el is HTMLElement => el !== null)
 
         if (prefersReducedMotion) {
           gsap.set([...items, ...highlights], { autoAlpha: 1, y: 0, clearProps: 'transform' })
-          if (verticalLineRef.current) gsap.set(verticalLineRef.current, { scaleY: 1 })
-          if (horizontalLineRef.current) gsap.set(horizontalLineRef.current, { scaleX: 1 })
           return
         }
 
         gsap.set(items, { autoAlpha: 0, y: ANIMATION.INITIAL_Y })
         gsap.set(highlights, { autoAlpha: 0, y: ANIMATION.INITIAL_Y })
-        if (verticalLineRef.current) gsap.set(verticalLineRef.current, { scaleY: 0 })
-        if (horizontalLineRef.current) gsap.set(horizontalLineRef.current, { scaleX: 0 })
 
         gsap.to(items, {
           autoAlpha: 1,
@@ -81,31 +66,6 @@ export function useAboutAnimation({
           },
         })
 
-        if (lineTargets.length > 0) {
-          const lineTl = gsap.timeline({
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: ANIMATION.SCROLL_START,
-              once: true,
-            },
-          })
-
-          if (verticalLineRef.current) {
-            lineTl.to(verticalLineRef.current, {
-              scaleY: 1,
-              duration: 0.6,
-              ease: 'power2.out',
-            })
-          }
-
-          if (horizontalLineRef.current) {
-            lineTl.to(horizontalLineRef.current, {
-              scaleX: 1,
-              duration: 0.6,
-              ease: 'power2.out',
-            })
-          }
-        }
       }, sectionRef)
 
       revertContext = () => ctx.revert()
