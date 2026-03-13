@@ -248,8 +248,15 @@
 
 .desktopPortraitStage {
   position: relative;
-  width: min(100%, 920px);
-  height: min(92vh, 960px);
+  width: min(108%, 980px);
+  height: min(96vh, 1020px);
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .desktopPortraitStage {
+    transform: translateX(-6rem);
+  }
 }
 
 .portraitFrame {
@@ -258,28 +265,33 @@
   height: 100%;
 }
 
+.desktopPortraitImage {
+  transform: scale(1.24);
+  transform-origin: center center;
+}
+
 .portraitHalo {
   position: absolute;
-  inset: 9% 16% 18%;
+  inset: 6% 12% 14%;
   z-index: 0;
   border-radius: 46% 54% 44% 56% / 52% 44% 56% 48%;
   pointer-events: none;
   background:
     radial-gradient(
       ellipse at 52% 34%,
-      rgb(255 238 175 / 0.34) 0%,
-      rgb(var(--c-gold) / 0.24) 30%,
-      rgb(var(--c-gold) / 0.11) 52%,
-      transparent 70%
+      rgb(255 238 175 / 0.5) 0%,
+      rgb(var(--c-gold) / 0.34) 32%,
+      rgb(var(--c-gold) / 0.18) 56%,
+      transparent 76%
     ),
     radial-gradient(
       ellipse at 50% 62%,
-      rgb(var(--c-khaki) / 0.16) 0%,
-      rgb(var(--c-gold) / 0.08) 34%,
-      transparent 66%
+      rgb(var(--c-khaki) / 0.24) 0%,
+      rgb(var(--c-gold) / 0.14) 38%,
+      transparent 72%
     );
-  filter: blur(24px);
-  opacity: 0.88;
+  filter: blur(34px);
+  opacity: 1;
 }
 
 /* ── HeroGlowScene — canvas star field ──────────────────────────────────── */
