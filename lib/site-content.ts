@@ -25,29 +25,29 @@ export const siteContent = {
     ],
   },
   about: {
-    title: process.env.NEXT_PUBLIC_ABOUT_TITLE || 'O MNIE',
+    title: process.env.NEXT_PUBLIC_ABOUT_TITLE || 'Pracuję tam gdzie dzieje się akcja',
     lead:
       process.env.NEXT_PUBLIC_ABOUT_LEAD
-      || 'Jestem fotografem i operatorem wideo. Pracuję tam, gdzie tempo jest wysokie, a emocje prawdziwe.',
+      || 'Człowiek od zawsze opowiadał historie.\nNajpierw słowem.\nPotem obrazem.\nZ czasem nauczyliśmy się pisać.\nA dziś…',
     description:
       process.env.NEXT_PUBLIC_ABOUT_DESCRIPTION
-      || 'Od eventów militarno-survivalowych i off-roadu po śluby i sesje rodzinne. Niezależnie od kontekstu dostajesz ten sam standard: reportaż, który oddaje klimat wydarzenia bez sztucznego pozowania.',
+      || 'Dziś opowiadamy historie filmem.\nW XXI wieku to właśnie film stał się językiem emocji, marek i wspomnień.\n\nI tutaj zaczyna się moja rola.',
     highlights: [
       {
-        title: 'Dwa światy, jeden styl',
-        description: 'Akcja, teren i ruch łączę z uważnością na relacje i emocje ludzi.',
+        title: 'Słowo to za mało',
+        description: 'Są momenty które można tylko pokazać — nie opisać.',
       },
       {
-        title: 'Praca w warunkach dynamicznych',
-        description: 'Sprawnie działam pod presją czasu, zmiennego światła i nieprzewidywalnego przebiegu wydarzeń.',
+        title: 'Pracuję tam gdzie dzieje się akcja',
+        description: 'Teren, presja czasu, zmienne światło — to moje naturalne środowisko.',
       },
       {
-        title: 'Materiał gotowy do publikacji',
-        description: 'Dostarczam kadry i ujęcia przygotowane pod social media, stronę i materiały promocyjne.',
+        title: 'Twoja historia gotowa do publikacji',
+        description: 'Materiał przygotowany pod social media, stronę i komunikację marki.',
       },
       {
-        title: 'Sprawny proces współpracy',
-        description: 'Przed realizacją ustalamy plan i priorytety, a po wydarzeniu otrzymujesz materiał w uzgodnionym terminie.',
+        title: 'Od akcji po emocje',
+        description: 'Militaria, off-road, śluby, rodzina — każde wydarzenie ma swoją historię. Ja ją znajduję.',
       },
     ],
     ctaLabel: process.env.NEXT_PUBLIC_ABOUT_CTA_LABEL || 'Sprawdź ofertę',

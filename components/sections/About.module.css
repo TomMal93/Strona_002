@@ -25,13 +25,12 @@
   margin-top: 0.95rem;
   display: block;
   height: 1px;
-  width: clamp(10rem, 24vw, 16rem);
+  width: 100%;
   background: linear-gradient(
     90deg,
-    transparent 0%,
-    rgb(var(--c-gold) / 0.55) 15%,
-    rgb(255 238 175 / 0.90) 50%,
-    rgb(var(--c-gold) / 0.55) 85%,
+    rgb(var(--c-gold) / 0.55) 0%,
+    rgb(255 238 175 / 0.90) 30%,
+    rgb(var(--c-gold) / 0.35) 70%,
     transparent 100%
   );
 }
@@ -227,4 +226,3 @@
     filter: none;
   }
 }
-
