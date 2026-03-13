@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { gsap } from 'gsap'
 
 const NAV_ITEMS = [
-  { label: 'O MNIE', href: '#about' },
   { label: 'GALERIA', href: '#portfolio' },
   { label: 'KONTAKT', href: '#contact' },
 ] as const
