@@ -15,7 +15,7 @@ test('site content exposes required SEO, Hero, About and Services copy fields', 
   assert.equal(typeof siteContent.about.ctaLabel, 'string')
   assert.equal(typeof siteContent.about.imageAlt, 'string')
   assert.ok(Array.isArray(siteContent.about.highlights))
-  assert.equal(siteContent.about.highlights.length, 3)
+  assert.equal(siteContent.about.highlights.length, 4)
   assert.equal(typeof siteContent.services.title, 'string')
   assert.equal(typeof siteContent.services.subtitle, 'string')
   assert.ok(Array.isArray(siteContent.services.items))
