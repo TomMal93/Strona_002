@@ -81,7 +81,7 @@
 
 ## 10. Dostępność
 
-- Semantyka: `<section id="o-mnie" aria-label="O mnie">`.
+- Semantyka: `<section id="about" aria-label="O mnie">`.
 - Hierarchia: `h2` + lista wyróżników jako `ul/li`.
 - Alt zdjęcia: opis kontekstowy (co się dzieje, gdzie, kto).
 - Kontrast tekstu: minimum WCAG AA.
@@ -92,3 +92,19 @@
 - Sekcja domyka narrację po Hero i prowadzi do oferty.
 - CTA jest wyraźnie widoczne na desktop i mobile.
 - Sekcja pozostaje spójna z kierunkiem `Tactical Elegance`.
+
+## 12. Mapa danych `siteContent.about` -> UI
+
+Źródło danych: `lib/site-content.ts` (`siteContent.about`).
+
+- `siteContent.about.title` -> nagłówek sekcji (`h2`).
+- `siteContent.about.lead` -> lead (pierwszy blok copy pod nagłówkiem).
+- `siteContent.about.description` -> opis uzupełniający pod leadem.
+- `siteContent.about.highlights[0..2].title` -> tytuły wyróżników (lista `ul/li`).
+- `siteContent.about.highlights[0..2].description` -> opisy wyróżników.
+- `siteContent.about.ctaLabel` -> etykieta mini CTA.
+- `siteContent.about.imageAlt` -> `alt` dla zdjęcia autora.
+
+Uwagi implementacyjne:
+- Utrzymać dokładnie 3 wyróżniki w UI (zgodnie z założeniem sekcji).
+- Przy braku któregoś pola z ENV używać fallbacków z `lib/site-content.ts`.
