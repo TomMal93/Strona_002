@@ -82,6 +82,7 @@
     radial-gradient(130% 90% at 12% -8%, rgb(180 120 80 / 0.2), transparent 55%),
     radial-gradient(120% 80% at 100% 100%, rgb(var(--c-gold) / 0.16), transparent 60%),
     linear-gradient(145deg, rgb(80 55 35 / 0.18) 0%, transparent 40%),
+    repeating-linear-gradient(125deg, rgb(38 28 18 / 0.22) 0, rgb(38 28 18 / 0.22) 8px, rgb(28 20 12 / 0.28) 8px, rgb(28 20 12 / 0.28) 16px),
     linear-gradient(160deg, rgb(26 19 15 / 0.97) 0%, rgb(21 15 11 / 0.98) 100%);
 }
 
@@ -101,6 +102,7 @@
     radial-gradient(130% 90% at 12% -8%, rgb(156 165 128 / 0.22), transparent 55%),
     radial-gradient(120% 80% at 100% 100%, rgb(var(--c-gold) / 0.16), transparent 60%),
     linear-gradient(145deg, rgb(78 84 63 / 0.2) 0%, transparent 40%),
+    repeating-linear-gradient(125deg, rgb(38 41 33 / 0.22) 0, rgb(38 41 33 / 0.22) 8px, rgb(28 31 24 / 0.28) 8px, rgb(28 31 24 / 0.28) 16px),
     linear-gradient(160deg, rgb(18 20 16 / 0.97) 0%, rgb(15 17 13 / 0.98) 100%);
 }
 
