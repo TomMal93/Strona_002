@@ -6,6 +6,7 @@ import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './About.module.css'
 import { useAboutAnimation } from './about/useAboutAnimation'
+import { getHighlightVariant } from './about/highlightLayout'
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -59,17 +60,24 @@ export default function About() {
               </p>
 
               <ul className={styles.highlightsGrid} aria-label="Wyróżniki" data-about-highlights>
-                {highlights.map((highlight, index) => (
+                {highlights.map((highlight, index) => {
+                  const variant = getHighlightVariant(index)
+
+                  return (
                   <li
                     key={highlight.title}
-                    className={`${styles.highlightItem} ${index < 2 ? styles.highlightItemPrimary : styles.highlightItemSecondary}`}
+                    className={cn(
+                      styles.highlightItem,
+                      variant === 'primary' ? styles.highlightItemPrimary : styles.highlightItemSecondary,
+                    )}
                     data-about-highlight
                   >
                     <div className={styles.highlightTopLine} aria-hidden="true" />
                     <h3 className="font-bebas text-[1.1rem] uppercase leading-[1.05] tracking-[0.02em] text-warm-white sm:text-[1.2rem]">{highlight.title}</h3>
                     <p className="mt-1.5 font-inter text-[0.8125rem] leading-6 text-warm-gray/95 sm:text-sm">{highlight.description}</p>
                   </li>
-                ))}
+                  )
+                })}
               </ul>
 
               <div className="mt-8">

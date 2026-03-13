@@ -1,14 +1,19 @@
 'use client'
 
 import { useRef } from 'react'
-import { siteContent, type ServiceIconName } from '@/lib/site-content'
+import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './Services.module.css'
 import { ServiceIcon } from './services/ServiceIcon'
 import { useServicesAnimation } from './services/useServicesAnimation'
+import {
+  getCardVariant,
+  orderServiceItems,
+  splitServiceRows,
+  type CardVariant,
+} from './services/serviceLayout'
 
 type ServiceItem = (typeof siteContent.services.items)[number]
-type CardVariant = 'highlight' | 'military'
 type CardStyleClassNames = {
   card: string
   line: string
@@ -18,7 +23,6 @@ type CardStyleClassNames = {
   icon: string
 }
 
-const HIGHLIGHT_ICONS = new Set<ServiceIconName>(['heart', 'flag'])
 
 const DESKTOP_START_CLASS_NAMES = [
   'lg:col-start-2',
@@ -30,16 +34,6 @@ const DESKTOP_START_CLASS_NAMES = [
 const TOP_ROW_START_CLASS_NAMES = DESKTOP_START_CLASS_NAMES.slice(0, 2)
 const BOTTOM_ROW_START_CLASS_NAMES = DESKTOP_START_CLASS_NAMES.slice(2)
 const TOP_ROW_COUNT = 2
-
-function getCardVariant(icon: ServiceIconName): CardVariant {
-  return HIGHLIGHT_ICONS.has(icon) ? 'highlight' : 'military'
-}
-
-function orderServiceItems(items: readonly ServiceItem[]): ServiceItem[] {
-  const highlightItems = items.filter((item) => HIGHLIGHT_ICONS.has(item.icon))
-  const regularItems = items.filter((item) => !HIGHLIGHT_ICONS.has(item.icon))
-  return [...highlightItems, ...regularItems]
-}
 
 const CARD_STYLE_MAP: Record<CardVariant, CardStyleClassNames> = {
   highlight: {
@@ -143,8 +137,7 @@ function ServiceCardsRow({ items, startClassNames, colsClass = '' }: ServiceCard
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null)
   const orderedItems = orderServiceItems(siteContent.services.items)
-  const topRowItems = orderedItems.slice(0, TOP_ROW_COUNT)
-  const bottomRowItems = orderedItems.slice(TOP_ROW_COUNT)
+  const [topRowItems, bottomRowItems] = splitServiceRows(orderedItems, TOP_ROW_COUNT)
 
   useServicesAnimation(sectionRef)
 
