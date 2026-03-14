@@ -12,23 +12,12 @@ export function getCardVariant(icon: ServiceIconName): CardVariant {
   return HIGHLIGHT_ICONS.has(icon) ? 'highlight' : 'military'
 }
 
+const DISPLAY_ORDER: ServiceIconName[] = ['drone', 'heart', 'crosshair', 'flag', 'wheel']
+
 export function orderServiceItems<T extends WithServiceIcon>(items: readonly T[]): T[] {
-  const groupedItems = items.reduce(
-    (acc, item) => {
-      if (HIGHLIGHT_ICONS.has(item.icon)) {
-        acc.highlight.push(item)
-      } else {
-        acc.regular.push(item)
-      }
-
-      return acc
-    },
-    { highlight: [] as T[], regular: [] as T[] },
-  )
-
-  return [...groupedItems.highlight, ...groupedItems.regular]
-}
-
-export function splitServiceRows<T>(items: readonly T[], topRowCount: number): [T[], T[]] {
-  return [items.slice(0, topRowCount), items.slice(topRowCount)]
+  const byIcon = new Map(items.map((item) => [item.icon, item]))
+  return DISPLAY_ORDER.flatMap((icon) => {
+    const item = byIcon.get(icon)
+    return item ? [item] : []
+  })
 }
