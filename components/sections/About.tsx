@@ -112,6 +112,7 @@ export default function About() {
 
                 <p ref={descriptionRef} className={styles.viewfinderDesc}>
                   {siteContent.about.description
+                    .split('I tutaj zaczyna się moja rola.')[0]
                     .split('filmem.')
                     .flatMap((part, index, array) => {
                       if (index === array.length - 1) return [part.trimStart()]
@@ -125,6 +126,9 @@ export default function About() {
                         return [chunk, 'wspomnień.', <br key={`desc-break-wspomnien-${index}-${chunkIndex}`} />]
                       })
                     })}
+                  <strong className={styles.viewfinderEmphasis}>
+                    I tutaj zaczyna się moja rola.
+                  </strong>
                 </p>
               </div>
             </div>
@@ -136,14 +140,14 @@ export default function About() {
                   key={highlight.title}
                   ref={setHighlightRef(index)}
                   className={styles.paramItem}
+                  aria-label={`${highlight.title}. ${highlight.description}`}
                 >
                   <span className={styles.paramLabel}>{highlight.title}</span>
-                  <span className={styles.paramDesc}>{highlight.description}</span>
                 </li>
               ))}
             </ul>
 
-            <div ref={ctaRef} className="mt-6">
+            <div ref={ctaRef} className="mt-6 flex justify-center">
               <a href="#services" className={styles.ctaLink}>
                 {siteContent.about.ctaLabel}
               </a>

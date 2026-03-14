@@ -34,20 +34,16 @@ export const siteContent = {
       || 'Dziś opowiadamy historie filmem.\nW XXI wieku to właśnie film stał się językiem emocji, marek i wspomnień.\n\nI tutaj zaczyna się moja rola.',
     highlights: [
       {
-        title: 'Słowo to za mało',
-        description: 'Są momenty które można tylko pokazać — nie opisać.',
+        title: 'Autentyczne momenty',
+        description: 'Materiał, który możesz od razu wykorzystać na stronie, w social mediach i komunikacji marki.',
       },
       {
-        title: 'Pracuję tam gdzie dzieje się akcja',
-        description: 'Teren, presja czasu, zmienne światło — to moje naturalne środowisko.',
+        title: 'Naturalny reportaż',
+        description: 'Naturalne kadry i prawdziwe emocje bez ustawiania ludzi i zatrzymywania chwili.',
       },
       {
-        title: 'Twoja historia gotowa do publikacji',
-        description: 'Materiał przygotowany pod social media, stronę i komunikację marki.',
-      },
-      {
-        title: 'Od akcji po emocje',
-        description: 'Militaria, off-road, śluby, rodzina — każde wydarzenie ma swoją historię. Ja ją znajduję.',
+        title: 'Prawdziwe emocje',
+        description: 'Od dynamicznych wydarzeń po kameralne momenty, szukam historii która naprawdę zostaje.',
       },
     ],
     ctaLabel: process.env.NEXT_PUBLIC_ABOUT_CTA_LABEL || 'Sprawdź ofertę',
