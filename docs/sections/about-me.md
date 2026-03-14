@@ -17,7 +17,7 @@
 
 - Ton: konkretny, prosty, obrazowy, bez patosu.
 - Każde zdanie ma odpowiadać na „co z tego ma klient?”.
-- Maksymalnie 2–3 krótkie zdania leadu + 3 wyróżniki.
+- Maksymalnie 2–3 krótkie zdania leadu + 1 mocna obietnica sekcji.
 - Przykładowa oś komunikatu:
   - „Pracuję w ruchu i pod presją czasu.”
   - „Łapię emocje bez ustawiania ludzi.”
@@ -29,7 +29,7 @@
 
 - Siatka 12 kolumn, podział `5/7`.
 - Lewa kolumna (5): zdjęcie autora + subtelne halo.
-- Prawa kolumna (7): eyebrow, nagłówek, lead, lista wyróżników, mini CTA.
+- Prawa kolumna (7): eyebrow, nagłówek, lead, mocna obietnica, mini CTA.
 - Odstępy sekcji: `py-20 md:py-28`.
 - Kontener: `max-w-content`.
 
@@ -40,7 +40,7 @@
   2. nagłówek,
   3. zdjęcie,
   4. lead,
-  5. lista 3 wyróżników,
+  5. jedna mocna obietnica,
   6. CTA.
 - Rytm odstępów: `gap-6` lub `gap-8`.
 
@@ -61,7 +61,7 @@
 ## 7. Elementy sekcji
 
 - **Blok bio:** kim jestem + jak pracuję.
-- **3 wyróżniki:** doświadczenie, niezawodność, styl reportażu / efekt końcowy.
+- **Jedna obietnica:** zdanie, które komunikuje wartość końcowego materiału i emocjonalny efekt dla klienta.
 - **Mini CTA:**
   - primary: `Zobacz ofertę`,
   - opcjonalnie ghost: `Zobacz realizacje`.
@@ -100,11 +100,10 @@
 - `siteContent.about.title` -> nagłówek sekcji (`h2`).
 - `siteContent.about.lead` -> lead (pierwszy blok copy pod nagłówkiem).
 - `siteContent.about.description` -> opis uzupełniający pod leadem.
-- `siteContent.about.highlights[0..2].title` -> tytuły wyróżników (lista `ul/li`).
-- `siteContent.about.highlights[0..2].description` -> opisy wyróżników.
+- `siteContent.about.statement` -> główna obietnica sekcji pod blokiem copy.
 - `siteContent.about.ctaLabel` -> etykieta mini CTA.
 - `siteContent.about.imageAlt` -> `alt` dla zdjęcia autora.
 
 Uwagi implementacyjne:
-- Utrzymać dokładnie 3 wyróżniki w UI (zgodnie z założeniem sekcji).
+- Utrzymać jedną krótką obietnicę w UI, bez powrotu do listy generycznych wyróżników.
 - Przy braku któregoś pola z ENV używać fallbacków z `lib/site-content.ts`.

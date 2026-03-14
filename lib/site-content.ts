@@ -32,21 +32,10 @@ export const siteContent = {
     description:
       process.env.NEXT_PUBLIC_ABOUT_DESCRIPTION
       || 'Dziś opowiadamy historie filmem.\nW XXI wieku to właśnie film stał się językiem emocji, marek i wspomnień.\n\nI tutaj zaczyna się moja rola.',
-    highlights: [
-      {
-        title: 'Autentyczne momenty',
-        description: 'Materiał, który możesz od razu wykorzystać na stronie, w social mediach i komunikacji marki.',
-      },
-      {
-        title: 'Naturalny reportaż',
-        description: 'Naturalne kadry i prawdziwe emocje bez ustawiania ludzi i zatrzymywania chwili.',
-      },
-      {
-        title: 'Prawdziwe emocje',
-        description: 'Od dynamicznych wydarzeń po kameralne momenty, szukam historii która naprawdę zostaje.',
-      },
-    ],
-    ctaLabel: process.env.NEXT_PUBLIC_ABOUT_CTA_LABEL || 'Sprawdź ofertę',
+    statement:
+      process.env.NEXT_PUBLIC_ABOUT_STATEMENT
+      || 'Tworzę materiał, który pozwala wrócić nie tylko do obrazu, ale przede wszystkim do emocji.',
+    ctaLabel: process.env.NEXT_PUBLIC_ABOUT_CTA_LABEL || 'Zobacz jak pracuję',
     imageAlt:
       process.env.NEXT_PUBLIC_ABOUT_IMAGE_ALT
       || 'Fotograf i operator drona — portret z dronem i kontrolerem',
@@ -55,7 +44,7 @@ export const siteContent = {
     title: process.env.NEXT_PUBLIC_SERVICES_TITLE || 'Oferta',
     subtitle:
       process.env.NEXT_PUBLIC_SERVICES_SUBTITLE
-      || 'Od reportażu eventowego po ujęcia z drona. Każdy materiał realizuję z naciskiem na dynamikę, klimat i historię.',
+      || 'Od reportażu eventowego po ujęcia z drona.\nKażdy materiał realizuję z naciskiem na dynamikę, klimat i historię.',
     items: [
       {
         icon: 'heart',

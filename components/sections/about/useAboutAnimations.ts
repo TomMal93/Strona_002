@@ -10,7 +10,7 @@ export type AboutAnimationRefs = {
   viewfinderRef: RefObject<HTMLDivElement>
   leadRef: RefObject<HTMLParagraphElement>
   descriptionRef: RefObject<HTMLParagraphElement>
-  highlightRefs: RefObject<(HTMLLIElement | null)[]>
+  statementRef: RefObject<HTMLDivElement>
   ctaRef: RefObject<HTMLDivElement>
 }
 
@@ -47,7 +47,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         viewfinderRef,
         leadRef,
         descriptionRef,
-        highlightRefs,
+        statementRef,
         ctaRef,
       } = refs
 
@@ -56,12 +56,9 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
           titleRef.current as HTMLElement | null,
           leadRef.current as HTMLElement | null,
           descriptionRef.current as HTMLElement | null,
+          statementRef.current as HTMLElement | null,
           ctaRef.current as HTMLElement | null,
         ].filter((el): el is HTMLElement => el !== null)
-
-        const cards = (highlightRefs.current ?? []).filter(
-          (el): el is HTMLLIElement => el !== null,
-        )
 
         const corners = viewfinderRef.current
           ? Array.from(viewfinderRef.current.querySelectorAll('[class*="cornerMark"]'))
@@ -71,7 +68,6 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
 
         if (prefersReducedMotion) {
           gsap.set(fadeElements, { autoAlpha: 1, y: 0 })
-          gsap.set(cards, { autoAlpha: 1, y: 0 })
           if (titleAccentRef.current)
             gsap.set(titleAccentRef.current, { scaleX: 1 })
           if (corners.length) gsap.set(corners, { autoAlpha: 1 })
@@ -81,7 +77,6 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         /* ── Initial states ─────────────────────────────────────────── */
 
         gsap.set(fadeElements, { autoAlpha: 0, y: 30 })
-        gsap.set(cards, { autoAlpha: 0, y: 20 })
         if (corners.length) gsap.set(corners, { autoAlpha: 0 })
 
         if (titleAccentRef.current)
@@ -138,14 +133,12 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
           '-=0.35',
         )
 
-        // Camera params stagger in
-        tl.to(cards, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.6,
-          ease: 'power3.out',
-          stagger: 0.08,
-        }, '-=0.3')
+        // Statement
+        tl.to(
+          statementRef.current,
+          { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' },
+          '-=0.3',
+        )
 
         // CTA
         tl.to(

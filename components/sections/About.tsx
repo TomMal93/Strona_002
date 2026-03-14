@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useCallback, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
@@ -19,7 +19,6 @@ function formatHudTime(frame: number): string {
 }
 
 export default function About() {
-  const highlights = siteContent.about.highlights
   const [hudFrame, setHudFrame] = useState(307458)
 
   const sectionRef = useRef<HTMLElement>(null!)
@@ -28,15 +27,8 @@ export default function About() {
   const viewfinderRef = useRef<HTMLDivElement>(null!)
   const leadRef = useRef<HTMLParagraphElement>(null!)
   const descriptionRef = useRef<HTMLParagraphElement>(null!)
-  const highlightRefs = useRef<(HTMLLIElement | null)[]>([])
+  const statementRef = useRef<HTMLDivElement>(null!)
   const ctaRef = useRef<HTMLDivElement>(null!)
-
-  const setHighlightRef = useCallback(
-    (index: number) => (el: HTMLLIElement | null) => {
-      highlightRefs.current[index] = el
-    },
-    [],
-  )
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -56,7 +48,7 @@ export default function About() {
     viewfinderRef,
     leadRef,
     descriptionRef,
-    highlightRefs,
+    statementRef,
     ctaRef,
   })
 
@@ -99,7 +91,7 @@ export default function About() {
                 >
                   {siteContent.about.title}
                 </h2>
-                <span aria-hidden="true" className={styles.sectionTitleAccentSoft} />
+                <span ref={titleAccentRef} aria-hidden="true" className={styles.sectionTitleAccentSoft} />
               </div>
 
               {/* Viewfinder frame */}
@@ -174,22 +166,17 @@ export default function About() {
               </div>
             </div>
 
-            {/* Camera-style parameters */}
-            <ul className={styles.cameraParams} aria-label="Wyróżniki">
-              {highlights.map((highlight, index) => (
-                <li
-                  key={highlight.title}
-                  ref={setHighlightRef(index)}
-                  className={styles.paramItem}
-                  aria-label={`${highlight.title}. ${highlight.description}`}
-                >
-                  <span className={styles.paramLabel}>{highlight.title}</span>
-                </li>
-              ))}
-            </ul>
+            <div ref={statementRef} className={styles.statementPanel}>
+              <span aria-hidden="true" className={styles.statementKicker}>
+                Core Promise
+              </span>
+              <p className={styles.aboutStatement}>
+                {siteContent.about.statement}
+              </p>
+            </div>
 
             <div ref={ctaRef} className="mt-6 flex justify-center">
-              <a href="#services" className={styles.ctaLink}>
+              <a href="#promo" className={styles.ctaLink}>
                 {siteContent.about.ctaLabel}
               </a>
             </div>
