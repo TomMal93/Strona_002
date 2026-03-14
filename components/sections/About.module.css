@@ -7,14 +7,28 @@
 
 .mediaHalo {
   position: absolute;
-  inset: -1.1rem;
+  inset: 4.5% 16% 12.5% -27%;
   z-index: var(--z-below);
   border-radius: 46% 54% 44% 56% / 52% 44% 56% 48%;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 52% 34%, rgb(255 238 175 / 0.34) 0%, rgb(var(--c-gold) / 0.24) 30%, transparent 70%),
-    radial-gradient(ellipse at 50% 62%, rgb(var(--c-khaki) / 0.16) 0%, transparent 66%);
-  filter: blur(24px);
+    radial-gradient(
+      ellipse at 48% 32%,
+      rgb(255 226 170 / 0.52) 0%,
+      rgb(236 176 96 / 0.38) 24%,
+      rgb(192 118 68 / 0.28) 52%,
+      rgb(132 72 58 / 0.16) 70%,
+      transparent 82%
+    ),
+    radial-gradient(
+      ellipse at 60% 64%,
+      rgb(224 154 92 / 0.2) 0%,
+      rgb(176 102 68 / 0.16) 38%,
+      rgb(120 68 72 / 0.1) 58%,
+      transparent 76%
+    );
+  filter: blur(36px);
+  opacity: 1;
 }
 
 .mediaFrame {
