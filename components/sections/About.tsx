@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
@@ -8,8 +8,19 @@ import styles from './About.module.css'
 import heroStyles from './Hero.module.css'
 import { useAboutAnimations } from './about/useAboutAnimations'
 
+function formatHudTime(frame: number): string {
+  const frames = frame % 24
+  const totalSeconds = Math.floor(frame / 24)
+  const seconds = totalSeconds % 60
+  const minutes = Math.floor(totalSeconds / 60) % 60
+  const hours = Math.floor(totalSeconds / 3600) % 24
+
+  return [hours, minutes, seconds, frames].map(value => String(value).padStart(2, '0')).join(':')
+}
+
 export default function About() {
   const highlights = siteContent.about.highlights
+  const [hudFrame, setHudFrame] = useState(307458)
 
   const sectionRef = useRef<HTMLElement>(null!)
   const titleRef = useRef<HTMLHeadingElement>(null!)
@@ -26,6 +37,17 @@ export default function About() {
     },
     [],
   )
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (mediaQuery.matches) return undefined
+
+    const timer = window.setInterval(() => {
+      setHudFrame(current => current + 1)
+    }, 80)
+
+    return () => window.clearInterval(timer)
+  }, [])
 
   useAboutAnimations({
     sectionRef,
@@ -87,13 +109,28 @@ export default function About() {
                 <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR}`} />
                 <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL}`} />
                 <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR}`} />
+                <div aria-hidden="true" className={styles.viewfinderHudTop}>
+                  <span className={styles.viewfinderBattery}>
+                    <span className={styles.viewfinderBatteryBody}>
+                      <span className={styles.viewfinderBatteryFill} />
+                      <span className={styles.viewfinderBatteryLevel}>99%</span>
+                    </span>
+                    <span className={styles.viewfinderBatteryCap} />
+                  </span>
+                  <div className={styles.viewfinderHudStatus}>
+                    <span className={styles.viewfinderOverline}>
+                      <span className={styles.viewfinderRecText}>REC</span>
+                    </span>
+                  </div>
+                </div>
+                <div aria-hidden="true" className={styles.viewfinderHudBottom}>
+                  <span className={styles.viewfinderResolution}>4K DCI / 25P</span>
+                  <span className={styles.viewfinderExposure}>ISO 800&nbsp;&nbsp;F2.8&nbsp;&nbsp;1/125</span>
+                  <span className={styles.viewfinderTimecode}>TC {formatHudTime(hudFrame)}</span>
+                </div>
 
                 {/* Content inside the viewfinder */}
                 <div className={styles.viewfinderContent}>
-                  <span className={styles.viewfinderOverline}>
-                    <span className={styles.viewfinderRecText}>REC</span>
-                  </span>
-
                   <p ref={leadRef} className={styles.viewfinderLead}>
                     {siteContent.about.lead
                       .split('historie.')

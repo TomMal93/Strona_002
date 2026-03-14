@@ -93,6 +93,108 @@
   padding: 2.8rem 1.4rem 1.6rem;
 }
 
+.viewfinderHudTop,
+.viewfinderHudBottom {
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  pointer-events: none;
+}
+
+.viewfinderHudTop {
+  top: 0.8rem;
+  justify-content: space-between;
+}
+
+.viewfinderHudBottom {
+  bottom: 0.7rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+}
+
+.viewfinderTimecode,
+.viewfinderResolution,
+.viewfinderBattery,
+.viewfinderExposure {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.54);
+  opacity: 0.88;
+}
+
+.viewfinderTimecode {
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
+  opacity: 0.92;
+  justify-self: end;
+  text-align: right;
+}
+
+.viewfinderExposure {
+  justify-self: center;
+  text-align: center;
+}
+
+.viewfinderBattery {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.18rem;
+}
+
+.viewfinderBatteryBody {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.7rem;
+  height: 1rem;
+  padding: 0 0.34rem;
+  border: 1px solid rgb(255 238 175 / 0.36);
+  border-radius: 2px;
+  overflow: hidden;
+  opacity: 0.6;
+}
+
+.viewfinderBatteryCap {
+  display: inline-block;
+  width: 0.16rem;
+  height: 0.48rem;
+  border-radius: 0 1px 1px 0;
+  background: rgb(255 238 175 / 0.36);
+  opacity: 0.6;
+}
+
+.viewfinderBatteryFill {
+  position: absolute;
+  inset: 0;
+  width: 99%;
+  background: rgb(255 238 175 / 0.78);
+}
+
+.viewfinderBatteryLevel {
+  position: relative;
+  z-index: 1;
+  line-height: 1;
+  color: rgb(12 12 12 / 0.92);
+}
+
+.viewfinderHudStatus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.45rem;
+}
+
 /* Corner marks — camera framing guides */
 .cornerMark {
   position: absolute;
@@ -134,15 +236,14 @@
   position: relative;
   display: grid;
   gap: 0.95rem;
+  padding-top: 1.6rem;
+  padding-bottom: 4rem;
   font-style: italic;
   text-align: center;
 }
 
 /* "REC" indicator — camera-style overline */
 .viewfinderOverline {
-  position: absolute;
-  top: -1.2rem;
-  right: 0;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -339,5 +440,41 @@
 
   .paramItem:hover {
     transform: none;
+  }
+}
+
+@media (width < 48rem) {
+  .viewfinder {
+    padding-inline: 1rem;
+  }
+
+  .viewfinderHudTop,
+  .viewfinderHudBottom {
+    left: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .viewfinderHudBottom {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .viewfinderTimecode,
+  .viewfinderResolution,
+  .viewfinderBattery,
+  .viewfinderExposure,
+  .viewfinderOverline {
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+  }
+
+  .viewfinderContent {
+    padding-top: 2rem;
+    padding-bottom: 3.9rem;
+  }
+
+  .viewfinderBatteryBody {
+    min-width: 2.35rem;
+    height: 0.92rem;
+    padding-inline: 0.25rem;
   }
 }
