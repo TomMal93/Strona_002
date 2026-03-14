@@ -64,72 +64,76 @@ export default function About() {
           </div>
 
           <div className="order-1 md:order-2 md:col-span-7 md:pl-4 lg:pl-8">
-            {/* Title */}
-            <div className="w-full text-center">
-              <h2
-                ref={titleRef}
-                id="about-heading"
-                className={cn(
-                  heroStyles.gradientTextPrimary,
-                  'font-bebas text-3xl uppercase leading-[0.96] tracking-wide sm:text-4xl',
-                )}
-              >
-                {siteContent.about.title}
-              </h2>
-              <span aria-hidden="true" className={styles.sectionTitleAccentSoft} />
-            </div>
+            <div className={styles.introCluster}>
+              {/* Title */}
+              <div className="w-full text-center">
+                <h2
+                  ref={titleRef}
+                  id="about-heading"
+                  className={cn(
+                    heroStyles.gradientTextPrimary,
+                    'font-bebas text-3xl uppercase leading-[0.96] tracking-wide sm:text-4xl',
+                  )}
+                >
+                  {siteContent.about.title}
+                </h2>
+                <span aria-hidden="true" className={styles.sectionTitleAccentSoft} />
+              </div>
 
-            {/* Viewfinder frame */}
-            <div ref={viewfinderRef} className={styles.viewfinder}>
-              {/* Corner marks */}
-              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />
-              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR}`} />
-              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL}`} />
-              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR}`} />
+              {/* Viewfinder frame */}
+              <div ref={viewfinderRef} className={styles.viewfinder}>
+                {/* Corner marks */}
+                <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />
+                <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR}`} />
+                <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL}`} />
+                <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR}`} />
 
-              {/* Content inside the viewfinder */}
-              <div className={styles.viewfinderContent}>
-                <span className={styles.viewfinderOverline}>REC</span>
+                {/* Content inside the viewfinder */}
+                <div className={styles.viewfinderContent}>
+                  <span className={styles.viewfinderOverline}>
+                    <span className={styles.viewfinderRecText}>REC</span>
+                  </span>
 
-                <p ref={leadRef} className={styles.viewfinderLead}>
-                  {siteContent.about.lead
-                    .split('historie.')
-                    .flatMap((part, index, array) => {
-                      if (index === array.length - 1) return [part.trimStart()]
-                      return [part, 'historie.', <br key={`lead-break-historie-${index}`} />]
-                    })
-                    .flatMap((part, index) => {
-                      if (typeof part !== 'string') return [part]
-                      const chunks = part.split('pisać.')
-                      return chunks.flatMap((chunk, chunkIndex) => {
-                        if (chunkIndex === chunks.length - 1) return [chunk]
-                        return [chunk, 'pisać.', <br key={`lead-break-pisac-${index}-${chunkIndex}`} />]
+                  <p ref={leadRef} className={styles.viewfinderLead}>
+                    {siteContent.about.lead
+                      .split('historie.')
+                      .flatMap((part, index, array) => {
+                        if (index === array.length - 1) return [part.trimStart()]
+                        return [part, 'historie.', <br key={`lead-break-historie-${index}`} />]
                       })
-                    })}
-                </p>
+                      .flatMap((part, index) => {
+                        if (typeof part !== 'string') return [part]
+                        const chunks = part.split('pisać.')
+                        return chunks.flatMap((chunk, chunkIndex) => {
+                          if (chunkIndex === chunks.length - 1) return [chunk]
+                          return [chunk, 'pisać.', <br key={`lead-break-pisac-${index}-${chunkIndex}`} />]
+                        })
+                      })}
+                  </p>
 
-                <span aria-hidden="true" className={styles.viewfinderDivider} />
+                  <span aria-hidden="true" className={styles.viewfinderDivider} />
 
-                <p ref={descriptionRef} className={styles.viewfinderDesc}>
-                  {siteContent.about.description
-                    .split('I tutaj zaczyna się moja rola.')[0]
-                    .split('filmem.')
-                    .flatMap((part, index, array) => {
-                      if (index === array.length - 1) return [part.trimStart()]
-                      return [part, 'filmem.', <br key={`desc-break-filmem-${index}`} />]
-                    })
-                    .flatMap((part, index) => {
-                      if (typeof part !== 'string') return [part]
-                      const chunks = part.split('wspomnień.')
-                      return chunks.flatMap((chunk, chunkIndex) => {
-                        if (chunkIndex === chunks.length - 1) return [chunk]
-                        return [chunk, 'wspomnień.', <br key={`desc-break-wspomnien-${index}-${chunkIndex}`} />]
+                  <p ref={descriptionRef} className={styles.viewfinderDesc}>
+                    {siteContent.about.description
+                      .split('I tutaj zaczyna się moja rola.')[0]
+                      .split('filmem.')
+                      .flatMap((part, index, array) => {
+                        if (index === array.length - 1) return [part.trimStart()]
+                        return [part, 'filmem.', <br key={`desc-break-filmem-${index}`} />]
                       })
-                    })}
-                  <strong className={styles.viewfinderEmphasis}>
-                    I tutaj zaczyna się moja rola.
-                  </strong>
-                </p>
+                      .flatMap((part, index) => {
+                        if (typeof part !== 'string') return [part]
+                        const chunks = part.split('wspomnień.')
+                        return chunks.flatMap((chunk, chunkIndex) => {
+                          if (chunkIndex === chunks.length - 1) return [chunk]
+                          return [chunk, 'wspomnień.', <br key={`desc-break-wspomnien-${index}-${chunkIndex}`} />]
+                        })
+                      })}
+                    <strong className={styles.viewfinderEmphasis}>
+                      I tutaj zaczyna się moja rola.
+                    </strong>
+                  </p>
+                </div>
               </div>
             </div>
 

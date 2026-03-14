@@ -39,6 +39,22 @@
 
 /* ── Title accent line ─────────────────────────────────────────────────── */
 
+.introCluster {
+  position: relative;
+}
+
+@media (width >= 48rem) {
+  .introCluster {
+    transform: translateY(-0.75rem);
+  }
+}
+
+@media (width >= 64rem) {
+  .introCluster {
+    transform: translateY(-1rem);
+  }
+}
+
 .sectionTitleAccent {
   margin-top: 0.95rem;
   display: block;
@@ -137,6 +153,11 @@
   color: rgb(var(--c-gold) / 0.6);
 }
 
+.viewfinderRecText {
+  display: inline-block;
+  animation: recPulse 1.6s ease-in-out infinite;
+}
+
 .viewfinderOverline::before {
   content: '';
   display: inline-block;
@@ -144,7 +165,18 @@
   height: 6px;
   border-radius: 50%;
   background: rgb(200 80 60 / 0.85);
-  box-shadow: 0 0 6px 1px rgb(200 80 60 / 0.4);
+  animation: recPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes recPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 /* Lead text — prominent, warm tint */
@@ -295,6 +327,14 @@
 @media (prefers-reduced-motion: reduce) {
   .mediaHalo {
     filter: none;
+  }
+
+  .viewfinderOverline::before {
+    animation: none;
+  }
+
+  .viewfinderRecText {
+    animation: none;
   }
 
   .paramItem:hover {
