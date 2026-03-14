@@ -14,7 +14,7 @@ export const siteContent = {
     headlineLine2: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_2 || 'Zapisuję emocje',
     subtitle:
       process.env.NEXT_PUBLIC_HERO_SUBTITLE
-      || 'Dokumentuję to, co warto pamiętać.\nOd pola bitwy po ślubny taniec.',
+      || 'Dokumentuję to, co warto pamiętać.\nOd pola bitwy po weselny taniec.',
     ctaLabel: process.env.NEXT_PUBLIC_HERO_CTA_LABEL || 'Skontaktuj się',
     aboutLabel: process.env.NEXT_PUBLIC_HERO_ABOUT_LABEL || 'O mnie',
     social: [
