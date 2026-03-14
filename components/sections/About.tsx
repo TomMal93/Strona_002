@@ -1,29 +1,53 @@
 'use client'
 
+import { useRef, useCallback } from 'react'
 import Image from 'next/image'
-import { useRef } from 'react'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './About.module.css'
-import { useAboutAnimation } from './about/useAboutAnimation'
-import { getHighlightVariant } from './about/highlightLayout'
+import heroStyles from './Hero.module.css'
+import { useAboutAnimations } from './about/useAboutAnimations'
 
 export default function About() {
-  const sectionRef = useRef<HTMLElement>(null)
   const highlights = siteContent.about.highlights
 
-  useAboutAnimation(sectionRef)
+  const sectionRef = useRef<HTMLElement>(null!)
+  const titleRef = useRef<HTMLHeadingElement>(null!)
+  const titleAccentRef = useRef<HTMLSpanElement>(null!)
+  const viewfinderRef = useRef<HTMLDivElement>(null!)
+  const leadRef = useRef<HTMLParagraphElement>(null!)
+  const descriptionRef = useRef<HTMLParagraphElement>(null!)
+  const highlightRefs = useRef<(HTMLLIElement | null)[]>([])
+  const ctaRef = useRef<HTMLDivElement>(null!)
+
+  const setHighlightRef = useCallback(
+    (index: number) => (el: HTMLLIElement | null) => {
+      highlightRefs.current[index] = el
+    },
+    [],
+  )
+
+  useAboutAnimations({
+    sectionRef,
+    titleRef,
+    titleAccentRef,
+    viewfinderRef,
+    leadRef,
+    descriptionRef,
+    highlightRefs,
+    ctaRef,
+  })
 
   return (
     <section
-      id="about"
       ref={sectionRef}
+      id="about"
       aria-label="O mnie"
-      className={cn('section-dark-bg px-6 py-20 md:py-28 lg:px-20')}
+      className="section-dark-bg px-6 py-20 md:py-28 lg:px-10"
     >
       <div className="mx-auto max-w-content">
         <div className="grid gap-8 md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
-          <div className="md:col-span-5" data-about-item>
+          <div className="order-2 md:order-1 md:col-span-5">
             <div className={styles.mediaShell}>
               <div aria-hidden="true" className={styles.mediaHalo} />
               <div className={styles.mediaFrame}>
@@ -33,58 +57,100 @@ export default function About() {
                   width={680}
                   height={1020}
                   className="h-full w-full object-cover"
-                  sizes="(max-width: 767px) 100vw, 40vw"
+                  sizes="(max-width: 767px) 100vw, 50vw"
                 />
               </div>
             </div>
           </div>
 
-          <div className="md:col-span-7" data-about-item>
-            <div className="flex max-w-3xl flex-col items-center text-center" data-about-item>
-              <span className="ui-overline">POZNAJMY SIĘ</span>
+          <div className="order-1 md:order-2 md:col-span-7 md:pl-4 lg:pl-8">
+            {/* Title */}
+            <div className="w-full text-center">
               <h2
+                ref={titleRef}
                 id="about-heading"
-                className="mt-4 font-bebas text-5xl uppercase leading-[0.92] tracking-wide text-warm-white sm:text-6xl"
+                className={cn(
+                  heroStyles.gradientTextPrimary,
+                  'font-bebas text-3xl uppercase leading-[0.96] tracking-wide sm:text-4xl',
+                )}
               >
                 {siteContent.about.title}
               </h2>
-              <span aria-hidden="true" className={styles.sectionTitleAccent} />
+              <span aria-hidden="true" className={styles.sectionTitleAccentSoft} />
             </div>
 
-            <div className={styles.glassPanel}>
-              <p className="max-w-[34ch] font-inter text-lg leading-relaxed text-warm-white/95">
-                {siteContent.about.lead}
-              </p>
-              <p className="mt-4 max-w-[50ch] font-inter text-base leading-relaxed text-warm-gray">
-                {siteContent.about.description}
-              </p>
+            {/* Viewfinder frame */}
+            <div ref={viewfinderRef} className={styles.viewfinder}>
+              {/* Corner marks */}
+              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />
+              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR}`} />
+              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL}`} />
+              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR}`} />
 
-              <ul className={styles.highlightsGrid} aria-label="Wyróżniki" data-about-highlights>
-                {highlights.map((highlight, index) => {
-                  const variant = getHighlightVariant(index)
+              {/* Content inside the viewfinder */}
+              <div className={styles.viewfinderContent}>
+                <span className={styles.viewfinderOverline}>REC</span>
 
-                  return (
-                  <li
-                    key={highlight.title}
-                    className={cn(
-                      styles.highlightItem,
-                      variant === 'primary' ? styles.highlightItemPrimary : styles.highlightItemSecondary,
-                    )}
-                    data-about-highlight
-                  >
-                    <div className={styles.highlightTopLine} aria-hidden="true" />
-                    <h3 className="font-bebas text-[1.1rem] uppercase leading-[1.05] tracking-[0.02em] text-warm-white sm:text-[1.2rem]">{highlight.title}</h3>
-                    <p className="mt-1.5 font-inter text-[0.8125rem] leading-6 text-warm-gray/95 sm:text-sm">{highlight.description}</p>
-                  </li>
-                  )
-                })}
-              </ul>
+                <p ref={leadRef} className={styles.viewfinderLead}>
+                  {siteContent.about.lead
+                    .split('historie.')
+                    .flatMap((part, index, array) => {
+                      if (index === array.length - 1) return [part.trimStart()]
+                      return [part, 'historie.', <br key={`lead-break-historie-${index}`} />]
+                    })
+                    .flatMap((part, index) => {
+                      if (typeof part !== 'string') return [part]
+                      const chunks = part.split('pisać.')
+                      return chunks.flatMap((chunk, chunkIndex) => {
+                        if (chunkIndex === chunks.length - 1) return [chunk]
+                        return [chunk, 'pisać.', <br key={`lead-break-pisac-${index}-${chunkIndex}`} />]
+                      })
+                    })}
+                </p>
 
-              <div className="mt-8">
-                <a href="#services" className={styles.ctaLink}>
-                  {siteContent.about.ctaLabel}
-                </a>
+                <span aria-hidden="true" className={styles.viewfinderDivider} />
+
+                <p ref={descriptionRef} className={styles.viewfinderDesc}>
+                  {siteContent.about.description
+                    .split('I tutaj zaczyna się moja rola.')[0]
+                    .split('filmem.')
+                    .flatMap((part, index, array) => {
+                      if (index === array.length - 1) return [part.trimStart()]
+                      return [part, 'filmem.', <br key={`desc-break-filmem-${index}`} />]
+                    })
+                    .flatMap((part, index) => {
+                      if (typeof part !== 'string') return [part]
+                      const chunks = part.split('wspomnień.')
+                      return chunks.flatMap((chunk, chunkIndex) => {
+                        if (chunkIndex === chunks.length - 1) return [chunk]
+                        return [chunk, 'wspomnień.', <br key={`desc-break-wspomnien-${index}-${chunkIndex}`} />]
+                      })
+                    })}
+                  <strong className={styles.viewfinderEmphasis}>
+                    I tutaj zaczyna się moja rola.
+                  </strong>
+                </p>
               </div>
+            </div>
+
+            {/* Camera-style parameters */}
+            <ul className={styles.cameraParams} aria-label="Wyróżniki">
+              {highlights.map((highlight, index) => (
+                <li
+                  key={highlight.title}
+                  ref={setHighlightRef(index)}
+                  className={styles.paramItem}
+                  aria-label={`${highlight.title}. ${highlight.description}`}
+                >
+                  <span className={styles.paramLabel}>{highlight.title}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div ref={ctaRef} className="mt-6 flex justify-center">
+              <a href="#services" className={styles.ctaLink}>
+                {siteContent.about.ctaLabel}
+              </a>
             </div>
           </div>
         </div>

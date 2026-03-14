@@ -71,17 +71,6 @@
   }
 }
 
-@keyframes desktop-image-in {
-  from {
-    opacity: 0;
-    transform: translate3d(12px, 16px, 0) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-}
-
 @keyframes mobile-panel-in {
   from {
     opacity: 0;
@@ -156,6 +145,11 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.heroHeading {
+  display: block;
+  padding-top: 0.12em;
 }
 
 .gradientTextSecondary {
@@ -248,8 +242,9 @@
 
 .desktopPortraitStage {
   position: relative;
-  width: min(100%, 920px);
-  height: min(92vh, 960px);
+  width: min(108%, 980px);
+  height: min(96vh, 1020px);
+  margin-inline: auto;
 }
 
 .portraitFrame {
@@ -258,28 +253,63 @@
   height: 100%;
 }
 
+.desktopPortraitImage {
+  transform: scale(1.24);
+  transform-origin: center center;
+}
+
 .portraitHalo {
   position: absolute;
-  inset: 9% 16% 18%;
+  inset: 5.5% 11.5% 13.5%;
   z-index: 0;
   border-radius: 46% 54% 44% 56% / 52% 44% 56% 48%;
   pointer-events: none;
   background:
     radial-gradient(
       ellipse at 52% 34%,
-      rgb(255 238 175 / 0.34) 0%,
-      rgb(var(--c-gold) / 0.24) 30%,
-      rgb(var(--c-gold) / 0.11) 52%,
-      transparent 70%
+      rgb(255 238 175 / 0.53) 0%,
+      rgb(var(--c-gold) / 0.36) 32%,
+      rgb(var(--c-gold) / 0.19) 56%,
+      transparent 77%
     ),
     radial-gradient(
       ellipse at 50% 62%,
-      rgb(var(--c-khaki) / 0.16) 0%,
-      rgb(var(--c-gold) / 0.08) 34%,
-      transparent 66%
+      rgb(var(--c-khaki) / 0.26) 0%,
+      rgb(var(--c-gold) / 0.15) 39%,
+      transparent 73%
     );
-  filter: blur(24px);
-  opacity: 0.88;
+  filter: blur(36px);
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .desktopPortraitImage {
+    animation: desktop-image-emerge 2.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .portraitHalo {
+    animation: desktop-halo-light-up 2.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes desktop-image-emerge {
+  from {
+    filter: brightness(0.42) saturate(0.88) contrast(1.04);
+  }
+  to {
+    filter: brightness(1) saturate(1) contrast(1);
+  }
+}
+
+@keyframes desktop-halo-light-up {
+  from {
+    opacity: 0.18;
+    filter: blur(44px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(36px);
+  }
 }
 
 /* ── HeroGlowScene — canvas star field ──────────────────────────────────── */
@@ -332,6 +362,11 @@
 
   .mobileImageEntrance,
   .mobilePanelEntrance {
+    animation: none;
+  }
+
+  .desktopPortraitImage,
+  .portraitHalo {
     animation: none;
   }
 

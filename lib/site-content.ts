@@ -10,8 +10,8 @@ export const siteContent = {
     || 'Fotografia i film — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
   hero: {
     eyebrow: process.env.NEXT_PUBLIC_HERO_EYEBROW || 'Fotografia & Film',
-    headlineLine1: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_1 || 'Zamrażam',
-    headlineLine2: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_2 || 'Chwile',
+    headlineLine1: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_1 || 'Zatrzymuję czas',
+    headlineLine2: process.env.NEXT_PUBLIC_HERO_HEADLINE_LINE_2 || 'Zapisuję emocje',
     subtitle:
       process.env.NEXT_PUBLIC_HERO_SUBTITLE
       || 'Dokumentuję to, co warto pamiętać.\nOd pola bitwy po ślubny taniec.',
@@ -25,29 +25,25 @@ export const siteContent = {
     ],
   },
   about: {
-    title: process.env.NEXT_PUBLIC_ABOUT_TITLE || 'O MNIE',
+    title: process.env.NEXT_PUBLIC_ABOUT_TITLE || 'O mnie',
     lead:
       process.env.NEXT_PUBLIC_ABOUT_LEAD
-      || 'Jestem fotografem i operatorem wideo. Pracuję tam, gdzie tempo jest wysokie, a emocje prawdziwe.',
+      || 'Człowiek od zawsze opowiadał historie.\nNajpierw słowem.\nPotem obrazem.\nZ czasem nauczyliśmy się pisać.\nA dziś…',
     description:
       process.env.NEXT_PUBLIC_ABOUT_DESCRIPTION
-      || 'Od eventów militarno-survivalowych i off-roadu po śluby i sesje rodzinne. Niezależnie od kontekstu dostajesz ten sam standard: reportaż, który oddaje klimat wydarzenia bez sztucznego pozowania.',
+      || 'Dziś opowiadamy historie filmem.\nW XXI wieku to właśnie film stał się językiem emocji, marek i wspomnień.\n\nI tutaj zaczyna się moja rola.',
     highlights: [
       {
-        title: 'Dwa światy, jeden styl',
-        description: 'Akcja, teren i ruch łączę z uważnością na relacje i emocje ludzi.',
+        title: 'Autentyczne momenty',
+        description: 'Materiał, który możesz od razu wykorzystać na stronie, w social mediach i komunikacji marki.',
       },
       {
-        title: 'Praca w warunkach dynamicznych',
-        description: 'Sprawnie działam pod presją czasu, zmiennego światła i nieprzewidywalnego przebiegu wydarzeń.',
+        title: 'Naturalny reportaż',
+        description: 'Naturalne kadry i prawdziwe emocje bez ustawiania ludzi i zatrzymywania chwili.',
       },
       {
-        title: 'Materiał gotowy do publikacji',
-        description: 'Dostarczam kadry i ujęcia przygotowane pod social media, stronę i materiały promocyjne.',
-      },
-      {
-        title: 'Sprawny proces współpracy',
-        description: 'Przed realizacją ustalamy plan i priorytety, a po wydarzeniu otrzymujesz materiał w uzgodnionym terminie.',
+        title: 'Prawdziwe emocje',
+        description: 'Od dynamicznych wydarzeń po kameralne momenty, szukam historii która naprawdę zostaje.',
       },
     ],
     ctaLabel: process.env.NEXT_PUBLIC_ABOUT_CTA_LABEL || 'Sprawdź ofertę',

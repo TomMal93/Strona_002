@@ -70,7 +70,7 @@ export default function HeroTextBlock({
         <p
           ref={headingRef}
           aria-hidden="true"
-          className={cn(styles.gradientTextPrimary, headingClassName, animated && styles.animHide)}
+          className={cn(styles.gradientTextPrimary, styles.heroHeading, headingClassName, animated && styles.animHide)}
         >
           {siteContent.hero.headlineLine1}
           <br />

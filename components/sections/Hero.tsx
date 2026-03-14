@@ -50,15 +50,15 @@ export default function Hero() {
 
       <MobileHeroLayout>
         <HeroTextBlock
-          headingClassName="mt-4 font-bebas text-[48px] uppercase leading-[0.9]"
+          headingClassName="mt-4 font-bebas text-[40px] uppercase leading-[0.96]"
           underlineClassName="block h-px w-full bg-gradient-to-r from-khaki/70 to-transparent"
         />
       </MobileHeroLayout>
 
-      <div className="relative z-10 mx-auto hidden h-full w-full max-w-[2000px] md:grid md:grid-cols-[minmax(280px,380px)_minmax(360px,1300px)] md:grid-rows-1 md:items-center md:justify-center md:gap-4 md:px-8 lg:gap-8 lg:px-12">
+      <div className="relative z-10 mx-auto hidden h-full w-full max-w-[2000px] md:grid md:grid-cols-2 md:grid-rows-1 md:items-center md:justify-center md:gap-0 md:px-8 lg:px-12">
         {/* ── Content column ───────────────────────────────────────────────── */}
-        <div className="md:flex md:flex-none md:flex-col md:items-end md:justify-center md:py-0">
-          <div className="max-w-[500px] text-left">
+        <div className="md:flex md:flex-none md:flex-col md:items-center md:justify-center md:py-0">
+          <div className="w-full max-w-[500px] text-left md:translate-y-10 lg:translate-y-14">
             <HeroTextBlock
               animated
               eyebrowRef={eyebrowRef}
@@ -67,7 +67,7 @@ export default function Hero() {
               underlineRef={underlineRef}
               verticalLineRef={verticalLineRef}
               ctaRef={ctaRef}
-              headingClassName="mt-4 font-bebas text-[48px] uppercase leading-[0.9] md:text-display"
+              headingClassName="mt-4 font-bebas text-[40px] uppercase leading-[0.96] md:text-[64px] lg:text-[84px]"
               underlineClassName="block h-px w-full origin-right bg-gradient-to-r from-khaki/70 to-transparent"
             />
           </div>
@@ -82,7 +82,7 @@ export default function Hero() {
                 src="/images/Hero_v4.png"
                 alt="Fotograf i operator drona — portret z dronem i kontrolerem"
                 fill
-                className="relative z-10 object-contain object-center"
+                className={`relative z-10 object-contain object-center ${styles.desktopPortraitImage}`}
                 loading="eager"
                 quality={85}
                 sizes="(min-width: 1440px) 46vw, (min-width: 768px) 44vw, 1px"
