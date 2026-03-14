@@ -98,7 +98,7 @@ export default function About() {
                       if (index === array.length - 1) return [part.trimStart()]
                       return [part, 'historie.', <br key={`lead-break-historie-${index}`} />]
                     })
-                    .flatMap((part, index, array) => {
+                    .flatMap((part, index) => {
                       if (typeof part !== 'string') return [part]
                       const chunks = part.split('pisać.')
                       return chunks.flatMap((chunk, chunkIndex) => {
@@ -118,7 +118,7 @@ export default function About() {
                       if (index === array.length - 1) return [part.trimStart()]
                       return [part, 'filmem.', <br key={`desc-break-filmem-${index}`} />]
                     })
-                    .flatMap((part, index, array) => {
+                    .flatMap((part, index) => {
                       if (typeof part !== 'string') return [part]
                       const chunks = part.split('wspomnień.')
                       return chunks.flatMap((chunk, chunkIndex) => {
