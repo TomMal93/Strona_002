@@ -176,16 +176,26 @@
 
 .viewfinderBatteryFill {
   position: absolute;
-  inset: 0;
-  width: 99%;
-  background: rgb(255 238 175 / 0.78);
+  top: 1px;
+  bottom: 1px;
+  left: 1px;
+  width: 88.9%;
+  border-radius: 1px;
+  background: rgb(255 238 175 / 0.28);
 }
 
 .viewfinderBatteryLevel {
   position: relative;
   z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 0.62rem;
+  font-weight: 600;
   line-height: 1;
-  color: rgb(12 12 12 / 0.92);
+  letter-spacing: 0.04em;
+  color: rgb(255 238 175 / 0.78);
 }
 
 .viewfinderHudStatus {
@@ -476,5 +486,9 @@
     min-width: 2.35rem;
     height: 0.92rem;
     padding-inline: 0.25rem;
+  }
+
+  .viewfinderBatteryLevel {
+    font-size: 0.56rem;
   }
 }
