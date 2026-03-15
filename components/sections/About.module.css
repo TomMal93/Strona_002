@@ -56,7 +56,7 @@
 .hudLineRight {
   flex: 1;
   height: 1px;
-  transform-origin: center;
+  will-change: transform, opacity;
   background: linear-gradient(
     90deg,
     transparent 0%,
@@ -65,7 +65,12 @@
   );
 }
 
+.hudLineLeft {
+  transform-origin: right center;
+}
+
 .hudLineRight {
+  transform-origin: left center;
   background: linear-gradient(
     90deg,
     rgb(var(--c-gold) / 0.46) 0%,
@@ -87,6 +92,7 @@
   text-transform: uppercase;
   color: rgb(255 238 175 / 0.54);
   white-space: nowrap;
+  will-change: transform, opacity;
 }
 
 @media (width >= 48rem) {
@@ -607,6 +613,10 @@
     padding-inline: 0.45rem;
     font-size: 0.64rem;
     letter-spacing: 0.08em;
+  }
+
+  .hudBar {
+    gap: 0.9rem;
   }
 
   .statementPanel {

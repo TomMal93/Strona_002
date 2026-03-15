@@ -76,6 +76,10 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         const hudLines = hudBarRef.current
           ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-line]'))
           : []
+        const hudInnerLines =
+          hudLines.length >= 4 ? [hudLines[1], hudLines[2]] : hudLines
+        const hudOuterLines =
+          hudLines.length >= 4 ? [hudLines[0], hudLines[3]] : []
         const hudLabels = hudBarRef.current
           ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-label]'))
           : []
@@ -108,7 +112,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
             gsap.set(viewfinderElement, { autoAlpha: 1, y: 0, scale: 1, clipPath: 'inset(0% 0% 0% 0%)' })
           }
           if (hudLines.length) gsap.set(hudLines, { scaleX: 1 })
-          if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1 })
+          if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1, y: 0 })
           if (topHudItems.length) gsap.set(topHudItems, { autoAlpha: 1, y: 0 })
           if (bottomHudItems.length) gsap.set(bottomHudItems, { autoAlpha: 1, y: 0 })
           if (contentElements.length) gsap.set(contentElements, { autoAlpha: 1, y: 0 })
@@ -128,7 +132,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
           })
         }
         if (hudLines.length) gsap.set(hudLines, { scaleX: 0 })
-        if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0 })
+        if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0, y: 8 })
         if (topHudItems.length) gsap.set(topHudItems, { autoAlpha: 0, y: -10 })
         if (bottomHudItems.length) gsap.set(bottomHudItems, { autoAlpha: 0, y: 10 })
         if (contentElements.length) gsap.set(contentElements, { autoAlpha: 0, y: 22 })
@@ -144,19 +148,39 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
           },
         })
 
-        if (hudLines.length) {
-          tl.to(hudLines, {
+        if (hudInnerLines.length) {
+          tl.to(hudInnerLines, {
             scaleX: 1,
-            duration: 0.45,
+            duration: 0.34,
             ease: 'power2.out',
+            stagger: 0.03,
           })
+        }
+
+        if (hudOuterLines.length) {
+          tl.to(
+            hudOuterLines,
+            {
+              scaleX: 1,
+              duration: 0.52,
+              ease: 'power2.out',
+              stagger: 0.05,
+            },
+            '-=0.1',
+          )
         }
 
         if (hudLabels.length) {
           tl.to(
             hudLabels,
-            { autoAlpha: 1, duration: 0.28, ease: 'power2.out' },
-            '-=0.15',
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.26,
+              ease: 'power2.out',
+              stagger: 0.06,
+            },
+            '-=0.18',
           )
         }
 
