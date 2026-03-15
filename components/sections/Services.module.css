@@ -5,7 +5,7 @@
   align-items: center;
   gap: 0;
   width: 100%;
-  margin-bottom: 1.2rem;
+  margin-top: 1.8rem;
   pointer-events: none;
 }
 
@@ -54,32 +54,43 @@
 /* ── Bottom decorative line — timeline markers ─────────────────────────── */
 
 .bottomTimeline {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  width: clamp(14rem, 50%, 22rem);
-  margin: 1.2rem auto 0;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  margin: 1.5rem auto 0;
   opacity: 0.3;
 }
 
-.bottomTimelineSeg {
-  flex: 1;
+.bottomTimelineLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
   height: 1px;
+  transform: translateY(-50%);
   transform-origin: center;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgb(var(--c-gold) / 0.6) 50%,
+    rgb(var(--c-gold) / 0.6) 10%,
+    rgb(var(--c-gold) / 0.6) 90%,
     transparent 100%
   );
+  grid-column: 1 / -1;
+  grid-row: 1;
+  pointer-events: none;
 }
 
 .bottomTimelineDiamond {
-  flex-shrink: 0;
+  grid-row: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 0.5rem;
   line-height: 1;
   color: rgb(var(--c-gold) / 0.8);
-  padding: 0 0.15rem;
+  z-index: 1;
 }
 
 /* ── Section header ────────────────────────────────────────────────────── */
@@ -123,7 +134,7 @@
 }
 
 .sectionIntro {
-  max-width: 62ch;
+  max-width: none;
 }
 
 /* ── Cards grid — film strip layout ───────────────────────────────────── */

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './Services.module.css'
@@ -164,6 +164,17 @@ export default function Services() {
     >
       <div className="mx-auto max-w-content">
         <div className={cn('mx-auto flex max-w-3xl flex-col items-center text-center', styles.sectionHeaderShell)}>
+          <h2
+            ref={titleRef}
+            id="services-heading"
+            className={cn(
+              heroStyles.gradientTextPrimary,
+              'text-center font-bebas text-5xl uppercase leading-[0.9] tracking-wide sm:text-6xl',
+              styles.sectionTitle,
+            )}
+          >
+            {siteContent.services.title}
+          </h2>
           {/* HUD bar — editing timeline interface */}
           <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
             <span data-hud-line className={styles.hudLineLeft} />
@@ -178,41 +189,17 @@ export default function Services() {
             <span data-hud-line className={styles.hudLineRight} />
           </div>
 
-          <span aria-hidden="true" data-scene-number className={styles.headerSceneLabel}>
-            postprodukcja
-          </span>
-
-          <h2
-            ref={titleRef}
-            id="services-heading"
-            className={cn(
-              heroStyles.gradientTextPrimary,
-              'text-center font-bebas text-5xl uppercase leading-[0.9] tracking-wide sm:text-6xl',
-              styles.sectionTitle,
-            )}
-          >
-            {siteContent.services.title}
-          </h2>
-          <span ref={titleAccentRef} aria-hidden="true" className={styles.sectionTitleAccent} />
-
           <p
             ref={introRef}
             className={cn(
-              'mt-5 max-w-2xl whitespace-pre-line font-inter font-light text-[16px] leading-[1.75] text-white/60',
+              'mt-5 whitespace-pre-line font-mono text-[0.95rem] leading-[1.85] tracking-wide text-white/50',
               styles.sectionIntro,
             )}
           >
-            {siteContent.services.subtitle}
+            Pięć ścieżek, jeden cel — <span className="text-amber-200/90 font-medium">materiał, który zostaje w pamięci.</span>
+            {'\n'}Wybierz scenę, która pasuje do Twojej historii.
           </p>
 
-          {/* Bottom decorative line — timeline markers */}
-          <div ref={bottomTimelineRef} aria-hidden="true" className={styles.bottomTimeline}>
-            <span data-bottom-seg className={styles.bottomTimelineSeg} />
-            <span data-bottom-diamond className={styles.bottomTimelineDiamond}>◆</span>
-            <span data-bottom-seg className={styles.bottomTimelineSeg} />
-            <span data-bottom-diamond className={styles.bottomTimelineDiamond}>◆</span>
-            <span data-bottom-seg className={styles.bottomTimelineSeg} />
-          </div>
         </div>
 
         {/* --- Film strip cards grid ------------------------------------------ */}
@@ -229,6 +216,14 @@ export default function Services() {
               />
             ))}
           </ul>
+        </div>
+
+        {/* Bottom decorative line — timeline markers */}
+        <div ref={bottomTimelineRef} aria-hidden="true" className={styles.bottomTimeline}>
+          <span data-bottom-seg className={styles.bottomTimelineLine} />
+          {orderedItems.map((item) => (
+            <span key={item.title} data-bottom-diamond className={styles.bottomTimelineDiamond}>◆</span>
+          ))}
         </div>
       </div>
     </section>

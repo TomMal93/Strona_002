@@ -22,6 +22,7 @@ export default function About() {
   const [hudFrame, setHudFrame] = useState(307458)
 
   const sectionRef = useRef<HTMLElement>(null!)
+  const hudBarRef = useRef<HTMLDivElement>(null!)
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const titleAccentRef = useRef<HTMLSpanElement>(null!)
   const viewfinderRef = useRef<HTMLDivElement>(null!)
@@ -43,6 +44,7 @@ export default function About() {
 
   useAboutAnimations({
     sectionRef,
+    hudBarRef,
     titleRef,
     titleAccentRef,
     viewfinderRef,
@@ -91,7 +93,15 @@ export default function About() {
                 >
                   {siteContent.about.title}
                 </h2>
-                <span ref={titleAccentRef} aria-hidden="true" className={styles.sectionTitleAccentSoft} />
+              </div>
+
+              <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
+                <span data-hud-line className={styles.hudLineLeft} />
+                <span data-hud-label className={styles.hudModeLabel}>profile</span>
+                <span data-hud-line className={styles.hudLineLeft} />
+                <span data-hud-line className={styles.hudLineRight} />
+                <span data-hud-label className={styles.hudTimecode}>scena 02/06</span>
+                <span data-hud-line className={styles.hudLineRight} />
               </div>
 
               {/* Viewfinder frame */}
@@ -168,17 +178,17 @@ export default function About() {
 
             <div ref={statementRef} className={styles.statementPanel}>
               <span aria-hidden="true" className={styles.statementKicker}>
-                Core Promise
+                Po co to robię
               </span>
               <p className={styles.aboutStatement}>
                 {siteContent.about.statement}
               </p>
-            </div>
 
-            <div ref={ctaRef} className="mt-6 flex justify-center">
-              <a href="#promo" className={styles.ctaLink}>
-                {siteContent.about.ctaLabel}
-              </a>
+              <div ref={ctaRef} className={styles.statementCta}>
+                <a href="#promo" className={styles.ctaLink}>
+                  {siteContent.about.ctaLabel}
+                </a>
+              </div>
             </div>
           </div>
         </div>

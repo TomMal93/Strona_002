@@ -34,7 +34,7 @@ export const siteContent = {
       || 'Dziś opowiadamy historie filmem.\nW XXI wieku to właśnie film stał się językiem emocji, marek i wspomnień.\n\nI tutaj zaczyna się moja rola.',
     statement:
       process.env.NEXT_PUBLIC_ABOUT_STATEMENT
-      || 'Tworzę materiał, który pozwala wrócić nie tylko do obrazu, ale przede wszystkim do emocji.',
+      || 'Nie chodzi mi tylko o ładne kadry, ale o to, żeby zatrzymać to, co w danym momencie było naprawdę ważne.',
     ctaLabel: process.env.NEXT_PUBLIC_ABOUT_CTA_LABEL || 'Zobacz jak pracuję',
     imageAlt:
       process.env.NEXT_PUBLIC_ABOUT_IMAGE_ALT
@@ -44,7 +44,7 @@ export const siteContent = {
     title: process.env.NEXT_PUBLIC_SERVICES_TITLE || 'Oferta',
     subtitle:
       process.env.NEXT_PUBLIC_SERVICES_SUBTITLE
-      || 'Od reportażu eventowego po ujęcia z drona.\nKażdy materiał realizuję z naciskiem na dynamikę, klimat i historię.',
+      || 'Pięć ścieżek, jeden cel — materiał, który zostaje w pamięci.\nWybierz scenę, która pasuje do Twojej historii.',
     items: [
       {
         icon: 'heart',

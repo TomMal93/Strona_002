@@ -5,6 +5,7 @@ import type { RefObject } from 'react'
 
 export type AboutAnimationRefs = {
   sectionRef: RefObject<HTMLElement>
+  hudBarRef: RefObject<HTMLDivElement>
   titleRef: RefObject<HTMLHeadingElement>
   titleAccentRef: RefObject<HTMLSpanElement>
   viewfinderRef: RefObject<HTMLDivElement>
@@ -42,6 +43,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
 
       const {
         sectionRef,
+        hudBarRef,
         titleRef,
         titleAccentRef,
         viewfinderRef,
@@ -63,11 +65,18 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         const corners = viewfinderRef.current
           ? Array.from(viewfinderRef.current.querySelectorAll('[class*="cornerMark"]'))
           : []
-
+        const hudLines = hudBarRef.current
+          ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-line]'))
+          : []
+        const hudLabels = hudBarRef.current
+          ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-label]'))
+          : []
         /* ── Reduced motion: show everything instantly ──────────────── */
 
         if (prefersReducedMotion) {
           gsap.set(fadeElements, { autoAlpha: 1, y: 0 })
+          if (hudLines.length) gsap.set(hudLines, { scaleX: 1 })
+          if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1 })
           if (titleAccentRef.current)
             gsap.set(titleAccentRef.current, { scaleX: 1 })
           if (corners.length) gsap.set(corners, { autoAlpha: 1 })
@@ -77,6 +86,8 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         /* ── Initial states ─────────────────────────────────────────── */
 
         gsap.set(fadeElements, { autoAlpha: 0, y: 30 })
+        if (hudLines.length) gsap.set(hudLines, { scaleX: 0 })
+        if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0 })
         if (corners.length) gsap.set(corners, { autoAlpha: 0 })
 
         if (titleAccentRef.current)
@@ -91,6 +102,22 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
             once: true,
           },
         })
+
+        if (hudLines.length) {
+          tl.to(hudLines, {
+            scaleX: 1,
+            duration: 0.45,
+            ease: 'power2.out',
+          })
+        }
+
+        if (hudLabels.length) {
+          tl.to(
+            hudLabels,
+            { autoAlpha: 1, duration: 0.28, ease: 'power2.out' },
+            '-=0.15',
+          )
+        }
 
         // Title fades in
         tl.to(titleRef.current, {
