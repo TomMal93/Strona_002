@@ -239,15 +239,25 @@
   inset: 0;
   z-index: var(--z-base);
   background:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0,
-      transparent 3px,
-      rgb(255 255 255 / 0.015) 3px,
-      rgb(255 255 255 / 0.015) 4px
+    radial-gradient(
+      120% 90% at 18% 14%,
+      rgb(255 244 214 / 0.035) 0%,
+      transparent 48%
+    ),
+    radial-gradient(
+      110% 80% at 82% 86%,
+      rgb(var(--c-gold) / 0.025) 0%,
+      transparent 52%
+    ),
+    linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.012) 0%,
+      transparent 24%,
+      transparent 76%,
+      rgb(255 255 255 / 0.008) 100%
     );
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.55;
   transition: opacity 320ms ease;
 }
 
@@ -298,61 +308,43 @@
 
 .sceneCardHighlight {
   background:
-    radial-gradient(130% 90% at 12% -8%, rgb(180 120 80 / 0.22), transparent 55%),
-    radial-gradient(120% 80% at 100% 100%, rgb(var(--c-gold) / 0.18), transparent 60%),
-    linear-gradient(145deg, rgb(80 55 35 / 0.18) 0%, transparent 40%),
-    repeating-linear-gradient(
-      125deg,
-      rgb(38 28 18 / 0.28) 0,
-      rgb(38 28 18 / 0.28) 10px,
-      rgb(28 20 12 / 0.34) 10px,
-      rgb(28 20 12 / 0.34) 20px
-    ),
-    linear-gradient(160deg, rgb(28 20 16 / 0.97) 0%, rgb(22 15 11 / 0.98) 100%);
-  border: 1px solid rgb(var(--c-warm) / 0.52);
+    radial-gradient(ellipse at 30% 20%, rgb(var(--c-khaki) / 0.035) 0%, transparent 58%),
+    linear-gradient(160deg, rgb(23 20 18 / 0.48) 0%, rgb(17 16 14 / 0.56) 100%);
+  border: 1px solid rgb(var(--c-khaki) / 0.17);
   box-shadow:
-    inset 0 1px 0 rgb(220 190 160 / 0.10),
-    0 18px 38px rgb(0 0 0 / 0.38);
+    inset 0 1px 0 rgb(255 244 214 / 0.05),
+    0 18px 38px rgb(0 0 0 / 0.34);
 }
 
 .sceneCardHighlight::after {
-  border-image: linear-gradient(135deg, rgb(200 155 105 / 0.50), transparent 48%, rgb(var(--c-gold) / 0.32)) 1;
+  border-image: linear-gradient(135deg, rgb(var(--c-khaki) / 0.3), transparent 48%, rgb(var(--c-gold) / 0.18)) 1;
 }
 
 .sceneCardHighlight:hover {
-  border-color: rgb(200 155 110 / 0.78);
+  border-color: rgb(var(--c-khaki) / 0.3);
   box-shadow:
-    inset 0 1px 0 rgb(230 200 170 / 0.18),
-    0 24px 48px rgb(0 0 0 / 0.46);
+    inset 0 1px 0 rgb(255 244 214 / 0.08),
+    0 24px 48px rgb(0 0 0 / 0.42);
 }
 
 .sceneCardMilitary {
   background:
-    radial-gradient(130% 90% at 12% -8%, rgb(156 165 128 / 0.25), transparent 55%),
-    radial-gradient(120% 80% at 100% 100%, rgb(var(--c-gold) / 0.2), transparent 60%),
-    linear-gradient(145deg, rgb(78 84 63 / 0.22) 0%, transparent 40%),
-    repeating-linear-gradient(
-      125deg,
-      rgb(38 41 33 / 0.28) 0,
-      rgb(38 41 33 / 0.28) 10px,
-      rgb(28 31 24 / 0.34) 10px,
-      rgb(28 31 24 / 0.34) 20px
-    ),
-    linear-gradient(160deg, rgb(20 22 18 / 0.97) 0%, rgb(15 17 13 / 0.98) 100%);
-  border: 1px solid rgb(var(--c-khaki) / 0.62);
+    radial-gradient(ellipse at 30% 20%, rgb(var(--c-khaki) / 0.04) 0%, transparent 60%),
+    linear-gradient(160deg, rgb(20 22 18 / 0.48) 0%, rgb(15 17 13 / 0.56) 100%);
+  border: 1px solid rgb(var(--c-khaki) / 0.15);
   box-shadow:
-    inset 0 1px 0 rgb(218 208 183 / 0.12),
+    inset 0 1px 0 rgb(255 244 214 / 0.04),
     0 18px 38px rgb(0 0 0 / 0.35);
 }
 
 .sceneCardMilitary::after {
-  border-image: linear-gradient(130deg, rgb(177 186 146 / 0.46), transparent 48%, rgb(var(--c-gold) / 0.36)) 1;
+  border-image: linear-gradient(130deg, rgb(var(--c-khaki) / 0.3), transparent 48%, rgb(var(--c-gold) / 0.18)) 1;
 }
 
 .sceneCardMilitary:hover {
-  border-color: rgb(177 186 146 / 0.82);
+  border-color: rgb(var(--c-khaki) / 0.32);
   box-shadow:
-    inset 0 1px 0 rgb(231 222 200 / 0.22),
+    inset 0 1px 0 rgb(255 244 214 / 0.08),
     0 24px 48px rgb(0 0 0 / 0.42);
 }
 
@@ -442,12 +434,12 @@
 }
 
 .reelLineHighlight1 {
-  background: linear-gradient(90deg, rgb(180 130 85 / 0.95), rgb(210 165 110 / 0.88), rgb(var(--c-gold) / 0.30));
+  background: linear-gradient(90deg, rgb(var(--c-khaki) / 0.82), rgb(var(--c-gold) / 0.62), rgb(var(--c-gold) / 0.16));
   opacity: 0.88;
 }
 
 .reelLineHighlight2 {
-  background: linear-gradient(90deg, rgb(180 130 85 / 0.60), rgb(210 165 110 / 0.50), rgb(var(--c-gold) / 0.15));
+  background: linear-gradient(90deg, rgb(var(--c-khaki) / 0.44), rgb(var(--c-gold) / 0.3), rgb(var(--c-gold) / 0.08));
   opacity: 0.55;
 }
 
@@ -456,12 +448,12 @@
 }
 
 .reelLineMilitary1 {
-  background: linear-gradient(90deg, rgb(151 159 121 / 0.9), rgb(var(--c-gold) / 0.78), rgb(73 81 57 / 0.32));
+  background: linear-gradient(90deg, rgb(var(--c-khaki) / 0.82), rgb(var(--c-gold) / 0.68), rgb(var(--c-khaki) / 0.16));
   opacity: 0.88;
 }
 
 .reelLineMilitary2 {
-  background: linear-gradient(90deg, rgb(151 159 121 / 0.55), rgb(var(--c-gold) / 0.45), rgb(73 81 57 / 0.18));
+  background: linear-gradient(90deg, rgb(var(--c-khaki) / 0.46), rgb(var(--c-gold) / 0.34), rgb(var(--c-khaki) / 0.08));
   opacity: 0.55;
 }
 
@@ -491,9 +483,9 @@
   border-radius: 50%;
   border: 1px solid rgb(var(--c-gold) / 0.4);
   background:
-    radial-gradient(circle at 40% 35%, rgb(var(--c-gold) / 0.18) 0%, transparent 60%),
-    radial-gradient(circle at 60% 65%, rgb(var(--c-gold) / 0.08) 0%, transparent 50%),
-    linear-gradient(180deg, rgb(var(--c-gold) / 0.12), rgb(var(--c-olive) / 0.08));
+    radial-gradient(circle at 40% 35%, rgb(var(--c-khaki) / 0.14) 0%, transparent 60%),
+    radial-gradient(circle at 60% 65%, rgb(var(--c-gold) / 0.06) 0%, transparent 50%),
+    linear-gradient(180deg, rgb(var(--c-khaki) / 0.08), rgb(255 255 255 / 0.02));
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.08),
     0 0 0 rgb(var(--c-gold) / 0);
@@ -512,33 +504,33 @@
 }
 
 .lensRingHighlight {
-  border-color: rgb(175 135 90 / 0.50);
+  border-color: rgb(var(--c-khaki) / 0.36);
   background:
-    radial-gradient(circle at 40% 35%, rgb(160 115 70 / 0.22) 0%, transparent 60%),
-    radial-gradient(circle at 60% 65%, rgb(80 55 35 / 0.12) 0%, transparent 50%),
-    linear-gradient(180deg, rgb(160 115 70 / 0.18), rgb(80 55 35 / 0.28));
+    radial-gradient(circle at 40% 35%, rgb(var(--c-khaki) / 0.17) 0%, transparent 60%),
+    radial-gradient(circle at 60% 65%, rgb(var(--c-gold) / 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, rgb(var(--c-khaki) / 0.1), rgb(255 255 255 / 0.03));
 }
 
 .sceneCardHighlight:hover .lensRingHighlight {
-  border-color: rgb(195 155 105 / 0.75);
+  border-color: rgb(var(--c-khaki) / 0.52);
   box-shadow:
-    inset 0 1px 0 rgb(240 200 165 / 0.18),
-    0 0 14px rgb(180 130 85 / 0.32);
+    inset 0 1px 0 rgb(255 244 214 / 0.15),
+    0 0 14px rgb(var(--c-khaki) / 0.16);
 }
 
 .lensRingMilitary {
-  border-color: rgb(161 171 130 / 0.50);
+  border-color: rgb(var(--c-khaki) / 0.38);
   background:
-    radial-gradient(circle at 40% 35%, rgb(123 133 96 / 0.26) 0%, transparent 60%),
-    radial-gradient(circle at 60% 65%, rgb(62 68 49 / 0.14) 0%, transparent 50%),
-    linear-gradient(180deg, rgb(123 133 96 / 0.22), rgb(62 68 49 / 0.36));
+    radial-gradient(circle at 40% 35%, rgb(var(--c-khaki) / 0.18) 0%, transparent 60%),
+    radial-gradient(circle at 60% 65%, rgb(var(--c-gold) / 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, rgb(var(--c-khaki) / 0.12), rgb(255 255 255 / 0.02));
 }
 
 .sceneCardMilitary:hover .lensRingMilitary {
-  border-color: rgb(181 191 148 / 0.78);
+  border-color: rgb(var(--c-khaki) / 0.54);
   box-shadow:
-    inset 0 1px 0 rgb(245 238 218 / 0.2),
-    0 0 14px rgb(151 159 121 / 0.28);
+    inset 0 1px 0 rgb(255 244 214 / 0.16),
+    0 0 14px rgb(var(--c-khaki) / 0.18);
 }
 
 /* ── Card content layer ───────────────────────────────────────────────── */
@@ -581,30 +573,30 @@
 /* ── Text color variants ──────────────────────────────────────────────── */
 
 .highlightTitle {
-  color: rgb(230 218 200);
+  color: rgb(255 245 230 / 0.92);
   letter-spacing: 0.03em;
   text-shadow: 0 1px 0 rgb(0 0 0 / 0.2);
 }
 
 .highlightText {
-  color: rgb(190 175 158);
+  color: rgb(255 255 255 / 0.58);
 }
 
 .iconHighlight {
-  color: rgb(195 155 110);
+  color: rgb(var(--c-khaki) / 0.84);
 }
 
 .militaryTitle {
-  color: rgb(228 223 205);
+  color: rgb(255 245 230 / 0.92);
   text-shadow: 0 1px 0 rgb(0 0 0 / 0.2);
 }
 
 .militaryText {
-  color: rgb(186 180 160);
+  color: rgb(255 255 255 / 0.55);
 }
 
 .iconMilitary {
-  color: rgb(198 190 166);
+  color: rgb(var(--c-khaki) / 0.82);
 }
 
 /* ── Responsive: solo 5th card on tablet 2-col ────────────────────────── */
