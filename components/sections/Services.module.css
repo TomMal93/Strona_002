@@ -13,7 +13,7 @@
 .hudLineRight {
   flex: 1;
   height: 1px;
-  transform-origin: center;
+  will-change: transform, opacity;
   background: linear-gradient(
     90deg,
     transparent 0%,
@@ -22,7 +22,12 @@
   );
 }
 
+.hudLineLeft {
+  transform-origin: right center;
+}
+
 .hudLineRight {
+  transform-origin: left center;
   background: linear-gradient(
     90deg,
     rgb(var(--c-gold) / 0.5) 0%,
@@ -44,6 +49,7 @@
   text-transform: uppercase;
   color: rgb(255 238 175 / 0.54);
   white-space: nowrap;
+  will-change: transform, opacity;
 }
 
 .hudPlayIcon {

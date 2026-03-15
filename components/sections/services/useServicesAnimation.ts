@@ -71,6 +71,10 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
         const hudLines = hudBarRef.current
           ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-line]'))
           : []
+        const hudInnerLines =
+          hudLines.length >= 4 ? [hudLines[1], hudLines[2]] : hudLines
+        const hudOuterLines =
+          hudLines.length >= 4 ? [hudLines[0], hudLines[3]] : []
         const hudLabels = hudBarRef.current
           ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-label]'))
           : []
@@ -86,7 +90,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
           if (titleAccentRef.current) gsap.set(titleAccentRef.current, { scaleX: 1 })
           if (timelineRef.current) gsap.set(timelineRef.current, { scaleX: 1 })
           if (hudLines.length) gsap.set(hudLines, { scaleX: 1 })
-          if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1 })
+          if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1, y: 0 })
           if (bottomSegs.length) gsap.set(bottomSegs, { scaleX: 1 })
           if (bottomDiamonds.length) gsap.set(bottomDiamonds, { autoAlpha: 1 })
           gsap.set(cards, { autoAlpha: 1, y: 0, clipPath: 'none' })
@@ -98,7 +102,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
         /* ── Initial states ─────────────────────────────────────────── */
 
         if (hudLines.length) gsap.set(hudLines, { scaleX: 0 })
-        if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0 })
+        if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0, y: 8 })
         if (bottomSegs.length) gsap.set(bottomSegs, { scaleX: 0 })
         if (bottomDiamonds.length) gsap.set(bottomDiamonds, { autoAlpha: 0 })
 
@@ -136,20 +140,40 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
         })
 
         // Phase 0: HUD bar lines draw from center
-        if (hudLines.length) {
-          tl.to(hudLines, {
+        if (hudInnerLines.length) {
+          tl.to(hudInnerLines, {
             scaleX: 1,
-            duration: 0.5,
+            duration: 0.34,
             ease: 'power2.out',
+            stagger: 0.03,
           })
+        }
+
+        if (hudOuterLines.length) {
+          tl.to(
+            hudOuterLines,
+            {
+              scaleX: 1,
+              duration: 0.52,
+              ease: 'power2.out',
+              stagger: 0.05,
+            },
+            '-=0.1',
+          )
         }
 
         // Phase 0.5: REC + timecode labels fade in
         if (hudLabels.length) {
           tl.to(
             hudLabels,
-            { autoAlpha: 1, duration: 0.3, ease: 'power2.out' },
-            '-=0.15',
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.26,
+              ease: 'power2.out',
+              stagger: 0.06,
+            },
+            '-=0.18',
           )
         }
 

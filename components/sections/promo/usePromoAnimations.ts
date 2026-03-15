@@ -47,6 +47,10 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         const hudLines = hudBarRef.current
           ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-line]'))
           : []
+        const hudInnerLines =
+          hudLines.length >= 4 ? [hudLines[1], hudLines[2]] : hudLines
+        const hudOuterLines =
+          hudLines.length >= 4 ? [hudLines[0], hudLines[3]] : []
         const hudLabels = hudBarRef.current
           ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-label]'))
           : []
@@ -66,7 +70,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         if (prefersReducedMotion) {
           gsap.set([titleRef.current, subtitleRef.current, videoFrameRef.current], { autoAlpha: 1, y: 0 })
           if (hudLines.length) gsap.set(hudLines, { scaleX: 1 })
-          if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1 })
+          if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1, y: 0 })
           if (corners.length) gsap.set(corners, { autoAlpha: 1 })
           if (ytCards.length) gsap.set(ytCards, { autoAlpha: 1, y: 0 })
           if (bottomLine) gsap.set(bottomLine, { scaleX: 1 })
@@ -79,7 +83,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         gsap.set([titleRef.current, subtitleRef.current], { autoAlpha: 0, y: 30 })
         gsap.set(videoFrameRef.current, { autoAlpha: 0, scale: 0.97 })
         if (hudLines.length) gsap.set(hudLines, { scaleX: 0 })
-        if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0 })
+        if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0, y: 8 })
         if (corners.length) gsap.set(corners, { autoAlpha: 0 })
         if (ytCards.length) gsap.set(ytCards, { autoAlpha: 0, y: 20 })
         if (bottomLine) gsap.set(bottomLine, { scaleX: 0 })
@@ -96,13 +100,35 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         })
 
         // 1. HUD lines
-        if (hudLines.length) {
-          tl.to(hudLines, { scaleX: 1, duration: 0.5, ease: 'power2.out' })
+        if (hudInnerLines.length) {
+          tl.to(hudInnerLines, {
+            scaleX: 1,
+            duration: 0.34,
+            ease: 'power2.out',
+            stagger: 0.03,
+          })
+        }
+
+        if (hudOuterLines.length) {
+          tl.to(
+            hudOuterLines,
+            {
+              scaleX: 1,
+              duration: 0.52,
+              ease: 'power2.out',
+              stagger: 0.05,
+            },
+            '-=0.1',
+          )
         }
 
         // 2. HUD labels
         if (hudLabels.length) {
-          tl.to(hudLabels, { autoAlpha: 1, duration: 0.3, ease: 'power2.out' }, '-=0.2')
+          tl.to(
+            hudLabels,
+            { autoAlpha: 1, y: 0, duration: 0.26, ease: 'power2.out', stagger: 0.06 },
+            '-=0.18',
+          )
         }
 
         // 3. Title

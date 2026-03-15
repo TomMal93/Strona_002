@@ -98,12 +98,12 @@ export default function Promo() {
           </h2>
 
           <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
-            <span data-hud-line className={styles.hudLineLeft} />
+            <span data-hud-line="left" className={styles.hudLineLeft} />
             <span data-hud-label className={styles.hudLabel}>preview</span>
-            <span data-hud-line className={styles.hudLineLeft} />
-            <span data-hud-line className={styles.hudLineRight} />
+            <span data-hud-line="left" className={styles.hudLineLeft} />
+            <span data-hud-line="right" className={styles.hudLineRight} />
             <span data-hud-label className={styles.hudLabel}>scena 03/06</span>
-            <span data-hud-line className={styles.hudLineRight} />
+            <span data-hud-line="right" className={styles.hudLineRight} />
           </div>
 
           <p
