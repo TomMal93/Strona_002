@@ -179,12 +179,12 @@ export default function Services() {
           <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
             <span data-hud-line="left" className={styles.hudLineLeft} />
             <span data-hud-label className={styles.hudPlayIndicator}>
-              <span className={styles.hudPlayIcon}>▶</span> PLAY
+              PROGRAM
             </span>
             <span data-hud-line="left" className={styles.hudLineLeft} />
             <span data-hud-line="right" className={styles.hudLineRight} />
             <span data-hud-label className={styles.hudTimecode}>
-              SCENA {String(orderedItems.length).padStart(2, '0')} / {String(orderedItems.length).padStart(2, '0')}
+              SCENA 04 / 06
             </span>
             <span data-hud-line="right" className={styles.hudLineRight} />
           </div>
