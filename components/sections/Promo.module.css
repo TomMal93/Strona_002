@@ -144,19 +144,10 @@
 
 .videoPlayOverlayPlaying .videoPlayBtn {
   opacity: 0;
-  transition:
-    opacity 280ms ease,
-    background 280ms ease,
-    border-color 280ms ease,
-    transform 280ms ease;
 }
 
 .videoPlayOverlayPlaying:hover {
   background: rgb(0 0 0 / 0.25);
-}
-
-.videoPlayOverlayPlaying:hover .videoPlayBtn {
-  opacity: 1;
 }
 
 .videoPlayBtn {
@@ -169,16 +160,43 @@
   background: rgb(0 0 0 / 0.55);
   border: 1px solid rgb(var(--c-gold) / 0.5);
   color: rgb(255 238 175 / 0.9);
+  opacity: 1;
   transition:
+    opacity 320ms ease,
     background 280ms ease,
     border-color 280ms ease,
     transform 280ms ease;
+}
+
+.videoPlayBtnPlaying .videoPlayIconPlay,
+.videoPlayBtnPlaying .videoPlayIconPause {
+  opacity: 0;
+  transform: scale(0.9);
 }
 
 .videoPlayOverlay:hover .videoPlayBtn {
   background: rgb(0 0 0 / 0.7);
   border-color: rgb(var(--c-gold) / 0.8);
   transform: scale(1.08);
+}
+
+.videoPlayIcon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 240ms ease,
+    transform 240ms ease;
+}
+
+.videoPlayIconPlay {
+  opacity: 1;
+}
+
+.videoPlayIconPause {
+  opacity: 0;
 }
 
 /* ── Video bottom bar — codec + progress + timecode ───────────────────── */

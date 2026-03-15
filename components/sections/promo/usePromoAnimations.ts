@@ -54,12 +54,12 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         ? Array.from(bottomTimelineRef.current.querySelectorAll<HTMLElement>('[data-bottom-diamond]'))
         : []
 
-      if (prefersReducedMotion) {
-        visibleFadeElements.forEach((el) => {
-          el.style.opacity = '1'
-          el.style.visibility = 'inherit'
-          el.style.transform = 'none'
-        })
+        if (prefersReducedMotion) {
+          visibleFadeElements.forEach((el) => {
+            el.style.opacity = '1'
+            el.style.visibility = 'inherit'
+            el.style.transform = 'none'
+          })
         if (videoFrameRef.current) {
           videoFrameRef.current.style.opacity = '1'
           videoFrameRef.current.style.visibility = 'inherit'
@@ -96,7 +96,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
       if (videoFrameRef.current) {
         videoFrameRef.current.style.opacity = '0'
         videoFrameRef.current.style.visibility = 'hidden'
-        videoFrameRef.current.style.transform = 'scale(0.97)'
+        videoFrameRef.current.style.transform = 'none'
       }
       hudLines.forEach((el) => { el.style.transform = 'scaleX(0)' })
       hudLabels.forEach((el) => {
@@ -180,7 +180,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         /* ── Initial states ─────────────────────────────────────────── */
 
         gsap.set([titleRef.current, subtitleRef.current], { autoAlpha: 0, y: 30 })
-        gsap.set(videoFrameRef.current, { autoAlpha: 0, scale: 0.97 })
+        gsap.set(videoFrameRef.current, { autoAlpha: 0 })
         if (hudLines.length) gsap.set(hudLines, { scaleX: 0 })
         if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0, y: 8 })
         if (corners.length) gsap.set(corners, { autoAlpha: 0 })
@@ -242,7 +242,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
 
         // 5. Video frame
         tl.to(videoFrameRef.current, {
-          autoAlpha: 1, scale: 1, duration: 0.8, ease: 'power3.out',
+          autoAlpha: 1, duration: 1.2, ease: 'power1.out',
         }, '-=0.3')
 
         // 6. Corner marks

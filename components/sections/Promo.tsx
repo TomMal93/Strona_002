@@ -144,17 +144,23 @@ export default function Promo() {
             onClick={handlePlayPause}
             aria-label={isPlaying ? 'Zatrzymaj film' : 'Odtwórz film promocyjny'}
           >
-            <span className={styles.videoPlayBtn}>
-              {isPlaying ? (
+            <span
+              className={cn(
+                styles.videoPlayBtn,
+                isPlaying && styles.videoPlayBtnPlaying,
+              )}
+            >
+              <span className={cn(styles.videoPlayIcon, styles.videoPlayIconPlay)}>
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+              <span className={cn(styles.videoPlayIcon, styles.videoPlayIconPause)}>
                 <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
                   <rect x="6" y="5" width="4" height="14" />
                   <rect x="14" y="5" width="4" height="14" />
                 </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              )}
+              </span>
             </span>
           </button>
 
