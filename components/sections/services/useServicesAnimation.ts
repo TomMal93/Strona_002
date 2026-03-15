@@ -33,6 +33,109 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
       '(prefers-reduced-motion: reduce)',
     ).matches
 
+    const setInitialStyles = () => {
+      const {
+        titleRef,
+        titleAccentRef,
+        introRef,
+        timelineRef,
+        hudBarRef,
+        bottomTimelineRef,
+      } = refs
+
+      const isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT
+      const cards = Array.from(
+        refs.sectionRef.current?.querySelectorAll<HTMLElement>('[data-service-card]') ?? [],
+      )
+      const cornerMarks = cards.flatMap((card) =>
+        Array.from(card.querySelectorAll<HTMLElement>('[data-corner-mark]')),
+      )
+      const sceneNumbers = cards.flatMap((card) =>
+        Array.from(card.querySelectorAll<HTMLElement>('[data-scene-number]')),
+      )
+      const hudLines = hudBarRef.current
+        ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-line]'))
+        : []
+      const hudLabels = hudBarRef.current
+        ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-label]'))
+        : []
+      const bottomSegs = bottomTimelineRef.current
+        ? Array.from(bottomTimelineRef.current.querySelectorAll<HTMLElement>('[data-bottom-seg]'))
+        : []
+      const bottomDiamonds = bottomTimelineRef.current
+        ? Array.from(bottomTimelineRef.current.querySelectorAll<HTMLElement>('[data-bottom-diamond]'))
+        : []
+      const fadeElements = [titleRef.current, introRef.current] as Array<HTMLElement | null>
+      const visibleFadeElements = fadeElements.filter(
+        (el): el is HTMLElement => el !== null,
+      )
+
+      if (prefersReducedMotion) {
+        visibleFadeElements.forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+          el.style.transform = 'none'
+        })
+        if (titleAccentRef.current) titleAccentRef.current.style.transform = 'scaleX(1)'
+        if (timelineRef.current) timelineRef.current.style.transform = 'scaleX(1)'
+        hudLines.forEach((el) => { el.style.transform = 'scaleX(1)' })
+        hudLabels.forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+          el.style.transform = 'none'
+        })
+        bottomSegs.forEach((el) => { el.style.transform = 'scaleX(1)' })
+        bottomDiamonds.forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+        })
+        cards.forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+          el.style.transform = 'none'
+          el.style.clipPath = 'none'
+        })
+        ;[...cornerMarks, ...sceneNumbers].forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+        })
+        return
+      }
+
+      visibleFadeElements.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+        el.style.transform = 'translate3d(0, 30px, 0)'
+      })
+      if (titleAccentRef.current) titleAccentRef.current.style.transform = 'scaleX(0)'
+      if (timelineRef.current) timelineRef.current.style.transform = 'scaleX(0)'
+      hudLines.forEach((el) => { el.style.transform = 'scaleX(0)' })
+      hudLabels.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+        el.style.transform = 'translate3d(0, 8px, 0)'
+      })
+      bottomSegs.forEach((el) => { el.style.transform = 'scaleX(0)' })
+      bottomDiamonds.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+      })
+      cards.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+        el.style.transform = isDesktop
+          ? 'translate3d(0, 15px, 0)'
+          : 'translate3d(0, 40px, 0)'
+        el.style.clipPath = isDesktop ? 'inset(0 100% 0 0)' : 'none'
+      })
+      ;[...cornerMarks, ...sceneNumbers].forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+      })
+    }
+
+    setInitialStyles()
+
     const initAnimations = async () => {
       const [{ gsap }, { ScrollTrigger }] = await Promise.all([
         import('gsap'),

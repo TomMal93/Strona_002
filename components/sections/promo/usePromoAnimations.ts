@@ -23,6 +23,105 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
       '(prefers-reduced-motion: reduce)',
     ).matches
 
+    const setInitialStyles = () => {
+      const {
+        hudBarRef,
+        titleRef,
+        subtitleRef,
+        videoFrameRef,
+        ytGridRef,
+        bottomTimelineRef,
+      } = refs
+
+      const fadeElements = [titleRef.current, subtitleRef.current] as Array<HTMLElement | null>
+      const visibleFadeElements = fadeElements.filter(
+        (el): el is HTMLElement => el !== null,
+      )
+      const hudLines = hudBarRef.current
+        ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-line]'))
+        : []
+      const hudLabels = hudBarRef.current
+        ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-label]'))
+        : []
+      const corners = videoFrameRef.current
+        ? Array.from(videoFrameRef.current.querySelectorAll<HTMLElement>('[data-corner-mark]'))
+        : []
+      const ytCards = ytGridRef.current
+        ? Array.from(ytGridRef.current.children) as HTMLElement[]
+        : []
+      const bottomLine = bottomTimelineRef.current?.querySelector<HTMLElement>('[data-bottom-seg]') ?? null
+      const bottomDiamonds = bottomTimelineRef.current
+        ? Array.from(bottomTimelineRef.current.querySelectorAll<HTMLElement>('[data-bottom-diamond]'))
+        : []
+
+      if (prefersReducedMotion) {
+        visibleFadeElements.forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+          el.style.transform = 'none'
+        })
+        if (videoFrameRef.current) {
+          videoFrameRef.current.style.opacity = '1'
+          videoFrameRef.current.style.visibility = 'inherit'
+          videoFrameRef.current.style.transform = 'none'
+        }
+        hudLines.forEach((el) => { el.style.transform = 'scaleX(1)' })
+        hudLabels.forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+          el.style.transform = 'none'
+        })
+        corners.forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+        })
+        ytCards.forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+          el.style.transform = 'none'
+        })
+        if (bottomLine) bottomLine.style.transform = 'scaleX(1)'
+        bottomDiamonds.forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+        })
+        return
+      }
+
+      visibleFadeElements.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+        el.style.transform = 'translate3d(0, 30px, 0)'
+      })
+      if (videoFrameRef.current) {
+        videoFrameRef.current.style.opacity = '0'
+        videoFrameRef.current.style.visibility = 'hidden'
+        videoFrameRef.current.style.transform = 'scale(0.97)'
+      }
+      hudLines.forEach((el) => { el.style.transform = 'scaleX(0)' })
+      hudLabels.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+        el.style.transform = 'translate3d(0, 8px, 0)'
+      })
+      corners.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+      })
+      ytCards.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+        el.style.transform = 'translate3d(0, 20px, 0)'
+      })
+      if (bottomLine) bottomLine.style.transform = 'scaleX(0)'
+      bottomDiamonds.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+      })
+    }
+
+    setInitialStyles()
+
     const initAnimations = async () => {
       const [{ gsap }, { ScrollTrigger }] = await Promise.all([
         import('gsap'),

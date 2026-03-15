@@ -30,6 +30,126 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
       '(prefers-reduced-motion: reduce)',
     ).matches
 
+    const setInitialStyles = () => {
+      const {
+        hudBarRef,
+        titleRef,
+        viewfinderRef,
+        leadRef,
+        descriptionRef,
+        statementRef,
+        ctaRef,
+      } = refs
+
+      const fadeElements = [
+        titleRef.current,
+        leadRef.current,
+        descriptionRef.current,
+        statementRef.current,
+        ctaRef.current,
+      ] as Array<HTMLElement | null>
+      const visibleFadeElements = fadeElements.filter(
+        (el): el is HTMLElement => el !== null,
+      )
+
+      const viewfinderElement = viewfinderRef.current
+      const hudLines = hudBarRef.current
+        ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-line]'))
+        : []
+      const hudLabels = hudBarRef.current
+        ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-label]'))
+        : []
+      const corners = viewfinderElement
+        ? Array.from(viewfinderElement.querySelectorAll<HTMLElement>('[class*="cornerMark"]'))
+        : []
+      const topHudItems = viewfinderElement
+        ? Array.from(
+            viewfinderElement.querySelectorAll<HTMLElement>(
+              '[class*="viewfinderBattery"], [class*="viewfinderHudStatus"]',
+            ),
+          )
+        : []
+      const bottomHudItems = viewfinderElement
+        ? Array.from(
+            viewfinderElement.querySelectorAll<HTMLElement>(
+              '[class*="viewfinderResolution"], [class*="viewfinderExposure"], [class*="viewfinderTimecode"]',
+            ),
+          )
+        : []
+      const contentElements = viewfinderElement
+        ? Array.from(
+            viewfinderElement.querySelectorAll<HTMLElement>(
+              '[class*="viewfinderLead"], [class*="viewfinderDivider"], [class*="viewfinderDesc"]',
+            ),
+          )
+        : []
+
+      if (prefersReducedMotion) {
+        visibleFadeElements.forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+          el.style.transform = 'none'
+        })
+        if (viewfinderElement) {
+          viewfinderElement.style.opacity = '1'
+          viewfinderElement.style.visibility = 'inherit'
+          viewfinderElement.style.transform = 'none'
+          viewfinderElement.style.clipPath = 'inset(0% 0% 0% 0%)'
+        }
+        hudLines.forEach((el) => { el.style.transform = 'scaleX(1)' })
+        hudLabels.forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+          el.style.transform = 'none'
+        })
+        ;[...corners, ...topHudItems, ...bottomHudItems, ...contentElements].forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+          el.style.transform = 'none'
+        })
+        return
+      }
+
+      visibleFadeElements.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+        el.style.transform = 'translate3d(0, 30px, 0)'
+      })
+      if (viewfinderElement) {
+        viewfinderElement.style.opacity = '0'
+        viewfinderElement.style.visibility = 'hidden'
+        viewfinderElement.style.transform = 'translate3d(0, 28px, 0) scale(0.985)'
+        viewfinderElement.style.clipPath = 'inset(0% 0% 100% 0%)'
+      }
+      hudLines.forEach((el) => { el.style.transform = 'scaleX(0)' })
+      hudLabels.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+        el.style.transform = 'translate3d(0, 8px, 0)'
+      })
+      corners.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+      })
+      topHudItems.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+        el.style.transform = 'translate3d(0, -10px, 0)'
+      })
+      bottomHudItems.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+        el.style.transform = 'translate3d(0, 10px, 0)'
+      })
+      contentElements.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+        el.style.transform = 'translate3d(0, 22px, 0)'
+      })
+    }
+
+    setInitialStyles()
+
     const initAnimations = async () => {
       const [{ gsap }, { ScrollTrigger }] = await Promise.all([
         import('gsap'),
