@@ -24,7 +24,6 @@ export default function About() {
   const sectionRef = useRef<HTMLElement>(null!)
   const hudBarRef = useRef<HTMLDivElement>(null!)
   const titleRef = useRef<HTMLHeadingElement>(null!)
-  const titleAccentRef = useRef<HTMLSpanElement>(null!)
   const viewfinderRef = useRef<HTMLDivElement>(null!)
   const leadRef = useRef<HTMLParagraphElement>(null!)
   const descriptionRef = useRef<HTMLParagraphElement>(null!)
@@ -46,7 +45,6 @@ export default function About() {
     sectionRef,
     hudBarRef,
     titleRef,
-    titleAccentRef,
     viewfinderRef,
     leadRef,
     descriptionRef,
@@ -93,6 +91,7 @@ export default function About() {
                 >
                   {siteContent.about.title}
                 </h2>
+                <span aria-hidden="true" className={styles.sectionTitleAccentSoft} />
               </div>
 
               <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
