@@ -271,9 +271,9 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         if (hudInnerLines.length) {
           tl.to(hudInnerLines, {
             scaleX: 1,
-            duration: 0.34,
+            duration: 0.18,
             ease: 'power2.out',
-            stagger: 0.03,
+            stagger: 0.01,
           })
         }
 
@@ -282,11 +282,11 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
             hudOuterLines,
             {
               scaleX: 1,
-              duration: 0.52,
+              duration: 0.24,
               ease: 'power2.out',
-              stagger: 0.05,
+              stagger: 0.015,
             },
-            '-=0.1',
+            '-=0.05',
           )
         }
 
@@ -296,11 +296,11 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.26,
+              duration: 0.14,
               ease: 'power2.out',
-              stagger: 0.06,
+              stagger: 0.02,
             },
-            '-=0.18',
+            '-=0.06',
           )
         }
 
@@ -309,7 +309,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
           y: 0,
           duration: 0.62,
           ease: 'power3.out',
-        })
+        }, '-=0.08')
 
         if (viewfinderElement) {
           tl.to(
