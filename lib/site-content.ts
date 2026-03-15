@@ -51,20 +51,20 @@ export const siteContent = {
     },
     youtubeVideos: [
       {
-        id: process.env.NEXT_PUBLIC_PROMO_YT_1_ID || 'dQw4w9WgXcQ',
-        title: process.env.NEXT_PUBLIC_PROMO_YT_1_TITLE || 'Reportaż eventowy',
+        id: process.env.NEXT_PUBLIC_PROMO_YT_1_ID || 'jCpSTtkiKsY',
+        title: process.env.NEXT_PUBLIC_PROMO_YT_1_TITLE || 'Przeprawa',
       },
       {
-        id: process.env.NEXT_PUBLIC_PROMO_YT_2_ID || 'dQw4w9WgXcQ',
+        id: process.env.NEXT_PUBLIC_PROMO_YT_2_ID || 'z-CdD24c2Sc',
         title: process.env.NEXT_PUBLIC_PROMO_YT_2_TITLE || 'Wesele — highlight',
       },
       {
-        id: process.env.NEXT_PUBLIC_PROMO_YT_3_ID || 'dQw4w9WgXcQ',
-        title: process.env.NEXT_PUBLIC_PROMO_YT_3_TITLE || 'Drony — ujęcia lotnicze',
+        id: process.env.NEXT_PUBLIC_PROMO_YT_3_ID || 'm3ncwB9JCXk',
+        title: process.env.NEXT_PUBLIC_PROMO_YT_3_TITLE || 'Moon Flames',
       },
       {
-        id: process.env.NEXT_PUBLIC_PROMO_YT_4_ID || 'dQw4w9WgXcQ',
-        title: process.env.NEXT_PUBLIC_PROMO_YT_4_TITLE || 'Off-road — relacja',
+        id: process.env.NEXT_PUBLIC_PROMO_YT_4_ID || 'we_wTV-xELQ',
+        title: process.env.NEXT_PUBLIC_PROMO_YT_4_TITLE || 'Echo Rodu - koncert',
       },
     ],
   },
