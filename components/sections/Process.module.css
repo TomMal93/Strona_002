@@ -1,0 +1,342 @@
+/* ── Section header ────────────────────────────────────────────────────── */
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.sectionTitle {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ── Gradient text — same as Hero ─────────────────────────────────────── */
+
+.gradientTextPrimary {
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-warm)) 0%,
+    rgb(255 238 175) 45%,
+    rgb(var(--c-gold)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── HUD bar ──────────────────────────────────────────────────────────── */
+
+.hudBar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  margin-top: 1.2rem;
+  pointer-events: none;
+}
+
+.hudLineLeft,
+.hudLineRight {
+  flex: 1;
+  height: 1px;
+  will-change: transform, opacity;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.3) 38%,
+    rgb(var(--c-gold) / 0.46) 100%
+  );
+}
+
+.hudLineLeft {
+  transform-origin: right center;
+}
+
+.hudLineRight {
+  transform-origin: left center;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--c-gold) / 0.46) 0%,
+    rgb(var(--c-gold) / 0.3) 62%,
+    transparent 100%
+  );
+}
+
+.hudLabelLeft,
+.hudLabelRight {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.75rem;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.54);
+  white-space: nowrap;
+  will-change: transform, opacity;
+}
+
+/* ── Timeline shell — viewfinder frame ────────────────────────────────── */
+
+.timelineShell {
+  position: relative;
+  padding: 2.8rem 1.4rem 1.6rem;
+}
+
+/* ── Corner marks — camera framing guides ─────────────────────────────── */
+
+.cornerMark {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.cornerTL {
+  top: 0;
+  left: 0;
+  border-top: 1px solid rgb(var(--c-gold) / 0.3);
+  border-left: 1px solid rgb(var(--c-gold) / 0.3);
+}
+
+.cornerTR {
+  top: 0;
+  right: 0;
+  border-top: 1px solid rgb(var(--c-gold) / 0.3);
+  border-right: 1px solid rgb(var(--c-gold) / 0.3);
+}
+
+.cornerBL {
+  bottom: 0;
+  left: 0;
+  border-bottom: 1px solid rgb(var(--c-gold) / 0.3);
+  border-left: 1px solid rgb(var(--c-gold) / 0.3);
+}
+
+.cornerBR {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid rgb(var(--c-gold) / 0.3);
+  border-right: 1px solid rgb(var(--c-gold) / 0.3);
+}
+
+/* ── Connector line ───────────────────────────────────────────────────── */
+
+.connectorLine {
+  display: none;
+}
+
+/* ── Steps grid ───────────────────────────────────────────────────────── */
+
+.stepsGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ── Step card ────────────────────────────────────────────────────────── */
+
+.stepCard {
+  position: relative;
+  padding: 1.5rem 1.25rem 1.5rem 2.5rem;
+  border: 1px solid rgb(var(--c-khaki) / 0.15);
+  border-radius: 0.25rem;
+  background: rgb(255 255 255 / 0.02);
+}
+
+/* Subtle glow */
+.stepCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 30% 20%,
+    rgb(var(--c-khaki) / 0.06) 0%,
+    transparent 60%
+  );
+}
+
+/* ── Step node — circle on connector line ─────────────────────────────── */
+
+.stepNode {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgb(var(--c-khaki) / 0.5);
+  background: rgb(var(--c-khaki) / 0.15);
+  box-shadow: 0 0 6px rgb(var(--c-khaki) / 0.15);
+  transform: translateX(-50%);
+}
+
+/* ── Step typography ──────────────────────────────────────────────────── */
+
+.stepNumber {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: rgb(255 238 175 / 0.3);
+}
+
+.stepLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(var(--c-khaki) / 0.8);
+}
+
+.stepTitle {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: rgb(255 245 230 / 0.92);
+}
+
+.stepDescription {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgb(255 255 255 / 0.55);
+}
+
+.stepTimeline {
+  display: inline-block;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.68rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.45);
+}
+
+/* ── Mobile: vertical connector line ──────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .connectorLine {
+    display: block;
+    position: absolute;
+    top: 2rem;
+    bottom: 2rem;
+    left: 1.4rem;
+    width: 1px;
+    transform-origin: top center;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgb(var(--c-khaki) / 0.35) 10%,
+      rgb(var(--c-khaki) / 0.35) 90%,
+      transparent 100%
+    );
+    z-index: 0;
+  }
+
+  .stepNode {
+    left: 0;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+}
+
+/* ── Tablet: 2x2 grid, no connector ───────────────────────────────────── */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .stepsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .stepCard {
+    padding-left: 1.25rem;
+  }
+
+  .stepNode {
+    display: none;
+  }
+}
+
+/* ── Desktop: 4 columns with horizontal connector ─────────────────────── */
+
+@media (min-width: 1024px) {
+  .stepsGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .stepCard {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .connectorLine {
+    display: block;
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    height: 1px;
+    transform-origin: left center;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgb(var(--c-khaki) / 0.35) 8%,
+      rgb(var(--c-khaki) / 0.5) 50%,
+      rgb(var(--c-khaki) / 0.35) 92%,
+      transparent 100%
+    );
+    box-shadow: 0 0 12px rgb(var(--c-khaki) / 0.1);
+    z-index: 0;
+  }
+
+  .stepNode {
+    position: absolute;
+    top: -0.75rem;
+    left: 1.25rem;
+    transform: none;
+    z-index: 1;
+  }
+
+  .stepCard {
+    position: relative;
+    padding-top: 2rem;
+  }
+}
+
+/* ── Small mobile adjustments ─────────────────────────────────────────── */
+
+@media (max-width: 479px) {
+  .hudLabelLeft,
+  .hudLabelRight {
+    padding-inline: 0.45rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+  }
+
+  .timelineShell {
+    padding-inline: 1rem;
+  }
+}

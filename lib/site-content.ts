@@ -111,4 +111,45 @@ export const siteContent = {
       },
     ],
   },
+  process: {
+    title: 'Proces',
+    subtitle:
+      'Od pierwszego kontaktu do gotowego materiału — cztery proste kroki.\nBez niespodzianek, bez zbędnego czekania.',
+    hudLabelLeft: 'WORKFLOW',
+    hudLabelRight: 'SCENA 07 / 09',
+    steps: [
+      {
+        number: '01',
+        label: 'KONTAKT',
+        title: 'Napisz do mnie',
+        description:
+          'Opisujesz swoje wydarzenie, termin i lokalizację. Odpowiadam w ciągu 24h z wstępnym planem.',
+        timeline: 'do 24h',
+      },
+      {
+        number: '02',
+        label: 'PLAN',
+        title: 'Ustalamy szczegóły',
+        description:
+          'Omawiamy zakres, harmonogram dnia i Twoje oczekiwania. Dostajesz jasny plan bez niespodzianek.',
+        timeline: '1–3 dni',
+      },
+      {
+        number: '03',
+        label: 'REALIZACJA',
+        title: 'Dzień zdjęć',
+        description:
+          'Przyjeżdżam przygotowany, z pełnym zestawem. Pracuję dyskretnie, ale łapię każdy moment.',
+        timeline: 'w ustalonym terminie',
+      },
+      {
+        number: '04',
+        label: 'DOSTAWA',
+        title: 'Odbierasz materiał',
+        description:
+          'Gotowe zdjęcia lub zmontowany film trafiają do Ciebie w umówionym terminie. Bez przeciągania.',
+        timeline: '2–4 tygodnie',
+      },
+    ],
+  },
 } as const
