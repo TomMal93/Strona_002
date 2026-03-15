@@ -3,6 +3,7 @@ const isDev = process.env.NODE_ENV === 'development'
 const contentSecurityPolicy = `
   default-src 'self';
   base-uri 'self';
+  frame-src https://www.youtube-nocookie.com;
   frame-ancestors 'none';
   form-action 'self';
   object-src 'none';
