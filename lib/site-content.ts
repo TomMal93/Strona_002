@@ -40,6 +40,34 @@ export const siteContent = {
       process.env.NEXT_PUBLIC_ABOUT_IMAGE_ALT
       || 'Fotograf i operator drona — portret z dronem i kontrolerem',
   },
+  promo: {
+    title: process.env.NEXT_PUBLIC_PROMO_TITLE || 'Moja praca w akcji',
+    subtitle:
+      process.env.NEXT_PUBLIC_PROMO_SUBTITLE
+      || 'Krótki przegląd tego, co robię — od pola po montażownię.',
+    heroVideo: {
+      src: process.env.NEXT_PUBLIC_PROMO_VIDEO_SRC || '/videos/promo-reel.mp4',
+      poster: process.env.NEXT_PUBLIC_PROMO_VIDEO_POSTER || '/images/promo-poster.jpg',
+    },
+    youtubeVideos: [
+      {
+        id: process.env.NEXT_PUBLIC_PROMO_YT_1_ID || 'dQw4w9WgXcQ',
+        title: process.env.NEXT_PUBLIC_PROMO_YT_1_TITLE || 'Reportaż eventowy',
+      },
+      {
+        id: process.env.NEXT_PUBLIC_PROMO_YT_2_ID || 'dQw4w9WgXcQ',
+        title: process.env.NEXT_PUBLIC_PROMO_YT_2_TITLE || 'Wesele — highlight',
+      },
+      {
+        id: process.env.NEXT_PUBLIC_PROMO_YT_3_ID || 'dQw4w9WgXcQ',
+        title: process.env.NEXT_PUBLIC_PROMO_YT_3_TITLE || 'Drony — ujęcia lotnicze',
+      },
+      {
+        id: process.env.NEXT_PUBLIC_PROMO_YT_4_ID || 'dQw4w9WgXcQ',
+        title: process.env.NEXT_PUBLIC_PROMO_YT_4_TITLE || 'Off-road — relacja',
+      },
+    ],
+  },
   services: {
     title: process.env.NEXT_PUBLIC_SERVICES_TITLE || 'Oferta',
     subtitle:

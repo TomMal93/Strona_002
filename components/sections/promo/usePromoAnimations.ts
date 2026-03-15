@@ -1,0 +1,171 @@
+'use client'
+
+import { useLayoutEffect } from 'react'
+import type { RefObject } from 'react'
+
+export type PromoAnimationRefs = {
+  sectionRef: RefObject<HTMLElement>
+  hudBarRef: RefObject<HTMLDivElement>
+  titleRef: RefObject<HTMLHeadingElement>
+  subtitleRef: RefObject<HTMLParagraphElement>
+  videoFrameRef: RefObject<HTMLDivElement>
+  ytGridRef: RefObject<HTMLDivElement>
+  bottomTimelineRef: RefObject<HTMLDivElement>
+}
+
+export function usePromoAnimations(refs: PromoAnimationRefs): void {
+  useLayoutEffect(() => {
+    let shouldCleanup = false
+    let observer: IntersectionObserver | undefined
+    let revertContext: (() => void) | undefined
+
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches
+
+    const initAnimations = async () => {
+      const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+      ])
+
+      if (shouldCleanup) return
+
+      gsap.registerPlugin(ScrollTrigger)
+
+      const {
+        sectionRef,
+        hudBarRef,
+        titleRef,
+        subtitleRef,
+        videoFrameRef,
+        ytGridRef,
+        bottomTimelineRef,
+      } = refs
+
+      const ctx = gsap.context(() => {
+        const hudLines = hudBarRef.current
+          ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-line]'))
+          : []
+        const hudLabels = hudBarRef.current
+          ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-label]'))
+          : []
+        const corners = videoFrameRef.current
+          ? Array.from(videoFrameRef.current.querySelectorAll('[data-corner-mark]'))
+          : []
+        const ytCards = ytGridRef.current
+          ? Array.from(ytGridRef.current.children)
+          : []
+        const bottomLine = bottomTimelineRef.current
+          ? bottomTimelineRef.current.querySelector('[data-bottom-seg]')
+          : null
+        const bottomDiamonds = bottomTimelineRef.current
+          ? Array.from(bottomTimelineRef.current.querySelectorAll('[data-bottom-diamond]'))
+          : []
+
+        if (prefersReducedMotion) {
+          gsap.set([titleRef.current, subtitleRef.current, videoFrameRef.current], { autoAlpha: 1, y: 0 })
+          if (hudLines.length) gsap.set(hudLines, { scaleX: 1 })
+          if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1 })
+          if (corners.length) gsap.set(corners, { autoAlpha: 1 })
+          if (ytCards.length) gsap.set(ytCards, { autoAlpha: 1, y: 0 })
+          if (bottomLine) gsap.set(bottomLine, { scaleX: 1 })
+          if (bottomDiamonds.length) gsap.set(bottomDiamonds, { autoAlpha: 1 })
+          return
+        }
+
+        /* ── Initial states ─────────────────────────────────────────── */
+
+        gsap.set([titleRef.current, subtitleRef.current], { autoAlpha: 0, y: 30 })
+        gsap.set(videoFrameRef.current, { autoAlpha: 0, scale: 0.97 })
+        if (hudLines.length) gsap.set(hudLines, { scaleX: 0 })
+        if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0 })
+        if (corners.length) gsap.set(corners, { autoAlpha: 0 })
+        if (ytCards.length) gsap.set(ytCards, { autoAlpha: 0, y: 20 })
+        if (bottomLine) gsap.set(bottomLine, { scaleX: 0 })
+        if (bottomDiamonds.length) gsap.set(bottomDiamonds, { autoAlpha: 0 })
+
+        /* ── Scroll-triggered timeline ──────────────────────────────── */
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 70%',
+            once: true,
+          },
+        })
+
+        // 1. HUD lines
+        if (hudLines.length) {
+          tl.to(hudLines, { scaleX: 1, duration: 0.5, ease: 'power2.out' })
+        }
+
+        // 2. HUD labels
+        if (hudLabels.length) {
+          tl.to(hudLabels, { autoAlpha: 1, duration: 0.3, ease: 'power2.out' }, '-=0.2')
+        }
+
+        // 3. Title
+        tl.to(titleRef.current, {
+          autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out',
+        }, '-=0.1')
+
+        // 4. Subtitle
+        tl.to(subtitleRef.current, {
+          autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out',
+        }, '-=0.3')
+
+        // 5. Video frame
+        tl.to(videoFrameRef.current, {
+          autoAlpha: 1, scale: 1, duration: 0.8, ease: 'power3.out',
+        }, '-=0.3')
+
+        // 6. Corner marks
+        if (corners.length) {
+          tl.to(corners, {
+            autoAlpha: 1, duration: 0.4, ease: 'power2.out', stagger: 0.06,
+          }, '-=0.4')
+        }
+
+        // 7. YouTube cards
+        if (ytCards.length) {
+          tl.to(ytCards, {
+            autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.12,
+          }, '-=0.2')
+        }
+
+        // 8. Bottom timeline
+        if (bottomLine) {
+          tl.to(bottomLine, { scaleX: 1, duration: 0.5, ease: 'power2.out' }, '-=0.3')
+        }
+        if (bottomDiamonds.length) {
+          tl.to(bottomDiamonds, {
+            autoAlpha: 1, duration: 0.3, ease: 'power2.out', stagger: 0.06,
+          }, '-=0.2')
+        }
+      }, sectionRef)
+
+      revertContext = () => ctx.revert()
+    }
+
+    if (refs.sectionRef.current) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          const hasIntersecting = entries.some((e) => e.isIntersecting)
+          if (!hasIntersecting) return
+          observer?.disconnect()
+          void initAnimations()
+        },
+        { root: null, threshold: 0, rootMargin: '0px 0px -25% 0px' },
+      )
+      observer.observe(refs.sectionRef.current)
+    }
+
+    return () => {
+      shouldCleanup = true
+      observer?.disconnect()
+      revertContext?.()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+}

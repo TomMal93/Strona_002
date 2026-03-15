@@ -1,0 +1,411 @@
+/* ── Section header — HUD bar ──────────────────────────────────────────── */
+
+.sectionHeaderShell {
+  position: relative;
+  isolation: isolate;
+  padding: 0 1rem 1rem;
+}
+
+.hudBar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  margin-top: 1.8rem;
+  pointer-events: none;
+}
+
+.hudLineLeft,
+.hudLineRight {
+  flex: 1;
+  height: 1px;
+  transform-origin: center;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.35) 40%,
+    rgb(var(--c-gold) / 0.5) 100%
+  );
+}
+
+.hudLineRight {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--c-gold) / 0.5) 0%,
+    rgb(var(--c-gold) / 0.35) 60%,
+    transparent 100%
+  );
+}
+
+.hudLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.75rem;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.54);
+  white-space: nowrap;
+}
+
+.sectionSubtitle {
+  max-width: none;
+}
+
+/* ── Hero video frame ─────────────────────────────────────────────────── */
+
+.videoFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-top: 2rem;
+  border: 1px solid rgb(var(--c-warm) / 0.25);
+  overflow: hidden;
+}
+
+.videoFrame video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Corner marks — 22px film frame guides */
+.cornerMark {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.cornerTL {
+  top: 0;
+  left: 0;
+  border-top: 1px solid rgb(var(--c-gold) / 0.55);
+  border-left: 1px solid rgb(var(--c-gold) / 0.55);
+}
+
+.cornerTR {
+  top: 0;
+  right: 0;
+  border-top: 1px solid rgb(var(--c-gold) / 0.55);
+  border-right: 1px solid rgb(var(--c-gold) / 0.55);
+}
+
+.cornerBL {
+  bottom: 0;
+  left: 0;
+  border-bottom: 1px solid rgb(var(--c-gold) / 0.55);
+  border-left: 1px solid rgb(var(--c-gold) / 0.55);
+}
+
+.cornerBR {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid rgb(var(--c-gold) / 0.55);
+  border-right: 1px solid rgb(var(--c-gold) / 0.55);
+}
+
+/* ── Video play overlay ───────────────────────────────────────────────── */
+
+.videoPlayOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(0 0 0 / 0.35);
+  border: none;
+  cursor: pointer;
+  transition:
+    background 280ms ease,
+    opacity 280ms ease;
+}
+
+.videoPlayOverlay:hover {
+  background: rgb(0 0 0 / 0.45);
+}
+
+/* When playing: transparent, show pause icon only on hover */
+.videoPlayOverlayPlaying {
+  background: transparent;
+}
+
+.videoPlayOverlayPlaying .videoPlayBtn {
+  opacity: 0;
+  transition:
+    opacity 280ms ease,
+    background 280ms ease,
+    border-color 280ms ease,
+    transform 280ms ease;
+}
+
+.videoPlayOverlayPlaying:hover {
+  background: rgb(0 0 0 / 0.25);
+}
+
+.videoPlayOverlayPlaying:hover .videoPlayBtn {
+  opacity: 1;
+}
+
+.videoPlayBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.55);
+  border: 1px solid rgb(var(--c-gold) / 0.5);
+  color: rgb(255 238 175 / 0.9);
+  transition:
+    background 280ms ease,
+    border-color 280ms ease,
+    transform 280ms ease;
+}
+
+.videoPlayOverlay:hover .videoPlayBtn {
+  background: rgb(0 0 0 / 0.7);
+  border-color: rgb(var(--c-gold) / 0.8);
+  transform: scale(1.08);
+}
+
+/* ── Video bottom bar — codec + progress + timecode ───────────────────── */
+
+.videoBottomBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.75rem;
+  background: linear-gradient(0deg, rgb(0 0 0 / 0.6) 0%, transparent 100%);
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.5);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.videoCodec {
+  white-space: nowrap;
+}
+
+.videoProgress {
+  flex: 1;
+  position: relative;
+  height: 2px;
+  background: rgb(255 255 255 / 0.1);
+  overflow: hidden;
+}
+
+.videoProgressFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, rgb(var(--c-gold) / 0.8), rgb(var(--c-gold) / 0.5));
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 150ms linear;
+}
+
+.videoTimecode {
+  white-space: nowrap;
+}
+
+/* ── YouTube grid ─────────────────────────────────────────────────────── */
+
+.ytGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .ytGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ytGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ── YouTube card ─────────────────────────────────────────────────────── */
+
+.ytCard {
+  transition: transform 340ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ytCard:hover {
+  transform: translateY(-4px);
+}
+
+.ytThumbnailBtn {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgb(var(--c-warm) / 0.2);
+  background: rgb(20 18 16);
+  cursor: pointer;
+  padding: 0;
+}
+
+.ytThumbnail {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 280ms ease;
+}
+
+.ytThumbnailBtn:hover .ytThumbnail {
+  opacity: 0.85;
+}
+
+/* Scan-line overlay */
+.ytScanline {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgb(255 255 255 / 0.015) 3px,
+      rgb(255 255 255 / 0.015) 4px
+    );
+  opacity: 0.7;
+}
+
+/* Play button */
+.ytPlayBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.55);
+  border: 1px solid rgb(var(--c-gold) / 0.5);
+  color: rgb(255 238 175 / 0.9);
+  transition:
+    background 280ms ease,
+    border-color 280ms ease,
+    transform 280ms ease;
+}
+
+.ytThumbnailBtn:hover .ytPlayBtn {
+  background: rgb(0 0 0 / 0.7);
+  border-color: rgb(var(--c-gold) / 0.8);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+/* Embedded iframe */
+.ytEmbed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgb(var(--c-warm) / 0.2);
+}
+
+.ytIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* YouTube title */
+.ytTitle {
+  margin: 0.55rem 0 0;
+  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(255 245 214 / 0.72);
+}
+
+/* ── Bottom timeline — decorative diamonds ────────────────────────────── */
+
+.bottomTimeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  margin: 2.5rem auto 0;
+  opacity: 0.3;
+}
+
+.bottomTimelineLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(-50%);
+  transform-origin: center;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.6) 10%,
+    rgb(var(--c-gold) / 0.6) 90%,
+    transparent 100%
+  );
+  grid-column: 1 / -1;
+  grid-row: 1;
+  pointer-events: none;
+}
+
+.bottomTimelineDiamond {
+  grid-row: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.5rem;
+  line-height: 1;
+  color: rgb(var(--c-gold) / 0.8);
+  z-index: 1;
+}
+
+/* ── Responsive: small screens ────────────────────────────────────────── */
+
+@media (width < 48rem) {
+  .hudLabel {
+    padding-inline: 0.45rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+  }
+
+  .videoBottomBar {
+    font-size: 0.64rem;
+    padding: 0.3rem 0.5rem;
+    gap: 0.4rem;
+  }
+}
+
