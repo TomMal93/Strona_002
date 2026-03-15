@@ -91,7 +91,6 @@ export default function About() {
                 >
                   {siteContent.about.title}
                 </h2>
-                <span aria-hidden="true" className={styles.sectionTitleAccentSoft} />
               </div>
 
               <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
