@@ -1,6 +1,9 @@
 .mobileFrame {
   --mobile-frame-w: 766px; /* musi odpowiadać breakpointowi md:hidden (767px) */
   width: var(--mobile-frame-w);
+  /* Po przeskalowaniu (scale = 100vw/766px z origin-top-left) ta wysokość
+     staje się dokładnie 100svh — dzięki temu flex-center trafia w środek sekcji */
+  height: calc(100svh * var(--mobile-frame-w) / 100vw);
   display: flex;
   flex-direction: column;
   align-items: center;

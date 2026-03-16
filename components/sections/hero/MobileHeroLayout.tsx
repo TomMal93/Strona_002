@@ -9,7 +9,7 @@ type MobileHeroLayoutProps = {
 
 export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
   return (
-    <div className={`relative z-10 mx-auto h-full origin-top-left scale-[calc(100vw/var(--mobile-frame-w))] px-[10px] md:hidden ${styles.mobileFrame}`}>
+    <div className={`relative z-10 mx-auto origin-top-left scale-[calc(100vw/var(--mobile-frame-w))] px-[10px] md:hidden ${styles.mobileFrame}`}>
       <div className={`relative ${styles.mobileGroupCenter}`}>
         <div className={`relative ml-auto ${styles.mobileImageWrap} ${styles.mobileImageEntrance}`}>
           <HeroGlowScene />
