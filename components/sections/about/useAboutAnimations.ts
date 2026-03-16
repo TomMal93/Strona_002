@@ -93,7 +93,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         if (viewfinderElement) {
           viewfinderElement.style.opacity = '1'
           viewfinderElement.style.visibility = 'inherit'
-          viewfinderElement.style.transform = 'none'
+          viewfinderElement.style.transform = 'scale(1.5)'
           viewfinderElement.style.clipPath = 'inset(0% 0% 0% 0%)'
         }
         hudLines.forEach((el) => { el.style.transform = 'scaleX(1)' })
@@ -118,7 +118,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
       if (viewfinderElement) {
         viewfinderElement.style.opacity = '0'
         viewfinderElement.style.visibility = 'hidden'
-        viewfinderElement.style.transform = 'translate3d(0, 28px, 0) scale(0.985)'
+        viewfinderElement.style.transform = 'translate3d(0, 28px, 0) scale(1.48)'
         viewfinderElement.style.clipPath = 'inset(0% 0% 100% 0%)'
       }
       hudLines.forEach((el) => { el.style.transform = 'scaleX(0)' })
@@ -229,7 +229,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         if (prefersReducedMotion) {
           gsap.set(visibleFadeElements, { autoAlpha: 1, y: 0 })
           if (viewfinderElement) {
-            gsap.set(viewfinderElement, { autoAlpha: 1, y: 0, scale: 1, clipPath: 'inset(0% 0% 0% 0%)' })
+            gsap.set(viewfinderElement, { autoAlpha: 1, y: 0, scale: 1.5, clipPath: 'inset(0% 0% 0% 0%)' })
           }
           if (hudLines.length) gsap.set(hudLines, { scaleX: 1 })
           if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1, y: 0 })
@@ -247,7 +247,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
           gsap.set(viewfinderElement, {
             autoAlpha: 0,
             y: 28,
-            scale: 0.985,
+            scale: 1.48,
             clipPath: 'inset(0% 0% 100% 0%)',
           })
         }
@@ -317,7 +317,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
             {
               autoAlpha: 1,
               y: 0,
-              scale: 1,
+              scale: 1.5,
               clipPath: 'inset(0% 0% 0% 0%)',
               duration: 0.72,
               ease: 'power3.out',
