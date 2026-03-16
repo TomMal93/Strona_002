@@ -143,8 +143,11 @@
 
 .viewfinder {
   position: relative;
-  margin-top: 5rem;
+  margin-top: 6.5rem;
   padding: 2.8rem 1.4rem 1.6rem;
+  transform: scale(1.5);
+  transform-origin: top center;
+  margin-bottom: 4rem;
 }
 
 .viewfinderHudTop,
