@@ -13,7 +13,7 @@ const NAV_ITEMS = [
   { label: 'OPINIE', href: '/#testimonials' },
   { label: 'OFERTA', href: '/#services' },
   { label: 'FAQ', href: '/#faq' },
-  { label: 'KONTAKT', href: '/#contact' },
+  { label: 'KONTAKT', href: '/contact' },
 ] as const
 
 const navLinkClassName = [

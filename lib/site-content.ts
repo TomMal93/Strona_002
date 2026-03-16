@@ -308,15 +308,15 @@ export const siteContent = {
       hudLabelRight: 'SCENA 01 / 05',
       text:
         process.env.NEXT_PUBLIC_ABOUTME_BIO
-        || 'Jestem fotografem i operatorem kamery z ponad 8-letnim doświadczeniem w branży audiowizualnej. Specjalizuję się w realizacji filmów ślubnych, materiałów promocyjnych oraz relacji z wydarzeń — od kameralnych uroczystości po dynamiczne eventy militarne i sportowe. Łączę pasję do obrazu z solidnym warsztatem technicznym. Pracuję w systemie kamer Sony, wykorzystuję drony, stabilizatory i profesjonalne oświetlenie, aby każdy kadr wyglądał kinowo. Moim celem jest stworzenie materiału, który nie tylko dobrze wygląda, ale przede wszystkim opowiada Twoją historię i zostaje w pamięci na lata.',
+        || 'Filmowaniem zajmuję się od około 3 lat.\nWszystko zaczęło się dość niewinnie - od chęci nagrywania moich terenowych wypadów.\nPoczątkowo były to proste ujęcia z drona i aparatu, bardziej dla własnej satysfakcji niż z myślą o czymś większym.\nZ czasem jednak zacząłem dostrzegać,\nże obraz potrafi opowiadać historie w wyjątkowy sposób - oddawać emocje, klimat miejsca i chwile,\nktóre szybko przemijają.\nTo właśnie wtedy hobby zaczęło przeradzać się w prawdziwą pasję.\nDziś kamera towarzyszy mi znacznie częściej, a każde kolejne nagranie jest okazją do tworzenia czegoś autentycznego - filmu, który zatrzymuje moment\ni pozwala wracać do niego po latach.',
     },
     video: {
       title: 'Przedstawiam się',
       hudLabelLeft: 'INTRO',
       hudLabelRight: 'SCENA 02 / 05',
-      type: (process.env.NEXT_PUBLIC_ABOUTME_VIDEO_TYPE || 'youtube') as 'youtube' | 'self-hosted',
+      type: (process.env.NEXT_PUBLIC_ABOUTME_VIDEO_TYPE || 'self-hosted') as 'youtube' | 'self-hosted',
       youtubeId: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_YT_ID || 'jCpSTtkiKsY',
-      src: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_SRC || '/videos/about-me-intro.mp4',
+      src: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_SRC || '/videos/contact/contact.mp4',
       poster: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_POSTER || '/images/about-me-video-poster.jpg',
     },
     contact: {
