@@ -175,6 +175,10 @@ export default function About() {
             </div>
 
             <div ref={statementRef} className={styles.statementPanel}>
+              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />
+              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR}`} />
+              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL}`} />
+              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR}`} />
               <p className={styles.aboutStatement}>
                 {siteContent.about.statement
                   .replace('Malxxxxx. ', 'Malxxxxx.\n')

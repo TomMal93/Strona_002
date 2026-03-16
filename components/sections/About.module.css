@@ -406,27 +406,11 @@
   display: grid;
   grid-template-rows: 1fr auto;
   margin: 2.8rem auto 0;
-  max-width: 42rem;
+  max-width: 37.5rem;
   min-height: 13.5rem;
   padding: 0;
-  border-radius: 0.5rem;
   background: transparent;
-  border: 1px solid rgb(255 238 175 / 0.09);
   isolation: isolate;
-  overflow: hidden;
-}
-
-.statementPanel::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  border-left: 1px solid rgb(255 238 175 / 0.025);
-  border-right: 1px solid rgb(255 238 175 / 0.025);
-  border-top: 1px solid rgb(255 238 175 / 0.02);
-  border-bottom: 1px solid rgb(255 238 175 / 0.02);
-  opacity: 0.34;
 }
 
 .aboutStatement {
