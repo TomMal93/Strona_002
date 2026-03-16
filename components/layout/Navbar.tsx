@@ -6,7 +6,8 @@ import { gsap } from 'gsap'
 
 const NAV_ITEMS = [
   { label: 'O MNIE', href: '#about' },
-  { label: 'GALERIA', href: '#portfolio' },
+  { label: 'MOJA PRACA', href: '#promo' },
+  { label: 'OFERTA', href: '#services' },
   { label: 'KONTAKT', href: '#contact' },
 ] as const
 

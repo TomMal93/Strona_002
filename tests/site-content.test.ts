@@ -12,10 +12,9 @@ test('site content exposes required SEO, Hero, About and Services copy fields', 
   assert.equal(typeof siteContent.about.title, 'string')
   assert.equal(typeof siteContent.about.lead, 'string')
   assert.equal(typeof siteContent.about.description, 'string')
+  assert.equal(typeof siteContent.about.statement, 'string')
   assert.equal(typeof siteContent.about.ctaLabel, 'string')
   assert.equal(typeof siteContent.about.imageAlt, 'string')
-  assert.ok(Array.isArray(siteContent.about.highlights))
-  assert.equal(siteContent.about.highlights.length, 4)
   assert.equal(typeof siteContent.services.title, 'string')
   assert.equal(typeof siteContent.services.subtitle, 'string')
   assert.ok(Array.isArray(siteContent.services.items))
@@ -32,13 +31,6 @@ test('site content exposes required SEO, Hero, About and Services copy fields', 
     assert.ok(item.description.length > 0)
   }
 
-  for (const item of siteContent.about.highlights) {
-    assert.equal(typeof item.title, 'string')
-    assert.equal(typeof item.description, 'string')
-    assert.ok(item.title.length > 0)
-    assert.ok(item.description.length > 0)
-  }
-
   assert.ok(siteContent.seoDescription.length > 0)
   assert.ok(siteContent.structuredDataDescription.length > 0)
   assert.ok(siteContent.hero.headlineLine1.length > 0)
@@ -48,6 +40,7 @@ test('site content exposes required SEO, Hero, About and Services copy fields', 
   assert.ok(siteContent.about.title.length > 0)
   assert.ok(siteContent.about.lead.length > 0)
   assert.ok(siteContent.about.description.length > 0)
+  assert.ok(siteContent.about.statement.length > 0)
   assert.ok(siteContent.about.ctaLabel.length > 0)
   assert.ok(siteContent.about.imageAlt.length > 0)
   assert.ok(siteContent.services.title.length > 0)

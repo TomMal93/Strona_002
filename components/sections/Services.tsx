@@ -1,84 +1,102 @@
 'use client'
 
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './Services.module.css'
+import heroStyles from './Hero.module.css'
 import { ServiceIcon } from './services/ServiceIcon'
 import { useServicesAnimation } from './services/useServicesAnimation'
 import {
   getCardVariant,
   orderServiceItems,
-  splitServiceRows,
   type CardVariant,
 } from './services/serviceLayout'
 
 type ServiceItem = (typeof siteContent.services.items)[number]
-type CardStyleClassNames = {
+
+type VariantClassNames = {
   card: string
-  line: string
+  reelLine1: string
+  reelLine2: string
   title: string
   text: string
-  badge: string
+  lensRing: string
   icon: string
+  cornerTL: string
+  cornerBR: string
 }
 
-
-const DESKTOP_START_CLASS_NAMES = [
-  'lg:col-start-2',
-  'lg:col-start-4',
-  'lg:col-start-1',
-  'lg:col-start-3',
-  'lg:col-start-5',
-] as const
-const TOP_ROW_START_CLASS_NAMES = DESKTOP_START_CLASS_NAMES.slice(0, 2)
-const BOTTOM_ROW_START_CLASS_NAMES = DESKTOP_START_CLASS_NAMES.slice(2)
-const TOP_ROW_COUNT = 2
-
-const CARD_STYLE_MAP: Record<CardVariant, CardStyleClassNames> = {
+const VARIANT_CLASSES: Record<CardVariant, VariantClassNames> = {
   highlight: {
-    card: styles.serviceCardHighlight,
-    line: styles.cardTopLineHighlight,
+    card: styles.sceneCardHighlight,
+    reelLine1: styles.reelLineHighlight1,
+    reelLine2: styles.reelLineHighlight2,
     title: styles.highlightTitle,
     text: styles.highlightText,
-    badge: styles.iconBadgeHighlight,
+    lensRing: styles.lensRingHighlight,
     icon: styles.iconHighlight,
+    cornerTL: '',
+    cornerBR: '',
   },
   military: {
-    card: styles.serviceCardMilitary,
-    line: styles.cardTopLineMilitary,
+    card: styles.sceneCardMilitary,
+    reelLine1: styles.reelLineMilitary1,
+    reelLine2: styles.reelLineMilitary2,
     title: styles.militaryTitle,
     text: styles.militaryText,
-    badge: styles.iconBadgeMilitary,
+    lensRing: styles.lensRingMilitary,
     icon: styles.iconMilitary,
+    cornerTL: styles.cornerTLMilitary,
+    cornerBR: styles.cornerBRMilitary,
   },
 }
 
-function getCardStyleClassNames(variant: CardVariant): CardStyleClassNames {
-  return CARD_STYLE_MAP[variant]
+function formatSceneNumber(index: number): string {
+  return String(index + 1).padStart(2, '0')
 }
 
-type ServiceCardProps = {
+type SceneCardProps = {
   item: ServiceItem
-  desktopStartClassName: string
+  index: number
 }
 
-function ServiceCard({ item, desktopStartClassName }: ServiceCardProps) {
+function SceneCard({ item, index }: SceneCardProps) {
   const variant = getCardVariant(item.icon)
-  const variantClassNames = getCardStyleClassNames(variant)
+  const v = VARIANT_CLASSES[variant]
 
   return (
     <li
       data-service-card
       className={cn(
-        'rounded-micro p-5 sm:p-6 md:h-auto md:col-span-1 lg:col-span-2',
-        desktopStartClassName,
-        variantClassNames.card,
-        styles.serviceCard,
+        'rounded-micro',
+        styles.sceneCard,
+        v.card,
       )}
     >
+      {/* Corner marks — film frame registration */}
+      <span
+        aria-hidden="true"
+        data-corner-mark
+        className={cn(styles.cornerMark, styles.cornerTL, v.cornerTL)}
+      />
+      <span
+        aria-hidden="true"
+        data-corner-mark
+        className={cn(styles.cornerMark, styles.cornerBR, v.cornerBR)}
+      />
+
+      {/* Scene number */}
+      <span aria-hidden="true" data-scene-number className={styles.sceneNumber}>
+        {formatSceneNumber(index)}
+      </span>
+
       <div className={styles.contentLayer}>
-        <div className={cn('mb-5', styles.cardTopLine, variantClassNames.line)} aria-hidden="true" />
+        {/* Double reel lines */}
+        <div className={styles.reelLines} aria-hidden="true">
+          <span className={cn(styles.reelLine, v.reelLine1)} />
+          <span className={cn(styles.reelLine, v.reelLine2)} />
+        </div>
 
         <p className={cn('ui-overline mx-auto text-khaki/90', styles.cardTag)}>
           {item.tag}
@@ -87,23 +105,23 @@ function ServiceCard({ item, desktopStartClassName }: ServiceCardProps) {
         <h3
           className={cn(
             'font-bebas text-2xl md:text-3xl uppercase leading-[1.0] tracking-wide text-warm-white',
-            variantClassNames.title,
+            v.title,
             styles.cardTitle,
           )}
         >
           {item.title}
         </h3>
 
-        <span className={styles.iconDock}>
-          <span className={cn(styles.iconBadge, variantClassNames.badge)}>
-            <ServiceIcon icon={item.icon} className={variantClassNames.icon} />
+        <span className={styles.lensDock}>
+          <span className={cn(styles.lensRing, v.lensRing)}>
+            <ServiceIcon icon={item.icon} className={v.icon} />
           </span>
         </span>
 
         <p
           className={cn(
             'mx-auto max-w-[38ch] text-center font-inter text-sm leading-relaxed text-warm-gray',
-            variantClassNames.text,
+            v.text,
             styles.cardDescription,
           )}
         >
@@ -114,35 +132,27 @@ function ServiceCard({ item, desktopStartClassName }: ServiceCardProps) {
   )
 }
 
-type ServiceCardsRowProps = {
-  items: ServiceItem[]
-  startClassNames: readonly string[]
-  colsClass?: string
-}
-
-function ServiceCardsRow({ items, startClassNames, colsClass = '' }: ServiceCardsRowProps) {
-  return (
-    <ul className={cn('grid gap-5 md:gap-y-0 lg:grid-cols-6', colsClass)}>
-      {items.map((item, index) => (
-        <ServiceCard
-          key={item.title}
-          item={item}
-          desktopStartClassName={startClassNames[index] ?? ''}
-        />
-      ))}
-    </ul>
-  )
-}
-
 export default function Services() {
-  const sectionRef = useRef<HTMLElement>(null)
+  const sectionRef = useRef<HTMLElement>(null!)
+  const titleRef = useRef<HTMLHeadingElement>(null!)
+  const titleAccentRef = useRef<HTMLSpanElement>(null!)
+  const introRef = useRef<HTMLParagraphElement>(null!)
+  const timelineRef = useRef<HTMLDivElement>(null!)
+  const hudBarRef = useRef<HTMLDivElement>(null!)
+  const bottomTimelineRef = useRef<HTMLDivElement>(null!)
   const orderedItems = orderServiceItems(siteContent.services.items)
-  const [topRowItems, bottomRowItems] = splitServiceRows(orderedItems, TOP_ROW_COUNT)
 
-  useServicesAnimation(sectionRef)
+  useServicesAnimation({
+    sectionRef,
+    titleRef,
+    titleAccentRef,
+    introRef,
+    timelineRef,
+    hudBarRef,
+    bottomTimelineRef,
+  })
 
   return (
-    // --- Services section: heading + intro + cards grid ---------------------
     <section
       ref={sectionRef}
       id="services"
@@ -155,31 +165,65 @@ export default function Services() {
       <div className="mx-auto max-w-content">
         <div className={cn('mx-auto flex max-w-3xl flex-col items-center text-center', styles.sectionHeaderShell)}>
           <h2
+            ref={titleRef}
             id="services-heading"
             className={cn(
-              'text-center font-bebas text-5xl uppercase leading-[0.9] tracking-wide text-warm-white sm:text-6xl',
+              heroStyles.gradientTextPrimary,
+              'text-center font-bebas text-5xl uppercase leading-[0.9] tracking-wide sm:text-6xl',
               styles.sectionTitle,
             )}
           >
             {siteContent.services.title}
           </h2>
-          <span aria-hidden="true" className={styles.sectionTitleAccent} />
+          {/* HUD bar — editing timeline interface */}
+          <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
+            <span data-hud-line="left" className={styles.hudLineLeft} />
+            <span data-hud-label className={styles.hudPlayIndicator}>
+              PROGRAM
+            </span>
+            <span data-hud-line="left" className={styles.hudLineLeft} />
+            <span data-hud-line="right" className={styles.hudLineRight} />
+            <span data-hud-label className={styles.hudTimecode}>
+              SCENA 04 / 06
+            </span>
+            <span data-hud-line="right" className={styles.hudLineRight} />
+          </div>
 
           <p
+            ref={introRef}
             className={cn(
-              'mt-5 max-w-2xl whitespace-pre-line font-inter font-light text-[16px] leading-[1.75] text-white/60',
+              'mt-5 whitespace-pre-line font-mono text-[0.95rem] leading-[1.85] tracking-wide text-white/50',
               styles.sectionIntro,
             )}
           >
-            {siteContent.services.subtitle}
+            Pięć ścieżek, jeden cel — <span className="text-amber-200/90 font-medium">materiał, który zostaje w pamięci.</span>
+            {'\n'}Wybierz scenę, która pasuje do Twojej historii.
           </p>
+
         </div>
 
-        {/* --- Services cards list -------------------------------------------- */}
-        <div className="mt-12 space-y-7 lg:mt-14 lg:space-y-9">
-          <ServiceCardsRow items={topRowItems} startClassNames={TOP_ROW_START_CLASS_NAMES} colsClass="sm:grid-cols-2" />
-          <div className={cn('hidden lg:block', styles.rowDivider)} aria-hidden="true" />
-          <ServiceCardsRow items={bottomRowItems} startClassNames={BOTTOM_ROW_START_CLASS_NAMES} colsClass="sm:grid-cols-2 md:grid-cols-3" />
+        {/* --- Film strip cards grid ------------------------------------------ */}
+        <div className="mt-12 lg:mt-14">
+          <ul className={styles.cardsContainer}>
+            {/* Timeline line (desktop) */}
+            <div ref={timelineRef} className={styles.timelineLine} aria-hidden="true" />
+
+            {orderedItems.map((item, index) => (
+              <SceneCard
+                key={item.title}
+                item={item}
+                index={index}
+              />
+            ))}
+          </ul>
+        </div>
+
+        {/* Bottom decorative line — timeline markers */}
+        <div ref={bottomTimelineRef} aria-hidden="true" className={styles.bottomTimeline}>
+          <span data-bottom-seg className={styles.bottomTimelineLine} />
+          {orderedItems.map((item) => (
+            <span key={item.title} data-bottom-diamond className={styles.bottomTimelineDiamond}>◆</span>
+          ))}
         </div>
       </div>
     </section>
