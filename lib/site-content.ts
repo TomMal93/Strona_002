@@ -76,38 +76,38 @@ export const siteContent = {
     items: [
       {
         icon: 'heart',
-        title: 'Wesela i sesje rodzinne',
+        title: 'Wesela i rodzina',
         tag: 'Foto + Wideo',
         description:
-          'Naturalny reportaż z naciskiem na emocje i autentyczne momenty. Bez sztucznego pozowania i zbędnego chaosu.',
+          'Naturalny reportaż pełen emocji i prawdziwych momentów. Bez sztucznego pozowania i zbędnego chaosu.',
       },
       {
         icon: 'drone',
         title: 'Drony',
         tag: 'Aerial',
         description:
-          'Ujęcia lotnicze podkreślające skalę wydarzenia i przestrzeń. Dynamiczne kadry do rolek, relacji i materiałów premium.',
+          'Ujęcia z powietrza pokazujące skalę wydarzeń i przestrzeń. Dynamiczne kadry do rolek i materiałów premium.',
       },
       {
         icon: 'crosshair',
-        title: 'Eventy militarne i survival',
+        title: 'Militaria i survival',
         tag: 'Reportaż',
         description:
-          'Reportaże terenowe z wydarzeń o podwyższonej dynamice. Ujęcia akcji, detalu sprzętu i atmosfery miejsca.',
+          'Reportaże terenowe z wydarzeń o wysokiej dynamice. Ujęcia akcji, sprzętu i surowej atmosfery miejsca.',
       },
       {
         icon: 'wheel',
-        title: 'Off-road / Jeepe',
+        title: 'Off-road i Jeep',
         tag: 'Akcja',
         description:
-          'Motoryzacyjne sesje terenowe i relacje z wypraw. Kadry z ruchem, pyłem i tempem, które oddają charakter jazdy.',
+          'Motoryzacyjne sesje terenowe i relacje z wypraw. Kadry z ruchem, pyłem i tempem jazdy. Materiał oddaje charakter trasy i emocje za kierownicą.',
       },
       {
         icon: 'flag',
-        title: 'Produkcje eventowe',
+        title: 'Eventy',
         tag: 'Content Pack',
         description:
-          'Komplet materiałów foto-wideo pod komunikację wydarzeń. Ujęcia do social mediów, portfolio i materiałów promocyjnych.',
+          'Komplet materiałów foto-wideo do promocji wydarzeń. Ujęcia do social mediów, portfolio i kampanii.',
       },
     ],
   },

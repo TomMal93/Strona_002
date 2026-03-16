@@ -137,7 +137,6 @@ export default function Services() {
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const titleAccentRef = useRef<HTMLSpanElement>(null!)
   const introRef = useRef<HTMLParagraphElement>(null!)
-  const timelineRef = useRef<HTMLDivElement>(null!)
   const hudBarRef = useRef<HTMLDivElement>(null!)
   const bottomTimelineRef = useRef<HTMLDivElement>(null!)
   const orderedItems = orderServiceItems(siteContent.services.items)
@@ -147,7 +146,6 @@ export default function Services() {
     titleRef,
     titleAccentRef,
     introRef,
-    timelineRef,
     hudBarRef,
     bottomTimelineRef,
   })
@@ -205,9 +203,6 @@ export default function Services() {
         {/* --- Film strip cards grid ------------------------------------------ */}
         <div className="mt-12 lg:mt-14">
           <ul className={styles.cardsContainer}>
-            {/* Timeline line (desktop) */}
-            <div ref={timelineRef} className={styles.timelineLine} aria-hidden="true" />
-
             {orderedItems.map((item, index) => (
               <SceneCard
                 key={item.title}
