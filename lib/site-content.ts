@@ -140,7 +140,7 @@ export const siteContent = {
           'Film, który uchwyci Wasze emocje, najpiękniejsze chwile i atmosferę całego dnia — pamiątka na całe życie.',
         video: {
           src: '/videos/services/weeding.mp4',
-          poster: '/images/promo-poster.jpg',
+          poster: '/images/services/weeding.png',
         },
       },
       {
@@ -159,7 +159,7 @@ export const siteContent = {
           'Montuję filmy z Twoich materiałów, od vlogów na YouTube przez rolki na media społecznościowe.',
         video: {
           src: '/videos/services/montage.mp4',
-          poster: '/images/promo-poster.jpg',
+          poster: '/images/services/montage.png',
         },
       },
       {
@@ -177,7 +177,7 @@ export const siteContent = {
           'Twoja marka w najlepszym świetle — przyciągnij uwagę odbiorców.',
         video: {
           src: '/videos/services/bieg.mp4',
-          poster: '/images/promo-poster.jpg',
+          poster: '/images/services/bieg.png',
         },
       },
     ],
@@ -285,5 +285,73 @@ export const siteContent = {
           'Tak — po realizacji otrzymujesz pełne prawa do wykorzystania materiału w social mediach, na stronie internetowej, w reklamach i materiałach promocyjnych.\n\nJeśli projekt wymaga szczególnych ustaleń licencyjnych, omawiamy to przed rozpoczęciem współpracy, żeby wszystko było jasne od samego początku.',
       },
     ],
+  },
+  aboutMe: {
+    meta: {
+      title: process.env.NEXT_PUBLIC_ABOUTME_META_TITLE || 'O mnie',
+      description:
+        process.env.NEXT_PUBLIC_ABOUTME_META_DESC
+        || 'Poznaj fotografa i operatora wideo stojącego za kamerą — doświadczenie, sprzęt i pasja w jednym.',
+    },
+    hero: {
+      name: process.env.NEXT_PUBLIC_ABOUTME_HERO_NAME || 'Przemek Malxxxxx',
+      tagline: process.env.NEXT_PUBLIC_ABOUTME_HERO_TAGLINE || 'Fotograf · Operator · Filmowiec',
+      resolution: '4K DCI / 25P',
+      backgroundImage:
+        process.env.NEXT_PUBLIC_ABOUTME_HERO_BG || '/images/about-me-hero.webp',
+      backgroundAlt:
+        process.env.NEXT_PUBLIC_ABOUTME_HERO_BG_ALT || 'Fotograf w plenerze z kamerą',
+    },
+    bio: {
+      title: 'O mnie',
+      hudLabelLeft: 'NOTES',
+      hudLabelRight: 'SCENA 01 / 05',
+      text:
+        process.env.NEXT_PUBLIC_ABOUTME_BIO
+        || 'Jestem fotografem i operatorem kamery z ponad 8-letnim doświadczeniem w branży audiowizualnej. Specjalizuję się w realizacji filmów ślubnych, materiałów promocyjnych oraz relacji z wydarzeń — od kameralnych uroczystości po dynamiczne eventy militarne i sportowe. Łączę pasję do obrazu z solidnym warsztatem technicznym. Pracuję w systemie kamer Sony, wykorzystuję drony, stabilizatory i profesjonalne oświetlenie, aby każdy kadr wyglądał kinowo. Moim celem jest stworzenie materiału, który nie tylko dobrze wygląda, ale przede wszystkim opowiada Twoją historię i zostaje w pamięci na lata.',
+    },
+    video: {
+      title: 'Przedstawiam się',
+      hudLabelLeft: 'INTRO',
+      hudLabelRight: 'SCENA 02 / 05',
+      type: (process.env.NEXT_PUBLIC_ABOUTME_VIDEO_TYPE || 'youtube') as 'youtube' | 'self-hosted',
+      youtubeId: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_YT_ID || 'jCpSTtkiKsY',
+      src: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_SRC || '/videos/about-me-intro.mp4',
+      poster: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_POSTER || '/images/about-me-video-poster.jpg',
+    },
+    contact: {
+      title: 'Kontakt',
+      hudLabelLeft: 'CONTACT',
+      hudLabelRight: 'SCENA 03 / 05',
+      phone: process.env.NEXT_PUBLIC_ABOUTME_PHONE || '+48 123 456 789',
+      email: process.env.NEXT_PUBLIC_ABOUTME_EMAIL || 'kontakt@example.com',
+      ctaLabel: process.env.NEXT_PUBLIC_ABOUTME_CTA_LABEL || 'Napisz do mnie',
+      ctaHref: process.env.NEXT_PUBLIC_ABOUTME_CTA_HREF || 'mailto:kontakt@example.com',
+      socials: [
+        { platform: 'facebook', href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || '#', label: 'Facebook' },
+        { platform: 'instagram', href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || '#', label: 'Instagram' },
+        { platform: 'tiktok', href: process.env.NEXT_PUBLIC_SOCIAL_TIKTOK || '#', label: 'TikTok' },
+        { platform: 'youtube', href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || '#', label: 'YouTube' },
+      ],
+    },
+    gear: {
+      title: 'Arsenał',
+      hudLabelLeft: 'GEAR',
+      hudLabelRight: 'SCENA 04 / 05',
+      stats: [
+        { value: 500, suffix: '+', label: 'Projektów' },
+        { value: 8, suffix: '+', label: 'Lat doświadczenia' },
+        { value: 4, suffix: 'K', label: 'Rozdzielczość' },
+        { value: 100, suffix: '%', label: 'Zadowolenia' },
+      ],
+      items: [
+        { category: 'KAMERA', name: 'Sony FX3', spec: 'Full-frame / S-Log3 / 4K 120fps' },
+        { category: 'DRON', name: 'DJI Mavic 3 Pro', spec: 'Hasselblad / 5.1K / APAS 5.0' },
+        { category: 'STABILIZATOR', name: 'DJI RS 3 Pro', spec: '4.5kg payload / LiDAR focus' },
+        { category: 'DŹWIĘK', name: 'Rode Wireless PRO', spec: '32-bit float / dual channel' },
+        { category: 'OŚWIETLENIE', name: 'Nanlite Forza 60C', spec: 'RGBLAC / 2700-7500K' },
+        { category: 'MONTAŻ', name: 'DaVinci Resolve', spec: 'Studio / Color grading / Fusion' },
+      ],
+    },
   },
 } as const
