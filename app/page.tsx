@@ -4,6 +4,7 @@ import Promo from '@/components/sections/Promo'
 import Testimonials from '@/components/sections/Testimonials'
 import Services from '@/components/sections/Services'
 import Process from '@/components/sections/Process'
+import Faq from '@/components/sections/Faq'
 
 /**
  * Strona główna — sekcje Hero + About + Promo + Testimonials + Services + Process.
@@ -19,6 +20,7 @@ export default function Home() {
       <Testimonials />
       <Services />
       <Process />
+      <Faq />
 
       {/* Tymczasowy anchor docelowy dla CTA — FR-04 */}
       <div id="contact" />

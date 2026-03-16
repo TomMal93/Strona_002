@@ -199,4 +199,67 @@ export const siteContent = {
       },
     ],
   },
+  faq: {
+    title: 'FAQ',
+    subtitle:
+      'Najczęściej zadawane pytania.\nOdpowiedzi, zanim zdążysz zapytać.',
+    hudLabelLeft: 'ODPOWIEDZI',
+    hudLabelRight: 'SCENA 08 / 09',
+    items: [
+      {
+        number: 'Q.01',
+        question: 'W jakich filmach się specjalizujesz?',
+        answer:
+          'Specjalizuję się w reportażu ślubnym oraz w tworzeniu filmów promocyjnych dla firm, poprzez materiały na platformy społecznościowe.',
+      },
+      {
+        number: 'Q.02',
+        question: 'Jakiego sprzętu używasz?',
+        answer:
+          'Nagrania realizuję w oparciu o system kamer Sony, ceniony w branży filmowej za doskonałą jakość obrazu.\n\nZa czysty i wyraźny dźwięk odpowiadają wysokiej jakości mikrofony Rode, które pozwalają precyzyjnie rejestrować głos, muzykę i atmosferę wydarzenia.\n\nPodczas nagrań wykorzystuję również profesjonalne oświetlenie filmowe, dzięki któremu możliwe jest odpowiednie doświetlenie sceny oraz uzyskanie estetycznego, kinowego wyglądu materiału.',
+      },
+      {
+        number: 'Q.03',
+        question: 'Czy zajmujesz się montażem filmów?',
+        answer:
+          'Tak, oferuję również montaż materiałów wideo. Pracuję w programie DaVinci Resolve, który jest jednym z najbardziej zaawansowanych narzędzi do edycji i korekcji kolorów używanych w branży filmowej.\n\nOferuję dynamiczny i dopasowany do charakteru materiału montaż, który podkreśla emocje, tempo wydarzenia oraz najważniejsze momenty nagrania.\n\nMogę zmontować zarówno materiał, który sam nagrałem, jak i ujęcia dostarczone przez Ciebie.',
+      },
+      {
+        number: 'Q.04',
+        question: 'Czy potrzebujesz drogiego sprzętu aby stworzyć dobry film?',
+        answer:
+          '„Drogi" sprzęt zdecydowanie pomaga uzyskać wysoką jakość obrazu i dźwięku, jednak najważniejsze są doświadczenie, pomysł i umiejętność opowiadania historii obrazem. Nawet najlepsza kamera nie zastąpi dobrego kadru, odpowiedniego światła czy przemyślanego montażu.\n\nDlatego w mojej pracy łączę obie te cechy — dobry sprzęt filmowy z doświadczeniem w realizacji i montażu wideo. Dzięki temu powstają materiały, które nie tylko dobrze wyglądają technicznie, ale także oddają klimat wydarzenia i przyciągają uwagę widza.',
+      },
+      {
+        number: 'Q.05',
+        question: 'Czy tworzenie filmów jest proste i przyjemne?',
+        answer:
+          'Tworzenie filmów potrafi być bardzo satysfakcjonujące, szczególnie gdy można uchwycić wyjątkowe chwile lub stworzyć ciekawą historię. W praktyce jednak jest to proces, który wymaga czasu, doświadczenia i zaangażowania.\n\nNa profesjonalnych planach filmowych nad końcowym efektem pracuje cały sztab ludzi: reżyser, operator kamery, oświetleniowiec, dźwiękowiec oraz montażysta.\n\nW przypadku moich realizacji często działam sam na planie zdjęciowym — można powiedzieć, że jestem trochę „one man army".\n\nSpokojnie — panuje nad tym, dzięki czemu cały proces przebiega sprawnie, a efekt końcowy pozostaje na wysokim poziomie.\n\nDlatego choć tworzenie filmów może wyglądać lekko i naturalnie, w rzeczywistości stoi za nim sporo pracy, wiedzy i pasji, które pozwalają stworzyć materiał o wysokiej jakości i ciekawym charakterze.',
+      },
+      {
+        number: 'Q.06',
+        question: 'Dlaczego to tyle kosztuje?',
+        answer:
+          'Na pierwszy rzut oka może się wydawać, że praca filmowca jest bardzo prosta — ktoś przyjeżdża z kamerą, nagrywa kilka godzin wydarzenia, a później inkasuje wynagrodzenie. W rzeczywistości jest to jednak tylko wierzchołek góry lodowej.\n\nProces tworzenia filmu to nie tylko same nagrania. Bardzo dużą część pracy stanowi postprodukcja, czyli selekcja materiału, montaż, korekcja kolorów i obróbka dźwięku.\n\nDla przykładu — w przypadku filmu weselnego przy pracy dwóch operatorów potrafi powstać nawet do 10 godzin surowego materiału. Już sama selekcja najlepszych ujęć potrafi zająć dziesiątki godzin, zanim jeszcze rozpocznie się właściwy montaż.\n\nDopiero później powstaje spójna historia, która oddaje emocje i klimat całego wydarzenia.\n\nNa cenę wpływa także sprzęt, doświadczenie, przygotowanie do realizacji oraz czas poświęcony na postprodukcję. Dzięki temu końcowy film jest dopracowany i staje się pamiątką, do której można wracać przez lata.',
+      },
+      {
+        number: 'Q.07',
+        question: 'Czy realizujesz zlecenia poza moim miastem / w terenie?',
+        answer:
+          'Tak — realizuję zlecenia na terenie całego kraju, a w przypadku większych projektów również za granicą. Eventy militarne, wyprawy off-road czy plenerowe sesje w trudnym terenie to moja codzienność.\n\nKoszty dojazdu ustalamy indywidualnie przed zleceniem, tak żeby nie było niespodzianek.',
+      },
+      {
+        number: 'Q.08',
+        question: 'Co jeśli chcę poprawki w zmontowanym filmie?',
+        answer:
+          'Każdy projekt obejmuje rundę poprawek — po otrzymaniu pierwszej wersji montażu możesz zgłosić uwagi, a ja wprowadzam korekty. Zależy mi na tym, żeby efekt końcowy w pełni odpowiadał Twoim oczekiwaniom.\n\nSzczegóły dotyczące liczby poprawek ustalamy przed rozpoczęciem współpracy.',
+      },
+      {
+        number: 'Q.09',
+        question: 'Czy mogę wykorzystać materiał komercyjnie?',
+        answer:
+          'Tak — po realizacji otrzymujesz pełne prawa do wykorzystania materiału w social mediach, na stronie internetowej, w reklamach i materiałach promocyjnych.\n\nJeśli projekt wymaga szczególnych ustaleń licencyjnych, omawiamy to przed rozpoczęciem współpracy, żeby wszystko było jasne od samego początku.',
+      },
+    ],
+  },
 } as const

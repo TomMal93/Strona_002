@@ -1,0 +1,335 @@
+/* ── Section header ────────────────────────────────────────────────────── */
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.sectionTitle {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ── Gradient text — same as Hero ─────────────────────────────────────── */
+
+.gradientTextPrimary {
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-warm)) 0%,
+    rgb(255 238 175) 45%,
+    rgb(var(--c-gold)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── HUD bar ──────────────────────────────────────────────────────────── */
+
+.hudBar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  margin-top: 1.2rem;
+  pointer-events: none;
+}
+
+.hudLineLeft,
+.hudLineRight {
+  flex: 1;
+  height: 1px;
+  will-change: transform, opacity;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.3) 38%,
+    rgb(var(--c-gold) / 0.46) 100%
+  );
+}
+
+.hudLineLeft {
+  transform-origin: right center;
+}
+
+.hudLineRight {
+  transform-origin: left center;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--c-gold) / 0.46) 0%,
+    rgb(var(--c-gold) / 0.3) 62%,
+    transparent 100%
+  );
+}
+
+.hudLabelLeft,
+.hudLabelRight {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.75rem;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.54);
+  white-space: nowrap;
+  will-change: transform, opacity;
+}
+
+/* ── FAQ shell — viewfinder frame ─────────────────────────────────────── */
+
+.faqShell {
+  position: relative;
+  padding: 2.8rem 1.4rem 1.6rem;
+  display: flex;
+  gap: 0;
+}
+
+/* ── Corner marks — camera framing guides ─────────────────────────────── */
+
+.cornerMark {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.cornerTL {
+  top: 0;
+  left: 0;
+  border-top: 1px solid rgb(var(--c-gold) / 0.3);
+  border-left: 1px solid rgb(var(--c-gold) / 0.3);
+}
+
+.cornerTR {
+  top: 0;
+  right: 0;
+  border-top: 1px solid rgb(var(--c-gold) / 0.3);
+  border-right: 1px solid rgb(var(--c-gold) / 0.3);
+}
+
+.cornerBL {
+  bottom: 0;
+  left: 0;
+  border-bottom: 1px solid rgb(var(--c-gold) / 0.3);
+  border-left: 1px solid rgb(var(--c-gold) / 0.3);
+}
+
+.cornerBR {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid rgb(var(--c-gold) / 0.3);
+  border-right: 1px solid rgb(var(--c-gold) / 0.3);
+}
+
+/* ── Film strip — vertical marker bar (desktop only) ─────────────────── */
+
+.filmStrip {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .filmStrip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 32px;
+    flex-shrink: 0;
+    padding-top: 0.5rem;
+    margin-right: 1.5rem;
+  }
+}
+
+.filmStripMarker {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid rgb(var(--c-gold) / 0.25);
+  background: rgb(var(--c-gold) / 0.08);
+  flex: 1;
+  max-height: 6px;
+  margin: auto 0;
+  transition: all 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.filmStripMarkerActive {
+  border-color: rgb(var(--c-gold) / 0.6);
+  background: rgb(var(--c-gold) / 0.25);
+  box-shadow: 0 0 12px rgb(var(--c-gold) / 0.3);
+}
+
+/* ── Items list ───────────────────────────────────────────────────────── */
+
+.itemsList {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── FAQ item ─────────────────────────────────────────────────────────── */
+
+.faqItem {
+  border-bottom: 1px solid rgb(var(--c-khaki) / 0.1);
+}
+
+.faqItem:first-child {
+  border-top: 1px solid rgb(var(--c-khaki) / 0.1);
+}
+
+/* ── Glow pulse on active item ────────────────────────────────────────── */
+
+.faqItemActive {
+  box-shadow: 0 0 18px rgb(var(--c-gold) / 0.06);
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 18px rgb(var(--c-gold) / 0.06);
+  }
+  50% {
+    box-shadow: 0 0 28px rgb(var(--c-gold) / 0.12);
+  }
+}
+
+/* ── Question button ──────────────────────────────────────────────────── */
+
+.faqQuestion {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+
+.questionNumber {
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+  color: rgb(255 238 175 / 0.35);
+  flex-shrink: 0;
+  transition: opacity 400ms ease;
+}
+
+.questionNumberActive {
+  opacity: 1;
+  color: rgb(255 238 175 / 0.7);
+}
+
+.questionText {
+  flex: 1;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgb(255 245 230 / 0.88);
+}
+
+.toggleIcon {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: rgb(var(--c-gold) / 0.5);
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.toggleIconOpen {
+  transform: rotate(45deg);
+}
+
+/* ── Answer — clip-path wipe ──────────────────────────────────────────── */
+
+.faqAnswer {
+  clip-path: inset(0 0 100% 0);
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    clip-path 500ms cubic-bezier(0.22, 1, 0.36, 1),
+    max-height 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faqAnswerOpen {
+  clip-path: inset(0 0 0% 0);
+  max-height: 800px;
+}
+
+/* ── Answer inner ─────────────────────────────────────────────────────── */
+
+.answerInner {
+  position: relative;
+  padding: 0.75rem 1rem 1.5rem 2.75rem;
+}
+
+/* ── Scan-line overlay ────────────────────────────────────────────────── */
+
+.scanLineOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 3px,
+    rgb(255 255 255 / 0.015) 3px,
+    rgb(255 255 255 / 0.015) 4px
+  );
+}
+
+/* ── Answer text ──────────────────────────────────────────────────────── */
+
+.answerText {
+  margin: 0;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: rgb(255 255 255 / 0.55);
+}
+
+/* ── Small mobile adjustments ─────────────────────────────────────────── */
+
+@media (max-width: 479px) {
+  .hudLabelLeft,
+  .hudLabelRight {
+    padding-inline: 0.45rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+  }
+
+  .faqShell {
+    padding-inline: 1rem;
+  }
+
+  .faqQuestion {
+    gap: 0.65rem;
+  }
+
+  .questionText {
+    font-size: 0.92rem;
+  }
+
+  .answerInner {
+    padding-left: 2rem;
+  }
+}
