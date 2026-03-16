@@ -6,17 +6,18 @@
 
 .mobileGroupCenter {
   top: 50%;
-  transform: translateY(-58%);
+  transform: translateY(-46%);
 }
 
 .mobileImageWrap {
-  margin-right: 40px;
-  width: 72%;
+  margin-right: auto;
+  margin-left: auto;
+  width: 108%;
 }
 
 .mobileTextWrap {
   margin-left: 70px;
-  margin-top: -380px;
+  margin-top: -420px;
 }
 
 .mobileTextHalo {
@@ -24,22 +25,7 @@
   isolation: isolate;
 }
 
-.mobileTextHalo::after {
-  content: '';
-  position: absolute;
-  /* bleed poza rodzica — bazuje na border-radius 0.9rem: góra ×2.0, boki ×1.2, dół ×0.6; glow mocniejszy powyżej */
-  inset: -1.8rem -1.08rem -0.54rem;
-  z-index: var(--z-below);
-  border-radius: 0.9rem;
-  pointer-events: none;
-  background: linear-gradient(
-    120deg,
-    rgb(var(--c-gold) / 0.2) 0%,
-    rgb(var(--c-gold) / 0.08) 50%,
-    rgb(var(--c-gold) / 0.2) 100%
-  );
-  filter: blur(35px);
-}
+/* halo usunięte — efekt glow wyłączony na mobile */
 
 .mobileTextPanel {
   background: rgb(8 8 8 / 0.38);
@@ -348,10 +334,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   /* filter: blur i backdrop-filter są nadal renderowane domyślnie — wyłącz dla użytkowników preferujących redukcję ruchu */
-  .mobileTextHalo::after {
-    filter: none;
-  }
-
   .portraitHalo {
     filter: none;
   }
