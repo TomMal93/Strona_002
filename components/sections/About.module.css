@@ -482,44 +482,37 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgb(255 238 175 / 0.95);
-  transition:
-    opacity 280ms ease,
-    border-color 280ms ease,
-    background-color 280ms ease;
 }
 
 .ctaLink::after {
   content: '';
   position: absolute;
-  left: 50%;
-  width: 75vw;
-  max-width: calc(42rem * 0.75);
+  left: 0.75rem;
+  right: 0.75rem;
   bottom: 0.38rem;
   height: 1px;
-  transform: translateX(-50%) scaleX(0);
+  opacity: 0;
+  transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 180ms ease;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgb(var(--c-gold) / 0.28) 14%,
-    rgb(var(--c-gold) / 0.78) 50%,
-    rgb(var(--c-gold) / 0.28) 86%,
+    rgb(255 238 175 / 0.2) 18%,
+    rgb(255 238 175 / 0.36) 50%,
+    rgb(255 238 175 / 0.2) 82%,
     transparent 100%
   );
 }
 
 .ctaLink:hover {
-  opacity: 0.9;
-  background: linear-gradient(
-    0deg,
-    rgb(255 238 175 / 0.035) 0%,
-    rgb(255 255 255 / 0.01) 100%
-  );
 }
 
 .ctaLink:hover::after {
-  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .bottomTimeline {
