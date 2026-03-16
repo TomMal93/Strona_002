@@ -143,7 +143,7 @@
 
 .viewfinder {
   position: relative;
-  margin-top: 6.5rem;
+  margin-top: calc(6.5rem + 30px);
   padding: 2.8rem 1.4rem 1.6rem;
   transform: scale(1.5);
   transform-origin: top center;
