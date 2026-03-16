@@ -68,6 +68,53 @@ export const siteContent = {
       },
     ],
   },
+  testimonials: {
+    title: 'Opinie',
+    subtitle:
+      'Każda realizacja to czyjaś historia.\nOto, co mówią ci, których historie opowiedziałem.',
+    hudLabelLeft: 'FEEDBACK',
+    hudLabelRight: 'SCENA 06 / 09',
+    items: [
+      {
+        quote:
+          'Szukaliśmy kogoś, kto poradzi sobie w trudnych warunkach terenowych i dostarczy materiał na czas. Efekt? Komplet zdjęć i zmontowany film w dwa tygodnie — bez poprawek.',
+        author: 'Karolina Nowicka',
+        context: 'Koordynatorka — Manewry Taktyczne Wschód',
+        tagline: 'TERMINOWOŚĆ',
+      },
+      {
+        quote:
+          'Jesteśmy zachwyceni naszym filmem weselnym! Całość została zmontowana w piękny, emocjonalny sposób i oglądając go znowu czujemy dokładnie te same emocje co w dniu ślubu. To pamiątka na całe życie — dziękujemy!',
+        author: 'Maja',
+        context: 'Para młoda — Film weselny',
+        tagline: 'EMOCJE',
+      },
+      {
+        quote:
+          'Relacja została zrealizowana fantastycznie. Kamera idealnie oddała klimat wydarzenia — energię sceny i wyjątkową atmosferę. Montaż jest dynamiczny, a ujęcia bardzo klimatyczne, dzięki czemu film świetnie oddaje charakter całego koncertu.',
+        author: 'Echo Rodu',
+        context: 'Zespół muzyczny — Relacja z koncertu',
+        tagline: 'KLIMAT',
+      },
+      {
+        quote:
+          'Film promocyjny przerósł nasze oczekiwania. Ujęcia wyglądają jak z teledysku! Dzięki temu filmowi nasza oferta prezentuje się dużo bardziej efektownie.',
+        author: 'Full Moon Flames',
+        context: 'Zespół — Film promocyjny',
+        tagline: 'EFEKT',
+      },
+    ],
+    trustedBy: {
+      label: 'Zaufali mi',
+      hudLabel: 'KLIENCI',
+      clients: [
+        { name: 'Beltor', logo: '/images/testimonials/beltor.png' },
+        { name: 'Bieg', logo: '/images/testimonials/bieg.png' },
+        { name: 'Dream Team', logo: '/images/testimonials/dreamteam.png' },
+        { name: 'Sushi', logo: '/images/testimonials/sushi.png' },
+      ],
+    },
+  },
   services: {
     title: process.env.NEXT_PUBLIC_SERVICES_TITLE || 'Oferta',
     subtitle:
