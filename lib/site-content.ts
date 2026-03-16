@@ -34,7 +34,7 @@ export const siteContent = {
       || 'Dziś opowiadamy historie filmem.\nW XXI wieku to właśnie film stał się językiem emocji, marek i wspomnień.\n\nI tutaj zaczyna się moja rola.',
     statement:
       process.env.NEXT_PUBLIC_ABOUT_STATEMENT
-      || 'Nie chodzi mi tylko o ładne kadry, ale o to, żeby zatrzymać to, co w danym momencie było naprawdę ważne.',
+      || 'Nazywam się Przemek Malxxxxx. Tworzę treści audiowizualne, które pokazują Cię tak, jak chcesz być zapamiętany.',
     ctaLabel: process.env.NEXT_PUBLIC_ABOUT_CTA_LABEL || 'Zobacz jak pracuję',
     imageAlt:
       process.env.NEXT_PUBLIC_ABOUT_IMAGE_ALT

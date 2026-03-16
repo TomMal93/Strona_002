@@ -175,11 +175,15 @@ export default function About() {
             </div>
 
             <div ref={statementRef} className={styles.statementPanel}>
-              <span aria-hidden="true" className={styles.statementKicker}>
-                Po co to robię
-              </span>
               <p className={styles.aboutStatement}>
-                {siteContent.about.statement}
+                {siteContent.about.statement
+                  .replace('Malxxxxx. ', 'Malxxxxx.\n')
+                  .replace('tak, jak', 'tak,\njak')
+                  .split('\n')
+                  .flatMap((part, index, array) => {
+                    if (index === array.length - 1) return [part]
+                    return [part, <br key={`statement-break-${index}`} />]
+                  })}
               </p>
 
               <div ref={ctaRef} className={styles.statementCta}>

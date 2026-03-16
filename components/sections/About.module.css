@@ -404,10 +404,10 @@
   --statement-line-offset: 1.15rem;
   position: relative;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1.12fr;
+  grid-template-rows: 1fr auto;
   margin: 2.8rem auto 0;
   max-width: 42rem;
-  min-height: 15rem;
+  min-height: 12.75rem;
   padding: 0;
   border-radius: 0.5rem;
   background: transparent;
@@ -429,46 +429,9 @@
   opacity: 0.34;
 }
 
-.statementPanel::after {
-  content: '';
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  width: calc(100% - (var(--statement-line-offset) * 2));
-  transform: translateX(-50%);
-  height: 1px;
-  z-index: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgb(255 238 175 / 0.15) 50%,
-    transparent 100%
-  );
-  opacity: 0.72;
-}
-
-.statementKicker {
-  position: relative;
-  grid-row: 1;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  min-height: 0;
-  margin-bottom: 0;
-  align-items: center;
-  padding-inline: 1.2rem;
-  font-family: var(--font-inter, 'Inter', sans-serif);
-  font-size: 0.98rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  text-transform: none;
-  color: rgb(255 241 210 / 0.9);
-}
-
 .aboutStatement {
   position: relative;
-  grid-row: 2 / span 2;
+  grid-row: 1;
   z-index: 1;
   display: flex;
   align-items: center;
@@ -477,9 +440,9 @@
   height: 100%;
   box-sizing: border-box;
   margin: 0;
-  padding: 0.65rem 1.2rem;
+  padding: 1rem 1.2rem 10px;
   text-align: center;
-  font-family: var(--font-inter, 'Inter', sans-serif);
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.68;
@@ -507,11 +470,12 @@
 
 .statementCta {
   position: relative;
-  grid-row: 4;
+  grid-row: 2;
   z-index: 1;
   display: flex;
   justify-content: center;
   min-height: 0;
+  padding-top: 0.75rem;
   padding-inline: 1.2rem;
   align-items: center;
 }
@@ -621,11 +585,6 @@
 
   .statementPanel {
     padding: 0.95rem 0.95rem 1rem;
-  }
-
-  .statementKicker {
-    font-size: 0.76rem;
-    letter-spacing: 0.16em;
   }
 
   .viewfinder {
