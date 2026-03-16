@@ -119,42 +119,66 @@ export const siteContent = {
     title: process.env.NEXT_PUBLIC_SERVICES_TITLE || 'Oferta',
     subtitle:
       process.env.NEXT_PUBLIC_SERVICES_SUBTITLE
-      || 'Pięć ścieżek, jeden cel — materiał, który zostaje w pamięci.\nWybierz scenę, która pasuje do Twojej historii.',
+      || 'Od ważnych wydarzeń po gotowy montaż i materiały dla marki.\nTrzy formaty, jeden cel — obraz, który działa i zostaje w pamięci.',
+    ctaLabel:
+      process.env.NEXT_PUBLIC_SERVICES_CTA_LABEL
+      || 'Skontaktuj się',
     items: [
       {
         icon: 'heart',
-        title: 'Wesela i rodzina',
-        tag: 'Foto + Wideo',
+        title: 'Film okolicznościowy',
+        tag: 'Wydarzenia',
+        lead:
+          'Zajmuję się realizacją filmów i zdjęć z ważnych wydarzeń, tworząc materiał, który zachowuje emocje, atmosferę i najważniejsze momenty dnia.',
+        bullets: [
+          'Śluby',
+          'Studniówki',
+          'Chrzciny',
+          'Urodziny',
+        ],
         description:
-          'Naturalny reportaż pełen emocji i prawdziwych momentów. Bez sztucznego pozowania i zbędnego chaosu.',
-      },
-      {
-        icon: 'drone',
-        title: 'Drony',
-        tag: 'Aerial',
-        description:
-          'Ujęcia z powietrza pokazujące skalę wydarzeń i przestrzeń. Dynamiczne kadry do rolek i materiałów premium.',
-      },
-      {
-        icon: 'crosshair',
-        title: 'Militaria i survival',
-        tag: 'Reportaż',
-        description:
-          'Reportaże terenowe z wydarzeń o wysokiej dynamice. Ujęcia akcji, sprzętu i surowej atmosfery miejsca.',
+          'Film, który uchwyci Wasze emocje, najpiękniejsze chwile i atmosferę całego dnia — pamiątka na całe życie.',
+        video: {
+          src: '/videos/services/weeding.mp4',
+          poster: '/images/promo-poster.jpg',
+        },
       },
       {
         icon: 'wheel',
-        title: 'Off-road i Jeep',
-        tag: 'Akcja',
+        title: 'Profesjonalny montaż',
+        tag: 'Postprodukcja',
+        lead:
+          'Z surowego materiału tworzę spójną, dynamiczną historię — dbam o obraz, dźwięk i rytm, aby Twój film był gotowy do oglądania i zapadał w pamięć.',
+        bullets: [
+          'Wybór najlepszych ujęć',
+          'Dynamiczny montaż',
+          'Dodanie efektów wizualnych oraz dźwiękowych',
+          'Korekcja kolorów',
+        ],
         description:
-          'Motoryzacyjne sesje terenowe i relacje z wypraw. Kadry z ruchem, pyłem i tempem jazdy. Materiał oddaje charakter trasy i emocje za kierownicą.',
+          'Montuję filmy z Twoich materiałów, od vlogów na YouTube przez rolki na media społecznościowe.',
+        video: {
+          src: '/videos/services/montage.mp4',
+          poster: '/images/promo-poster.jpg',
+        },
       },
       {
         icon: 'flag',
-        title: 'Eventy',
-        tag: 'Content Pack',
+        title: 'Materiały promocyjne',
+        tag: 'Promo Video',
+        lead:
+          'Tworzę wideo promocyjne, które pokazuje Twoją markę w najlepszym świetle i przyciąga uwagę odbiorców.',
+        bullets: [
+          'Kreowanie spójnego wizerunku marki w wideo',
+          'Dynamiczne ujęcia dopasowane do charakteru produktu lub usługi',
+          'Materiały do mediów społecznościowych i kampanii reklamowych',
+        ],
         description:
-          'Komplet materiałów foto-wideo do promocji wydarzeń. Ujęcia do social mediów, portfolio i kampanii.',
+          'Twoja marka w najlepszym świetle — przyciągnij uwagę odbiorców.',
+        video: {
+          src: '/videos/services/bieg.mp4',
+          poster: '/images/promo-poster.jpg',
+        },
       },
     ],
   },

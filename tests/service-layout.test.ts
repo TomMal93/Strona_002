@@ -3,8 +3,8 @@ import assert from 'node:assert/strict'
 import type { ServiceIconName } from '../lib/site-content.ts'
 import {
   getCardVariant,
+  getSceneNumber,
   orderServiceItems,
-  splitServiceRows,
 } from '../components/sections/services/serviceLayout.ts'
 
 type MockServiceItem = {
@@ -30,13 +30,11 @@ test('orderServiceItems keeps highlight items first while preserving relative or
 
   assert.deepEqual(
     ordered.map((item) => item.title),
-    ['B', 'D', 'A', 'C'],
+    ['B', 'C', 'D'],
   )
 })
 
-test('splitServiceRows returns top and bottom rows by size', () => {
-  const [top, bottom] = splitServiceRows(mockItems, 2)
-
-  assert.deepEqual(top.map((item) => item.title), ['A', 'B'])
-  assert.deepEqual(bottom.map((item) => item.title), ['C', 'D'])
+test('getSceneNumber returns a zero-padded scene label', () => {
+  assert.equal(getSceneNumber(0), '01')
+  assert.equal(getSceneNumber(4), '05')
 })
