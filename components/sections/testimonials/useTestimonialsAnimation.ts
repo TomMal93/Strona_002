@@ -91,9 +91,6 @@ export function useTestimonialsAnimation(
         : []
 
       const socialProofEl = socialProofRef.current
-      const statNumbers = socialProofEl
-        ? Array.from(socialProofEl.querySelectorAll<HTMLElement>('[data-stat-number]'))
-        : []
       const statValues = socialProofEl
         ? Array.from(socialProofEl.querySelectorAll<HTMLElement>('[data-stat-value]'))
         : []
