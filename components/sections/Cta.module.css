@@ -81,71 +81,210 @@
   will-change: transform, opacity;
 }
 
-/* ── CTA content shell ───────────────────────────────────────────────── */
+/* ── CTA content shell — layered composition ─────────────────────────── */
 
 .ctaShell {
   position: relative;
-  padding: 3rem 1.5rem;
+  padding: 4rem 2rem;
   text-align: center;
 }
 
-/* Corner marks — viewfinder frame */
-.cornerMark {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  pointer-events: none;
-}
-
-.cornerTL {
-  top: 0;
-  left: 0;
-  border-top: 1px solid rgb(var(--c-gold) / 0.3);
-  border-left: 1px solid rgb(var(--c-gold) / 0.3);
-}
-
-.cornerTR {
-  top: 0;
-  right: 0;
-  border-top: 1px solid rgb(var(--c-gold) / 0.3);
-  border-right: 1px solid rgb(var(--c-gold) / 0.3);
-}
-
-.cornerBL {
-  bottom: 0;
-  left: 0;
-  border-bottom: 1px solid rgb(var(--c-gold) / 0.3);
-  border-left: 1px solid rgb(var(--c-gold) / 0.3);
-}
-
-.cornerBR {
-  bottom: 0;
-  right: 0;
-  border-bottom: 1px solid rgb(var(--c-gold) / 0.3);
-  border-right: 1px solid rgb(var(--c-gold) / 0.3);
-}
-
-/* ── Glow behind headline ────────────────────────────────────────────── */
+/* ── Background layer: dual glow with pulse ──────────────────────────── */
 
 .ctaGlow {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 420px;
-  height: 420px;
+  width: 520px;
+  height: 520px;
   transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgb(var(--c-gold) / 0.08) 0%,
-    rgb(var(--c-gold) / 0.03) 40%,
-    transparent 70%
-  );
   pointer-events: none;
   z-index: var(--z-below);
 }
 
-/* ── CTA headline ────────────────────────────────────────────────────── */
+.glowOrb {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(var(--c-gold) / 0.14) 0%,
+    rgb(var(--c-gold) / 0.06) 35%,
+    transparent 65%
+  );
+  animation: glowPulse 5s ease-in-out infinite;
+}
+
+.glowOrbWarm {
+  position: absolute;
+  inset: -15%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(var(--c-warm) / 0.09) 0%,
+    rgb(var(--c-warm) / 0.03) 40%,
+    transparent 70%
+  );
+  animation: glowPulse 7s ease-in-out 1.5s infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.7;
+  }
+}
+
+/* Radial vignette on edges */
+.ctaVignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 50%,
+    transparent 40%,
+    rgb(13 13 13 / 0.35) 100%
+  );
+  z-index: var(--z-below);
+}
+
+/* ── Mid-ground: corner marks — enlarged, draw-in animation ──────────── */
+
+.cornerMark {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.cornerTL {
+  top: 0;
+  left: 0;
+  border-top: 1px solid rgb(var(--c-gold) / 0.5);
+  border-left: 1px solid rgb(var(--c-gold) / 0.5);
+}
+
+.cornerTR {
+  top: 0;
+  right: 0;
+  border-top: 1px solid rgb(var(--c-gold) / 0.5);
+  border-right: 1px solid rgb(var(--c-gold) / 0.5);
+}
+
+.cornerBL {
+  bottom: 0;
+  left: 0;
+  border-bottom: 1px solid rgb(var(--c-gold) / 0.5);
+  border-left: 1px solid rgb(var(--c-gold) / 0.5);
+}
+
+.cornerBR {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid rgb(var(--c-gold) / 0.5);
+  border-right: 1px solid rgb(var(--c-gold) / 0.5);
+}
+
+/* Subtle corner breathing */
+.cornerMark {
+  animation: cornerBreathe 4s ease-in-out infinite;
+  animation-play-state: paused; /* started by GSAP after entrance */
+}
+
+@keyframes cornerBreathe {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.3; }
+}
+
+/* ── Mid-ground: crosshair marks ─────────────────────────────────────── */
+
+.crosshair {
+  position: absolute;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Draw the crosshair with pseudo-elements */
+.crosshair::before,
+.crosshair::after {
+  content: '';
+  position: absolute;
+  background: rgb(var(--c-gold) / 0.4);
+}
+
+/* Horizontal bar */
+.crosshair::before {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+/* Vertical bar */
+.crosshair::after {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+}
+
+.crosshairTop {
+  top: -4px;
+  transform: translateX(-50%);
+  animation: crosshairSpin 20s linear infinite;
+  animation-play-state: paused;
+}
+
+.crosshairBottom {
+  bottom: -4px;
+  transform: translateX(-50%);
+  animation: crosshairSpin 20s linear infinite reverse;
+  animation-play-state: paused;
+}
+
+@keyframes crosshairSpin {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+
+/* ── Mid-ground: dashed focus circle ─────────────────────────────────── */
+
+.focusCircle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 340px;
+  height: 340px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgb(var(--c-gold) / 0.1);
+  pointer-events: none;
+  animation: focusRotate 30s linear infinite;
+}
+
+@keyframes focusRotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ── Foreground: content layer ───────────────────────────────────────── */
+
+.ctaContent {
+  position: relative;
+  z-index: var(--z-above);
+}
+
+/* ── CTA headline — clip-path reveal target ──────────────────────────── */
 
 .ctaHeadline {
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
@@ -154,20 +293,38 @@
   line-height: 1;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  margin: 0 0 1.25rem;
+  margin: 0 0 1.5rem;
+  clip-path: inset(0 50% 0 50%);
 }
 
-/* ── CTA subtitle ────────────────────────────────────────────────────── */
+/* ── CTA separator — filmstrip line between headline and desc ────────── */
+
+.ctaSeparator {
+  width: 80px;
+  height: 1px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.5) 20%,
+    rgb(255 238 175 / 0.7) 50%,
+    rgb(var(--c-gold) / 0.5) 80%,
+    transparent 100%
+  );
+  transform: scaleX(0);
+}
+
+/* ── CTA subtitle — blur-to-sharp entrance ───────────────────────────── */
 
 .ctaSubtitle {
   max-width: 32rem;
-  margin: 0 auto 2.5rem;
+  margin: 0 auto 2.8rem;
   font-family: var(--font-inter, 'Inter', sans-serif);
   font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.85;
   letter-spacing: 0.02em;
-  color: rgb(255 255 255 / 0.5);
+  color: rgb(255 255 255 / 0.55);
   white-space: pre-line;
 }
 
@@ -177,28 +334,57 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.8rem;
+  gap: 2rem;
 }
 
-@media (min-width: 480px) {
-  .ctaButtons {
-    flex-direction: row;
-    justify-content: center;
-    gap: 2.5rem;
-  }
-}
+/* ── Primary CTA — bordered button with glow ─────────────────────────── */
 
-/* ── CTA link — primary (gold gradient text + animated underline) ───── */
-
-.ctaLink {
+.ctaPrimary {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.15rem 0.55rem;
+  justify-content: center;
+  padding: 0.9rem 2.4rem;
+  border: 1px solid rgb(var(--c-gold) / 0.45);
+  background: rgb(var(--c-gold) / 0.06);
+  transition:
+    border-color 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ctaPrimary:hover {
+  border-color: rgb(var(--c-gold) / 0.7);
+  background: rgb(var(--c-gold) / 0.10);
+}
+
+.ctaPrimaryGlow {
+  position: absolute;
+  inset: -8px;
+  border-radius: 2px;
+  background: radial-gradient(
+    ellipse at center,
+    rgb(var(--c-gold) / 0.12) 0%,
+    transparent 70%
+  );
+  filter: blur(12px);
+  pointer-events: none;
+  transition: opacity 400ms ease, transform 400ms ease;
+  opacity: 0.5;
+}
+
+.ctaPrimary:hover .ctaPrimaryGlow {
+  opacity: 1;
+  transform: scale(1.3);
+}
+
+.ctaPrimaryLabel {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-  font-size: 1.25rem;
-  letter-spacing: 0.10em;
+  font-size: 1.3rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   background: linear-gradient(
     130deg,
@@ -209,6 +395,36 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* ── Secondary CTA group ─────────────────────────────────────────────── */
+
+.ctaSecondaryGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+@media (min-width: 480px) {
+  .ctaSecondaryGroup {
+    flex-direction: row;
+    gap: 2.5rem;
+  }
+}
+
+/* ── CTA link — text style (secondary actions) ───────────────────────── */
+
+.ctaLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.15rem 0.55rem;
+  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
+  font-size: 1.15rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
   transition:
     opacity 280ms ease,
     transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -221,14 +437,6 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgb(var(--c-gold) / 0.55) 15%,
-    rgb(255 238 175 / 0.90) 50%,
-    rgb(var(--c-gold) / 0.55) 85%,
-    transparent 100%
-  );
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -243,8 +451,31 @@
   transform: scaleX(1);
 }
 
-/* ── CTA link — secondary (khaki gradient text) ─────────────────────── */
+/* Gold variant */
+.ctaLinkGold {
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-warm)) 0%,
+    rgb(255 238 175) 45%,
+    rgb(var(--c-gold)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
+.ctaLinkGold::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.55) 15%,
+    rgb(255 238 175 / 0.90) 50%,
+    rgb(var(--c-gold) / 0.55) 85%,
+    transparent 100%
+  );
+}
+
+/* Khaki/secondary variant */
 .ctaLinkSecondary {
   background: linear-gradient(
     130deg,
@@ -295,7 +526,54 @@
     padding-inline: 1rem;
   }
 
+  .ctaPrimary {
+    padding: 0.75rem 1.8rem;
+  }
+
+  .ctaPrimaryLabel {
+    font-size: 1.15rem;
+  }
+
   .ctaLink {
-    font-size: 1.1rem;
+    font-size: 1rem;
+  }
+
+  .cornerMark {
+    width: 20px;
+    height: 20px;
+  }
+
+  .focusCircle {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .glowOrb,
+  .glowOrbWarm,
+  .focusCircle,
+  .crosshairTop,
+  .crosshairBottom,
+  .cornerMark {
+    animation: none;
+  }
+
+  .ctaHeadline {
+    clip-path: none;
+  }
+
+  .ctaSeparator {
+    transform: scaleX(1);
+  }
+
+  .ctaPrimaryGlow {
+    transition: none;
+  }
+
+  .ctaLink::after {
+    transition: none;
   }
 }

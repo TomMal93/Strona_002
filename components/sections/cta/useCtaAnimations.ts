@@ -11,6 +11,14 @@ export type CtaAnimationRefs = {
   headlineRef: RefObject<HTMLParagraphElement>
   descRef: RefObject<HTMLParagraphElement>
   buttonsRef: RefObject<HTMLDivElement>
+  cornerTLRef: RefObject<HTMLSpanElement>
+  cornerTRRef: RefObject<HTMLSpanElement>
+  cornerBLRef: RefObject<HTMLSpanElement>
+  cornerBRRef: RefObject<HTMLSpanElement>
+  crosshairTopRef: RefObject<HTMLSpanElement>
+  crosshairBottomRef: RefObject<HTMLSpanElement>
+  glowRef: RefObject<HTMLDivElement>
+  separatorRef: RefObject<HTMLDivElement>
 }
 
 export function useCtaAnimations(refs: CtaAnimationRefs): void {
@@ -23,8 +31,19 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
       '(prefers-reduced-motion: reduce)',
     ).matches
 
+    const allCorners = [
+      refs.cornerTLRef,
+      refs.cornerTRRef,
+      refs.cornerBLRef,
+      refs.cornerBRRef,
+    ]
+    const allCrosshairs = [refs.crosshairTopRef, refs.crosshairBottomRef]
+
     const setInitialStyles = () => {
-      const { titleRef, hudBarRef, headlineRef, descRef, buttonsRef } = refs
+      const {
+        titleRef, hudBarRef, headlineRef, descRef, buttonsRef,
+        subtitleRef, glowRef, separatorRef,
+      } = refs
 
       const hudLines = hudBarRef.current
         ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-line]'))
@@ -34,69 +53,63 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         : []
 
       if (prefersReducedMotion) {
-        if (titleRef.current) {
-          titleRef.current.style.opacity = '1'
-          titleRef.current.style.visibility = 'inherit'
-          titleRef.current.style.transform = 'none'
-        }
-        if (refs.subtitleRef.current) {
-          refs.subtitleRef.current.style.opacity = '1'
-          refs.subtitleRef.current.style.visibility = 'inherit'
-          refs.subtitleRef.current.style.transform = 'none'
-        }
+        ;[titleRef, subtitleRef, headlineRef, descRef, buttonsRef].forEach((ref) => {
+          if (ref.current) {
+            ref.current.style.opacity = '1'
+            ref.current.style.visibility = 'inherit'
+            ref.current.style.transform = 'none'
+          }
+        })
         hudLines.forEach((el) => { el.style.transform = 'scaleX(1)' })
         hudLabels.forEach((el) => {
           el.style.opacity = '1'
           el.style.visibility = 'inherit'
         })
+        allCorners.forEach((ref) => {
+          if (ref.current) ref.current.style.opacity = '0.5'
+        })
+        allCrosshairs.forEach((ref) => {
+          if (ref.current) ref.current.style.opacity = '0.4'
+        })
         if (headlineRef.current) {
-          headlineRef.current.style.opacity = '1'
-          headlineRef.current.style.visibility = 'inherit'
-          headlineRef.current.style.transform = 'none'
+          headlineRef.current.style.clipPath = 'none'
         }
-        if (descRef.current) {
-          descRef.current.style.opacity = '1'
-          descRef.current.style.visibility = 'inherit'
-          descRef.current.style.transform = 'none'
+        if (separatorRef.current) {
+          separatorRef.current.style.transform = 'scaleX(1)'
         }
-        if (buttonsRef.current) {
-          buttonsRef.current.style.opacity = '1'
-          buttonsRef.current.style.visibility = 'inherit'
-          buttonsRef.current.style.transform = 'none'
+        if (glowRef.current) {
+          glowRef.current.style.opacity = '1'
         }
         return
       }
 
       // Hidden initial states
-      if (titleRef.current) {
-        titleRef.current.style.opacity = '0'
-        titleRef.current.style.visibility = 'hidden'
-        titleRef.current.style.transform = 'translate3d(0, 30px, 0)'
-      }
-      if (refs.subtitleRef.current) {
-        refs.subtitleRef.current.style.opacity = '0'
-        refs.subtitleRef.current.style.visibility = 'hidden'
-        refs.subtitleRef.current.style.transform = 'translate3d(0, 20px, 0)'
-      }
+      ;[titleRef, subtitleRef, headlineRef, descRef, buttonsRef].forEach((ref) => {
+        if (ref.current) {
+          ref.current.style.opacity = '0'
+          ref.current.style.visibility = 'hidden'
+          ref.current.style.transform = 'translate3d(0, 30px, 0)'
+        }
+      })
       hudLines.forEach((el) => { el.style.transform = 'scaleX(0)' })
       hudLabels.forEach((el) => {
         el.style.opacity = '0'
         el.style.visibility = 'hidden'
       })
+      allCorners.forEach((ref) => {
+        if (ref.current) ref.current.style.opacity = '0'
+      })
+      allCrosshairs.forEach((ref) => {
+        if (ref.current) ref.current.style.opacity = '0'
+      })
       if (headlineRef.current) {
-        headlineRef.current.style.opacity = '0'
-        headlineRef.current.style.visibility = 'hidden'
-        headlineRef.current.style.transform = 'translate3d(0, 30px, 0)'
+        headlineRef.current.style.clipPath = 'inset(0 50% 0 50%)'
       }
-      if (descRef.current) {
-        descRef.current.style.opacity = '0'
-        descRef.current.style.visibility = 'hidden'
-        descRef.current.style.transform = 'translate3d(0, 20px, 0)'
+      if (separatorRef.current) {
+        separatorRef.current.style.transform = 'scaleX(0)'
       }
-      if (buttonsRef.current) {
-        buttonsRef.current.style.opacity = '0'
-        buttonsRef.current.style.visibility = 'hidden'
-        buttonsRef.current.style.transform = 'translate3d(0, 20px, 0)'
+      if (glowRef.current) {
+        glowRef.current.style.opacity = '0'
       }
     }
 
@@ -112,7 +125,10 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
 
       gsap.registerPlugin(ScrollTrigger)
 
-      const { sectionRef, titleRef, subtitleRef, hudBarRef, headlineRef, descRef, buttonsRef } = refs
+      const {
+        sectionRef, titleRef, subtitleRef, hudBarRef,
+        headlineRef, descRef, buttonsRef, glowRef, separatorRef,
+      } = refs
 
       const ctx = gsap.context(() => {
         const hudLines = hudBarRef.current
@@ -122,14 +138,26 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
           ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-label]'))
           : []
 
+        const cornerEls = allCorners
+          .map((ref) => ref.current)
+          .filter(Boolean) as HTMLElement[]
+
+        const crosshairEls = allCrosshairs
+          .map((ref) => ref.current)
+          .filter(Boolean) as HTMLElement[]
+
         if (prefersReducedMotion) {
           if (titleRef.current) gsap.set(titleRef.current, { autoAlpha: 1, y: 0 })
           if (subtitleRef.current) gsap.set(subtitleRef.current, { autoAlpha: 1, y: 0 })
           if (hudLines.length) gsap.set(hudLines, { scaleX: 1 })
           if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1 })
-          if (headlineRef.current) gsap.set(headlineRef.current, { autoAlpha: 1, y: 0 })
+          if (headlineRef.current) gsap.set(headlineRef.current, { autoAlpha: 1, y: 0, clipPath: 'inset(0 0% 0 0%)' })
           if (descRef.current) gsap.set(descRef.current, { autoAlpha: 1, y: 0 })
           if (buttonsRef.current) gsap.set(buttonsRef.current, { autoAlpha: 1, y: 0 })
+          if (cornerEls.length) gsap.set(cornerEls, { opacity: 0.5 })
+          if (crosshairEls.length) gsap.set(crosshairEls, { opacity: 0.4 })
+          if (glowRef.current) gsap.set(glowRef.current, { opacity: 1 })
+          if (separatorRef.current) gsap.set(separatorRef.current, { scaleX: 1 })
           return
         }
 
@@ -138,9 +166,13 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0 })
         if (titleRef.current) gsap.set(titleRef.current, { autoAlpha: 0, y: 30 })
         if (subtitleRef.current) gsap.set(subtitleRef.current, { autoAlpha: 0, y: 20 })
-        if (headlineRef.current) gsap.set(headlineRef.current, { autoAlpha: 0, y: 30 })
-        if (descRef.current) gsap.set(descRef.current, { autoAlpha: 0, y: 20 })
+        if (headlineRef.current) gsap.set(headlineRef.current, { autoAlpha: 0, y: 30, clipPath: 'inset(0 50% 0 50%)' })
+        if (descRef.current) gsap.set(descRef.current, { autoAlpha: 0, y: 20, filter: 'blur(4px)' })
         if (buttonsRef.current) gsap.set(buttonsRef.current, { autoAlpha: 0, y: 20 })
+        if (cornerEls.length) gsap.set(cornerEls, { opacity: 0, scale: 0.5 })
+        if (crosshairEls.length) gsap.set(crosshairEls, { opacity: 0, scale: 0 })
+        if (glowRef.current) gsap.set(glowRef.current, { opacity: 0, scale: 0.8 })
+        if (separatorRef.current) gsap.set(separatorRef.current, { scaleX: 0 })
 
         // Scroll-triggered timeline
         const tl = gsap.timeline({
@@ -201,35 +233,106 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
           )
         }
 
-        // Phase 4: CTA headline
+        // Phase 4: Glow fade in
+        if (glowRef.current) {
+          tl.to(
+            glowRef.current,
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 1.2,
+              ease: 'power2.out',
+            },
+            '-=0.3',
+          )
+        }
+
+        // Phase 5: Corner marks draw-in (scale + fade)
+        if (cornerEls.length) {
+          tl.to(
+            cornerEls,
+            {
+              opacity: 0.5,
+              scale: 1,
+              duration: 0.6,
+              ease: 'power3.out',
+              stagger: 0.08,
+              onComplete: () => {
+                // Start breathing animation
+                cornerEls.forEach((el) => {
+                  el.style.animationPlayState = 'running'
+                })
+              },
+            },
+            '-=0.8',
+          )
+        }
+
+        // Phase 6: Crosshairs pop in
+        if (crosshairEls.length) {
+          tl.to(
+            crosshairEls,
+            {
+              opacity: 0.4,
+              scale: 1,
+              duration: 0.5,
+              ease: 'back.out(1.7)',
+              stagger: 0.1,
+              onComplete: () => {
+                // Start spinning animation
+                crosshairEls.forEach((el) => {
+                  el.style.animationPlayState = 'running'
+                })
+              },
+            },
+            '-=0.4',
+          )
+        }
+
+        // Phase 7: CTA headline — clip-path reveal + fade in
         if (headlineRef.current) {
           tl.to(
             headlineRef.current,
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.8,
-              ease: 'power3.out',
-            },
-            '-=0.2',
-          )
-        }
-
-        // Phase 5: CTA description
-        if (descRef.current) {
-          tl.to(
-            descRef.current,
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.6,
+              clipPath: 'inset(0 0% 0 0%)',
+              duration: 1.0,
               ease: 'power3.out',
             },
             '-=0.3',
           )
         }
 
-        // Phase 6: Buttons
+        // Phase 8: Separator line
+        if (separatorRef.current) {
+          tl.to(
+            separatorRef.current,
+            {
+              scaleX: 1,
+              duration: 0.6,
+              ease: 'power2.out',
+            },
+            '-=0.5',
+          )
+        }
+
+        // Phase 9: Description — blur-to-sharp + fade
+        if (descRef.current) {
+          tl.to(
+            descRef.current,
+            {
+              autoAlpha: 1,
+              y: 0,
+              filter: 'blur(0px)',
+              duration: 0.8,
+              ease: 'power3.out',
+            },
+            '-=0.3',
+          )
+        }
+
+        // Phase 10: Buttons
         if (buttonsRef.current) {
           tl.to(
             buttonsRef.current,
@@ -239,7 +342,7 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
               duration: 0.6,
               ease: 'power3.out',
             },
-            '-=0.2',
+            '-=0.3',
           )
         }
       }, sectionRef)
