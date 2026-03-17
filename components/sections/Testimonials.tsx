@@ -253,6 +253,7 @@ export default function Testimonials() {
           <div className={styles.trustedHeader}>
             <h3 className={cn(styles.trustedTitle, styles.gradientTextPrimary)}>{trustedBy.label}</h3>
           </div>
+          <span aria-hidden="true" className={styles.logosDivider} />
           <ul className={styles.logosStrip}>
             {trustedBy.clients.map((client) => (
               <li
@@ -270,6 +271,7 @@ export default function Testimonials() {
               </li>
             ))}
           </ul>
+          <span aria-hidden="true" className={styles.logosDivider} />
         </div>
       </div>
     </section>
