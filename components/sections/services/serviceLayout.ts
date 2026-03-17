@@ -12,7 +12,7 @@ export function getCardVariant(icon: ServiceIconName): CardVariant {
   return HIGHLIGHT_ICONS.has(icon) ? 'highlight' : 'military'
 }
 
-const DISPLAY_ORDER: ServiceIconName[] = ['drone', 'heart', 'crosshair', 'flag', 'wheel']
+const DISPLAY_ORDER: ServiceIconName[] = ['heart', 'wheel', 'flag']
 
 export function orderServiceItems<T extends WithServiceIcon>(items: readonly T[]): T[] {
   const byIcon = new Map(items.map((item) => [item.icon, item]))
@@ -20,4 +20,8 @@ export function orderServiceItems<T extends WithServiceIcon>(items: readonly T[]
     const item = byIcon.get(icon)
     return item ? [item] : []
   })
+}
+
+export function getSceneNumber(index: number): string {
+  return String(index + 1).padStart(2, '0')
 }

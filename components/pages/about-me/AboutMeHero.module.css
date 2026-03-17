@@ -1,0 +1,278 @@
+/* ── Hero — Director's Profile ────────────────────────────────────────── */
+
+.heroSection {
+  position: relative;
+  height: 100dvh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* ── Parallax background ─────────────────────────────────────────────── */
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.heroBg img {
+  display: block;
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  object-position: center 20%;
+  will-change: transform;
+}
+
+/* ── Dark gradient overlay ───────────────────────────────────────────── */
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    0deg,
+    rgb(13 13 13 / 0.92) 0%,
+    rgb(13 13 13 / 0.6) 35%,
+    rgb(13 13 13 / 0.3) 60%,
+    rgb(13 13 13 / 0.15) 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Film strip sprocket holes ───────────────────────────────────────── */
+
+.filmStripLeft,
+.filmStripRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 14px,
+    rgb(255 238 175 / 0.12) 14px,
+    rgb(255 238 175 / 0.12) 20px,
+    transparent 20px,
+    transparent 34px
+  );
+}
+
+.filmStripLeft {
+  left: 0;
+}
+
+.filmStripRight {
+  right: 0;
+}
+
+@media (width < 48rem) {
+  .filmStripLeft,
+  .filmStripRight {
+    width: 16px;
+  }
+}
+
+/* ── Content ─────────────────────────────────────────────────────────── */
+
+.heroContent {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1280px;
+  padding: 0 2rem 4rem;
+  text-align: center;
+}
+
+@media (width >= 48rem) {
+  .heroContent {
+    text-align: left;
+    padding-bottom: 5rem;
+  }
+}
+
+/* ── Name ─────────────────────────────────────────────────────────────── */
+
+.heroName {
+  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
+  font-size: clamp(48px, 10vw, 110px);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-warm)) 0%,
+    rgb(255 238 175) 45%,
+    rgb(var(--c-gold)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Tagline ──────────────────────────────────────────────────────────── */
+
+.heroTagline {
+  margin-top: 0.75rem;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.6);
+}
+
+/* ── HUD overlay ─────────────────────────────────────────────────────── */
+
+.hudOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Corner marks — viewfinder */
+.cornerMark {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+}
+
+.cornerTL {
+  top: 1.5rem;
+  left: 1.5rem;
+  border-top: 1px solid rgb(var(--c-gold) / 0.4);
+  border-left: 1px solid rgb(var(--c-gold) / 0.4);
+}
+
+.cornerTR {
+  top: 1.5rem;
+  right: 1.5rem;
+  border-top: 1px solid rgb(var(--c-gold) / 0.4);
+  border-right: 1px solid rgb(var(--c-gold) / 0.4);
+}
+
+.cornerBL {
+  bottom: 1.5rem;
+  left: 1.5rem;
+  border-bottom: 1px solid rgb(var(--c-gold) / 0.4);
+  border-left: 1px solid rgb(var(--c-gold) / 0.4);
+}
+
+.cornerBR {
+  bottom: 1.5rem;
+  right: 1.5rem;
+  border-bottom: 1px solid rgb(var(--c-gold) / 0.4);
+  border-right: 1px solid rgb(var(--c-gold) / 0.4);
+}
+
+/* REC indicator */
+.recIndicator {
+  position: absolute;
+  top: 2rem;
+  left: 3.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(var(--c-gold) / 0.6);
+}
+
+.recDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgb(200 80 60 / 0.85);
+  animation: recPulse 1.6s ease-in-out infinite;
+}
+
+.recText {
+  animation: recPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes recPulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+/* Resolution label */
+.resolutionLabel {
+  position: absolute;
+  top: 2rem;
+  right: 3.5rem;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.45);
+}
+
+.resolutionLabelBottomRight {
+  top: auto;
+  bottom: 2rem;
+}
+
+/* Timecode — bottom right */
+.timecode {
+  position: absolute;
+  bottom: 2rem;
+  right: 3.5rem;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.76rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.14em;
+  color: rgb(255 238 175 / 0.5);
+}
+
+@media (width < 48rem) {
+  .cornerMark {
+    width: 20px;
+    height: 20px;
+  }
+
+  .cornerTL, .cornerTR { top: 1rem; }
+  .cornerBL, .cornerBR { bottom: 1rem; }
+  .cornerTL, .cornerBL { left: 1rem; }
+  .cornerTR, .cornerBR { right: 1rem; }
+
+  .recIndicator {
+    top: 1.5rem;
+    left: 2.5rem;
+    font-size: 0.7rem;
+  }
+
+  .resolutionLabel {
+    top: 1.5rem;
+    right: 2.5rem;
+    font-size: 0.64rem;
+  }
+
+  .resolutionLabelBottomRight {
+    top: auto;
+    bottom: 1.5rem;
+  }
+
+  .timecode {
+    bottom: 1.5rem;
+    right: 2.5rem;
+    font-size: 0.64rem;
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .recDot,
+  .recText {
+    animation: none;
+  }
+}

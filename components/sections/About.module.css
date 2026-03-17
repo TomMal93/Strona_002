@@ -404,71 +404,18 @@
   --statement-line-offset: 1.15rem;
   position: relative;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1.12fr;
+  grid-template-rows: 1fr auto;
   margin: 2.8rem auto 0;
-  max-width: 42rem;
-  min-height: 15rem;
+  max-width: 37.5rem;
+  min-height: 13.5rem;
   padding: 0;
-  border-radius: 0.5rem;
   background: transparent;
-  border: 1px solid rgb(255 238 175 / 0.09);
   isolation: isolate;
-  overflow: hidden;
-}
-
-.statementPanel::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  border-left: 1px solid rgb(255 238 175 / 0.025);
-  border-right: 1px solid rgb(255 238 175 / 0.025);
-  border-top: 1px solid rgb(255 238 175 / 0.02);
-  border-bottom: 1px solid rgb(255 238 175 / 0.02);
-  opacity: 0.34;
-}
-
-.statementPanel::after {
-  content: '';
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  width: calc(100% - (var(--statement-line-offset) * 2));
-  transform: translateX(-50%);
-  height: 1px;
-  z-index: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgb(255 238 175 / 0.15) 50%,
-    transparent 100%
-  );
-  opacity: 0.72;
-}
-
-.statementKicker {
-  position: relative;
-  grid-row: 1;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  min-height: 0;
-  margin-bottom: 0;
-  align-items: center;
-  padding-inline: 1.2rem;
-  font-family: var(--font-inter, 'Inter', sans-serif);
-  font-size: 0.98rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  text-transform: none;
-  color: rgb(255 241 210 / 0.9);
 }
 
 .aboutStatement {
   position: relative;
-  grid-row: 2 / span 2;
+  grid-row: 1;
   z-index: 1;
   display: flex;
   align-items: center;
@@ -477,9 +424,9 @@
   height: 100%;
   box-sizing: border-box;
   margin: 0;
-  padding: 0.65rem 1.2rem;
+  padding: 1rem 1.2rem 10px;
   text-align: center;
-  font-family: var(--font-inter, 'Inter', sans-serif);
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.68;
@@ -507,11 +454,13 @@
 
 .statementCta {
   position: relative;
-  grid-row: 4;
+  grid-row: 2;
   z-index: 1;
   display: flex;
   justify-content: center;
   min-height: 0;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
   padding-inline: 1.2rem;
   align-items: center;
 }
@@ -524,23 +473,15 @@
   align-items: center;
   justify-content: center;
   padding: 0.45rem 0.9rem 0.5rem;
-  border-bottom: 1px solid rgb(255 238 175 / 0.12);
+  border-bottom: none;
   border-top: none;
   border-radius: 0.2rem;
-  background: linear-gradient(
-    0deg,
-    rgb(255 238 175 / 0.022) 0%,
-    rgb(255 255 255 / 0.006) 100%
-  );
+  background: transparent;
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
   font-size: 1.1rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgb(255 238 175 / 0.95);
-  transition:
-    opacity 280ms ease,
-    border-color 280ms ease,
-    background-color 280ms ease;
 }
 
 .ctaLink::after {
@@ -550,23 +491,27 @@
   right: 0.75rem;
   bottom: 0.38rem;
   height: 1px;
-  transform-origin: left center;
+  opacity: 0;
   transform: scaleX(0);
-  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
-  background: linear-gradient(90deg, rgb(var(--c-gold) / 0.8), transparent);
-}
-
-.ctaLink:hover {
-  opacity: 0.9;
-  border-bottom-color: rgb(255 238 175 / 0.2);
+  transform-origin: left center;
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 180ms ease;
   background: linear-gradient(
-    0deg,
-    rgb(255 238 175 / 0.035) 0%,
-    rgb(255 255 255 / 0.01) 100%
+    90deg,
+    transparent 0%,
+    rgb(255 238 175 / 0.2) 18%,
+    rgb(255 238 175 / 0.36) 50%,
+    rgb(255 238 175 / 0.2) 82%,
+    transparent 100%
   );
 }
 
+.ctaLink:hover {
+}
+
 .ctaLink:hover::after {
+  opacity: 1;
   transform: scaleX(1);
 }
 
@@ -621,11 +566,6 @@
 
   .statementPanel {
     padding: 0.95rem 0.95rem 1rem;
-  }
-
-  .statementKicker {
-    font-size: 0.76rem;
-    letter-spacing: 0.16em;
   }
 
   .viewfinder {

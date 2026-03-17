@@ -8,7 +8,6 @@ export type ServicesAnimationRefs = {
   titleRef: RefObject<HTMLHeadingElement>
   titleAccentRef: RefObject<HTMLSpanElement>
   introRef: RefObject<HTMLParagraphElement>
-  timelineRef: RefObject<HTMLDivElement>
   hudBarRef: RefObject<HTMLDivElement>
   bottomTimelineRef: RefObject<HTMLDivElement>
 }
@@ -38,7 +37,6 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
         titleRef,
         titleAccentRef,
         introRef,
-        timelineRef,
         hudBarRef,
         bottomTimelineRef,
       } = refs
@@ -77,7 +75,6 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
           el.style.transform = 'none'
         })
         if (titleAccentRef.current) titleAccentRef.current.style.transform = 'scaleX(1)'
-        if (timelineRef.current) timelineRef.current.style.transform = 'scaleX(1)'
         hudLines.forEach((el) => { el.style.transform = 'scaleX(1)' })
         hudLabels.forEach((el) => {
           el.style.opacity = '1'
@@ -108,7 +105,6 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
         el.style.transform = 'translate3d(0, 30px, 0)'
       })
       if (titleAccentRef.current) titleAccentRef.current.style.transform = 'scaleX(0)'
-      if (timelineRef.current) timelineRef.current.style.transform = 'scaleX(0)'
       hudLines.forEach((el) => { el.style.transform = 'scaleX(0)' })
       hudLabels.forEach((el) => {
         el.style.opacity = '0'
@@ -151,7 +147,6 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
         titleRef,
         titleAccentRef,
         introRef,
-        timelineRef,
         hudBarRef,
         bottomTimelineRef,
       } = refs
@@ -191,7 +186,6 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
         if (prefersReducedMotion) {
           gsap.set([titleRef.current, introRef.current], { autoAlpha: 1, y: 0 })
           if (titleAccentRef.current) gsap.set(titleAccentRef.current, { scaleX: 1 })
-          if (timelineRef.current) gsap.set(timelineRef.current, { scaleX: 1 })
           if (hudLines.length) gsap.set(hudLines, { scaleX: 1 })
           if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1, y: 0 })
           if (bottomSegs.length) gsap.set(bottomSegs, { scaleX: 1 })
@@ -213,10 +207,6 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
 
         if (titleAccentRef.current) {
           gsap.set(titleAccentRef.current, { scaleX: 0 })
-        }
-
-        if (timelineRef.current) {
-          gsap.set(timelineRef.current, { scaleX: 0 })
         }
 
         if (isDesktop) {
@@ -316,15 +306,6 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
           tl.to(
             bottomDiamonds,
             { autoAlpha: 1, duration: 0.3, ease: 'power2.out' },
-            '-=0.2',
-          )
-        }
-
-        // Phase 5: Timeline line draws (desktop only)
-        if (timelineRef.current && isDesktop) {
-          tl.to(
-            timelineRef.current,
-            { scaleX: 1, duration: 0.8, ease: 'power2.inOut' },
             '-=0.2',
           )
         }
