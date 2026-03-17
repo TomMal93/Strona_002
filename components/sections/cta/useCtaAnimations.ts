@@ -8,9 +8,47 @@ export type CtaAnimationRefs = {
   titleRef: RefObject<HTMLHeadingElement>
   subtitleRef: RefObject<HTMLParagraphElement>
   hudBarRef: RefObject<HTMLDivElement>
-  headlineRef: RefObject<HTMLParagraphElement>
+  statsRef: RefObject<HTMLDivElement>
   descRef: RefObject<HTMLParagraphElement>
   buttonsRef: RefObject<HTMLDivElement>
+  cornerTLRef: RefObject<HTMLSpanElement>
+  cornerTRRef: RefObject<HTMLSpanElement>
+  cornerBLRef: RefObject<HTMLSpanElement>
+  cornerBRRef: RefObject<HTMLSpanElement>
+  crosshairTopRef: RefObject<HTMLSpanElement>
+  crosshairBottomRef: RefObject<HTMLSpanElement>
+  glowRef: RefObject<HTMLDivElement>
+  separatorRef: RefObject<HTMLDivElement>
+}
+
+/* ── Count-up helper ──────────────────────────────────────────────────── */
+
+function animateCountUp(
+  el: HTMLElement,
+  target: string,
+  duration: number,
+  gsapInstance: typeof import('gsap')['gsap'],
+) {
+  // Extract numeric part and suffix (e.g. "200+" → 200, "+")
+  const match = target.match(/^(\d+)(.*)$/)
+  if (!match) {
+    // Non-numeric values like "4K" — just reveal
+    el.textContent = target
+    return
+  }
+
+  const endValue = parseInt(match[1], 10)
+  const suffix = match[2] || ''
+  const proxy = { val: 0 }
+
+  gsapInstance.to(proxy, {
+    val: endValue,
+    duration,
+    ease: 'power2.out',
+    onUpdate: () => {
+      el.textContent = `${Math.round(proxy.val)}${suffix}`
+    },
+  })
 }
 
 export function useCtaAnimations(refs: CtaAnimationRefs): void {
@@ -23,8 +61,19 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
       '(prefers-reduced-motion: reduce)',
     ).matches
 
+    const allCorners = [
+      refs.cornerTLRef,
+      refs.cornerTRRef,
+      refs.cornerBLRef,
+      refs.cornerBRRef,
+    ]
+    const allCrosshairs = [refs.crosshairTopRef, refs.crosshairBottomRef]
+
     const setInitialStyles = () => {
-      const { titleRef, hudBarRef, headlineRef, descRef, buttonsRef } = refs
+      const {
+        titleRef, hudBarRef, statsRef, descRef, buttonsRef,
+        subtitleRef, glowRef, separatorRef,
+      } = refs
 
       const hudLines = hudBarRef.current
         ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-line]'))
@@ -34,69 +83,62 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         : []
 
       if (prefersReducedMotion) {
-        if (titleRef.current) {
-          titleRef.current.style.opacity = '1'
-          titleRef.current.style.visibility = 'inherit'
-          titleRef.current.style.transform = 'none'
-        }
-        if (refs.subtitleRef.current) {
-          refs.subtitleRef.current.style.opacity = '1'
-          refs.subtitleRef.current.style.visibility = 'inherit'
-          refs.subtitleRef.current.style.transform = 'none'
-        }
+        ;[titleRef, subtitleRef, statsRef, descRef, buttonsRef].forEach((ref) => {
+          if (ref.current) {
+            ref.current.style.opacity = '1'
+            ref.current.style.visibility = 'inherit'
+            ref.current.style.transform = 'none'
+          }
+        })
         hudLines.forEach((el) => { el.style.transform = 'scaleX(1)' })
         hudLabels.forEach((el) => {
           el.style.opacity = '1'
           el.style.visibility = 'inherit'
         })
-        if (headlineRef.current) {
-          headlineRef.current.style.opacity = '1'
-          headlineRef.current.style.visibility = 'inherit'
-          headlineRef.current.style.transform = 'none'
+        allCorners.forEach((ref) => {
+          if (ref.current) ref.current.style.opacity = '0.5'
+        })
+        allCrosshairs.forEach((ref) => {
+          if (ref.current) ref.current.style.opacity = '0.4'
+        })
+        if (separatorRef.current) {
+          separatorRef.current.style.transform = 'scaleX(1)'
         }
-        if (descRef.current) {
-          descRef.current.style.opacity = '1'
-          descRef.current.style.visibility = 'inherit'
-          descRef.current.style.transform = 'none'
-        }
-        if (buttonsRef.current) {
-          buttonsRef.current.style.opacity = '1'
-          buttonsRef.current.style.visibility = 'inherit'
-          buttonsRef.current.style.transform = 'none'
+        if (glowRef.current) {
+          glowRef.current.style.opacity = '1'
         }
         return
       }
 
       // Hidden initial states
-      if (titleRef.current) {
-        titleRef.current.style.opacity = '0'
-        titleRef.current.style.visibility = 'hidden'
-        titleRef.current.style.transform = 'translate3d(0, 30px, 0)'
-      }
-      if (refs.subtitleRef.current) {
-        refs.subtitleRef.current.style.opacity = '0'
-        refs.subtitleRef.current.style.visibility = 'hidden'
-        refs.subtitleRef.current.style.transform = 'translate3d(0, 20px, 0)'
+      ;[titleRef, subtitleRef, descRef, buttonsRef].forEach((ref) => {
+        if (ref.current) {
+          ref.current.style.opacity = '0'
+          ref.current.style.visibility = 'hidden'
+          ref.current.style.transform = 'translate3d(0, 30px, 0)'
+        }
+      })
+      if (statsRef.current) {
+        statsRef.current.style.opacity = '0'
+        statsRef.current.style.visibility = 'hidden'
+        statsRef.current.style.transform = 'translate3d(0, 20px, 0) scale(0.97)'
       }
       hudLines.forEach((el) => { el.style.transform = 'scaleX(0)' })
       hudLabels.forEach((el) => {
         el.style.opacity = '0'
         el.style.visibility = 'hidden'
       })
-      if (headlineRef.current) {
-        headlineRef.current.style.opacity = '0'
-        headlineRef.current.style.visibility = 'hidden'
-        headlineRef.current.style.transform = 'translate3d(0, 30px, 0)'
+      allCorners.forEach((ref) => {
+        if (ref.current) ref.current.style.opacity = '0'
+      })
+      allCrosshairs.forEach((ref) => {
+        if (ref.current) ref.current.style.opacity = '0'
+      })
+      if (separatorRef.current) {
+        separatorRef.current.style.transform = 'scaleX(0)'
       }
-      if (descRef.current) {
-        descRef.current.style.opacity = '0'
-        descRef.current.style.visibility = 'hidden'
-        descRef.current.style.transform = 'translate3d(0, 20px, 0)'
-      }
-      if (buttonsRef.current) {
-        buttonsRef.current.style.opacity = '0'
-        buttonsRef.current.style.visibility = 'hidden'
-        buttonsRef.current.style.transform = 'translate3d(0, 20px, 0)'
+      if (glowRef.current) {
+        glowRef.current.style.opacity = '0'
       }
     }
 
@@ -112,7 +154,10 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
 
       gsap.registerPlugin(ScrollTrigger)
 
-      const { sectionRef, titleRef, subtitleRef, hudBarRef, headlineRef, descRef, buttonsRef } = refs
+      const {
+        sectionRef, titleRef, subtitleRef, hudBarRef,
+        statsRef, descRef, buttonsRef, glowRef, separatorRef,
+      } = refs
 
       const ctx = gsap.context(() => {
         const hudLines = hudBarRef.current
@@ -122,14 +167,31 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
           ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-label]'))
           : []
 
+        const cornerEls = allCorners
+          .map((ref) => ref.current)
+          .filter(Boolean) as HTMLElement[]
+
+        const crosshairEls = allCrosshairs
+          .map((ref) => ref.current)
+          .filter(Boolean) as HTMLElement[]
+
+        // Stat value elements for count-up
+        const statValueEls = statsRef.current
+          ? Array.from(statsRef.current.querySelectorAll<HTMLElement>('[data-stat-value]'))
+          : []
+
         if (prefersReducedMotion) {
           if (titleRef.current) gsap.set(titleRef.current, { autoAlpha: 1, y: 0 })
           if (subtitleRef.current) gsap.set(subtitleRef.current, { autoAlpha: 1, y: 0 })
           if (hudLines.length) gsap.set(hudLines, { scaleX: 1 })
           if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1 })
-          if (headlineRef.current) gsap.set(headlineRef.current, { autoAlpha: 1, y: 0 })
+          if (statsRef.current) gsap.set(statsRef.current, { autoAlpha: 1, y: 0, scale: 1 })
           if (descRef.current) gsap.set(descRef.current, { autoAlpha: 1, y: 0 })
           if (buttonsRef.current) gsap.set(buttonsRef.current, { autoAlpha: 1, y: 0 })
+          if (cornerEls.length) gsap.set(cornerEls, { opacity: 0.5 })
+          if (crosshairEls.length) gsap.set(crosshairEls, { opacity: 0.4 })
+          if (glowRef.current) gsap.set(glowRef.current, { opacity: 1 })
+          if (separatorRef.current) gsap.set(separatorRef.current, { scaleX: 1 })
           return
         }
 
@@ -138,9 +200,13 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0 })
         if (titleRef.current) gsap.set(titleRef.current, { autoAlpha: 0, y: 30 })
         if (subtitleRef.current) gsap.set(subtitleRef.current, { autoAlpha: 0, y: 20 })
-        if (headlineRef.current) gsap.set(headlineRef.current, { autoAlpha: 0, y: 30 })
-        if (descRef.current) gsap.set(descRef.current, { autoAlpha: 0, y: 20 })
+        if (statsRef.current) gsap.set(statsRef.current, { autoAlpha: 0, y: 20, scale: 0.97 })
+        if (descRef.current) gsap.set(descRef.current, { autoAlpha: 0, y: 20, filter: 'blur(4px)' })
         if (buttonsRef.current) gsap.set(buttonsRef.current, { autoAlpha: 0, y: 20 })
+        if (cornerEls.length) gsap.set(cornerEls, { opacity: 0, scale: 0.5 })
+        if (crosshairEls.length) gsap.set(crosshairEls, { opacity: 0, scale: 0 })
+        if (glowRef.current) gsap.set(glowRef.current, { opacity: 0, scale: 0.8 })
+        if (separatorRef.current) gsap.set(separatorRef.current, { scaleX: 0 })
 
         // Scroll-triggered timeline
         const tl = gsap.timeline({
@@ -165,12 +231,7 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         if (hudLabels.length) {
           tl.to(
             hudLabels,
-            {
-              autoAlpha: 1,
-              duration: 0.3,
-              ease: 'power2.out',
-              stagger: 0.06,
-            },
+            { autoAlpha: 1, duration: 0.3, ease: 'power2.out', stagger: 0.06 },
             '-=0.2',
           )
         }
@@ -178,12 +239,7 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         // Phase 2: Title
         tl.to(
           titleRef.current,
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.7,
-            ease: 'power3.out',
-          },
+          { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' },
           '-=0.1',
         )
 
@@ -191,55 +247,114 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         if (subtitleRef.current) {
           tl.to(
             subtitleRef.current,
+            { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+            '-=0.2',
+          )
+        }
+
+        // Phase 4: Glow fade in
+        if (glowRef.current) {
+          tl.to(
+            glowRef.current,
+            { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' },
+            '-=0.3',
+          )
+        }
+
+        // Phase 5: Corner marks draw-in
+        if (cornerEls.length) {
+          tl.to(
+            cornerEls,
             {
-              autoAlpha: 1,
-              y: 0,
+              opacity: 0.5,
+              scale: 1,
               duration: 0.6,
               ease: 'power3.out',
+              stagger: 0.08,
+              onComplete: () => {
+                cornerEls.forEach((el) => {
+                  el.style.animationPlayState = 'running'
+                })
+              },
             },
-            '-=0.2',
+            '-=0.8',
           )
         }
 
-        // Phase 4: CTA headline
-        if (headlineRef.current) {
+        // Phase 6: Crosshairs pop in
+        if (crosshairEls.length) {
           tl.to(
-            headlineRef.current,
+            crosshairEls,
+            {
+              opacity: 0.4,
+              scale: 1,
+              duration: 0.5,
+              ease: 'back.out(1.7)',
+              stagger: 0.1,
+              onComplete: () => {
+                crosshairEls.forEach((el) => {
+                  el.style.animationPlayState = 'running'
+                })
+              },
+            },
+            '-=0.4',
+          )
+        }
+
+        // Phase 7: Stats strip — slide up + scale in, then count-up
+        if (statsRef.current) {
+          tl.to(
+            statsRef.current,
             {
               autoAlpha: 1,
               y: 0,
+              scale: 1,
               duration: 0.8,
               ease: 'power3.out',
+              onComplete: () => {
+                // Trigger count-up on each stat value
+                statValueEls.forEach((el) => {
+                  const target = el.getAttribute('data-target')
+                  if (target) {
+                    animateCountUp(el, target, 1.6, gsap)
+                  }
+                })
+              },
             },
-            '-=0.2',
+            '-=0.3',
           )
         }
 
-        // Phase 5: CTA description
+        // Phase 8: Separator line
+        if (separatorRef.current) {
+          tl.to(
+            separatorRef.current,
+            { scaleX: 1, duration: 0.6, ease: 'power2.out' },
+            '-=0.4',
+          )
+        }
+
+        // Phase 9: Description — blur-to-sharp
         if (descRef.current) {
           tl.to(
             descRef.current,
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.6,
+              filter: 'blur(0px)',
+              duration: 0.8,
               ease: 'power3.out',
             },
             '-=0.3',
           )
         }
 
-        // Phase 6: Buttons
+        // Phase 10: Buttons
         if (buttonsRef.current) {
           tl.to(
             buttonsRef.current,
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.6,
-              ease: 'power3.out',
-            },
-            '-=0.2',
+            { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' },
+            '-=0.3',
           )
         }
       }, sectionRef)
