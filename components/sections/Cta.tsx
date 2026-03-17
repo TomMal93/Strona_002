@@ -17,14 +17,14 @@ const PhoneIcon = () => (
     strokeWidth={2}
     strokeLinecap="round"
     strokeLinejoin="round"
-    className={styles.ctaIcon}
+    className={styles.btnIcon}
     aria-hidden="true"
   >
     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
   </svg>
 )
 
-const ArrowIcon = () => (
+const ArrowRightIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -33,7 +33,7 @@ const ArrowIcon = () => (
     strokeWidth={2}
     strokeLinecap="round"
     strokeLinejoin="round"
-    className={styles.ctaIcon}
+    className={cn(styles.btnIcon, styles.btnIconArrow)}
     aria-hidden="true"
   >
     <line x1="5" y1="12" x2="19" y2="12" />
@@ -46,7 +46,7 @@ export default function Cta() {
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const subtitleRef = useRef<HTMLParagraphElement>(null!)
   const hudBarRef = useRef<HTMLDivElement>(null!)
-  const headlineRef = useRef<HTMLParagraphElement>(null!)
+  const statsRef = useRef<HTMLDivElement>(null!)
   const descRef = useRef<HTMLParagraphElement>(null!)
   const buttonsRef = useRef<HTMLDivElement>(null!)
   const cornerTLRef = useRef<HTMLSpanElement>(null!)
@@ -63,7 +63,7 @@ export default function Cta() {
     titleRef,
     subtitleRef,
     hudBarRef,
-    headlineRef,
+    statsRef,
     descRef,
     buttonsRef,
     cornerTLRef,
@@ -77,7 +77,7 @@ export default function Cta() {
   })
 
   const {
-    title, subtitle, hudLabelLeft, hudLabelRight,
+    title, subtitle, hudLabelLeft, hudLabelRight, stats,
     ctaLabel, ctaHref, phoneLabel, phoneHref,
     secondaryLabel, secondaryHref,
   } = siteContent.cta
@@ -151,40 +151,61 @@ export default function Cta() {
 
           {/* ── Foreground layer: content ── */}
           <div className={styles.ctaContent}>
-            {/* Headline with clip-path reveal */}
-            <p ref={headlineRef} className={cn(styles.ctaHeadline, styles.gradientTextPrimary)}>
-              Twoja historia zasługuje na więcej niż zwykłe nagranie
-            </p>
+            {/* ── Stats strip ── */}
+            <div ref={statsRef} className={styles.statsStrip}>
+              {stats.map((stat, i) => (
+                <React.Fragment key={stat.label}>
+                  {i > 0 && (
+                    <span aria-hidden="true" className={styles.statDivider} />
+                  )}
+                  <div className={styles.statItem}>
+                    <span
+                      className={styles.statValue}
+                      data-stat-value
+                      data-target={stat.value}
+                    >
+                      {stat.value}
+                    </span>
+                    <span className={styles.statLabel}>{stat.label}</span>
+                  </div>
+                </React.Fragment>
+              ))}
+            </div>
 
-            {/* Separator line between headline and description */}
+            {/* Separator */}
             <div ref={separatorRef} aria-hidden="true" className={styles.ctaSeparator} />
 
-            {/* Description with blur-to-sharp effect */}
+            {/* Description */}
             <p ref={descRef} className={styles.ctaSubtitle}>
               Opowiedz mi o swoim projekcie — razem stworzymy materiał,
               {'\n'}który zostanie z Tobą na lata.
             </p>
 
-            {/* CTA links — clear hierarchy */}
+            {/* ── Buttons ── */}
             <div ref={buttonsRef} className={styles.ctaButtons}>
-              <a href={ctaHref} className={styles.ctaPrimary}>
-                <span className={styles.ctaPrimaryGlow} aria-hidden="true" />
-                <span className={styles.ctaPrimaryLabel}>
+              {/* Primary — animated border + shimmer */}
+              <a href={ctaHref} className={styles.btnPrimary}>
+                <span aria-hidden="true" className={styles.btnBorderGlow} />
+                <span aria-hidden="true" className={styles.btnShimmer} />
+                <span className={styles.btnPrimaryInner}>
                   {ctaLabel}
-                  <ArrowIcon />
+                  <ArrowRightIcon />
                 </span>
               </a>
 
-              <div className={styles.ctaSecondaryGroup}>
-                <a href={phoneHref} className={cn(styles.ctaLink, styles.ctaLinkGold)}>
+              {/* Secondary group */}
+              <div className={styles.btnSecondaryRow}>
+                {/* Phone — ghost pill with pulse ring */}
+                <a href={phoneHref} className={styles.btnGhost}>
+                  <span aria-hidden="true" className={styles.btnPulseRing} />
                   <PhoneIcon />
                   {phoneLabel}
                 </a>
-                <a
-                  href={secondaryHref}
-                  className={cn(styles.ctaLink, styles.ctaLinkSecondary)}
-                >
+
+                {/* Tertiary text link */}
+                <a href={secondaryHref} className={styles.btnTertiary}>
                   {secondaryLabel}
+                  <ArrowRightIcon />
                 </a>
               </div>
             </div>
