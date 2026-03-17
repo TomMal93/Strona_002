@@ -175,8 +175,62 @@
   margin-top: 2.5rem;
 }
 
-.ctaButton {
-  min-width: 14rem;
+.ctaLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.15rem 0.55rem;
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-warm)) 0%,
+    rgb(255 238 175) 45%,
+    rgb(var(--c-gold)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition:
+    opacity 280ms ease,
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ctaLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.55) 15%,
+    rgb(255 238 175 / 0.90) 50%,
+    rgb(var(--c-gold) / 0.55) 85%,
+    transparent 100%
+  );
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ctaLink:hover {
+  opacity: 0.80;
+  transform: translateY(-1px);
+}
+
+.ctaLink:hover::after {
+  transform: scaleX(1);
+}
+
+.ctaArrow {
+  display: inline-block;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ctaLink:hover .ctaArrow {
+  transform: translateX(3px);
 }
 
 /* ── Card shell ───────────────────────────────────────────────────────── */

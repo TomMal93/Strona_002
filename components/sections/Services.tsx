@@ -5,7 +5,6 @@ import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './Services.module.css'
 import heroStyles from './Hero.module.css'
-import Button from '@/components/ui/Button'
 import { ServiceIcon } from './services/ServiceIcon'
 import { useServicesAnimation } from './services/useServicesAnimation'
 import {
@@ -322,9 +321,16 @@ export default function Services() {
         </div>
 
         <div className={styles.sectionCta}>
-          <Button as="a" href="#contact" variant="outline" size="lg" className={styles.ctaButton}>
+          <a
+            href="#contact"
+            className={cn(
+              styles.ctaLink,
+              'font-bebas text-lg uppercase tracking-widest',
+            )}
+          >
             {siteContent.services.ctaLabel}
-          </Button>
+            <span aria-hidden="true" className={styles.ctaArrow}>→</span>
+          </a>
         </div>
       </div>
     </section>
