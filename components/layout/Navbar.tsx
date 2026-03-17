@@ -14,6 +14,7 @@ const NAV_ITEMS = [
   { label: 'OFERTA', href: '/#services' },
   { label: 'PROCES', href: '/#process' },
   { label: 'FAQ', href: '/#faq' },
+  { label: 'WSPÓŁPRACA', href: '/#cta' },
   { label: 'KONTAKT', href: '/contact' },
 ] as const
 

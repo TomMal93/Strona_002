@@ -228,7 +228,7 @@ export const siteContent = {
     subtitle:
       'Najczęściej zadawane pytania.\nOdpowiedzi, zanim zdążysz zapytać.',
     hudLabelLeft: 'ANSWERS',
-    hudLabelRight: 'SCENA 07 / 07',
+    hudLabelRight: 'SCENA 07 / 08',
     items: [
       {
         number: 'Q.01',
@@ -285,6 +285,19 @@ export const siteContent = {
           'Tak — po realizacji otrzymujesz pełne prawa do wykorzystania materiału w social mediach, na stronie internetowej, w reklamach i materiałach promocyjnych.\n\nJeśli projekt wymaga szczególnych ustaleń licencyjnych, omawiamy to przed rozpoczęciem współpracy, żeby wszystko było jasne od samego początku.',
       },
     ],
+  },
+  cta: {
+    title: 'Gotowy na swoją historię?',
+    subtitle:
+      'Każdy projekt zaczyna się od rozmowy.\nNapisz — odpowiem w ciągu 24h.',
+    hudLabelLeft: 'FINAL CTA',
+    hudLabelRight: 'SCENA 08 / 08',
+    ctaLabel: process.env.NEXT_PUBLIC_CTA_LABEL || 'Napisz do mnie',
+    ctaHref: process.env.NEXT_PUBLIC_CTA_HREF || '/contact',
+    phoneLabel: process.env.NEXT_PUBLIC_CTA_PHONE_LABEL || 'Napisz',
+    phoneHref: process.env.NEXT_PUBLIC_CTA_PHONE_HREF || 'tel:+48123456789',
+    secondaryLabel: process.env.NEXT_PUBLIC_CTA_SECONDARY_LABEL || 'Zobacz portfolio',
+    secondaryHref: process.env.NEXT_PUBLIC_CTA_SECONDARY_HREF || '#promo',
   },
   aboutMe: {
     meta: {
