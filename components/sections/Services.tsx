@@ -178,12 +178,6 @@ function SceneCard({ item, index }: SceneCardProps) {
 
         <div className={styles.cardBody}>
           <div className={styles.cardHeader}>
-            <span className={styles.lensDock}>
-              <span className={cn(styles.lensRing, v.lensRing)}>
-                <ServiceIcon icon={item.icon} className={v.icon} />
-              </span>
-            </span>
-
             <div>
               <p className={cn('ui-overline text-khaki/90', styles.cardTag)}>
                 {item.tag}
@@ -199,6 +193,12 @@ function SceneCard({ item, index }: SceneCardProps) {
                 {item.title}
               </h3>
             </div>
+
+            <span className={styles.lensDock}>
+              <span className={cn(styles.lensRing, v.lensRing)}>
+                <ServiceIcon icon={item.icon} className={v.icon} />
+              </span>
+            </span>
           </div>
 
           <p
