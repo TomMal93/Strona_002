@@ -413,6 +413,330 @@
   }
 }
 
+/* ── Social Proof Bar — cinematic HUD readout ────────────────────────── */
+
+.socialProofBar {
+  position: relative;
+  margin-top: 3rem;
+  padding: 2.5rem 1.5rem 2rem;
+  border: 1px solid rgb(var(--c-gold) / 0.12);
+  border-radius: 0.25rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgb(var(--c-gold) / 0.04) 0%, transparent 60%),
+    rgb(13 13 13 / 0.6);
+  overflow: hidden;
+  backdrop-filter: blur(2px);
+}
+
+/* ── Film-strip perforations ─────────────────────────────────────────── */
+
+.filmStripEdge {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  opacity: 0.25;
+}
+
+.perforation {
+  display: block;
+  width: 6px;
+  height: 3px;
+  border-radius: 1px;
+  background: rgb(var(--c-gold) / 0.5);
+  flex-shrink: 0;
+}
+
+/* ── Scanning line — sweeps across the bar ───────────────────────────── */
+
+.scanLine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0) 20%,
+    rgb(var(--c-gold) / 0.7) 50%,
+    rgb(var(--c-gold) / 0) 80%,
+    transparent 100%
+  );
+  animation: scanSweep 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes scanSweep {
+  0% { left: -100%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 200%; opacity: 0; }
+}
+
+/* ── REC indicator ───────────────────────────────────────────────────── */
+
+.recIndicator {
+  position: absolute;
+  top: 0.65rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.62rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ff4444;
+  animation: recBlink 2s step-end infinite;
+}
+
+.recDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff4444;
+  box-shadow: 0 0 6px 2px rgb(255 68 68 / 0.4);
+}
+
+@keyframes recBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── HUD label (top-right) ───────────────────────────────────────────── */
+
+.socialProofHudLabel {
+  position: absolute;
+  top: 0.65rem;
+  right: 1rem;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.62rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.35);
+}
+
+/* ── Stats grid ──────────────────────────────────────────────────────── */
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 1rem;
+  padding: 1.5rem 0;
+  position: relative;
+}
+
+.statCell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.statTag {
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.58rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(var(--c-khaki) / 0.45);
+  margin-bottom: 0.15rem;
+}
+
+.statValue {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  position: relative;
+}
+
+/* Digital glitch flicker on the numbers */
+.statNumber {
+  display: inline-block;
+  position: relative;
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-warm)) 0%,
+    rgb(255 238 175) 45%,
+    rgb(var(--c-gold)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.statSuffix {
+  font-size: 0.65em;
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-warm)) 0%,
+    rgb(255 238 175) 45%,
+    rgb(var(--c-gold)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  opacity: 0.7;
+}
+
+.statLabel {
+  font-family: var(--font-inter, 'Inter', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.4);
+  max-width: 14ch;
+}
+
+/* Vertical divider between stat cells (desktop only) */
+.statDivider {
+  display: none;
+}
+
+/* ── Timecode (bottom-right) ─────────────────────────────────────────── */
+
+.timecode {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.58rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  color: rgb(255 238 175 / 0.25);
+}
+
+/* ── Viewfinder corner brackets ──────────────────────────────────────── */
+
+.viewfinderCorner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+}
+
+.vfTL {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid rgb(var(--c-gold) / 0.4);
+  border-left: 2px solid rgb(var(--c-gold) / 0.4);
+}
+
+.vfTR {
+  top: -1px;
+  right: -1px;
+  border-top: 2px solid rgb(var(--c-gold) / 0.4);
+  border-right: 2px solid rgb(var(--c-gold) / 0.4);
+}
+
+.vfBL {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 2px solid rgb(var(--c-gold) / 0.4);
+  border-left: 2px solid rgb(var(--c-gold) / 0.4);
+}
+
+.vfBR {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid rgb(var(--c-gold) / 0.4);
+  border-right: 2px solid rgb(var(--c-gold) / 0.4);
+}
+
+/* ── Desktop: 4 columns + vertical dividers ──────────────────────────── */
+
+@media (min-width: 768px) {
+  .socialProofBar {
+    padding: 2.5rem 2.5rem 2rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .statDivider {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgb(var(--c-gold) / 0.2) 30%,
+      rgb(var(--c-gold) / 0.2) 70%,
+      transparent 100%
+    );
+  }
+}
+
+/* ── Social proof bar entry animation ────────────────────────────────── */
+
+/* Glitch flicker keyframes for stat reveal */
+@keyframes statGlitch {
+  0% { opacity: 0; transform: translate3d(0, 0, 0); }
+  15% { opacity: 0.8; transform: translate3d(-2px, 0, 0); }
+  20% { opacity: 0.2; transform: translate3d(3px, 0, 0); }
+  35% { opacity: 0.9; transform: translate3d(0, 0, 0); }
+  40% { opacity: 0.4; transform: translate3d(-1px, 0, 0); }
+  55% { opacity: 1; transform: translate3d(1px, 0, 0); }
+  70% { opacity: 0.85; transform: translate3d(0, 0, 0); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* Applied by GSAP when entering viewport */
+.socialProofBar[data-revealed] .statCell {
+  animation: statGlitch 0.6s ease-out both;
+}
+
+.socialProofBar[data-revealed] .statCell:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.socialProofBar[data-revealed] .statCell:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.socialProofBar[data-revealed] .statCell:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+/* Horizontal flickering line across stats on reveal */
+.socialProofBar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.4) 20%,
+    rgb(var(--c-gold) / 0.15) 50%,
+    rgb(var(--c-gold) / 0.4) 80%,
+    transparent 100%
+  );
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 /* ── Small mobile adjustments ─────────────────────────────────────────── */
 
 @media (max-width: 479px) {
@@ -425,5 +749,26 @@
 
   .logosStrip {
     gap: 1.5rem 2rem;
+  }
+
+  .socialProofBar {
+    padding: 2rem 0.75rem 1.5rem;
+  }
+
+  .recIndicator {
+    font-size: 0.55rem;
+  }
+
+  .socialProofHudLabel {
+    font-size: 0.55rem;
+  }
+
+  .perforation {
+    width: 4px;
+    height: 2px;
+  }
+
+  .filmStripEdge {
+    gap: 5px;
   }
 }

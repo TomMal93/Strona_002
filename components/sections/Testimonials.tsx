@@ -17,8 +17,9 @@ export default function Testimonials() {
   const trustedPanelRef = useRef<HTMLDivElement>(null!)
   const isAnimating = useRef(false)
 
-  const { title, subtitle, hudLabelLeft, hudLabelRight, items, trustedBy } =
+  const { title, subtitle, hudLabelLeft, hudLabelRight, items, socialProof, trustedBy } =
     siteContent.testimonials
+  const socialProofRef = useRef<HTMLDivElement>(null!)
 
   const total = items.length
   const [activeIndex, setActiveIndex] = useState(1)
@@ -33,6 +34,7 @@ export default function Testimonials() {
     hudBarRef,
     carouselShellRef,
     trackRef,
+    socialProofRef,
     trustedPanelRef,
     totalSlides: total,
     initialDomIndex: activeIndex + 1,
@@ -222,6 +224,69 @@ export default function Testimonials() {
               </svg>
             </button>
           </nav>
+        </div>
+
+        {/* Social proof bar — cinematic HUD readout */}
+        <div
+          ref={socialProofRef}
+          className={styles.socialProofBar}
+          data-social-proof
+        >
+          {/* Film-strip perforations top */}
+          <div className={styles.filmStripEdge} aria-hidden="true">
+            {Array.from({ length: 24 }).map((_, i) => (
+              <span key={i} className={styles.perforation} />
+            ))}
+          </div>
+
+          {/* Scanning line */}
+          <span className={styles.scanLine} aria-hidden="true" />
+
+          {/* REC indicator */}
+          <span className={styles.recIndicator} aria-hidden="true">
+            <span className={styles.recDot} />
+            REC
+          </span>
+
+          {/* HUD label */}
+          <span className={styles.socialProofHudLabel} aria-hidden="true">
+            {socialProof.hudLabel}
+          </span>
+
+          {/* Stats grid */}
+          <div className={styles.statsGrid}>
+            {socialProof.items.map((stat, i) => (
+              <div key={stat.tag} className={styles.statCell} data-stat-cell>
+                <span className={styles.statTag} data-stat-tag>{stat.tag}</span>
+                <span className={styles.statValue} data-stat-value data-target={stat.value} data-suffix={stat.suffix}>
+                  <span className={styles.statNumber} data-stat-number>0</span>
+                  <span className={styles.statSuffix}>{stat.suffix}</span>
+                </span>
+                <span className={styles.statLabel}>{stat.label}</span>
+                {i < socialProof.items.length - 1 && (
+                  <span className={styles.statDivider} aria-hidden="true" />
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Timecode */}
+          <span className={styles.timecode} aria-hidden="true" data-timecode>
+            00:00:00:00
+          </span>
+
+          {/* Film-strip perforations bottom */}
+          <div className={styles.filmStripEdge} aria-hidden="true">
+            {Array.from({ length: 24 }).map((_, i) => (
+              <span key={i} className={styles.perforation} />
+            ))}
+          </div>
+
+          {/* Viewfinder corner brackets */}
+          <span className={cn(styles.viewfinderCorner, styles.vfTL)} aria-hidden="true" />
+          <span className={cn(styles.viewfinderCorner, styles.vfTR)} aria-hidden="true" />
+          <span className={cn(styles.viewfinderCorner, styles.vfBL)} aria-hidden="true" />
+          <span className={cn(styles.viewfinderCorner, styles.vfBR)} aria-hidden="true" />
         </div>
 
         {/* Trusted by panel */}
