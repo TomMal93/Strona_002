@@ -104,6 +104,15 @@ export const siteContent = {
         tagline: 'EFEKT',
       },
     ],
+    socialProof: {
+      hudLabel: 'STATS',
+      items: [
+        { value: 200, suffix: '+', label: 'Zrealizowanych projektów', tag: 'PROJECTS' },
+        { value: 8, suffix: '+', label: 'Lat doświadczenia', tag: 'EXPERIENCE' },
+        { value: 100, suffix: '%', label: 'Zadowolonych klientów', tag: 'SATISFACTION' },
+        { value: 4, suffix: 'K', label: 'Jakość obrazu', tag: 'RESOLUTION' },
+      ],
+    },
     trustedBy: {
       label: 'Zaufali mi',
       hudLabel: 'KLIENCI',

@@ -10,6 +10,7 @@ export type TestimonialsAnimationRefs = {
   hudBarRef: RefObject<HTMLDivElement>
   carouselShellRef: RefObject<HTMLDivElement>
   trackRef: RefObject<HTMLDivElement>
+  socialProofRef: RefObject<HTMLDivElement>
   trustedPanelRef: RefObject<HTMLDivElement>
   totalSlides: number
   initialDomIndex: number
@@ -73,7 +74,7 @@ export function useTestimonialsAnimation(
     ).matches
 
     const setInitialStyles = () => {
-      const { titleRef, hudBarRef, carouselShellRef, trustedPanelRef } = refs
+      const { titleRef, hudBarRef, carouselShellRef, socialProofRef, trustedPanelRef } = refs
 
       const hudLines = hudBarRef.current
         ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-line]'))
@@ -87,6 +88,14 @@ export function useTestimonialsAnimation(
         : []
       const trustedItems = trustedPanel
         ? Array.from(trustedPanel.querySelectorAll<HTMLElement>('[data-trusted-item]'))
+        : []
+
+      const socialProofEl = socialProofRef.current
+      const statNumbers = socialProofEl
+        ? Array.from(socialProofEl.querySelectorAll<HTMLElement>('[data-stat-number]'))
+        : []
+      const statValues = socialProofEl
+        ? Array.from(socialProofEl.querySelectorAll<HTMLElement>('[data-stat-value]'))
         : []
 
       if (prefersReducedMotion) {
@@ -109,6 +118,17 @@ export function useTestimonialsAnimation(
           carouselShellRef.current.style.opacity = '1'
           carouselShellRef.current.style.visibility = 'inherit'
           carouselShellRef.current.style.transform = 'none'
+        }
+        if (socialProofEl) {
+          socialProofEl.style.opacity = '1'
+          socialProofEl.style.visibility = 'inherit'
+          socialProofEl.style.transform = 'none'
+          socialProofEl.setAttribute('data-revealed', '')
+          statValues.forEach((el) => {
+            const target = el.getAttribute('data-target')
+            const numEl = el.querySelector('[data-stat-number]')
+            if (numEl && target) numEl.textContent = target
+          })
         }
         if (trustedPanel) {
           trustedPanel.style.opacity = '1'
@@ -147,6 +167,11 @@ export function useTestimonialsAnimation(
         carouselShellRef.current.style.visibility = 'hidden'
         carouselShellRef.current.style.transform = 'translate3d(0, 20px, 0)'
       }
+      if (socialProofEl) {
+        socialProofEl.style.opacity = '0'
+        socialProofEl.style.visibility = 'hidden'
+        socialProofEl.style.transform = 'translate3d(0, 30px, 0)'
+      }
       if (trustedPanel) {
         trustedPanel.style.opacity = '0'
         trustedPanel.style.visibility = 'hidden'
@@ -182,7 +207,7 @@ export function useTestimonialsAnimation(
       gsap.registerPlugin(ScrollTrigger)
       gsapRef.current = gsap
 
-      const { sectionRef, titleRef, subtitleRef, hudBarRef, carouselShellRef, trustedPanelRef } = refs
+      const { sectionRef, titleRef, subtitleRef, hudBarRef, carouselShellRef, socialProofRef, trustedPanelRef } = refs
 
       const ctx = gsap.context(() => {
         const hudLines = hudBarRef.current
@@ -199,12 +224,26 @@ export function useTestimonialsAnimation(
           ? Array.from(trustedPanel.querySelectorAll('[data-trusted-item]'))
           : []
 
+        const socialProofEl = socialProofRef.current
+        const spStatValues = socialProofEl
+          ? Array.from(socialProofEl.querySelectorAll<HTMLElement>('[data-stat-value]'))
+          : []
+
         if (prefersReducedMotion) {
           if (titleRef.current) gsap.set(titleRef.current, { autoAlpha: 1, y: 0 })
           if (subtitleRef.current) gsap.set(subtitleRef.current, { autoAlpha: 1, y: 0 })
           if (hudLines.length) gsap.set(hudLines, { scaleX: 1 })
           if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1 })
           if (carouselShellRef.current) gsap.set(carouselShellRef.current, { autoAlpha: 1, y: 0 })
+          if (socialProofEl) {
+            gsap.set(socialProofEl, { autoAlpha: 1, y: 0 })
+            socialProofEl.setAttribute('data-revealed', '')
+            spStatValues.forEach((el) => {
+              const target = el.getAttribute('data-target')
+              const numEl = el.querySelector('[data-stat-number]')
+              if (numEl && target) numEl.textContent = target
+            })
+          }
           if (trustedPanel) gsap.set(trustedPanel, { autoAlpha: 1, y: 0 })
           if (trustedCornerMarks.length) gsap.set(trustedCornerMarks, { autoAlpha: 1 })
           if (trustedItems.length) gsap.set(trustedItems, { autoAlpha: 1 })
@@ -217,6 +256,7 @@ export function useTestimonialsAnimation(
         if (titleRef.current) gsap.set(titleRef.current, { autoAlpha: 0, y: 30 })
         if (subtitleRef.current) gsap.set(subtitleRef.current, { autoAlpha: 0, y: 20 })
         if (carouselShellRef.current) gsap.set(carouselShellRef.current, { autoAlpha: 0, y: 20 })
+        if (socialProofEl) gsap.set(socialProofEl, { autoAlpha: 0, y: 30 })
         if (trustedPanel) gsap.set(trustedPanel, { autoAlpha: 0, y: 20 })
         if (trustedCornerMarks.length) gsap.set(trustedCornerMarks, { autoAlpha: 0 })
         if (trustedItems.length) gsap.set(trustedItems, { autoAlpha: 0 })
@@ -292,6 +332,68 @@ export function useTestimonialsAnimation(
             },
             '-=0.2',
           )
+        }
+
+        // Phase 4b: Social proof bar — cinematic reveal with counter
+        if (socialProofEl) {
+          tl.to(
+            socialProofEl,
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.7,
+              ease: 'power3.out',
+              onStart: () => {
+                socialProofEl.setAttribute('data-revealed', '')
+              },
+            },
+            '-=0.1',
+          )
+
+          // Animate counting numbers
+          spStatValues.forEach((el) => {
+            const target = parseInt(el.getAttribute('data-target') || '0', 10)
+            const numEl = el.querySelector('[data-stat-number]')
+            if (!numEl || !target) return
+
+            const counter = { val: 0 }
+            tl.to(
+              counter,
+              {
+                val: target,
+                duration: 1.8,
+                ease: 'power2.out',
+                onUpdate: () => {
+                  numEl.textContent = String(Math.round(counter.val))
+                },
+              },
+              '<+0.15',
+            )
+          })
+
+          // Animate timecode
+          const timecodeEl = socialProofEl.querySelector('[data-timecode]')
+          if (timecodeEl) {
+            const tc = { frame: 0 }
+            tl.to(
+              tc,
+              {
+                frame: 2847,
+                duration: 1.8,
+                ease: 'power2.out',
+                onUpdate: () => {
+                  const f = Math.round(tc.frame)
+                  const frames = f % 25
+                  const secs = Math.floor(f / 25) % 60
+                  const mins = Math.floor(f / 1500) % 60
+                  const hrs = Math.floor(f / 90000)
+                  timecodeEl.textContent =
+                    `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}:${String(frames).padStart(2, '0')}`
+                },
+              },
+              '<',
+            )
+          }
         }
 
         // Phase 5: Trusted panel
