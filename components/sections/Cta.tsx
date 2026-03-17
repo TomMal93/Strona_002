@@ -118,7 +118,7 @@ export default function Cta() {
 
           {/* CTA links */}
           <div ref={buttonsRef} className={styles.ctaButtons}>
-            <a href={ctaHref} className={styles.ctaLink}>
+            <a href={ctaHref} className={cn(styles.ctaLink, styles.ctaLinkSecondary)}>
               {ctaLabel}
             </a>
             <a href={phoneHref} className={styles.ctaLink}>
