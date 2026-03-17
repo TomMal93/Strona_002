@@ -73,7 +73,7 @@ export const siteContent = {
     subtitle:
       'Każda realizacja to czyjaś historia.\nOto, co mówią ci, których historie opowiedziałem.',
     hudLabelLeft: 'FEEDBACK',
-    hudLabelRight: 'SCENA 06 / 09',
+    hudLabelRight: 'SCENA 04 / 07',
     items: [
       {
         quote:
@@ -187,7 +187,7 @@ export const siteContent = {
     subtitle:
       'Od pierwszego kontaktu do gotowego materiału — cztery proste kroki.\nBez niespodzianek, bez zbędnego czekania.',
     hudLabelLeft: 'WORKFLOW',
-    hudLabelRight: 'SCENA 07 / 09',
+    hudLabelRight: 'SCENA 06 / 07',
     steps: [
       {
         number: '01',
@@ -227,8 +227,8 @@ export const siteContent = {
     title: 'FAQ',
     subtitle:
       'Najczęściej zadawane pytania.\nOdpowiedzi, zanim zdążysz zapytać.',
-    hudLabelLeft: 'ODPOWIEDZI',
-    hudLabelRight: 'SCENA 08 / 09',
+    hudLabelLeft: 'ANSWERS',
+    hudLabelRight: 'SCENA 07 / 07',
     items: [
       {
         number: 'Q.01',
