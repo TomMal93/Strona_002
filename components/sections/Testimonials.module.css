@@ -320,7 +320,7 @@
 .trustedPanel {
   position: relative;
   margin-top: 3rem;
-  padding: 3rem 2.5rem;
+  padding: 1rem 2.5rem 5rem;
   border: 1px solid rgb(var(--c-khaki) / 0.12);
   border-radius: 0.25rem;
   background: rgb(255 255 255 / 0.015);
@@ -353,6 +353,26 @@
   line-height: 1.1;
   margin: 0;
   opacity: 0.7;
+}
+
+.logosDivider {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .logosDivider {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgb(var(--c-gold) / 0.1) 20%,
+      rgb(255 238 175 / 0.18) 50%,
+      rgb(var(--c-gold) / 0.1) 80%,
+      transparent 100%
+    );
+  }
 }
 
 .logosStrip {
