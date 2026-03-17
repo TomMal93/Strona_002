@@ -227,7 +227,7 @@ export const siteContent = {
     title: 'FAQ',
     subtitle:
       'Najczęściej zadawane pytania.\nOdpowiedzi, zanim zdążysz zapytać.',
-    hudLabelLeft: 'ODPOWIEDZI',
+    hudLabelLeft: 'ANSWERS',
     hudLabelRight: 'SCENA 07 / 07',
     items: [
       {
