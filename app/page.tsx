@@ -5,10 +5,11 @@ import Testimonials from '@/components/sections/Testimonials'
 import Services from '@/components/sections/Services'
 import Process from '@/components/sections/Process'
 import Faq from '@/components/sections/Faq'
+import Cta from '@/components/sections/Cta'
 
 /**
- * Strona główna — sekcje Hero + About + Promo + Testimonials + Services + Process.
- * Kolejne sekcje (Benefits, Portfolio, Instagram, FAQ + strong CTA)
+ * Strona główna — sekcje Hero + About + Promo + Testimonials + Services + Process + FAQ + CTA.
+ * Kolejne sekcje (Benefits, Portfolio, Instagram)
  * zostaną dodane w kolejnych iteracjach (tech-spec.md §5).
  */
 export default function Home() {
@@ -21,9 +22,7 @@ export default function Home() {
       <Services />
       <Process />
       <Faq />
-
-      {/* Tymczasowy anchor docelowy dla CTA — FR-04 */}
-      <div id="contact" />
+      <Cta />
     </main>
   )
 }
