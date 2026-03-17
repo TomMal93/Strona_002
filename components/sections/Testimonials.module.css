@@ -367,9 +367,9 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgb(var(--c-gold) / 0.2) 20%,
-      rgb(255 238 175 / 0.35) 50%,
-      rgb(var(--c-gold) / 0.2) 80%,
+      rgb(var(--c-gold) / 0.1) 20%,
+      rgb(255 238 175 / 0.18) 50%,
+      rgb(var(--c-gold) / 0.1) 80%,
       transparent 100%
     );
   }
