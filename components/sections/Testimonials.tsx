@@ -17,7 +17,9 @@ export default function Testimonials() {
   const trustedPanelRef = useRef<HTMLDivElement>(null!)
   const isAnimating = useRef(false)
 
-  const { title, subtitle, hudLabelLeft, hudLabelRight, items, trustedBy } =
+  const socialProofPanelRef = useRef<HTMLDivElement>(null!)
+
+  const { title, subtitle, hudLabelLeft, hudLabelRight, items, trustedBy, socialProof } =
     siteContent.testimonials
 
   const total = items.length
@@ -34,6 +36,7 @@ export default function Testimonials() {
     carouselShellRef,
     trackRef,
     trustedPanelRef,
+    socialProofPanelRef,
     totalSlides: total,
     initialDomIndex: activeIndex + 1,
   })
@@ -270,6 +273,51 @@ export default function Testimonials() {
               </li>
             ))}
           </ul>
+        </div>
+
+        {/* Social proof in numbers */}
+        <div
+          ref={socialProofPanelRef}
+          className={styles.socialProofPanel}
+          data-social-proof-panel
+        >
+          <span
+            aria-hidden="true"
+            data-corner-mark-sp
+            className={cn(styles.cornerMark, styles.cornerTL)}
+          />
+          <span
+            aria-hidden="true"
+            data-corner-mark-sp
+            className={cn(styles.cornerMark, styles.cornerTR)}
+          />
+          <span
+            aria-hidden="true"
+            data-corner-mark-sp
+            className={cn(styles.cornerMark, styles.cornerBL)}
+          />
+          <span
+            aria-hidden="true"
+            data-corner-mark-sp
+            className={cn(styles.cornerMark, styles.cornerBR)}
+          />
+          <div className={styles.socialProofHeader}>
+            <h3 className={cn(styles.socialProofTitle, styles.gradientTextPrimary)}>
+              {socialProof.label}
+            </h3>
+          </div>
+          <div className={styles.statsGrid}>
+            {socialProof.items.map((stat) => (
+              <div
+                key={stat.description}
+                className={styles.statItem}
+                data-stat-item
+              >
+                <span className={styles.statValue}>{stat.value}</span>
+                <span className={styles.statDescription}>{stat.description}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

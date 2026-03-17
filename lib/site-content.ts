@@ -114,6 +114,15 @@ export const siteContent = {
         { name: 'Sushi', logo: '/images/testimonials/sushi.png' },
       ],
     },
+    socialProof: {
+      label: 'W liczbach',
+      items: [
+        { value: '50+', description: 'Zrealizowanych projektów' },
+        { value: '30+', description: 'Zadowolonych klientów' },
+        { value: '5 lat', description: 'Doświadczenia' },
+        { value: '100%', description: 'Terminowość' },
+      ],
+    },
   },
   services: {
     title: process.env.NEXT_PUBLIC_SERVICES_TITLE || 'Oferta',
