@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { label: 'REALIZACJE', href: '/#promo' },
   { label: 'OPINIE', href: '/#testimonials' },
   { label: 'OFERTA', href: '/#services' },
+  { label: 'PROCES', href: '/#process' },
   { label: 'FAQ', href: '/#faq' },
   { label: 'KONTAKT', href: '/contact' },
 ] as const
