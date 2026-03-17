@@ -295,26 +295,27 @@ export default function Testimonials() {
           className={styles.trustedPanel}
           data-trusted-panel
         >
-          <span
-            aria-hidden="true"
-            data-corner-mark
-            className={cn(styles.cornerMark, styles.cornerTL)}
-          />
-          <span
-            aria-hidden="true"
-            data-corner-mark
-            className={cn(styles.cornerMark, styles.cornerTR)}
-          />
-          <span
-            aria-hidden="true"
-            data-corner-mark
-            className={cn(styles.cornerMark, styles.cornerBL)}
-          />
-          <span
-            aria-hidden="true"
-            data-corner-mark
-            className={cn(styles.cornerMark, styles.cornerBR)}
-          />
+          {/* Film-strip perforations top */}
+          <div className={styles.filmStripEdge} aria-hidden="true">
+            {Array.from({ length: 24 }).map((_, i) => (
+              <span key={i} className={styles.perforation} />
+            ))}
+          </div>
+
+          {/* Scanning line */}
+          <span className={styles.trustedScanLine} aria-hidden="true" />
+
+          {/* HUD indicator */}
+          <span className={styles.trustedHudIndicator} aria-hidden="true">
+            PARTNERS
+          </span>
+
+          {/* Viewfinder corner brackets */}
+          <span className={cn(styles.viewfinderCorner, styles.vfTL)} aria-hidden="true" />
+          <span className={cn(styles.viewfinderCorner, styles.vfTR)} aria-hidden="true" />
+          <span className={cn(styles.viewfinderCorner, styles.vfBL)} aria-hidden="true" />
+          <span className={cn(styles.viewfinderCorner, styles.vfBR)} aria-hidden="true" />
+
           <div className={styles.trustedHeader}>
             <h3 className={cn(styles.trustedTitle, styles.gradientTextPrimary)}>{trustedBy.label}</h3>
           </div>
@@ -337,6 +338,18 @@ export default function Testimonials() {
             ))}
           </ul>
           <span aria-hidden="true" className={styles.logosDivider} />
+
+          {/* Film-strip perforations bottom */}
+          <div className={styles.filmStripEdge} aria-hidden="true">
+            {Array.from({ length: 24 }).map((_, i) => (
+              <span key={i} className={styles.perforation} />
+            ))}
+          </div>
+
+          {/* Timecode */}
+          <span className={styles.trustedTimecode} aria-hidden="true">
+            VERIFIED
+          </span>
         </div>
       </div>
     </section>

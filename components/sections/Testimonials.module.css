@@ -320,10 +320,78 @@
 .trustedPanel {
   position: relative;
   margin-top: 3rem;
-  padding: 1rem 2.5rem 5rem;
-  border: 1px solid rgb(var(--c-khaki) / 0.12);
+  padding: 2.5rem 1.5rem 2rem;
+  border: 1px solid rgb(var(--c-gold) / 0.12);
   border-radius: 0.25rem;
-  background: rgb(255 255 255 / 0.015);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgb(var(--c-gold) / 0.04) 0%, transparent 60%),
+    rgb(13 13 13 / 0.6);
+  overflow: hidden;
+  backdrop-filter: blur(2px);
+}
+
+/* Horizontal flickering line across trusted panel */
+.trustedPanel::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.4) 20%,
+    rgb(var(--c-gold) / 0.15) 50%,
+    rgb(var(--c-gold) / 0.4) 80%,
+    transparent 100%
+  );
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Scanning line for trusted panel */
+.trustedScanLine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0) 20%,
+    rgb(var(--c-gold) / 0.7) 50%,
+    rgb(var(--c-gold) / 0) 80%,
+    transparent 100%
+  );
+  animation: scanSweep 4s ease-in-out infinite;
+  animation-delay: 2s;
+  pointer-events: none;
+}
+
+/* HUD label for trusted panel */
+.trustedHudIndicator {
+  position: absolute;
+  top: 0.65rem;
+  left: 1rem;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.62rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.35);
+}
+
+.trustedTimecode {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.58rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  color: rgb(255 238 175 / 0.25);
 }
 
 .trustedHeader {
@@ -660,6 +728,10 @@
 /* ── Desktop: 4 columns + vertical dividers ──────────────────────────── */
 
 @media (min-width: 768px) {
+  .trustedPanel {
+    padding: 2.5rem 2.5rem 2rem;
+  }
+
   .socialProofBar {
     padding: 2.5rem 2.5rem 2rem;
   }
@@ -749,6 +821,14 @@
 
   .logosStrip {
     gap: 1.5rem 2rem;
+  }
+
+  .trustedPanel {
+    padding: 2rem 0.75rem 1.5rem;
+  }
+
+  .trustedHudIndicator {
+    font-size: 0.55rem;
   }
 
   .socialProofBar {
