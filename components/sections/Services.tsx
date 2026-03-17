@@ -329,7 +329,6 @@ export default function Services() {
             )}
           >
             {siteContent.services.ctaLabel}
-            <span aria-hidden="true" className={styles.ctaArrow}>→</span>
           </a>
         </div>
       </div>
