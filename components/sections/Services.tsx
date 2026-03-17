@@ -118,7 +118,6 @@ function SceneCard({ item, index }: SceneCardProps) {
     <li
       data-service-card
       className={cn(
-        'rounded-micro',
         styles.sceneCard,
         v.card,
       )}
