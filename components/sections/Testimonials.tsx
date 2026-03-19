@@ -242,17 +242,6 @@ export default function Testimonials() {
           {/* Scanning line */}
           <span className={styles.scanLine} aria-hidden="true" />
 
-          {/* REC indicator */}
-          <span className={styles.recIndicator} aria-hidden="true">
-            <span className={styles.recDot} />
-            REC
-          </span>
-
-          {/* HUD label */}
-          <span className={styles.socialProofHudLabel} aria-hidden="true">
-            {socialProof.hudLabel}
-          </span>
-
           {/* Stats grid */}
           <div className={styles.statsGrid}>
             {socialProof.items.map((stat, i) => (
@@ -269,11 +258,6 @@ export default function Testimonials() {
               </div>
             ))}
           </div>
-
-          {/* Timecode */}
-          <span className={styles.timecode} aria-hidden="true" data-timecode>
-            00:00:00:00
-          </span>
 
           {/* Trusted by — integrated into social proof bar */}
           <div

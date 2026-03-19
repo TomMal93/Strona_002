@@ -413,52 +413,6 @@
   100% { left: 200%; opacity: 0; }
 }
 
-/* ── REC indicator ───────────────────────────────────────────────────── */
-
-.recIndicator {
-  position: absolute;
-  top: 0.65rem;
-  left: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.62rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #ff4444;
-  animation: recBlink 2s step-end infinite;
-}
-
-.recDot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #ff4444;
-  box-shadow: 0 0 6px 2px rgb(255 68 68 / 0.4);
-}
-
-@keyframes recBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* ── HUD label (top-right) ───────────────────────────────────────────── */
-
-.socialProofHudLabel {
-  position: absolute;
-  top: 0.65rem;
-  right: 1rem;
-  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.62rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgb(255 238 175 / 0.35);
-}
-
 /* ── Stats grid ──────────────────────────────────────────────────────── */
 
 .statsGrid {
@@ -544,19 +498,6 @@
 /* Vertical divider between stat cells (desktop only) */
 .statDivider {
   display: none;
-}
-
-/* ── Timecode (bottom-right) ─────────────────────────────────────────── */
-
-.timecode {
-  position: absolute;
-  bottom: 0.5rem;
-  right: 1rem;
-  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.58rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.12em;
-  color: rgb(255 238 175 / 0.25);
 }
 
 /* ── Viewfinder corner brackets ──────────────────────────────────────── */
@@ -692,14 +633,6 @@
 
   .socialProofBar {
     padding: 2rem 0.75rem 1.5rem;
-  }
-
-  .recIndicator {
-    font-size: 0.55rem;
-  }
-
-  .socialProofHudLabel {
-    font-size: 0.55rem;
   }
 
   .perforation {

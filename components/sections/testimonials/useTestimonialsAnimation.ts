@@ -352,29 +352,6 @@ export function useTestimonialsAnimation(
             )
           })
 
-          // Animate timecode
-          const timecodeEl = socialProofEl.querySelector('[data-timecode]')
-          if (timecodeEl) {
-            const tc = { frame: 0 }
-            tl.to(
-              tc,
-              {
-                frame: 2847,
-                duration: 1.8,
-                ease: 'power2.out',
-                onUpdate: () => {
-                  const f = Math.round(tc.frame)
-                  const frames = f % 25
-                  const secs = Math.floor(f / 25) % 60
-                  const mins = Math.floor(f / 1500) % 60
-                  const hrs = Math.floor(f / 90000)
-                  timecodeEl.textContent =
-                    `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}:${String(frames).padStart(2, '0')}`
-                },
-              },
-              '<',
-            )
-          }
         }
 
         // Phase 5: Trusted items (inside social proof bar)
