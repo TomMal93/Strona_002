@@ -597,25 +597,6 @@
   animation-delay: 0.3s;
 }
 
-/* Horizontal flickering line across stats on reveal */
-.socialProofBar::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgb(var(--c-gold) / 0.4) 20%,
-    rgb(var(--c-gold) / 0.15) 50%,
-    rgb(var(--c-gold) / 0.4) 80%,
-    transparent 100%
-  );
-  opacity: 0.3;
-  pointer-events: none;
-}
 
 /* ── Small mobile adjustments ─────────────────────────────────────────── */
 
