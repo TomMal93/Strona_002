@@ -83,9 +83,6 @@ export function useTestimonialsAnimation(
         ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-label]'))
         : []
       const trustedPanel = trustedPanelRef.current
-      const trustedCornerMarks = trustedPanel
-        ? Array.from(trustedPanel.querySelectorAll<HTMLElement>('[data-corner-mark]'))
-        : []
       const trustedItems = trustedPanel
         ? Array.from(trustedPanel.querySelectorAll<HTMLElement>('[data-trusted-item]'))
         : []
@@ -132,10 +129,6 @@ export function useTestimonialsAnimation(
           trustedPanel.style.visibility = 'inherit'
           trustedPanel.style.transform = 'none'
         }
-        trustedCornerMarks.forEach((el) => {
-          el.style.opacity = '1'
-          el.style.visibility = 'inherit'
-        })
         trustedItems.forEach((el) => {
           el.style.opacity = '1'
           el.style.visibility = 'inherit'
@@ -172,12 +165,8 @@ export function useTestimonialsAnimation(
       if (trustedPanel) {
         trustedPanel.style.opacity = '0'
         trustedPanel.style.visibility = 'hidden'
-        trustedPanel.style.transform = 'translate3d(0, 20px, 0)'
+        trustedPanel.style.transform = 'translate3d(0, 10px, 0)'
       }
-      trustedCornerMarks.forEach((el) => {
-        el.style.opacity = '0'
-        el.style.visibility = 'hidden'
-      })
       trustedItems.forEach((el) => {
         el.style.opacity = '0'
         el.style.visibility = 'hidden'
@@ -214,9 +203,6 @@ export function useTestimonialsAnimation(
           ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-label]'))
           : []
         const trustedPanel = trustedPanelRef.current
-        const trustedCornerMarks = trustedPanel
-          ? Array.from(trustedPanel.querySelectorAll('[data-corner-mark]'))
-          : []
         const trustedItems = trustedPanel
           ? Array.from(trustedPanel.querySelectorAll('[data-trusted-item]'))
           : []
@@ -242,7 +228,6 @@ export function useTestimonialsAnimation(
             })
           }
           if (trustedPanel) gsap.set(trustedPanel, { autoAlpha: 1, y: 0 })
-          if (trustedCornerMarks.length) gsap.set(trustedCornerMarks, { autoAlpha: 1 })
           if (trustedItems.length) gsap.set(trustedItems, { autoAlpha: 1 })
           return
         }
@@ -254,8 +239,7 @@ export function useTestimonialsAnimation(
         if (subtitleRef.current) gsap.set(subtitleRef.current, { autoAlpha: 0, y: 20 })
         if (carouselShellRef.current) gsap.set(carouselShellRef.current, { autoAlpha: 0, y: 20 })
         if (socialProofEl) gsap.set(socialProofEl, { autoAlpha: 0, y: 30 })
-        if (trustedPanel) gsap.set(trustedPanel, { autoAlpha: 0, y: 20 })
-        if (trustedCornerMarks.length) gsap.set(trustedCornerMarks, { autoAlpha: 0 })
+        if (trustedPanel) gsap.set(trustedPanel, { autoAlpha: 0, y: 10 })
         if (trustedItems.length) gsap.set(trustedItems, { autoAlpha: 0 })
 
         // Scroll-triggered timeline
@@ -368,46 +352,22 @@ export function useTestimonialsAnimation(
             )
           })
 
-          // Animate timecode
-          const timecodeEl = socialProofEl.querySelector('[data-timecode]')
-          if (timecodeEl) {
-            const tc = { frame: 0 }
-            tl.to(
-              tc,
-              {
-                frame: 2847,
-                duration: 1.8,
-                ease: 'power2.out',
-                onUpdate: () => {
-                  const f = Math.round(tc.frame)
-                  const frames = f % 25
-                  const secs = Math.floor(f / 25) % 60
-                  const mins = Math.floor(f / 1500) % 60
-                  const hrs = Math.floor(f / 90000)
-                  timecodeEl.textContent =
-                    `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}:${String(frames).padStart(2, '0')}`
-                },
-              },
-              '<',
-            )
-          }
         }
 
-        // Phase 5: Trusted panel
+        // Phase 5: Trusted items (inside social proof bar)
         if (trustedPanel) {
           tl.to(
             trustedPanel,
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.6,
+              duration: 0.5,
               ease: 'power3.out',
             },
-            '-=0.2',
+            '-=0.3',
           )
         }
 
-        // Phase 6: Trusted items
         if (trustedItems.length) {
           tl.to(
             trustedItems,
@@ -417,7 +377,7 @@ export function useTestimonialsAnimation(
               ease: 'power2.out',
               stagger: 0.08,
             },
-            '-=0.3',
+            '-=0.2',
           )
         }
       }, sectionRef)

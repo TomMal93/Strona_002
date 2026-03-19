@@ -242,17 +242,6 @@ export default function Testimonials() {
           {/* Scanning line */}
           <span className={styles.scanLine} aria-hidden="true" />
 
-          {/* REC indicator */}
-          <span className={styles.recIndicator} aria-hidden="true">
-            <span className={styles.recDot} />
-            REC
-          </span>
-
-          {/* HUD label */}
-          <span className={styles.socialProofHudLabel} aria-hidden="true">
-            {socialProof.hudLabel}
-          </span>
-
           {/* Stats grid */}
           <div className={styles.statsGrid}>
             {socialProof.items.map((stat, i) => (
@@ -270,10 +259,32 @@ export default function Testimonials() {
             ))}
           </div>
 
-          {/* Timecode */}
-          <span className={styles.timecode} aria-hidden="true" data-timecode>
-            00:00:00:00
-          </span>
+          {/* Trusted by — integrated into social proof bar */}
+          <div
+            ref={trustedPanelRef}
+            className={styles.trustedSection}
+            data-trusted-panel
+          >
+            <span aria-hidden="true" className={styles.trustedDivider} />
+            <h3 className={cn(styles.trustedTitle, styles.gradientTextPrimary)}>{trustedBy.label}</h3>
+            <ul className={styles.logosStrip}>
+              {trustedBy.clients.map((client) => (
+                <li
+                  key={client.name}
+                  className={styles.logoItem}
+                  data-trusted-item
+                >
+                  <Image
+                    src={client.logo}
+                    alt={client.name}
+                    width={120}
+                    height={48}
+                    className={styles.logoImage}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
 
           {/* Film-strip perforations bottom */}
           <div className={styles.filmStripEdge} aria-hidden="true">
@@ -287,56 +298,6 @@ export default function Testimonials() {
           <span className={cn(styles.viewfinderCorner, styles.vfTR)} aria-hidden="true" />
           <span className={cn(styles.viewfinderCorner, styles.vfBL)} aria-hidden="true" />
           <span className={cn(styles.viewfinderCorner, styles.vfBR)} aria-hidden="true" />
-        </div>
-
-        {/* Trusted by panel */}
-        <div
-          ref={trustedPanelRef}
-          className={styles.trustedPanel}
-          data-trusted-panel
-        >
-          <span
-            aria-hidden="true"
-            data-corner-mark
-            className={cn(styles.cornerMark, styles.cornerTL)}
-          />
-          <span
-            aria-hidden="true"
-            data-corner-mark
-            className={cn(styles.cornerMark, styles.cornerTR)}
-          />
-          <span
-            aria-hidden="true"
-            data-corner-mark
-            className={cn(styles.cornerMark, styles.cornerBL)}
-          />
-          <span
-            aria-hidden="true"
-            data-corner-mark
-            className={cn(styles.cornerMark, styles.cornerBR)}
-          />
-          <div className={styles.trustedHeader}>
-            <h3 className={cn(styles.trustedTitle, styles.gradientTextPrimary)}>{trustedBy.label}</h3>
-          </div>
-          <span aria-hidden="true" className={styles.logosDivider} />
-          <ul className={styles.logosStrip}>
-            {trustedBy.clients.map((client) => (
-              <li
-                key={client.name}
-                className={styles.logoItem}
-                data-trusted-item
-              >
-                <Image
-                  src={client.logo}
-                  alt={client.name}
-                  width={120}
-                  height={48}
-                  className={styles.logoImage}
-                />
-              </li>
-            ))}
-          </ul>
-          <span aria-hidden="true" className={styles.logosDivider} />
         </div>
       </div>
     </section>

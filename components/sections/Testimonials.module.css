@@ -81,42 +81,6 @@
   will-change: transform, opacity;
 }
 
-/* ── Corner marks — camera framing guides ─────────────────────────────── */
-
-.cornerMark {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  pointer-events: none;
-}
-
-.cornerTL {
-  top: 0;
-  left: 0;
-  border-top: 1px solid rgb(var(--c-gold) / 0.3);
-  border-left: 1px solid rgb(var(--c-gold) / 0.3);
-}
-
-.cornerTR {
-  top: 0;
-  right: 0;
-  border-top: 1px solid rgb(var(--c-gold) / 0.3);
-  border-right: 1px solid rgb(var(--c-gold) / 0.3);
-}
-
-.cornerBL {
-  bottom: 0;
-  left: 0;
-  border-bottom: 1px solid rgb(var(--c-gold) / 0.3);
-  border-left: 1px solid rgb(var(--c-gold) / 0.3);
-}
-
-.cornerBR {
-  bottom: 0;
-  right: 0;
-  border-bottom: 1px solid rgb(var(--c-gold) / 0.3);
-  border-right: 1px solid rgb(var(--c-gold) / 0.3);
-}
 
 /* ── Carousel ────────────────────────────────────────────────────────── */
 
@@ -315,64 +279,39 @@
   border-color: rgb(var(--c-gold) / 0.6);
 }
 
-/* ── Trusted panel ───────────────────────────────────────────────────── */
+/* ── Trusted section (inside social proof bar) ──────────────────────── */
 
-.trustedPanel {
-  position: relative;
-  margin-top: 3rem;
-  padding: 1rem 2.5rem 5rem;
-  border: 1px solid rgb(var(--c-khaki) / 0.12);
-  border-radius: 0.25rem;
-  background: rgb(255 255 255 / 0.015);
-}
-
-.trustedHeader {
+.trustedSection {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
+  gap: 1rem;
+  padding-top: 0.5rem;
 }
 
-.trustedHudLabel {
-  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.68rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgb(255 238 175 / 0.4);
+.trustedDivider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.12) 20%,
+    rgb(255 238 175 / 0.2) 50%,
+    rgb(var(--c-gold) / 0.12) 80%,
+    transparent 100%
+  );
 }
 
 .trustedTitle {
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 400;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   line-height: 1.1;
   margin: 0;
-  opacity: 0.7;
-}
-
-.logosDivider {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .logosDivider {
-    display: block;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgb(var(--c-gold) / 0.1) 20%,
-      rgb(255 238 175 / 0.18) 50%,
-      rgb(var(--c-gold) / 0.1) 80%,
-      transparent 100%
-    );
-  }
+  opacity: 0.6;
 }
 
 .logosStrip {
@@ -380,7 +319,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 2rem 3rem;
+  gap: 1.5rem 2.5rem;
 }
 
 .logoItem {
@@ -391,10 +330,10 @@
 }
 
 .logoImage {
-  max-height: 300px;
+  max-height: 200px;
   width: auto;
   object-fit: contain;
-  opacity: 0.5;
+  opacity: 0.4;
   filter: grayscale(100%) brightness(2);
   transition: opacity 0.3s ease, filter 0.3s ease;
 }
@@ -472,52 +411,6 @@
   10% { opacity: 1; }
   90% { opacity: 1; }
   100% { left: 200%; opacity: 0; }
-}
-
-/* ── REC indicator ───────────────────────────────────────────────────── */
-
-.recIndicator {
-  position: absolute;
-  top: 0.65rem;
-  left: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.62rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #ff4444;
-  animation: recBlink 2s step-end infinite;
-}
-
-.recDot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #ff4444;
-  box-shadow: 0 0 6px 2px rgb(255 68 68 / 0.4);
-}
-
-@keyframes recBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* ── HUD label (top-right) ───────────────────────────────────────────── */
-
-.socialProofHudLabel {
-  position: absolute;
-  top: 0.65rem;
-  right: 1rem;
-  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.62rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgb(255 238 175 / 0.35);
 }
 
 /* ── Stats grid ──────────────────────────────────────────────────────── */
@@ -605,19 +498,6 @@
 /* Vertical divider between stat cells (desktop only) */
 .statDivider {
   display: none;
-}
-
-/* ── Timecode (bottom-right) ─────────────────────────────────────────── */
-
-.timecode {
-  position: absolute;
-  bottom: 0.5rem;
-  right: 1rem;
-  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.58rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.12em;
-  color: rgb(255 238 175 / 0.25);
 }
 
 /* ── Viewfinder corner brackets ──────────────────────────────────────── */
@@ -717,25 +597,6 @@
   animation-delay: 0.3s;
 }
 
-/* Horizontal flickering line across stats on reveal */
-.socialProofBar::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgb(var(--c-gold) / 0.4) 20%,
-    rgb(var(--c-gold) / 0.15) 50%,
-    rgb(var(--c-gold) / 0.4) 80%,
-    transparent 100%
-  );
-  opacity: 0.3;
-  pointer-events: none;
-}
 
 /* ── Small mobile adjustments ─────────────────────────────────────────── */
 
@@ -753,14 +614,6 @@
 
   .socialProofBar {
     padding: 2rem 0.75rem 1.5rem;
-  }
-
-  .recIndicator {
-    font-size: 0.55rem;
-  }
-
-  .socialProofHudLabel {
-    font-size: 0.55rem;
   }
 
   .perforation {
