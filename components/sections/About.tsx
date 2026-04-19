@@ -66,7 +66,7 @@ export default function About() {
               <div aria-hidden="true" className={styles.mediaHalo} />
               <div className={styles.mediaFrame}>
                 <Image
-                  src="/images/about_me_001.png"
+                  src="/images/about-me-section.png"
                   alt={siteContent.about.imageAlt}
                   width={680}
                   height={1020}
