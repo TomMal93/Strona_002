@@ -102,7 +102,7 @@ export default function Promo() {
             <span data-hud-label className={styles.hudLabel}>preview</span>
             <span data-hud-line="left" className={styles.hudLineLeft} />
             <span data-hud-line="right" className={styles.hudLineRight} />
-            <span data-hud-label className={styles.hudLabel}>scena 03/07</span>
+            <span data-hud-label className={styles.hudLabel}>scene 03/07</span>
             <span data-hud-line="right" className={styles.hudLineRight} />
           </div>
 
@@ -165,7 +165,7 @@ export default function Promo() {
           </button>
 
           <div aria-hidden="true" className={styles.videoBottomBar}>
-            <span className={styles.videoCodec}>H.265/LOG3</span>
+            <span className={styles.videoCodec}>H.265 s-log3</span>
             <span className={styles.videoProgress}>
               <span
                 className={styles.videoProgressFill}

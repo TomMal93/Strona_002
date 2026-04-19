@@ -266,7 +266,7 @@
 
 @media (min-width: 1024px) {
   .ytGrid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -372,6 +372,7 @@
   font-size: 1rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  text-align: center;
   color: rgb(255 245 214 / 0.72);
 }
 
@@ -380,7 +381,7 @@
 .bottomTimeline {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
   margin: 2.5rem auto 0;
   opacity: 0.3;

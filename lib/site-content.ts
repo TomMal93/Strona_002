@@ -43,7 +43,7 @@ export const siteContent = {
     title: process.env.NEXT_PUBLIC_PROMO_TITLE || 'Moja praca w akcji',
     subtitle:
       process.env.NEXT_PUBLIC_PROMO_SUBTITLE
-      || 'Krótki przegląd tego, co robię — od pola po montażownię.',
+      || 'Krótki przegląd tego, co robię - od scenariusza po montażownię.',
     heroVideo: {
       src: process.env.NEXT_PUBLIC_PROMO_VIDEO_SRC || '/videos/promo-reel.mp4',
       poster: process.env.NEXT_PUBLIC_PROMO_VIDEO_POSTER || '/images/promo-poster.jpg',
@@ -55,15 +55,11 @@ export const siteContent = {
       },
       {
         id: process.env.NEXT_PUBLIC_PROMO_YT_2_ID || 'z-CdD24c2Sc',
-        title: process.env.NEXT_PUBLIC_PROMO_YT_2_TITLE || 'Wesele — highlight',
+        title: process.env.NEXT_PUBLIC_PROMO_YT_2_TITLE || 'Prolog filmu ślubnego',
       },
       {
         id: process.env.NEXT_PUBLIC_PROMO_YT_3_ID || 'm3ncwB9JCXk',
-        title: process.env.NEXT_PUBLIC_PROMO_YT_3_TITLE || 'Moon Flames',
-      },
-      {
-        id: process.env.NEXT_PUBLIC_PROMO_YT_4_ID || 'we_wTV-xELQ',
-        title: process.env.NEXT_PUBLIC_PROMO_YT_4_TITLE || 'Echo Rodu - koncert',
+        title: process.env.NEXT_PUBLIC_PROMO_YT_3_TITLE || 'Full moon flames',
       },
     ],
   },
