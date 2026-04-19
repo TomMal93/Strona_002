@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import styles from '../Hero.module.css'
 import { filterSupportedSocialLinks, type SocialPlatform } from './socialPlatforms'
 
-const ctaBaseClassName = 'px-4 py-2 text-center font-bebas text-[18px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2'
+const ctaBaseClassName = 'px-4 py-2 text-center font-bebas text-[21px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2'
 
 const socialIcons: Record<SocialPlatform, JSX.Element> = {
   facebook: (
@@ -62,7 +62,7 @@ export default function HeroTextBlock({
         <span ref={verticalLineRef} aria-hidden="true" className={cn(styles.verticalLine, animated && styles.animScaleYZero)} />
         <span
           ref={eyebrowRef}
-          className={cn(styles.gradientTextSecondary, 'block font-bebas text-[18px] uppercase tracking-heading', animated && styles.animHide)}
+          className={cn(styles.gradientTextSecondary, 'block font-bebas text-[21px] uppercase tracking-heading', animated && styles.animHide)}
         >
           {siteContent.hero.eyebrow}
         </span>
@@ -72,15 +72,15 @@ export default function HeroTextBlock({
           aria-hidden="true"
           className={cn(styles.gradientTextPrimary, styles.heroHeading, headingClassName, animated && styles.animHide)}
         >
-          {siteContent.hero.headlineLine1}
+          <span className="whitespace-nowrap">{siteContent.hero.headlineLine1}</span>
           <br />
-          {siteContent.hero.headlineLine2}
+          <span className="whitespace-nowrap">{siteContent.hero.headlineLine2}</span>
         </p>
 
         <div className="max-w-[34ch]">
           <p
             ref={descriptionRef}
-            className={cn(styles.gradientTextSecondary, 'mt-6 whitespace-pre-line pb-5 font-bebas text-[16px] leading-[1.5] tracking-heading', animated && styles.animHide)}
+            className={cn(styles.gradientTextSecondary, 'mt-6 whitespace-pre-line pb-5 font-bebas text-[19px] leading-[1.5] tracking-heading', animated && styles.animHide)}
           >
             {siteContent.hero.subtitle}
           </p>
