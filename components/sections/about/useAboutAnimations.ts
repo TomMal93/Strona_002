@@ -59,9 +59,13 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
       const hudLabels = hudBarRef.current
         ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-label]'))
         : []
-      const corners = viewfinderElement
+      const viewfinderCorners = viewfinderElement
         ? Array.from(viewfinderElement.querySelectorAll<HTMLElement>('[class*="cornerMark"]'))
         : []
+      const statementCorners = statementRef.current
+        ? Array.from(statementRef.current.querySelectorAll<HTMLElement>('[class*="cornerMark"]'))
+        : []
+      const corners = [...viewfinderCorners, ...statementCorners]
       const topHudItems = viewfinderElement
         ? Array.from(
             viewfinderElement.querySelectorAll<HTMLElement>(
@@ -190,9 +194,13 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
           (el): el is HTMLElement => el !== null,
         )
 
-        const corners = viewfinderElement
+        const viewfinderCorners = viewfinderElement
           ? Array.from(viewfinderElement.querySelectorAll('[class*="cornerMark"]'))
           : []
+        const statementCorners = statementElement
+          ? Array.from(statementElement.querySelectorAll('[class*="cornerMark"]'))
+          : []
+        const corners = [...viewfinderCorners, ...statementCorners]
         const hudLines = hudBarRef.current
           ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-line]'))
           : []
@@ -268,13 +276,24 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
           },
         })
 
+        tl.to(titleElement, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.62,
+          ease: 'power3.out',
+        })
+
         if (hudInnerLines.length) {
-          tl.to(hudInnerLines, {
-            scaleX: 1,
-            duration: 0.18,
-            ease: 'power2.out',
-            stagger: 0.01,
-          })
+          tl.to(
+            hudInnerLines,
+            {
+              scaleX: 1,
+              duration: 0.18,
+              ease: 'power2.out',
+              stagger: 0.01,
+            },
+            '-=0.28',
+          )
         }
 
         if (hudOuterLines.length) {
@@ -304,13 +323,6 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
           )
         }
 
-        tl.to(titleElement, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.62,
-          ease: 'power3.out',
-        }, '-=0.08')
-
         if (viewfinderElement) {
           tl.to(
             viewfinderElement,
@@ -322,20 +334,20 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
               duration: 0.72,
               ease: 'power3.out',
             },
-            '-=0.16',
+            '-=0.10',
           )
         }
 
-        if (corners.length) {
+        if (viewfinderCorners.length) {
           tl.to(
-            corners,
+            viewfinderCorners,
             {
               autoAlpha: 1,
               duration: 0.22,
               ease: 'power2.out',
-              stagger: 0.04,
+              stagger: 0.05,
             },
-            '-=0.34',
+            '-=0.40',
           )
         }
 
@@ -349,7 +361,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
               ease: 'power2.out',
               stagger: 0.05,
             },
-            '-=0.1',
+            '-=0.22',
           )
         }
 
@@ -363,7 +375,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
               ease: 'power2.out',
               stagger: 0.05,
             },
-            '-=0.22',
+            '-=0.18',
           )
         }
 
@@ -375,22 +387,35 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
               y: 0,
               duration: 0.55,
               ease: 'power3.out',
-              stagger: 0.08,
+              stagger: 0.10,
             },
-            '-=0.04',
+            '-=0.10',
           )
         }
 
         tl.to(
           statementElement,
           { autoAlpha: 1, y: 0, duration: 0.62, ease: 'power3.out' },
-          '-=0.12',
+          '-=0.18',
         )
+
+        if (statementCorners.length) {
+          tl.to(
+            statementCorners,
+            {
+              autoAlpha: 1,
+              duration: 0.22,
+              ease: 'power2.out',
+              stagger: 0.04,
+            },
+            '-=0.52',
+          )
+        }
 
         tl.to(
           ctaElement,
           { autoAlpha: 1, y: 0, duration: 0.56, ease: 'power3.out' },
-          '-=0.34',
+          '-=0.10',
         )
       }, sectionRef)
 
