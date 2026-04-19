@@ -289,17 +289,19 @@ export const siteContent = {
       'Każdy projekt zaczyna się od rozmowy.\nNapisz — odpowiem w ciągu 24h.',
     hudLabelLeft: 'FINAL CTA',
     hudLabelRight: 'SCENE 08 / 08',
-    stats: [
-      { value: '100+', label: 'Zrealizowanych projektów' },
-      { value: '3+', label: 'Lat doświadczenia' },
-      { value: '4K', label: 'Jakość kinowa' },
-    ],
     ctaLabel: process.env.NEXT_PUBLIC_CTA_LABEL || 'Napisz do mnie',
     ctaHref: process.env.NEXT_PUBLIC_CTA_HREF || '/contact',
     phoneLabel: process.env.NEXT_PUBLIC_CTA_PHONE_LABEL || 'Zadzwoń',
     phoneHref: process.env.NEXT_PUBLIC_CTA_PHONE_HREF || 'tel:+48123456789',
     secondaryLabel: process.env.NEXT_PUBLIC_CTA_SECONDARY_LABEL || 'Zobacz portfolio',
     secondaryHref: process.env.NEXT_PUBLIC_CTA_SECONDARY_HREF || '#promo',
+    social: [
+      { platform: 'youtube' as const, href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || 'https://www.youtube.com/@Maleszyk.V-log' },
+      { platform: 'facebook' as const, href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || 'https://www.facebook.com/profile.php?id=61557050460965' },
+      { platform: 'instagram' as const, href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || 'https://www.instagram.com/maleszyk.media/' },
+      { platform: 'whatsapp' as const, href: process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP || 'https://wa.me/48123456789' },
+      { platform: 'messenger' as const, href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || 'https://m.me/maleszyk.media' },
+    ],
   },
   aboutMe: {
     meta: {

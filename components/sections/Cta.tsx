@@ -24,6 +24,38 @@ const PhoneIcon = () => (
   </svg>
 )
 
+type SocialPlatform = 'youtube' | 'facebook' | 'instagram' | 'whatsapp' | 'messenger'
+
+const socialIcons: Record<SocialPlatform, React.ReactElement> = {
+  youtube: (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z" />
+    </svg>
+  ),
+  facebook: (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  ),
+  instagram: (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none" />
+    </svg>
+  ),
+  whatsapp: (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.76.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.35.19 1.86.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.12-.27-.2-.57-.35zM12 2a10 10 0 0 0-8.54 15.18L2 22l4.94-1.42A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-2.93.84.86-2.85-.2-.31A8.2 8.2 0 1 1 12 20.2z" />
+    </svg>
+  ),
+  messenger: (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.2 5.44 3.14 7.17.17.15.27.36.28.59l.05 1.77a.8.8 0 0 0 1.12.71l1.97-.87a.8.8 0 0 1 .53-.04c.9.25 1.86.38 2.91.38 5.64 0 10-4.13 10-9.7C22 6.13 17.64 2 12 2zm6 7.6-2.94 4.66a1.5 1.5 0 0 1-2.17.4L10.55 12.7a.6.6 0 0 0-.72 0l-3.17 2.4c-.42.32-.98-.18-.71-.63L8.9 9.81a1.5 1.5 0 0 1 2.17-.4l2.34 1.96a.6.6 0 0 0 .72 0l3.17-2.4c.42-.32.98.18.71.63z" />
+    </svg>
+  ),
+}
+
 const ArrowRightIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -46,9 +78,9 @@ export default function Cta() {
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const subtitleRef = useRef<HTMLParagraphElement>(null!)
   const hudBarRef = useRef<HTMLDivElement>(null!)
-  const statsRef = useRef<HTMLDivElement>(null!)
-  const descRef = useRef<HTMLParagraphElement>(null!)
-  const buttonsRef = useRef<HTMLDivElement>(null!)
+  const primaryBtnRef = useRef<HTMLAnchorElement>(null!)
+  const secondaryRowRef = useRef<HTMLDivElement>(null!)
+  const socialRowRef = useRef<HTMLDivElement>(null!)
   const cornerTLRef = useRef<HTMLSpanElement>(null!)
   const cornerTRRef = useRef<HTMLSpanElement>(null!)
   const cornerBLRef = useRef<HTMLSpanElement>(null!)
@@ -56,16 +88,15 @@ export default function Cta() {
   const crosshairTopRef = useRef<HTMLSpanElement>(null!)
   const crosshairBottomRef = useRef<HTMLSpanElement>(null!)
   const glowRef = useRef<HTMLDivElement>(null!)
-  const separatorRef = useRef<HTMLDivElement>(null!)
 
   useCtaAnimations({
     sectionRef,
     titleRef,
     subtitleRef,
     hudBarRef,
-    statsRef,
-    descRef,
-    buttonsRef,
+    primaryBtnRef,
+    secondaryRowRef,
+    socialRowRef,
     cornerTLRef,
     cornerTRRef,
     cornerBLRef,
@@ -73,13 +104,12 @@ export default function Cta() {
     crosshairTopRef,
     crosshairBottomRef,
     glowRef,
-    separatorRef,
   })
 
   const {
-    title, subtitle, hudLabelLeft, hudLabelRight, stats,
+    title, subtitle, hudLabelLeft, hudLabelRight,
     ctaLabel, ctaHref, phoneLabel, phoneHref,
-    secondaryLabel, secondaryHref,
+    secondaryLabel, secondaryHref, social,
   } = siteContent.cta
 
   return (
@@ -149,64 +179,46 @@ export default function Cta() {
           {/* Dashed focus circle */}
           <div aria-hidden="true" className={styles.focusCircle} />
 
-          {/* ── Foreground layer: content ── */}
+          {/* ── Foreground layer: actions ── */}
           <div className={styles.ctaContent}>
-            {/* ── Stats strip ── */}
-            <div ref={statsRef} className={styles.statsStrip}>
-              {stats.map((stat, i) => (
-                <React.Fragment key={stat.label}>
-                  {i > 0 && (
-                    <span aria-hidden="true" className={styles.statDivider} />
-                  )}
-                  <div className={styles.statItem}>
-                    <span
-                      className={styles.statValue}
-                      data-stat-value
-                      data-target={stat.value}
-                    >
-                      {stat.value}
-                    </span>
-                    <span className={styles.statLabel}>{stat.label}</span>
-                  </div>
-                </React.Fragment>
-              ))}
-            </div>
-
-            {/* Separator */}
-            <div ref={separatorRef} aria-hidden="true" className={styles.ctaSeparator} />
-
-            {/* Description */}
-            <p ref={descRef} className={styles.ctaSubtitle}>
-              Opowiedz mi o swoim projekcie — razem stworzymy materiał,
-              {'\n'}który zostanie z Tobą na lata.
-            </p>
-
-            {/* ── Buttons ── */}
-            <div ref={buttonsRef} className={styles.ctaButtons}>
-              {/* Primary — animated border + shimmer */}
-              <a href={ctaHref} className={styles.btnPrimary}>
-                <span aria-hidden="true" className={styles.btnBorderGlow} />
-                <span aria-hidden="true" className={styles.btnShimmer} />
-                <span className={styles.btnPrimaryInner}>
+            <div className={styles.ctaActions}>
+              {/* Secondary row — two tertiary links split by a dot */}
+              <div ref={secondaryRowRef} className={styles.secondaryRow}>
+                <a href={ctaHref} className={styles.btnTertiary}>
                   {ctaLabel}
                   <ArrowRightIcon />
-                </span>
-              </a>
-
-              {/* Secondary group */}
-              <div className={styles.btnSecondaryRow}>
-                {/* Phone — ghost pill with pulse ring */}
-                <a href={phoneHref} className={styles.btnGhost}>
-                  <span aria-hidden="true" className={styles.btnPulseRing} />
-                  <PhoneIcon />
-                  {phoneLabel}
                 </a>
-
-                {/* Tertiary text link */}
+                <span aria-hidden="true" className={styles.dotSeparator} />
                 <a href={secondaryHref} className={styles.btnTertiary}>
                   {secondaryLabel}
                   <ArrowRightIcon />
                 </a>
+              </div>
+
+              {/* Primary — phone call with layered pulsing rings */}
+              <a ref={primaryBtnRef} href={phoneHref} className={styles.btnPrimary}>
+                <span aria-hidden="true" className={cn(styles.btnPulseRing, styles.btnPulseRing1)} />
+                <span aria-hidden="true" className={cn(styles.btnPulseRing, styles.btnPulseRing2)} />
+                <span className={styles.btnPrimaryInner}>
+                  <PhoneIcon />
+                  {phoneLabel}
+                </span>
+              </a>
+
+              {/* Social icons */}
+              <div ref={socialRowRef} className={styles.socialRow}>
+                {social.map(({ platform, href }) => (
+                  <a
+                    key={platform}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={platform}
+                    className={styles.socialLink}
+                  >
+                    {socialIcons[platform]}
+                  </a>
+                ))}
               </div>
             </div>
           </div>

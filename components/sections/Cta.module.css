@@ -238,105 +238,12 @@
   z-index: var(--z-above);
 }
 
-/* ── Stats strip ─────────────────────────────────────────────────────── */
-
-.statsStrip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  margin-bottom: 2.2rem;
-}
-
-.statItem {
+.ctaActions {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0 1.5rem;
-}
-
-.statValue {
-  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0.04em;
-  background: linear-gradient(
-    130deg,
-    rgb(var(--c-warm)) 0%,
-    rgb(255 238 175) 45%,
-    rgb(var(--c-gold)) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.statLabel {
-  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.68rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-  color: rgb(255 255 255 / 0.40);
-  white-space: nowrap;
-}
-
-.statDivider {
-  display: block;
-  width: 1px;
-  height: 48px;
-  flex-shrink: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgb(var(--c-gold) / 0.35) 30%,
-    rgb(var(--c-gold) / 0.35) 70%,
-    transparent 100%
-  );
-}
-
-/* ── Separator ───────────────────────────────────────────────────────── */
-
-.ctaSeparator {
-  width: 80px;
-  height: 1px;
-  margin: 0 auto 1.5rem;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgb(var(--c-gold) / 0.5) 20%,
-    rgb(255 238 175 / 0.7) 50%,
-    rgb(var(--c-gold) / 0.5) 80%,
-    transparent 100%
-  );
-  transform: scaleX(0);
-}
-
-/* ── Subtitle ────────────────────────────────────────────────────────── */
-
-.ctaSubtitle {
-  max-width: 32rem;
-  margin: 0 auto 2.8rem;
-  font-family: var(--font-inter, 'Inter', sans-serif);
-  font-size: 0.95rem;
-  font-weight: 400;
-  line-height: 1.85;
-  letter-spacing: 0.02em;
-  color: rgb(255 255 255 / 0.55);
-  white-space: pre-line;
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
-   BUTTONS
-   ══════════════════════════════════════════════════════════════════════════ */
-
-.ctaButtons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.8rem;
+  gap: 2rem;
+  padding: 1.5rem 0;
 }
 
 .btnIcon {
@@ -350,114 +257,65 @@
   transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ── Primary CTA — animated conic border + shimmer ───────────────────── */
+/* ── Primary CTA — dominant phone button with layered pulsing rings ──── */
 
 .btnPrimary {
-  --border-angle: 0deg;
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1px;
-  background: conic-gradient(
-    from var(--border-angle),
-    transparent 0%,
-    rgb(var(--c-gold) / 0.15) 10%,
-    rgb(255 238 175 / 0.65) 15%,
-    rgb(var(--c-warm) / 0.80) 20%,
-    rgb(255 238 175 / 0.65) 25%,
-    rgb(var(--c-gold) / 0.15) 30%,
-    transparent 40%
-  );
-  animation: borderRotate 4s linear infinite;
-  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  border: 1px solid rgb(var(--c-gold) / 0.55);
+  background: rgb(13 13 13 / 0.92);
+  transition:
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 300ms ease;
 }
 
 .btnPrimary:hover {
   transform: translateY(-2px);
+  border-color: rgb(var(--c-gold) / 0.9);
 }
 
-.btnPrimary:hover .btnIconArrow {
-  transform: translateX(3px);
-}
-
-@keyframes borderRotate {
-  to { --border-angle: 360deg; }
-}
-
-@property --border-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-/* Glow behind the entire button */
-.btnBorderGlow {
+/* Layered pulsing rings reinforcing "call now" cue */
+.btnPulseRing {
   position: absolute;
-  inset: -12px;
-  border-radius: 4px;
-  background: radial-gradient(
-    ellipse at center,
-    rgb(var(--c-gold) / 0.14) 0%,
-    transparent 70%
-  );
-  filter: blur(16px);
+  inset: 0;
+  border: 1px solid rgb(var(--c-gold) / 0.55);
   pointer-events: none;
-  opacity: 0.6;
-  transition: opacity 400ms ease, transform 400ms ease;
+  animation: pulseRing 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-.btnPrimary:hover .btnBorderGlow {
-  opacity: 1;
-  transform: scale(1.4);
+.btnPulseRing2 {
+  animation-delay: 1.2s;
 }
 
-/* Shimmer sweep across the label */
-.btnShimmer {
-  position: absolute;
-  inset: 1px;
-  overflow: hidden;
-  pointer-events: none;
-  border-radius: 1px;
+@keyframes pulseRing {
+  0% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  80% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
 }
 
-.btnShimmer::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(
-    105deg,
-    transparent 0%,
-    rgb(255 238 175 / 0.06) 40%,
-    rgb(255 238 175 / 0.12) 50%,
-    rgb(255 238 175 / 0.06) 60%,
-    transparent 100%
-  );
-  animation: shimmerSweep 3.5s ease-in-out 1.2s infinite;
-}
-
-@keyframes shimmerSweep {
-  0% { left: -100%; }
-  45%, 100% { left: 160%; }
-}
-
-/* Inner label area — dark background so border is visible */
+/* Inner label area */
 .btnPrimaryInner {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.9rem 2.6rem;
-  background: rgb(13 13 13 / 0.92);
+  gap: 0.75rem;
+  padding: 1.15rem 3rem;
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-  font-size: 1.35rem;
-  letter-spacing: 0.14em;
+  font-size: 1.6rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  background-clip: padding-box;
-  color: rgb(255 238 175 / 0.90);
+  color: rgb(255 238 175 / 0.92);
   transition: color 300ms ease;
 }
 
@@ -465,53 +323,31 @@
   color: rgb(255 238 175);
 }
 
-/* ── Ghost button — phone with pulse ring ────────────────────────────── */
+/* ── Secondary row — two tertiary links with dot separator ───────────── */
 
-.btnGhost {
-  position: relative;
-  display: inline-flex;
+.secondaryRow {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.6rem 1.6rem;
-  border: 1px solid rgb(var(--c-gold) / 0.25);
-  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-  font-size: 1.1rem;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-  color: rgb(255 238 175 / 0.70);
-  transition:
-    border-color 300ms ease,
-    color 300ms ease,
-    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  gap: 0.8rem;
 }
 
-.btnGhost:hover {
-  border-color: rgb(var(--c-gold) / 0.55);
-  color: rgb(255 238 175 / 0.95);
-  transform: translateY(-1px);
+.dotSeparator {
+  display: none;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgb(var(--c-gold) / 0.45);
 }
 
-/* Pulsing ring effect */
-.btnPulseRing {
-  position: absolute;
-  inset: -4px;
-  border: 1px solid rgb(var(--c-gold) / 0.20);
-  pointer-events: none;
-  animation: pulseRing 3s ease-out infinite;
-}
-
-@keyframes pulseRing {
-  0% {
-    opacity: 0.6;
-    transform: scale(1);
+@media (min-width: 480px) {
+  .secondaryRow {
+    flex-direction: row;
+    gap: 1.25rem;
   }
-  70% {
-    opacity: 0;
-    transform: scale(1.12);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.12);
+
+  .dotSeparator {
+    display: block;
   }
 }
 
@@ -574,20 +410,36 @@
   transform: translateX(3px);
 }
 
-/* ── Secondary row ───────────────────────────────────────────────────── */
+/* ── Social icons row ────────────────────────────────────────────────── */
 
-.btnSecondaryRow {
+.socialRow {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1.2rem;
+  justify-content: center;
+  gap: 1.4rem;
+  margin-top: 0.6rem;
 }
 
-@media (min-width: 480px) {
-  .btnSecondaryRow {
-    flex-direction: row;
-    gap: 2rem;
-  }
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: rgb(255 238 175 / 0.55);
+  transition:
+    color 280ms ease,
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.socialLink svg {
+  width: 20px;
+  height: 20px;
+}
+
+.socialLink:hover {
+  color: rgb(255 238 175 / 0.95);
+  transform: translateY(-2px);
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -606,30 +458,10 @@
     padding-inline: 1rem;
   }
 
-  .statsStrip {
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-
-  .statDivider {
-    width: 48px;
-    height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent 0%,
-      rgb(var(--c-gold) / 0.35) 30%,
-      rgb(var(--c-gold) / 0.35) 70%,
-      transparent 100%
-    );
-  }
-
-  .statItem {
-    padding: 0;
-  }
-
   .btnPrimaryInner {
-    padding: 0.75rem 2rem;
-    font-size: 1.2rem;
+    padding: 0.95rem 2.2rem;
+    font-size: 1.35rem;
+    letter-spacing: 0.12em;
   }
 
   .cornerMark {
@@ -654,21 +486,10 @@
   .crosshairTop,
   .crosshairBottom,
   .cornerMark,
-  .btnPrimary,
-  .btnShimmer::after,
   .btnPulseRing {
     animation: none;
   }
 
-  .btnPrimary {
-    background: rgb(var(--c-gold) / 0.30);
-  }
-
-  .ctaSeparator {
-    transform: scaleX(1);
-  }
-
-  .btnBorderGlow,
   .btnIconArrow {
     transition: none;
   }
