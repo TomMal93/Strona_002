@@ -68,15 +68,8 @@ export const siteContent = {
     subtitle:
       'Każda realizacja to czyjaś historia.\nOto, co mówią ci, których historie opowiedziałem.',
     hudLabelLeft: 'FEEDBACK',
-    hudLabelRight: 'SCENA 04 / 07',
+    hudLabelRight: 'SCENE 04 / 07',
     items: [
-      {
-        quote:
-          'Szukaliśmy kogoś, kto poradzi sobie w trudnych warunkach terenowych i dostarczy materiał na czas. Efekt? Komplet zdjęć i zmontowany film w dwa tygodnie — bez poprawek.',
-        author: 'Karolina Nowicka',
-        context: 'Koordynatorka — Manewry Taktyczne Wschód',
-        tagline: 'TERMINOWOŚĆ',
-      },
       {
         quote:
           'Jesteśmy zachwyceni naszym filmem weselnym! Całość została zmontowana w piękny, emocjonalny sposób i oglądając go znowu czujemy dokładnie te same emocje co w dniu ślubu. To pamiątka na całe życie — dziękujemy!',
@@ -102,8 +95,8 @@ export const siteContent = {
     socialProof: {
       hudLabel: 'STATS',
       items: [
-        { value: 200, suffix: '+', label: 'Zrealizowanych projektów', tag: 'PROJECTS' },
-        { value: 8, suffix: '+', label: 'Lat doświadczenia', tag: 'EXPERIENCE' },
+        { value: 100, suffix: '+', label: 'Zrealizowanych projektów', tag: 'PROJECTS' },
+        { value: 3, suffix: '+', label: 'Lat doświadczenia', tag: 'EXPERIENCE' },
         { value: 100, suffix: '%', label: 'Zadowolonych klientów', tag: 'SATISFACTION' },
         { value: 4, suffix: 'K', label: 'Jakość obrazu', tag: 'RESOLUTION' },
       ],
@@ -123,7 +116,7 @@ export const siteContent = {
     title: process.env.NEXT_PUBLIC_SERVICES_TITLE || 'Oferta',
     subtitle:
       process.env.NEXT_PUBLIC_SERVICES_SUBTITLE
-      || 'Od ważnych wydarzeń po gotowy montaż i materiały dla marki.\nTrzy formaty, jeden cel — obraz, który działa i zostaje w pamięci.',
+      || 'Od kluczowych momentów, przez montaż, po materiały dla marki.\nCel jest jeden — obraz, który przyciąga i zostaje w pamięci.',
     ctaLabel:
       process.env.NEXT_PUBLIC_SERVICES_CTA_LABEL
       || 'Skontaktuj się',
@@ -191,7 +184,7 @@ export const siteContent = {
     subtitle:
       'Od pierwszego kontaktu do gotowego materiału — cztery proste kroki.\nBez niespodzianek, bez zbędnego czekania.',
     hudLabelLeft: 'WORKFLOW',
-    hudLabelRight: 'SCENA 06 / 07',
+    hudLabelRight: 'SCENE 06 / 07',
     steps: [
       {
         number: '01',
@@ -232,7 +225,7 @@ export const siteContent = {
     subtitle:
       'Najczęściej zadawane pytania.\nOdpowiedzi, zanim zdążysz zapytać.',
     hudLabelLeft: 'ANSWERS',
-    hudLabelRight: 'SCENA 07 / 08',
+    hudLabelRight: 'SCENE 07 / 08',
     items: [
       {
         number: 'Q.01',
@@ -274,7 +267,7 @@ export const siteContent = {
         number: 'Q.07',
         question: 'Czy realizujesz zlecenia poza moim miastem / w terenie?',
         answer:
-          'Tak — realizuję zlecenia na terenie całego kraju, a w przypadku większych projektów również za granicą. Eventy militarne, wyprawy off-road czy plenerowe sesje w trudnym terenie to moja codzienność.\n\nKoszty dojazdu ustalamy indywidualnie przed zleceniem, tak żeby nie było niespodzianek.',
+          'Tak - realizuję zlecenia na terenie całego kraju, a w przypadku większych projektów również za granicą.\nEventy, wyprawy off-road czy plenerowe sesje w trudnym terenie to moja codzienność.\nKoszty dojazdu ustalamy indywidualnie przed zleceniem, tak żeby nie było niespodzianek.',
       },
       {
         number: 'Q.08',
@@ -295,10 +288,10 @@ export const siteContent = {
     subtitle:
       'Każdy projekt zaczyna się od rozmowy.\nNapisz — odpowiem w ciągu 24h.',
     hudLabelLeft: 'FINAL CTA',
-    hudLabelRight: 'SCENA 08 / 08',
+    hudLabelRight: 'SCENE 08 / 08',
     stats: [
-      { value: '200+', label: 'Zrealizowanych projektów' },
-      { value: '8+', label: 'Lat doświadczenia' },
+      { value: '100+', label: 'Zrealizowanych projektów' },
+      { value: '3+', label: 'Lat doświadczenia' },
       { value: '4K', label: 'Jakość kinowa' },
     ],
     ctaLabel: process.env.NEXT_PUBLIC_CTA_LABEL || 'Napisz do mnie',
@@ -327,7 +320,7 @@ export const siteContent = {
     bio: {
       title: 'O mnie',
       hudLabelLeft: 'NOTES',
-      hudLabelRight: 'SCENA 01 / 05',
+      hudLabelRight: 'SCENE 01 / 05',
       text:
         process.env.NEXT_PUBLIC_ABOUTME_BIO
         || 'Filmowaniem zajmuję się od około 3 lat.\nWszystko zaczęło się dość niewinnie - od chęci nagrywania moich terenowych wypadów.\nPoczątkowo były to proste ujęcia z drona i aparatu, bardziej dla własnej satysfakcji niż z myślą o czymś większym.\nZ czasem jednak zacząłem dostrzegać,\nże obraz potrafi opowiadać historie w wyjątkowy sposób - oddawać emocje, klimat miejsca i chwile,\nktóre szybko przemijają.\nTo właśnie wtedy hobby zaczęło przeradzać się w prawdziwą pasję.\nDziś kamera towarzyszy mi znacznie częściej, a każde kolejne nagranie jest okazją do tworzenia czegoś autentycznego - filmu, który zatrzymuje moment\ni pozwala wracać do niego po latach.',
@@ -335,7 +328,7 @@ export const siteContent = {
     video: {
       title: 'Przedstawiam się',
       hudLabelLeft: 'INTRO',
-      hudLabelRight: 'SCENA 02 / 05',
+      hudLabelRight: 'SCENE 02 / 05',
       type: (process.env.NEXT_PUBLIC_ABOUTME_VIDEO_TYPE || 'self-hosted') as 'youtube' | 'self-hosted',
       youtubeId: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_YT_ID || 'jCpSTtkiKsY',
       src: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_SRC || '/videos/contact/contact.mp4',
@@ -344,7 +337,7 @@ export const siteContent = {
     contact: {
       title: 'Kontakt',
       hudLabelLeft: 'CONTACT',
-      hudLabelRight: 'SCENA 03 / 05',
+      hudLabelRight: 'SCENE 03 / 05',
       phone: process.env.NEXT_PUBLIC_ABOUTME_PHONE || '+48 123 456 789',
       email: process.env.NEXT_PUBLIC_ABOUTME_EMAIL || 'kontakt@example.com',
       ctaLabel: process.env.NEXT_PUBLIC_ABOUTME_CTA_LABEL || 'Napisz do mnie',
@@ -359,7 +352,7 @@ export const siteContent = {
     gear: {
       title: 'Arsenał',
       hudLabelLeft: 'GEAR',
-      hudLabelRight: 'SCENA 04 / 05',
+      hudLabelRight: 'SCENE 04 / 05',
       stats: [
         { value: 500, suffix: '+', label: 'Projektów' },
         { value: 8, suffix: '+', label: 'Lat doświadczenia' },
