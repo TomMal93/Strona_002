@@ -11,6 +11,7 @@ export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
     <div className={`relative z-10 mx-auto h-full origin-top-left scale-[calc(100vw/var(--mobile-frame-w))] px-[10px] md:hidden ${styles.mobileFrame}`}>
       <div className={styles.mobileGroupCenter}>
         <div className={`relative ${styles.mobileImageWrap} ${styles.mobileImageEntrance}`}>
+          <div aria-hidden="true" className={styles.portraitHalo} />
           <div className="relative z-10 aspect-[3/4] w-full">
             <Image
               src="/images/Hero_v4.png"
