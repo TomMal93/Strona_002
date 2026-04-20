@@ -16,11 +16,14 @@ export const siteContent = {
       process.env.NEXT_PUBLIC_HERO_SUBTITLE
       || 'Dokumentuję to, co warto pamiętać.\nOd teledysku po weselny taniec.',
     ctaLabel: process.env.NEXT_PUBLIC_HERO_CTA_LABEL || 'Skontaktuj się',
+    ctaHref: process.env.NEXT_PUBLIC_HERO_CTA_HREF || 'tel:+48123456789',
     aboutLabel: process.env.NEXT_PUBLIC_HERO_ABOUT_LABEL || 'O mnie',
     social: [
       { platform: 'facebook', href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || 'https://www.facebook.com/profile.php?id=61557050460965' },
       { platform: 'instagram', href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || 'https://www.instagram.com/maleszyk.media/' },
       { platform: 'youtube', href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || 'https://www.youtube.com/@Maleszyk.V-log' },
+      { platform: 'messenger', href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || 'https://m.me/maleszyk.media' },
+      { platform: 'whatsapp', href: process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP || 'https://wa.me/48123456789' },
     ],
   },
   about: {

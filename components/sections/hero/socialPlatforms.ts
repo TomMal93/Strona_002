@@ -3,6 +3,8 @@ export const SUPPORTED_SOCIAL_PLATFORMS = [
   'instagram',
   'tiktok',
   'youtube',
+  'messenger',
+  'whatsapp',
 ] as const
 
 export type SocialPlatform = (typeof SUPPORTED_SOCIAL_PLATFORMS)[number]
