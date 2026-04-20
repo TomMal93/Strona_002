@@ -25,8 +25,8 @@ export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
           </div>
         </div>
 
-        <div className={`w-fit ${styles.mobileTextWrap}`}>
-          <div className={`max-w-[660px] rounded-xl p-4 text-left ${styles.mobileTextHalo} ${styles.mobileTextPanel} ${styles.mobilePanelEntrance}`}>
+        <div className={`w-full ${styles.mobileTextWrap}`}>
+          <div className={`w-full rounded-xl p-4 text-left ${styles.mobileTextHalo} ${styles.mobileTextPanel} ${styles.mobilePanelEntrance}`}>
             {children}
           </div>
         </div>

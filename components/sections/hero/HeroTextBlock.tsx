@@ -45,6 +45,8 @@ export type HeroTextBlockProps = {
   eyebrowClassName?: string
   subtitleClassName?: string
   ctaClassName?: string
+  subtitleWrapClassName?: string
+  socialIconClassName?: string
   animated?: boolean
   eyebrowRef?: Ref<HTMLSpanElement>
   headingRef?: Ref<HTMLParagraphElement>
@@ -60,6 +62,8 @@ export default function HeroTextBlock({
   eyebrowClassName = 'block font-bebas text-[21px] uppercase tracking-heading',
   subtitleClassName = 'mt-6 whitespace-pre-line pb-5 font-bebas text-[19px] leading-[1.5] tracking-heading',
   ctaClassName = 'px-4 py-2 text-center font-bebas text-[23px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2',
+  subtitleWrapClassName = 'max-w-[34ch]',
+  socialIconClassName = '[&>svg]:h-[21px] [&>svg]:w-[21px]',
   animated = false,
   eyebrowRef,
   headingRef,
@@ -91,7 +95,7 @@ export default function HeroTextBlock({
           <span className="whitespace-nowrap">{siteContent.hero.headlineLine2}</span>
         </p>
 
-        <div className="max-w-[34ch]">
+        <div className={subtitleWrapClassName}>
           <p
             ref={descriptionRef}
             className={cn(styles.gradientTextSecondary, subtitleClassName, animated && styles.animHide)}
@@ -123,7 +127,7 @@ export default function HeroTextBlock({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={platform}
-              className="text-white/40 transition-colors duration-300 hover:text-white"
+              className={cn('text-white/40 transition-colors duration-300 hover:text-white', socialIconClassName)}
             >
               {socialIcons[platform]}
             </a>

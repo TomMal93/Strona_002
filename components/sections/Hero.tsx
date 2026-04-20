@@ -51,6 +51,11 @@ export default function Hero() {
       <MobileHeroLayout>
         <HeroTextBlock
           headingClassName="mt-4 font-bebas text-[88px] uppercase leading-[0.96] md:text-[70px] lg:text-[90px]"
+          eyebrowClassName="block font-bebas text-[34px] uppercase tracking-heading"
+          subtitleClassName="mt-6 whitespace-pre-line pb-5 font-bebas text-[30px] leading-[1.5] tracking-heading"
+          subtitleWrapClassName="w-full"
+          ctaClassName="px-4 py-2 text-center font-bebas text-[36px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2"
+          socialIconClassName="[&>svg]:h-[36px] [&>svg]:w-[36px]"
           underlineClassName="block h-px w-full bg-gradient-to-r from-khaki/70 to-transparent"
         />
       </MobileHeroLayout>
