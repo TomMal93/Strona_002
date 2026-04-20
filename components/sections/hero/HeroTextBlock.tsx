@@ -4,8 +4,6 @@ import { cn } from '@/lib/utils'
 import styles from '../Hero.module.css'
 import { filterSupportedSocialLinks, type SocialPlatform } from './socialPlatforms'
 
-const ctaBaseClassName = 'px-4 py-2 text-center font-bebas text-[23px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2'
-
 const socialIcons: Record<SocialPlatform, JSX.Element> = {
   facebook: (
     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -44,6 +42,9 @@ const socialIcons: Record<SocialPlatform, JSX.Element> = {
 export type HeroTextBlockProps = {
   headingClassName: string
   underlineClassName: string
+  eyebrowClassName?: string
+  subtitleClassName?: string
+  ctaClassName?: string
   animated?: boolean
   eyebrowRef?: Ref<HTMLSpanElement>
   headingRef?: Ref<HTMLParagraphElement>
@@ -56,6 +57,9 @@ export type HeroTextBlockProps = {
 export default function HeroTextBlock({
   headingClassName,
   underlineClassName,
+  eyebrowClassName = 'block font-bebas text-[21px] uppercase tracking-heading',
+  subtitleClassName = 'mt-6 whitespace-pre-line pb-5 font-bebas text-[19px] leading-[1.5] tracking-heading',
+  ctaClassName = 'px-4 py-2 text-center font-bebas text-[23px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2',
   animated = false,
   eyebrowRef,
   headingRef,
@@ -72,7 +76,7 @@ export default function HeroTextBlock({
         <span ref={verticalLineRef} aria-hidden="true" className={cn(styles.verticalLine, animated && styles.animScaleYZero)} />
         <span
           ref={eyebrowRef}
-          className={cn(styles.gradientTextSecondary, 'block font-bebas text-[21px] uppercase tracking-heading', animated && styles.animHide)}
+          className={cn(styles.gradientTextSecondary, eyebrowClassName, animated && styles.animHide)}
         >
           {siteContent.hero.eyebrow}
         </span>
@@ -90,7 +94,7 @@ export default function HeroTextBlock({
         <div className="max-w-[34ch]">
           <p
             ref={descriptionRef}
-            className={cn(styles.gradientTextSecondary, 'mt-6 whitespace-pre-line pb-5 font-bebas text-[19px] leading-[1.5] tracking-heading', animated && styles.animHide)}
+            className={cn(styles.gradientTextSecondary, subtitleClassName, animated && styles.animHide)}
           >
             {siteContent.hero.subtitle}
           </p>
@@ -104,10 +108,10 @@ export default function HeroTextBlock({
 
       <div ref={ctaRef} className={cn('mt-8 flex flex-col gap-5', animated && styles.animHide)}>
         <div className="flex flex-wrap items-center gap-8">
-          <a href={siteContent.hero.ctaHref} className={cn(styles.ctaButton, ctaBaseClassName)}>
+          <a href={siteContent.hero.ctaHref} className={cn(styles.ctaButton, ctaClassName)}>
             {siteContent.hero.ctaLabel}
           </a>
-          <a href="#about" className={cn(styles.ctaButton, styles.ctaButtonSecondary, ctaBaseClassName)}>
+          <a href="#about" className={cn(styles.ctaButton, styles.ctaButtonSecondary, ctaClassName)}>
             {siteContent.hero.aboutLabel}
           </a>
         </div>

@@ -50,7 +50,7 @@ export default function Hero() {
 
       <MobileHeroLayout>
         <HeroTextBlock
-          headingClassName="mt-4 font-bebas text-[46px] uppercase leading-[0.96]"
+          headingClassName="mt-4 font-bebas text-[88px] uppercase leading-[0.96] md:text-[70px] lg:text-[90px]"
           underlineClassName="block h-px w-full bg-gradient-to-r from-khaki/70 to-transparent"
         />
       </MobileHeroLayout>

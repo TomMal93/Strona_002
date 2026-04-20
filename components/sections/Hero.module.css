@@ -1,22 +1,31 @@
 .mobileFrame {
   --mobile-frame-w: 766px; /* musi odpowiadać breakpointowi md:hidden (767px) */
+  --mobile-scale: calc(100vw / var(--mobile-frame-w));
   width: var(--mobile-frame-w);
-  padding-top: 55px;
+  /* Kompensacja scale(origin top-left): frame po skali zajmuje 100vh*scale,
+     reszta (100vh - 100vh*scale) / 2 rozkładamy jako margin-top by wycentrować pionowo */
+  margin-top: calc((100vh - 100vh * var(--mobile-scale)) / 2);
 }
 
 .mobileGroupCenter {
-  top: 50%;
-  transform: translateY(-58%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
 }
 
 .mobileImageWrap {
-  margin-right: 40px;
-  width: 72%;
+  align-self: flex-end;
+  margin-right: -320px;
+  margin-top: -360px;
+  width: 160%;
 }
 
 .mobileTextWrap {
+  align-self: flex-start;
   margin-left: 70px;
-  margin-top: -380px;
+  margin-top: -500px;
 }
 
 .mobileTextHalo {
@@ -44,10 +53,6 @@
 .mobileTextPanel {
   background: rgb(8 8 8 / 0.38);
   backdrop-filter: blur(4px);
-}
-
-.mobileTextPanel :is(h1, p, span, a) {
-  text-shadow: 0 2px 8px rgb(0 0 0 / 0.55);
 }
 
 @media (max-width: 767px) {
@@ -310,40 +315,6 @@
     opacity: 1;
     filter: blur(36px);
   }
-}
-
-/* ── HeroGlowScene — canvas star field ──────────────────────────────────── */
-
-.glowScene {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.starHalo {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 55%;
-  background: radial-gradient(
-    ellipse at center,
-    rgb(var(--c-warm) / 0.24) 0%,
-    rgb(var(--c-gold) / 0.13) 42%,
-    transparent 70%
-  );
-  filter: blur(22px);
-  pointer-events: none;
-}
-
-.dustCanvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
