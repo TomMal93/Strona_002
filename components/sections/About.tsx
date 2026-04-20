@@ -1,7 +1,6 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
-import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './About.module.css'
@@ -22,6 +21,7 @@ export default function About() {
   const [hudFrame, setHudFrame] = useState(307458)
 
   const sectionRef = useRef<HTMLElement>(null!)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const hudBarRef = useRef<HTMLDivElement>(null!)
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const viewfinderRef = useRef<HTMLDivElement>(null!)
@@ -39,6 +39,10 @@ export default function About() {
     }, 80)
 
     return () => window.clearInterval(timer)
+  }, [])
+
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.playbackRate = 0.6
   }, [])
 
   useAboutAnimations({
@@ -63,15 +67,16 @@ export default function About() {
         <div className="grid gap-8 md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
           <div className="order-2 md:order-1 md:col-span-5">
             <div className={styles.mediaShell}>
-              <div aria-hidden="true" className={styles.mediaHalo} />
               <div className={styles.mediaFrame}>
-                <Image
-                  src="/images/about-me-section.png"
-                  alt={siteContent.about.imageAlt}
-                  width={680}
-                  height={1020}
+                <video
+                  ref={videoRef}
+                  src="/videos/about-me.mp4"
+                  aria-label={siteContent.about.imageAlt}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
                   className="h-full w-full object-cover"
-                  sizes="(max-width: 767px) 100vw, 50vw"
                 />
               </div>
             </div>

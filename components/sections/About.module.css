@@ -3,6 +3,20 @@
 .mediaShell {
   position: relative;
   isolation: isolate;
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media (min-width: 768px) {
+  .mediaShell {
+    margin-left: -28%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mediaShell {
+    margin-left: -45%;
+  }
 }
 
 .mediaHalo {
@@ -34,7 +48,36 @@
 .mediaFrame {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: auto;
+  border-radius: 50%;
+  -webkit-mask-image: radial-gradient(
+    circle at center,
+    #000 5%,
+    rgb(0 0 0 / 0.92) 18%,
+    rgb(0 0 0 / 0.78) 30%,
+    rgb(0 0 0 / 0.6) 42%,
+    rgb(0 0 0 / 0.42) 55%,
+    rgb(0 0 0 / 0.26) 68%,
+    rgb(0 0 0 / 0.14) 80%,
+    rgb(0 0 0 / 0.06) 90%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle at center,
+    #000 5%,
+    rgb(0 0 0 / 0.92) 18%,
+    rgb(0 0 0 / 0.78) 30%,
+    rgb(0 0 0 / 0.6) 42%,
+    rgb(0 0 0 / 0.42) 55%,
+    rgb(0 0 0 / 0.26) 68%,
+    rgb(0 0 0 / 0.14) 80%,
+    rgb(0 0 0 / 0.06) 90%,
+    transparent 100%
+  );
 }
 
 /* ── Title accent line ─────────────────────────────────────────────────── */
