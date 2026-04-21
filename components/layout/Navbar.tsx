@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { label: 'O MNIE', href: '/#about' },
   { label: 'REALIZACJE', href: '/#promo' },
   { label: 'OPINIE', href: '/#testimonials' },
-  { label: 'OFERTA', href: '/#services' },
+  { label: 'OFERTA', href: '/oferta' },
   { label: 'PROCES', href: '/#process' },
   { label: 'FAQ', href: '/#faq' },
   { label: 'WSPÓŁPRACA', href: '/#cta' },

@@ -306,6 +306,26 @@ export const siteContent = {
       { platform: 'messenger' as const, href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || 'https://m.me/maleszyk.media' },
     ],
   },
+  offerPage: {
+    meta: {
+      title: process.env.NEXT_PUBLIC_OFFER_META_TITLE || 'Oferta — Maleszyk Media',
+      description:
+        process.env.NEXT_PUBLIC_OFFER_META_DESC
+        || 'Film okolicznościowy, profesjonalny montaż i materiały promocyjne — pełna oferta usług filmowych.',
+    },
+    hero: {
+      eyebrow: 'Usługi',
+      title: 'Oferta',
+      lead:
+        'Od kluczowych momentów, przez montaż, po materiały dla marki.\nCel jest jeden — obraz, który przyciąga i zostaje w pamięci.',
+    },
+    cta: {
+      title: 'Porozmawiajmy o Twoim projekcie',
+      lead: 'Napisz, zadzwoń albo umów krótką rozmowę — powiem Ci, co mogę zrobić, a Ty zdecydujesz.',
+      label: 'Skontaktuj się',
+      href: '/contact',
+    },
+  },
   aboutMe: {
     meta: {
       title: process.env.NEXT_PUBLIC_ABOUTME_META_TITLE || 'O mnie',

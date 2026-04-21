@@ -1,0 +1,20 @@
+.heroSection {
+  position: relative;
+  overflow: hidden;
+}
+
+.heroSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 80% at 50% 0%, rgba(var(--c-gold) / 0.08), transparent 70%),
+    radial-gradient(50% 60% at 50% 100%, rgba(var(--c-olive) / 0.08), transparent 75%);
+}
+
+.eyebrow,
+.title,
+.lead {
+  position: relative;
+}
