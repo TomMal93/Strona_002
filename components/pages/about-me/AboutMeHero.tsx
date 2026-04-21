@@ -16,6 +16,7 @@ type AboutMeHeroProps = {
     backgroundAlt?: string
     showRecIndicator?: boolean
     showTimecode?: boolean
+    framedImage?: boolean
   }
 }
 
@@ -45,18 +46,39 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
     <section
       ref={sectionRef}
       aria-label="Profil reżysera"
-      className={styles.heroSection}
+      className={cn(
+        styles.heroSection,
+        hero.framedImage && styles.heroSectionFramed,
+      )}
     >
       {/* Parallax background */}
-      <div ref={bgRef} className={styles.heroBg}>
+      <div
+        ref={bgRef}
+        className={cn(
+          styles.heroBg,
+          hero.framedImage && styles.heroBgFramed,
+        )}
+      >
         <Image
           src={hero.backgroundImage}
           alt={hero.backgroundAlt}
           fill
           priority
           sizes="100vw"
-          style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
+          style={
+            hero.framedImage
+              ? { objectFit: 'cover', objectPosition: 'center center' }
+              : { objectFit: 'cover', objectPosition: 'center 20%' }
+          }
         />
+        {hero.framedImage ? (
+          <>
+            <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerTL)} />
+            <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerTR)} />
+            <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerBL)} />
+            <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerBR)} />
+          </>
+        ) : null}
       </div>
 
       {/* Overlay */}

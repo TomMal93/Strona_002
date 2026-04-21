@@ -18,6 +18,7 @@ export default function AboutMePage() {
           backgroundAlt: 'Zdjęcie kontaktowe',
           showRecIndicator: false,
           showTimecode: false,
+          framedImage: true,
         }}
       />
       <AboutMeBio />
