@@ -20,6 +20,7 @@ const ACTIVE_SECTION_PROGRESS = 2 / 3
 export default function SectionRail() {
   const pathname = usePathname()
   const [activeId, setActiveId] = useState<string>(SECTIONS[0].id)
+  const [isRevealed, setIsRevealed] = useState(false)
 
   useEffect(() => {
     if (pathname !== HOME_PATH) return
@@ -61,6 +62,7 @@ export default function SectionRail() {
       }
 
       setActiveId(nextId)
+      setIsRevealed(window.scrollY > window.innerHeight * 0.2)
     }
 
     const onScroll = () => {
@@ -89,7 +91,12 @@ export default function SectionRail() {
   return (
     <nav
       aria-label="Nawigacja sekcji"
-      className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 lg:block"
+      aria-hidden={!isRevealed}
+      className={[
+        'fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 lg:block',
+        'transition-opacity duration-500 motion-reduce:transition-none',
+        isRevealed ? 'opacity-100' : 'pointer-events-none opacity-0',
+      ].join(' ')}
     >
       <ul role="list" className="flex flex-col gap-7">
         {SECTIONS.map((section) => {
@@ -101,9 +108,11 @@ export default function SectionRail() {
                 aria-current={isActive ? 'true' : undefined}
                 className={[
                   'group flex items-center gap-3 font-bebas text-[18px] tracking-heading uppercase',
-                  'transition-colors duration-300',
+                  'transition-all duration-300',
                   'focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-khaki',
-                  isActive ? 'text-khaki' : 'text-white/40 hover:text-white/80',
+                  isActive
+                    ? 'text-khaki opacity-100'
+                    : 'text-white opacity-40 hover:opacity-100',
                 ].join(' ')}
               >
                 <span>{section.label}</span>
@@ -112,8 +121,8 @@ export default function SectionRail() {
                   className={[
                     'block transition-all duration-300 motion-reduce:transition-none',
                     isActive
-                      ? 'h-0.5 w-12 bg-khaki'
-                      : 'h-px w-7 bg-white/40 group-hover:bg-white/80',
+                      ? 'h-0.5 w-16 bg-khaki'
+                      : 'h-px w-7 bg-white',
                   ].join(' ')}
                 />
               </Link>
