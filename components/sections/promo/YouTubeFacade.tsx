@@ -15,10 +15,20 @@ export function YouTubeFacade({ videoId, title }: YouTubeFacadeProps) {
     setLoaded(true)
   }, [])
 
+  const cornerMarks = (
+    <>
+      <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />
+      <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR}`} />
+      <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL}`} />
+      <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR}`} />
+    </>
+  )
+
   if (loaded) {
     return (
       <div className={styles.ytCard}>
         <div className={styles.ytEmbed}>
+          {cornerMarks}
           <iframe
             src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
             title={title}
@@ -47,6 +57,7 @@ export function YouTubeFacade({ videoId, title }: YouTubeFacadeProps) {
           loading="lazy"
         />
         <span className={styles.ytScanline} aria-hidden="true" />
+        {cornerMarks}
         <span className={styles.ytPlayBtn} aria-hidden="true">
           <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
             <path d="M8 5v14l11-7z" />

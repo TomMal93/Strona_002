@@ -77,21 +77,21 @@ export const siteContent = {
         quote:
           'Jesteśmy zachwyceni naszym filmem weselnym! Całość została zmontowana w piękny, emocjonalny sposób i oglądając go znowu czujemy dokładnie te same emocje co w dniu ślubu. To pamiątka na całe życie — dziękujemy!',
         author: 'Maja',
-        context: 'Para młoda — Film weselny',
+        context: 'Para młoda - Film weselny',
         tagline: 'EMOCJE',
       },
       {
         quote:
           'Relacja została zrealizowana fantastycznie. Kamera idealnie oddała klimat wydarzenia — energię sceny i wyjątkową atmosferę. Montaż jest dynamiczny, a ujęcia bardzo klimatyczne, dzięki czemu film świetnie oddaje charakter całego koncertu.',
         author: 'Echo Rodu',
-        context: 'Zespół muzyczny — Relacja z koncertu',
+        context: 'Zespół muzyczny - Relacja z koncertu',
         tagline: 'KLIMAT',
       },
       {
         quote:
           'Film promocyjny przerósł nasze oczekiwania. Ujęcia wyglądają jak z teledysku! Dzięki temu filmowi nasza oferta prezentuje się dużo bardziej efektownie.',
         author: 'Full Moon Flames',
-        context: 'Zespół — Film promocyjny',
+        context: 'Zespół - Film promocyjny',
         tagline: 'EFEKT',
       },
     ],

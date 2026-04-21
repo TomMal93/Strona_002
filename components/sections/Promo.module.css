@@ -68,7 +68,6 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   margin-top: 2rem;
-  border: 1px solid rgb(var(--c-warm) / 0.25);
   overflow: hidden;
 }
 
@@ -286,7 +285,6 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border: 1px solid rgb(var(--c-warm) / 0.2);
   background: rgb(20 18 16);
   cursor: pointer;
   padding: 0;
@@ -353,7 +351,11 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border: 1px solid rgb(var(--c-warm) / 0.2);
+}
+
+.ytThumbnailBtn .cornerMark,
+.ytEmbed .cornerMark {
+  z-index: 3;
 }
 
 .ytIframe {
@@ -369,7 +371,7 @@
 .ytTitle {
   margin: 0.55rem 0 0;
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-  font-size: 1rem;
+  font-size: 1.2rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-align: center;
