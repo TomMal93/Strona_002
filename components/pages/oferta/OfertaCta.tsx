@@ -5,7 +5,9 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
-import Button from '@/components/ui/Button'
+import CtaActions from '@/components/sections/cta/CtaActions'
+import CtaShell from '@/components/sections/cta/CtaShell'
+import heroStyles from '@/components/sections/Hero.module.css'
 import styles from './OfertaCta.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -14,7 +16,15 @@ export default function OfertaCta() {
   const sectionRef = useRef<HTMLElement>(null!)
   const contentRef = useRef<HTMLDivElement>(null!)
 
-  const { title, lead, label, href } = siteContent.offerPage.cta
+  const { title, lead } = siteContent.offerPage.cta
+  const {
+    ctaLabel, ctaHref, phoneLabel, phoneHref,
+    secondaryLabel, secondaryHref, social,
+  } = siteContent.cta
+  const actionsData = {
+    ctaLabel, ctaHref, phoneLabel, phoneHref,
+    secondaryLabel, secondaryHref, social,
+  }
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -46,19 +56,26 @@ export default function OfertaCta() {
         styles.section,
       )}
     >
-      <div
-        ref={contentRef}
-        className="mx-auto flex max-w-2xl flex-col items-center text-center"
-      >
-        <h2 className="font-bebas text-5xl uppercase leading-[0.9] tracking-wide text-warm-white sm:text-6xl">
-          {title}
-        </h2>
-        <p className="mt-5 whitespace-pre-line font-mono text-[0.95rem] leading-[1.85] tracking-wide text-white/50">
-          {lead}
-        </p>
-        <Button as="a" href={href} variant="primary" size="lg" className="mt-8">
-          {label}
-        </Button>
+      <div ref={contentRef} className="mx-auto max-w-content">
+        <CtaShell glow={false}>
+          <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+            <h2
+              className={cn(
+                heroStyles.gradientTextPrimary,
+                'font-bebas text-5xl uppercase leading-[0.9] tracking-wide sm:text-6xl',
+              )}
+            >
+              {title}
+            </h2>
+            <p className="mt-5 whitespace-pre-line font-mono text-[0.95rem] leading-[1.85] tracking-wide text-white/50">
+              {lead}
+            </p>
+          </div>
+
+          <div className="mt-10">
+            <CtaActions data={actionsData} />
+          </div>
+        </CtaShell>
       </div>
     </section>
   )
