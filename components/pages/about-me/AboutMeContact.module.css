@@ -225,6 +225,78 @@
   justify-content: center;
 }
 
+.btnIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+}
+
+.btnPrimary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(var(--c-gold) / 0.55);
+  background: rgb(13 13 13 / 0.92);
+  text-decoration: none;
+  transition:
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 300ms ease;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  border-color: rgb(var(--c-gold) / 0.9);
+}
+
+.btnPulseRing {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgb(var(--c-gold) / 0.55);
+  pointer-events: none;
+  animation: pulseRing 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.btnPulseRing2 {
+  animation-delay: 1.2s;
+}
+
+@keyframes pulseRing {
+  0% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+
+  80% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+}
+
+.btnPrimaryInner {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.15rem 3rem;
+  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
+  font-size: 1.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.92);
+  transition: color 300ms ease;
+}
+
+.btnPrimary:hover .btnPrimaryInner {
+  color: rgb(255 238 175);
+}
+
 /* ── Responsive ──────────────────────────────────────────────────────── */
 
 @media (width < 48rem) {
@@ -237,5 +309,10 @@
 
   .contactPanel {
     padding: 1.75rem 1.25rem;
+  }
+
+  .btnPrimaryInner {
+    padding: 1rem 2rem;
+    font-size: 1.3rem;
   }
 }

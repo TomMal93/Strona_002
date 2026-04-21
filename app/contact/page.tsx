@@ -4,7 +4,6 @@ import AboutMeHero from '@/components/pages/about-me/AboutMeHero'
 import AboutMeBio from '@/components/pages/about-me/AboutMeBio'
 import AboutMeVideo from '@/components/pages/about-me/AboutMeVideo'
 import AboutMeContact from '@/components/pages/about-me/AboutMeContact'
-import AboutMeGear from '@/components/pages/about-me/AboutMeGear'
 
 export const metadata: Metadata = {
   title: siteContent.aboutMe.meta.title,
@@ -30,7 +29,6 @@ export default function AboutMePage() {
         }}
       />
       <AboutMeContact />
-      <AboutMeGear />
     </main>
   )
 }

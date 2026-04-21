@@ -354,7 +354,7 @@ export const siteContent = {
     bio: {
       title: 'O mnie',
       hudLabelLeft: 'NOTES',
-      hudLabelRight: 'SCENE 01 / 05',
+      hudLabelRight: 'SCENE 01 / 03',
       text:
         process.env.NEXT_PUBLIC_ABOUTME_BIO
         || 'Filmowaniem zajmuję się od około 3 lat.\nWszystko zaczęło się dość niewinnie - od chęci nagrywania moich terenowych wypadów.\nPoczątkowo były to proste ujęcia z drona i aparatu, bardziej dla własnej satysfakcji niż z myślą o czymś większym.\nZ czasem jednak zacząłem dostrzegać,\nże obraz potrafi opowiadać historie w wyjątkowy sposób - oddawać emocje, klimat miejsca i chwile,\nktóre szybko przemijają.\nTo właśnie wtedy hobby zaczęło przeradzać się w prawdziwą pasję.\nDziś kamera towarzyszy mi znacznie częściej, a każde kolejne nagranie jest okazją do tworzenia czegoś autentycznego - filmu, który zatrzymuje moment\ni pozwala wracać do niego po latach.',
@@ -362,7 +362,7 @@ export const siteContent = {
     video: {
       title: 'Przedstawiam się',
       hudLabelLeft: 'INTRO',
-      hudLabelRight: 'SCENE 02 / 05',
+      hudLabelRight: 'SCENE 02 / 03',
       type: (process.env.NEXT_PUBLIC_ABOUTME_VIDEO_TYPE || 'self-hosted') as 'youtube' | 'self-hosted',
       youtubeId: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_YT_ID || 'jCpSTtkiKsY',
       src: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_SRC || '/videos/contact/contact.mp4',
@@ -371,35 +371,16 @@ export const siteContent = {
     contact: {
       title: 'Kontakt',
       hudLabelLeft: 'CONTACT',
-      hudLabelRight: 'SCENE 03 / 05',
+      hudLabelRight: 'SCENE 03 / 03',
       phone: process.env.NEXT_PUBLIC_ABOUTME_PHONE || '+48 123 456 789',
       email: process.env.NEXT_PUBLIC_ABOUTME_EMAIL || 'kontakt@example.com',
-      ctaLabel: process.env.NEXT_PUBLIC_ABOUTME_CTA_LABEL || 'Napisz do mnie',
+      ctaLabel: process.env.NEXT_PUBLIC_ABOUTME_CTA_LABEL || 'Porozmawiajmy',
       ctaHref: process.env.NEXT_PUBLIC_ABOUTME_CTA_HREF || 'mailto:kontakt@example.com',
       socials: [
         { platform: 'facebook', href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || '#', label: 'Facebook' },
         { platform: 'instagram', href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || '#', label: 'Instagram' },
         { platform: 'tiktok', href: process.env.NEXT_PUBLIC_SOCIAL_TIKTOK || '#', label: 'TikTok' },
         { platform: 'youtube', href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || '#', label: 'YouTube' },
-      ],
-    },
-    gear: {
-      title: 'Arsenał',
-      hudLabelLeft: 'GEAR',
-      hudLabelRight: 'SCENE 04 / 05',
-      stats: [
-        { value: 500, suffix: '+', label: 'Projektów' },
-        { value: 8, suffix: '+', label: 'Lat doświadczenia' },
-        { value: 4, suffix: 'K', label: 'Rozdzielczość' },
-        { value: 100, suffix: '%', label: 'Zadowolenia' },
-      ],
-      items: [
-        { category: 'KAMERA', name: 'Sony FX3', spec: 'Full-frame / S-Log3 / 4K 120fps' },
-        { category: 'DRON', name: 'DJI Mavic 3 Pro', spec: 'Hasselblad / 5.1K / APAS 5.0' },
-        { category: 'STABILIZATOR', name: 'DJI RS 3 Pro', spec: '4.5kg payload / LiDAR focus' },
-        { category: 'DŹWIĘK', name: 'Rode Wireless PRO', spec: '32-bit float / dual channel' },
-        { category: 'OŚWIETLENIE', name: 'Nanlite Forza 60C', spec: 'RGBLAC / 2700-7500K' },
-        { category: 'MONTAŻ', name: 'DaVinci Resolve', spec: 'Studio / Color grading / Fusion' },
       ],
     },
   },
