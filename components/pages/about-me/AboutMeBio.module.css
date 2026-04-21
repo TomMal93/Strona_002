@@ -89,7 +89,6 @@
   margin: 0 auto;
   padding: 2rem 2rem 2rem 2.5rem;
   background: rgb(245 240 235 / 0.04);
-  border-left: 2px solid rgb(var(--c-gold) / 0.25);
 }
 
 /* Corner marks */
@@ -166,6 +165,37 @@
 
 .bioWord {
   display: inline;
+}
+
+.videoBlock {
+  margin-top: 2.5rem;
+}
+
+.videoSeparator {
+  width: min(100%, 32rem);
+  height: 1px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.12) 18%,
+    rgb(var(--c-gold) / 0.45) 50%,
+    rgb(var(--c-gold) / 0.12) 82%,
+    transparent 100%
+  );
+}
+
+.videoBlockHeader {
+  margin-bottom: 1.1rem;
+  text-align: center;
+}
+
+.videoBlockLead {
+  margin: 0;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: rgb(255 255 255 / 0.5);
 }
 
 /* ── Responsive ──────────────────────────────────────────────────────── */

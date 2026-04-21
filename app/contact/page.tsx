@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { siteContent } from '@/lib/site-content'
 import AboutMeHero from '@/components/pages/about-me/AboutMeHero'
 import AboutMeBio from '@/components/pages/about-me/AboutMeBio'
-import AboutMeVideo from '@/components/pages/about-me/AboutMeVideo'
 import AboutMeContact from '@/components/pages/about-me/AboutMeContact'
 
 export const metadata: Metadata = {
@@ -22,12 +21,6 @@ export default function AboutMePage() {
         }}
       />
       <AboutMeBio />
-      <AboutMeVideo
-        videoOverride={{
-          type: 'self-hosted',
-          src: '/videos/contact/contact.mp4',
-        }}
-      />
       <AboutMeContact />
     </main>
   )

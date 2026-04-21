@@ -7,6 +7,7 @@ import styles from './AboutMeVideo.module.css'
 import { useAboutMeVideoAnimations } from './useAboutMeVideoAnimations'
 
 type AboutMeVideoProps = {
+  embedded?: boolean
   videoOverride?: {
     title?: string
     hudLabelLeft?: string
@@ -18,7 +19,7 @@ type AboutMeVideoProps = {
   }
 }
 
-export default function AboutMeVideo({ videoOverride }: AboutMeVideoProps) {
+export default function AboutMeVideo({ embedded = false, videoOverride }: AboutMeVideoProps) {
   const sectionRef = useRef<HTMLElement>(null!)
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const subtitleRef = useRef<HTMLParagraphElement>(null!)
@@ -85,6 +86,114 @@ export default function AboutMeVideo({ videoOverride }: AboutMeVideoProps) {
     videoShellRef,
   })
 
+  const videoPlayer = (
+    <div
+      ref={videoShellRef}
+      className={cn(
+        styles.videoShell,
+        isYouTube ? styles.videoShellLandscape : styles.videoShellPortrait,
+      )}
+    >
+      <div className={styles.videoHalo} aria-hidden="true" />
+
+      {/* Sprocket holes */}
+      <div
+        className={cn(
+          styles.sprocketTop,
+          isYouTube ? styles.sprocketLandscape : styles.sprocketPortrait,
+        )}
+        aria-hidden="true"
+      />
+
+      <div
+        className={cn(
+          styles.videoFrame,
+          isYouTube ? styles.videoFrameLandscape : styles.videoFramePortrait,
+        )}
+      >
+        <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerTL)} />
+        <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerTR)} />
+        <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerBL)} />
+        <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerBR)} />
+
+        {isYouTube ? (
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}?rel=0`}
+            title={video.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        ) : (
+          <>
+            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+            <video
+              ref={videoRef}
+              muted
+              loop
+              playsInline
+              poster={video.poster}
+            >
+              <source src={video.src} type="video/mp4" />
+            </video>
+
+            <button
+              type="button"
+              className={cn(
+                styles.videoPlayOverlay,
+                isPlaying && styles.videoPlayOverlayPlaying,
+              )}
+              onClick={handlePlayPause}
+              aria-label={isPlaying ? 'Zatrzymaj film' : 'Odtwórz film'}
+            >
+              <span
+                className={cn(
+                  styles.videoPlayBtn,
+                  isPlaying && styles.videoPlayBtnPlaying,
+                )}
+              >
+                <span className={cn(styles.videoPlayIcon, styles.videoPlayIconPlay)}>
+                  <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+                <span className={cn(styles.videoPlayIcon, styles.videoPlayIconPause)}>
+                  <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
+                    <rect x="6" y="5" width="4" height="14" />
+                    <rect x="14" y="5" width="4" height="14" />
+                  </svg>
+                </span>
+              </span>
+            </button>
+
+            <div aria-hidden="true" className={styles.videoBottomBar}>
+              <span className={styles.videoCodec}>H.265/LOG3</span>
+              <span className={styles.videoProgress}>
+                <span
+                  className={styles.videoProgressFill}
+                  style={{ transform: `scaleX(${progress})` }}
+                />
+              </span>
+              <span className={styles.videoTimecode}>{timecode}</span>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Sprocket holes bottom */}
+      <div
+        className={cn(
+          styles.sprocketBottom,
+          isYouTube ? styles.sprocketLandscape : styles.sprocketPortrait,
+        )}
+        aria-hidden="true"
+      />
+    </div>
+  )
+
+  if (embedded) {
+    return <div ref={sectionRef}>{videoPlayer}</div>
+  }
+
   return (
     <section
       ref={sectionRef}
@@ -130,107 +239,7 @@ export default function AboutMeVideo({ videoOverride }: AboutMeVideoProps) {
         </div>
 
         {/* Video player */}
-        <div
-          ref={videoShellRef}
-          className={cn(
-            styles.videoShell,
-            isYouTube ? styles.videoShellLandscape : styles.videoShellPortrait,
-          )}
-        >
-          <div className={styles.videoHalo} aria-hidden="true" />
-
-          {/* Sprocket holes */}
-          <div
-            className={cn(
-              styles.sprocketTop,
-              isYouTube ? styles.sprocketLandscape : styles.sprocketPortrait,
-            )}
-            aria-hidden="true"
-          />
-
-          <div
-            className={cn(
-              styles.videoFrame,
-              isYouTube ? styles.videoFrameLandscape : styles.videoFramePortrait,
-            )}
-          >
-            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerTL)} />
-            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerTR)} />
-            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerBL)} />
-            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerBR)} />
-
-            {isYouTube ? (
-              <iframe
-                src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}?rel=0`}
-                title={video.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            ) : (
-              <>
-                {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                <video
-                  ref={videoRef}
-                  muted
-                  loop
-                  playsInline
-                  poster={video.poster}
-                >
-                  <source src={video.src} type="video/mp4" />
-                </video>
-
-                <button
-                  type="button"
-                  className={cn(
-                    styles.videoPlayOverlay,
-                    isPlaying && styles.videoPlayOverlayPlaying,
-                  )}
-                  onClick={handlePlayPause}
-                  aria-label={isPlaying ? 'Zatrzymaj film' : 'Odtwórz film'}
-                >
-                  <span
-                    className={cn(
-                      styles.videoPlayBtn,
-                      isPlaying && styles.videoPlayBtnPlaying,
-                    )}
-                  >
-                    <span className={cn(styles.videoPlayIcon, styles.videoPlayIconPlay)}>
-                      <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </span>
-                    <span className={cn(styles.videoPlayIcon, styles.videoPlayIconPause)}>
-                      <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
-                        <rect x="6" y="5" width="4" height="14" />
-                        <rect x="14" y="5" width="4" height="14" />
-                      </svg>
-                    </span>
-                  </span>
-                </button>
-
-                <div aria-hidden="true" className={styles.videoBottomBar}>
-                  <span className={styles.videoCodec}>H.265/LOG3</span>
-                  <span className={styles.videoProgress}>
-                    <span
-                      className={styles.videoProgressFill}
-                      style={{ transform: `scaleX(${progress})` }}
-                    />
-                  </span>
-                  <span className={styles.videoTimecode}>{timecode}</span>
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* Sprocket holes bottom */}
-          <div
-            className={cn(
-              styles.sprocketBottom,
-              isYouTube ? styles.sprocketLandscape : styles.sprocketPortrait,
-            )}
-            aria-hidden="true"
-          />
-        </div>
+        {videoPlayer}
       </div>
     </section>
   )

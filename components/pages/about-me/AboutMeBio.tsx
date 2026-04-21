@@ -5,6 +5,7 @@ import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './AboutMeBio.module.css'
 import { useAboutMeBioAnimations } from './useAboutMeBioAnimations'
+import AboutMeVideo from './AboutMeVideo'
 
 export default function AboutMeBio() {
   const sectionRef = useRef<HTMLElement>(null!)
@@ -22,6 +23,7 @@ export default function AboutMeBio() {
   })
 
   const { bio } = siteContent.aboutMe
+  const { video } = siteContent.aboutMe
 
   const [introBlock, ...restBlocks] = bio.text.split('\n\n')
   const introLines = introBlock.split('\n')
@@ -124,6 +126,21 @@ export default function AboutMeBio() {
               ))}
             </p>
           ))}
+
+          <div className={styles.videoBlock}>
+            <div aria-hidden="true" className={styles.videoSeparator} />
+            <div className={styles.videoBlockHeader}>
+              <p className={styles.videoBlockLead}>Poznaj mnie bliżej - w minutę.</p>
+            </div>
+
+            <AboutMeVideo
+              embedded
+              videoOverride={{
+                type: 'self-hosted',
+                src: '/videos/contact/contact.mp4',
+              }}
+            />
+          </div>
         </div>
       </div>
     </section>
