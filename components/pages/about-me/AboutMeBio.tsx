@@ -138,9 +138,6 @@ export default function AboutMeBio() {
                 {video.highlightsLeft.map((item, index) => (
                   <article key={item} className={styles.videoFeatureCard}>
                     <div className={styles.videoFeatureMeta}>
-                      <span className={styles.videoFeatureIndex}>
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
                       <span aria-hidden="true" className={styles.videoFeatureRule} />
                     </div>
                     <h3 className={styles.videoFeatureTitle}>{item}</h3>
@@ -164,9 +161,6 @@ export default function AboutMeBio() {
                 {video.highlightsRight.map((item, index) => (
                   <article key={item} className={styles.videoFeatureCard}>
                     <div className={styles.videoFeatureMeta}>
-                      <span className={styles.videoFeatureIndex}>
-                        {String(index + 3).padStart(2, '0')}
-                      </span>
                       <span aria-hidden="true" className={styles.videoFeatureRule} />
                     </div>
                     <h3 className={styles.videoFeatureTitle}>{item}</h3>

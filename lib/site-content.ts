@@ -368,12 +368,18 @@ export const siteContent = {
       src: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_SRC || '/videos/contact/contact.mp4',
       poster: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_POSTER || '/images/about-me-video-poster.jpg',
       highlightsLeft: [
-        'Autentyczne kadry',
-        'Czucie klimatu',
+        'Wyczucie\nchwili',
+        'Naturalne emocje',
+        'Filmowe spojrzenie',
+        'Spokój w działaniu',
+        'Uważność na detal',
       ],
       highlightsRight: [
-        'Filmowe myślenie',
-        'Dopracowany montaż',
+        'Dopracowany detal',
+        'Prawdziwe tempo',
+        'Światło i przestrzeń',
+        'Kadry z charakterem',
+        'Opowieść w obrazie',
       ],
     },
     contact: {
