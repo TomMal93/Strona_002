@@ -18,6 +18,10 @@ const NAV_ITEMS = [
   { label: 'KONTAKT', href: '/contact' },
 ] as const
 
+const DESKTOP_NAV_ITEMS = NAV_ITEMS.filter((item) => (
+  item.href === '/#hero' || item.href === '/oferta' || item.href === '/contact'
+))
+
 const navLinkClassName = [
   'relative font-bebas text-[16px] tracking-heading uppercase',
   'text-white/60 hover:text-white transition-colors duration-300',
@@ -220,7 +224,7 @@ export default function Navbar() {
 
         {/* Desktop navigation */}
         <nav className="hidden md:flex items-center gap-10" aria-label="Nawigacja główna">
-          {NAV_ITEMS.map((item) => (
+          {DESKTOP_NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
