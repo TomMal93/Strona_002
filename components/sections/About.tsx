@@ -67,7 +67,6 @@ export default function About() {
         <div className="grid gap-8 md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
           <div className="order-2 md:order-1 md:col-span-5">
             <div className={styles.mediaShell}>
-              <div aria-hidden="true" className={styles.mediaGlow} />
               <div className={styles.mediaFrame}>
                 <video
                   ref={videoRef}
@@ -77,8 +76,12 @@ export default function About() {
                   loop
                   muted
                   playsInline
-                  className="h-full w-full object-cover"
+                  className={styles.mediaVideo}
                 />
+                <div aria-hidden="true" className={styles.hologramTint} />
+                <div aria-hidden="true" className={styles.hologramGrid} />
+                <div aria-hidden="true" className={styles.hologramScanlines} />
+                <div aria-hidden="true" className={styles.cinematicNoise} />
               </div>
             </div>
           </div>
