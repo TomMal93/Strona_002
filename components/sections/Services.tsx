@@ -325,7 +325,7 @@ export default function Services() {
             href={siteContent.services.ctaHref}
             className={cn(
               styles.ctaLink,
-              'font-bebas text-xl uppercase tracking-widest sm:text-2xl',
+              'font-bebas text-[1.15rem] uppercase tracking-widest sm:text-[1.35rem]',
             )}
           >
             {siteContent.services.ctaLabel}
@@ -337,7 +337,7 @@ export default function Services() {
             href={siteContent.services.secondaryCtaHref}
             className={cn(
               styles.ctaLink,
-              'font-bebas text-xl uppercase tracking-widest sm:text-2xl',
+              'font-bebas text-[1.15rem] uppercase tracking-widest sm:text-[1.35rem]',
             )}
           >
             {siteContent.services.secondaryCtaLabel}
