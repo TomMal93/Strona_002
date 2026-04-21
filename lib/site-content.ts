@@ -367,6 +367,14 @@ export const siteContent = {
       youtubeId: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_YT_ID || 'jCpSTtkiKsY',
       src: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_SRC || '/videos/contact/contact.mp4',
       poster: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_POSTER || '/images/about-me-video-poster.jpg',
+      highlightsLeft: [
+        'Autentyczne kadry',
+        'Czucie klimatu',
+      ],
+      highlightsRight: [
+        'Filmowe myślenie',
+        'Dopracowany montaż',
+      ],
     },
     contact: {
       title: 'Kontakt',

@@ -133,13 +133,47 @@ export default function AboutMeBio() {
               <p className={styles.videoBlockLead}>Poznaj mnie bliżej - w minutę.</p>
             </div>
 
-            <AboutMeVideo
-              embedded
-              videoOverride={{
-                type: 'self-hosted',
-                src: '/videos/contact/contact.mp4',
-              }}
-            />
+            <div className={styles.videoFeatureLayout}>
+              <div className={cn(styles.videoFeatureColumn, styles.videoFeatureColumnLeft)}>
+                {video.highlightsLeft.map((item, index) => (
+                  <article key={item} className={styles.videoFeatureCard}>
+                    <div className={styles.videoFeatureMeta}>
+                      <span className={styles.videoFeatureIndex}>
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <span aria-hidden="true" className={styles.videoFeatureRule} />
+                    </div>
+                    <h3 className={styles.videoFeatureTitle}>{item}</h3>
+                  </article>
+                ))}
+              </div>
+
+              <div className={styles.videoFeatureCenter}>
+                <span aria-hidden="true" className={cn(styles.videoDivider, styles.videoDividerLeft)} />
+                <AboutMeVideo
+                  embedded
+                  videoOverride={{
+                    type: 'self-hosted',
+                    src: '/videos/contact/contact.mp4',
+                  }}
+                />
+                <span aria-hidden="true" className={cn(styles.videoDivider, styles.videoDividerRight)} />
+              </div>
+
+              <div className={cn(styles.videoFeatureColumn, styles.videoFeatureColumnRight)}>
+                {video.highlightsRight.map((item, index) => (
+                  <article key={item} className={styles.videoFeatureCard}>
+                    <div className={styles.videoFeatureMeta}>
+                      <span className={styles.videoFeatureIndex}>
+                        {String(index + 3).padStart(2, '0')}
+                      </span>
+                      <span aria-hidden="true" className={styles.videoFeatureRule} />
+                    </div>
+                    <h3 className={styles.videoFeatureTitle}>{item}</h3>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

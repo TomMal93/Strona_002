@@ -198,6 +198,118 @@
   color: rgb(255 255 255 / 0.5);
 }
 
+.videoFeatureLayout {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.videoFeatureColumn {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.videoFeatureCard {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.15rem 0;
+  text-align: center;
+}
+
+.videoFeatureMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.videoFeatureIndex {
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.42);
+}
+
+.videoFeatureRule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--c-gold) / 0.45) 0%,
+    rgb(var(--c-gold) / 0.12) 100%
+  );
+}
+
+.videoFeatureTitle {
+  margin: 0;
+  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
+  font-size: 1.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.9);
+}
+
+.videoFeatureCenter {
+  position: relative;
+  min-width: 0;
+}
+
+.videoDivider {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.1) 12%,
+    rgb(var(--c-gold) / 0.38) 50%,
+    rgb(var(--c-gold) / 0.1) 88%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+@media (width >= 64rem) {
+  .videoFeatureLayout {
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 30rem) minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+
+  .videoFeatureColumnLeft .videoFeatureCard {
+    text-align: right;
+  }
+
+  .videoFeatureColumnRight .videoFeatureCard {
+    text-align: left;
+  }
+
+  .videoFeatureColumnRight .videoFeatureMeta {
+    flex-direction: row-reverse;
+  }
+
+  .videoFeatureColumnRight .videoFeatureRule {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--c-gold) / 0.12) 0%,
+      rgb(var(--c-gold) / 0.45) 100%
+    );
+  }
+
+  .videoDivider {
+    display: block;
+  }
+
+  .videoDividerLeft {
+    left: -0.55rem;
+  }
+
+  .videoDividerRight {
+    right: -0.55rem;
+  }
+}
+
 /* ── Responsive ──────────────────────────────────────────────────────── */
 
 @media (width < 48rem) {
