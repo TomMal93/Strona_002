@@ -23,8 +23,8 @@ export default function AboutMeBio() {
 
   const { bio } = siteContent.aboutMe
 
-  // Split text into words for typewriter effect
-  const words = bio.text.split(/(\s+)/)
+  const [introBlock, ...restBlocks] = bio.text.split('\n\n')
+  const introLines = introBlock.split('\n')
 
   return (
     <section
@@ -79,17 +79,51 @@ export default function AboutMeBio() {
 
           <span aria-hidden="true" className={styles.notesLabel}>NOTES</span>
 
-          <p className={styles.bioText}>
-            {words.map((word, i) =>
-              /^\s+$/.test(word) ? (
-                word
-              ) : (
-                <span key={i} data-bio-word className={styles.bioWord}>
-                  {word}
-                </span>
-              ),
-            )}
+          <p className={cn(styles.bioText, styles.bioTextIntro)}>
+            {introLines.map((line, lineIndex) => (
+              <span key={line}>
+                {line.split(/(\s+)/).map((word, i) =>
+                  /^\s+$/.test(word) ? (
+                    word
+                  ) : (
+                    <span key={`${lineIndex}-${i}`} data-bio-word className={styles.bioWord}>
+                      {word}
+                    </span>
+                  ),
+                )}
+                {lineIndex < introLines.length - 1 ? <br /> : null}
+              </span>
+            ))}
           </p>
+
+          {restBlocks.map((paragraph, paragraphIndex) => (
+            <p
+              key={paragraph}
+              className={cn(
+                styles.bioText,
+                paragraph.startsWith('Dziś nie tylko nagrywam') && styles.bioTextCentered,
+              )}
+            >
+              {paragraph.split('\n').map((line, lineIndex) => (
+                <span key={`${paragraphIndex}-${lineIndex}`}>
+                  {line.split(/(\s+)/).map((word, i) =>
+                    /^\s+$/.test(word) ? (
+                      word
+                    ) : (
+                      <span
+                        key={`${paragraphIndex}-${lineIndex}-${i}`}
+                        data-bio-word
+                        className={styles.bioWord}
+                      >
+                        {word}
+                      </span>
+                    ),
+                  )}
+                  {lineIndex < paragraph.split('\n').length - 1 ? <br /> : null}
+                </span>
+              ))}
+            </p>
+          ))}
         </div>
       </div>
     </section>

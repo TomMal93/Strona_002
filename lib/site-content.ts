@@ -357,7 +357,7 @@ export const siteContent = {
       hudLabelRight: 'SCENE 01 / 03',
       text:
         process.env.NEXT_PUBLIC_ABOUTME_BIO
-        || 'Filmowaniem zajmuję się od około 3 lat.\nWszystko zaczęło się dość niewinnie - od chęci nagrywania moich terenowych wypadów.\nPoczątkowo były to proste ujęcia z drona i aparatu, bardziej dla własnej satysfakcji niż z myślą o czymś większym.\nZ czasem jednak zacząłem dostrzegać,\nże obraz potrafi opowiadać historie w wyjątkowy sposób - oddawać emocje, klimat miejsca i chwile,\nktóre szybko przemijają.\nTo właśnie wtedy hobby zaczęło przeradzać się w prawdziwą pasję.\nDziś kamera towarzyszy mi znacznie częściej, a każde kolejne nagranie jest okazją do tworzenia czegoś autentycznego - filmu, który zatrzymuje moment\ni pozwala wracać do niego po latach.',
+        || 'Wszystko zaczęło się od kurzu na bezdrożach\ni chęci zatrzymania w kadrze surowego klimatu moich terenowych wypraw.\n\nTrzy lata temu kamera i dron były dla mnie tylko narzędziami – cyfrowym pamiętnikiem z podróży, który miał cieszyć głównie moje oko.\nZ czasem jednak zauważyłem, że między jednym a drugim ujęciem dzieje się coś więcej.\n\nOdkryłem, że film to nie tylko suma ładnych obrazków, ale potężny język, którym można opowiadać o tym, co niewidoczne: o napięciu przed trudnym podjazdem, o ciszy poranka w lesie i o ulotnych emocjach, które znikają szybciej niż dym z ogniska.\n\nDziś nie tylko nagrywam – ja buduję opowieści.\nSzukam w obiektywie autentyczności, by każdy film był powrotem do chwil, które zasługują na to, by trwać wiecznie.',
     },
     video: {
       title: 'Przedstawiam się',
