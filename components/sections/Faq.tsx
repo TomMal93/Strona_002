@@ -157,7 +157,11 @@ export default function Faq() {
                   >
                     <div className={styles.answerInner}>
                       <span className={styles.scanLineOverlay} aria-hidden="true" />
-                      <p className={styles.answerText}>{item.answer}</p>
+                      <div className={styles.answerText}>
+                        {item.answer.split('\n\n').map((paragraph) => (
+                          <p key={paragraph}>{paragraph}</p>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
