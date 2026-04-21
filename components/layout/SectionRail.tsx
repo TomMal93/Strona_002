@@ -28,37 +28,18 @@ export default function SectionRail() {
     let rafId = 0
 
     const updateActiveSection = () => {
-      const headerEl = document.querySelector<HTMLElement>('header')
-      const headerOffset = headerEl?.offsetHeight ?? 0
-      const scrollAnchor = window.scrollY + headerOffset
-
       const items = SECTIONS.flatMap((s) => {
         const el = document.getElementById(s.id)
         if (!el) return []
-        return [{ id: s.id, top: el.offsetTop, height: el.offsetHeight }]
+        return [{ id: s.id, rect: el.getBoundingClientRect() }]
       })
 
       if (items.length === 0) return
 
+      const activationLine = window.innerHeight * ACTIVE_SECTION_PROGRESS
       let nextId = items[0].id
-
-      for (let i = 0; i < items.length; i += 1) {
-        const current = items[i]
-        const next = items[i + 1]
-
-        if (!next) {
-          if (scrollAnchor >= current.top) nextId = current.id
-          break
-        }
-
-        const activationPoint = current.top + current.height * ACTIVE_SECTION_PROGRESS
-        if (scrollAnchor >= activationPoint) {
-          nextId = next.id
-          continue
-        }
-
-        nextId = current.id
-        break
+      for (const item of items) {
+        if (item.rect.top <= activationLine) nextId = item.id
       }
 
       const atBottom =
