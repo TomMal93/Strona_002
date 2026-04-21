@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Bebas_Neue, Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
+import Footer from '@/components/layout/Footer'
 import SmoothScroll from '@/components/layout/SmoothScroll'
 import WebVitalsReporter from '@/components/analytics/WebVitalsReporter'
 import { siteContent } from '@/lib/site-content'
@@ -89,6 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {enableWebVitals ? <WebVitalsReporter /> : null}
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>
+        <Footer />
       </body>
     </html>
   )
