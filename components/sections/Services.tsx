@@ -322,13 +322,25 @@ export default function Services() {
 
         <div className={styles.sectionCta}>
           <a
-            href="#contact"
+            href={siteContent.services.ctaHref}
             className={cn(
               styles.ctaLink,
-              'font-bebas text-lg uppercase tracking-widest',
+              'font-bebas text-xl uppercase tracking-widest sm:text-2xl',
             )}
           >
             {siteContent.services.ctaLabel}
+          </a>
+
+          <span aria-hidden="true" className={styles.ctaSeparator} />
+
+          <a
+            href={siteContent.services.secondaryCtaHref}
+            className={cn(
+              styles.ctaLink,
+              'font-bebas text-xl uppercase tracking-widest sm:text-2xl',
+            )}
+          >
+            {siteContent.services.secondaryCtaLabel}
           </a>
         </div>
       </div>

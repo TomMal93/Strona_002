@@ -172,7 +172,30 @@
 .sectionCta {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.9rem;
   margin-top: 2.5rem;
+}
+
+.ctaSeparator {
+  width: 2.75rem;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.18) 18%,
+    rgb(255 238 175 / 0.55) 50%,
+    rgb(var(--c-gold) / 0.18) 82%,
+    transparent 100%
+  );
+  opacity: 0.85;
+}
+
+@media (max-width: 639px) {
+  .ctaSeparator {
+    width: 1.6rem;
+  }
 }
 
 .ctaLink {

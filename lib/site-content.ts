@@ -123,6 +123,15 @@ export const siteContent = {
     ctaLabel:
       process.env.NEXT_PUBLIC_SERVICES_CTA_LABEL
       || 'Skontaktuj się',
+    ctaHref:
+      process.env.NEXT_PUBLIC_SERVICES_CTA_HREF
+      || '#contact',
+    secondaryCtaLabel:
+      process.env.NEXT_PUBLIC_SERVICES_SECONDARY_CTA_LABEL
+      || 'Pełna oferta',
+    secondaryCtaHref:
+      process.env.NEXT_PUBLIC_SERVICES_SECONDARY_CTA_HREF
+      || '/oferta',
     items: [
       {
         icon: 'heart',
