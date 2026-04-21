@@ -91,7 +91,7 @@ export default function SectionRail() {
       aria-label="Nawigacja sekcji"
       className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 lg:block"
     >
-      <ul role="list" className="flex flex-col gap-4">
+      <ul role="list" className="flex flex-col gap-7">
         {SECTIONS.map((section) => {
           const isActive = section.id === activeId
           return (
@@ -100,7 +100,7 @@ export default function SectionRail() {
                 href={`/#${section.id}`}
                 aria-current={isActive ? 'true' : undefined}
                 className={[
-                  'group flex items-center gap-3 font-bebas text-[12px] tracking-heading uppercase',
+                  'group flex items-center gap-3 font-bebas text-[18px] tracking-heading uppercase',
                   'transition-colors duration-300',
                   'focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-khaki',
                   isActive ? 'text-khaki' : 'text-white/40 hover:text-white/80',
