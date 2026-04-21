@@ -59,11 +59,11 @@
   object-fit: cover;
   transform: scale(1.03);
   filter:
-    saturate(0.72)
-    contrast(1.28)
-    brightness(0.9)
-    sepia(0.08)
-    hue-rotate(162deg);
+    saturate(0.8)
+    contrast(1.16)
+    brightness(0.92)
+    sepia(0.16)
+    hue-rotate(8deg);
   mix-blend-mode: lighten;
   opacity: 0.88;
   animation: hologramDrift 9s ease-in-out infinite alternate;
@@ -81,16 +81,16 @@
 .mediaFrame::before {
   z-index: 1;
   background:
-    linear-gradient(180deg, rgb(8 18 28 / 0.06) 0%, transparent 18%, transparent 78%, rgb(6 14 24 / 0.18) 100%),
-    linear-gradient(120deg, rgb(78 226 255 / 0.05) 0%, transparent 42%, rgb(134 92 255 / 0.08) 100%);
+    linear-gradient(180deg, rgb(18 14 10 / 0.08) 0%, transparent 18%, transparent 78%, rgb(22 16 12 / 0.2) 100%),
+    linear-gradient(120deg, rgb(var(--c-warm) / 0.08) 0%, transparent 42%, rgb(var(--c-gold) / 0.12) 100%);
   opacity: 0.68;
 }
 
 .mediaFrame::after {
   z-index: 6;
   background:
-    linear-gradient(180deg, rgb(4 10 16 / 0.18) 0%, transparent 22%, transparent 76%, rgb(4 10 16 / 0.24) 100%),
-    linear-gradient(90deg, rgb(38 210 255 / 0.08) 0%, transparent 24%, transparent 78%, rgb(255 92 214 / 0.06) 100%);
+    linear-gradient(180deg, rgb(10 8 6 / 0.18) 0%, transparent 22%, transparent 76%, rgb(12 9 7 / 0.24) 100%),
+    linear-gradient(90deg, rgb(var(--c-khaki) / 0.1) 0%, transparent 24%, transparent 78%, rgb(var(--c-gold) / 0.08) 100%);
   opacity: 0.54;
 }
 
@@ -107,18 +107,18 @@
   z-index: 2;
   mix-blend-mode: screen;
   background:
-    linear-gradient(180deg, rgb(58 245 255 / 0.16) 0%, transparent 34%, transparent 68%, rgb(73 113 255 / 0.18) 100%),
-    linear-gradient(90deg, rgb(0 255 255 / 0.08) 0%, transparent 40%, rgb(255 91 201 / 0.09) 100%);
-  opacity: 0.95;
+    linear-gradient(180deg, rgb(var(--c-warm) / 0.14) 0%, transparent 34%, transparent 68%, rgb(var(--c-gold) / 0.16) 100%),
+    linear-gradient(90deg, rgb(var(--c-khaki) / 0.08) 0%, transparent 40%, rgb(var(--c-gold) / 0.1) 100%);
+  opacity: 0.88;
 }
 
 .hologramGrid {
   z-index: 3;
-  opacity: 0.3;
+  opacity: 0.22;
   mix-blend-mode: screen;
   background:
-    linear-gradient(rgb(123 242 255 / 0.16) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(123 242 255 / 0.14) 1px, transparent 1px);
+    linear-gradient(rgb(var(--c-khaki) / 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--c-gold) / 0.12) 1px, transparent 1px);
   background-size: 100% 22px, 22px 100%;
   transform: perspective(600px) rotateX(63deg) scale(1.2) translateY(34%);
   transform-origin: center bottom;
@@ -126,13 +126,13 @@
 
 .hologramScanlines {
   z-index: 4;
-  opacity: 0.28;
+  opacity: 0.2;
   mix-blend-mode: screen;
   background:
     repeating-linear-gradient(
       180deg,
-      rgb(138 246 255 / 0.1) 0px,
-      rgb(138 246 255 / 0.1) 1px,
+      rgb(var(--c-khaki) / 0.08) 0px,
+      rgb(var(--c-khaki) / 0.08) 1px,
       transparent 1px,
       transparent 5px
     );
@@ -145,9 +145,9 @@
   opacity: 0;
   mix-blend-mode: screen;
   background-image:
-    radial-gradient(circle, rgb(255 255 255 / 0.32) 0.7px, transparent 1.1px),
-    radial-gradient(circle, rgb(112 222 255 / 0.18) 0.8px, transparent 1.3px),
-    radial-gradient(circle, rgb(255 255 255 / 0.14) 0.6px, transparent 1px);
+    radial-gradient(circle, rgb(255 244 220 / 0.28) 0.7px, transparent 1.1px),
+    radial-gradient(circle, rgb(var(--c-khaki) / 0.16) 0.8px, transparent 1.3px),
+    radial-gradient(circle, rgb(var(--c-gold) / 0.14) 0.6px, transparent 1px);
   background-size: 12px 12px, 18px 18px, 8px 8px;
   background-position: 0 0, 5px 7px, 3px 2px;
   filter: contrast(1.2) blur(0.15px);
