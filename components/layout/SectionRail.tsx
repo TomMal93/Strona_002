@@ -61,7 +61,9 @@ export default function SectionRail() {
         break
       }
 
-      setActiveId(nextId)
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
+      setActiveId(atBottom ? items[items.length - 1].id : nextId)
       setIsRevealed(window.scrollY > window.innerHeight * 0.2)
     }
 
@@ -106,6 +108,7 @@ export default function SectionRail() {
               <Link
                 href={`/#${section.id}`}
                 aria-current={isActive ? 'true' : undefined}
+                onClick={(event) => event.currentTarget.blur()}
                 className={[
                   'group flex items-center gap-3 font-bebas text-[18px] tracking-heading uppercase',
                   'transition-all duration-300',
