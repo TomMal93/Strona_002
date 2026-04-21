@@ -54,15 +54,15 @@ export default function Footer() {
 
   return (
     <footer className="section-dark-bg border-t border-warm-gray/10 px-6 py-8 lg:px-20">
-      <div className="mx-auto flex max-w-content flex-col items-center gap-4 md:flex-row md:justify-between md:gap-6">
+      <div className="mx-auto flex max-w-content flex-col items-center gap-4 text-center md:grid md:grid-cols-3 md:gap-6">
         <Link
           href="/#hero"
-          className="font-bebas text-sm uppercase tracking-heading text-warm-white transition-colors duration-200 hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki"
+          className="font-bebas text-sm uppercase tracking-heading text-warm-white transition-colors duration-200 hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki md:justify-self-start"
         >
           MALESZYK.MEDIA
         </Link>
 
-        <ul className="flex items-center gap-1">
+        <ul className="flex items-center gap-1 md:justify-self-center">
           {socials.map(({ platform, href }) => (
             <li key={platform}>
               <a
@@ -80,7 +80,7 @@ export default function Footer() {
           ))}
         </ul>
 
-        <p className="font-inter text-xs text-warm-gray">
+        <p className="font-inter text-xs text-warm-gray md:justify-self-end md:text-right">
           © {year} Maleszyk.Media · Wszelkie prawa zastrzeżone
         </p>
       </div>
