@@ -8,7 +8,6 @@ export type AboutMeHeroAnimationRefs = {
   bgRef: RefObject<HTMLDivElement>
   nameRef: RefObject<HTMLHeadingElement>
   taglineRef: RefObject<HTMLParagraphElement>
-  hudOverlayRef: RefObject<HTMLDivElement>
 }
 
 export function useAboutMeHeroAnimations(refs: AboutMeHeroAnimationRefs): void {
@@ -20,11 +19,7 @@ export function useAboutMeHeroAnimations(refs: AboutMeHeroAnimationRefs): void {
       '(prefers-reduced-motion: reduce)',
     ).matches
 
-    const { nameRef, taglineRef, hudOverlayRef } = refs
-
-    const hudElements = hudOverlayRef.current
-      ? Array.from(hudOverlayRef.current.children) as HTMLElement[]
-      : []
+    const { nameRef, taglineRef } = refs
 
     if (prefersReducedMotion) {
       if (nameRef.current) {
@@ -35,9 +30,6 @@ export function useAboutMeHeroAnimations(refs: AboutMeHeroAnimationRefs): void {
         taglineRef.current.style.opacity = '1'
         taglineRef.current.style.transform = 'none'
       }
-      hudElements.forEach((el) => {
-        el.style.opacity = '1'
-      })
       return
     }
 
@@ -50,9 +42,6 @@ export function useAboutMeHeroAnimations(refs: AboutMeHeroAnimationRefs): void {
       taglineRef.current.style.opacity = '0'
       taglineRef.current.style.transform = 'translate3d(0, 20px, 0)'
     }
-    hudElements.forEach((el) => {
-      el.style.opacity = '0'
-    })
 
     const initAnimations = async () => {
       const [{ gsap }, { ScrollTrigger }] = await Promise.all([
@@ -88,20 +77,6 @@ export function useAboutMeHeroAnimations(refs: AboutMeHeroAnimationRefs): void {
               ease: 'power2.out',
             },
             '-=0.4',
-          )
-        }
-
-        // HUD elements stagger
-        if (hudElements.length) {
-          tl.to(
-            hudElements,
-            {
-              opacity: 1,
-              duration: 0.4,
-              stagger: 0.02,
-              ease: 'power2.out',
-            },
-            '-=0.3',
           )
         }
 

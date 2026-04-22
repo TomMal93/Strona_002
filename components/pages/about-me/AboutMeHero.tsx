@@ -25,14 +25,12 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
   const bgRef = useRef<HTMLDivElement>(null!)
   const nameRef = useRef<HTMLHeadingElement>(null!)
   const taglineRef = useRef<HTMLParagraphElement>(null!)
-  const hudOverlayRef = useRef<HTMLDivElement>(null!)
 
   useAboutMeHeroAnimations({
     sectionRef,
     bgRef,
     nameRef,
     taglineRef,
-    hudOverlayRef,
   })
 
   const hero = {
@@ -77,6 +75,8 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
             <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerTR)} />
             <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerBL)} />
             <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerBR)} />
+            <div className={cn(styles.filmStripLeft, styles.filmStripFramed)} aria-hidden="true" />
+            <div className={cn(styles.filmStripRight, styles.filmStripFramed)} aria-hidden="true" />
           </>
         ) : null}
       </div>
@@ -85,8 +85,12 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
       <div className={styles.heroOverlay} aria-hidden="true" />
 
       {/* Film strip sprocket holes */}
-      <div className={styles.filmStripLeft} aria-hidden="true" />
-      <div className={styles.filmStripRight} aria-hidden="true" />
+      {!hero.framedImage ? (
+        <>
+          <div className={styles.filmStripLeft} aria-hidden="true" />
+          <div className={styles.filmStripRight} aria-hidden="true" />
+        </>
+      ) : null}
 
       {/* Content */}
       <div className={styles.heroContent}>
@@ -98,33 +102,6 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
         </p>
       </div>
 
-      {/* HUD overlay */}
-      <div ref={hudOverlayRef} className={styles.hudOverlay} aria-hidden="true">
-        <span className={cn(styles.cornerMark, styles.cornerTL)} />
-        <span className={cn(styles.cornerMark, styles.cornerTR)} />
-        <span className={cn(styles.cornerMark, styles.cornerBL)} />
-        <span className={cn(styles.cornerMark, styles.cornerBR)} />
-
-        {hero.showRecIndicator ? (
-          <span className={styles.recIndicator}>
-            <span className={styles.recDot} />
-            <span className={styles.recText}>REC</span>
-          </span>
-        ) : null}
-
-        <span
-          className={cn(
-            styles.resolutionLabel,
-            !hero.showTimecode && styles.resolutionLabelBottomRight,
-          )}
-        >
-          {hero.resolution}
-        </span>
-
-        {hero.showTimecode ? (
-          <span className={styles.timecode}>00:00:00:00</span>
-        ) : null}
-      </div>
     </section>
   )
 }

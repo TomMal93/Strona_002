@@ -134,12 +134,20 @@
   right: 0;
 }
 
-.heroSectionFramed .filmStripLeft {
-  left: var(--framed-ornament-offset);
+.filmStripFramed {
+  top: 0;
+  bottom: 0;
+  z-index: 2;
 }
 
-.heroSectionFramed .filmStripRight {
-  right: var(--framed-ornament-offset);
+.filmStripLeft.filmStripFramed {
+  left: 0;
+  right: auto;
+}
+
+.filmStripRight.filmStripFramed {
+  right: 0;
+  left: auto;
 }
 
 @media (width < 48rem) {
