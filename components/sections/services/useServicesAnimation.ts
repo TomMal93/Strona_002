@@ -63,6 +63,11 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
       const bottomDiamonds = bottomTimelineRef.current
         ? Array.from(bottomTimelineRef.current.querySelectorAll<HTMLElement>('[data-bottom-diamond]'))
         : []
+      const ctaLinks = Array.from(
+        refs.sectionRef.current?.querySelectorAll<HTMLElement>('[data-cta-link]') ?? [],
+      )
+      const ctaSeparator =
+        refs.sectionRef.current?.querySelector<HTMLElement>('[data-cta-separator]') ?? null
       const fadeElements = [titleRef.current, introRef.current] as Array<HTMLElement | null>
       const visibleFadeElements = fadeElements.filter(
         (el): el is HTMLElement => el !== null,
@@ -96,6 +101,15 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
           el.style.opacity = '1'
           el.style.visibility = 'inherit'
         })
+        ctaLinks.forEach((el) => {
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+          el.style.transform = 'none'
+        })
+        if (ctaSeparator) {
+          ctaSeparator.style.opacity = '0.85'
+          ctaSeparator.style.transform = 'scaleX(1)'
+        }
         return
       }
 
@@ -128,6 +142,15 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
         el.style.opacity = '0'
         el.style.visibility = 'hidden'
       })
+      ctaLinks.forEach((el) => {
+        el.style.opacity = '0'
+        el.style.visibility = 'hidden'
+        el.style.transform = 'translate3d(0, 12px, 0)'
+      })
+      if (ctaSeparator) {
+        ctaSeparator.style.opacity = '0'
+        ctaSeparator.style.transform = 'scaleX(0)'
+      }
     }
 
     setInitialStyles()
@@ -320,7 +343,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
               y: 0,
               duration: 0.6,
               ease: 'power3.out',
-              stagger: 0.015,
+              stagger: 0.35,
             },
             '-=0.3',
           )
@@ -332,7 +355,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
               y: 0,
               duration: 0.7,
               ease: 'power2.out',
-              stagger: 0.02,
+              stagger: 0.35,
             },
             '-=0.2',
           )
@@ -357,6 +380,35 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
               stagger: 0.02,
             },
             '-=0.2',
+          )
+        }
+
+        const ctaLinks = gsap.utils.toArray<HTMLElement>('[data-cta-link]')
+        if (ctaLinks.length) {
+          tl.to(
+            ctaLinks,
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.45,
+              ease: 'power3.out',
+              stagger: 0.25,
+            },
+            '-=0.1',
+          )
+        }
+
+        const ctaSeparator = sectionRef.current?.querySelector<HTMLElement>('[data-cta-separator]')
+        if (ctaSeparator) {
+          tl.to(
+            ctaSeparator,
+            {
+              opacity: 0.85,
+              scaleX: 1,
+              duration: 0.45,
+              ease: 'power2.out',
+            },
+            '-=0.3',
           )
         }
       }, sectionRef)

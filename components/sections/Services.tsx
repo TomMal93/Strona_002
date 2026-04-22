@@ -323,6 +323,7 @@ export default function Services() {
         <div className={styles.sectionCta}>
           <a
             href={siteContent.services.ctaHref}
+            data-cta-link
             className={cn(
               styles.ctaLink,
               'font-bebas text-[1.15rem] uppercase tracking-widest sm:text-[1.35rem]',
@@ -331,10 +332,11 @@ export default function Services() {
             {siteContent.services.ctaLabel}
           </a>
 
-          <span aria-hidden="true" className={styles.ctaSeparator} />
+          <span aria-hidden="true" data-cta-separator className={styles.ctaSeparator} />
 
           <a
             href={siteContent.services.secondaryCtaHref}
+            data-cta-link
             className={cn(
               styles.ctaLink,
               'font-bebas text-[1.15rem] uppercase tracking-widest sm:text-[1.35rem]',
