@@ -271,7 +271,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 70%',
+            start: 'top 85%',
             once: true,
           },
         })
@@ -345,7 +345,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
               autoAlpha: 1,
               duration: 0.22,
               ease: 'power2.out',
-              stagger: 0.05,
+              stagger: 0.025,
             },
             '-=0.40',
           )
@@ -359,7 +359,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
               y: 0,
               duration: 0.34,
               ease: 'power2.out',
-              stagger: 0.05,
+              stagger: 0.025,
             },
             '-=0.22',
           )
@@ -373,7 +373,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
               y: 0,
               duration: 0.34,
               ease: 'power2.out',
-              stagger: 0.05,
+              stagger: 0.025,
             },
             '-=0.18',
           )
@@ -387,7 +387,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
               y: 0,
               duration: 0.55,
               ease: 'power3.out',
-              stagger: 0.10,
+              stagger: 0.025,
             },
             '-=0.10',
           )
@@ -406,7 +406,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
               autoAlpha: 1,
               duration: 0.22,
               ease: 'power2.out',
-              stagger: 0.04,
+              stagger: 0.02,
             },
             '-=0.52',
           )

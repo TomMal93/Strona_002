@@ -74,7 +74,7 @@ export function useAboutMeVideoAnimations(refs: AboutMeVideoAnimationRefs): void
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: refs.sectionRef.current,
-            start: 'top 70%',
+            start: 'top 85%',
             once: true,
           },
         })

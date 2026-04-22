@@ -227,7 +227,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 70%',
+            start: 'top 85%',
             once: true,
           },
         })
@@ -238,7 +238,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
             scaleX: 1,
             duration: 0.34,
             ease: 'power2.out',
-            stagger: 0.03,
+            stagger: 0.015,
           })
         }
 
@@ -249,7 +249,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
               scaleX: 1,
               duration: 0.52,
               ease: 'power2.out',
-              stagger: 0.05,
+              stagger: 0.025,
             },
             '-=0.1',
           )
@@ -264,7 +264,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
               y: 0,
               duration: 0.26,
               ease: 'power2.out',
-              stagger: 0.06,
+              stagger: 0.015,
             },
             '-=0.18',
           )
@@ -320,7 +320,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
               y: 0,
               duration: 0.6,
               ease: 'power3.out',
-              stagger: 0.12,
+              stagger: 0.015,
             },
             '-=0.3',
           )
@@ -332,7 +332,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
               y: 0,
               duration: 0.7,
               ease: 'power2.out',
-              stagger: 0.08,
+              stagger: 0.02,
             },
             '-=0.2',
           )
@@ -354,7 +354,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
               autoAlpha: 1,
               duration: 0.25,
               ease: 'power2.out',
-              stagger: 0.04,
+              stagger: 0.02,
             },
             '-=0.2',
           )

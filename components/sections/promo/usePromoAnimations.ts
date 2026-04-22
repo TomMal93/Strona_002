@@ -193,7 +193,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 70%',
+            start: 'top 85%',
             once: true,
           },
         })
@@ -204,7 +204,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
             scaleX: 1,
             duration: 0.34,
             ease: 'power2.out',
-            stagger: 0.03,
+            stagger: 0.015,
           })
         }
 
@@ -215,7 +215,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
               scaleX: 1,
               duration: 0.52,
               ease: 'power2.out',
-              stagger: 0.05,
+              stagger: 0.025,
             },
             '-=0.1',
           )
@@ -225,7 +225,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         if (hudLabels.length) {
           tl.to(
             hudLabels,
-            { autoAlpha: 1, y: 0, duration: 0.26, ease: 'power2.out', stagger: 0.06 },
+            { autoAlpha: 1, y: 0, duration: 0.26, ease: 'power2.out', stagger: 0.015 },
             '-=0.18',
           )
         }
@@ -248,14 +248,14 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         // 6. Corner marks
         if (corners.length) {
           tl.to(corners, {
-            autoAlpha: 1, duration: 0.4, ease: 'power2.out', stagger: 0.06,
+            autoAlpha: 1, duration: 0.4, ease: 'power2.out', stagger: 0.015,
           }, '-=0.4')
         }
 
         // 7. YouTube cards
         if (ytCards.length) {
           tl.to(ytCards, {
-            autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.12,
+            autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.015,
           }, '-=0.2')
         }
 
@@ -265,7 +265,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         }
         if (bottomDiamonds.length) {
           tl.to(bottomDiamonds, {
-            autoAlpha: 1, duration: 0.3, ease: 'power2.out', stagger: 0.06,
+            autoAlpha: 1, duration: 0.3, ease: 'power2.out', stagger: 0.015,
           }, '-=0.2')
         }
       }, sectionRef)

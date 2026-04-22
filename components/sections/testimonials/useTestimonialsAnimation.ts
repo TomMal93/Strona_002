@@ -246,7 +246,7 @@ export function useTestimonialsAnimation(
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 70%',
+            start: 'top 85%',
             once: true,
           },
         })
@@ -257,7 +257,7 @@ export function useTestimonialsAnimation(
             scaleX: 1,
             duration: 0.5,
             ease: 'power2.out',
-            stagger: 0.05,
+            stagger: 0.025,
           })
         }
 
@@ -269,7 +269,7 @@ export function useTestimonialsAnimation(
               autoAlpha: 1,
               duration: 0.3,
               ease: 'power2.out',
-              stagger: 0.06,
+              stagger: 0.015,
             },
             '-=0.2',
           )
@@ -375,7 +375,7 @@ export function useTestimonialsAnimation(
               autoAlpha: 1,
               duration: 0.3,
               ease: 'power2.out',
-              stagger: 0.08,
+              stagger: 0.02,
             },
             '-=0.2',
           )

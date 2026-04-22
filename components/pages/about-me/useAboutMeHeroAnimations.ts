@@ -98,7 +98,7 @@ export function useAboutMeHeroAnimations(refs: AboutMeHeroAnimationRefs): void {
             {
               opacity: 1,
               duration: 0.4,
-              stagger: 0.08,
+              stagger: 0.02,
               ease: 'power2.out',
             },
             '-=0.3',

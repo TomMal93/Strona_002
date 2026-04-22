@@ -103,7 +103,7 @@ export function useAboutMeGearAnimations(refs: AboutMeGearAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: refs.sectionRef.current,
-            start: 'top 70%',
+            start: 'top 85%',
             once: true,
           },
         })
@@ -134,7 +134,7 @@ export function useAboutMeGearAnimations(refs: AboutMeGearAnimationRefs): void {
         // Stats — count-up
         if (statItems.length) {
           tl.to(statItems, {
-            opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power3.out',
+            opacity: 1, y: 0, duration: 0.5, stagger: 0.025, ease: 'power3.out',
           }, '-=0.2')
 
           // Animate stat numbers (count-up)
@@ -159,14 +159,14 @@ export function useAboutMeGearAnimations(refs: AboutMeGearAnimationRefs): void {
         // Accent lines
         if (statAccents.length) {
           tl.to(statAccents, {
-            scaleX: 1, duration: 0.4, stagger: 0.05, ease: 'power2.out',
+            scaleX: 1, duration: 0.4, stagger: 0.025, ease: 'power2.out',
           }, '-=0.8')
         }
 
         // Equipment cards
         if (equipCards.length) {
           tl.to(equipCards, {
-            opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power3.out',
+            opacity: 1, y: 0, duration: 0.5, stagger: 0.02, ease: 'power3.out',
           }, '-=0.4')
         }
       }, refs.sectionRef)

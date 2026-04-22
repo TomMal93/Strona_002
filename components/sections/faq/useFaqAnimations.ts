@@ -160,7 +160,7 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 70%',
+            start: 'top 85%',
             once: true,
           },
         })
@@ -171,7 +171,7 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
             scaleX: 1,
             duration: 0.5,
             ease: 'power2.out',
-            stagger: 0.05,
+            stagger: 0.025,
           })
         }
 
@@ -183,7 +183,7 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
               autoAlpha: 1,
               duration: 0.3,
               ease: 'power2.out',
-              stagger: 0.06,
+              stagger: 0.015,
             },
             '-=0.2',
           )
@@ -223,7 +223,7 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
               autoAlpha: 1,
               duration: 0.3,
               ease: 'power2.out',
-              stagger: 0.05,
+              stagger: 0.025,
             },
             '-=0.3',
           )
@@ -239,7 +239,7 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
               y: 0,
               duration: 0.5,
               ease: 'power3.out',
-              stagger: 0.12,
+              stagger: 0.015,
             },
             phase5Pos,
           )
@@ -252,7 +252,7 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
               y: 0,
               duration: 0.4,
               ease: 'power3.out',
-              stagger: 0.12,
+              stagger: 0.015,
             },
             phase5Pos,
           )

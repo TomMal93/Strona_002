@@ -163,7 +163,7 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 70%',
+            start: 'top 85%',
             once: true,
           },
         })
@@ -174,7 +174,7 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
             scaleX: 1,
             duration: 0.5,
             ease: 'power2.out',
-            stagger: 0.05,
+            stagger: 0.025,
           })
         }
 
@@ -182,7 +182,7 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         if (hudLabels.length) {
           tl.to(
             hudLabels,
-            { autoAlpha: 1, duration: 0.3, ease: 'power2.out', stagger: 0.06 },
+            { autoAlpha: 1, duration: 0.3, ease: 'power2.out', stagger: 0.015 },
             '-=0.2',
           )
         }
@@ -221,7 +221,7 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
               scale: 1,
               duration: 0.6,
               ease: 'power3.out',
-              stagger: 0.08,
+              stagger: 0.02,
               onComplete: () => {
                 cornerEls.forEach((el) => {
                   el.style.animationPlayState = 'running'
@@ -241,7 +241,7 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
               scale: 1,
               duration: 0.5,
               ease: 'back.out(1.7)',
-              stagger: 0.1,
+              stagger: 0.025,
               onComplete: () => {
                 crosshairEls.forEach((el) => {
                   el.style.animationPlayState = 'running'
@@ -290,7 +290,7 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
             gsap.set(socialIconEls, { autoAlpha: 0, y: 8 })
             tl.to(
               socialIconEls,
-              { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power3.out', stagger: 0.08 },
+              { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power3.out', stagger: 0.02 },
               '-=0.35',
             )
           }
