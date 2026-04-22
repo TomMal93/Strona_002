@@ -8,8 +8,8 @@ const SECTIONS = [
   { id: 'hero',         label: 'STRONA GŁÓWNA' },
   { id: 'about',        label: 'O MNIE' },
   { id: 'promo',        label: 'REALIZACJE' },
-  { id: 'testimonials', label: 'OPINIE' },
   { id: 'process',      label: 'PROCES' },
+  { id: 'testimonials', label: 'OPINIE' },
   { id: 'faq',          label: 'FAQ' },
   { id: 'cta',          label: 'WSPÓŁPRACA' },
 ] as const
