@@ -32,6 +32,9 @@ export function useAboutMeBioAnimations(refs: AboutMeBioAnimationRefs): void {
     const bioWords = bioPanelRef.current
       ? Array.from(bioPanelRef.current.querySelectorAll<HTMLElement>('[data-bio-word]'))
       : []
+    const videoBlock = bioPanelRef.current
+      ? bioPanelRef.current.querySelector<HTMLElement>('[data-video-block]')
+      : null
 
     if (prefersReducedMotion) {
       ;[titleRef.current, subtitleRef.current, bioPanelRef.current].forEach((el) => {
@@ -49,6 +52,11 @@ export function useAboutMeBioAnimations(refs: AboutMeBioAnimationRefs): void {
       bioWords.forEach((el) => {
         el.style.opacity = '1'
       })
+      if (videoBlock) {
+        videoBlock.style.opacity = '1'
+        videoBlock.style.visibility = 'inherit'
+        videoBlock.style.transform = 'none'
+      }
       return
     }
 
@@ -73,6 +81,11 @@ export function useAboutMeBioAnimations(refs: AboutMeBioAnimationRefs): void {
     bioWords.forEach((el) => {
       el.style.opacity = '0'
     })
+    if (videoBlock) {
+      videoBlock.style.opacity = '0'
+      videoBlock.style.visibility = 'hidden'
+      videoBlock.style.transform = 'translate3d(0, 20px, 0)'
+    }
 
     const initAnimations = async () => {
       const [{ gsap }, { ScrollTrigger }] = await Promise.all([
@@ -125,13 +138,22 @@ export function useAboutMeBioAnimations(refs: AboutMeBioAnimationRefs): void {
           }, '-=0.2')
         }
 
-        // Typewriter effect on words
+        // Bio text fade in all at once
         if (bioWords.length) {
           tl.to(bioWords, {
             opacity: 1,
-            duration: 0.03,
-            stagger: 0.025,
-            ease: 'none',
+            duration: 0.4,
+            ease: 'power2.out',
+          }, '-=0.1')
+        }
+
+        // Video block reveals after the text
+        if (videoBlock) {
+          tl.to(videoBlock, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power3.out',
           }, '-=0.1')
         }
       }, refs.sectionRef)

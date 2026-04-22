@@ -127,7 +127,7 @@ export default function AboutMeBio() {
             </p>
           ))}
 
-          <div className={styles.videoBlock}>
+          <div data-video-block className={styles.videoBlock}>
             <div aria-hidden="true" className={styles.videoSeparator} />
             <div className={styles.videoBlockHeader}>
               <p className={styles.videoBlockLead}>Poznaj mnie bliżej - w minutę.</p>
