@@ -83,24 +83,15 @@
 
 .mobileTextPanel {
   position: relative;
-  background: rgb(8 8 8 / 0.38);
+  /* Duży kontrast przezroczystości: mocniejszy środek, wyraźnie zanikające krawędzie. */
+  background: radial-gradient(
+    145% 130% at 50% 52%,
+    rgb(8 8 8 / 0.68) 0%,
+    rgb(8 8 8 / 0.56) 42%,
+    rgb(8 8 8 / 0.28) 74%,
+    rgb(8 8 8 / 0.08) 100%
+  );
   backdrop-filter: blur(4px);
-  border: 1px solid rgb(var(--c-gold) / 0.26);
-  /* Mocne przejście krawędzi panelu do transparentności. */
-  -webkit-mask-image: radial-gradient(
-    130% 120% at 50% 52%,
-    rgb(0 0 0 / 1) 56%,
-    rgb(0 0 0 / 0.75) 72%,
-    rgb(0 0 0 / 0.3) 86%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    130% 120% at 50% 52%,
-    rgb(0 0 0 / 1) 56%,
-    rgb(0 0 0 / 0.75) 72%,
-    rgb(0 0 0 / 0.3) 86%,
-    transparent 100%
-  );
 }
 
 @media (max-width: 767px) {
