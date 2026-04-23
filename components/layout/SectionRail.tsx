@@ -82,7 +82,7 @@ export default function SectionRail() {
         isRevealed ? 'opacity-100' : 'pointer-events-none opacity-0',
       ].join(' ')}
     >
-      <ul role="list" className="flex flex-col gap-7">
+      <ul className="flex flex-col gap-7">
         {SECTIONS.map((section) => {
           const isActive = section.id === activeId
           return (

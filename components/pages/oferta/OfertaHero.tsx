@@ -14,7 +14,7 @@ export default function OfertaHero() {
   const hudBarRef = useRef<HTMLDivElement>(null!)
   const leadRef = useRef<HTMLParagraphElement>(null!)
 
-  const { eyebrow, title, lead } = siteContent.offerPage.hero
+  const { title, lead } = siteContent.offerPage.hero
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
