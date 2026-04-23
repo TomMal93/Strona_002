@@ -393,7 +393,7 @@ export function useTestimonialsAnimation(
           observer?.disconnect()
           void initAnimations()
         },
-        { root: null, threshold: 0, rootMargin: '0px 0px -25% 0px' },
+        { root: null, threshold: 0, rootMargin: '600px 0px 600px 0px' },
       )
       observer.observe(refs.sectionRef.current)
     }
