@@ -11,9 +11,9 @@ export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
       <div className={styles.mobileGroupCenter}>
         <div className={`relative ${styles.mobileImageWrap} ${styles.mobileImageEntrance}`}>
           <div aria-hidden="true" className={styles.portraitHalo} />
-          <div className="relative z-10 aspect-[3/4] w-full">
+          <div className={styles.mobileVideoCircle}>
             <video
-              className="h-full w-full object-contain object-center"
+              className="h-full w-full object-cover object-center"
               autoPlay
               muted
               loop
