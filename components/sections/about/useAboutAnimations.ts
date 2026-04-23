@@ -270,7 +270,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 75%',
+            start: 'top 35%',
             once: true,
           },
         })
