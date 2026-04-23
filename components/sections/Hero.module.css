@@ -19,7 +19,7 @@
 .mobileImageWrap {
   align-self: flex-end;
   margin-right: -320px;
-  margin-top: -385px;
+  margin-top: -435px;
   width: 160%;
 }
 
@@ -83,7 +83,14 @@
 
 .mobileTextPanel {
   position: relative;
-  background: rgb(8 8 8 / 0.38);
+  /* Duży kontrast przezroczystości: mocniejszy środek, wyraźnie zanikające krawędzie. */
+  background: radial-gradient(
+    145% 130% at 50% 52%,
+    rgb(8 8 8 / 0.68) 0%,
+    rgb(8 8 8 / 0.56) 42%,
+    rgb(8 8 8 / 0.28) 74%,
+    rgb(8 8 8 / 0.08) 100%
+  );
   backdrop-filter: blur(4px);
 }
 
