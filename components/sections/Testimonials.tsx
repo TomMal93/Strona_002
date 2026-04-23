@@ -16,6 +16,9 @@ export default function Testimonials() {
   const trackRef = useRef<HTMLDivElement>(null!)
   const trustedPanelRef = useRef<HTMLDivElement>(null!)
   const isAnimating = useRef(false)
+  const touchStartX = useRef<number | null>(null)
+  const touchStartY = useRef<number | null>(null)
+  const touchDeltaX = useRef(0)
 
   const { title, subtitle, hudLabelLeft, hudLabelRight, items, socialProof, trustedBy } =
     siteContent.testimonials
@@ -87,6 +90,38 @@ export default function Testimonials() {
     [goTo, total],
   )
 
+  const handleTouchStart = useCallback((event: React.TouchEvent<HTMLDivElement>) => {
+    const firstTouch = event.touches[0]
+    touchStartX.current = firstTouch.clientX
+    touchStartY.current = firstTouch.clientY
+    touchDeltaX.current = 0
+  }, [])
+
+  const handleTouchMove = useCallback((event: React.TouchEvent<HTMLDivElement>) => {
+    if (touchStartX.current === null || touchStartY.current === null) return
+    const firstTouch = event.touches[0]
+    touchDeltaX.current = firstTouch.clientX - touchStartX.current
+  }, [])
+
+  const handleTouchEnd = useCallback(() => {
+    if (touchStartX.current === null || touchStartY.current === null) return
+
+    const swipeThreshold = 45
+    const deltaX = touchDeltaX.current
+
+    if (Math.abs(deltaX) >= swipeThreshold) {
+      if (deltaX < 0) {
+        handleNext()
+      } else {
+        handlePrev()
+      }
+    }
+
+    touchStartX.current = null
+    touchStartY.current = null
+    touchDeltaX.current = 0
+  }, [handleNext, handlePrev])
+
   // Active DOM index for visual styling
   const activeDomIndex = activeIndex + 1
 
@@ -137,7 +172,13 @@ export default function Testimonials() {
 
         {/* Carousel */}
         <div ref={carouselShellRef} className={styles.carouselShell} data-carousel-shell>
-          <div className={styles.carouselViewport}>
+          <div
+            className={styles.carouselViewport}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onTouchCancel={handleTouchEnd}
+          >
             <div ref={trackRef} className={styles.carouselTrack}>
               {extendedItems.map((item, domIndex) => {
                 const isActive = domIndex === activeDomIndex
