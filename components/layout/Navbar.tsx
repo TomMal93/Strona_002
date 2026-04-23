@@ -209,7 +209,7 @@ export default function Navbar() {
       }`}>
 
         {/* Logo */}
-        <Link href="/" aria-label="Strona główna" className="relative h-10 w-10 flex-shrink-0 md:h-12 md:w-12">
+        <Link href="/" aria-label="Strona główna" className="relative h-10 w-10 shrink-0 md:h-12 md:w-12">
           <Image
             src="/images/logo_m.webp"
             alt=""
@@ -256,7 +256,7 @@ export default function Navbar() {
           />
           <span
             className={`block h-px w-6 bg-white origin-center transition-transform duration-300 ${
-              mobileOpen ? '-translate-y-[6px] -rotate-45' : ''
+              mobileOpen ? 'translate-y-[-6px] -rotate-45' : ''
             }`}
           />
         </button>

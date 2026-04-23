@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import Image from 'next/image'
 import styles from '../Promo.module.css'
 
 type YouTubeFacadeProps = {
@@ -50,9 +51,11 @@ export function YouTubeFacade({ videoId, title }: YouTubeFacadeProps) {
         onClick={handleClick}
         aria-label={`Odtwórz: ${title}`}
       >
-        <img
+        <Image
           src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
           alt=""
+          fill
+          sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 640px"
           className={styles.ytThumbnail}
           loading="lazy"
         />

@@ -31,6 +31,11 @@ const nextConfig = {
     // Cache'uj zoptymalizowane obrazy przez 30 dni (domyślnie: 60 s)
     minimumCacheTTL: 60 * 60 * 24 * 30,
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'img.youtube.com',
+        pathname: '/vi/**',
+      },
       // Odkomentuj i uzupełnij gdy będziesz używać Cloudinary lub innego CDN:
       // {
       //   protocol: 'https',
