@@ -18,10 +18,11 @@
 }
 
 .mobileImageWrap {
-  align-self: flex-end;
-  margin-right: -320px;
+  align-self: center;
+  margin-right: 0;
   margin-top: -445px;
-  width: 160%;
+  width: 100%;
+  max-width: 560px;
 }
 
 .mobileImageWrap .portraitHalo {
@@ -43,7 +44,7 @@
 .mobileTextWrap {
   align-self: stretch;
   margin-left: 30px;
-  margin-top: -560px;
+  margin-top: -530px;
 }
 
 .mobileTextWrapCentered {
