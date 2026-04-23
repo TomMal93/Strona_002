@@ -25,7 +25,6 @@ const DESKTOP_BREAKPOINT = 1024
 export function useServicesAnimation(refs: ServicesAnimationRefs): void {
   useLayoutEffect(() => {
     let shouldCleanup = false
-    let observer: IntersectionObserver | undefined
     let revertContext: (() => void) | undefined
 
     const prefersReducedMotion = window.matchMedia(
@@ -250,7 +249,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 85%',
+            start: 'top 92%',
             once: true,
           },
         })
@@ -297,7 +296,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
         tl.to(titleRef.current, {
           autoAlpha: 1,
           y: 0,
-          duration: 0.7,
+          duration: 0.5,
           ease: 'power3.out',
         })
 
@@ -341,9 +340,9 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
               autoAlpha: 1,
               clipPath: 'inset(0 0% 0 0)',
               y: 0,
-              duration: 0.6,
+              duration: 0.45,
               ease: 'power3.out',
-              stagger: 0.35,
+              stagger: 0.08,
             },
             '-=0.3',
           )
@@ -353,9 +352,9 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.7,
+              duration: 0.5,
               ease: 'power2.out',
-              stagger: 0.35,
+              stagger: 0.08,
             },
             '-=0.2',
           )
@@ -390,9 +389,9 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.45,
+              duration: 0.35,
               ease: 'power3.out',
-              stagger: 0.25,
+              stagger: 0.06,
             },
             '-=0.1',
           )
@@ -416,22 +415,10 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
       revertContext = () => ctx.revert()
     }
 
-    if (refs.sectionRef.current) {
-      observer = new IntersectionObserver(
-        (entries) => {
-          const hasIntersecting = entries.some((e) => e.isIntersecting)
-          if (!hasIntersecting) return
-          observer?.disconnect()
-          void initAnimations()
-        },
-        { root: null, threshold: 0, rootMargin: '0px 0px -25% 0px' },
-      )
-      observer.observe(refs.sectionRef.current)
-    }
+    void initAnimations()
 
     return () => {
       shouldCleanup = true
-      observer?.disconnect()
       revertContext?.()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

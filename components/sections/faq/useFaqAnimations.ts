@@ -14,7 +14,6 @@ export type FaqAnimationRefs = {
 export function useFaqAnimations(refs: FaqAnimationRefs): void {
   useLayoutEffect(() => {
     let shouldCleanup = false
-    let observer: IntersectionObserver | undefined
     let revertContext: (() => void) | undefined
 
     const prefersReducedMotion = window.matchMedia(
@@ -160,7 +159,7 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 85%',
+            start: 'top 92%',
             once: true,
           },
         })
@@ -195,7 +194,7 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
           {
             autoAlpha: 1,
             y: 0,
-            duration: 0.7,
+            duration: 0.5,
             ease: 'power3.out',
           },
           '-=0.1',
@@ -208,7 +207,7 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.6,
+              duration: 0.45,
               ease: 'power3.out',
             },
             '-=0.2',
@@ -237,9 +236,9 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.5,
+              duration: 0.4,
               ease: 'power3.out',
-              stagger: 0.015,
+              stagger: 0.01,
             },
             phase5Pos,
           )
@@ -250,9 +249,9 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.4,
+              duration: 0.3,
               ease: 'power3.out',
-              stagger: 0.015,
+              stagger: 0.01,
             },
             phase5Pos,
           )
@@ -262,22 +261,10 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
       revertContext = () => ctx.revert()
     }
 
-    if (refs.sectionRef.current) {
-      observer = new IntersectionObserver(
-        (entries) => {
-          const hasIntersecting = entries.some((e) => e.isIntersecting)
-          if (!hasIntersecting) return
-          observer?.disconnect()
-          void initAnimations()
-        },
-        { root: null, threshold: 0, rootMargin: '0px 0px -25% 0px' },
-      )
-      observer.observe(refs.sectionRef.current)
-    }
+    void initAnimations()
 
     return () => {
       shouldCleanup = true
-      observer?.disconnect()
       revertContext?.()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

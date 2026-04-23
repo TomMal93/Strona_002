@@ -18,7 +18,6 @@ const TABLET_BREAKPOINT = 768
 export function useProcessAnimations(refs: ProcessAnimationRefs): void {
   useLayoutEffect(() => {
     let shouldCleanup = false
-    let observer: IntersectionObserver | undefined
     let revertContext: (() => void) | undefined
 
     const prefersReducedMotion = window.matchMedia(
@@ -203,7 +202,7 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 85%',
+            start: 'top 92%',
             once: true,
           },
         })
@@ -238,7 +237,7 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
           {
             autoAlpha: 1,
             y: 0,
-            duration: 0.7,
+            duration: 0.5,
             ease: 'power3.out',
           },
           '-=0.1',
@@ -251,7 +250,7 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.6,
+              duration: 0.45,
               ease: 'power3.out',
             },
             '-=0.2',
@@ -279,7 +278,7 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
               connectorRef.current,
               {
                 scaleX: 1,
-                duration: 1.0,
+                duration: 0.7,
                 ease: 'power2.inOut',
               },
               '-=0.2',
@@ -289,7 +288,7 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
               connectorRef.current,
               {
                 scaleY: 1,
-                duration: 1.0,
+                duration: 0.7,
                 ease: 'power2.inOut',
               },
               '-=0.2',
@@ -304,11 +303,11 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
             {
               autoAlpha: 1,
               scale: 1,
-              duration: 0.4,
+              duration: 0.35,
               ease: 'back.out(1.7)',
-              stagger: 0.02,
+              stagger: 0.012,
             },
-            '-=0.6',
+            '-=0.5',
           )
         }
 
@@ -319,11 +318,11 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.6,
+              duration: 0.45,
               ease: 'power3.out',
-              stagger: 0.02,
+              stagger: 0.012,
             },
-            '-=0.5',
+            '-=0.4',
           )
         }
 
@@ -345,22 +344,10 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
       revertContext = () => ctx.revert()
     }
 
-    if (refs.sectionRef.current) {
-      observer = new IntersectionObserver(
-        (entries) => {
-          const hasIntersecting = entries.some((e) => e.isIntersecting)
-          if (!hasIntersecting) return
-          observer?.disconnect()
-          void initAnimations()
-        },
-        { root: null, threshold: 0, rootMargin: '0px 0px -25% 0px' },
-      )
-      observer.observe(refs.sectionRef.current)
-    }
+    void initAnimations()
 
     return () => {
       shouldCleanup = true
-      observer?.disconnect()
       revertContext?.()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

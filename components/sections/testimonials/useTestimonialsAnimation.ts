@@ -66,7 +66,6 @@ export function useTestimonialsAnimation(
 
   useLayoutEffect(() => {
     let shouldCleanup = false
-    let observer: IntersectionObserver | undefined
     let revertContext: (() => void) | undefined
 
     const prefersReducedMotion = window.matchMedia(
@@ -246,7 +245,7 @@ export function useTestimonialsAnimation(
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 85%',
+            start: 'top 92%',
             once: true,
           },
         })
@@ -281,7 +280,7 @@ export function useTestimonialsAnimation(
           {
             autoAlpha: 1,
             y: 0,
-            duration: 0.7,
+            duration: 0.5,
             ease: 'power3.out',
           },
           '-=0.1',
@@ -294,7 +293,7 @@ export function useTestimonialsAnimation(
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.6,
+              duration: 0.45,
               ease: 'power3.out',
             },
             '-=0.2',
@@ -308,7 +307,7 @@ export function useTestimonialsAnimation(
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.6,
+              duration: 0.5,
               ease: 'power3.out',
             },
             '-=0.2',
@@ -322,7 +321,7 @@ export function useTestimonialsAnimation(
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.7,
+              duration: 0.5,
               ease: 'power3.out',
               onStart: () => {
                 socialProofEl.setAttribute('data-revealed', '')
@@ -342,7 +341,7 @@ export function useTestimonialsAnimation(
               counter,
               {
                 val: target,
-                duration: 1.8,
+                duration: 1.2,
                 ease: 'power2.out',
                 onUpdate: () => {
                   numEl.textContent = String(Math.round(counter.val))
@@ -385,22 +384,10 @@ export function useTestimonialsAnimation(
       revertContext = () => ctx.revert()
     }
 
-    if (refs.sectionRef.current) {
-      observer = new IntersectionObserver(
-        (entries) => {
-          const hasIntersecting = entries.some((e) => e.isIntersecting)
-          if (!hasIntersecting) return
-          observer?.disconnect()
-          void initAnimations()
-        },
-        { root: null, threshold: 0, rootMargin: '0px 0px -25% 0px' },
-      )
-      observer.observe(refs.sectionRef.current)
-    }
+    void initAnimations()
 
     return () => {
       shouldCleanup = true
-      observer?.disconnect()
       revertContext?.()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
