@@ -4,9 +4,8 @@
   --mobile-scale: calc(100vw / var(--mobile-frame-w));
   width: var(--mobile-frame-w);
   height: var(--mobile-frame-h);
-  /* Kompensacja scale(origin top-left): frame po skali zajmuje 100vh*scale,
-     reszta (100vh - 100vh*scale) / 2 rozkładamy jako margin-top by wycentrować pionowo */
-  margin-top: calc((100vh - var(--mobile-frame-h) * var(--mobile-scale)) / 2);
+  /* Trzymaj mobilny frame przy dolnej krawędzi ekranu. */
+  margin-top: calc(100svh - var(--mobile-frame-h) * var(--mobile-scale));
 }
 
 .mobileGroupCenter {
@@ -15,7 +14,7 @@
   align-items: center;
   justify-content: flex-end;
   min-height: 100%;
-  padding-bottom: 20px;
+  padding-bottom: 0;
 }
 
 .mobileImageWrap {
