@@ -1,10 +1,12 @@
 .mobileFrame {
   --mobile-frame-w: 766px; /* musi odpowiadać breakpointowi md:hidden (767px) */
+  --mobile-frame-h: 1120px;
   --mobile-scale: calc(100vw / var(--mobile-frame-w));
   width: var(--mobile-frame-w);
+  height: var(--mobile-frame-h);
   /* Kompensacja scale(origin top-left): frame po skali zajmuje 100vh*scale,
      reszta (100vh - 100vh*scale) / 2 rozkładamy jako margin-top by wycentrować pionowo */
-  margin-top: calc((100vh - 100vh * var(--mobile-scale)) / 2);
+  margin-top: calc((100vh - var(--mobile-frame-h) * var(--mobile-scale)) / 2);
 }
 
 .mobileGroupCenter {
@@ -19,7 +21,7 @@
 .mobileImageWrap {
   align-self: flex-end;
   margin-right: -320px;
-  margin-top: -385px;
+  margin-top: -445px;
   width: 160%;
 }
 
