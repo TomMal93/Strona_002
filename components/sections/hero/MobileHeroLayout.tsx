@@ -14,7 +14,7 @@ export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
           <div aria-hidden="true" className={styles.portraitHalo} />
           <div className="relative z-10 aspect-[3/4] w-full">
             <Image
-              src="/images/Hero_v4.png"
+              src="/images/about-me-section.png"
               alt="Fotograf i operator drona — portret z dronem i kontrolerem"
               fill
               className="object-contain object-center"

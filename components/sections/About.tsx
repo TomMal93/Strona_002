@@ -21,7 +21,6 @@ export default function About() {
   const [hudFrame, setHudFrame] = useState(307458)
 
   const sectionRef = useRef<HTMLElement>(null!)
-  const videoRef = useRef<HTMLVideoElement>(null)
   const hudBarRef = useRef<HTMLDivElement>(null!)
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const viewfinderRef = useRef<HTMLDivElement>(null!)
@@ -39,10 +38,6 @@ export default function About() {
     }, 80)
 
     return () => window.clearInterval(timer)
-  }, [])
-
-  useEffect(() => {
-    if (videoRef.current) videoRef.current.playbackRate = 0.6
   }, [])
 
   useAboutAnimations({
@@ -64,29 +59,8 @@ export default function About() {
       className="section-dark-bg px-6 py-20 md:py-28 lg:px-10"
     >
       <div className="mx-auto max-w-content">
-        <div className="grid gap-8 md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
-          <div className="order-2 md:order-1 md:col-span-5">
-            <div className={styles.mediaShell}>
-              <div className={styles.mediaFrame}>
-                <video
-                  ref={videoRef}
-                  src="/videos/about-me.mp4"
-                  aria-label={siteContent.about.imageAlt}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className={styles.mediaVideo}
-                />
-                <div aria-hidden="true" className={styles.hologramTint} />
-                <div aria-hidden="true" className={styles.hologramGrid} />
-                <div aria-hidden="true" className={styles.hologramScanlines} />
-                <div aria-hidden="true" className={styles.cinematicNoise} />
-              </div>
-            </div>
-          </div>
-
-          <div className="order-1 md:order-2 md:col-span-7 md:pl-4 lg:pl-8">
+        <div className="grid gap-8 md:items-center md:gap-10 lg:gap-12">
+          <div>
             <div className={styles.introCluster}>
               {/* Title */}
               <div className="w-full text-center">
