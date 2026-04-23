@@ -191,7 +191,15 @@ export default function AboutMeVideo({ embedded = false, videoOverride }: AboutM
   )
 
   if (embedded) {
-    return <div ref={sectionRef}>{videoPlayer}</div>
+    return (
+      <div
+        ref={(el) => {
+          sectionRef.current = el as HTMLElement
+        }}
+      >
+        {videoPlayer}
+      </div>
+    )
   }
 
   return (
