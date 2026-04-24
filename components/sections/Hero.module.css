@@ -76,39 +76,12 @@
 }
 
 .mobileTextHalo::after {
-  content: '';
-  position: absolute;
-  /* bleed poza rodzica — bazuje na border-radius 0.9rem: góra ×2.0, boki ×1.2, dół ×0.6; glow mocniejszy powyżej */
-  inset: -1.8rem -1.08rem -0.54rem;
-  z-index: var(--z-below);
-  border-radius: 0.9rem;
-  pointer-events: none;
-  background: linear-gradient(
-    120deg,
-    rgb(var(--c-gold) / 0.2) 0%,
-    rgb(var(--c-gold) / 0.08) 50%,
-    rgb(var(--c-gold) / 0.2) 100%
-  );
-  filter: blur(35px);
+  content: none;
 }
 
 .mobileTextPanel {
   position: relative;
-  isolation: isolate;
   background: transparent;
-}
-
-.mobileTextPanel::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  background: rgb(8 8 8 / 0.38);
-  backdrop-filter: blur(4px);
-  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000 25%, rgb(0 0 0 / 0.2) 70%, transparent 95%);
-  mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000 25%, rgb(0 0 0 / 0.2) 70%, transparent 95%);
-  pointer-events: none;
 }
 
 @media (max-width: 767px) {
