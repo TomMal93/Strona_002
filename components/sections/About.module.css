@@ -789,10 +789,13 @@
   .viewfinderTimecode,
   .viewfinderResolution,
   .viewfinderBattery,
-  .viewfinderExposure,
   .viewfinderOverline {
     font-size: 0.64rem;
     letter-spacing: 0.08em;
+  }
+
+  .viewfinderExposure {
+    display: none;
   }
 
   .viewfinderContent {
