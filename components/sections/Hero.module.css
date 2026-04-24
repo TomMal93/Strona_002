@@ -16,8 +16,7 @@
 }
 
 .mobileImageWrap {
-  align-self: flex-end;
-  margin-right: -320px;
+  align-self: center;
   margin-top: -360px;
   width: 160%;
 }
@@ -40,7 +39,6 @@
 
 .mobileTextWrap {
   align-self: stretch;
-  margin-left: 30px;
   margin-top: -560px;
 }
 
@@ -153,6 +151,23 @@
 @media (max-width: 767px) {
   .verticalLine {
     display: none;
+  }
+
+  .mobileTextPanel .textBlock {
+    padding-left: 0;
+  }
+
+  .mobileTextPanel .separatorLine {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .mobileTextPanel > div:last-child {
+    align-items: center;
+  }
+
+  .mobileTextPanel > div:last-child > div {
+    justify-content: center;
   }
 }
 

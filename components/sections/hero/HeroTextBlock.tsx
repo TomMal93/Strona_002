@@ -119,7 +119,7 @@ export default function HeroTextBlock({
             {siteContent.hero.aboutLabel}
           </a>
         </div>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-7">
           {socialLinks.map(({ platform, href }) => (
             <a
               key={platform}
@@ -127,7 +127,7 @@ export default function HeroTextBlock({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={platform}
-              className={cn('text-white/40 transition-colors duration-300 hover:text-white', socialIconClassName)}
+              className={cn('text-[rgb(255_238_175/0.55)] transition-colors duration-300 hover:text-[rgb(255_238_175/0.95)]', socialIconClassName)}
             >
               {socialIcons[platform]}
             </a>
