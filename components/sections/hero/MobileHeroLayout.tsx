@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import Image from 'next/image'
+import { siteContent } from '@/lib/site-content'
 import styles from '../Hero.module.css'
 
 type MobileHeroLayoutProps = {
@@ -13,14 +13,14 @@ export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
         <div className={`relative ${styles.mobileImageWrap} ${styles.mobileImageEntrance}`}>
           <div aria-hidden="true" className={styles.portraitHalo} />
           <div className="relative z-10 aspect-[3/4] w-full">
-            <Image
-              src="/images/Hero_v4.png"
-              alt="Fotograf i operator drona — portret z dronem i kontrolerem"
-              fill
-              className="object-contain object-center"
-              priority
-              quality={75}
-              sizes="(max-width: 767px) 72vw, 1px"
+            <video
+              src="/videos/about-me.mp4"
+              aria-label={siteContent.about.imageAlt}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-full w-full object-contain object-center"
             />
           </div>
         </div>

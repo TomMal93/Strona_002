@@ -119,7 +119,7 @@ export default function HeroTextBlock({
             {siteContent.hero.aboutLabel}
           </a>
         </div>
-        <div className="flex items-center gap-7">
+        <div className="flex items-center gap-7 md:gap-5">
           {socialLinks.map(({ platform, href }) => (
             <a
               key={platform}
