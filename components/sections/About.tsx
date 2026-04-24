@@ -175,10 +175,6 @@ export default function About() {
 
               <div ref={ctaRef} className={styles.statementCta}>
                 <div className={styles.statementCtaRow}>
-                  <a href="#promo" className={styles.ctaLink}>
-                    {siteContent.about.ctaLabel}
-                  </a>
-                  <span aria-hidden="true" className={styles.statementSeparator} />
                   <a href="/contact" className={styles.ctaLink}>
                     Więcej o mnie
                   </a>
