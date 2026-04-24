@@ -1,11 +1,12 @@
 .mobileFrame {
   --mobile-frame-w: 766px; /* musi odpowiadać breakpointowi md:hidden (767px) */
   --mobile-frame-h: 1120px;
+  --mobile-video-center-y: 465px; /* środek koła w układzie projektowym */
   --mobile-scale: calc(100vw / var(--mobile-frame-w));
   width: var(--mobile-frame-w);
   height: var(--mobile-frame-h);
-  /* Trzymaj mobilny frame przy dolnej krawędzi ekranu. */
-  margin-top: calc(100svh - var(--mobile-frame-h) * var(--mobile-scale));
+  /* Ustaw środek wideo na wysokości 1/3 ekranu (widok mobile). */
+  margin-top: calc(33.333svh - var(--mobile-video-center-y) * var(--mobile-scale));
 }
 
 .mobileGroupCenter {
