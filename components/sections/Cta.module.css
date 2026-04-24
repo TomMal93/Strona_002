@@ -240,8 +240,10 @@
 
 .ctaActions {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 2rem;
   padding: 1.5rem 0;
 }
@@ -417,7 +419,6 @@
   align-items: center;
   justify-content: center;
   gap: 1.4rem;
-  margin-top: 0.6rem;
 }
 
 .socialLink {
