@@ -43,7 +43,7 @@ test('site content exposes required SEO, Hero, About and Services copy fields', 
   assert.ok(siteContent.seoDescription.length > 0)
   assert.ok(siteContent.structuredDataDescription.length > 0)
   assert.ok(siteContent.hero.headlineLine1.length > 0)
-  assert.ok(siteContent.hero.headlineLine2.length > 0)
+  assert.equal(typeof siteContent.hero.headlineLine2, 'string')
   assert.ok(siteContent.hero.subtitle.length > 0)
   assert.ok(siteContent.hero.ctaLabel.length > 0)
   assert.ok(siteContent.about.title.length > 0)

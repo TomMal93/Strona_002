@@ -45,7 +45,7 @@ export default function Hero() {
     >
       {/* Semantic heading — single h1 for SEO and screen readers */}
       <h1 className="sr-only">
-        {siteContent.hero.headlineLine1} {siteContent.hero.headlineLine2}
+        {[siteContent.hero.headlineLine1, siteContent.hero.headlineLine2].filter(Boolean).join(' ')}
       </h1>
 
       <MobileHeroLayout>

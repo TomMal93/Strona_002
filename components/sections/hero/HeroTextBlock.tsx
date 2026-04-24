@@ -99,8 +99,12 @@ export default function HeroTextBlock({
           className={cn(styles.gradientTextPrimary, styles.heroHeading, headingClassName, animated && styles.animHide)}
         >
           <span className="whitespace-nowrap">{siteContent.hero.headlineLine1}</span>
-          <br />
-          <span className="whitespace-nowrap">{siteContent.hero.headlineLine2}</span>
+          {siteContent.hero.headlineLine2 && (
+            <>
+              <br />
+              <span className="whitespace-nowrap">{siteContent.hero.headlineLine2}</span>
+            </>
+          )}
         </p>
 
         <div className={subtitleWrapClassName}>
