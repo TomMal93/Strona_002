@@ -16,6 +16,8 @@ export default function Testimonials() {
   const trackRef = useRef<HTMLDivElement>(null!)
   const trustedPanelRef = useRef<HTMLDivElement>(null!)
   const isAnimating = useRef(false)
+  const touchStartX = useRef(0)
+  const touchStartY = useRef(0)
 
   const { title, subtitle, hudLabelLeft, hudLabelRight, items, socialProof, trustedBy } =
     siteContent.testimonials
@@ -78,6 +80,22 @@ export default function Testimonials() {
     }
   }, [activeIndex, total, goTo])
 
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+    touchStartY.current = e.touches[0].clientY
+  }, [])
+
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      const dx = e.changedTouches[0].clientX - touchStartX.current
+      const dy = e.changedTouches[0].clientY - touchStartY.current
+      if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return
+      if (dx < 0) handleNext()
+      else handlePrev()
+    },
+    [handleNext, handlePrev],
+  )
+
   const handleDot = useCallback(
     (index: number) => {
       if (isAnimating.current) return
@@ -137,7 +155,11 @@ export default function Testimonials() {
 
         {/* Carousel */}
         <div ref={carouselShellRef} className={styles.carouselShell} data-carousel-shell>
-          <div className={styles.carouselViewport}>
+          <div
+            className={styles.carouselViewport}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             <div ref={trackRef} className={styles.carouselTrack}>
               {extendedItems.map((item, domIndex) => {
                 const isActive = domIndex === activeDomIndex
