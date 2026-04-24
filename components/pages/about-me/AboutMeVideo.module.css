@@ -339,6 +339,8 @@
 
   .videoFramePortrait {
     max-width: min(100%, 20rem);
+    height: clamp(24rem, 72svh, 30rem);
+    aspect-ratio: auto;
   }
 
   .videoShellPortrait,
