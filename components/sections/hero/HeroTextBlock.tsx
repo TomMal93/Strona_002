@@ -42,9 +42,13 @@ const socialIcons: Record<SocialPlatform, JSX.Element> = {
 export type HeroTextBlockProps = {
   headingClassName: string
   underlineClassName: string
+  textBlockClassName?: string
   eyebrowClassName?: string
   subtitleClassName?: string
   ctaClassName?: string
+  ctaContainerClassName?: string
+  ctaButtonsRowClassName?: string
+  socialRowClassName?: string
   subtitleWrapClassName?: string
   socialIconClassName?: string
   animated?: boolean
@@ -59,9 +63,13 @@ export type HeroTextBlockProps = {
 export default function HeroTextBlock({
   headingClassName,
   underlineClassName,
+  textBlockClassName,
   eyebrowClassName = 'block font-bebas text-[21px] uppercase tracking-heading',
   subtitleClassName = 'mt-6 whitespace-pre-line pb-5 font-bebas text-[19px] leading-[1.5] tracking-heading',
   ctaClassName = 'px-4 py-2 text-center font-bebas text-[23px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2',
+  ctaContainerClassName,
+  ctaButtonsRowClassName,
+  socialRowClassName,
   subtitleWrapClassName = 'max-w-[34ch]',
   socialIconClassName = '[&>svg]:h-[21px] [&>svg]:w-[21px]',
   animated = false,
@@ -76,7 +84,7 @@ export default function HeroTextBlock({
 
   return (
     <>
-      <div className={styles.textBlock}>
+      <div className={cn(styles.textBlock, textBlockClassName)}>
         <span ref={verticalLineRef} aria-hidden="true" className={cn(styles.verticalLine, animated && styles.animScaleYZero)} />
         <span
           ref={eyebrowRef}
@@ -110,8 +118,8 @@ export default function HeroTextBlock({
         </div>
       </div>
 
-      <div ref={ctaRef} className={cn('mt-8 flex flex-col gap-5', animated && styles.animHide)}>
-        <div className="flex flex-wrap items-center gap-8">
+      <div ref={ctaRef} className={cn('mt-8 flex flex-col gap-5', ctaContainerClassName, animated && styles.animHide)}>
+        <div className={cn('flex flex-wrap items-center gap-8', ctaButtonsRowClassName)}>
           <a href={siteContent.hero.ctaHref} className={cn(styles.ctaButton, ctaClassName)}>
             {siteContent.hero.ctaLabel}
           </a>
@@ -119,7 +127,7 @@ export default function HeroTextBlock({
             {siteContent.hero.aboutLabel}
           </a>
         </div>
-        <div className="flex items-center gap-5">
+        <div className={cn('flex items-center gap-5', socialRowClassName)}>
           {socialLinks.map(({ platform, href }) => (
             <a
               key={platform}
