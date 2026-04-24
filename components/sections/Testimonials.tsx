@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useState, useCallback } from 'react'
+import React, { useRef, useState, useCallback, useEffect } from 'react'
 import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
@@ -18,6 +18,7 @@ export default function Testimonials() {
   const isAnimating = useRef(false)
   const touchStartX = useRef(0)
   const touchStartY = useRef(0)
+  const viewportRef = useRef<HTMLDivElement>(null)
 
   const { title, subtitle, hudLabelLeft, hudLabelRight, items, socialProof, trustedBy } =
     siteContent.testimonials
@@ -80,21 +81,29 @@ export default function Testimonials() {
     }
   }, [activeIndex, total, goTo])
 
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX
-    touchStartY.current = e.touches[0].clientY
-  }, [])
+  useEffect(() => {
+    const viewport = viewportRef.current
+    if (!viewport) return
 
-  const handleTouchEnd = useCallback(
-    (e: React.TouchEvent) => {
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.touches[0].clientX
+      touchStartY.current = e.touches[0].clientY
+    }
+    const onTouchEnd = (e: TouchEvent) => {
       const dx = e.changedTouches[0].clientX - touchStartX.current
       const dy = e.changedTouches[0].clientY - touchStartY.current
       if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return
       if (dx < 0) handleNext()
       else handlePrev()
-    },
-    [handleNext, handlePrev],
-  )
+    }
+
+    viewport.addEventListener('touchstart', onTouchStart, { passive: true })
+    viewport.addEventListener('touchend', onTouchEnd, { passive: true })
+    return () => {
+      viewport.removeEventListener('touchstart', onTouchStart)
+      viewport.removeEventListener('touchend', onTouchEnd)
+    }
+  }, [handleNext, handlePrev])
 
   const handleDot = useCallback(
     (index: number) => {
@@ -155,11 +164,7 @@ export default function Testimonials() {
 
         {/* Carousel */}
         <div ref={carouselShellRef} className={styles.carouselShell} data-carousel-shell>
-          <div
-            className={styles.carouselViewport}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-          >
+          <div ref={viewportRef} className={styles.carouselViewport}>
             <div ref={trackRef} className={styles.carouselTrack}>
               {extendedItems.map((item, domIndex) => {
                 const isActive = domIndex === activeDomIndex
