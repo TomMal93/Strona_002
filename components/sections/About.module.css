@@ -584,7 +584,7 @@
   display: grid;
   grid-template-rows: 1fr auto;
   margin: 2.8rem auto 0;
-  max-width: 37.5rem;
+  max-width: 100%;
   min-height: 13.5rem;
   padding: 0;
   background: rgb(var(--c-gold) / 0.006);

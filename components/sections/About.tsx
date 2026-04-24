@@ -61,7 +61,7 @@ export default function About() {
       <div className="mx-auto max-w-content">
         <div className="md:grid md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
           <div className="hidden md:col-span-5 md:block">
-            <div className="relative mx-auto aspect-[3/4] w-full max-w-[520px]">
+            <div className="relative mx-auto aspect-[3/4] w-full">
               <video
                 src="/videos/about-me.mp4"
                 aria-label={siteContent.about.imageAlt}
