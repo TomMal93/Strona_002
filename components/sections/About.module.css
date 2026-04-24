@@ -800,6 +800,18 @@
     padding-bottom: 3.9rem;
   }
 
+  .viewfinderExposure {
+    display: none;
+  }
+
+  .ctaLinkFirst {
+    display: none;
+  }
+
+  .statementSeparator {
+    display: none !important;
+  }
+
   .viewfinderBatteryBody {
     min-width: 2.35rem;
     height: 0.92rem;
