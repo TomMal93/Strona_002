@@ -55,7 +55,7 @@ export default function Hero() {
           subtitleClassName="mt-6 whitespace-pre-line pb-5 font-bebas text-[24px] leading-[1.5] tracking-heading"
           subtitleWrapClassName="w-full"
           ctaClassName="px-4 py-2 text-center font-bebas text-[28px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2"
-          socialIconClassName="[&>svg]:h-[34px] [&>svg]:w-[34px]"
+          socialIconClassName="[&>svg]:h-[28px] [&>svg]:w-[28px]"
           underlineClassName="block h-px w-full bg-gradient-to-r from-transparent via-khaki/70 to-transparent"
         />
       </MobileHeroLayout>
