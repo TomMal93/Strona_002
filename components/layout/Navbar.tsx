@@ -266,7 +266,7 @@ export default function Navbar() {
       <div
         ref={mobileMenuRef}
         id="mobile-menu"
-        className="invisible md:hidden border-t border-white/10 bg-[#0f0f12]/90 backdrop-blur-md"
+        className="invisible md:hidden absolute left-0 right-0 top-full border-t border-white/10 bg-[#0f0f12]/90 backdrop-blur-md"
         aria-hidden={!mobileOpen}
       >
         <nav
