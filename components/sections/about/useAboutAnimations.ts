@@ -270,7 +270,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 80%',
+            start: 'top 92%',
             once: true,
           },
         })
@@ -421,16 +421,10 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
       revertContext = () => ctx.revert()
     }
 
-    // Defer one frame so Hero's `h-svh` has applied and the About section's
-    // page-coord position is correct before ScrollTrigger measures it.
-    // Otherwise the trigger can see the section at scroll-top and fire immediately.
-    const rafId = window.requestAnimationFrame(() => {
-      void initAnimations()
-    })
+    void initAnimations()
 
     return () => {
       shouldCleanup = true
-      window.cancelAnimationFrame(rafId)
       revertContext?.()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
