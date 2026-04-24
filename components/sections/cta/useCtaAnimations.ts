@@ -23,7 +23,6 @@ export type CtaAnimationRefs = {
 export function useCtaAnimations(refs: CtaAnimationRefs): void {
   useLayoutEffect(() => {
     let shouldCleanup = false
-    let observer: IntersectionObserver | undefined
     let revertContext: (() => void) | undefined
 
     const prefersReducedMotion = window.matchMedia(
@@ -163,7 +162,7 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 85%',
+            start: 'top 92%',
             once: true,
           },
         })
@@ -190,7 +189,7 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         // Phase 2: Title
         tl.to(
           titleRef.current,
-          { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' },
+          { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out' },
           '-=0.1',
         )
 
@@ -198,7 +197,7 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         if (subtitleRef.current) {
           tl.to(
             subtitleRef.current,
-            { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+            { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power3.out' },
             '-=0.2',
           )
         }
@@ -207,7 +206,7 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         if (glowRef.current) {
           tl.to(
             glowRef.current,
-            { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' },
+            { opacity: 1, scale: 1, duration: 0.75, ease: 'power2.out' },
             '-=0.3',
           )
         }
@@ -219,16 +218,16 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
             {
               opacity: 0.5,
               scale: 1,
-              duration: 0.6,
+              duration: 0.4,
               ease: 'power3.out',
-              stagger: 0.02,
+              stagger: 0.015,
               onComplete: () => {
                 cornerEls.forEach((el) => {
                   el.style.animationPlayState = 'running'
                 })
               },
             },
-            '-=0.8',
+            '-=0.5',
           )
         }
 
@@ -239,16 +238,16 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
             {
               opacity: 0.4,
               scale: 1,
-              duration: 0.5,
+              duration: 0.35,
               ease: 'back.out(1.7)',
-              stagger: 0.025,
+              stagger: 0.015,
               onComplete: () => {
                 crosshairEls.forEach((el) => {
                   el.style.animationPlayState = 'running'
                 })
               },
             },
-            '-=0.4',
+            '-=0.3',
           )
         }
 
@@ -260,10 +259,10 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
               autoAlpha: 1,
               y: 0,
               scale: 1,
-              duration: 0.85,
+              duration: 0.6,
               ease: 'power3.out',
             },
-            '-=0.3',
+            '-=0.25',
           )
         }
 
@@ -271,8 +270,8 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         if (secondaryRowRef.current) {
           tl.to(
             secondaryRowRef.current,
-            { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-            '-=0.4',
+            { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power3.out' },
+            '-=0.3',
           )
         }
 
@@ -283,15 +282,15 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
           )
           tl.to(
             socialRowRef.current,
-            { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out' },
-            '-=0.3',
+            { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power3.out' },
+            '-=0.25',
           )
           if (socialIconEls.length) {
             gsap.set(socialIconEls, { autoAlpha: 0, y: 8 })
             tl.to(
               socialIconEls,
-              { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power3.out', stagger: 0.02 },
-              '-=0.35',
+              { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power3.out', stagger: 0.012 },
+              '-=0.3',
             )
           }
         }
@@ -300,22 +299,10 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
       revertContext = () => ctx.revert()
     }
 
-    if (refs.sectionRef.current) {
-      observer = new IntersectionObserver(
-        (entries) => {
-          const hasIntersecting = entries.some((e) => e.isIntersecting)
-          if (!hasIntersecting) return
-          observer?.disconnect()
-          void initAnimations()
-        },
-        { root: null, threshold: 0, rootMargin: '0px 0px -25% 0px' },
-      )
-      observer.observe(refs.sectionRef.current)
-    }
+    void initAnimations()
 
     return () => {
       shouldCleanup = true
-      observer?.disconnect()
       revertContext?.()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -16,7 +16,6 @@ export type PromoAnimationRefs = {
 export function usePromoAnimations(refs: PromoAnimationRefs): void {
   useLayoutEffect(() => {
     let shouldCleanup = false
-    let observer: IntersectionObserver | undefined
     let revertContext: (() => void) | undefined
 
     const prefersReducedMotion = window.matchMedia(
@@ -193,7 +192,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 85%',
+            start: 'top 92%',
             once: true,
           },
         })
@@ -232,30 +231,30 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
 
         // 3. Title
         tl.to(titleRef.current, {
-          autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out',
+          autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out',
         }, '-=0.1')
 
         // 4. Subtitle
         tl.to(subtitleRef.current, {
-          autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out',
+          autoAlpha: 1, y: 0, duration: 0.45, ease: 'power3.out',
         }, '-=0.3')
 
         // 5. Video frame
         tl.to(videoFrameRef.current, {
-          autoAlpha: 1, duration: 1.2, ease: 'power1.out',
+          autoAlpha: 1, duration: 0.75, ease: 'power1.out',
         }, '-=0.3')
 
         // 6. Corner marks
         if (corners.length) {
           tl.to(corners, {
-            autoAlpha: 1, duration: 0.4, ease: 'power2.out', stagger: 0.015,
+            autoAlpha: 1, duration: 0.3, ease: 'power2.out', stagger: 0.012,
           }, '-=0.4')
         }
 
         // 7. YouTube cards
         if (ytCards.length) {
           tl.to(ytCards, {
-            autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.015,
+            autoAlpha: 1, y: 0, duration: 0.45, ease: 'power3.out', stagger: 0.008,
           }, '-=0.2')
         }
 
@@ -273,22 +272,10 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
       revertContext = () => ctx.revert()
     }
 
-    if (refs.sectionRef.current) {
-      observer = new IntersectionObserver(
-        (entries) => {
-          const hasIntersecting = entries.some((e) => e.isIntersecting)
-          if (!hasIntersecting) return
-          observer?.disconnect()
-          void initAnimations()
-        },
-        { root: null, threshold: 0, rootMargin: '0px 0px -25% 0px' },
-      )
-      observer.observe(refs.sectionRef.current)
-    }
+    void initAnimations()
 
     return () => {
       shouldCleanup = true
-      observer?.disconnect()
       revertContext?.()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

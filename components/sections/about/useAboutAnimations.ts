@@ -23,7 +23,6 @@ export type AboutAnimationRefs = {
 export function useAboutAnimations(refs: AboutAnimationRefs): void {
   useLayoutEffect(() => {
     let shouldCleanup = false
-    let observer: IntersectionObserver | undefined
     let revertContext: (() => void) | undefined
 
     const prefersReducedMotion = window.matchMedia(
@@ -271,7 +270,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 85%',
+            start: 'top 92%',
             once: true,
           },
         })
@@ -279,7 +278,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         tl.to(titleElement, {
           autoAlpha: 1,
           y: 0,
-          duration: 0.62,
+          duration: 0.45,
           ease: 'power3.out',
         })
 
@@ -331,7 +330,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
               y: 0,
               scale: 1,
               clipPath: 'inset(0% 0% 0% 0%)',
-              duration: 0.72,
+              duration: 0.5,
               ease: 'power3.out',
             },
             '-=0.10',
@@ -422,22 +421,10 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
       revertContext = () => ctx.revert()
     }
 
-    if (refs.sectionRef.current) {
-      observer = new IntersectionObserver(
-        (entries) => {
-          const hasIntersecting = entries.some((e) => e.isIntersecting)
-          if (!hasIntersecting) return
-          observer?.disconnect()
-          void initAnimations()
-        },
-        { root: null, threshold: 0, rootMargin: '0px 0px -25% 0px' },
-      )
-      observer.observe(refs.sectionRef.current)
-    }
+    void initAnimations()
 
     return () => {
       shouldCleanup = true
-      observer?.disconnect()
       revertContext?.()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
