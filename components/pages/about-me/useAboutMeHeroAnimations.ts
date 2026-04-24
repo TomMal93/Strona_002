@@ -80,6 +80,26 @@ export function useAboutMeHeroAnimations(refs: AboutMeHeroAnimationRefs): void {
           )
         }
 
+        const textElements = [nameRef.current, taglineRef.current].filter(Boolean)
+        if (textElements.length > 0) {
+          ScrollTrigger.create({
+            trigger: refs.sectionRef.current,
+            start: 'top top',
+            end: '65% top',
+            scrub: true,
+            animation: gsap.fromTo(
+              textElements,
+              { opacity: 1 },
+              {
+                opacity: 0,
+                y: -24,
+                ease: 'none',
+                immediateRender: false,
+              },
+            ),
+          })
+        }
+
         // Parallax on background image
         const bgImg = refs.bgRef.current?.querySelector('img')
         if (bgImg) {
