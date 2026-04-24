@@ -59,7 +59,22 @@ export default function About() {
       className="section-dark-bg px-6 py-20 md:py-28 lg:px-10"
     >
       <div className="mx-auto max-w-content">
-        <div>
+        <div className="md:grid md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
+          <div className="hidden md:col-span-5 md:block">
+            <div className="relative mx-auto aspect-[3/4] w-full max-w-[520px]">
+              <video
+                src="/videos/about-me.mp4"
+                aria-label={siteContent.about.imageAlt}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="relative z-10 h-full w-full object-contain object-center [clip-path:circle(28%_at_50%_50%)] [mask-image:radial-gradient(circle_at_center,#000_5%,transparent_85%)] [-webkit-mask-image:radial-gradient(circle_at_center,#000_5%,transparent_85%)]"
+              />
+            </div>
+          </div>
+
+          <div className="md:col-span-7">
             <div className={styles.introCluster}>
               {/* Title */}
               <div className="w-full text-center">
@@ -107,7 +122,7 @@ export default function About() {
                 </div>
                 <div aria-hidden="true" className={styles.viewfinderHudBottom}>
                   <span className={styles.viewfinderResolution}>4K DCI / 25P</span>
-                  <span className={styles.viewfinderExposure}>ISO 800&nbsp;&nbsp;F2.8&nbsp;&nbsp;1/125</span>
+                  <span className={cn(styles.viewfinderExposure, styles.hideOnMobile)}>ISO 800&nbsp;&nbsp;F2.8&nbsp;&nbsp;1/125</span>
                   <span className={styles.viewfinderTimecode}>TC {formatHudTime(hudFrame)}</span>
                 </div>
 
@@ -174,7 +189,7 @@ export default function About() {
 
               <div ref={ctaRef} className={styles.statementCta}>
                 <div className={styles.statementCtaRow}>
-                  <a href="#promo" className={styles.ctaLink}>
+                  <a href="#promo" className={cn(styles.ctaLink, styles.workCtaLink)}>
                     {siteContent.about.ctaLabel}
                   </a>
                   <span aria-hidden="true" className={styles.statementSeparator} />
@@ -184,6 +199,7 @@ export default function About() {
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
     </section>

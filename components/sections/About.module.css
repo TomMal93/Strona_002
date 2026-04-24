@@ -719,6 +719,10 @@
   transform: scaleX(1);
 }
 
+.workCtaLink {
+  display: inline-flex;
+}
+
 .bottomTimeline {
   display: block;
   width: 100%;
@@ -795,6 +799,10 @@
     letter-spacing: 0.08em;
   }
 
+  .hideOnMobile {
+    display: none;
+  }
+
   .viewfinderContent {
     padding-top: 2rem;
     padding-bottom: 3.9rem;
@@ -808,5 +816,10 @@
 
   .viewfinderBatteryLevel {
     font-size: 0.56rem;
+  }
+
+  .workCtaLink,
+  .statementSeparator {
+    display: none;
   }
 }
