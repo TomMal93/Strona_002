@@ -340,16 +340,6 @@
   background: rgb(var(--c-gold) / 0.45);
 }
 
-@media (min-width: 480px) {
-  .secondaryRow {
-    flex-direction: row;
-    gap: 1.25rem;
-  }
-
-  .dotSeparator {
-    display: block;
-  }
-}
 
 /* ── Tertiary text link ──────────────────────────────────────────────── */
 

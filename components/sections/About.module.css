@@ -783,7 +783,12 @@
   }
 
   .viewfinderHudBottom {
-    grid-template-columns: auto 1fr auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .viewfinderExposure {
+    display: none;
   }
 
   .viewfinderTimecode,
