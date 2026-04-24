@@ -17,12 +17,12 @@
 
 .mobileImageWrap {
   align-self: center;
-  margin-top: -360px;
+  margin-top: -420px;
   width: 160%;
 }
 
 .mobileImageWrap .portraitHalo {
-  inset: 9% 11.5% 10%;
+  inset: 28% 30% 28%;
   animation: mobile-halo-pulse 4.5s ease-in-out infinite;
 }
 
@@ -39,7 +39,7 @@
 
 .mobileTextWrap {
   align-self: stretch;
-  margin-top: -560px;
+  margin-top: -480px;
 }
 
 .mobileTextHalo {
