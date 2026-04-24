@@ -26,6 +26,34 @@
   animation: mobile-halo-pulse 4.5s ease-in-out infinite;
 }
 
+.mobileVideoGlow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 75%;
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgb(255 238 175 / 0.55) 0%,
+      rgb(var(--c-gold) / 0.4) 30%,
+      rgb(var(--c-gold) / 0.2) 55%,
+      transparent 78%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgb(var(--c-khaki) / 0.28) 0%,
+      rgb(var(--c-gold) / 0.12) 45%,
+      transparent 78%
+    );
+  filter: blur(36px);
+  animation: mobile-halo-pulse 4.5s ease-in-out infinite;
+}
+
 @keyframes mobile-halo-pulse {
   0%, 100% {
     opacity: 0.85;
@@ -66,8 +94,21 @@
 
 .mobileTextPanel {
   position: relative;
+  isolation: isolate;
+  background: transparent;
+}
+
+.mobileTextPanel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
   background: rgb(8 8 8 / 0.38);
   backdrop-filter: blur(4px);
+  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000 25%, rgb(0 0 0 / 0.2) 70%, transparent 95%);
+  mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000 25%, rgb(0 0 0 / 0.2) 70%, transparent 95%);
+  pointer-events: none;
 }
 
 @media (max-width: 767px) {
@@ -360,8 +401,10 @@
     filter: none;
   }
 
-  .mobileImageWrap .portraitHalo {
+  .mobileImageWrap .portraitHalo,
+  .mobileVideoGlow {
     animation: none;
+    filter: none;
   }
 
   .mobileTextPanel {
