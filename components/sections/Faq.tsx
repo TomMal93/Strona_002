@@ -74,30 +74,8 @@ export default function Faq() {
           </p>
         </div>
 
-        {/* FAQ Shell with corner marks */}
+        {/* FAQ Shell */}
         <div className={styles.faqShell}>
-          {/* Corner marks */}
-          <span
-            aria-hidden="true"
-            data-corner-mark
-            className={cn(styles.cornerMark, styles.cornerTL)}
-          />
-          <span
-            aria-hidden="true"
-            data-corner-mark
-            className={cn(styles.cornerMark, styles.cornerTR)}
-          />
-          <span
-            aria-hidden="true"
-            data-corner-mark
-            className={cn(styles.cornerMark, styles.cornerBL)}
-          />
-          <span
-            aria-hidden="true"
-            data-corner-mark
-            className={cn(styles.cornerMark, styles.cornerBR)}
-          />
-
           {/* Film strip indicator (desktop only) */}
           <div className={styles.filmStrip} aria-hidden="true">
             {items.map((item, i) => (

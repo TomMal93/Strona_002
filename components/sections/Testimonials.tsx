@@ -293,11 +293,6 @@ export default function Testimonials() {
             ))}
           </div>
 
-          {/* Viewfinder corner brackets */}
-          <span className={cn(styles.viewfinderCorner, styles.vfTL)} aria-hidden="true" />
-          <span className={cn(styles.viewfinderCorner, styles.vfTR)} aria-hidden="true" />
-          <span className={cn(styles.viewfinderCorner, styles.vfBL)} aria-hidden="true" />
-          <span className={cn(styles.viewfinderCorner, styles.vfBR)} aria-hidden="true" />
         </div>
       </div>
     </section>
