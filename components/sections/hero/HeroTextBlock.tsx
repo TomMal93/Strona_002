@@ -46,6 +46,7 @@ export type HeroTextBlockProps = {
   subtitleClassName?: string
   ctaClassName?: string
   subtitleWrapClassName?: string
+  socialRowClassName?: string
   socialIconClassName?: string
   animated?: boolean
   eyebrowRef?: Ref<HTMLSpanElement>
@@ -63,6 +64,7 @@ export default function HeroTextBlock({
   subtitleClassName = 'mt-6 whitespace-pre-line pb-5 font-bebas text-[19px] leading-[1.5] tracking-heading',
   ctaClassName = 'px-4 py-2 text-center font-bebas text-[23px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2',
   subtitleWrapClassName = 'max-w-[34ch]',
+  socialRowClassName = 'flex items-center gap-7 md:gap-5',
   socialIconClassName = '[&>svg]:h-[21px] [&>svg]:w-[21px]',
   animated = false,
   eyebrowRef,
@@ -119,7 +121,7 @@ export default function HeroTextBlock({
             {siteContent.hero.aboutLabel}
           </a>
         </div>
-        <div className="flex items-center gap-7 md:gap-5">
+        <div className={socialRowClassName}>
           {socialLinks.map(({ platform, href }) => (
             <a
               key={platform}

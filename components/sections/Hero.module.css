@@ -187,6 +187,15 @@
   .mobileTextPanel > div:last-child > div {
     justify-content: center;
   }
+
+  .mobileTextWrap,
+  .mobileTextPanel {
+    overflow: visible;
+  }
+
+  .mobileTextWrap {
+    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 /* ── Gradient text — współdzielony przez opis i buttony ──────────────────── */
