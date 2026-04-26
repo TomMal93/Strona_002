@@ -416,6 +416,23 @@
   transform: translateX(3px);
 }
 
+@media (max-width: 639px) {
+  .secondaryRow {
+    width: 100%;
+    justify-items: center;
+  }
+
+  .btnTertiary {
+    width: auto;
+    justify-self: center;
+    padding-inline: 0.25rem;
+  }
+
+  .btnTertiary .btnIcon {
+    display: none;
+  }
+}
+
 /* ── Social icons row ────────────────────────────────────────────────── */
 
 .socialRow {
