@@ -241,7 +241,7 @@
 
 @media (max-width: 767px) {
   .connectorLine {
-    display: block;
+    display: none;
     position: absolute;
     top: 2rem;
     bottom: 2rem;

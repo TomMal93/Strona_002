@@ -423,6 +423,10 @@
 /* ── Responsive: small screens ────────────────────────────────────────── */
 
 @media (width < 48rem) {
+  .bottomTimeline {
+    display: none;
+  }
+
   .hudLabel {
     padding-inline: 0.45rem;
     font-size: 0.64rem;
