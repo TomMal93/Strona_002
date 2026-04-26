@@ -293,7 +293,7 @@
   }
 
   .connectorLine {
-    display: block;
+    display: none;
     position: absolute;
     top: 2rem;
     left: 0;

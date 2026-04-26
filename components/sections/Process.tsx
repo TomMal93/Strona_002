@@ -105,11 +105,6 @@ export default function Process() {
           <ol ref={stepsContainerRef} className={styles.stepsGrid}>
             {steps.map((step) => (
               <li key={step.number} className={styles.stepCard} data-process-step>
-                <span
-                  className={styles.stepNode}
-                  data-process-node
-                  aria-hidden="true"
-                />
                 <span className={styles.stepNumber}>{step.number}</span>
                 <span className={styles.stepLabel}>{step.label}</span>
                 <h3 className={styles.stepTitle}>{step.title}</h3>
