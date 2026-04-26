@@ -242,7 +242,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1.35rem;
   padding: 1.5rem 0;
 }
 
@@ -326,10 +326,12 @@
 /* ── Secondary row — two tertiary links with dot separator ───────────── */
 
 .secondaryRow {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   align-items: center;
-  gap: 0.8rem;
+  justify-items: center;
+  gap: 0.7rem;
+  width: min(100%, 34rem);
 }
 
 .dotSeparator {
@@ -340,9 +342,9 @@
   background: rgb(var(--c-gold) / 0.45);
 }
 
-@media (min-width: 480px) {
+@media (min-width: 640px) {
   .secondaryRow {
-    flex-direction: row;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     gap: 1.25rem;
   }
 
@@ -357,11 +359,15 @@
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.4rem;
+  width: 100%;
+  min-height: 2.35rem;
   padding: 0.5rem 0.15rem 0.55rem;
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
   font-size: 1.05rem;
   letter-spacing: 0.10em;
+  text-align: center;
   text-transform: uppercase;
   background: linear-gradient(
     130deg,

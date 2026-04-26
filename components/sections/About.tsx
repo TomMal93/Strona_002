@@ -95,7 +95,7 @@ export default function About() {
                 <span data-hud-label className={styles.hudModeLabel}>profile</span>
                 <span data-hud-line="left" className={styles.hudLineLeft} />
                 <span data-hud-line="right" className={styles.hudLineRight} />
-                <span data-hud-label className={styles.hudTimecode}>scene 02/07</span>
+                <span data-hud-label className={styles.hudTimecode}>scene 02/08</span>
                 <span data-hud-line="right" className={styles.hudLineRight} />
               </div>
 

@@ -102,7 +102,7 @@ export default function Promo() {
             <span data-hud-label className={styles.hudLabel}>preview</span>
             <span data-hud-line="left" className={styles.hudLineLeft} />
             <span data-hud-line="right" className={styles.hudLineRight} />
-            <span data-hud-label className={styles.hudLabel}>scene 03/07</span>
+            <span data-hud-label className={styles.hudLabel}>scene 03/08</span>
             <span data-hud-line="right" className={styles.hudLineRight} />
           </div>
 

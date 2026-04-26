@@ -71,7 +71,7 @@ export const siteContent = {
     subtitle:
       'Każda realizacja to czyjaś historia.\nOto, co mówią ci, których historie opowiedziałem.',
     hudLabelLeft: 'FEEDBACK',
-    hudLabelRight: 'SCENE 04 / 07',
+    hudLabelRight: 'SCENE 06 / 08',
     items: [
       {
         quote:
@@ -196,7 +196,7 @@ export const siteContent = {
     subtitle:
       'Od pierwszego kontaktu do gotowego materiału — cztery proste kroki.\nBez niespodzianek, bez zbędnego czekania.',
     hudLabelLeft: 'WORKFLOW',
-    hudLabelRight: 'SCENE 06 / 07',
+    hudLabelRight: 'SCENE 05 / 08',
     steps: [
       {
         number: '01',

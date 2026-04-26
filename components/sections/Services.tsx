@@ -268,7 +268,7 @@ export default function Services() {
             <span data-hud-line="left" className={styles.hudLineLeft} />
             <span data-hud-line="right" className={styles.hudLineRight} />
             <span data-hud-label className={styles.hudTimecode}>
-              SCENE 05 / 07
+              SCENE 04 / 08
             </span>
             <span data-hud-line="right" className={styles.hudLineRight} />
           </div>
