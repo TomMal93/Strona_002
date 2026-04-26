@@ -84,8 +84,10 @@
 /* ── Timeline shell — viewfinder frame ────────────────────────────────── */
 
 .timelineShell {
+  --process-frame-gap: 1.6rem;
+
   position: relative;
-  padding: 2.8rem 1.4rem 1.6rem;
+  padding: var(--process-frame-gap);
 }
 
 /* ── Corner marks — camera framing guides ─────────────────────────────── */
@@ -243,7 +245,7 @@
     position: absolute;
     top: 2rem;
     bottom: 2rem;
-    left: 1.4rem;
+    left: var(--process-frame-gap);
     width: 1px;
     transform-origin: top center;
     background: linear-gradient(
@@ -337,6 +339,6 @@
   }
 
   .timelineShell {
-    padding-inline: 1rem;
+    --process-frame-gap: 1rem;
   }
 }

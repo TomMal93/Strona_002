@@ -24,8 +24,6 @@ type VariantClassNames = {
   text: string
   lensRing: string
   icon: string
-  cornerTL: string
-  cornerBR: string
   videoFrame: string
   bullet: string
   bulletDot: string
@@ -42,8 +40,6 @@ const VARIANT_CLASSES: Record<CardVariant, VariantClassNames> = {
     text: styles.highlightText,
     lensRing: styles.lensRingHighlight,
     icon: styles.iconHighlight,
-    cornerTL: '',
-    cornerBR: '',
     videoFrame: styles.videoFrameHighlight,
     bullet: styles.bulletHighlight,
     bulletDot: styles.bulletDotHighlight,
@@ -58,8 +54,6 @@ const VARIANT_CLASSES: Record<CardVariant, VariantClassNames> = {
     text: styles.militaryText,
     lensRing: styles.lensRingMilitary,
     icon: styles.iconMilitary,
-    cornerTL: styles.cornerTLMilitary,
-    cornerBR: styles.cornerBRMilitary,
     videoFrame: styles.videoFrameMilitary,
     bullet: styles.bulletMilitary,
     bulletDot: styles.bulletDotMilitary,
@@ -121,17 +115,6 @@ function SceneCard({ item, index }: SceneCardProps) {
         v.card,
       )}
     >
-      <span
-        aria-hidden="true"
-        data-corner-mark
-        className={cn(styles.cornerMark, styles.cornerTL, v.cornerTL)}
-      />
-      <span
-        aria-hidden="true"
-        data-corner-mark
-        className={cn(styles.cornerMark, styles.cornerBR, v.cornerBR)}
-      />
-
       <span aria-hidden="true" data-scene-number className={styles.sceneNumber}>
         {getSceneNumber(index)}
       </span>
