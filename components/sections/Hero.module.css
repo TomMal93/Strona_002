@@ -2,9 +2,9 @@
   --mobile-frame-w: 766px; /* musi odpowiadać breakpointowi md:hidden (767px) */
   --mobile-scale: calc(100vw / var(--mobile-frame-w));
   width: var(--mobile-frame-w);
-  /* Kompensacja scale(origin top-left): frame po skali zajmuje 100vh*scale,
-     reszta (100vh - 100vh*scale) / 2 rozkładamy jako margin-top by wycentrować pionowo */
-  margin-top: calc((100vh - 100vh * var(--mobile-scale)) / 2);
+  /* Kompensacja scale(origin top-left): frame po skali zajmuje 100svh*scale,
+     reszta (100svh - 100svh*scale) / 2 rozkładamy jako margin-top by wycentrować pionowo */
+  margin-top: calc((100svh - 100svh * var(--mobile-scale)) / 2);
 }
 
 .mobileGroupCenter {
@@ -19,6 +19,10 @@
   align-self: center;
   margin-top: -55%;
   width: 160%;
+}
+
+.mobileVideoStage {
+  transform: translateY(-10svh);
 }
 
 .mobileImageWrap .portraitHalo {

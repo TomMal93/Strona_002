@@ -11,7 +11,7 @@ export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
     <div className={`relative z-10 mx-auto h-full origin-top-left scale-[calc(100vw/var(--mobile-frame-w))] px-[10px] md:hidden ${styles.mobileFrame}`}>
       <div className={styles.mobileGroupCenter}>
         <div className={`relative ${styles.mobileImageWrap} ${styles.mobileImageEntrance}`}>
-          <div className="relative aspect-[3/4] w-full">
+          <div className={`relative aspect-[3/4] w-full ${styles.mobileVideoStage}`}>
             <video
               src="/videos/about-me.mp4"
               aria-label={siteContent.about.imageAlt}
