@@ -98,7 +98,7 @@
     rgb(var(--c-gold) / 0.70) 50%,
     transparent 100%
   );
-  transform-origin: center;
+  transform-origin: left center;
 }
 
 .subtitle {

@@ -1,13 +1,14 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { gsap } from 'gsap'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { usePreloaderGate } from './usePreloaderGate'
 import styles from './Preloader.module.css'
 
 const SESSION_KEY = 'intro:played:v1'
 const FADE_OUT_MS = 600
 
-type Phase = 'visible' | 'leaving' | 'gone'
+type Phase = 'visible' | 'gone'
 
 // Default to 'visible' so the overlay is part of the first paint (no FOUC
 // where Hero flashes before the loader). The inline boot script in layout.tsx
@@ -39,46 +40,60 @@ export default function Preloader() {
   const gate = usePreloaderGate(phase === 'visible')
 
   // Entrance animation while visible.
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (phase !== 'visible') return
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) return
+    if (prefersReducedMotion) {
+      gsap.set(wordmarkRef.current, {
+        autoAlpha: 1,
+        y: 0,
+      })
+      gsap.set(dividerRef.current, {
+        autoAlpha: 1,
+        xPercent: 0,
+        scaleX: 1,
+      })
+      gsap.set(subtitleRef.current, {
+        autoAlpha: 0.7,
+        y: 0,
+      })
+      return
+    }
 
-    let revert: (() => void) | undefined
-    let cancelled = false
+    const ctx = gsap.context(() => {
+      gsap.set(wordmarkRef.current, { autoAlpha: 0, y: 24 })
+      gsap.set(dividerRef.current, {
+        autoAlpha: 0,
+        xPercent: -38,
+        scaleX: 0.35,
+        transformOrigin: 'left center',
+      })
+      gsap.set(subtitleRef.current, { autoAlpha: 0, y: 8 })
 
-    void import('gsap').then(({ gsap }) => {
-      if (cancelled) return
-      const ctx = gsap.context(() => {
-        gsap.set(wordmarkRef.current, { autoAlpha: 0, y: 24 })
-        gsap.set(dividerRef.current, { scaleX: 0 })
-        gsap.set(subtitleRef.current, { autoAlpha: 0, y: 8 })
-
-        const tl = gsap.timeline()
-        tl.to(wordmarkRef.current, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.9,
-          ease: 'power3.out',
-        })
-        tl.to(dividerRef.current, {
-          scaleX: 1,
-          duration: 0.8,
-          ease: 'power2.out',
-        }, '-=0.5')
-        tl.to(subtitleRef.current, {
-          autoAlpha: 0.7,
-          y: 0,
-          duration: 0.7,
-          ease: 'power3.out',
-        }, '-=0.55')
-      }, overlayRef)
-      revert = () => ctx.revert()
-    })
+      const tl = gsap.timeline({ defaults: { overwrite: 'auto' } })
+      tl.to(wordmarkRef.current, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.85,
+        ease: 'power3.out',
+      })
+      tl.to(dividerRef.current, {
+        autoAlpha: 1,
+        xPercent: 0,
+        scaleX: 1,
+        duration: 0.9,
+        ease: 'power3.out',
+      }, '-=0.45')
+      tl.to(subtitleRef.current, {
+        autoAlpha: 0.7,
+        y: 0,
+        duration: 0.65,
+        ease: 'power3.out',
+      }, '-=0.55')
+    }, overlayRef)
 
     return () => {
-      cancelled = true
-      revert?.()
+      ctx.revert()
     }
   }, [phase])
 
@@ -100,26 +115,44 @@ export default function Preloader() {
     }
 
     if (prefersReducedMotion) {
-      setPhase('leaving')
       finish()
       return
     }
 
-    setPhase('leaving')
-    let cancelled = false
-    void import('gsap').then(({ gsap }) => {
-      if (cancelled) return
-      gsap.to(overlayRef.current, {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        defaults: { overwrite: 'auto' },
+        onComplete: finish,
+      })
+      tl.to(dividerRef.current, {
+        autoAlpha: 0,
+        xPercent: 130,
+        scaleX: 0.82,
+        duration: 0.46,
+        ease: 'power3.in',
+      })
+      tl.to(subtitleRef.current, {
+        autoAlpha: 0,
+        y: -6,
+        duration: 0.35,
+        ease: 'power2.in',
+      }, '<')
+      tl.to(wordmarkRef.current, {
+        autoAlpha: 0,
+        y: -8,
+        duration: 0.38,
+        ease: 'power2.in',
+      }, '<+=0.05')
+      tl.to(overlayRef.current, {
         autoAlpha: 0,
         scale: 1.04,
         duration: FADE_OUT_MS / 1000,
         ease: 'power2.inOut',
-        onComplete: finish,
-      })
-    })
+      }, '-=0.08')
+    }, overlayRef)
 
     return () => {
-      cancelled = true
+      ctx.revert()
     }
   }, [phase, gate])
 
