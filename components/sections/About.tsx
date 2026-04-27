@@ -193,7 +193,7 @@ export default function About() {
                     {siteContent.about.ctaLabel}
                   </a>
                   <span aria-hidden="true" className={styles.statementSeparator} />
-                  <a href="/contact" className={styles.ctaLink}>
+                  <a href="/contact#bio" className={styles.ctaLink}>
                     Więcej o mnie
                   </a>
                 </div>

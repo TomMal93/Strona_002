@@ -351,10 +351,49 @@ export const siteContent = {
       backgroundAlt:
         process.env.NEXT_PUBLIC_ABOUTME_HERO_BG_ALT || 'Fotograf w plenerze z kamerą',
     },
+    profile: {
+      title: process.env.NEXT_PUBLIC_ABOUTME_PROFILE_TITLE || 'Kim jestem',
+      hudLabelLeft: 'PROFILE',
+      hudLabelRight: 'SCENE 01 / 03',
+      subtitle: 'Profile',
+      intro:
+        process.env.NEXT_PUBLIC_ABOUTME_PROFILE_INTRO
+        || 'Nazywam się Przemek Malxxxxx. Jestem fotografem, operatorem i filmowcem — łączę doświadczenie z planu zdjęciowego z wrażliwością na ludzi, dzięki czemu moje filmy oddają nie tylko obraz, ale i atmosferę.',
+      locationLabel: 'Gdzie pracuję',
+      locationText:
+        process.env.NEXT_PUBLIC_ABOUTME_PROFILE_LOCATION
+        || 'Baza w Polsce, działam na terenie całego kraju, a większe projekty realizuję także za granicą. Plener, teren, off-road i sale eventowe — czuję się dobrze tam, gdzie dzieje się historia.',
+      specialtiesLabel: 'W czym się specjalizuję',
+      specialties: [
+        'Filmy ślubne i okolicznościowe',
+        'Materiały promocyjne dla marek',
+        'Relacje z eventów i koncertów',
+        'Off-road, plener, drony',
+        'Profesjonalny montaż w DaVinci Resolve',
+      ],
+      gearLabel: 'Sprzęt',
+      gear: [
+        'Kamery Sony — kinowa głębia obrazu',
+        'Mikrofony Rode — czysty dźwięk z planu',
+        'Drony — kadry z lotu ptaka',
+        'Profesjonalne oświetlenie filmowe',
+      ],
+      statsLabel: 'Liczby',
+      stats: [
+        { value: '3+', label: 'lata doświadczenia' },
+        { value: '100+', label: 'zrealizowanych projektów' },
+        { value: '4K', label: 'jakość obrazu' },
+        { value: '24h', label: 'czas odpowiedzi' },
+      ],
+      cta: {
+        label: 'Skontaktuj się',
+        href: '#aboutme-contact-heading',
+      },
+    },
     bio: {
       title: 'Dlaczego to robię',
       hudLabelLeft: 'NOTES',
-      hudLabelRight: 'SCENE 01 / 02',
+      hudLabelRight: 'SCENE 02 / 03',
       text:
         process.env.NEXT_PUBLIC_ABOUTME_BIO
         || 'Wszystko zaczęło się od kurzu na bezdrożach\ni chęci zatrzymania w kadrze surowego klimatu moich terenowych wypraw.\n\nTrzy lata temu kamera i dron były dla mnie tylko narzędziami – cyfrowym pamiętnikiem z podróży, który miał cieszyć głównie moje oko.\nZ czasem jednak zauważyłem, że między jednym a drugim ujęciem dzieje się coś więcej.\n\nOdkryłem, że film to nie tylko suma ładnych obrazków, ale potężny język, którym można opowiadać o tym, co niewidoczne: o napięciu przed trudnym podjazdem, o ciszy poranka w lesie i o ulotnych emocjach, które znikają szybciej niż dym z ogniska.\n\nDziś nie tylko nagrywam – ja buduję opowieści.\nSzukam w obiektywie autentyczności, by każdy film był powrotem do chwil, które zasługują na to, by trwać wiecznie.',
@@ -385,7 +424,7 @@ export const siteContent = {
     contact: {
       title: 'Kontakt',
       hudLabelLeft: 'CONTACT',
-      hudLabelRight: 'SCENE 02 / 02',
+      hudLabelRight: 'SCENE 03 / 03',
       phone: process.env.NEXT_PUBLIC_ABOUTME_PHONE || '+48 123 456 789',
       email: process.env.NEXT_PUBLIC_ABOUTME_EMAIL || 'kontakt@example.com',
       ctaLabel: process.env.NEXT_PUBLIC_ABOUTME_CTA_LABEL || 'Porozmawiajmy',
