@@ -5,7 +5,6 @@ import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './AboutMeBio.module.css'
 import { useAboutMeBioAnimations } from './useAboutMeBioAnimations'
-import AboutMeVideo from './AboutMeVideo'
 
 export default function AboutMeBio() {
   const sectionRef = useRef<HTMLElement>(null!)
@@ -22,15 +21,13 @@ export default function AboutMeBio() {
     bioPanelRef,
   })
 
-  const { bio } = siteContent.aboutMe
-  const { video } = siteContent.aboutMe
-
-  const [introBlock, ...restBlocks] = bio.text.split('\n\n')
-  const introLines = introBlock.split('\n')
+  const { profile } = siteContent.aboutMe
+  const introWords = profile.intro.split(/(\s+)/)
 
   return (
     <section
       ref={sectionRef}
+      id="bio"
       aria-labelledby="aboutme-bio-heading"
       className={cn(
         'bg-anthracite px-6 py-20 sm:py-24 lg:px-20 lg:py-32',
@@ -49,17 +46,17 @@ export default function AboutMeBio() {
               styles.sectionTitle,
             )}
           >
-            {bio.title}
+            {profile.title}
           </h2>
           <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
             <span data-hud-line className={styles.hudLineLeft} />
             <span data-hud-label className={styles.hudLabelLeft}>
-              {bio.hudLabelLeft}
+              {profile.hudLabelLeft}
             </span>
             <span data-hud-line className={styles.hudLineLeft} />
             <span data-hud-line className={styles.hudLineRight} />
             <span data-hud-label className={styles.hudLabelRight}>
-              {bio.hudLabelRight}
+              {profile.hudLabelRight}
             </span>
             <span data-hud-line className={styles.hudLineRight} />
           </div>
@@ -68,11 +65,11 @@ export default function AboutMeBio() {
             ref={subtitleRef}
             className="mt-5 whitespace-pre-line font-mono text-[0.95rem] leading-[1.85] tracking-wide text-white/50"
           >
-            Director&apos;s Notes
+            {profile.subtitle}
           </p>
         </div>
 
-        {/* Bio panel — script style */}
+        {/* Profile panel */}
         <div ref={bioPanelRef} className={styles.bioPanel}>
           {/* Outer corner marks — visible on desktop, hidden on mobile */}
           <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerOuter, styles.cornerTL)} />
@@ -81,7 +78,7 @@ export default function AboutMeBio() {
           <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerOuter, styles.cornerBR)} />
           <span aria-hidden="true" className={cn(styles.notesLabel, styles.notesLabelOuter)}>NOTES</span>
 
-          {/* Text sub-panel */}
+          {/* Intro sub-panel */}
           <div className={styles.bioPanelText}>
             <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTL)} />
             <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTR)} />
@@ -90,101 +87,94 @@ export default function AboutMeBio() {
             <span aria-hidden="true" className={cn(styles.notesLabel, styles.notesLabelInner)}>NOTES</span>
 
             <p className={cn(styles.bioText, styles.bioTextIntro)}>
-              {introLines.map((line, lineIndex) => (
-                <span key={line}>
-                  {line.split(/(\s+)/).map((word, i) =>
-                    /^\s+$/.test(word) ? (
-                      word
-                    ) : (
-                      <span key={`${lineIndex}-${i}`} data-bio-word className={styles.bioWord}>
-                        {word}
-                      </span>
-                    ),
-                  )}
-                  {lineIndex < introLines.length - 1 ? <br /> : null}
-                </span>
-              ))}
-            </p>
-
-            {restBlocks.map((paragraph, paragraphIndex) => (
-              <p
-                key={paragraph}
-                className={cn(
-                  styles.bioText,
-                  paragraph.startsWith('Dziś nie tylko nagrywam') && styles.bioTextCentered,
-                )}
-              >
-                {paragraph.split('\n').map((line, lineIndex) => (
-                  <span key={`${paragraphIndex}-${lineIndex}`}>
-                    {line.split(/(\s+)/).map((word, i) =>
-                      /^\s+$/.test(word) ? (
-                        word
-                      ) : (
-                        <span
-                          key={`${paragraphIndex}-${lineIndex}-${i}`}
-                          data-bio-word
-                          className={styles.bioWord}
-                        >
-                          {word}
-                        </span>
-                      ),
-                    )}
-                    {lineIndex < paragraph.split('\n').length - 1 ? <br /> : null}
+              {introWords.map((token, i) =>
+                /^\s+$/.test(token) ? (
+                  token
+                ) : (
+                  <span key={`intro-${i}`} data-bio-word className={styles.bioWord}>
+                    {token}
                   </span>
-                ))}
-              </p>
-            ))}
+                ),
+              )}
+            </p>
           </div>
 
-          {/* Video sub-panel */}
-          <div className={styles.bioPanelVideo}>
-            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTL)} />
-            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTR)} />
-            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBL)} />
-            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBR)} />
+          {/* Profile grid: location + specialties */}
+          <div className={styles.profileGrid}>
+            <article className={styles.infoBlock}>
+              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTL)} />
+              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTR)} />
+              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBL)} />
+              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBR)} />
+              <span aria-hidden="true" className={cn(styles.notesLabel, styles.notesLabelInner)}>NOTES</span>
 
-            <div data-video-block className={styles.videoBlock}>
-              <div aria-hidden="true" className={styles.videoSeparator} />
-              <div className={styles.videoBlockHeader}>
-                <p className={styles.videoBlockLead}>Poznaj mnie bliżej - w minutę.</p>
-              </div>
+              <header className={styles.infoHeader}>
+                <span aria-hidden="true" className={styles.infoRule} />
+                <h3 className={styles.infoLabel}>{profile.locationLabel}</h3>
+              </header>
+              <p className={styles.infoBody}>{profile.locationText}</p>
+            </article>
 
-              <div className={styles.videoFeatureLayout}>
-                <div className={cn(styles.videoFeatureColumn, styles.videoFeatureColumnLeft)}>
-                  {video.highlightsLeft.map((item) => (
-                    <article key={item} className={styles.videoFeatureCard}>
-                      <div className={styles.videoFeatureMeta}>
-                        <span aria-hidden="true" className={styles.videoFeatureRule} />
-                      </div>
-                      <h3 className={styles.videoFeatureTitle}>{item}</h3>
-                    </article>
-                  ))}
-                </div>
+            <article className={styles.infoBlock}>
+              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTL)} />
+              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTR)} />
+              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBL)} />
+              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBR)} />
+              <span aria-hidden="true" className={cn(styles.notesLabel, styles.notesLabelInner)}>NOTES</span>
 
-                <div className={styles.videoFeatureCenter}>
-                  <span aria-hidden="true" className={cn(styles.videoDivider, styles.videoDividerLeft)} />
-                  <AboutMeVideo
-                    embedded
-                    videoOverride={{
-                      type: 'self-hosted',
-                      src: '/videos/contact/contact.mp4',
-                    }}
-                  />
-                  <span aria-hidden="true" className={cn(styles.videoDivider, styles.videoDividerRight)} />
-                </div>
+              <header className={styles.infoHeader}>
+                <span aria-hidden="true" className={styles.infoRule} />
+                <h3 className={styles.infoLabel}>{profile.specialtiesLabel}</h3>
+              </header>
+              <ul className={styles.specialtiesList}>
+                {profile.specialties.map((item) => (
+                  <li key={item} className={styles.specialtyItem}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </div>
 
-                <div className={cn(styles.videoFeatureColumn, styles.videoFeatureColumnRight)}>
-                  {video.highlightsRight.map((item) => (
-                    <article key={item} className={styles.videoFeatureCard}>
-                      <div className={styles.videoFeatureMeta}>
-                        <span aria-hidden="true" className={styles.videoFeatureRule} />
-                      </div>
-                      <h3 className={styles.videoFeatureTitle}>{item}</h3>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            </div>
+          {/* Stats row */}
+          <section className={styles.statsBlock} aria-label={profile.statsLabel}>
+            <header className={styles.infoHeader}>
+              <span aria-hidden="true" className={styles.infoRule} />
+              <h3 className={styles.infoLabel}>{profile.statsLabel}</h3>
+              <span aria-hidden="true" className={styles.infoRule} />
+            </header>
+            <ul className={styles.statsRow}>
+              {profile.stats.map((stat) => (
+                <li key={stat.label} className={styles.statBlock}>
+                  <span className={cn(styles.statValue, styles.gradientTextPrimary)}>{stat.value}</span>
+                  <span className={styles.statLabel}>{stat.label}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* Gear */}
+          <section className={styles.gearBlock} aria-label={profile.gearLabel}>
+            <header className={styles.infoHeader}>
+              <span aria-hidden="true" className={styles.infoRule} />
+              <h3 className={styles.infoLabel}>{profile.gearLabel}</h3>
+              <span aria-hidden="true" className={styles.infoRule} />
+            </header>
+            <ul className={styles.gearList}>
+              {profile.gear.map((item) => (
+                <li key={item} className={styles.gearItem}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* Mini CTA */}
+          <div className={styles.profileCta}>
+            <a href={profile.cta.href} className={styles.profileCtaLink}>
+              {profile.cta.label}
+              <span aria-hidden="true" className={styles.profileCtaArrow}>↓</span>
+            </a>
           </div>
         </div>
       </div>
