@@ -125,7 +125,7 @@ export const siteContent = {
       || 'Skontaktuj się',
     ctaHref:
       process.env.NEXT_PUBLIC_SERVICES_CTA_HREF
-      || '#contact',
+      || '#cta',
     secondaryCtaLabel:
       process.env.NEXT_PUBLIC_SERVICES_SECONDARY_CTA_LABEL
       || 'Pełna oferta',
@@ -302,7 +302,7 @@ export const siteContent = {
     hudLabelLeft: 'FINAL CTA',
     hudLabelRight: 'SCENE 08 / 08',
     ctaLabel: process.env.NEXT_PUBLIC_CTA_LABEL || 'Napisz do mnie',
-    ctaHref: process.env.NEXT_PUBLIC_CTA_HREF || '/contact',
+    ctaHref: process.env.NEXT_PUBLIC_CTA_HREF || 'mailto:kontakt@example.com',
     phoneLabel: process.env.NEXT_PUBLIC_CTA_PHONE_LABEL || 'Zadzwoń',
     phoneHref: process.env.NEXT_PUBLIC_CTA_PHONE_HREF || 'tel:+48123456789',
     secondaryLabel: process.env.NEXT_PUBLIC_CTA_SECONDARY_LABEL || 'Zobacz portfolio',

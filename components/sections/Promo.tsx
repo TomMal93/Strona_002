@@ -32,8 +32,8 @@ export default function Promo() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [timecode, setTimecode] = useState('00:00/00:00')
-  const [activeVideoIndex, setActiveVideoIndex] = useState(0)
-  const [activeDomVideoIndex, setActiveDomVideoIndex] = useState(1)
+  const [activeVideoIndex, setActiveVideoIndex] = useState(1)
+  const [activeDomVideoIndex, setActiveDomVideoIndex] = useState(2)
   const [isTrackTransitionDisabled, setIsTrackTransitionDisabled] = useState(false)
 
   const handlePlayPause = useCallback(() => {
