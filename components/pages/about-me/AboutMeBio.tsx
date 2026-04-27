@@ -74,98 +74,115 @@ export default function AboutMeBio() {
 
         {/* Bio panel — script style */}
         <div ref={bioPanelRef} className={styles.bioPanel}>
-          <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerTL)} />
-          <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerTR)} />
-          <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerBL)} />
-          <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerBR)} />
+          {/* Outer corner marks — visible on desktop, hidden on mobile */}
+          <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerOuter, styles.cornerTL)} />
+          <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerOuter, styles.cornerTR)} />
+          <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerOuter, styles.cornerBL)} />
+          <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerOuter, styles.cornerBR)} />
+          <span aria-hidden="true" className={cn(styles.notesLabel, styles.notesLabelOuter)}>NOTES</span>
 
-          <span aria-hidden="true" className={styles.notesLabel}>NOTES</span>
+          {/* Text sub-panel */}
+          <div className={styles.bioPanelText}>
+            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTL)} />
+            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTR)} />
+            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBL)} />
+            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBR)} />
+            <span aria-hidden="true" className={cn(styles.notesLabel, styles.notesLabelInner)}>NOTES</span>
 
-          <p className={cn(styles.bioText, styles.bioTextIntro)}>
-            {introLines.map((line, lineIndex) => (
-              <span key={line}>
-                {line.split(/(\s+)/).map((word, i) =>
-                  /^\s+$/.test(word) ? (
-                    word
-                  ) : (
-                    <span key={`${lineIndex}-${i}`} data-bio-word className={styles.bioWord}>
-                      {word}
-                    </span>
-                  ),
-                )}
-                {lineIndex < introLines.length - 1 ? <br /> : null}
-              </span>
-            ))}
-          </p>
-
-          {restBlocks.map((paragraph, paragraphIndex) => (
-            <p
-              key={paragraph}
-              className={cn(
-                styles.bioText,
-                paragraph.startsWith('Dziś nie tylko nagrywam') && styles.bioTextCentered,
-              )}
-            >
-              {paragraph.split('\n').map((line, lineIndex) => (
-                <span key={`${paragraphIndex}-${lineIndex}`}>
+            <p className={cn(styles.bioText, styles.bioTextIntro)}>
+              {introLines.map((line, lineIndex) => (
+                <span key={line}>
                   {line.split(/(\s+)/).map((word, i) =>
                     /^\s+$/.test(word) ? (
                       word
                     ) : (
-                      <span
-                        key={`${paragraphIndex}-${lineIndex}-${i}`}
-                        data-bio-word
-                        className={styles.bioWord}
-                      >
+                      <span key={`${lineIndex}-${i}`} data-bio-word className={styles.bioWord}>
                         {word}
                       </span>
                     ),
                   )}
-                  {lineIndex < paragraph.split('\n').length - 1 ? <br /> : null}
+                  {lineIndex < introLines.length - 1 ? <br /> : null}
                 </span>
               ))}
             </p>
-          ))}
 
-          <div data-video-block className={styles.videoBlock}>
-            <div aria-hidden="true" className={styles.videoSeparator} />
-            <div className={styles.videoBlockHeader}>
-              <p className={styles.videoBlockLead}>Poznaj mnie bliżej - w minutę.</p>
-            </div>
-
-            <div className={styles.videoFeatureLayout}>
-              <div className={cn(styles.videoFeatureColumn, styles.videoFeatureColumnLeft)}>
-                {video.highlightsLeft.map((item) => (
-                  <article key={item} className={styles.videoFeatureCard}>
-                    <div className={styles.videoFeatureMeta}>
-                      <span aria-hidden="true" className={styles.videoFeatureRule} />
-                    </div>
-                    <h3 className={styles.videoFeatureTitle}>{item}</h3>
-                  </article>
+            {restBlocks.map((paragraph, paragraphIndex) => (
+              <p
+                key={paragraph}
+                className={cn(
+                  styles.bioText,
+                  paragraph.startsWith('Dziś nie tylko nagrywam') && styles.bioTextCentered,
+                )}
+              >
+                {paragraph.split('\n').map((line, lineIndex) => (
+                  <span key={`${paragraphIndex}-${lineIndex}`}>
+                    {line.split(/(\s+)/).map((word, i) =>
+                      /^\s+$/.test(word) ? (
+                        word
+                      ) : (
+                        <span
+                          key={`${paragraphIndex}-${lineIndex}-${i}`}
+                          data-bio-word
+                          className={styles.bioWord}
+                        >
+                          {word}
+                        </span>
+                      ),
+                    )}
+                    {lineIndex < paragraph.split('\n').length - 1 ? <br /> : null}
+                  </span>
                 ))}
+              </p>
+            ))}
+          </div>
+
+          {/* Video sub-panel */}
+          <div className={styles.bioPanelVideo}>
+            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTL)} />
+            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTR)} />
+            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBL)} />
+            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBR)} />
+
+            <div data-video-block className={styles.videoBlock}>
+              <div aria-hidden="true" className={styles.videoSeparator} />
+              <div className={styles.videoBlockHeader}>
+                <p className={styles.videoBlockLead}>Poznaj mnie bliżej - w minutę.</p>
               </div>
 
-              <div className={styles.videoFeatureCenter}>
-                <span aria-hidden="true" className={cn(styles.videoDivider, styles.videoDividerLeft)} />
-                <AboutMeVideo
-                  embedded
-                  videoOverride={{
-                    type: 'self-hosted',
-                    src: '/videos/contact/contact.mp4',
-                  }}
-                />
-                <span aria-hidden="true" className={cn(styles.videoDivider, styles.videoDividerRight)} />
-              </div>
+              <div className={styles.videoFeatureLayout}>
+                <div className={cn(styles.videoFeatureColumn, styles.videoFeatureColumnLeft)}>
+                  {video.highlightsLeft.map((item) => (
+                    <article key={item} className={styles.videoFeatureCard}>
+                      <div className={styles.videoFeatureMeta}>
+                        <span aria-hidden="true" className={styles.videoFeatureRule} />
+                      </div>
+                      <h3 className={styles.videoFeatureTitle}>{item}</h3>
+                    </article>
+                  ))}
+                </div>
 
-              <div className={cn(styles.videoFeatureColumn, styles.videoFeatureColumnRight)}>
-                {video.highlightsRight.map((item) => (
-                  <article key={item} className={styles.videoFeatureCard}>
-                    <div className={styles.videoFeatureMeta}>
-                      <span aria-hidden="true" className={styles.videoFeatureRule} />
-                    </div>
-                    <h3 className={styles.videoFeatureTitle}>{item}</h3>
-                  </article>
-                ))}
+                <div className={styles.videoFeatureCenter}>
+                  <span aria-hidden="true" className={cn(styles.videoDivider, styles.videoDividerLeft)} />
+                  <AboutMeVideo
+                    embedded
+                    videoOverride={{
+                      type: 'self-hosted',
+                      src: '/videos/contact/contact.mp4',
+                    }}
+                  />
+                  <span aria-hidden="true" className={cn(styles.videoDivider, styles.videoDividerRight)} />
+                </div>
+
+                <div className={cn(styles.videoFeatureColumn, styles.videoFeatureColumnRight)}>
+                  {video.highlightsRight.map((item) => (
+                    <article key={item} className={styles.videoFeatureCard}>
+                      <div className={styles.videoFeatureMeta}>
+                        <span aria-hidden="true" className={styles.videoFeatureRule} />
+                      </div>
+                      <h3 className={styles.videoFeatureTitle}>{item}</h3>
+                    </article>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
