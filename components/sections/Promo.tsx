@@ -99,14 +99,22 @@ export default function Promo() {
     return (activeSlideIndex - 1 + totalVideos) % totalVideos
   }, [activeSlideIndex, totalVideos])
 
+  useEffect(() => {
+    if (totalVideos <= 0) return
+    setActiveSlideIndex((prev) => {
+      if (prev < 0 || prev > totalVideos + 1) return 1
+      return prev
+    })
+  }, [totalVideos])
+
   const handlePrevVideo = useCallback(() => {
     if (totalVideos <= 1) return
-    setActiveSlideIndex((prev) => prev - 1)
+    setActiveSlideIndex((prev) => Math.max(prev - 1, 0))
   }, [totalVideos])
 
   const handleNextVideo = useCallback(() => {
     if (totalVideos <= 1) return
-    setActiveSlideIndex((prev) => prev + 1)
+    setActiveSlideIndex((prev) => Math.min(prev + 1, totalVideos + 1))
   }, [totalVideos])
 
   const handleDot = useCallback((index: number) => {
