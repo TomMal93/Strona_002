@@ -44,9 +44,6 @@ export default function Preloader() {
     if (phase !== 'visible') return
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) {
-      gsap.set(overlayRef.current, {
-        autoAlpha: 1,
-      })
       gsap.set(wordmarkRef.current, {
         autoAlpha: 1,
         y: 0,
@@ -64,7 +61,6 @@ export default function Preloader() {
     }
 
     const ctx = gsap.context(() => {
-      gsap.set(overlayRef.current, { autoAlpha: 0 })
       gsap.set(wordmarkRef.current, { autoAlpha: 0, y: 24 })
       gsap.set(dividerRef.current, {
         autoAlpha: 0,
@@ -75,17 +71,12 @@ export default function Preloader() {
       gsap.set(subtitleRef.current, { autoAlpha: 0, y: 8 })
 
       const tl = gsap.timeline({ defaults: { overwrite: 'auto' } })
-      tl.to(overlayRef.current, {
-        autoAlpha: 1,
-        duration: 0.28,
-        ease: 'power1.out',
-      })
       tl.to(wordmarkRef.current, {
         autoAlpha: 1,
         y: 0,
         duration: 0.85,
         ease: 'power3.out',
-      }, '-=0.02')
+      })
       tl.to(dividerRef.current, {
         autoAlpha: 1,
         xPercent: 0,
