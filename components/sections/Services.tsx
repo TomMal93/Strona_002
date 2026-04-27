@@ -1,6 +1,12 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  type PointerEvent as ReactPointerEvent,
+} from 'react'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './Services.module.css'
@@ -65,9 +71,11 @@ const VARIANT_CLASSES: Record<CardVariant, VariantClassNames> = {
 type SceneCardProps = {
   item: ServiceItem
   index: number
+  animate?: boolean
+  className?: string
 }
 
-function SceneCard({ item, index }: SceneCardProps) {
+function SceneCard({ item, index, animate = true, className }: SceneCardProps) {
   const variant = getCardVariant(item.icon)
   const v = VARIANT_CLASSES[variant]
   const videoRef = useRef<HTMLVideoElement>(null!)
@@ -109,10 +117,11 @@ function SceneCard({ item, index }: SceneCardProps) {
 
   return (
     <li
-      data-service-card
+      {...(animate ? { 'data-service-card': '' } : {})}
       className={cn(
         styles.sceneCard,
         v.card,
+        className,
       )}
     >
       <span aria-hidden="true" data-scene-number className={styles.sceneNumber}>
@@ -225,7 +234,63 @@ export default function Services() {
   const introRef = useRef<HTMLParagraphElement>(null!)
   const hudBarRef = useRef<HTMLDivElement>(null!)
   const bottomTimelineRef = useRef<HTMLDivElement>(null!)
+  const swipeStateRef = useRef<{
+    pointerId: number
+    startX: number
+    startY: number
+  } | null>(null)
+  const [activeCardIndex, setActiveCardIndex] = useState(0)
   const orderedItems = orderServiceItems(siteContent.services.items)
+  const totalCards = orderedItems.length
+
+  const handlePrevCard = useCallback(() => {
+    setActiveCardIndex((prev) => (prev - 1 + totalCards) % totalCards)
+  }, [totalCards])
+
+  const handleNextCard = useCallback(() => {
+    setActiveCardIndex((prev) => (prev + 1) % totalCards)
+  }, [totalCards])
+
+  const handleDot = useCallback((index: number) => {
+    setActiveCardIndex(index)
+  }, [])
+
+  const handlePointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'mouse') return
+    event.currentTarget.setPointerCapture(event.pointerId)
+    swipeStateRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+    }
+  }, [])
+
+  const handlePointerUp = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    const swipe = swipeStateRef.current
+    if (!swipe || swipe.pointerId !== event.pointerId) return
+    event.currentTarget.releasePointerCapture(event.pointerId)
+
+    const deltaX = event.clientX - swipe.startX
+    const deltaY = event.clientY - swipe.startY
+    const horizontalThreshold = 36
+    const isHorizontalGesture = Math.abs(deltaX) > Math.abs(deltaY)
+
+    swipeStateRef.current = null
+
+    if (!isHorizontalGesture || Math.abs(deltaX) < horizontalThreshold) return
+    if (deltaX < 0) {
+      handleNextCard()
+      return
+    }
+    handlePrevCard()
+  }, [handleNextCard, handlePrevCard])
+
+  const handlePointerCancel = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId)
+    }
+    swipeStateRef.current = null
+  }, [])
 
   useServicesAnimation({
     sectionRef,
@@ -285,6 +350,67 @@ export default function Services() {
         </div>
 
         <div className="mt-12 lg:mt-14">
+          <div className={styles.mobileCarouselShell}>
+            <div
+              className={styles.mobileCarouselViewport}
+              onPointerDown={handlePointerDown}
+              onPointerUp={handlePointerUp}
+              onPointerCancel={handlePointerCancel}
+            >
+              <ul
+                className={styles.mobileCarouselTrack}
+                style={{ transform: `translate3d(-${activeCardIndex * 100}%, 0, 0)` }}
+              >
+                {orderedItems.map((item, index) => (
+                  <SceneCard
+                    key={item.title}
+                    item={item}
+                    index={index}
+                    animate={false}
+                    className={styles.mobileCarouselSlide}
+                  />
+                ))}
+              </ul>
+            </div>
+
+            <nav className={styles.mobileCarouselNav} aria-label="Nawigacja oferty">
+              <button
+                type="button"
+                className={styles.mobileNavBtn}
+                onClick={handlePrevCard}
+                aria-label="Poprzednia karta oferty"
+              >
+                <svg viewBox="0 0 24 24">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+
+              <div className={styles.mobileDots}>
+                {orderedItems.map((item, index) => (
+                  <button
+                    key={item.title}
+                    type="button"
+                    className={cn(styles.mobileDot, index === activeCardIndex && styles.mobileDotActive)}
+                    onClick={() => handleDot(index)}
+                    aria-label={`Karta oferty ${index + 1}`}
+                    aria-current={index === activeCardIndex ? 'true' : undefined}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                className={styles.mobileNavBtn}
+                onClick={handleNextCard}
+                aria-label="Następna karta oferty"
+              >
+                <svg viewBox="0 0 24 24">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            </nav>
+          </div>
+
           <ul className={styles.cardsContainer}>
             {orderedItems.map((item, index) => (
               <SceneCard

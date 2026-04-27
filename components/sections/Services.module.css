@@ -79,16 +79,104 @@
 
 /* ── Grid / timeline ──────────────────────────────────────────────────── */
 
+.mobileCarouselShell {
+  display: block;
+}
+
+.mobileCarouselViewport {
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.mobileCarouselTrack {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.mobileCarouselSlide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.mobileCarouselNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.mobileNavBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(var(--c-gold) / 0.3);
+  border-radius: 0.25rem;
+  background: rgb(255 255 255 / 0.02);
+  color: rgb(255 238 175 / 0.7);
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.mobileNavBtn:hover {
+  border-color: rgb(var(--c-gold) / 0.6);
+  background: rgb(255 255 255 / 0.05);
+  color: rgb(255 238 175 / 1);
+}
+
+.mobileNavBtn svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mobileDots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobileDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgb(var(--c-gold) / 0.3);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.mobileDotActive {
+  background: rgb(var(--c-gold) / 0.6);
+  border-color: rgb(var(--c-gold) / 0.6);
+}
+
 .cardsContainer {
   position: relative;
-  display: grid;
+  display: none;
   gap: 1.5rem;
   grid-template-columns: 1fr;
   align-items: start;
 }
 
 @media (min-width: 768px) {
+  .mobileCarouselShell {
+    display: none;
+  }
+
   .cardsContainer {
+    display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 1.6rem;
   }
