@@ -1,6 +1,12 @@
 'use client'
 
-import { useRef, useState, useCallback, useEffect } from 'react'
+import {
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+  type PointerEvent as ReactPointerEvent,
+} from 'react'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './Promo.module.css'
@@ -16,10 +22,16 @@ export default function Promo() {
   const videoFrameRef = useRef<HTMLDivElement>(null!)
   const videoRef = useRef<HTMLVideoElement>(null!)
   const ytGridRef = useRef<HTMLDivElement>(null!)
+  const swipeStateRef = useRef<{
+    pointerId: number
+    startX: number
+    startY: number
+  } | null>(null)
   const bottomTimelineRef = useRef<HTMLDivElement>(null!)
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [timecode, setTimecode] = useState('00:00/00:00')
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0)
 
   const handlePlayPause = useCallback(() => {
     const video = videoRef.current
@@ -72,6 +84,56 @@ export default function Promo() {
   })
 
   const { promo } = siteContent
+  const totalVideos = promo.youtubeVideos.length
+
+  const handlePrevVideo = useCallback(() => {
+    setActiveVideoIndex((prev) => (prev - 1 + totalVideos) % totalVideos)
+  }, [totalVideos])
+
+  const handleNextVideo = useCallback(() => {
+    setActiveVideoIndex((prev) => (prev + 1) % totalVideos)
+  }, [totalVideos])
+
+  const handleDot = useCallback((index: number) => {
+    setActiveVideoIndex(index)
+  }, [])
+
+  const handlePointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'mouse') return
+    event.currentTarget.setPointerCapture(event.pointerId)
+    swipeStateRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+    }
+  }, [])
+
+  const handlePointerUp = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    const swipe = swipeStateRef.current
+    if (!swipe || swipe.pointerId !== event.pointerId) return
+    event.currentTarget.releasePointerCapture(event.pointerId)
+
+    const deltaX = event.clientX - swipe.startX
+    const deltaY = event.clientY - swipe.startY
+    const horizontalThreshold = 36
+    const isHorizontalGesture = Math.abs(deltaX) > Math.abs(deltaY)
+
+    swipeStateRef.current = null
+
+    if (!isHorizontalGesture || Math.abs(deltaX) < horizontalThreshold) return
+    if (deltaX < 0) {
+      handleNextVideo()
+      return
+    }
+    handlePrevVideo()
+  }, [handleNextVideo, handlePrevVideo])
+
+  const handlePointerCancel = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId)
+    }
+    swipeStateRef.current = null
+  }, [])
 
   return (
     <section
@@ -177,6 +239,69 @@ export default function Promo() {
         </div>
 
         {/* ── YouTube grid ────────────────────────────────────────── */}
+        <div
+          className={styles.ytCarouselShell}
+          data-mobile-carousel
+        >
+          <div
+            className={styles.ytCarouselViewport}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerCancel}
+          >
+            <div
+              className={styles.ytCarouselTrack}
+              style={{ transform: `translate3d(-${activeVideoIndex * 100}%, 0, 0)` }}
+            >
+              {promo.youtubeVideos.map((video) => (
+                <div key={video.id + video.title} className={styles.ytCarouselSlide}>
+                  <YouTubeFacade
+                    videoId={video.id}
+                    title={video.title}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <nav className={styles.ytCarouselNav} aria-label="Nawigacja filmów">
+            <button
+              type="button"
+              className={styles.ytNavBtn}
+              onClick={handlePrevVideo}
+              aria-label="Poprzedni film"
+            >
+              <svg viewBox="0 0 24 24">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+
+            <div className={styles.ytDots}>
+              {promo.youtubeVideos.map((video, index) => (
+                <button
+                  key={video.id}
+                  type="button"
+                  className={cn(styles.ytDot, index === activeVideoIndex && styles.ytDotActive)}
+                  onClick={() => handleDot(index)}
+                  aria-label={`Film ${index + 1}`}
+                  aria-current={index === activeVideoIndex ? 'true' : undefined}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className={styles.ytNavBtn}
+              onClick={handleNextVideo}
+              aria-label="Następny film"
+            >
+              <svg viewBox="0 0 24 24">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </nav>
+        </div>
+
         <div ref={ytGridRef} className={styles.ytGrid}>
           {promo.youtubeVideos.map((video) => (
             <YouTubeFacade
