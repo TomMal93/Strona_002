@@ -133,10 +133,28 @@
 }
 
 @media (width >= 48rem) {
+  .contactPanel {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 3rem;
+  }
+
   .contactGrid {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 3rem;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .ctaArea {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .socialSection {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    align-items: flex-end;
   }
 }
 
@@ -183,11 +201,6 @@
   gap: 1.25rem;
 }
 
-@media (width >= 48rem) {
-  .socialSection {
-    align-items: flex-end;
-  }
-}
 
 .socialRow {
   display: flex;
@@ -200,13 +213,11 @@
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  border: 1px solid rgb(var(--c-gold) / 0.25);
   color: rgb(255 238 175 / 0.6);
-  transition: border-color 280ms ease, color 280ms ease, transform 280ms ease, box-shadow 280ms ease;
+  transition: color 280ms ease, transform 280ms ease, box-shadow 280ms ease;
 }
 
 .socialLink:hover {
-  border-color: rgb(var(--c-gold) / 0.6);
   color: rgb(255 238 175 / 0.95);
   transform: scale(1.08);
   box-shadow: 0 0 16px rgb(var(--c-gold) / 0.15);
@@ -309,6 +320,10 @@
 
   .contactPanel {
     padding: 1.75rem 1.25rem;
+  }
+
+  .socialSection {
+    margin-top: 1.5rem;
   }
 
   .btnPrimaryInner {

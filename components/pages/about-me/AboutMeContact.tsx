@@ -134,24 +134,6 @@ export default function AboutMeContact() {
                 </a>
               </div>
             </div>
-
-            {/* Social media */}
-            <div className={styles.socialSection}>
-              <div className={styles.socialRow}>
-                {contact.socials.map((social) => (
-                  <a
-                    key={social.platform}
-                    href={social.href}
-                    className={styles.socialLink}
-                    aria-label={social.label}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {SOCIAL_ICONS[social.platform]}
-                  </a>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* CTA */}
@@ -164,6 +146,24 @@ export default function AboutMeContact() {
                 {contact.ctaLabel}
               </span>
             </a>
+          </div>
+
+          {/* Social media */}
+          <div className={styles.socialSection}>
+            <div className={styles.socialRow}>
+              {contact.socials.map((social) => (
+                <a
+                  key={social.platform}
+                  href={social.href}
+                  className={styles.socialLink}
+                  aria-label={social.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {SOCIAL_ICONS[social.platform]}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
