@@ -191,11 +191,7 @@ export default function Navbar() {
       : navLinkClassName
   )
 
-  const getMobileLinkClassName = (href: string) => (
-    href === activeHref
-      ? `${mobileNavLinkClassName} text-white`
-      : mobileNavLinkClassName
-  )
+  const getMobileLinkClassName = () => mobileNavLinkClassName
 
   return (
     <header
@@ -277,8 +273,7 @@ export default function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className={getMobileLinkClassName(item.href)}
-              aria-current={item.href === activeHref ? 'location' : undefined}
+              className={getMobileLinkClassName()}
               onClick={() => setMobileOpen(false)}
             >
               {item.label}
