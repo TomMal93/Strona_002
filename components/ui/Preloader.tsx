@@ -8,7 +8,7 @@ import styles from './Preloader.module.css'
 const SESSION_KEY = 'intro:played:v1'
 const FADE_OUT_MS = 600
 
-type Phase = 'visible' | 'leaving' | 'gone'
+type Phase = 'visible' | 'gone'
 
 // Default to 'visible' so the overlay is part of the first paint (no FOUC
 // where Hero flashes before the loader). The inline boot script in layout.tsx
@@ -115,12 +115,10 @@ export default function Preloader() {
     }
 
     if (prefersReducedMotion) {
-      setPhase('leaving')
       finish()
       return
     }
 
-    setPhase('leaving')
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         defaults: { overwrite: 'auto' },
