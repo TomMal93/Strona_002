@@ -5,6 +5,7 @@ import {
   useState,
   useCallback,
   useEffect,
+  useMemo,
   type PointerEvent as ReactPointerEvent,
 } from 'react'
 import { siteContent } from '@/lib/site-content'
@@ -31,7 +32,8 @@ export default function Promo() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [timecode, setTimecode] = useState('00:00/00:00')
-  const [activeVideoIndex, setActiveVideoIndex] = useState(1)
+  const [activeSlideIndex, setActiveSlideIndex] = useState(1)
+  const [isTrackTransitionEnabled, setIsTrackTransitionEnabled] = useState(true)
 
   const handlePlayPause = useCallback(() => {
     const video = videoRef.current
@@ -84,19 +86,65 @@ export default function Promo() {
   })
 
   const { promo } = siteContent
-  const totalVideos = promo.youtubeVideos.length
+  const totalVideos = Number(promo.youtubeVideos.length)
+  const carouselVideos = useMemo(() => {
+    if (totalVideos === 0) return []
+    const lastVideo = promo.youtubeVideos[totalVideos - 1]
+    const firstVideo = promo.youtubeVideos[0]
+    return [lastVideo, ...promo.youtubeVideos, firstVideo]
+  }, [promo.youtubeVideos, totalVideos])
+
+  const activeVideoIndex = useMemo(() => {
+    if (totalVideos === 0) return 0
+    return (activeSlideIndex - 1 + totalVideos) % totalVideos
+  }, [activeSlideIndex, totalVideos])
+
+  useEffect(() => {
+    if (totalVideos <= 0) return
+    setActiveSlideIndex((prev) => {
+      if (prev < 0 || prev > totalVideos + 1) return 1
+      return prev
+    })
+  }, [totalVideos])
 
   const handlePrevVideo = useCallback(() => {
-    setActiveVideoIndex((prev) => (prev - 1 + totalVideos) % totalVideos)
+    if (totalVideos <= 1) return
+    setActiveSlideIndex((prev) => Math.max(prev - 1, 0))
   }, [totalVideos])
 
   const handleNextVideo = useCallback(() => {
-    setActiveVideoIndex((prev) => (prev + 1) % totalVideos)
+    if (totalVideos <= 1) return
+    setActiveSlideIndex((prev) => Math.min(prev + 1, totalVideos + 1))
   }, [totalVideos])
 
   const handleDot = useCallback((index: number) => {
-    setActiveVideoIndex(index)
+    setActiveSlideIndex(index + 1)
   }, [])
+
+  const handleCarouselTransitionEnd = useCallback(() => {
+    if (totalVideos <= 1) return
+
+    if (activeSlideIndex === 0) {
+      setIsTrackTransitionEnabled(false)
+      setActiveSlideIndex(totalVideos)
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsTrackTransitionEnabled(true)
+        })
+      })
+      return
+    }
+
+    if (activeSlideIndex === totalVideos + 1) {
+      setIsTrackTransitionEnabled(false)
+      setActiveSlideIndex(1)
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsTrackTransitionEnabled(true)
+        })
+      })
+    }
+  }, [activeSlideIndex, totalVideos])
 
   const handlePointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
     if (event.pointerType === 'mouse') return
@@ -251,10 +299,14 @@ export default function Promo() {
           >
             <div
               className={styles.ytCarouselTrack}
-              style={{ transform: `translate3d(-${activeVideoIndex * 100}%, 0, 0)` }}
+              style={{
+                transform: `translate3d(-${activeSlideIndex * 100}%, 0, 0)`,
+                transition: isTrackTransitionEnabled ? undefined : 'none',
+              }}
+              onTransitionEnd={handleCarouselTransitionEnd}
             >
-              {promo.youtubeVideos.map((video) => (
-                <div key={video.id + video.title} className={styles.ytCarouselSlide}>
+              {carouselVideos.map((video, index) => (
+                <div key={`${video.id}-${index}`} className={styles.ytCarouselSlide}>
                   <YouTubeFacade
                     videoId={video.id}
                     title={video.title}
