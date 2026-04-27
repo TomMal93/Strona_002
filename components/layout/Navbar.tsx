@@ -219,7 +219,7 @@ export default function Navbar() {
           aria-label="Strona główna"
           aria-hidden={!logoVisible}
           tabIndex={logoVisible ? undefined : -1}
-          className={`relative h-10 w-36 shrink-0 transition-[opacity,transform] duration-500 ease-out md:h-12 md:w-44 ${
+          className={`group relative h-10 w-36 shrink-0 transition-[opacity,transform] duration-500 ease-out md:absolute md:left-[20vw] md:h-12 md:w-44 ${
             logoVisible
               ? 'translate-y-0 opacity-100'
               : '-translate-y-2 pointer-events-none opacity-0'
@@ -230,7 +230,7 @@ export default function Navbar() {
             alt=""
             width={1536}
             height={390}
-            className="pointer-events-none h-full w-full object-contain"
+            className="pointer-events-none h-full w-full object-contain opacity-75 transition-opacity duration-300 group-hover:opacity-100"
             sizes="(max-width: 767px) 144px, 176px"
             priority
             aria-hidden="true"
@@ -238,7 +238,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop navigation */}
-        <nav className="hidden md:flex items-center gap-10" aria-label="Nawigacja główna">
+        <nav className="hidden items-center gap-10 md:ml-auto md:mr-[10vw] md:flex" aria-label="Nawigacja główna">
           {DESKTOP_NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
