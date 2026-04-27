@@ -204,7 +204,7 @@ export default function Navbar() {
     >
       <div className={`flex items-center justify-between px-6 py-2 md:px-12 lg:px-20 transition-[background-color,backdrop-filter] duration-500 ${
         scrolled || mobileOpen
-          ? 'bg-[#0f0f12]/90 backdrop-blur-md'
+          ? 'bg-[#0f0f12]/50 md:bg-[#0f0f12]/90 backdrop-blur-md'
           : 'bg-transparent'
       }`}>
 
