@@ -270,7 +270,7 @@ export default function Navbar() {
         aria-hidden={!mobileOpen}
       >
         <nav
-          className="flex flex-col gap-1 px-6 py-6"
+          className="flex flex-col items-center gap-1 px-6 py-6 text-center"
           aria-label="Nawigacja mobilna"
         >
           {DESKTOP_NAV_ITEMS.map((item) => (
