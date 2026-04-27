@@ -37,6 +37,7 @@ const mobileNavLinkClassName =
 
 const HOME_PATH = '/'
 const ACTIVE_SECTION_PROGRESS = 2 / 3
+const SECTION_RAIL_REVEAL_PROGRESS = 0.2
 
 function getSectionHref(href: string) {
   const [, hash = ''] = href.split('#')
@@ -47,6 +48,7 @@ export default function Navbar() {
   const [scrolled, setScrolled]       = useState(false)
   const [mobileOpen, setMobileOpen]   = useState(false)
   const [activeHref, setActiveHref]   = useState('/#hero')
+  const [logoRevealed, setLogoRevealed] = useState(false)
   const headerRef                      = useRef<HTMLElement>(null)
   const mobileMenuRef                  = useRef<HTMLDivElement>(null)
   const pathname                       = usePathname()
@@ -57,6 +59,7 @@ export default function Navbar() {
 
     const updateScrolled = () => {
       setScrolled(window.scrollY > 8)
+      setLogoRevealed(window.scrollY > window.innerHeight * SECTION_RAIL_REVEAL_PROGRESS)
     }
 
     const onScroll = () => {
@@ -69,9 +72,11 @@ export default function Navbar() {
 
     updateScrolled()
     window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', updateScrolled)
 
     return () => {
       window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', updateScrolled)
       if (rafId) window.cancelAnimationFrame(rafId)
     }
   }, [])
@@ -195,6 +200,7 @@ export default function Navbar() {
   )
 
   const getMobileLinkClassName = () => mobileNavLinkClassName
+  const logoVisible = pathname !== HOME_PATH || logoRevealed
 
   return (
     <header
@@ -208,7 +214,17 @@ export default function Navbar() {
       }`}>
 
         {/* Logo */}
-        <Link href="/" aria-label="Strona główna" className="relative h-10 w-36 shrink-0 md:h-12 md:w-44">
+        <Link
+          href="/"
+          aria-label="Strona główna"
+          aria-hidden={!logoVisible}
+          tabIndex={logoVisible ? undefined : -1}
+          className={`relative h-10 w-36 shrink-0 transition-[opacity,transform] duration-500 ease-out md:h-12 md:w-44 ${
+            logoVisible
+              ? 'translate-y-0 opacity-100'
+              : '-translate-y-2 pointer-events-none opacity-0'
+          }`}
+        >
           <Image
             src="/images/logo.png"
             alt=""
