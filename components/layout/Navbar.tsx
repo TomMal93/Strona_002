@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -30,7 +30,10 @@ const navLinkClassName = [
 ].join(' ')
 
 const mobileNavLinkClassName =
-  'font-bebas text-[28px] tracking-heading uppercase py-2 text-khaki/85 hover:text-khaki transition-colors duration-200'
+  [
+    'font-bebas text-[28px] tracking-heading uppercase py-2 transition-opacity duration-200 hover:opacity-80',
+    'bg-[linear-gradient(130deg,rgb(var(--c-warm))_0%,rgb(255_238_175)_45%,rgb(var(--c-gold))_100%)] bg-clip-text text-transparent',
+  ].join(' ')
 
 const HOME_PATH = '/'
 const ACTIVE_SECTION_PROGRESS = 2 / 3
@@ -269,15 +272,19 @@ export default function Navbar() {
           className="flex flex-col items-center gap-1 px-6 py-6 text-center"
           aria-label="Nawigacja mobilna"
         >
-          {DESKTOP_NAV_ITEMS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={getMobileLinkClassName()}
-              onClick={() => setMobileOpen(false)}
-            >
-              {item.label}
-            </Link>
+          {DESKTOP_NAV_ITEMS.map((item, index) => (
+            <Fragment key={item.href}>
+              <Link
+                href={item.href}
+                className={getMobileLinkClassName()}
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
+              </Link>
+              {index < DESKTOP_NAV_ITEMS.length - 1 && (
+                <span aria-hidden="true" className="h-px w-full max-w-[220px] bg-white/20" />
+              )}
+            </Fragment>
           ))}
         </nav>
       </div>
