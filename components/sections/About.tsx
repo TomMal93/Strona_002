@@ -69,7 +69,7 @@ export default function About() {
                 loop
                 muted
                 playsInline
-                className="relative z-10 h-full w-full object-contain object-center [clip-path:circle(28%_at_50%_50%)] [mask-image:radial-gradient(circle_at_center,#000_5%,transparent_85%)] [-webkit-mask-image:radial-gradient(circle_at_center,#000_5%,transparent_85%)]"
+                className="pointer-events-none relative z-10 h-full w-full origin-center -translate-x-[20%] scale-[1.5] object-contain object-center [clip-path:circle(28%_at_50%_50%)] [mask-image:radial-gradient(circle_at_center,#000_5%,transparent_85%)] [-webkit-mask-image:radial-gradient(circle_at_center,#000_5%,transparent_85%)]"
               />
             </div>
           </div>
