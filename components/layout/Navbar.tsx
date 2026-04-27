@@ -273,7 +273,7 @@ export default function Navbar() {
           className="flex flex-col gap-1 px-6 py-6"
           aria-label="Nawigacja mobilna"
         >
-          {NAV_ITEMS.map((item) => (
+          {DESKTOP_NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
