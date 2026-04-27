@@ -49,7 +49,8 @@ export default function AboutMeBio() {
               styles.sectionTitle,
             )}
           >
-            {bio.title}
+            <span className="sm:hidden">{bio.titleMobile}</span>
+            <span className="hidden sm:inline">{bio.title}</span>
           </h2>
           <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
             <span data-hud-line className={styles.hudLineLeft} />

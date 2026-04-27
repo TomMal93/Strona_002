@@ -353,6 +353,7 @@ export const siteContent = {
     },
     bio: {
       title: 'O mnie',
+      titleMobile: 'Dlaczego to robię',
       hudLabelLeft: 'NOTES',
       hudLabelRight: 'SCENE 01 / 02',
       text:
