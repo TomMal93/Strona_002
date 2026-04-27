@@ -4,7 +4,8 @@
   width: var(--mobile-frame-w);
   /* Kompensacja scale(origin top-left): frame po skali zajmuje 100svh*scale,
      reszta (100svh - 100svh*scale) / 2 rozkładamy jako margin-top by wycentrować pionowo */
-  margin-top: calc((100svh - 100svh * var(--mobile-scale)) / 2);
+  margin-top: clamp(0px, calc((100svh - 100svh * var(--mobile-scale)) / 2 - 48px), 72px);
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
 }
 
 .mobileGroupCenter {
@@ -194,7 +195,13 @@
   }
 
   .mobileTextWrap {
-    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 767px) and (max-height: 800px) {
+  .mobileFrame {
+    margin-top: 0;
   }
 }
 
