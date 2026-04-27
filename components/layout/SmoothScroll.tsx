@@ -29,8 +29,19 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     rafId = window.requestAnimationFrame(rafHandler)
 
+    // Pause Lenis while the intro overlay is visible so the user can't scroll behind it.
+    if (document.body.classList.contains('intro-active')) {
+      lenis.stop()
+    }
+    const onIntroActive = () => lenis.stop()
+    const onIntroDone = () => lenis.start()
+    window.addEventListener('intro:active', onIntroActive)
+    window.addEventListener('intro:done', onIntroDone)
+
     return () => {
       window.cancelAnimationFrame(rafId)
+      window.removeEventListener('intro:active', onIntroActive)
+      window.removeEventListener('intro:done', onIntroDone)
       lenis.off('scroll', ScrollTrigger.update)
       lenis.destroy()
     }

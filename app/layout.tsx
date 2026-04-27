@@ -5,6 +5,7 @@ import Navbar from '@/components/layout/Navbar'
 import SectionRail from '@/components/layout/SectionRail'
 import Footer from '@/components/layout/Footer'
 import SmoothScroll from '@/components/layout/SmoothScroll'
+import Preloader from '@/components/ui/Preloader'
 import WebVitalsReporter from '@/components/analytics/WebVitalsReporter'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
@@ -86,9 +87,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLdString }}
         />
+        {/* Synchronous boot: marks <html> for the preloader so returning visitors
+            (sessionStorage) don't flash the overlay on hydration. Must run before
+            paint, hence inline in <head>. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('intro:played:v1')==='1')document.documentElement.classList.add('intro-played')}catch(e){}",
+          }}
+        />
       </head>
       <body className={bodyClassName}>
         {enableWebVitals ? <WebVitalsReporter /> : null}
+        <Preloader />
         <Navbar />
         <SectionRail />
         <SmoothScroll>{children}</SmoothScroll>

@@ -28,6 +28,17 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  /* While the intro overlay is up, lock native scroll. Lenis is stopped via event listener. */
+  body.intro-active {
+    overflow: hidden;
+  }
+
+  /* Returning visitor (sessionStorage) — skip the overlay entirely.
+     Set by the synchronous boot script in <head>, runs before first paint. */
+  html.intro-played [data-intro-overlay] {
+    display: none !important;
+  }
 }
 
 @layer components {
