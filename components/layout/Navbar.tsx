@@ -282,7 +282,10 @@ export default function Navbar() {
                 {item.label}
               </Link>
               {index < DESKTOP_NAV_ITEMS.length - 1 && (
-                <span aria-hidden="true" className="h-px w-full max-w-[220px] bg-white/20" />
+                <span
+                  aria-hidden="true"
+                  className="block h-px w-[clamp(180px,32vw,420px)] bg-[linear-gradient(90deg,transparent_0%,rgb(var(--c-gold)/0.70)_50%,transparent_100%)]"
+                />
               )}
             </Fragment>
           ))}
