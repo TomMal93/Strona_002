@@ -352,7 +352,7 @@ export const siteContent = {
         process.env.NEXT_PUBLIC_ABOUTME_HERO_BG_ALT || 'Fotograf w plenerze z kamerą',
     },
     bio: {
-      title: 'O mnie',
+      title: 'Dlaczego to robię',
       hudLabelLeft: 'NOTES',
       hudLabelRight: 'SCENE 01 / 02',
       text:
