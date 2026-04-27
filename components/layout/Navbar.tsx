@@ -30,7 +30,7 @@ const navLinkClassName = [
 ].join(' ')
 
 const mobileNavLinkClassName =
-  'font-bebas text-[28px] tracking-heading uppercase py-2 text-white/70 hover:text-white transition-colors duration-200'
+  'font-bebas text-[28px] tracking-heading uppercase py-2 text-khaki/85 hover:text-khaki transition-colors duration-200'
 
 const HOME_PATH = '/'
 const ACTIVE_SECTION_PROGRESS = 2 / 3
@@ -266,7 +266,7 @@ export default function Navbar() {
       <div
         ref={mobileMenuRef}
         id="mobile-menu"
-        className="invisible md:hidden absolute left-0 right-0 top-full border-t border-white/10 bg-[#0f0f12]/90 backdrop-blur-md"
+        className="invisible md:hidden absolute left-0 right-0 top-full border-t border-white/10 bg-[#0f0f12]/70 backdrop-blur-md"
         aria-hidden={!mobileOpen}
       >
         <nav
