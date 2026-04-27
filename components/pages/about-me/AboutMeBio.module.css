@@ -319,4 +319,20 @@
   .videoFeatureColumn {
     display: none;
   }
+
+  .bioText:not(:last-of-type)::after {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 1px;
+    margin: 0.85rem auto 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgb(var(--c-gold) / 0.07) 15%,
+      rgb(var(--c-gold) / 0.18) 50%,
+      rgb(var(--c-gold) / 0.07) 85%,
+      transparent 100%
+    );
+  }
 }
