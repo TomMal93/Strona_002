@@ -44,13 +44,32 @@ export default function Preloader() {
     if (phase !== 'visible') return
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) {
-      gsap.set([wordmarkRef.current, dividerRef.current, subtitleRef.current], {
-        clearProps: 'all',
+      gsap.set(wordmarkRef.current, {
+        autoAlpha: 1,
+        y: 0,
+      })
+      gsap.set(dividerRef.current, {
+        autoAlpha: 1,
+        xPercent: 0,
+        scaleX: 1,
+      })
+      gsap.set(subtitleRef.current, {
+        autoAlpha: 0.7,
+        y: 0,
       })
       return
     }
 
     const ctx = gsap.context(() => {
+      gsap.set(wordmarkRef.current, { autoAlpha: 0, y: 24 })
+      gsap.set(dividerRef.current, {
+        autoAlpha: 0,
+        xPercent: -38,
+        scaleX: 0.35,
+        transformOrigin: 'left center',
+      })
+      gsap.set(subtitleRef.current, { autoAlpha: 0, y: 8 })
+
       const tl = gsap.timeline({ defaults: { overwrite: 'auto' } })
       tl.to(wordmarkRef.current, {
         autoAlpha: 1,
