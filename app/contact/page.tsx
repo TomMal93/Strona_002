@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { siteContent } from '@/lib/site-content'
 import AboutMeHero from '@/components/pages/about-me/AboutMeHero'
 import AboutMeBio from '@/components/pages/about-me/AboutMeBio'
+import WhyIDoThis from '@/components/pages/about-me/WhyIDoThis'
 import AboutMeContact from '@/components/pages/about-me/AboutMeContact'
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default function AboutMePage() {
         }}
       />
       <AboutMeBio />
+      <WhyIDoThis />
       <AboutMeContact />
     </main>
   )
