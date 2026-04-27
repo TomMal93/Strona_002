@@ -1,6 +1,7 @@
 'use client'
 
 import { gsap } from 'gsap'
+import Image from 'next/image'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { usePreloaderGate } from './usePreloaderGate'
 import styles from './Preloader.module.css'
@@ -177,8 +178,16 @@ export default function Preloader() {
       <div aria-hidden="true" className={styles.halo} />
       <div className={styles.wordmarkRow}>
         <div ref={wordmarkRef} className={styles.wordmark}>
-          <span className={styles.wordmarkPrimary}>MALESZYK.</span>
-          <span className={styles.wordmarkAccent}>MEDIA</span>
+          <Image
+            src="/images/logo.png"
+            alt=""
+            width={1536}
+            height={390}
+            className={styles.logo}
+            sizes="(max-width: 767px) 78vw, 520px"
+            priority
+            aria-hidden="true"
+          />
         </div>
         <span ref={dividerRef} aria-hidden="true" className={styles.divider} />
         <span ref={subtitleRef} className={styles.subtitle}>

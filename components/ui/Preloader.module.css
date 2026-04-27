@@ -62,30 +62,15 @@
 }
 
 .wordmark {
-  display: flex;
-  align-items: baseline;
+  display: block;
   justify-content: center;
-  font-family: var(--font-bebas), sans-serif;
-  font-size: clamp(48px, 9.5vw, 116px);
-  line-height: 1;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
+  width: min(78vw, 520px);
 }
 
-.wordmarkPrimary {
-  color: #ffffff;
-}
-
-.wordmarkAccent {
-  background: linear-gradient(
-    130deg,
-    rgb(var(--c-warm)) 0%,
-    rgb(255 238 175) 45%,
-    rgb(var(--c-gold)) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.logo {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .divider {

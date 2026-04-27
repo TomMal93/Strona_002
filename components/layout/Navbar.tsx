@@ -208,14 +208,14 @@ export default function Navbar() {
       }`}>
 
         {/* Logo */}
-        <Link href="/" aria-label="Strona główna" className="relative h-10 w-10 shrink-0 md:h-12 md:w-12">
+        <Link href="/" aria-label="Strona główna" className="relative h-10 w-36 shrink-0 md:h-12 md:w-44">
           <Image
-            src="/images/logo_m.webp"
+            src="/images/logo.png"
             alt=""
-            width={96}
-            height={96}
-            className="pointer-events-none absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 object-contain"
-            sizes="(max-width: 767px) 40px, 48px"
+            width={1536}
+            height={390}
+            className="pointer-events-none h-full w-full object-contain"
+            sizes="(max-width: 767px) 144px, 176px"
             priority
             aria-hidden="true"
           />
