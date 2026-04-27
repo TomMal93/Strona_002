@@ -356,31 +356,43 @@
 
 @media (min-width: 768px) {
   .desktopPortraitImage {
-    animation: desktop-image-emerge 2.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: desktop-image-emerge 3.6s cubic-bezier(0.22, 1, 0.36, 1) 1.4s both;
   }
 
   .portraitHalo {
-    animation: desktop-halo-light-up 2.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: desktop-halo-light-up 4.2s cubic-bezier(0.22, 1, 0.36, 1) 1.1s both;
   }
 }
 
 @keyframes desktop-image-emerge {
   from {
-    filter: brightness(0.42) saturate(0.88) contrast(1.04);
+    opacity: 0;
+    filter: brightness(0.32) saturate(0.82) contrast(1.06);
+    transform: scale(1.28);
+  }
+  60% {
+    opacity: 1;
   }
   to {
+    opacity: 1;
     filter: brightness(1) saturate(1) contrast(1);
+    transform: scale(1.24);
   }
 }
 
 @keyframes desktop-halo-light-up {
   from {
-    opacity: 0.18;
-    filter: blur(44px);
+    opacity: 0;
+    filter: blur(56px);
+    transform: scale(0.92);
+  }
+  40% {
+    opacity: 0.35;
   }
   to {
     opacity: 1;
     filter: blur(36px);
+    transform: scale(1);
   }
 }
 
