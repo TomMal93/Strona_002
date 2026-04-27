@@ -10,6 +10,7 @@ export type PromoAnimationRefs = {
   subtitleRef: RefObject<HTMLParagraphElement>
   videoFrameRef: RefObject<HTMLDivElement>
   ytGridRef: RefObject<HTMLDivElement>
+  ytCarouselShellRef: RefObject<HTMLDivElement>
   bottomTimelineRef: RefObject<HTMLDivElement>
 }
 
@@ -29,9 +30,11 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         subtitleRef,
         videoFrameRef,
         ytGridRef,
+        ytCarouselShellRef,
         bottomTimelineRef,
       } = refs
 
+      const carouselShell = ytCarouselShellRef.current
       const fadeElements = [titleRef.current, subtitleRef.current] as Array<HTMLElement | null>
       const visibleFadeElements = fadeElements.filter(
         (el): el is HTMLElement => el !== null,
@@ -79,6 +82,11 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
           el.style.visibility = 'inherit'
           el.style.transform = 'none'
         })
+        if (carouselShell) {
+          carouselShell.style.opacity = '1'
+          carouselShell.style.visibility = 'inherit'
+          carouselShell.style.transform = 'none'
+        }
         if (bottomLine) bottomLine.style.transform = 'scaleX(1)'
         bottomDiamonds.forEach((el) => {
           el.style.opacity = '1'
@@ -112,6 +120,11 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         el.style.visibility = 'hidden'
         el.style.transform = 'translate3d(0, 20px, 0)'
       })
+      if (carouselShell) {
+        carouselShell.style.opacity = '0'
+        carouselShell.style.visibility = 'hidden'
+        carouselShell.style.transform = 'translate3d(0, 24px, 0)'
+      }
       if (bottomLine) bottomLine.style.transform = 'scaleX(0)'
       bottomDiamonds.forEach((el) => {
         el.style.opacity = '0'
@@ -138,6 +151,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         subtitleRef,
         videoFrameRef,
         ytGridRef,
+        ytCarouselShellRef,
         bottomTimelineRef,
       } = refs
 
@@ -158,6 +172,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         const ytCards = ytGridRef.current
           ? Array.from(ytGridRef.current.children)
           : []
+        const carouselShell = ytCarouselShellRef.current
         const bottomLine = bottomTimelineRef.current
           ? bottomTimelineRef.current.querySelector('[data-bottom-seg]')
           : null
@@ -171,6 +186,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
           if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1, y: 0 })
           if (corners.length) gsap.set(corners, { autoAlpha: 1 })
           if (ytCards.length) gsap.set(ytCards, { autoAlpha: 1, y: 0 })
+          if (carouselShell) gsap.set(carouselShell, { autoAlpha: 1, y: 0 })
           if (bottomLine) gsap.set(bottomLine, { scaleX: 1 })
           if (bottomDiamonds.length) gsap.set(bottomDiamonds, { autoAlpha: 1 })
           return
@@ -184,6 +200,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0, y: 8 })
         if (corners.length) gsap.set(corners, { autoAlpha: 0 })
         if (ytCards.length) gsap.set(ytCards, { autoAlpha: 0, y: 20 })
+        if (carouselShell) gsap.set(carouselShell, { autoAlpha: 0, y: 24 })
         if (bottomLine) gsap.set(bottomLine, { scaleX: 0 })
         if (bottomDiamonds.length) gsap.set(bottomDiamonds, { autoAlpha: 0 })
 
@@ -251,11 +268,16 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
           }, '-=0.4')
         }
 
-        // 7. YouTube cards
+        // 7. YouTube cards (desktop grid) / mobile carousel shell
         if (ytCards.length) {
           tl.to(ytCards, {
             autoAlpha: 1, y: 0, duration: 0.45, ease: 'power3.out', stagger: 0.008,
           }, '-=0.2')
+        }
+        if (carouselShell) {
+          tl.to(carouselShell, {
+            autoAlpha: 1, y: 0, duration: 0.55, ease: 'power3.out',
+          }, '-=0.35')
         }
 
         // 8. Bottom timeline

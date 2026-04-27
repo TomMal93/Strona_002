@@ -23,6 +23,7 @@ export default function About() {
   const sectionRef = useRef<HTMLElement>(null!)
   const hudBarRef = useRef<HTMLDivElement>(null!)
   const titleRef = useRef<HTMLHeadingElement>(null!)
+  const videoRef = useRef<HTMLDivElement>(null!)
   const viewfinderRef = useRef<HTMLDivElement>(null!)
   const leadRef = useRef<HTMLParagraphElement>(null!)
   const descriptionRef = useRef<HTMLParagraphElement>(null!)
@@ -44,6 +45,7 @@ export default function About() {
     sectionRef,
     hudBarRef,
     titleRef,
+    videoRef,
     viewfinderRef,
     leadRef,
     descriptionRef,
@@ -61,7 +63,7 @@ export default function About() {
       <div className="mx-auto max-w-content">
         <div className="md:grid md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
           <div className="hidden md:col-span-5 md:block">
-            <div className="relative mx-auto aspect-[3/4] w-full">
+            <div ref={videoRef} className="relative mx-auto aspect-[3/4] w-full">
               <video
                 src="/videos/about-me.mp4"
                 aria-label={siteContent.about.imageAlt}

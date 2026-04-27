@@ -22,6 +22,7 @@ export default function Promo() {
   const videoFrameRef = useRef<HTMLDivElement>(null!)
   const videoRef = useRef<HTMLVideoElement>(null!)
   const ytGridRef = useRef<HTMLDivElement>(null!)
+  const ytCarouselShellRef = useRef<HTMLDivElement>(null!)
   const swipeStateRef = useRef<{
     pointerId: number
     startX: number
@@ -83,6 +84,7 @@ export default function Promo() {
     subtitleRef,
     videoFrameRef,
     ytGridRef,
+    ytCarouselShellRef,
     bottomTimelineRef,
   })
 
@@ -291,6 +293,7 @@ export default function Promo() {
 
         {/* ── YouTube grid ────────────────────────────────────────── */}
         <div
+          ref={ytCarouselShellRef}
           className={styles.ytCarouselShell}
           data-mobile-carousel
         >

@@ -233,6 +233,7 @@ export default function Services() {
   const titleAccentRef = useRef<HTMLSpanElement>(null!)
   const introRef = useRef<HTMLParagraphElement>(null!)
   const hudBarRef = useRef<HTMLDivElement>(null!)
+  const mobileCarouselRef = useRef<HTMLDivElement>(null!)
   const bottomTimelineRef = useRef<HTMLDivElement>(null!)
   const swipeStateRef = useRef<{
     pointerId: number
@@ -349,6 +350,7 @@ export default function Services() {
     titleAccentRef,
     introRef,
     hudBarRef,
+    mobileCarouselRef,
     bottomTimelineRef,
   })
 
@@ -401,7 +403,7 @@ export default function Services() {
         </div>
 
         <div className="mt-12 lg:mt-14">
-          <div className={styles.mobileCarouselShell}>
+          <div ref={mobileCarouselRef} className={styles.mobileCarouselShell}>
             <div
               className={styles.mobileCarouselViewport}
               onPointerDown={handlePointerDown}

@@ -7,6 +7,7 @@ export type AboutAnimationRefs = {
   sectionRef: RefObject<HTMLElement>
   hudBarRef: RefObject<HTMLDivElement>
   titleRef: RefObject<HTMLHeadingElement>
+  videoRef: RefObject<HTMLDivElement>
   viewfinderRef: RefObject<HTMLDivElement>
   leadRef: RefObject<HTMLParagraphElement>
   descriptionRef: RefObject<HTMLParagraphElement>
@@ -33,12 +34,15 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
       const {
         hudBarRef,
         titleRef,
+        videoRef,
         viewfinderRef,
         leadRef,
         descriptionRef,
         statementRef,
         ctaRef,
       } = refs
+
+      const videoElement = videoRef.current
 
       const fadeElements = [
         titleRef.current,
@@ -93,6 +97,11 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
           el.style.visibility = 'inherit'
           el.style.transform = 'none'
         })
+        if (videoElement) {
+          videoElement.style.opacity = '1'
+          videoElement.style.visibility = 'inherit'
+          videoElement.style.transform = 'none'
+        }
         if (viewfinderElement) {
           viewfinderElement.style.opacity = '1'
           viewfinderElement.style.visibility = 'inherit'
@@ -118,6 +127,11 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         el.style.visibility = 'hidden'
         el.style.transform = 'translate3d(0, 30px, 0)'
       })
+      if (videoElement) {
+        videoElement.style.opacity = '0'
+        videoElement.style.visibility = 'hidden'
+        videoElement.style.transform = 'scale(0.94)'
+      }
       if (viewfinderElement) {
         viewfinderElement.style.opacity = '0'
         viewfinderElement.style.visibility = 'hidden'
@@ -179,6 +193,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         const statementElement = statementRef.current
         const ctaElement = ctaRef.current
         const titleElement = titleRef.current
+        const videoElement = refs.videoRef.current
         const leadElement = leadRef.current
         const descriptionElement = descriptionRef.current
 
@@ -235,6 +250,9 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
 
         if (prefersReducedMotion) {
           gsap.set(visibleFadeElements, { autoAlpha: 1, y: 0 })
+          if (videoElement) {
+            gsap.set(videoElement, { autoAlpha: 1, scale: 1 })
+          }
           if (viewfinderElement) {
             gsap.set(viewfinderElement, { autoAlpha: 1, y: 0, scale: 1, clipPath: 'inset(0% 0% 0% 0%)' })
           }
@@ -250,6 +268,9 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         /* ── Initial states ─────────────────────────────────────────── */
 
         gsap.set(visibleFadeElements, { autoAlpha: 0, y: 30 })
+        if (videoElement) {
+          gsap.set(videoElement, { autoAlpha: 0, scale: 0.94 })
+        }
         if (viewfinderElement) {
           gsap.set(viewfinderElement, {
             autoAlpha: 0,
@@ -334,6 +355,19 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
               ease: 'power3.out',
             },
             '-=0.10',
+          )
+        }
+
+        if (videoElement) {
+          tl.to(
+            videoElement,
+            {
+              autoAlpha: 1,
+              scale: 1,
+              duration: 0.85,
+              ease: 'power3.out',
+            },
+            '-=0.45',
           )
         }
 

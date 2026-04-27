@@ -9,6 +9,7 @@ export type ServicesAnimationRefs = {
   titleAccentRef: RefObject<HTMLSpanElement>
   introRef: RefObject<HTMLParagraphElement>
   hudBarRef: RefObject<HTMLDivElement>
+  mobileCarouselRef: RefObject<HTMLDivElement>
   bottomTimelineRef: RefObject<HTMLDivElement>
 }
 
@@ -37,8 +38,11 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
         titleAccentRef,
         introRef,
         hudBarRef,
+        mobileCarouselRef,
         bottomTimelineRef,
       } = refs
+
+      const mobileCarousel = mobileCarouselRef.current
 
       const isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT
       const cards = Array.from(
@@ -96,6 +100,11 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
           el.style.transform = 'none'
           el.style.clipPath = 'none'
         })
+        if (mobileCarousel) {
+          mobileCarousel.style.opacity = '1'
+          mobileCarousel.style.visibility = 'inherit'
+          mobileCarousel.style.transform = 'none'
+        }
         ;[...cornerMarks, ...sceneNumbers].forEach((el) => {
           el.style.opacity = '1'
           el.style.visibility = 'inherit'
@@ -137,6 +146,11 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
           : 'translate3d(0, 40px, 0)'
         el.style.clipPath = isDesktop ? 'inset(0 100% 0 0)' : 'none'
       })
+      if (mobileCarousel && !isDesktop) {
+        mobileCarousel.style.opacity = '0'
+        mobileCarousel.style.visibility = 'hidden'
+        mobileCarousel.style.transform = 'translate3d(0, 32px, 0)'
+      }
       ;[...cornerMarks, ...sceneNumbers].forEach((el) => {
         el.style.opacity = '0'
         el.style.visibility = 'hidden'
@@ -175,6 +189,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
 
       const ctx = gsap.context(() => {
         const cards = gsap.utils.toArray<HTMLElement>('[data-service-card]')
+        const mobileCarousel = refs.mobileCarouselRef.current
 
         const cornerMarks = cards.flatMap((card) =>
           Array.from(card.querySelectorAll('[data-corner-mark]')),
@@ -213,6 +228,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
           if (bottomSegs.length) gsap.set(bottomSegs, { scaleX: 1 })
           if (bottomDiamonds.length) gsap.set(bottomDiamonds, { autoAlpha: 1 })
           gsap.set(cards, { autoAlpha: 1, y: 0, clipPath: 'none' })
+          if (mobileCarousel) gsap.set(mobileCarousel, { autoAlpha: 1, y: 0 })
           if (cornerMarks.length) gsap.set(cornerMarks, { autoAlpha: 1 })
           if (sceneNumbers.length) gsap.set(sceneNumbers, { autoAlpha: 1 })
           return
@@ -239,6 +255,7 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
           })
         } else {
           gsap.set(cards, { autoAlpha: 0, y: 40 })
+          if (mobileCarousel) gsap.set(mobileCarousel, { autoAlpha: 0, y: 32 })
         }
 
         if (cornerMarks.length) gsap.set(cornerMarks, { autoAlpha: 0 })
@@ -358,6 +375,18 @@ export function useServicesAnimation(refs: ServicesAnimationRefs): void {
             },
             '-=0.2',
           )
+          if (mobileCarousel) {
+            tl.to(
+              mobileCarousel,
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.6,
+                ease: 'power3.out',
+              },
+              '-=0.4',
+            )
+          }
         }
 
         // Phase 6: Corner marks + scene numbers appear
