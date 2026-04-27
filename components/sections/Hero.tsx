@@ -41,7 +41,7 @@ export default function Hero() {
       ref={sectionRef}
       id="hero"
       aria-label="Sekcja główna"
-      className="h-svh md:h-dvh w-full section-dark-bg"
+      className={`h-svh md:h-dvh w-full section-dark-bg ${styles.heroSection}`}
     >
       {/* Semantic heading — single h1 for SEO and screen readers */}
       <h1 className="sr-only">

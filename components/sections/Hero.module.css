@@ -1,3 +1,7 @@
+.heroSection {
+  overflow: visible;
+}
+
 .mobileFrame {
   --mobile-frame-w: 766px; /* musi odpowiadać breakpointowi md:hidden (767px) */
   --mobile-scale: calc(100vw / var(--mobile-frame-w));
@@ -5,6 +9,7 @@
   /* Kompensacja scale(origin top-left): frame po skali zajmuje 100svh*scale,
      reszta (100svh - 100svh*scale) / 2 rozkładamy jako margin-top by wycentrować pionowo */
   margin-top: calc((100svh - 100svh * var(--mobile-scale)) / 2);
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
 }
 
 .mobileGroupCenter {
@@ -194,7 +199,13 @@
   }
 
   .mobileTextWrap {
-    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (min-width: 768px) {
+  .heroSection {
+    overflow: hidden;
   }
 }
 
