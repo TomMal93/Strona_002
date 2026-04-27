@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useState, useCallback } from 'react'
+import React, { useRef, useState, useCallback, type PointerEvent as ReactPointerEvent } from 'react'
 import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
@@ -16,6 +16,11 @@ export default function Testimonials() {
   const trackRef = useRef<HTMLDivElement>(null!)
   const trustedPanelRef = useRef<HTMLDivElement>(null!)
   const isAnimating = useRef(false)
+  const swipeStateRef = useRef<{
+    pointerId: number
+    startX: number
+    startY: number
+  } | null>(null)
 
   const { title, subtitle, hudLabelLeft, hudLabelRight, items, socialProof, trustedBy } =
     siteContent.testimonials
@@ -87,6 +92,43 @@ export default function Testimonials() {
     [goTo, total],
   )
 
+  const handlePointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'mouse') return
+    event.currentTarget.setPointerCapture(event.pointerId)
+    swipeStateRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+    }
+  }, [])
+
+  const handlePointerUp = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    const swipe = swipeStateRef.current
+    if (!swipe || swipe.pointerId !== event.pointerId) return
+    event.currentTarget.releasePointerCapture(event.pointerId)
+
+    const deltaX = event.clientX - swipe.startX
+    const deltaY = event.clientY - swipe.startY
+    const horizontalThreshold = 36
+    const isHorizontalGesture = Math.abs(deltaX) > Math.abs(deltaY)
+
+    swipeStateRef.current = null
+
+    if (!isHorizontalGesture || Math.abs(deltaX) < horizontalThreshold) return
+    if (deltaX < 0) {
+      handleNext()
+      return
+    }
+    handlePrev()
+  }, [handleNext, handlePrev])
+
+  const handlePointerCancel = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId)
+    }
+    swipeStateRef.current = null
+  }, [])
+
   // Active DOM index for visual styling
   const activeDomIndex = activeIndex + 1
 
@@ -137,7 +179,12 @@ export default function Testimonials() {
 
         {/* Carousel */}
         <div ref={carouselShellRef} className={styles.carouselShell} data-carousel-shell>
-          <div className={styles.carouselViewport}>
+          <div
+            className={styles.carouselViewport}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerCancel}
+          >
             <div ref={trackRef} className={styles.carouselTrack}>
               {extendedItems.map((item, domIndex) => {
                 const isActive = domIndex === activeDomIndex
