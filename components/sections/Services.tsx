@@ -239,20 +239,57 @@ export default function Services() {
     startX: number
     startY: number
   } | null>(null)
+  const isAnimatingRef = useRef(false)
   const [activeCardIndex, setActiveCardIndex] = useState(0)
+  const [activeDomCardIndex, setActiveDomCardIndex] = useState(1)
+  const [isTrackTransitionDisabled, setIsTrackTransitionDisabled] = useState(false)
   const orderedItems = orderServiceItems(siteContent.services.items)
   const totalCards = orderedItems.length
+  const extendedItems = [
+    orderedItems[totalCards - 1],
+    ...orderedItems,
+    orderedItems[0],
+  ]
 
   const handlePrevCard = useCallback(() => {
-    setActiveCardIndex((prev) => (prev - 1 + totalCards) % totalCards)
-  }, [totalCards])
+    if (totalCards <= 1 || isAnimatingRef.current) return
+
+    if (activeCardIndex <= 0) {
+      isAnimatingRef.current = true
+      setIsTrackTransitionDisabled(false)
+      setActiveCardIndex(totalCards - 1)
+      setActiveDomCardIndex(0)
+      return
+    }
+
+    const newIndex = activeCardIndex - 1
+    setIsTrackTransitionDisabled(false)
+    setActiveCardIndex(newIndex)
+    setActiveDomCardIndex(newIndex + 1)
+  }, [activeCardIndex, totalCards])
 
   const handleNextCard = useCallback(() => {
-    setActiveCardIndex((prev) => (prev + 1) % totalCards)
-  }, [totalCards])
+    if (totalCards <= 1 || isAnimatingRef.current) return
+
+    if (activeCardIndex >= totalCards - 1) {
+      isAnimatingRef.current = true
+      setIsTrackTransitionDisabled(false)
+      setActiveCardIndex(0)
+      setActiveDomCardIndex(totalCards + 1)
+      return
+    }
+
+    const newIndex = activeCardIndex + 1
+    setIsTrackTransitionDisabled(false)
+    setActiveCardIndex(newIndex)
+    setActiveDomCardIndex(newIndex + 1)
+  }, [activeCardIndex, totalCards])
 
   const handleDot = useCallback((index: number) => {
+    if (isAnimatingRef.current) return
+    setIsTrackTransitionDisabled(false)
     setActiveCardIndex(index)
+    setActiveDomCardIndex(index + 1)
   }, [])
 
   const handlePointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
@@ -291,6 +328,20 @@ export default function Services() {
     }
     swipeStateRef.current = null
   }, [])
+
+  const handleTrackTransitionEnd = useCallback(() => {
+    if (!isAnimatingRef.current) return
+
+    setIsTrackTransitionDisabled(true)
+    setActiveDomCardIndex(activeCardIndex + 1)
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setIsTrackTransitionDisabled(false)
+        isAnimatingRef.current = false
+      })
+    })
+  }, [activeCardIndex])
 
   useServicesAnimation({
     sectionRef,
@@ -358,14 +409,18 @@ export default function Services() {
               onPointerCancel={handlePointerCancel}
             >
               <ul
-                className={styles.mobileCarouselTrack}
-                style={{ transform: `translate3d(-${activeCardIndex * 100}%, 0, 0)` }}
+                className={cn(
+                  styles.mobileCarouselTrack,
+                  isTrackTransitionDisabled && styles.mobileCarouselTrackNoTransition,
+                )}
+                style={{ transform: `translate3d(-${activeDomCardIndex * 100}%, 0, 0)` }}
+                onTransitionEnd={handleTrackTransitionEnd}
               >
-                {orderedItems.map((item, index) => (
+                {extendedItems.map((item, index) => (
                   <SceneCard
-                    key={item.title}
+                    key={`${item.title}-${index}`}
                     item={item}
-                    index={index}
+                    index={index === 0 ? totalCards - 1 : index === totalCards + 1 ? 0 : index - 1}
                     animate={false}
                     className={styles.mobileCarouselSlide}
                   />

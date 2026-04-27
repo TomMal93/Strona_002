@@ -27,11 +27,14 @@ export default function Promo() {
     startX: number
     startY: number
   } | null>(null)
+  const isAnimatingRef = useRef(false)
   const bottomTimelineRef = useRef<HTMLDivElement>(null!)
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [timecode, setTimecode] = useState('00:00/00:00')
-  const [activeVideoIndex, setActiveVideoIndex] = useState(1)
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0)
+  const [activeDomVideoIndex, setActiveDomVideoIndex] = useState(1)
+  const [isTrackTransitionDisabled, setIsTrackTransitionDisabled] = useState(false)
 
   const handlePlayPause = useCallback(() => {
     const video = videoRef.current
@@ -85,17 +88,51 @@ export default function Promo() {
 
   const { promo } = siteContent
   const totalVideos = promo.youtubeVideos.length
+  const extendedVideos = [
+    promo.youtubeVideos[totalVideos - 1],
+    ...promo.youtubeVideos,
+    promo.youtubeVideos[0],
+  ]
 
   const handlePrevVideo = useCallback(() => {
-    setActiveVideoIndex((prev) => (prev - 1 + totalVideos) % totalVideos)
-  }, [totalVideos])
+    if (totalVideos <= 1 || isAnimatingRef.current) return
+
+    if (activeVideoIndex <= 0) {
+      isAnimatingRef.current = true
+      setIsTrackTransitionDisabled(false)
+      setActiveVideoIndex(totalVideos - 1)
+      setActiveDomVideoIndex(0)
+      return
+    }
+
+    const newIndex = activeVideoIndex - 1
+    setIsTrackTransitionDisabled(false)
+    setActiveVideoIndex(newIndex)
+    setActiveDomVideoIndex(newIndex + 1)
+  }, [activeVideoIndex, totalVideos])
 
   const handleNextVideo = useCallback(() => {
-    setActiveVideoIndex((prev) => (prev + 1) % totalVideos)
-  }, [totalVideos])
+    if (totalVideos <= 1 || isAnimatingRef.current) return
+
+    if (activeVideoIndex >= totalVideos - 1) {
+      isAnimatingRef.current = true
+      setIsTrackTransitionDisabled(false)
+      setActiveVideoIndex(0)
+      setActiveDomVideoIndex(totalVideos + 1)
+      return
+    }
+
+    const newIndex = activeVideoIndex + 1
+    setIsTrackTransitionDisabled(false)
+    setActiveVideoIndex(newIndex)
+    setActiveDomVideoIndex(newIndex + 1)
+  }, [activeVideoIndex, totalVideos])
 
   const handleDot = useCallback((index: number) => {
+    if (isAnimatingRef.current) return
+    setIsTrackTransitionDisabled(false)
     setActiveVideoIndex(index)
+    setActiveDomVideoIndex(index + 1)
   }, [])
 
   const handlePointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
@@ -134,6 +171,20 @@ export default function Promo() {
     }
     swipeStateRef.current = null
   }, [])
+
+  const handleTrackTransitionEnd = useCallback(() => {
+    if (!isAnimatingRef.current) return
+
+    setIsTrackTransitionDisabled(true)
+    setActiveDomVideoIndex(activeVideoIndex + 1)
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setIsTrackTransitionDisabled(false)
+        isAnimatingRef.current = false
+      })
+    })
+  }, [activeVideoIndex])
 
   return (
     <section
@@ -250,10 +301,14 @@ export default function Promo() {
             onPointerCancel={handlePointerCancel}
           >
             <div
-              className={styles.ytCarouselTrack}
-              style={{ transform: `translate3d(-${activeVideoIndex * 100}%, 0, 0)` }}
+              className={cn(
+                styles.ytCarouselTrack,
+                isTrackTransitionDisabled && styles.ytCarouselTrackNoTransition,
+              )}
+              style={{ transform: `translate3d(-${activeDomVideoIndex * 100}%, 0, 0)` }}
+              onTransitionEnd={handleTrackTransitionEnd}
             >
-              {promo.youtubeVideos.map((video) => (
+              {extendedVideos.map((video) => (
                 <div key={video.id + video.title} className={styles.ytCarouselSlide}>
                   <YouTubeFacade
                     videoId={video.id}
