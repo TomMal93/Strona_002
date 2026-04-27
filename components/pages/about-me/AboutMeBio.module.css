@@ -91,12 +91,31 @@
   background: rgb(245 240 235 / 0.04);
 }
 
+/* Sub-panel containers (transparent on desktop, styled on mobile) */
+.bioPanelText,
+.bioPanelVideo {
+  position: relative;
+}
+
 /* Corner marks */
 .cornerMark {
   position: absolute;
   width: 18px;
   height: 18px;
   pointer-events: none;
+}
+
+/* Inner marks: hidden on desktop, shown on mobile */
+.cornerInner {
+  display: none;
+}
+
+/* Outer NOTES label: visible on desktop */
+.notesLabelOuter {}
+
+/* Inner NOTES label: hidden on desktop */
+.notesLabelInner {
+  display: none;
 }
 
 .cornerTL {
@@ -312,11 +331,67 @@
     letter-spacing: 0.08em;
   }
 
+  /* Outer panel: transparent container on mobile */
   .bioPanel {
-    padding: 1.5rem 1.25rem 1.5rem 1.75rem;
+    padding: 0;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  /* Hide outer decorations on mobile */
+  .cornerOuter,
+  .notesLabelOuter {
+    display: none;
+  }
+
+  /* Sub-panels: each gets its own frame on mobile */
+  .bioPanelText,
+  .bioPanelVideo {
+    padding: 1.5rem 1.25rem;
+    background: rgb(245 240 235 / 0.04);
+  }
+
+  /* Show inner corner marks and NOTES on mobile */
+  .cornerInner {
+    display: block;
+  }
+
+  .notesLabelInner {
+    display: block;
+  }
+
+  /* Video panel: no extra margin, hide separator (gap between panels provides separation) */
+  .bioPanelVideo .videoBlock {
+    margin-top: 0;
+  }
+
+  .bioPanelVideo .videoSeparator {
+    display: none;
   }
 
   .videoFeatureColumn {
     display: none;
+  }
+
+  .bioText {
+    text-align: center;
+  }
+
+  .bioText:not(:last-of-type)::after {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 1px;
+    margin: 0.85rem auto 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgb(var(--c-gold) / 0.07) 15%,
+      rgb(var(--c-gold) / 0.18) 50%,
+      rgb(var(--c-gold) / 0.07) 85%,
+      transparent 100%
+    );
   }
 }
