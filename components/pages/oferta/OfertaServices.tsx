@@ -102,7 +102,7 @@ export default function OfertaServices() {
                   {item.bullets.map((bullet) => (
                     <li key={bullet} className={styles.bullet}>
                       <span aria-hidden="true" className={styles.bulletDot} />
-                      <span>{bullet}</span>
+                      <span className={styles.bulletText}>{bullet}</span>
                     </li>
                   ))}
                 </ul>

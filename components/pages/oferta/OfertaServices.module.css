@@ -108,11 +108,67 @@
   color: #c8c0b4;
 }
 
+.bulletText {
+  display: block;
+  font-weight: 700;
+}
+
 .bulletDot {
+  position: relative;
+  display: block;
   flex-shrink: 0;
   width: 6px;
   height: 6px;
   margin-top: 0.5rem;
   background: rgba(var(--c-gold) / 1);
   transform: rotate(45deg);
+}
+
+@media (min-width: 1024px) {
+  .bullets {
+    align-items: center;
+  }
+
+  .bullet {
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    max-width: 34rem;
+    text-align: center;
+  }
+
+  .bulletDot {
+    display: none;
+  }
+
+  .bulletText {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+  }
+
+  .bulletText::before,
+  .bulletText::after {
+    content: '';
+    display: block;
+    width: 1.2rem;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(var(--c-gold) / 0.16) 0%,
+      rgba(var(--c-gold) / 0.45) 100%
+    );
+  }
+
+  .bulletText::after {
+    background: linear-gradient(
+      90deg,
+      rgba(var(--c-gold) / 0.45) 0%,
+      rgba(var(--c-gold) / 0.16) 100%,
+      transparent 100%
+    );
+  }
 }
