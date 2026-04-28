@@ -89,7 +89,7 @@ export default function WhyIDoThis() {
             <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBR)} />
             <span aria-hidden="true" className={cn(styles.notesLabel, styles.notesLabelInner)}>NOTES</span>
 
-            <p className={cn(styles.bioText, styles.bioTextIntro)}>
+            <p data-why-paragraph className={cn(styles.bioText, styles.bioTextIntro)}>
               {introLines.map((line, lineIndex) => (
                 <span key={line}>
                   {line.split(/(\s+)/).map((word, i) =>
@@ -109,6 +109,7 @@ export default function WhyIDoThis() {
             {restBlocks.map((paragraph, paragraphIndex) => (
               <p
                 key={paragraph}
+                data-why-paragraph
                 className={cn(
                   styles.bioText,
                   restBlocks[paragraphIndex + 1]?.startsWith('Dziś nie tylko nagrywam') && styles.bioTextBeforeDivider,
@@ -153,8 +154,8 @@ export default function WhyIDoThis() {
 
               <div className={styles.videoFeatureLayout}>
                 <div className={cn(styles.videoFeatureColumn, styles.videoFeatureColumnLeft)}>
-                  {video.highlightsLeft.map((item) => (
-                    <article key={item} className={styles.videoFeatureCard}>
+                  {video.highlightsLeft.map((item, i) => (
+                    <article key={item} data-why-feature-card data-why-feature-row={i} className={styles.videoFeatureCard}>
                       <div className={styles.videoFeatureMeta}>
                         <span aria-hidden="true" className={styles.videoFeatureRule} />
                       </div>
@@ -177,8 +178,8 @@ export default function WhyIDoThis() {
                 </div>
 
                 <div className={cn(styles.videoFeatureColumn, styles.videoFeatureColumnRight)}>
-                  {video.highlightsRight.map((item) => (
-                    <article key={item} className={styles.videoFeatureCard}>
+                  {video.highlightsRight.map((item, i) => (
+                    <article key={item} data-why-feature-card data-why-feature-row={i} className={styles.videoFeatureCard}>
                       <div className={styles.videoFeatureMeta}>
                         <span aria-hidden="true" className={styles.videoFeatureRule} />
                       </div>
