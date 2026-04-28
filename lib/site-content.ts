@@ -20,10 +20,10 @@ export const siteContent = {
     aboutLabel: process.env.NEXT_PUBLIC_HERO_ABOUT_LABEL || 'O mnie',
     social: [
       { platform: 'facebook', href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || 'https://www.facebook.com/profile.php?id=61557050460965' },
-      { platform: 'instagram', href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || 'https://www.instagram.com/maleszyk.media/' },
       { platform: 'youtube', href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || 'https://www.youtube.com/@Maleszyk.V-log' },
-      { platform: 'messenger', href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || 'https://m.me/maleszyk.media' },
+      { platform: 'instagram', href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || 'https://www.instagram.com/maleszyk.media/' },
       { platform: 'whatsapp', href: process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP || 'https://wa.me/48123456789' },
+      { platform: 'messenger', href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || 'https://m.me/maleszyk.media' },
     ],
   },
   about: {
@@ -308,8 +308,8 @@ export const siteContent = {
     secondaryLabel: process.env.NEXT_PUBLIC_CTA_SECONDARY_LABEL || 'Zobacz portfolio',
     secondaryHref: process.env.NEXT_PUBLIC_CTA_SECONDARY_HREF || '#promo',
     social: [
-      { platform: 'youtube' as const, href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || 'https://www.youtube.com/@Maleszyk.V-log' },
       { platform: 'facebook' as const, href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || 'https://www.facebook.com/profile.php?id=61557050460965' },
+      { platform: 'youtube' as const, href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || 'https://www.youtube.com/@Maleszyk.V-log' },
       { platform: 'instagram' as const, href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || 'https://www.instagram.com/maleszyk.media/' },
       { platform: 'whatsapp' as const, href: process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP || 'https://wa.me/48123456789' },
       { platform: 'messenger' as const, href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || 'https://m.me/maleszyk.media' },
@@ -430,11 +430,11 @@ export const siteContent = {
       ctaLabel: process.env.NEXT_PUBLIC_ABOUTME_CTA_LABEL || 'Porozmawiajmy',
       ctaHref: process.env.NEXT_PUBLIC_ABOUTME_CTA_HREF || 'mailto:kontakt@example.com',
       socials: [
+        { platform: 'facebook', href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || '#', label: 'Facebook' },
         { platform: 'youtube', href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || '#', label: 'YouTube' },
         { platform: 'instagram', href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || '#', label: 'Instagram' },
-        { platform: 'messenger', href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || 'https://m.me/maleszyk.media', label: 'Messenger' },
         { platform: 'whatsapp', href: process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP || 'https://wa.me/48123456789', label: 'WhatsApp' },
-        { platform: 'facebook', href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || '#', label: 'Facebook' },
+        { platform: 'messenger', href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || 'https://m.me/maleszyk.media', label: 'Messenger' },
       ],
     },
   },
