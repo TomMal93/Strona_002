@@ -178,6 +178,29 @@
   text-align: center;
 }
 
+.bioTextWithDivider {
+  position: relative;
+  padding-top: 1.75rem;
+}
+
+.bioTextWithDivider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(100%, 18rem);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.12) 18%,
+    rgb(var(--c-gold) / 0.42) 50%,
+    rgb(var(--c-gold) / 0.12) 82%,
+    transparent 100%
+  );
+}
+
 .bioText + .bioText {
   margin-top: 1rem;
 }
@@ -258,6 +281,18 @@
   text-transform: uppercase;
   color: rgb(255 238 175 / 0.62);
   white-space: pre-line;
+  transition:
+    color 260ms ease,
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.videoFeatureCard:hover .videoFeatureTitle {
+  color: rgb(255 238 175 / 0.9);
+  transform: translateX(4px);
+}
+
+.videoFeatureColumnRight .videoFeatureCard:hover .videoFeatureTitle {
+  transform: translateX(-4px);
 }
 
 .videoFeatureCenter {
@@ -283,6 +318,10 @@
 }
 
 @media (width >= 64rem) {
+  .bioPanelText .bioText {
+    text-align: center;
+  }
+
   .videoFeatureLayout {
     grid-template-columns: minmax(0, 1fr) minmax(20rem, 30rem) minmax(0, 1fr);
     gap: 1.75rem;
