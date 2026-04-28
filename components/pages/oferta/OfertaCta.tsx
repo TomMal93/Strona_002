@@ -23,7 +23,7 @@ export default function OfertaCta() {
   } = siteContent.cta
   const actionsData = {
     ctaLabel, ctaHref, phoneLabel, phoneHref,
-    secondaryLabel, secondaryHref, social,
+    secondaryLabel, secondaryHref: '/#promo', social,
   }
 
   useEffect(() => {
