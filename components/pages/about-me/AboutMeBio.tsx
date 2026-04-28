@@ -111,6 +111,7 @@ export default function AboutMeBio() {
               <header className={styles.infoHeader}>
                 <span aria-hidden="true" className={styles.infoRule} />
                 <h3 className={styles.infoLabel}>{profile.locationLabel}</h3>
+                <span aria-hidden="true" className={styles.infoRule} />
               </header>
               <p className={styles.infoBody}>{profile.locationText}</p>
             </article>
@@ -125,6 +126,7 @@ export default function AboutMeBio() {
               <header className={styles.infoHeader}>
                 <span aria-hidden="true" className={styles.infoRule} />
                 <h3 className={styles.infoLabel}>{profile.specialtiesLabel}</h3>
+                <span aria-hidden="true" className={styles.infoRule} />
               </header>
               <ul className={styles.specialtiesList}>
                 {profile.specialties.map((item) => (
