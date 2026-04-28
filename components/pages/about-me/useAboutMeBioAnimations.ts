@@ -32,6 +32,9 @@ export function useAboutMeBioAnimations(refs: AboutMeBioAnimationRefs): void {
     const bioWords = bioPanelRef.current
       ? Array.from(bioPanelRef.current.querySelectorAll<HTMLElement>('[data-bio-word]'))
       : []
+    const bioBlocks = bioPanelRef.current
+      ? Array.from(bioPanelRef.current.querySelectorAll<HTMLElement>('[data-bio-block]'))
+      : []
     const videoBlock = bioPanelRef.current
       ? bioPanelRef.current.querySelector<HTMLElement>('[data-video-block]')
       : null
@@ -48,6 +51,11 @@ export function useAboutMeBioAnimations(refs: AboutMeBioAnimationRefs): void {
       hudLabels.forEach((el) => {
         el.style.opacity = '1'
         el.style.visibility = 'inherit'
+      })
+      bioBlocks.forEach((el) => {
+        el.style.opacity = '1'
+        el.style.visibility = 'inherit'
+        el.style.transform = 'none'
       })
       bioWords.forEach((el) => {
         el.style.opacity = '1'
@@ -71,15 +79,19 @@ export function useAboutMeBioAnimations(refs: AboutMeBioAnimationRefs): void {
     if (bioPanelRef.current) {
       bioPanelRef.current.style.opacity = '0'
       bioPanelRef.current.style.visibility = 'hidden'
-      bioPanelRef.current.style.transform = 'translate3d(0, 20px, 0)'
     }
     hudLines.forEach((el) => { el.style.transform = 'scaleX(0)' })
     hudLabels.forEach((el) => {
       el.style.opacity = '0'
       el.style.visibility = 'hidden'
     })
-    bioWords.forEach((el) => {
+    bioBlocks.forEach((el) => {
       el.style.opacity = '0'
+      el.style.visibility = 'hidden'
+      el.style.transform = 'translate3d(0, 18px, 0)'
+    })
+    bioWords.forEach((el) => {
+      el.style.opacity = '1'
     })
     if (videoBlock) {
       videoBlock.style.opacity = '0'
@@ -131,21 +143,24 @@ export function useAboutMeBioAnimations(refs: AboutMeBioAnimationRefs): void {
           }, '-=0.3')
         }
 
-        // Bio panel fade in
+        // Bio panel container reveals (decorations + frame)
         if (bioPanelRef.current) {
           tl.to(bioPanelRef.current, {
-            autoAlpha: 1, y: 0, duration: 0.55, ease: 'power3.out',
+            autoAlpha: 1, duration: 0.45, ease: 'power3.out',
           }, '-=0.2')
         }
 
-        // Bio text fade in all at once
-        if (bioWords.length) {
-          tl.to(bioWords, {
-            opacity: 1,
-            duration: 0.4,
-            ease: 'power2.out',
-          }, '-=0.1')
+        // Each sub-block inside the frame enters with a consistent stagger
+        if (bioBlocks.length) {
+          tl.to(bioBlocks, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power3.out',
+            stagger: 0.09,
+          }, '-=0.25')
         }
+
 
         // Video block reveals after the text
         if (videoBlock) {

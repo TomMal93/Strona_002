@@ -79,7 +79,7 @@ export default function AboutMeBio() {
           <span aria-hidden="true" className={cn(styles.notesLabel, styles.notesLabelOuter)}>NOTES</span>
 
           {/* Intro sub-panel */}
-          <div className={styles.bioPanelText}>
+          <div data-bio-block className={styles.bioPanelText}>
             <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTL)} />
             <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTR)} />
             <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBL)} />
@@ -101,7 +101,7 @@ export default function AboutMeBio() {
 
           {/* Profile grid: location + specialties */}
           <div className={styles.profileGrid}>
-            <article className={styles.infoBlock}>
+            <article data-bio-block className={styles.infoBlock}>
               <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTL)} />
               <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTR)} />
               <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBL)} />
@@ -116,7 +116,7 @@ export default function AboutMeBio() {
               <p className={styles.infoBody}>{profile.locationText}</p>
             </article>
 
-            <article className={styles.infoBlock}>
+            <article data-bio-block className={styles.infoBlock}>
               <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTL)} />
               <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTR)} />
               <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBL)} />
@@ -139,7 +139,7 @@ export default function AboutMeBio() {
           </div>
 
           {/* Stats row */}
-          <section className={styles.statsBlock} aria-label={profile.statsLabel}>
+          <section data-bio-block className={styles.statsBlock} aria-label={profile.statsLabel}>
             <header className={styles.infoHeader}>
               <span aria-hidden="true" className={styles.infoRule} />
               <h3 className={styles.infoLabel}>{profile.statsLabel}</h3>
@@ -156,7 +156,7 @@ export default function AboutMeBio() {
           </section>
 
           {/* Gear */}
-          <section className={styles.gearBlock} aria-label={profile.gearLabel}>
+          <section data-bio-block className={styles.gearBlock} aria-label={profile.gearLabel}>
             <header className={styles.infoHeader}>
               <span aria-hidden="true" className={styles.infoRule} />
               <h3 className={styles.infoLabel}>{profile.gearLabel}</h3>
@@ -172,7 +172,7 @@ export default function AboutMeBio() {
           </section>
 
           {/* Mini CTA */}
-          <div className={styles.profileCta}>
+          <div data-bio-block className={styles.profileCta}>
             <a href={profile.cta.href} className={styles.profileCtaLink}>
               {profile.cta.label}
               <span aria-hidden="true" className={styles.profileCtaArrow}>↓</span>
