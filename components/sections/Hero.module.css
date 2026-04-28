@@ -1,29 +1,39 @@
+/* ── Mobile hero — natywnie responsywny layout (bez scale transform) ────── */
+
+@media (max-width: 767px) {
+  .heroSection {
+    /* Centralne pokrętła do tweakowania mobilnego hero */
+    --m-bottom-gap: 5svh;            /* odstęp dolnej krawędzi panelu od dołu viewportu */
+    --m-video-size: 70vw;            /* rozmiar kontenera video (kwadrat) */
+    --m-video-overlap: 6svh;         /* o ile video „wystaje" nad text panel */
+    --m-stack-gap: 2svh;             /* odstęp między video a text panelem */
+    --m-panel-padding: clamp(12px, 4vw, 24px);
+    padding-bottom: calc(var(--m-bottom-gap) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 .mobileFrame {
-  --mobile-frame-w: 766px; /* musi odpowiadać breakpointowi md:hidden (767px) */
-  --mobile-scale: calc(100vw / var(--mobile-frame-w));
-  width: var(--mobile-frame-w);
-  /* Kompensacja scale(origin top-left): frame po skali zajmuje 100svh*scale,
-     reszta (100svh - 100svh*scale) / 2 rozkładamy jako margin-top by wycentrować pionowo */
-  margin-top: clamp(0px, calc((100svh - 100svh * var(--mobile-scale)) / 2 - 48px), 72px);
-  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  width: 100%;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 5vw, 32px);
 }
 
 .mobileGroupCenter {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100%;
+  gap: var(--m-stack-gap);
 }
 
 .mobileImageWrap {
-  align-self: center;
-  margin-top: -55%;
-  width: 160%;
+  width: var(--m-video-size);
+  margin-bottom: calc(-1 * var(--m-video-overlap));
 }
 
 .mobileVideoStage {
-  transform: translateY(-10svh);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
 }
 
 .mobileImageWrap .portraitHalo {
@@ -72,7 +82,7 @@
 
 .mobileTextWrap {
   align-self: stretch;
-  margin-top: -55%;
+  width: 100%;
 }
 
 .mobileTextHalo {
@@ -87,6 +97,7 @@
 .mobileTextPanel {
   position: relative;
   background: transparent;
+  padding: var(--m-panel-padding);
 }
 
 @media (max-width: 767px) {
@@ -192,16 +203,6 @@
   .mobileTextWrap,
   .mobileTextPanel {
     overflow: visible;
-  }
-
-  .mobileTextWrap {
-    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-  }
-}
-
-@media (max-width: 767px) and (max-height: 800px) {
-  .mobileFrame {
-    margin-top: 0;
   }
 }
 

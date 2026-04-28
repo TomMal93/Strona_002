@@ -41,7 +41,7 @@ export default function Hero() {
       ref={sectionRef}
       id="hero"
       aria-label="Sekcja główna"
-      className="h-svh md:h-dvh w-full section-dark-bg"
+      className={`h-svh md:h-dvh w-full section-dark-bg flex flex-col justify-end md:block ${styles.heroSection}`}
     >
       {/* Semantic heading — single h1 for SEO and screen readers */}
       <h1 className="sr-only">
@@ -50,13 +50,13 @@ export default function Hero() {
 
       <MobileHeroLayout>
         <HeroTextBlock
-          headingClassName="mt-4 font-bebas text-[68px] uppercase leading-[0.96] md:text-[70px] lg:text-[90px]"
-          eyebrowClassName="block font-bebas text-[26px] uppercase tracking-heading"
-          subtitleClassName="mt-6 whitespace-pre-line pb-5 font-bebas text-[24px] leading-[1.5] tracking-heading"
+          headingClassName="mt-4 font-bebas text-[clamp(40px,11vw,68px)] uppercase leading-[0.96] md:text-[70px] lg:text-[90px]"
+          eyebrowClassName="block font-bebas text-[clamp(18px,4.5vw,26px)] uppercase tracking-heading"
+          subtitleClassName="mt-6 whitespace-pre-line pb-5 font-bebas text-[clamp(16px,4vw,24px)] leading-[1.5] tracking-heading"
           subtitleWrapClassName="w-full"
-          ctaClassName="px-4 py-2 text-center font-bebas text-[28px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2"
+          ctaClassName="px-4 py-2 text-center font-bebas text-[clamp(20px,5vw,28px)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2"
           socialRowClassName="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 overflow-visible"
-          socialIconClassName="inline-flex h-12 w-12 items-center justify-center overflow-visible leading-none [&>svg]:block [&>svg]:h-[28px] [&>svg]:w-[28px] [&>svg]:shrink-0 [&>svg]:overflow-visible"
+          socialIconClassName="inline-flex h-12 w-12 items-center justify-center overflow-visible leading-none [&>svg]:block [&>svg]:h-[clamp(22px,6vw,30px)] [&>svg]:w-[clamp(22px,6vw,30px)] [&>svg]:shrink-0 [&>svg]:overflow-visible"
           underlineClassName="block h-px w-full bg-gradient-to-r from-transparent via-khaki/70 to-transparent"
         />
       </MobileHeroLayout>
