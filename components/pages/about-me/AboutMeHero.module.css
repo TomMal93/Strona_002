@@ -14,6 +14,20 @@
   --framed-ornament-offset: clamp(1.75rem, 8vw, 8rem);
 }
 
+@media (width >= 48rem) {
+  .heroSectionFramed {
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgb(var(--c-olive) / 0.09) 0,
+        rgb(var(--c-olive) / 0.09) 1px,
+        rgb(var(--c-olive) / 0) 1px,
+        rgb(var(--c-olive) / 0) 22px
+      ),
+      rgb(13 13 13);
+  }
+}
+
 /* ── Parallax background ─────────────────────────────────────────────── */
 
 .heroBg {
@@ -52,6 +66,16 @@
     rgb(13 13 13 / 0.72) 92%,
     rgb(13 13 13 / 0.98) 100%
   );
+}
+
+@media (width >= 48rem) {
+  .heroBgFramed {
+    background: transparent;
+  }
+
+  .heroSectionFramed .heroBgFramed::after {
+    display: none;
+  }
 }
 
 .heroBg img {
@@ -117,6 +141,12 @@
     rgb(13 13 13 / 0.15) 100%
   );
   pointer-events: none;
+}
+
+@media (width >= 48rem) {
+  .heroSectionFramed .heroOverlay {
+    background: transparent;
+  }
 }
 
 /* ── Film strip sprocket holes ───────────────────────────────────────── */
@@ -235,7 +265,7 @@
 /* ── Tagline ──────────────────────────────────────────────────────────── */
 
 .heroTagline {
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
   font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
   font-size: 0.85rem;
   letter-spacing: 0.18em;

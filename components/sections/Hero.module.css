@@ -4,7 +4,7 @@
   .heroSection {
     /* Centralne pokrętła do tweakowania mobilnego hero */
     --m-bottom-gap: 2svh;            /* odstęp dolnej krawędzi panelu od dołu viewportu */
-    --m-video-size: 70vw;            /* rozmiar kontenera video (kwadrat) */
+    --m-video-size: 90vw;            /* rozmiar kontenera video (kwadrat) */
     --m-video-overlap: 4svh;         /* o ile video „wystaje" nad text panel */
     --m-stack-gap: 0.5svh;           /* odstęp między video a text panelem */
     --m-panel-padding: clamp(12px, 4vw, 24px);
