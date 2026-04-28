@@ -169,6 +169,7 @@ export default function WhyIDoThis() {
                     videoOverride={{
                       type: 'self-hosted',
                       src: '/videos/contact/contact.mp4',
+                      poster: '/images/contact/bio.webp',
                     }}
                   />
                   <span aria-hidden="true" className={cn(styles.videoDivider, styles.videoDividerRight)} />
