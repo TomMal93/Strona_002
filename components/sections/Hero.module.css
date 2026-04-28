@@ -3,7 +3,7 @@
 @media (max-width: 767px) {
   .heroSection {
     /* Centralne pokrętła do tweakowania mobilnego hero */
-    --m-bottom-gap: 2svh;            /* odstęp dolnej krawędzi panelu od dołu viewportu */
+    --m-bottom-gap: 0.5svh;          /* odstęp dolnej krawędzi panelu od dołu viewportu */
     --m-video-size: 110vw;           /* rozmiar kontenera video (kwadrat) */
     --m-video-overlap: 4svh;         /* o ile video „wystaje" nad text panel */
     --m-stack-gap: 4svh;             /* odstęp między video a text panelem */

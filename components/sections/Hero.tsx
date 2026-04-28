@@ -51,7 +51,7 @@ export default function Hero() {
       <MobileHeroLayout>
         <HeroTextBlock
           headingClassName="mt-1 font-bebas text-[clamp(40px,11vw,68px)] uppercase leading-[0.96] md:text-[70px] lg:text-[90px]"
-          eyebrowClassName="block font-bebas text-[clamp(18px,4.5vw,26px)] uppercase tracking-heading"
+          eyebrowClassName="block font-bebas text-[clamp(14px,3.6vw,20px)] uppercase tracking-heading opacity-90"
           subtitleClassName="mt-3 whitespace-pre-line pb-3 font-bebas text-[clamp(16px,4vw,24px)] leading-[1.5] tracking-heading"
           subtitleWrapClassName="w-full"
           ctaClassName="px-4 py-2 text-center font-bebas text-[clamp(20px,5vw,28px)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2"
