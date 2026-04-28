@@ -62,15 +62,31 @@
 }
 
 .wordmark {
-  display: block;
+  display: flex;
+  align-items: baseline;
   justify-content: center;
-  width: min(78vw, 520px);
+  font-family: var(--font-bebas), sans-serif;
+  font-size: clamp(3.25rem, 12vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(245 241 232);
+  white-space: nowrap;
 }
 
-.logo {
-  display: block;
-  width: 100%;
-  height: auto;
+.dot {
+  color: rgb(200 80 60);
+}
+
+.media {
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-warm)) 0%,
+    rgb(255 238 175) 45%,
+    rgb(var(--c-gold)) 100%
+  );
+  background-clip: text;
+  color: transparent;
 }
 
 .divider {
