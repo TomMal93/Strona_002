@@ -19,7 +19,7 @@ export default function OfertaCta() {
   const { title, lead } = siteContent.offerPage.cta
   const {
     ctaLabel, ctaHref, phoneLabel, phoneHref,
-    secondaryLabel, secondaryHref, social,
+    secondaryLabel, social,
   } = siteContent.cta
   const actionsData = {
     ctaLabel, ctaHref, phoneLabel, phoneHref,
