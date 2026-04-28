@@ -15,8 +15,11 @@ export default function AboutMePage() {
     <main>
       <AboutMeHero
         heroOverride={{
-          backgroundImage: '/images/contact/contact.webp',
+          backgroundImage: '/images/contact/contact-hero.webp',
           backgroundAlt: 'Zdjęcie kontaktowe',
+          imageQuality: 68,
+          imageSizes: '(max-width: 767px) 100vw, (max-width: 1199px) 56vw, 48vw',
+          imageUnoptimized: true,
           showRecIndicator: false,
           showTimecode: false,
           framedImage: true,

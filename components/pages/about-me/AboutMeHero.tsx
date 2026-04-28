@@ -14,6 +14,9 @@ type AboutMeHeroProps = {
     resolution?: string
     backgroundImage?: string
     backgroundAlt?: string
+    imageQuality?: number
+    imageSizes?: string
+    imageUnoptimized?: boolean
     showRecIndicator?: boolean
     showTimecode?: boolean
     framedImage?: boolean
@@ -39,6 +42,9 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
     ...siteContent.aboutMe.hero,
     ...heroOverride,
   }
+  const imageSizes =
+    hero.imageSizes ?? (hero.framedImage ? '(max-width: 767px) 100vw, 80vh' : '100vw')
+  const imageQuality = hero.imageQuality ?? (hero.framedImage ? 72 : 80)
 
   return (
     <section
@@ -62,7 +68,9 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
           alt={hero.backgroundAlt}
           fill
           priority
-          sizes={hero.framedImage ? '(width < 48rem) 100vw, 80vh' : '100vw'}
+          quality={imageQuality}
+          sizes={imageSizes}
+          unoptimized={hero.imageUnoptimized}
           style={
             hero.framedImage
               ? { objectFit: 'cover', objectPosition: 'center center' }
