@@ -62,7 +62,7 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
           alt={hero.backgroundAlt}
           fill
           priority
-          sizes="100vw"
+          sizes={hero.framedImage ? '(width < 48rem) 100vw, 80vh' : '100vw'}
           style={
             hero.framedImage
               ? { objectFit: 'cover', objectPosition: 'center center' }
