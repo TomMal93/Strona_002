@@ -111,6 +111,7 @@ export default function WhyIDoThis() {
                 key={paragraph}
                 className={cn(
                   styles.bioText,
+                  restBlocks[paragraphIndex + 1]?.startsWith('Dziś nie tylko nagrywam') && styles.bioTextBeforeDivider,
                   paragraph.startsWith('Dziś nie tylko nagrywam') && styles.bioTextWithDivider,
                   paragraph.startsWith('Dziś nie tylko nagrywam') && styles.bioTextCentered,
                 )}

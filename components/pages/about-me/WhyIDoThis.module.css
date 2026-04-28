@@ -433,4 +433,8 @@
       transparent 100%
     );
   }
+
+  .bioTextBeforeDivider::after {
+    display: none !important;
+  }
 }
