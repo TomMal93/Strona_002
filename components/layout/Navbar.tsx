@@ -1,7 +1,6 @@
 'use client'
 
 import { Fragment, useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { gsap } from 'gsap'
@@ -223,22 +222,17 @@ export default function Navbar() {
           aria-label="Strona główna"
           aria-hidden={!logoVisible}
           tabIndex={logoVisible ? undefined : -1}
-          className={`group relative h-10 w-36 shrink-0 transition-[opacity,transform] duration-500 ease-out md:absolute md:left-[20vw] md:h-12 md:w-44 ${
+          className={`relative shrink-0 font-bebas text-[1.006rem] uppercase tracking-heading text-warm-white transition-[opacity,transform,color] duration-500 ease-out hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki md:absolute md:left-[20vw] ${
             logoVisible
               ? 'translate-y-0 opacity-100'
               : '-translate-y-2 pointer-events-none opacity-0'
           }`}
         >
-          <Image
-            src="/images/logo.png"
-            alt=""
-            width={1536}
-            height={390}
-            className="pointer-events-none h-full w-full object-contain opacity-75 transition-opacity duration-300 group-hover:opacity-100"
-            sizes="(max-width: 767px) 144px, 176px"
-            priority
-            aria-hidden="true"
-          />
+          MALESZYK
+          <span className="text-[#c8503c]">.</span>
+          <span className="bg-[linear-gradient(130deg,rgb(var(--c-warm))_0%,rgb(255_238_175)_45%,rgb(var(--c-gold))_100%)] bg-clip-text text-transparent">
+            MEDIA
+          </span>
         </Link>
 
         {/* Desktop navigation */}

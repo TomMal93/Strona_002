@@ -59,7 +59,11 @@ export default function Footer() {
           href="/#hero"
           className="font-bebas text-sm uppercase tracking-heading text-warm-white transition-colors duration-200 hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki md:justify-self-start"
         >
-          MALESZYK.MEDIA
+          MALESZYK
+          <span className="text-[#c8503c]">.</span>
+          <span className="bg-[linear-gradient(130deg,rgb(var(--c-warm))_0%,rgb(255_238_175)_45%,rgb(var(--c-gold))_100%)] bg-clip-text text-transparent">
+            MEDIA
+          </span>
         </Link>
 
         <ul className="flex items-center gap-1 md:justify-self-center">
