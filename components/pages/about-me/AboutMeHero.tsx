@@ -69,16 +69,6 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
               : { objectFit: 'cover', objectPosition: 'center 20%' }
           }
         />
-        {hero.framedImage ? (
-          <>
-            <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerTL)} />
-            <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerTR)} />
-            <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerBL)} />
-            <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerBR)} />
-            <div className={cn(styles.filmStripLeft, styles.filmStripFramed)} aria-hidden="true" />
-            <div className={cn(styles.filmStripRight, styles.filmStripFramed)} aria-hidden="true" />
-          </>
-        ) : null}
       </div>
 
       {/* Overlay */}

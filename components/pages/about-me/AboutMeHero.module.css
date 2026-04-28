@@ -31,13 +31,25 @@
   width: auto;
   transform: translateX(-50%);
   overflow: hidden;
-  border: 1px solid rgb(var(--c-gold) / 0.2);
-  background:
-    radial-gradient(circle at 50% 30%, rgb(255 238 175 / 0.08), transparent 55%),
-    rgb(10 10 10 / 0.92);
-  box-shadow:
-    0 24px 60px rgb(0 0 0 / 0.35),
-    inset 0 0 0 1px rgb(255 238 175 / 0.05);
+  background: rgb(10 10 10 / 0.92);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 0.35);
+}
+
+.heroBgFramed::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgb(13 13 13 / 0.88) 0%,
+    rgb(13 13 13 / 0.28) 10%,
+    transparent 18%,
+    transparent 82%,
+    rgb(13 13 13 / 0.28) 90%,
+    rgb(13 13 13 / 0.88) 100%
+  );
 }
 
 .heroBg img {
