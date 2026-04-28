@@ -201,17 +201,21 @@ export default function Navbar() {
 
   const getMobileLinkClassName = () => mobileNavLinkClassName
   const logoVisible = pathname !== HOME_PATH || logoRevealed
+  const isContactPage = pathname === '/contact'
+  const headerSurfaceClassName = isContactPage
+    ? (scrolled || mobileOpen
+        ? 'bg-[#0f0f12]/68 backdrop-blur-md'
+        : 'bg-[#0f0f12]')
+    : (scrolled || mobileOpen
+        ? 'bg-[#0f0f12]/50 md:bg-[#0f0f12]/90 backdrop-blur-md'
+        : 'bg-transparent')
 
   return (
     <header
       ref={headerRef}
       className="fixed top-0 left-0 right-0 z-50"
     >
-      <div className={`flex items-center justify-between px-6 py-2 md:px-12 lg:px-20 transition-[background-color,backdrop-filter] duration-500 ${
-        scrolled || mobileOpen
-          ? 'bg-[#0f0f12]/50 md:bg-[#0f0f12]/90 backdrop-blur-md'
-          : 'bg-transparent'
-      }`}>
+      <div className={`flex items-center justify-between px-6 py-2 md:px-12 lg:px-20 transition-[background-color,backdrop-filter] duration-500 ${headerSurfaceClassName}`}>
 
         {/* Logo */}
         <Link
