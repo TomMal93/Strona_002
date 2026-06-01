@@ -2,6 +2,7 @@
 
 import { useRef, useState, useCallback, useEffect } from 'react'
 import { siteContent } from '@/lib/site-content'
+import { useLazyVideoSource } from '@/components/ui/useLazyVideoSource'
 import { cn } from '@/lib/utils'
 import styles from './AboutMeVideo.module.css'
 import { useAboutMeVideoAnimations } from './useAboutMeVideoAnimations'
@@ -36,6 +37,7 @@ export default function AboutMeVideo({ embedded = false, videoOverride }: AboutM
     ...videoOverride,
   }
   const isYouTube = video.type === 'youtube'
+  const shouldLoadVideo = useLazyVideoSource(videoShellRef, !isYouTube)
 
   const handlePlayPause = useCallback(() => {
     const vid = videoRef.current
@@ -131,9 +133,10 @@ export default function AboutMeVideo({ embedded = false, videoOverride }: AboutM
               muted
               loop
               playsInline
+              preload="metadata"
               poster={video.poster}
             >
-              <source src={video.src} type="video/mp4" />
+              {shouldLoadVideo && <source src={video.src} type="video/mp4" />}
             </video>
 
             <button

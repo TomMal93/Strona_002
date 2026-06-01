@@ -2,6 +2,7 @@
 
 import { useRef, useState, useCallback, useEffect } from 'react'
 import { siteContent } from '@/lib/site-content'
+import { useLazyVideoSource } from '@/components/ui/useLazyVideoSource'
 import { cn } from '@/lib/utils'
 import styles from './WhyIDoThisVideo.module.css'
 import { useWhyIDoThisVideoAnimations } from './useWhyIDoThisVideoAnimations'
@@ -36,6 +37,7 @@ export default function WhyIDoThisVideo({ embedded = false, videoOverride }: Why
     ...videoOverride,
   }
   const isYouTube = video.type === 'youtube'
+  const shouldLoadVideo = useLazyVideoSource(videoShellRef, !isYouTube)
 
   const handlePlayPause = useCallback(() => {
     const vid = videoRef.current
@@ -131,9 +133,10 @@ export default function WhyIDoThisVideo({ embedded = false, videoOverride }: Why
               muted
               loop
               playsInline
+              preload="metadata"
               poster={video.poster}
             >
-              <source src={video.src} type="video/mp4" />
+              {shouldLoadVideo && <source src={video.src} type="video/mp4" />}
             </video>
 
             <button

@@ -8,6 +8,7 @@ import React, {
   type PointerEvent as ReactPointerEvent,
 } from 'react'
 import { siteContent } from '@/lib/site-content'
+import { useLazyVideoSource } from '@/components/ui/useLazyVideoSource'
 import { cn } from '@/lib/utils'
 import styles from './Services.module.css'
 import heroStyles from './Hero.module.css'
@@ -78,7 +79,9 @@ type SceneCardProps = {
 function SceneCard({ item, index, animate = true, className }: SceneCardProps) {
   const variant = getCardVariant(item.icon)
   const v = VARIANT_CLASSES[variant]
+  const videoFrameRef = useRef<HTMLDivElement>(null!)
   const videoRef = useRef<HTMLVideoElement>(null!)
+  const shouldLoadVideo = useLazyVideoSource(videoFrameRef)
   const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
@@ -134,7 +137,7 @@ function SceneCard({ item, index, animate = true, className }: SceneCardProps) {
           <span className={cn(styles.reelLine, v.reelLine2)} />
         </div>
 
-        <div className={cn(styles.videoFrame, v.videoFrame)}>
+        <div ref={videoFrameRef} className={cn(styles.videoFrame, v.videoFrame)}>
           <span className={styles.videoBadge}>{item.tag}</span>
           <span className={styles.videoStatus}>{isPlaying ? 'preview on' : 'click to play'}</span>
 
@@ -148,7 +151,7 @@ function SceneCard({ item, index, animate = true, className }: SceneCardProps) {
             playsInline
             onClick={toggleVideo}
           >
-            <source src={item.video.src} type="video/mp4" />
+            {shouldLoadVideo && <source src={item.video.src} type="video/mp4" />}
           </video>
 
           <button

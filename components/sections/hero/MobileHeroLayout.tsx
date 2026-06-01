@@ -13,7 +13,7 @@ export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
         <div className={`relative ${styles.mobileImageWrap} ${styles.mobileImageEntrance}`}>
           <div className={`relative ${styles.mobileVideoStage}`}>
             <video
-              src="/videos/about-me.mp4"
+              src="/videos/hero/hero-video.mp4"
               aria-label={siteContent.about.imageAlt}
               autoPlay
               loop

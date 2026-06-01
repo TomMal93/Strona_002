@@ -8,6 +8,7 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from 'react'
 import { siteContent } from '@/lib/site-content'
+import { useLazyVideoSource } from '@/components/ui/useLazyVideoSource'
 import { cn } from '@/lib/utils'
 import styles from './Promo.module.css'
 import heroStyles from './Hero.module.css'
@@ -89,6 +90,7 @@ export default function Promo() {
   })
 
   const { promo } = siteContent
+  const shouldLoadHeroVideo = useLazyVideoSource(videoFrameRef)
   const totalVideos = promo.youtubeVideos.length
   const extendedVideos = [
     promo.youtubeVideos[totalVideos - 1],
@@ -244,9 +246,10 @@ export default function Promo() {
             ref={videoRef}
             loop
             playsInline
+            preload="metadata"
             poster={promo.heroVideo.poster}
           >
-            <source src={promo.heroVideo.src} type="video/mp4" />
+            {shouldLoadHeroVideo && <source src={promo.heroVideo.src} type="video/mp4" />}
           </video>
 
           <button
