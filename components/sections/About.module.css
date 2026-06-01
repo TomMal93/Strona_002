@@ -74,36 +74,8 @@
 }
 
 .aboutVideoMedia {
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    #000 0%,
-    #000 28%,
-    rgb(0 0 0 / 0.86) 32%,
-    rgb(0 0 0 / 0.68) 36%,
-    rgb(0 0 0 / 0.52) 42%,
-    rgb(0 0 0 / 0.38) 48%,
-    rgb(0 0 0 / 0.24) 54%,
-    rgb(0 0 0 / 0.12) 60%,
-    transparent 66%,
-    transparent 72%,
-    transparent 76%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse at center,
-    #000 0%,
-    #000 28%,
-    rgb(0 0 0 / 0.86) 32%,
-    rgb(0 0 0 / 0.68) 36%,
-    rgb(0 0 0 / 0.52) 42%,
-    rgb(0 0 0 / 0.38) 48%,
-    rgb(0 0 0 / 0.24) 54%,
-    rgb(0 0 0 / 0.12) 60%,
-    transparent 66%,
-    transparent 72%,
-    transparent 76%,
-    transparent 100%
-  );
+  -webkit-mask-image: radial-gradient(ellipse 60% 60% at center, #000 10%, transparent 70%);
+  mask-image: radial-gradient(ellipse 60% 60% at center, #000 10%, transparent 70%);
 }
 
 .mediaFrame::before,

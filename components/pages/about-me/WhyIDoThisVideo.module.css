@@ -141,6 +141,13 @@
   overflow: hidden;
 }
 
+@media (width >= 48rem) {
+  .videoFrame {
+    -webkit-mask-image: radial-gradient(ellipse 60% 60% at center, #000 10%, transparent 70%);
+    mask-image: radial-gradient(ellipse 60% 60% at center, #000 10%, transparent 70%);
+  }
+}
+
 .videoFrameLandscape {
   aspect-ratio: 16 / 9;
 }
