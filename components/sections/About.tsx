@@ -127,7 +127,7 @@ export default function About() {
                 </div>
                 <div aria-hidden="true" className={styles.viewfinderHudBottom}>
                   <span className={styles.viewfinderResolution}>4K DCI / 25P</span>
-                  <span className={cn(styles.viewfinderExposure, styles.hideOnMobile)}>ISO 800&nbsp;&nbsp;F2.8&nbsp;&nbsp;1/125</span>
+                  <span className={cn(styles.viewfinderExposure, styles.hideOnMobile)}>ISO 800&nbsp;&nbsp;1/50</span>
                   <span className={styles.viewfinderTimecode}>TC {formatHudTime(hudFrame)}</span>
                 </div>
 
