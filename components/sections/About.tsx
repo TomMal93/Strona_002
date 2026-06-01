@@ -63,15 +63,18 @@ export default function About() {
       <div className="mx-auto max-w-content">
         <div className="md:grid md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
           <div className="hidden md:col-span-5 md:block">
-            <div ref={videoRef} className="relative mx-auto aspect-[3/4] w-full">
+            <div ref={videoRef} className={cn('relative mx-auto aspect-[3/4] w-3/4', styles.aboutVideoFrame)}>
               <video
-                src="/videos/about-me.mp4"
+                src="/videos/hero/hero-video.mp4"
                 aria-label={siteContent.about.imageAlt}
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="pointer-events-none relative z-10 h-full w-full origin-center translate-x-[-20%] scale-150 object-contain object-center [clip-path:circle(28%_at_50%_50%)] [mask-image:radial-gradient(circle_at_center,#000_5%,transparent_85%)] [-webkit-mask-image:radial-gradient(circle_at_center,#000_5%,transparent_85%)]"
+                className={cn(
+                  'pointer-events-none relative z-10 h-full w-full origin-center translate-x-[-25%] scale-[1.725] object-contain object-center',
+                  styles.aboutVideoMedia,
+                )}
               />
             </div>
           </div>
