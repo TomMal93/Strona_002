@@ -143,8 +143,24 @@
 
 @media (width >= 48rem) {
   .videoFrame {
-    -webkit-mask-image: radial-gradient(ellipse 60% 60% at center, #000 10%, transparent 70%);
-    mask-image: radial-gradient(ellipse 60% 60% at center, #000 10%, transparent 70%);
+    -webkit-mask-image: radial-gradient(
+      ellipse 60% 60% at center,
+      #000 0%,
+      #000 15%,
+      rgb(0 0 0 / 0.8) 30%,
+      rgb(0 0 0 / 0.5) 45%,
+      rgb(0 0 0 / 0.2) 60%,
+      transparent 75%
+    );
+    mask-image: radial-gradient(
+      ellipse 60% 60% at center,
+      #000 0%,
+      #000 15%,
+      rgb(0 0 0 / 0.8) 30%,
+      rgb(0 0 0 / 0.5) 45%,
+      rgb(0 0 0 / 0.2) 60%,
+      transparent 75%
+    );
   }
 }
 
