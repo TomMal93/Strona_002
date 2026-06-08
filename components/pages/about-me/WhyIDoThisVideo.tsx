@@ -130,7 +130,6 @@ export default function WhyIDoThisVideo({ embedded = false, videoOverride }: Why
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video
               ref={videoRef}
-              muted
               loop
               playsInline
               preload="metadata"

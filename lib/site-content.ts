@@ -414,9 +414,9 @@ export const siteContent = {
         'Uważność na detal',
       ],
       highlightsRight: [
-        'Dopracowany detal',
+        'Przyjazna atmosfera',
         'Prawdziwe tempo',
-        'Światło i przestrzeń',
+        'Gra\nświatłem',
         'Kadry z charakterem',
         'Opowieść w obrazie',
       ],

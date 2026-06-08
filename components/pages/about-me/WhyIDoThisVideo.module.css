@@ -139,29 +139,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-}
-
-@media (width >= 48rem) {
-  .videoFrame {
-    -webkit-mask-image: radial-gradient(
-      ellipse 60% 60% at center,
-      #000 0%,
-      #000 15%,
-      rgb(0 0 0 / 0.8) 30%,
-      rgb(0 0 0 / 0.5) 45%,
-      rgb(0 0 0 / 0.2) 60%,
-      transparent 75%
-    );
-    mask-image: radial-gradient(
-      ellipse 60% 60% at center,
-      #000 0%,
-      #000 15%,
-      rgb(0 0 0 / 0.8) 30%,
-      rgb(0 0 0 / 0.5) 45%,
-      rgb(0 0 0 / 0.2) 60%,
-      transparent 75%
-    );
-  }
+  background: rgb(0 0 0 / 0.72);
 }
 
 .videoFrameLandscape {
@@ -179,8 +157,15 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   border: none;
+}
+
+.videoFrame video {
+  object-fit: contain;
+}
+
+.videoFrame iframe {
+  object-fit: cover;
 }
 
 /* Corner marks */
