@@ -13,6 +13,15 @@ gsap.registerPlugin(ScrollTrigger)
 
 type ServiceItem = (typeof siteContent.services.items)[number]
 
+const OFFER_DETAILS_DESCRIPTIONS: Partial<Record<ServiceItem['title'], string>> = {
+  'Film okolicznościowy':
+    'Film, który uchwyci Wasze emocje, najpiękniejsze chwile i atmosferę całego dnia — pamiątka na całe życie. Dbam o naturalne kadry, dyskretną pracę w trakcie wydarzenia i montaż, który prowadzi przez najważniejsze momenty bez sztucznego przeciągania historii. Materiał może obejmować zarówno dynamiczny skrót, jak i dłuższą formę dopasowaną do charakteru uroczystości.',
+  'Profesjonalny montaż':
+    'Montuję filmy z Twoich materiałów, od vlogów na YouTube przez rolki na media społecznościowe. Porządkuję ujęcia, wybieram najmocniejsze fragmenty, układam tempo i dbam o spójność obrazu oraz dźwięku. W zależności od potrzeb mogę przygotować krótką, dynamiczną wersję do publikacji albo dłuższy materiał gotowy do prezentacji klientom, rodzinie lub społeczności.',
+  'Materiały promocyjne':
+    'Twoja marka w najlepszym świetle — przyciągnij uwagę odbiorców. Tworzę materiały, które jasno pokazują produkt, usługę lub wydarzenie i są dopasowane do miejsca publikacji: strony internetowej, kampanii reklamowej albo social mediów. Stawiam na czytelny przekaz, dobre tempo i ujęcia, które wzmacniają charakter marki zamiast tylko dekorować film.',
+}
+
 type OfertaServiceBlockProps = {
   item: ServiceItem
   index: number
@@ -23,6 +32,7 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
   const shouldLoadVideo = useLazyVideoSource(videoFrameRef)
   const sceneNumber = String(index + 1).padStart(2, '0')
   const mediaFirst = index % 2 === 1
+  const detailsDescription = OFFER_DETAILS_DESCRIPTIONS[item.title] ?? item.description
 
   return (
     <article
@@ -66,21 +76,20 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
           </h2>
         </div>
 
-        <p className="mt-6 font-inter text-sm leading-relaxed text-warm-gray">
+        <p className="mt-6 text-center font-inter text-sm leading-relaxed text-warm-gray">
           {item.lead}
         </p>
       </div>
 
       <div className={cn(styles.details, 'lg:order-3')}>
         <div className={styles.detailsHeader}>
-          <p className="ui-overline text-khaki/90">Rozszerzone info</p>
           <h3 className="font-bebas text-2xl uppercase leading-[1.0] tracking-wide text-warm-white md:text-3xl">
             Co obejmuje usługa
           </h3>
         </div>
 
         <p className={styles.detailsDescription}>
-          {item.description}
+          {detailsDescription}
         </p>
 
         <ul className={styles.bullets}>
