@@ -30,7 +30,7 @@ const navLinkClassName = [
 
 const mobileNavLinkClassName =
   [
-    'font-bebas text-[28px] tracking-heading uppercase py-2 transition-opacity duration-200 hover:opacity-80',
+    'relative font-bebas text-[28px] tracking-heading uppercase py-2 transition-opacity duration-200 hover:opacity-80',
     'bg-[linear-gradient(130deg,rgb(var(--c-warm))_0%,rgb(255_238_175)_45%,rgb(var(--c-gold))_100%)] bg-clip-text text-transparent',
   ].join(' ')
 
@@ -126,7 +126,7 @@ export default function Navbar() {
   /* Highlight the current section in the homepage navigation */
   useEffect(() => {
     if (pathname !== HOME_PATH) {
-      setActiveHref('')
+      setActiveHref(pathname)
       return
     }
 
@@ -198,7 +198,11 @@ export default function Navbar() {
       : navLinkClassName
   )
 
-  const getMobileLinkClassName = () => mobileNavLinkClassName
+  const getMobileLinkClassName = (href: string) => (
+    href === activeHref
+      ? `${mobileNavLinkClassName} after:absolute after:bottom-1 after:left-1/2 after:h-px after:w-full after:-translate-x-1/2 after:bg-khaki`
+      : `${mobileNavLinkClassName} opacity-70`
+  )
   const logoVisible = pathname !== HOME_PATH || logoRevealed
   const isContactPage = pathname === '/contact'
   const headerSurfaceClassName = isContactPage
@@ -290,7 +294,8 @@ export default function Navbar() {
             <Fragment key={item.href}>
               <Link
                 href={item.href}
-                className={getMobileLinkClassName()}
+                className={getMobileLinkClassName(item.href)}
+                aria-current={item.href === activeHref ? 'location' : undefined}
                 onClick={() => setMobileOpen(false)}
               >
                 {item.label}
