@@ -378,6 +378,7 @@
   background: rgb(255 255 255 / 0.02);
   transition:
     transform 420ms cubic-bezier(0.19, 1, 0.22, 1),
+    background-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
     border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -391,15 +392,26 @@
   pointer-events: none;
   background: radial-gradient(
     ellipse at 30% 20%,
-    rgb(var(--c-khaki) / 0.06) 0%,
+    rgb(var(--c-khaki) / 0.11) 0%,
     transparent 60%
   );
+  opacity: 0.55;
+  transition: opacity 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.sceneCard:hover {
-  transform: translateY(-4px);
-  border-color: rgb(var(--c-khaki) / 0.28);
-  box-shadow: 0 8px 24px rgb(0 0 0 / 0.18);
+.sceneCard:hover,
+.sceneCard:focus-within {
+  transform: translateY(-8px);
+  border-color: rgb(var(--c-gold) / 0.55);
+  background: rgb(255 255 255 / 0.035);
+  box-shadow:
+    0 18px 44px rgb(0 0 0 / 0.34),
+    0 0 34px rgb(var(--c-gold) / 0.16);
+}
+
+.sceneCard:hover::before,
+.sceneCard:focus-within::before {
+  opacity: 1;
 }
 
 .sceneCardHighlight,
@@ -430,6 +442,10 @@
   left: 0;
   border-top: 1px solid rgb(var(--c-gold) / 0.3);
   border-left: 1px solid rgb(var(--c-gold) / 0.3);
+  transition:
+    border-color 280ms ease,
+    width 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .cornerBR {
@@ -437,6 +453,17 @@
   bottom: 0;
   border-right: 1px solid rgb(var(--c-gold) / 0.3);
   border-bottom: 1px solid rgb(var(--c-gold) / 0.3);
+  transition:
+    border-color 280ms ease,
+    width 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sceneCard:hover .cornerMark,
+.sceneCard:focus-within .cornerMark {
+  width: 28px;
+  height: 28px;
+  border-color: rgb(var(--c-gold) / 0.78);
 }
 
 .cornerTLMilitary,
@@ -468,6 +495,9 @@
   display: block;
   height: 1px;
   transform-origin: left center;
+  transition:
+    opacity 260ms ease,
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reelLineHighlight1,
@@ -475,6 +505,12 @@
 .reelLineMilitary1,
 .reelLineMilitary2 {
   background: linear-gradient(90deg, rgb(var(--c-gold) / 0.5), transparent 95%);
+}
+
+.sceneCard:hover .reelLine,
+.sceneCard:focus-within .reelLine {
+  opacity: 1;
+  transform: scaleX(1.12);
 }
 
 /* ── Video frame ──────────────────────────────────────────────────────── */
@@ -499,6 +535,15 @@
   object-fit: cover;
   display: block;
   cursor: pointer;
+  transition:
+    filter 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.sceneCard:hover .cardVideo,
+.sceneCard:focus-within .cardVideo {
+  filter: saturate(1.08) contrast(1.06);
+  transform: scale(1.035);
 }
 
 .videoBadge,
@@ -627,6 +672,19 @@
   border-radius: 50%;
   border: 1px solid rgb(var(--c-khaki) / 0.2);
   background: rgb(255 255 255 / 0.03);
+  transition:
+    background-color 260ms ease,
+    border-color 260ms ease,
+    box-shadow 320ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sceneCard:hover .lensRing,
+.sceneCard:focus-within .lensRing {
+  transform: translateY(-2px) scale(1.04);
+  border-color: rgb(var(--c-gold) / 0.58);
+  background: rgb(var(--c-gold) / 0.09);
+  box-shadow: 0 0 22px rgb(var(--c-gold) / 0.16);
 }
 
 .lensRingHighlight,
@@ -639,6 +697,14 @@
   width: 1.15rem;
   height: 1.15rem;
   color: rgb(255 238 175 / 0.7);
+  transition: color 260ms ease;
+}
+
+.sceneCard:hover .iconHighlight,
+.sceneCard:hover .iconMilitary,
+.sceneCard:focus-within .iconHighlight,
+.sceneCard:focus-within .iconMilitary {
+  color: rgb(255 238 175 / 1);
 }
 
 .cardLead {
