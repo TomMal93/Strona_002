@@ -90,6 +90,8 @@
 
 .carouselViewport {
   overflow: hidden;
+  margin-block: -0.75rem;
+  padding-block: 0.75rem;
   touch-action: pan-y;
 }
 
@@ -102,7 +104,14 @@
   flex: 0 0 85%;
   min-width: 0;
   padding: 0 0.5rem;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 420ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.carouselSlide:not([data-inactive]):hover,
+.carouselSlide:not([data-inactive]):focus-within {
+  transform: translateY(-8px);
 }
 
 .carouselSlide[data-inactive] {
@@ -118,6 +127,8 @@
 
 .testimonialCard {
   position: relative;
+  overflow: hidden;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   padding: 2rem 1.75rem 1.75rem;
@@ -126,6 +137,10 @@
   background: rgb(255 255 255 / 0.02);
   margin: 0;
   height: 100%;
+  transition:
+    background-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .testimonialCard::before {
@@ -136,9 +151,30 @@
   pointer-events: none;
   background: radial-gradient(
     ellipse at 30% 20%,
-    rgb(var(--c-khaki) / 0.06) 0%,
+    rgb(var(--c-khaki) / 0.11) 0%,
     transparent 60%
   );
+  opacity: 0.55;
+  transition: opacity 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.testimonialCard > * {
+  position: relative;
+  z-index: 1;
+}
+
+.carouselSlide:not([data-inactive]):hover .testimonialCard,
+.carouselSlide:not([data-inactive]):focus-within .testimonialCard {
+  border-color: rgb(var(--c-gold) / 0.55);
+  background: rgb(255 255 255 / 0.035);
+  box-shadow:
+    0 18px 44px rgb(0 0 0 / 0.34),
+    0 0 34px rgb(var(--c-gold) / 0.16);
+}
+
+.carouselSlide:not([data-inactive]):hover .testimonialCard::before,
+.carouselSlide:not([data-inactive]):focus-within .testimonialCard::before {
+  opacity: 1;
 }
 
 .cardTagline {
@@ -151,6 +187,12 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgb(255 238 175 / 0.45);
+  transition: color 260ms ease;
+}
+
+.carouselSlide:not([data-inactive]):hover .cardTagline,
+.carouselSlide:not([data-inactive]):focus-within .cardTagline {
+  color: rgb(255 238 175 / 0.78);
 }
 
 .cardNumber {
@@ -161,6 +203,15 @@
   font-variant-numeric: tabular-nums;
   line-height: 1;
   color: rgb(255 238 175 / 0.25);
+  transition:
+    color 260ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.carouselSlide:not([data-inactive]):hover .cardNumber,
+.carouselSlide:not([data-inactive]):focus-within .cardNumber {
+  color: rgb(255 238 175 / 0.82);
+  transform: translateY(-1px);
 }
 
 .quoteText {
@@ -190,6 +241,15 @@
     rgb(var(--c-gold) / 0.3) 0%,
     transparent 100%
   );
+  transition:
+    opacity 260ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.carouselSlide:not([data-inactive]):hover .cardDivider,
+.carouselSlide:not([data-inactive]):focus-within .cardDivider {
+  opacity: 1;
+  transform: scaleX(1.08);
 }
 
 .cardFooter {
@@ -209,6 +269,12 @@
   text-transform: uppercase;
   line-height: 1.1;
   color: rgb(255 245 230 / 0.92);
+  transition: color 260ms ease;
+}
+
+.carouselSlide:not([data-inactive]):hover .authorName,
+.carouselSlide:not([data-inactive]):focus-within .authorName {
+  color: rgb(255 245 230 / 1);
 }
 
 .authorContext {
@@ -218,6 +284,12 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgb(var(--c-khaki) / 0.7);
+  transition: color 260ms ease;
+}
+
+.carouselSlide:not([data-inactive]):hover .authorContext,
+.carouselSlide:not([data-inactive]):focus-within .authorContext {
+  color: rgb(var(--c-gold) / 0.95);
 }
 
 /* ── Carousel navigation ─────────────────────────────────────────────── */
@@ -315,6 +387,19 @@
   line-height: 1.1;
   margin: 0;
   opacity: 0.6;
+  transition:
+    filter 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 260ms ease,
+    text-shadow 320ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.socialProofBar:hover .trustedTitle,
+.socialProofBar:focus-within .trustedTitle {
+  opacity: 1;
+  filter: saturate(1.12) contrast(1.06);
+  text-shadow: 0 0 22px rgb(var(--c-gold) / 0.22);
+  transform: translateY(-2px) scale(1.03);
 }
 
 .logosStrip {
@@ -329,7 +414,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.3s ease, filter 0.3s ease;
+  border-radius: 0.25rem;
+  transition:
+    background-color 260ms ease,
+    box-shadow 320ms ease,
+    filter 0.3s ease,
+    opacity 0.3s ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.socialProofBar:hover .logoItem,
+.socialProofBar:focus-within .logoItem {
+  background: rgb(var(--c-gold) / 0.035);
+  box-shadow: 0 0 18px rgb(var(--c-gold) / 0.08);
+  transform: translateY(-2px) scale(1.03);
 }
 
 .logoImage {
@@ -341,6 +439,8 @@
   transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
+.socialProofBar:hover .logoImage,
+.socialProofBar:focus-within .logoImage,
 .logoItem:hover .logoImage {
   opacity: 0.8;
   filter: grayscale(0%);
