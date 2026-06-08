@@ -28,7 +28,6 @@
 
 .block:hover,
 .block:focus-within {
-  transform: translateY(-8px);
   border-color: rgba(var(--c-gold) / 0.58);
   background: rgba(0, 0, 0, 0.32);
   box-shadow:
@@ -146,6 +145,19 @@
   gap: 0.75rem;
 }
 
+.title {
+  transition:
+    color 260ms ease,
+    text-shadow 320ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.block:hover .title,
+.block:focus-within .title {
+  color: rgba(255, 238, 175, 1);
+  text-shadow: 0 0 24px rgba(var(--c-gold) / 0.24);
+}
+
 .details {
   position: relative;
   display: flex;
@@ -200,7 +212,7 @@
 
 .block:hover .iconDock,
 .block:focus-within .iconDock {
-  transform: translateY(-2px) scale(1.04);
+  transform: scale(1.04);
   border-color: rgba(var(--c-gold) / 0.72);
   background: rgba(var(--c-gold) / 0.09);
   box-shadow: 0 0 22px rgba(var(--c-gold) / 0.16);
@@ -233,7 +245,6 @@
 .bullet:hover,
 .bullet:focus-within {
   color: rgba(255, 238, 175, 1);
-  transform: translateY(-2px);
 }
 
 .bulletText {

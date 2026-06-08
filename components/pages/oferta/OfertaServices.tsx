@@ -69,6 +69,7 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
           <p className="ui-overline text-khaki/90">{item.tag}</p>
           <h2
             className={cn(
+              styles.title,
               'font-bebas text-3xl uppercase leading-[1.0] tracking-wide text-warm-white md:text-4xl lg:text-5xl',
             )}
           >
