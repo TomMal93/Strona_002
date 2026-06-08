@@ -29,7 +29,7 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
       data-offer-block
       className={cn(
         styles.block,
-        'grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-14 lg:items-stretch',
+        'grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start lg:gap-14',
       )}
     >
       <div className={cn(styles.media, mediaFirst && 'lg:order-2')}>
@@ -69,8 +69,17 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
         <p className="mt-6 font-inter text-sm leading-relaxed text-warm-gray">
           {item.lead}
         </p>
+      </div>
 
-        <p className="mt-6 font-inter text-sm leading-relaxed text-warm-gray">
+      <div className={cn(styles.details, 'lg:order-3')}>
+        <div className={styles.detailsHeader}>
+          <p className="ui-overline text-khaki/90">Rozszerzone info</p>
+          <h3 className="font-bebas text-2xl uppercase leading-[1.0] tracking-wide text-warm-white md:text-3xl">
+            Co obejmuje usługa
+          </h3>
+        </div>
+
+        <p className={styles.detailsDescription}>
           {item.description}
         </p>
 
