@@ -368,6 +368,45 @@
     rgb(13 13 13 / 0.6);
   overflow: hidden;
   backdrop-filter: blur(2px);
+  transition:
+    transform 420ms cubic-bezier(0.19, 1, 0.22, 1),
+    background-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.socialProofBar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 30% 20%,
+    rgb(var(--c-khaki) / 0.11) 0%,
+    transparent 60%
+  );
+  opacity: 0.55;
+  transition: opacity 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.socialProofBar > * {
+  position: relative;
+  z-index: 1;
+}
+
+.socialProofBar:hover,
+.socialProofBar:focus-within {
+  transform: translateY(-8px);
+  border-color: rgb(var(--c-gold) / 0.55);
+  background-color: rgb(255 255 255 / 0.035);
+  box-shadow:
+    0 18px 44px rgb(0 0 0 / 0.34),
+    0 0 34px rgb(var(--c-gold) / 0.16);
+}
+
+.socialProofBar:hover::before,
+.socialProofBar:focus-within::before {
+  opacity: 1;
 }
 
 /* ── Film-strip perforations ─────────────────────────────────────────── */
@@ -378,6 +417,12 @@
   gap: 8px;
   width: 100%;
   opacity: 0.25;
+  transition: opacity 280ms ease;
+}
+
+.socialProofBar:hover .filmStripEdge,
+.socialProofBar:focus-within .filmStripEdge {
+  opacity: 0.48;
 }
 
 .perforation {
@@ -387,6 +432,15 @@
   border-radius: 1px;
   background: rgb(var(--c-gold) / 0.5);
   flex-shrink: 0;
+  transition:
+    background-color 260ms ease,
+    box-shadow 320ms ease;
+}
+
+.socialProofBar:hover .perforation,
+.socialProofBar:focus-within .perforation {
+  background: rgb(var(--c-gold) / 0.78);
+  box-shadow: 0 0 10px rgb(var(--c-gold) / 0.18);
 }
 
 /* ── Scanning line — sweeps across the bar ───────────────────────────── */
@@ -443,6 +497,12 @@
   text-transform: uppercase;
   color: rgb(var(--c-khaki) / 0.45);
   margin-bottom: 0.15rem;
+  transition: color 260ms ease;
+}
+
+.socialProofBar:hover .statTag,
+.socialProofBar:focus-within .statTag {
+  color: rgb(var(--c-gold) / 0.78);
 }
 
 .statValue {
@@ -455,6 +515,12 @@
   line-height: 1;
   letter-spacing: 0.02em;
   position: relative;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.socialProofBar:hover .statValue,
+.socialProofBar:focus-within .statValue {
+  transform: translateY(-2px) scale(1.03);
 }
 
 /* Digital glitch flicker on the numbers */
@@ -486,6 +552,12 @@
   -webkit-text-fill-color: transparent;
   color: transparent;
   opacity: 0.7;
+  transition: opacity 260ms ease;
+}
+
+.socialProofBar:hover .statSuffix,
+.socialProofBar:focus-within .statSuffix {
+  opacity: 0.95;
 }
 
 .statLabel {
@@ -496,6 +568,12 @@
   text-transform: uppercase;
   color: rgb(255 255 255 / 0.4);
   max-width: 14ch;
+  transition: color 260ms ease;
+}
+
+.socialProofBar:hover .statLabel,
+.socialProofBar:focus-within .statLabel {
+  color: rgb(255 255 255 / 0.58);
 }
 
 /* Vertical divider between stat cells (desktop only) */
@@ -564,6 +642,20 @@
       transparent 0%,
       rgb(var(--c-gold) / 0.2) 30%,
       rgb(var(--c-gold) / 0.2) 70%,
+      transparent 100%
+    );
+    transition:
+      opacity 260ms ease,
+      background 260ms ease;
+  }
+
+  .socialProofBar:hover .statDivider,
+  .socialProofBar:focus-within .statDivider {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgb(var(--c-gold) / 0.42) 30%,
+      rgb(var(--c-gold) / 0.42) 70%,
       transparent 100%
     );
   }
