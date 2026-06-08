@@ -92,10 +92,42 @@
   display: flex;
   flex-direction: column;
   gap: 2.25rem;
+  transition:
+    background-color 280ms ease,
+    box-shadow 320ms ease;
+}
+
+.bioPanel:hover,
+.bioPanel:focus-within {
+  background: rgb(245 240 235 / 0.055);
+  box-shadow:
+    0 18px 44px rgb(0 0 0 / 0.26),
+    0 0 34px rgb(var(--c-gold) / 0.12);
 }
 
 .bioPanelText {
   position: relative;
+}
+
+.bioPanelText,
+.infoBlock,
+.statsBlock,
+.gearBlock {
+  transition:
+    background-color 260ms ease,
+    box-shadow 300ms ease;
+}
+
+.bioPanelText:hover,
+.bioPanelText:focus-within,
+.infoBlock:hover,
+.infoBlock:focus-within,
+.statsBlock:hover,
+.statsBlock:focus-within,
+.gearBlock:hover,
+.gearBlock:focus-within {
+  background: rgb(245 240 235 / 0.035);
+  box-shadow: 0 0 24px rgb(var(--c-gold) / 0.08);
 }
 
 /* Corner marks */
@@ -147,6 +179,15 @@
   border-right: 1px solid rgb(var(--c-gold) / 0.35);
 }
 
+.bioPanel:hover .cornerOuter,
+.bioPanel:focus-within .cornerOuter,
+.bioPanelText:hover .cornerInner,
+.bioPanelText:focus-within .cornerInner,
+.infoBlock:hover .cornerInner,
+.infoBlock:focus-within .cornerInner {
+  border-color: rgb(var(--c-gold) / 0.72);
+}
+
 /* NOTES label */
 .notesLabel {
   position: absolute;
@@ -157,6 +198,16 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgb(255 238 175 / 0.3);
+  transition: color 240ms ease;
+}
+
+.bioPanel:hover .notesLabelOuter,
+.bioPanel:focus-within .notesLabelOuter,
+.bioPanelText:hover .notesLabelInner,
+.bioPanelText:focus-within .notesLabelInner,
+.infoBlock:hover .notesLabelInner,
+.infoBlock:focus-within .notesLabelInner {
+  color: rgb(255 238 175 / 0.58);
 }
 
 /* Bio text */
@@ -177,6 +228,15 @@
 
 .bioWord {
   display: inline;
+  transition:
+    color 220ms ease,
+    text-shadow 280ms ease;
+}
+
+.bioPanelText:hover .bioWord,
+.bioPanelText:focus-within .bioWord {
+  color: rgb(255 238 175 / 0.82);
+  text-shadow: 0 0 18px rgb(var(--c-gold) / 0.12);
 }
 
 /* ── Section header rows for sub-blocks ──────────────────────────────── */
@@ -207,6 +267,19 @@
   text-transform: uppercase;
   color: rgb(255 238 175 / 0.7);
   white-space: nowrap;
+  transition:
+    color 240ms ease,
+    text-shadow 280ms ease;
+}
+
+.infoBlock:hover .infoLabel,
+.infoBlock:focus-within .infoLabel,
+.statsBlock:hover .infoLabel,
+.statsBlock:focus-within .infoLabel,
+.gearBlock:hover .infoLabel,
+.gearBlock:focus-within .infoLabel {
+  color: rgb(255 238 175 / 0.95);
+  text-shadow: 0 0 18px rgb(var(--c-gold) / 0.16);
 }
 
 .infoBody {
@@ -247,6 +320,12 @@
   letter-spacing: 0.02em;
   padding-left: 1.1rem;
   position: relative;
+  transition: color 220ms ease;
+}
+
+.specialtyItem:hover,
+.specialtyItem:focus-within {
+  color: rgb(255 238 175 / 0.9);
 }
 
 .specialtyItem::before {
@@ -279,6 +358,19 @@
   flex-direction: column;
   align-items: center;
   gap: 0.35rem;
+  transition:
+    color 220ms ease,
+    text-shadow 280ms ease;
+}
+
+.statBlock:hover .statValue,
+.statBlock:focus-within .statValue {
+  text-shadow: 0 0 24px rgb(var(--c-gold) / 0.18);
+}
+
+.statBlock:hover .statLabel,
+.statBlock:focus-within .statLabel {
+  color: rgb(255 255 255 / 0.72);
 }
 
 .statValue {
@@ -294,6 +386,7 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgb(255 255 255 / 0.5);
+  transition: color 220ms ease;
 }
 
 /* ── Gear block ──────────────────────────────────────────────────────── */
@@ -324,6 +417,12 @@
   padding-left: 0;
   position: relative;
   text-align: center;
+  transition: color 220ms ease;
+}
+
+.gearItem:hover,
+.gearItem:focus-within {
+  color: rgb(255 238 175 / 0.9);
 }
 
 .gearItem::before {
