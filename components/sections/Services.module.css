@@ -350,7 +350,6 @@
 
 .ctaLink:hover {
   opacity: 0.80;
-  transform: translateY(-1px);
 }
 
 .ctaLink:hover::after {
@@ -401,7 +400,6 @@
 
 .sceneCard:hover,
 .sceneCard:focus-within {
-  transform: translateY(-8px);
   border-color: rgb(var(--c-gold) / 0.55);
   background: rgb(255 255 255 / 0.035);
   box-shadow:
@@ -681,7 +679,7 @@
 
 .sceneCard:hover .lensRing,
 .sceneCard:focus-within .lensRing {
-  transform: translateY(-2px) scale(1.04);
+  transform: scale(1.04);
   border-color: rgb(var(--c-gold) / 0.58);
   background: rgb(var(--c-gold) / 0.09);
   box-shadow: 0 0 22px rgb(var(--c-gold) / 0.16);
