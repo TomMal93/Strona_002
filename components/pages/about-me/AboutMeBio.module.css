@@ -401,13 +401,15 @@
   list-style: none;
   display: grid;
   gap: 0.55rem;
-  justify-items: center;
+  width: min(100%, 34rem);
+  margin-inline: auto;
+  justify-items: stretch;
 }
 
 .gearItem {
-  display: inline-flex;
+  display: grid;
+  grid-template-columns: 1.1rem minmax(0, 1fr) 1.1rem;
   align-items: center;
-  justify-content: center;
   gap: 0.85rem;
   font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
   font-size: 0.9rem;
@@ -428,6 +430,7 @@
 .gearItem::before {
   content: '';
   display: block;
+  align-self: center;
   width: 1.1rem;
   height: 1px;
   background: linear-gradient(
@@ -441,6 +444,7 @@
 .gearItem::after {
   content: '';
   display: block;
+  align-self: center;
   width: 1.1rem;
   height: 1px;
   background: linear-gradient(

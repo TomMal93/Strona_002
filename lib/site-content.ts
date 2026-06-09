@@ -354,7 +354,7 @@ export const siteContent = {
     profile: {
       title: process.env.NEXT_PUBLIC_ABOUTME_PROFILE_TITLE || 'Kim jestem',
       hudLabelLeft: 'PROFILE',
-      hudLabelRight: 'SCENE 01 / 03',
+      hudLabelRight: 'SCENE 02 / 03',
       subtitle: 'Profile',
       intro:
         process.env.NEXT_PUBLIC_ABOUTME_PROFILE_INTRO
@@ -373,9 +373,9 @@ export const siteContent = {
       ],
       gearLabel: 'Sprzęt',
       gear: [
-        'Kamery Sony — kinowa głębia obrazu',
-        'Mikrofony Rode — czysty dźwięk z planu',
-        'Drony — kadry z lotu ptaka',
+        'Kamery Sony',
+        'Mikrofony Rode',
+        'Drony',
         'Profesjonalne oświetlenie filmowe',
       ],
       statsLabel: 'Liczby',
@@ -393,7 +393,7 @@ export const siteContent = {
     bio: {
       title: 'Dlaczego to robię',
       hudLabelLeft: 'NOTES',
-      hudLabelRight: 'SCENE 02 / 03',
+      hudLabelRight: 'SCENE 01 / 03',
       text:
         process.env.NEXT_PUBLIC_ABOUTME_BIO
         || 'Wszystko zaczęło się od kurzu na bezdrożach\ni chęci zatrzymania w kadrze surowego klimatu moich terenowych wypraw.\n\nTrzy lata temu kamera i dron były dla mnie tylko narzędziami – cyfrowym pamiętnikiem z podróży, który miał cieszyć głównie moje oko.\nZ czasem jednak zauważyłem, że między jednym a drugim ujęciem dzieje się coś więcej.\n\nOdkryłem, że film to nie tylko suma ładnych obrazków, ale potężny język, którym można opowiadać o tym, co niewidoczne: o napięciu przed trudnym podjazdem, o ciszy poranka w lesie i o ulotnych emocjach, które znikają szybciej niż dym z ogniska.\n\nDziś nie tylko nagrywam – ja buduję opowieści.\nSzukam w obiektywie autentyczności, by każdy film był powrotem do chwil, które zasługują na to, by trwać wiecznie.',

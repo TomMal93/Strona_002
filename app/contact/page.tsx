@@ -25,8 +25,8 @@ export default function AboutMePage() {
           framedImage: true,
         }}
       />
-      <AboutMeBio />
       <WhyIDoThis />
+      <AboutMeBio />
       <AboutMeContact />
     </main>
   )
