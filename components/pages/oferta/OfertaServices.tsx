@@ -42,25 +42,7 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
         'grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start lg:gap-14',
       )}
     >
-      <div className={cn(styles.media, mediaFirst && 'lg:order-2')}>
-        <div ref={videoFrameRef} className={styles.videoFrame}>
-          <span aria-hidden="true" className={styles.sceneTag}>
-            SCENE {sceneNumber} / 03
-          </span>
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          <video
-            className={styles.video}
-            poster={item.video.poster}
-            controls
-            playsInline
-            preload="metadata"
-          >
-            {shouldLoadVideo && <source src={item.video.src} type="video/mp4" />}
-          </video>
-        </div>
-      </div>
-
-      <div className={styles.body}>
+      <div className={cn(styles.body, !mediaFirst && 'lg:order-2')}>
         <div className={styles.header}>
           <span className={styles.iconDock} aria-hidden="true">
             <ServiceIcon icon={item.icon} className="h-6 w-6" />
@@ -79,6 +61,24 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
         <p className="mt-6 text-center font-inter text-sm leading-relaxed text-warm-gray">
           {item.lead}
         </p>
+      </div>
+
+      <div className={cn(styles.media, !mediaFirst && 'lg:order-1')}>
+        <div ref={videoFrameRef} className={styles.videoFrame}>
+          <span aria-hidden="true" className={styles.sceneTag}>
+            SCENE {sceneNumber} / 03
+          </span>
+          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+          <video
+            className={styles.video}
+            poster={item.video.poster}
+            controls
+            playsInline
+            preload="metadata"
+          >
+            {shouldLoadVideo && <source src={item.video.src} type="video/mp4" />}
+          </video>
+        </div>
       </div>
 
       <div className={cn(styles.details, 'lg:order-3')}>
