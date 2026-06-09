@@ -4,10 +4,10 @@ import {
   useRef,
   useState,
   useCallback,
-  useEffect,
   type PointerEvent as ReactPointerEvent,
 } from 'react'
 import { siteContent } from '@/lib/site-content'
+import CinematicVideoPlayer from '@/components/ui/CinematicVideoPlayer'
 import { useLazyVideoSource } from '@/components/ui/useLazyVideoSource'
 import { cn } from '@/lib/utils'
 import styles from './Promo.module.css'
@@ -21,7 +21,6 @@ export default function Promo() {
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const subtitleRef = useRef<HTMLParagraphElement>(null!)
   const videoFrameRef = useRef<HTMLDivElement>(null!)
-  const videoRef = useRef<HTMLVideoElement>(null!)
   const ytGridRef = useRef<HTMLDivElement>(null!)
   const ytCarouselShellRef = useRef<HTMLDivElement>(null!)
   const swipeStateRef = useRef<{
@@ -31,52 +30,9 @@ export default function Promo() {
   } | null>(null)
   const isAnimatingRef = useRef(false)
   const bottomTimelineRef = useRef<HTMLDivElement>(null!)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [progress, setProgress] = useState(0)
-  const [timecode, setTimecode] = useState('00:00/00:00')
   const [activeVideoIndex, setActiveVideoIndex] = useState(1)
   const [activeDomVideoIndex, setActiveDomVideoIndex] = useState(2)
   const [isTrackTransitionDisabled, setIsTrackTransitionDisabled] = useState(false)
-
-  const handlePlayPause = useCallback(() => {
-    const video = videoRef.current
-    if (!video) return
-    if (video.paused) {
-      video.play()
-      setIsPlaying(true)
-    } else {
-      video.pause()
-      setIsPlaying(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-
-    function formatTime(sec: number): string {
-      const m = Math.floor(sec / 60)
-      const s = Math.floor(sec % 60)
-      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
-    }
-
-    const onTimeUpdate = () => {
-      const dur = video.duration || 1
-      setProgress(video.currentTime / dur)
-      setTimecode(`${formatTime(video.currentTime)}/${formatTime(dur)}`)
-    }
-
-    const onLoadedMetadata = () => {
-      setTimecode(`00:00/${formatTime(video.duration)}`)
-    }
-
-    video.addEventListener('timeupdate', onTimeUpdate)
-    video.addEventListener('loadedmetadata', onLoadedMetadata)
-    return () => {
-      video.removeEventListener('timeupdate', onTimeUpdate)
-      video.removeEventListener('loadedmetadata', onLoadedMetadata)
-    }
-  }, [])
 
   usePromoAnimations({
     sectionRef,
@@ -235,63 +191,19 @@ export default function Promo() {
         </div>
 
         {/* ── Hero video ──────────────────────────────────────────── */}
-        <div ref={videoFrameRef} className={styles.videoFrame}>
+        <CinematicVideoPlayer
+          ref={videoFrameRef}
+          className={styles.videoFrame}
+          src={promo.heroVideo.src}
+          poster={promo.heroVideo.poster}
+          shouldLoad={shouldLoadHeroVideo}
+          playLabel="film promocyjny"
+        >
           <span aria-hidden="true" data-corner-mark className={`${styles.cornerMark} ${styles.cornerTL}`} />
           <span aria-hidden="true" data-corner-mark className={`${styles.cornerMark} ${styles.cornerTR}`} />
           <span aria-hidden="true" data-corner-mark className={`${styles.cornerMark} ${styles.cornerBL}`} />
           <span aria-hidden="true" data-corner-mark className={`${styles.cornerMark} ${styles.cornerBR}`} />
-
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          <video
-            ref={videoRef}
-            loop
-            playsInline
-            preload="metadata"
-            poster={promo.heroVideo.poster}
-          >
-            {shouldLoadHeroVideo && <source src={promo.heroVideo.src} type="video/mp4" />}
-          </video>
-
-          <button
-            type="button"
-            className={cn(
-              styles.videoPlayOverlay,
-              isPlaying && styles.videoPlayOverlayPlaying,
-            )}
-            onClick={handlePlayPause}
-            aria-label={isPlaying ? 'Zatrzymaj film' : 'Odtwórz film promocyjny'}
-          >
-            <span
-              className={cn(
-                styles.videoPlayBtn,
-                isPlaying && styles.videoPlayBtnPlaying,
-              )}
-            >
-              <span className={cn(styles.videoPlayIcon, styles.videoPlayIconPlay)}>
-                <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </span>
-              <span className={cn(styles.videoPlayIcon, styles.videoPlayIconPause)}>
-                <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
-                  <rect x="6" y="5" width="4" height="14" />
-                  <rect x="14" y="5" width="4" height="14" />
-                </svg>
-              </span>
-            </span>
-          </button>
-
-          <div aria-hidden="true" className={styles.videoBottomBar}>
-            <span className={styles.videoCodec}>H.265 s-log3</span>
-            <span className={styles.videoProgress}>
-              <span
-                className={styles.videoProgressFill}
-                style={{ transform: `scaleX(${progress})` }}
-              />
-            </span>
-            <span className={styles.videoTimecode}>{timecode}</span>
-          </div>
-        </div>
+        </CinematicVideoPlayer>
 
         {/* ── YouTube grid ────────────────────────────────────────── */}
         <div

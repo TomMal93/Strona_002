@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { siteContent } from '@/lib/site-content'
+import CinematicVideoPlayer from '@/components/ui/CinematicVideoPlayer'
 import { useLazyVideoSource } from '@/components/ui/useLazyVideoSource'
 import { cn } from '@/lib/utils'
 import { ServiceIcon } from '@/components/sections/services/ServiceIcon'
@@ -64,21 +65,20 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
       </div>
 
       <div className={cn(styles.media, !mediaFirst && 'lg:order-1')}>
-        <div ref={videoFrameRef} className={styles.videoFrame}>
+        <CinematicVideoPlayer
+          ref={videoFrameRef}
+          className={styles.videoFrame}
+          videoClassName={styles.video}
+          src={item.video.src}
+          poster={item.video.poster}
+          shouldLoad={shouldLoadVideo}
+          bottomLabel={item.tag}
+          playLabel={item.title}
+        >
           <span aria-hidden="true" className={styles.sceneTag}>
             SCENE {sceneNumber} / 03
           </span>
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          <video
-            className={styles.video}
-            poster={item.video.poster}
-            controls
-            playsInline
-            preload="metadata"
-          >
-            {shouldLoadVideo && <source src={item.video.src} type="video/mp4" />}
-          </video>
-        </div>
+        </CinematicVideoPlayer>
       </div>
 
       <div className={cn(styles.details, 'lg:order-3')}>

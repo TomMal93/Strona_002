@@ -1,0 +1,283 @@
+.frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.playOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(0 0 0 / 0.35);
+  border: none;
+  cursor: pointer;
+  transition:
+    background 280ms ease,
+    opacity 280ms ease;
+}
+
+.playOverlay:hover {
+  background: rgb(0 0 0 / 0.45);
+}
+
+.playOverlayPlaying {
+  background: transparent;
+}
+
+.playOverlayPlaying .playBtn {
+  opacity: 0;
+}
+
+.playOverlayPlaying:hover {
+  background: rgb(0 0 0 / 0.25);
+}
+
+.playBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border: 1px solid rgb(var(--c-gold) / 0.5);
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.55);
+  color: rgb(255 238 175 / 0.9);
+  opacity: 1;
+  transition:
+    opacity 320ms ease,
+    background 280ms ease,
+    border-color 280ms ease,
+    transform 280ms ease;
+}
+
+.playBtnPlaying .playIconPlay,
+.playBtnPlaying .playIconPause {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.playOverlay:hover .playBtn {
+  background: rgb(0 0 0 / 0.7);
+  border-color: rgb(var(--c-gold) / 0.8);
+  transform: scale(1.08);
+}
+
+.playIcon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 240ms ease,
+    transform 240ms ease;
+}
+
+.playIconPlay {
+  opacity: 1;
+}
+
+.playIconPause {
+  opacity: 0;
+}
+
+.bottomBar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.75rem;
+  background: linear-gradient(0deg, rgb(0 0 0 / 0.6) 0%, transparent 100%);
+  color: rgb(255 238 175 / 0.5);
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: auto;
+}
+
+.codec,
+.timecode {
+  white-space: nowrap;
+}
+
+.progress {
+  position: relative;
+  flex: 1;
+  height: 1rem;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.progress::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgb(255 255 255 / 0.1);
+  transform: translateY(-50%);
+}
+
+.progressTrack {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  overflow: hidden;
+  transform: translateY(-50%);
+}
+
+.progressFill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgb(var(--c-gold) / 0.8), rgb(var(--c-gold) / 0.5));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 150ms linear;
+}
+
+.progress:hover::before,
+.progress:focus-visible::before {
+  background: rgb(255 255 255 / 0.18);
+}
+
+.progress:focus-visible {
+  outline: 2px solid rgb(var(--c-gold) / 0.65);
+  outline-offset: 4px;
+}
+
+.controls {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 2.25rem;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid rgb(var(--c-gold) / 0.25);
+  background: rgb(0 0 0 / 0.5);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 0.4rem, 0);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.frame:hover .controls,
+.frame:focus-within .controls {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0);
+}
+
+.volumeControl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.controlLabel {
+  color: rgb(255 238 175 / 0.62);
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.volumeSlider {
+  width: 6.25rem;
+  height: 1.25rem;
+  accent-color: rgb(var(--c-gold));
+  cursor: pointer;
+}
+
+.controlButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgb(var(--c-gold) / 0.35);
+  background: rgb(0 0 0 / 0.28);
+  color: rgb(255 238 175 / 0.82);
+  cursor: pointer;
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease;
+}
+
+.controlButton:hover,
+.controlButton:focus-visible {
+  border-color: rgb(var(--c-gold) / 0.65);
+  background: rgb(var(--c-gold) / 0.12);
+  color: rgb(255 238 175);
+}
+
+.controlButton:focus-visible {
+  outline: 2px solid rgb(var(--c-gold) / 0.7);
+  outline-offset: 3px;
+}
+
+.controlButton svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+@media (width < 48rem) {
+  .bottomBar {
+    gap: 0.4rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.64rem;
+  }
+
+  .controls {
+    right: 0.5rem;
+    bottom: 1.8rem;
+    gap: 0.45rem;
+    padding: 0.35rem 0.4rem;
+  }
+
+  .controlLabel {
+    display: none;
+  }
+
+  .volumeSlider {
+    width: 4.5rem;
+  }
+
+  .controlButton {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}
