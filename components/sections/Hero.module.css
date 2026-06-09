@@ -36,6 +36,27 @@
   aspect-ratio: 1 / 1;
 }
 
+.mobileAboutVideoEffect {
+  -webkit-mask-image: radial-gradient(
+    ellipse 60% 60% at center,
+    #000 0%,
+    #000 15%,
+    rgb(0 0 0 / 0.8) 30%,
+    rgb(0 0 0 / 0.5) 45%,
+    rgb(0 0 0 / 0.2) 60%,
+    transparent 75%
+  );
+  mask-image: radial-gradient(
+    ellipse 60% 60% at center,
+    #000 0%,
+    #000 15%,
+    rgb(0 0 0 / 0.8) 30%,
+    rgb(0 0 0 / 0.5) 45%,
+    rgb(0 0 0 / 0.2) 60%,
+    transparent 75%
+  );
+}
+
 .mobileImageWrap .portraitHalo {
   inset: 28% 30% 28%;
   animation: mobile-halo-pulse 4.5s ease-in-out infinite;

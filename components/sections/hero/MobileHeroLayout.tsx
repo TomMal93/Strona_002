@@ -19,7 +19,7 @@ export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
               loop
               muted
               playsInline
-              className="relative z-10 h-full w-full object-cover object-center [clip-path:circle(45%_at_50%_50%)] [mask-image:radial-gradient(circle_at_center,#000_30%,transparent_85%)] [-webkit-mask-image:radial-gradient(circle_at_center,#000_30%,transparent_85%)]"
+              className={`relative z-10 h-full w-full object-cover object-center ${styles.mobileAboutVideoEffect}`}
             />
           </div>
         </div>
