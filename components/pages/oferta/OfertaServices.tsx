@@ -52,7 +52,6 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
             className={styles.video}
             poster={item.video.poster}
             controls
-            muted
             playsInline
             preload="metadata"
           >
@@ -84,7 +83,7 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
 
       <div className={cn(styles.details, 'lg:order-3')}>
         <div className={styles.detailsHeader}>
-          <h3 className="font-bebas text-2xl uppercase leading-[1.0] tracking-wide text-warm-white md:text-3xl">
+          <h3 className="text-center font-bebas text-2xl uppercase leading-[1.0] tracking-wide text-warm-white md:text-3xl lg:text-left">
             Co obejmuje usługa
           </h3>
         </div>

@@ -200,7 +200,7 @@ export default function Navbar() {
 
   const getMobileLinkClassName = (href: string) => (
     href === activeHref
-      ? `${mobileNavLinkClassName} after:absolute after:bottom-1 after:left-1/2 after:h-px after:w-full after:-translate-x-1/2 after:bg-khaki`
+      ? mobileNavLinkClassName
       : `${mobileNavLinkClassName} opacity-70`
   )
   const logoVisible = pathname !== HOME_PATH || logoRevealed
