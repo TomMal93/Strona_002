@@ -347,7 +347,7 @@ export const siteContent = {
       tagline: process.env.NEXT_PUBLIC_ABOUTME_HERO_TAGLINE || 'Fotograf · Operator · Filmowiec',
       resolution: '4K DCI / 25P',
       backgroundImage:
-        process.env.NEXT_PUBLIC_ABOUTME_HERO_BG || '/images/about-me-hero.webp',
+        process.env.NEXT_PUBLIC_ABOUTME_HERO_BG || '/images/contact/contact-hero.webp',
       backgroundAlt:
         process.env.NEXT_PUBLIC_ABOUTME_HERO_BG_ALT || 'Fotograf w plenerze z kamerą',
     },
@@ -405,7 +405,7 @@ export const siteContent = {
       type: (process.env.NEXT_PUBLIC_ABOUTME_VIDEO_TYPE || 'self-hosted') as 'youtube' | 'self-hosted',
       youtubeId: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_YT_ID || 'jCpSTtkiKsY',
       src: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_SRC || '/videos/contact/contact.mp4',
-      poster: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_POSTER || '/images/about-me-video-poster.jpg',
+      poster: process.env.NEXT_PUBLIC_ABOUTME_VIDEO_POSTER || '/images/contact/bio.webp',
       highlightsLeft: [
         'Wyczucie\nchwili',
         'Naturalne emocje',

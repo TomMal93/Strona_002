@@ -225,8 +225,8 @@ export default function Promo() {
               style={{ transform: `translate3d(-${activeDomVideoIndex * 100}%, 0, 0)` }}
               onTransitionEnd={handleTrackTransitionEnd}
             >
-              {extendedVideos.map((video) => (
-                <div key={video.id + video.title} className={styles.ytCarouselSlide}>
+              {extendedVideos.map((video, index) => (
+                <div key={`${video.id}-${index}`} className={styles.ytCarouselSlide}>
                   <YouTubeFacade
                     videoId={video.id}
                     title={video.title}

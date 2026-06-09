@@ -27,6 +27,7 @@ const inter = Inter({
 
 const siteUrl    = process.env.SITE_URL    ?? 'https://example.com'
 const authorName = process.env.AUTHOR_NAME ?? 'Autor'
+const heroImagePath = '/images/Hero_v4.png'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
     description: siteContent.seoDescription,
     images: [
       {
-        url: '/images/hero.webp',
+        url: heroImagePath,
         alt: `${authorName} — Fotografia i Film`,
       },
     ],
@@ -54,11 +55,11 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `Portfolio Fotograficzno-Wideo | ${authorName}`,
     description: siteContent.seoDescription,
-    images: ['/images/hero.webp'],
+    images: [heroImagePath],
   },
   icons: {
-    icon: '/images/logo.png',
-    apple: '/images/logo.png',
+    icon: heroImagePath,
+    apple: heroImagePath,
   },
 }
 
@@ -81,7 +82,7 @@ const bodyClassName = cn(
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pl">
+    <html lang="pl" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
