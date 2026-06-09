@@ -48,7 +48,7 @@ export const siteContent = {
       process.env.NEXT_PUBLIC_PROMO_SUBTITLE
       || 'Krótki przegląd tego, co robię - od scenariusza po montażownię.',
     heroVideo: {
-      src: process.env.NEXT_PUBLIC_PROMO_VIDEO_SRC || '/videos/promo-reel.mp4',
+      src: process.env.NEXT_PUBLIC_PROMO_VIDEO_SRC || '/videos/promo-reel.webm',
       poster: process.env.NEXT_PUBLIC_PROMO_VIDEO_POSTER || '/images/portfolio/promo-poster.webp',
     },
     youtubeVideos: [
@@ -148,7 +148,7 @@ export const siteContent = {
         description:
           'Film, który uchwyci Wasze emocje, najpiękniejsze chwile i atmosferę całego dnia — pamiątka na całe życie.',
         video: {
-          src: '/videos/services/weeding.mp4',
+          src: '/videos/services/weeding.webm',
           poster: '/images/services/weeding.webp',
         },
       },
@@ -167,7 +167,7 @@ export const siteContent = {
         description:
           'Montuję filmy z Twoich materiałów, od vlogów na YouTube przez rolki na media społecznościowe.',
         video: {
-          src: '/videos/services/montage.mp4',
+          src: '/videos/services/montage.webm',
           poster: '/images/services/montage.webp',
         },
       },
@@ -185,7 +185,7 @@ export const siteContent = {
         description:
           'Twoja marka w najlepszym świetle — przyciągnij uwagę odbiorców.',
         video: {
-          src: '/videos/services/bieg.mp4',
+          src: '/videos/services/bieg.webm',
           poster: '/images/services/bieg.webp',
         },
       },
