@@ -163,11 +163,21 @@ export default function AboutMeBio() {
               <span aria-hidden="true" className={styles.infoRule} />
             </header>
             <ul className={styles.gearList}>
-              {profile.gear.map((item) => (
-                <li key={item} className={styles.gearItem}>
-                  {item}
-                </li>
-              ))}
+              {profile.gear.map((item) => {
+                const [label, detail] = item.split(' — ')
+                return (
+                  <li key={item} className={styles.gearItem}>
+                    <span className="flex items-center justify-center gap-2">
+                      <span>{label}</span>
+                      {detail && (
+                        <span className="hidden md:inline opacity-50">
+                          — {detail}
+                        </span>
+                      )}
+                    </span>
+                  </li>
+                )
+              })}
             </ul>
           </section>
 

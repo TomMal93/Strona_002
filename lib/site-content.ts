@@ -373,10 +373,10 @@ export const siteContent = {
       ],
       gearLabel: 'Sprzęt',
       gear: [
-        'Kamery Sony',
-        'Mikrofony Rode',
-        'Drony',
-        'Profesjonalne oświetlenie filmowe',
+        'Kamery Sony — system Alpha 4K',
+        'Mikrofony Rode — czyste audio',
+        'Drony — ujęcia z powietrza',
+        'Profesjonalne oświetlenie — plan i studio',
       ],
       statsLabel: 'Liczby',
       stats: [
