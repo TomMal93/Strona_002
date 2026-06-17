@@ -206,10 +206,6 @@
 }
 
 @media (width < 48rem) {
-  .heroSectionFramed {
-    clip-path: inset(0);
-  }
-
   .heroBgFramed {
     position: absolute;
     inset: 0;
