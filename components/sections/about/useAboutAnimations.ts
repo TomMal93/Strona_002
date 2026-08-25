@@ -110,7 +110,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
           viewfinderElement.style.opacity = '1'
           viewfinderElement.style.visibility = 'inherit'
           viewfinderElement.style.transform = 'none'
-          viewfinderElement.style.clipPath = 'inset(0% 0% 0% 0%)'
+          viewfinderElement.style.removeProperty('clip-path')
         }
         hudLines.forEach((el) => { el.style.transform = 'scaleX(1)' })
         hudLabels.forEach((el) => {
@@ -265,7 +265,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
             gsap.set(videoMediaElement, { clearProps: 'filter' })
           }
           if (viewfinderElement) {
-            gsap.set(viewfinderElement, { autoAlpha: 1, y: 0, scale: 1, clipPath: 'inset(0% 0% 0% 0%)' })
+            gsap.set(viewfinderElement, { autoAlpha: 1, y: 0, scale: 1, clearProps: 'clipPath' })
           }
           if (hudLines.length) gsap.set(hudLines, { scaleX: 1 })
           if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1, y: 0 })
@@ -369,6 +369,9 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
               clipPath: 'inset(0% 0% 0% 0%)',
               duration: 0.5,
               ease: 'power3.out',
+              onComplete: () => {
+                gsap.set(viewfinderElement, { clearProps: 'clipPath' })
+              },
             },
             '-=0.10',
           )

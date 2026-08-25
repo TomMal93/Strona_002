@@ -77,7 +77,7 @@
   content: '';
   position: absolute;
   z-index: 0;
-  inset: -95% -115% -90% -105%;
+  inset: -95% -45% -90% -135%;
   pointer-events: none;
   background: radial-gradient(
     ellipse 62% 68% at 42% 50%,
@@ -90,11 +90,14 @@
   -webkit-mask-image:
     linear-gradient(
       90deg,
-      #000 0%,
-      #000 48%,
-      rgb(0 0 0 / 0.72) 60%,
-      rgb(0 0 0 / 0.22) 70%,
-      transparent 78%
+      transparent 0%,
+      rgb(0 0 0 / 0.12) 10%,
+      rgb(0 0 0 / 0.5) 24%,
+      #000 38%,
+      #000 52%,
+      rgb(0 0 0 / 0.64) 60%,
+      rgb(0 0 0 / 0.2) 68%,
+      transparent 74%
     ),
     linear-gradient(
       180deg,
@@ -113,11 +116,14 @@
   mask-image:
     linear-gradient(
       90deg,
-      #000 0%,
-      #000 48%,
-      rgb(0 0 0 / 0.72) 60%,
-      rgb(0 0 0 / 0.22) 70%,
-      transparent 78%
+      transparent 0%,
+      rgb(0 0 0 / 0.12) 10%,
+      rgb(0 0 0 / 0.5) 24%,
+      #000 38%,
+      #000 52%,
+      rgb(0 0 0 / 0.64) 60%,
+      rgb(0 0 0 / 0.2) 68%,
+      transparent 74%
     ),
     linear-gradient(
       180deg,
@@ -137,9 +143,9 @@
 
 @media (min-width: 1024px) {
   .aboutVideoFrame::before {
-    inset: -52% -68% -50% -62%;
+    inset: -52% -28% -50% -92%;
     background: radial-gradient(
-      ellipse 68% 74% at 42% 50%,
+      ellipse 76% 74% at 35% 50%,
       rgb(0 0 0 / 0.34) 0%,
       rgb(0 0 0 / 0.28) 22%,
       rgb(0 0 0 / 0.19) 44%,
@@ -151,14 +157,14 @@
       linear-gradient(
         90deg,
         transparent 0%,
-        rgb(0 0 0 / 0.12) 8%,
-        rgb(0 0 0 / 0.48) 19%,
-        rgb(0 0 0 / 0.82) 31%,
-        #000 43%,
-        #000 54%,
-        rgb(0 0 0 / 0.72) 66%,
-        rgb(0 0 0 / 0.28) 79%,
-        transparent 92%
+        rgb(0 0 0 / 0.12) 9%,
+        rgb(0 0 0 / 0.48) 22%,
+        rgb(0 0 0 / 0.82) 34%,
+        #000 44%,
+        #000 52%,
+        rgb(0 0 0 / 0.62) 59%,
+        rgb(0 0 0 / 0.2) 66%,
+        transparent 72%
       ),
       linear-gradient(
         180deg,
@@ -177,14 +183,14 @@
       linear-gradient(
         90deg,
         transparent 0%,
-        rgb(0 0 0 / 0.12) 8%,
-        rgb(0 0 0 / 0.48) 19%,
-        rgb(0 0 0 / 0.82) 31%,
-        #000 43%,
-        #000 54%,
-        rgb(0 0 0 / 0.72) 66%,
-        rgb(0 0 0 / 0.28) 79%,
-        transparent 92%
+        rgb(0 0 0 / 0.12) 9%,
+        rgb(0 0 0 / 0.48) 22%,
+        rgb(0 0 0 / 0.82) 34%,
+        #000 44%,
+        #000 52%,
+        rgb(0 0 0 / 0.62) 59%,
+        rgb(0 0 0 / 0.2) 66%,
+        transparent 72%
       ),
       linear-gradient(
         180deg,
@@ -565,7 +571,7 @@
 
   .aboutVideoFrame {
     margin-top: 0;
-    left: 1.25rem;
+    left: 3rem;
     top: -1rem;
   }
 }
@@ -584,7 +590,7 @@
   }
 
   .aboutVideoFrame {
-    left: 2rem;
+    left: 5rem;
     top: -1.25rem;
   }
 }
