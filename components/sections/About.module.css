@@ -432,6 +432,14 @@
 
   .copyPanel {
     margin-top: 0;
+    top: -0.75rem;
+    padding-top: 2.2rem;
+    padding-bottom: 1.2rem;
+  }
+
+  .copyPanel .viewfinderContent {
+    padding-top: 1rem;
+    padding-bottom: 2.5rem;
   }
 
   .aboutVideoFrame {
@@ -498,6 +506,12 @@
 
   .outerHudOnly .viewfinderTimecode {
     grid-column: 3;
+  }
+
+  .outerHudOnly .viewfinderHudStatus {
+    position: absolute;
+    top: 0.25rem;
+    right: -0.15rem;
   }
 
   .innerHudOnly {
