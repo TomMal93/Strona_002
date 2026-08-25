@@ -410,8 +410,11 @@
 
 /* ── Title accent line ─────────────────────────────────────────────────── */
 
-.introCluster {
+.sectionHeader {
   position: relative;
+  width: min(100%, 48rem);
+  margin-inline: auto;
+  text-align: center;
 }
 
 .hudBar {
@@ -466,18 +469,6 @@
   will-change: transform, opacity;
 }
 
-@media (width >= 48rem) {
-  .introCluster {
-    transform: translateY(-1.2rem);
-  }
-}
-
-@media (width >= 64rem) {
-  .introCluster {
-    transform: translateY(-1.5rem);
-  }
-}
-
 .sectionTitleAccent {
   margin-top: 0.95rem;
   display: block;
@@ -512,9 +503,90 @@
 
 .viewfinder {
   position: relative;
+  display: block;
+}
+
+.outerCorner {
+  display: none;
+}
+
+.aboutLayout {
+  display: block;
+}
+
+.videoColumn {
+  display: none;
+}
+
+.copyPanel {
+  position: relative;
   margin-top: 3.5rem;
   padding: 2.8rem 1.4rem 1.6rem;
   background: rgb(var(--c-gold) / 0.015);
+}
+
+@media (width >= 48rem) {
+  .viewfinder {
+    position: relative;
+    display: block;
+    width: calc(100% + 3rem);
+    min-height: 46rem;
+    margin-top: 2rem;
+    margin-left: -1.5rem;
+    padding: 2.8rem 2rem 2rem;
+  }
+
+  .outerCorner {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+
+  .aboutLayout {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+    min-height: 40rem;
+    gap: 2.5rem;
+  }
+
+  .videoColumn {
+    display: block;
+    grid-column: span 5 / span 5;
+  }
+
+  .copyColumn {
+    grid-column: span 7 / span 7;
+  }
+
+  .copyPanel {
+    margin-top: 0;
+  }
+
+  .aboutVideoFrame {
+    margin-top: 0;
+    left: 1.25rem;
+    top: -1rem;
+  }
+}
+
+@media (width >= 64rem) {
+  .viewfinder {
+    width: calc(100% + 6rem);
+    min-height: 50rem;
+    margin-left: -3rem;
+    padding: 3.25rem 2.75rem 2.5rem;
+  }
+
+  .aboutLayout {
+    min-height: 44rem;
+    gap: 3rem;
+  }
+
+  .aboutVideoFrame {
+    left: 2rem;
+    top: -1.25rem;
+  }
 }
 
 .viewfinderHudTop,
@@ -538,6 +610,28 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
+}
+
+.outerHudOnly {
+  display: none;
+}
+
+@media (width >= 48rem) {
+  .outerHudOnly.viewfinderHudTop {
+    display: flex;
+  }
+
+  .outerHudOnly.viewfinderHudBottom {
+    display: grid;
+  }
+
+  .outerHudOnly .viewfinderTimecode {
+    grid-column: 3;
+  }
+
+  .innerHudOnly {
+    display: none;
+  }
 }
 
 .viewfinderTimecode,
@@ -970,7 +1064,7 @@
     padding: 0.95rem 0.95rem 1rem;
   }
 
-  .viewfinder {
+  .copyPanel {
     padding-inline: 1rem;
   }
 

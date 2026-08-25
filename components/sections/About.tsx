@@ -61,57 +61,79 @@ export default function About() {
       className="section-dark-bg px-6 py-20 md:py-28 lg:px-10"
     >
       <div className="mx-auto max-w-content">
-        <div className="md:grid md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
-          <div className="hidden md:col-span-5 md:block">
-            <div ref={videoRef} className={cn('relative mx-auto aspect-[3/4] w-3/4', styles.aboutVideoFrame)}>
-              <video
-                src="/videos/hero/hero-video.mp4"
-                aria-label={siteContent.about.imageAlt}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className={cn(
-                  'pointer-events-none relative z-10 h-full w-full origin-center translate-x-[-25%] scale-[1.725] object-contain object-center',
-                  styles.aboutVideoMedia,
-                )}
-              />
+        <div className={styles.sectionHeader}>
+          <h2
+            ref={titleRef}
+            id="about-heading"
+            className={cn(
+              heroStyles.gradientTextPrimary,
+              'text-center font-bebas text-3xl uppercase leading-[0.96] tracking-wide sm:text-4xl md:text-6xl md:leading-[0.9]',
+            )}
+          >
+            {siteContent.about.title}
+          </h2>
+
+          <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
+            <span data-hud-line="left" className={styles.hudLineLeft} />
+            <span data-hud-label className={styles.hudModeLabel}>profile</span>
+            <span data-hud-line="left" className={styles.hudLineLeft} />
+            <span data-hud-line="right" className={styles.hudLineRight} />
+            <span data-hud-label className={styles.hudTimecode}>scene 02/08</span>
+            <span data-hud-line="right" className={styles.hudLineRight} />
+          </div>
+        </div>
+
+        {/* One desktop viewfinder now frames the portrait and both copy panels. */}
+        <div ref={viewfinderRef} className={styles.viewfinder}>
+          <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL} ${styles.outerCorner}`} />
+          <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR} ${styles.outerCorner}`} />
+          <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL} ${styles.outerCorner}`} />
+          <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR} ${styles.outerCorner}`} />
+          <div aria-hidden="true" className={cn(styles.viewfinderHudTop, styles.outerHudOnly)}>
+            <span className={styles.viewfinderBattery}>
+              <span className={styles.viewfinderBatteryBody}>
+                <span className={styles.viewfinderBatteryFill} />
+                <span className={styles.viewfinderBatteryLevel}>99%</span>
+              </span>
+              <span className={styles.viewfinderBatteryCap} />
+            </span>
+            <div className={styles.viewfinderHudStatus}>
+              <span className={styles.viewfinderOverline}>
+                <span className={styles.viewfinderRecText}>REC</span>
+              </span>
             </div>
           </div>
+          <div aria-hidden="true" className={cn(styles.viewfinderHudBottom, styles.outerHudOnly)}>
+            <span className={styles.viewfinderResolution}>4K DCI / 25P</span>
+            <span className={styles.viewfinderTimecode}>TC {formatHudTime(hudFrame)}</span>
+          </div>
 
-          <div className="md:col-span-7">
-            <div className={styles.introCluster}>
-              {/* Title */}
-              <div className="w-full text-center">
-                <h2
-                  ref={titleRef}
-                  id="about-heading"
+          <div className={styles.aboutLayout}>
+            <div className={styles.videoColumn}>
+              <div ref={videoRef} className={cn('relative mx-auto aspect-[3/4] w-3/4', styles.aboutVideoFrame)}>
+                <video
+                  src="/videos/hero/hero-video.mp4"
+                  aria-label={siteContent.about.imageAlt}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
                   className={cn(
-                    heroStyles.gradientTextPrimary,
-                    'font-bebas text-3xl uppercase leading-[0.96] tracking-wide sm:text-4xl',
+                    'pointer-events-none relative z-10 h-full w-full origin-center translate-x-[-25%] scale-[1.725] object-contain object-center',
+                    styles.aboutVideoMedia,
                   )}
-                >
-                  {siteContent.about.title}
-                </h2>
+                />
               </div>
+            </div>
 
-              <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
-                <span data-hud-line="left" className={styles.hudLineLeft} />
-                <span data-hud-label className={styles.hudModeLabel}>profile</span>
-                <span data-hud-line="left" className={styles.hudLineLeft} />
-                <span data-hud-line="right" className={styles.hudLineRight} />
-                <span data-hud-label className={styles.hudTimecode}>scene 02/08</span>
-                <span data-hud-line="right" className={styles.hudLineRight} />
-              </div>
-
-              {/* Viewfinder frame */}
-              <div ref={viewfinderRef} className={styles.viewfinder}>
+            <div className={styles.copyColumn}>
+              <div className={styles.copyPanel}>
                 {/* Corner marks */}
                 <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />
                 <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR}`} />
                 <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL}`} />
                 <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR}`} />
-                <div aria-hidden="true" className={styles.viewfinderHudTop}>
+                <div aria-hidden="true" className={cn(styles.viewfinderHudTop, styles.innerHudOnly)}>
                   <span className={styles.viewfinderBattery}>
                     <span className={styles.viewfinderBatteryBody}>
                       <span className={styles.viewfinderBatteryFill} />
@@ -125,7 +147,7 @@ export default function About() {
                     </span>
                   </div>
                 </div>
-                <div aria-hidden="true" className={styles.viewfinderHudBottom}>
+                <div aria-hidden="true" className={cn(styles.viewfinderHudBottom, styles.innerHudOnly)}>
                   <span className={styles.viewfinderResolution}>4K DCI / 25P</span>
                   <span className={cn(styles.viewfinderExposure, styles.hideOnMobile)}>ISO 800&nbsp;&nbsp;1/50</span>
                   <span className={styles.viewfinderTimecode}>TC {formatHudTime(hudFrame)}</span>
@@ -174,39 +196,39 @@ export default function About() {
                   </p>
                 </div>
               </div>
-            </div>
 
-            <div ref={statementRef} className={styles.statementPanel}>
-              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />
-              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR}`} />
-              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL}`} />
-              <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR}`} />
-              <p className={styles.aboutStatement}>
-                {siteContent.about.statement
-                  .replace('Malxxxxx. ', 'Malxxxxx.\n')
-                  .replace('tak, jak', 'tak,\njak')
-                  .split('\n')
-                  .flatMap((part, index, array) => {
-                    if (index === array.length - 1) return [part]
-                    return [part, <br key={`statement-break-${index}`} />]
-                  })}
-              </p>
+              <div ref={statementRef} className={styles.statementPanel}>
+                <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />
+                <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR}`} />
+                <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL}`} />
+                <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR}`} />
+                <p className={styles.aboutStatement}>
+                  {siteContent.about.statement
+                    .replace('Malxxxxx. ', 'Malxxxxx.\n')
+                    .replace('tak, jak', 'tak,\njak')
+                    .split('\n')
+                    .flatMap((part, index, array) => {
+                      if (index === array.length - 1) return [part]
+                      return [part, <br key={`statement-break-${index}`} />]
+                    })}
+                </p>
 
-              <div ref={ctaRef} className={styles.statementCta}>
-                <div className={styles.statementCtaRow}>
-                  <a href="#promo" className={cn(styles.ctaLink, styles.workCtaLink)}>
-                    {siteContent.about.ctaLabel}
-                  </a>
-                  <span aria-hidden="true" className={styles.statementSeparator} />
-                  <a href="/contact#bio" className={styles.ctaLink}>
-                    Więcej o mnie
-                  </a>
+                <div ref={ctaRef} className={styles.statementCta}>
+                  <div className={styles.statementCtaRow}>
+                    <a href="#promo" className={cn(styles.ctaLink, styles.workCtaLink)}>
+                      {siteContent.about.ctaLabel}
+                    </a>
+                    <span aria-hidden="true" className={styles.statementSeparator} />
+                    <a href="/contact#bio" className={styles.ctaLink}>
+                      Więcej o mnie
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          </div>
         </div>
+      </div>
     </section>
   )
 }
