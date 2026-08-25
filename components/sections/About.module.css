@@ -147,6 +147,58 @@
       rgb(0 0 0 / 0.045) 82%,
       transparent 100%
     );
+    -webkit-mask-image:
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        rgb(0 0 0 / 0.12) 8%,
+        rgb(0 0 0 / 0.48) 19%,
+        rgb(0 0 0 / 0.82) 31%,
+        #000 43%,
+        #000 54%,
+        rgb(0 0 0 / 0.72) 66%,
+        rgb(0 0 0 / 0.28) 79%,
+        transparent 92%
+      ),
+      linear-gradient(
+        180deg,
+        transparent 0%,
+        rgb(0 0 0 / 0.08) 8%,
+        rgb(0 0 0 / 0.32) 18%,
+        rgb(0 0 0 / 0.72) 31%,
+        #000 43%,
+        #000 57%,
+        rgb(0 0 0 / 0.72) 69%,
+        rgb(0 0 0 / 0.32) 82%,
+        rgb(0 0 0 / 0.08) 92%,
+        transparent 100%
+      );
+    mask-image:
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        rgb(0 0 0 / 0.12) 8%,
+        rgb(0 0 0 / 0.48) 19%,
+        rgb(0 0 0 / 0.82) 31%,
+        #000 43%,
+        #000 54%,
+        rgb(0 0 0 / 0.72) 66%,
+        rgb(0 0 0 / 0.28) 79%,
+        transparent 92%
+      ),
+      linear-gradient(
+        180deg,
+        transparent 0%,
+        rgb(0 0 0 / 0.08) 8%,
+        rgb(0 0 0 / 0.32) 18%,
+        rgb(0 0 0 / 0.72) 31%,
+        #000 43%,
+        #000 57%,
+        rgb(0 0 0 / 0.72) 69%,
+        rgb(0 0 0 / 0.32) 82%,
+        rgb(0 0 0 / 0.08) 92%,
+        transparent 100%
+      );
   }
 }
 
