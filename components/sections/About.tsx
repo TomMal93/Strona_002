@@ -124,6 +124,7 @@ export default function About() {
                   )}
                 />
               </div>
+
             </div>
 
             <div className={styles.copyColumn}>
@@ -211,6 +212,10 @@ export default function About() {
                       if (index === array.length - 1) return [part]
                       return [part, <br key={`statement-break-${index}`} />]
                     })}
+                </p>
+
+                <p className={styles.photographerNote}>
+                  {siteContent.about.photographerNote}
                 </p>
 
                 <div ref={ctaRef} className={styles.statementCta}>

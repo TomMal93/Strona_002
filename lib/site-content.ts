@@ -41,6 +41,9 @@ export const siteContent = {
     imageAlt:
       process.env.NEXT_PUBLIC_ABOUT_IMAGE_ALT
       || 'Fotograf i operator drona — portret z dronem i kontrolerem',
+    photographerNote:
+      process.env.NEXT_PUBLIC_ABOUT_PHOTOGRAPHER_NOTE
+      || 'Specjalizuję się w produkcji filmowej, fotografii, ujęciach z drona oraz montażu. Od ponad 3 lat realizuję projekty w całej Polsce, a większe produkcje także za granicą.',
   },
   promo: {
     title: process.env.NEXT_PUBLIC_PROMO_TITLE || 'Moja praca w akcji',

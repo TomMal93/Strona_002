@@ -389,6 +389,10 @@
   display: none;
 }
 
+.photographerNote {
+  display: none;
+}
+
 .copyPanel {
   position: relative;
   margin-top: 3.5rem;
@@ -466,6 +470,28 @@
     left: 5rem;
     top: -1.25rem;
   }
+
+  .photographerNote {
+    display: block;
+  }
+
+  .aboutStatement::after {
+    display: none;
+  }
+}
+
+.photographerNote {
+  grid-row: 2;
+  margin: 0;
+  padding: 0.4rem 1.4rem 1.15rem;
+  text-align: center;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.68;
+  letter-spacing: 0.005em;
+  color: rgb(255 245 214 / 0.84);
+  text-wrap: balance;
 }
 
 .viewfinderHudTop,
@@ -755,7 +781,7 @@
   --statement-line-offset: 1.15rem;
   position: relative;
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 1fr auto auto;
   margin: 2.8rem auto 0;
   max-width: 100%;
   min-height: 13.5rem;
@@ -805,7 +831,7 @@
 
 .statementCta {
   position: relative;
-  grid-row: 2;
+  grid-row: 3;
   z-index: 1;
   display: flex;
   justify-content: center;
