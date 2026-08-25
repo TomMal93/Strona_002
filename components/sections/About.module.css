@@ -135,6 +135,21 @@
   mask-composite: intersect;
 }
 
+@media (min-width: 1024px) {
+  .aboutVideoFrame::before {
+    inset: -52% -68% -50% -62%;
+    background: radial-gradient(
+      ellipse 68% 74% at 42% 50%,
+      rgb(0 0 0 / 0.34) 0%,
+      rgb(0 0 0 / 0.28) 22%,
+      rgb(0 0 0 / 0.19) 44%,
+      rgb(0 0 0 / 0.11) 64%,
+      rgb(0 0 0 / 0.045) 82%,
+      transparent 100%
+    );
+  }
+}
+
 .aboutVideoMedia {
   /* A two-part portrait matte follows the head and beard instead of the
      rectangular video frame. The solid cores preserve all facial shadows;
