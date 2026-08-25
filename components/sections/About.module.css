@@ -73,46 +73,124 @@
   margin-top: -3.5rem;
 }
 
+.aboutVideoFrame::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: -95% -115% -90% -105%;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 62% 68% at 42% 50%,
+    rgb(0 0 0 / 0.46) 0%,
+    rgb(0 0 0 / 0.34) 30%,
+    rgb(0 0 0 / 0.18) 52%,
+    rgb(0 0 0 / 0.07) 72%,
+    transparent 100%
+  );
+  -webkit-mask-image:
+    linear-gradient(
+      90deg,
+      #000 0%,
+      #000 48%,
+      rgb(0 0 0 / 0.72) 60%,
+      rgb(0 0 0 / 0.22) 70%,
+      transparent 78%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgb(0 0 0 / 0.08) 8%,
+      rgb(0 0 0 / 0.32) 18%,
+      rgb(0 0 0 / 0.72) 31%,
+      #000 43%,
+      #000 57%,
+      rgb(0 0 0 / 0.72) 69%,
+      rgb(0 0 0 / 0.32) 82%,
+      rgb(0 0 0 / 0.08) 92%,
+      transparent 100%
+    );
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(
+      90deg,
+      #000 0%,
+      #000 48%,
+      rgb(0 0 0 / 0.72) 60%,
+      rgb(0 0 0 / 0.22) 70%,
+      transparent 78%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgb(0 0 0 / 0.08) 8%,
+      rgb(0 0 0 / 0.32) 18%,
+      rgb(0 0 0 / 0.72) 31%,
+      #000 43%,
+      #000 57%,
+      rgb(0 0 0 / 0.72) 69%,
+      rgb(0 0 0 / 0.32) 82%,
+      rgb(0 0 0 / 0.08) 92%,
+      transparent 100%
+    );
+  mask-composite: intersect;
+}
+
 .aboutVideoMedia {
   /* A two-part portrait matte follows the head and beard instead of the
      rectangular video frame. The solid cores preserve all facial shadows;
      only the surrounding black field is feathered into the section. */
   -webkit-mask-image:
     radial-gradient(
-      ellipse 46% 40% at 50% 40%,
+      ellipse closest-side at 50% 50%,
       #000 0%,
-      #000 56%,
-      rgb(0 0 0 / 0.82) 68%,
-      rgb(0 0 0 / 0.38) 84%,
+      #000 70%,
+      rgb(0 0 0 / 0.78) 80%,
+      rgb(0 0 0 / 0.32) 91%,
       transparent 100%
     ),
     radial-gradient(
-      ellipse 43% 36% at 48% 72%,
+      ellipse 52% 47% at 47% 40%,
+      #000 0%,
+      #000 56%,
+      rgb(0 0 0 / 0.82) 70%,
+      rgb(0 0 0 / 0.42) 87%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 49% 44% at 45% 72%,
       #000 0%,
       #000 48%,
-      rgb(0 0 0 / 0.78) 64%,
-      rgb(0 0 0 / 0.32) 82%,
+      rgb(0 0 0 / 0.78) 66%,
+      rgb(0 0 0 / 0.36) 85%,
       transparent 100%
     );
-  -webkit-mask-composite: source-over;
+  -webkit-mask-composite: source-in, source-over;
   mask-image:
     radial-gradient(
-      ellipse 46% 40% at 50% 40%,
+      ellipse closest-side at 50% 50%,
       #000 0%,
-      #000 56%,
-      rgb(0 0 0 / 0.82) 68%,
-      rgb(0 0 0 / 0.38) 84%,
+      #000 70%,
+      rgb(0 0 0 / 0.78) 80%,
+      rgb(0 0 0 / 0.32) 91%,
       transparent 100%
     ),
     radial-gradient(
-      ellipse 43% 36% at 48% 72%,
+      ellipse 52% 47% at 47% 40%,
+      #000 0%,
+      #000 56%,
+      rgb(0 0 0 / 0.82) 70%,
+      rgb(0 0 0 / 0.42) 87%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 49% 44% at 45% 72%,
       #000 0%,
       #000 48%,
-      rgb(0 0 0 / 0.78) 64%,
-      rgb(0 0 0 / 0.32) 82%,
+      rgb(0 0 0 / 0.78) 66%,
+      rgb(0 0 0 / 0.36) 85%,
       transparent 100%
     );
-  mask-composite: add;
+  mask-composite: intersect, add;
   filter: none;
   opacity: 1;
   will-change: filter, opacity;
