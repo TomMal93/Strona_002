@@ -36,9 +36,46 @@
   aspect-ratio: 1 / 1;
 }
 
+.mobileVideoStage::before,
+.mobileVideoStage::after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  height: 42%;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.mobileVideoStage::before {
+  top: -18%;
+  background: linear-gradient(
+    to bottom,
+    rgb(13 13 13) 0%,
+    rgb(13 13 13) 32%,
+    rgb(13 13 13 / 0.86) 48%,
+    rgb(13 13 13 / 0.55) 65%,
+    rgb(13 13 13 / 0.25) 80%,
+    transparent 100%
+  );
+}
+
+.mobileVideoStage::after {
+  bottom: -18%;
+  background: linear-gradient(
+    to top,
+    rgb(13 13 13) 0%,
+    rgb(13 13 13) 32%,
+    rgb(13 13 13 / 0.86) 48%,
+    rgb(13 13 13 / 0.55) 65%,
+    rgb(13 13 13 / 0.25) 80%,
+    transparent 100%
+  );
+}
+
 .mobileAboutVideoEffect {
   -webkit-mask-image: radial-gradient(
-    ellipse 60% 60% at center,
+    ellipse 100% 100% at center,
     #000 0%,
     #000 15%,
     rgb(0 0 0 / 0.8) 30%,
@@ -47,7 +84,7 @@
     transparent 75%
   );
   mask-image: radial-gradient(
-    ellipse 60% 60% at center,
+    ellipse 100% 100% at center,
     #000 0%,
     #000 15%,
     rgb(0 0 0 / 0.8) 30%,
