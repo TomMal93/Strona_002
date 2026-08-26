@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import styles from './Cta.module.css'
 import { useCtaAnimations } from './cta/useCtaAnimations'
@@ -19,14 +20,22 @@ const PinIcon = () => (
   </svg>
 )
 
-const LeafIcon = () => (
+const ClapperIcon = () => (
   <svg viewBox="0 0 32 32" aria-hidden="true">
-    <path d="M27 5C15 5 7 11 7 20c0 3 2 5 5 5 9 0 15-8 15-20Z" />
-    <path d="M5 28c4-8 9-12 17-17" />
+    <path d="M5 12h22v15H5zM5 12l2-7 21-3-2 7-21 3Z" />
+    <path d="m10 5 3 5m4-7 3 5m4-6 3 5M11 12v15" />
   </svg>
 )
 
-const featureIcons = [CameraIcon, PinIcon, LeafIcon]
+const featureIcons = [CameraIcon, PinIcon, ClapperIcon]
+const featureDetails = ['Od pomysłu po gotowy materiał', 'Dojadę, gdzie trzeba', 'Emocje, które zostają']
+
+const stories = [
+  { className: styles.storyWedding, src: '/images/cta/wedding-story.webp', label: 'Miłość / Ślub' },
+  { className: styles.storyEvent, src: '/images/cta/event-story.webp', label: 'Wydarzenia / Eventy' },
+  { className: styles.storyMusic, src: '/images/cta/music-story.webp', label: 'Muzyka / Teledyski' },
+  { className: styles.storyBrand, src: '/images/cta/brand-story.webp', label: 'Marka / Komercja' },
+]
 
 export default function Cta() {
   const sectionRef = useRef<HTMLElement>(null!)
@@ -43,35 +52,58 @@ export default function Cta() {
 
   return (
     <section ref={sectionRef} id="cta" aria-labelledby="cta-heading" className={styles.section}>
-      <div className={styles.background} aria-hidden="true" />
       <div className={styles.grain} aria-hidden="true" />
+      <span className={`${styles.corner} ${styles.cornerTL}`} aria-hidden="true" />
+      <span className={`${styles.corner} ${styles.cornerTR}`} aria-hidden="true" />
+      <span className={`${styles.corner} ${styles.cornerBL}`} aria-hidden="true" />
+      <span className={`${styles.corner} ${styles.cornerBR}`} aria-hidden="true" />
 
-      <div className={styles.content}>
-        <p ref={eyebrowRef} className={styles.eyebrow}>{eyebrow}</p>
-        <h2 ref={titleRef} id="cta-heading" className={styles.title}>{title}</h2>
-        <p ref={subtitleRef} className={styles.subtitle}>{subtitle}</p>
+      <div className={styles.recBadge} aria-hidden="true"><span>REC</span><i /></div>
+      <div className={styles.battery} aria-hidden="true"><i /><span>72%</span></div>
 
-        <div className={styles.actions}>
-          <a ref={primaryBtnRef} href={ctaHref} className={styles.primaryButton}>
-            <span>{ctaLabel}</span>
-            <span className={styles.buttonArrow} aria-hidden="true">→</span>
-          </a>
-          <a ref={secondaryLinkRef} href={secondaryHref} className={styles.secondaryLink}>
-            {secondaryLabel}<span aria-hidden="true">→</span>
-          </a>
+      <div className={styles.layout}>
+        <div className={styles.content}>
+          <p ref={eyebrowRef} className={styles.eyebrow}>{eyebrow}</p>
+          <h2 ref={titleRef} id="cta-heading" className={styles.title}>{title}</h2>
+          <p ref={subtitleRef} className={styles.subtitle}>{subtitle}</p>
+
+          <div className={styles.actions}>
+            <a ref={primaryBtnRef} href={ctaHref} className={styles.primaryButton}>
+              <CameraIcon />
+              <span>{ctaLabel}</span>
+            </a>
+            <a ref={secondaryLinkRef} href={secondaryHref} className={styles.secondaryLink}>
+              {secondaryLabel}<span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div ref={featuresRef} className={styles.features} aria-label="Najważniejsze informacje">
+            {features.map((feature, index) => {
+              const Icon = featureIcons[index]
+              return (
+                <div key={feature.label} className={styles.feature}>
+                  <Icon />
+                  <strong>{feature.label}</strong>
+                  <span>{featureDetails[index]}</span>
+                </div>
+              )
+            })}
+          </div>
         </div>
 
-        <div ref={featuresRef} className={styles.features} aria-label="Najważniejsze informacje">
-          {features.map((feature, index) => {
-            const Icon = featureIcons[index]
-            return (
-              <div key={feature.label} className={styles.feature}>
-                <Icon />
-                <span>{feature.label}</span>
-              </div>
-            )
-          })}
+        <div className={styles.mosaic} aria-hidden="true">
+          {stories.map((story) => (
+            <figure key={story.label} className={`${styles.story} ${story.className}`}>
+              <Image src={story.src} alt="" fill sizes="(min-width: 900px) 50vw, 100vw" />
+              <figcaption>{story.label}</figcaption>
+            </figure>
+          ))}
         </div>
+      </div>
+
+      <div className={styles.cameraMeta} aria-hidden="true">
+        <span>24FPS&nbsp;&nbsp; ƒ/2.8&nbsp;&nbsp; ISO 800</span>
+        <span>00:00:24:17</span>
       </div>
     </section>
   )
