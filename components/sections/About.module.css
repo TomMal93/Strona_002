@@ -942,6 +942,48 @@
   );
 }
 
+/* The section is globally scaled to 80% below 1750px. Compensate the main
+   copy inside both frames so it retains its original readable visual size. */
+@media (min-width: 48rem) and (max-width: 63.999rem) {
+  .viewfinder {
+    width: calc(100% + 5rem);
+    min-height: 52rem;
+    margin-left: -2.5rem;
+  }
+
+  .aboutLayout {
+    min-height: 46.5rem;
+  }
+}
+
+@media (min-width: 64rem) and (max-width: 1749px) {
+  .viewfinder {
+    width: calc(100% + 8rem);
+    min-height: 56rem;
+    margin-left: -4rem;
+  }
+
+  .aboutLayout {
+    min-height: 50rem;
+  }
+}
+
+@media (max-width: 1749px) {
+  .viewfinderLead,
+  .viewfinderDesc {
+    font-size: 1.1875rem;
+  }
+
+  .aboutStatement,
+  .photographerNote {
+    font-size: 1.25rem;
+  }
+
+  .ctaLink {
+    font-size: 1.375rem;
+  }
+}
+
 /* ── Accessibility ─────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
