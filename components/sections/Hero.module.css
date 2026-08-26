@@ -432,16 +432,28 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  border: clamp(1px, 0.1vw, 1.5px) solid;
-  border-color:
-    rgb(255 238 175 / 0.70)
-    rgb(var(--c-gold) / 0.32)
-    rgb(var(--c-gold) / 0.16)
-    rgb(255 238 175 / 0.54);
   border-radius: inherit;
-  box-shadow:
-    0 0 clamp(10px, 1.2vw, 18px) rgb(255 238 175 / 0.18),
-    inset 0 0 clamp(18px, 2.2vw, 34px) rgb(var(--c-gold) / 0.12);
+  background: conic-gradient(
+    from 0deg,
+    rgb(255 238 175 / 0.50) 0deg 5deg,
+    rgb(255 238 175 / 0.32) 12deg,
+    rgb(var(--c-gold) / 0.08) 21deg,
+    transparent 30deg 202deg,
+    rgb(var(--c-gold) / 0.10) 224deg,
+    rgb(255 238 175 / 0.42) 285deg,
+    rgb(255 238 175 / 0.50) 360deg
+  );
+  -webkit-mask-image: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 2px),
+    #000 calc(100% - 1.2px) 100%
+  );
+  mask-image: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 2px),
+    #000 calc(100% - 1.2px) 100%
+  );
+  filter: drop-shadow(0 0 6px rgb(255 226 160 / 0.20));
 }
 
 /* Światło wypełnia koło, ale pozostaje osobno od cienkiej obwódki. */
@@ -599,6 +611,10 @@
   .portraitHalo::after {
     filter: none;
     opacity: 0.58;
+  }
+
+  .portraitHalo::before {
+    filter: none;
   }
 
   .haloParticles {
