@@ -199,6 +199,25 @@
   }
 }
 
+/* The page is scaled to 64% below 1200px, leaving enough effective room for
+   three balanced tiles. Avoid the oversized lead tile in this range. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .cardsContainer {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .cardsContainer > :first-child,
+  .cardsContainer > :nth-child(2),
+  .cardsContainer > :nth-child(3) {
+    grid-column: auto;
+  }
+
+  .cardsContainer > :first-child .contentLayer {
+    padding: 1.05rem;
+  }
+}
+
 @media (min-width: 1200px) {
   .cardsContainer {
     grid-template-columns: repeat(3, minmax(0, 1fr));

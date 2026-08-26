@@ -86,6 +86,18 @@
   }
 }
 
+/* Below 1200px every section is reduced by another 20%. Content sections
+   compound the two responsive scales: 0.8 × 0.8 = 0.64. */
+@media (max-width: 1199px) {
+  [data-responsive-sections] > section:first-child {
+    zoom: 0.8;
+  }
+
+  [data-responsive-sections] > section:not(:first-child) {
+    zoom: 0.64;
+  }
+}
+
 /* Lenis smooth scroll — required styles (lenis/dist/lenis.css v1.1.x) */
 html.lenis,
 html.lenis body {
