@@ -217,17 +217,31 @@ export default function About() {
                 <p className={styles.photographerNote}>
                   {siteContent.about.photographerNote}
                 </p>
+              </div>
 
-                <div ref={ctaRef} className={styles.statementCta}>
-                  <div className={styles.statementCtaRow}>
-                    <a href="#promo" className={cn(styles.ctaLink, styles.workCtaLink)}>
-                      {siteContent.about.ctaLabel}
-                    </a>
-                    <span aria-hidden="true" className={styles.statementSeparator} />
-                    <a href="/contact#bio" className={styles.ctaLink}>
-                      Więcej o mnie
-                    </a>
-                  </div>
+              <div ref={ctaRef} className={styles.statementCta}>
+                <div className={styles.statementCtaRow}>
+                  <a
+                    href="#promo"
+                    className={cn(
+                      heroStyles.ctaButton,
+                      heroStyles.ctaButtonSecondary,
+                      styles.workCtaLink,
+                      'px-4 py-2 font-bebas text-[1.15rem] uppercase tracking-widest sm:text-[1.35rem]',
+                    )}
+                  >
+                    {siteContent.about.ctaLabel}
+                  </a>
+                  <a
+                    href="/contact#bio"
+                    className={cn(
+                      heroStyles.ctaButton,
+                      heroStyles.ctaButtonSecondary,
+                      'px-4 py-2 font-bebas text-[1.15rem] uppercase tracking-widest sm:text-[1.35rem]',
+                    )}
+                  >
+                    Więcej o mnie
+                  </a>
                 </div>
               </div>
             </div>

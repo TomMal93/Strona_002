@@ -781,7 +781,7 @@
   --statement-line-offset: 1.15rem;
   position: relative;
   display: grid;
-  grid-template-rows: 1fr auto auto;
+  grid-template-rows: 1fr auto;
   margin: 2.8rem auto 0;
   max-width: 100%;
   min-height: 13.5rem;
@@ -831,12 +831,12 @@
 
 .statementCta {
   position: relative;
-  grid-row: 3;
   z-index: 1;
   display: flex;
   justify-content: center;
   min-height: 0;
-  padding-top: 0.7rem;
+  margin-top: 2rem;
+  padding-top: 0;
   padding-bottom: 0.7rem;
   padding-inline: 1.2rem;
   align-items: center;
@@ -846,76 +846,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
-}
-
-.statementSeparator {
-  display: none;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: rgb(255 238 175 / 0.45);
+  gap: 2rem;
 }
 
 @media (min-width: 480px) {
   .statementCtaRow {
     flex-direction: row;
-    gap: 1.25rem;
   }
-
-  .statementSeparator {
-    display: block;
-  }
-}
-
-/* ── CTA link ──────────────────────────────────────────────────────────── */
-
-.ctaLink {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.45rem 0.9rem 0.5rem;
-  border-bottom: none;
-  border-top: none;
-  border-radius: 0.2rem;
-  background: transparent;
-  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-  font-size: 1.1rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgb(255 238 175 / 0.95);
-}
-
-.ctaLink::after {
-  content: '';
-  position: absolute;
-  left: 0.75rem;
-  right: 0.75rem;
-  bottom: 0.38rem;
-  height: 1px;
-  opacity: 0;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition:
-    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 180ms ease;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgb(255 238 175 / 0.2) 18%,
-    rgb(255 238 175 / 0.36) 50%,
-    rgb(255 238 175 / 0.2) 82%,
-    transparent 100%
-  );
-}
-
-.ctaLink:hover {
-}
-
-.ctaLink:hover::after {
-  opacity: 1;
-  transform: scaleX(1);
 }
 
 .workCtaLink {
@@ -979,9 +916,6 @@
     font-size: 1.25rem;
   }
 
-  .ctaLink {
-    font-size: 1.375rem;
-  }
 }
 
 /* ── Accessibility ─────────────────────────────────────────────────────── */
@@ -1059,8 +993,7 @@
     font-size: 0.56rem;
   }
 
-  .workCtaLink,
-  .statementSeparator {
+  .workCtaLink {
     display: none;
   }
 }
