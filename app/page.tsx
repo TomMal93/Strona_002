@@ -14,7 +14,7 @@ import Cta from '@/components/sections/Cta'
  */
 export default function Home() {
   return (
-    <main data-home-sections>
+    <main data-responsive-sections>
       <Hero />
       <About />
       <Promo />

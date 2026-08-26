@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function AboutMePage() {
   return (
-    <main>
+    <main data-responsive-sections>
       <AboutMeHero
         heroOverride={{
           backgroundImage: '/images/contact/contact-hero.webp',

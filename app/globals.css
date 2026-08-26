@@ -77,11 +77,11 @@
     rgb(13 13 13);
 }
 
-/* Compact the homepage below wide-desktop size while keeping Hero at its
-   intended viewport scale. `zoom` scales typography, spacing, media, and the
-   section's layout footprint together, avoiding transform-related gaps. */
+/* Compact content sections below wide-desktop size while keeping each page's
+   leading Hero at its intended viewport scale. `zoom` scales typography,
+   spacing, media, and the section's layout footprint together. */
 @media (max-width: 1749px) {
-  [data-home-sections] > section:not(#hero) {
+  [data-responsive-sections] > section:not(:first-child) {
     zoom: 0.8;
   }
 }

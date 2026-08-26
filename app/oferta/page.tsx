@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function OfertaPage() {
   return (
-    <main>
+    <main data-responsive-sections>
       <OfertaHero />
       <OfertaServices />
       <OfertaCta />
