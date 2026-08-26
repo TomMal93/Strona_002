@@ -15,7 +15,7 @@ export const siteContent = {
     subtitle:
       process.env.NEXT_PUBLIC_HERO_SUBTITLE
       || 'Dokumentuję to, co warto pamiętać.\nOd teledysku po weselny taniec.',
-    ctaLabel: process.env.NEXT_PUBLIC_HERO_CTA_LABEL || 'Skontaktuj się',
+    ctaLabel: process.env.NEXT_PUBLIC_HERO_CTA_LABEL || 'Zapytaj o termin',
     ctaHref: process.env.NEXT_PUBLIC_HERO_CTA_HREF || 'tel:+48123456789',
     aboutLabel: process.env.NEXT_PUBLIC_HERO_ABOUT_LABEL || 'O mnie',
     social: [
@@ -125,7 +125,7 @@ export const siteContent = {
       || 'Od kluczowych momentów, przez montaż, po materiały dla marki.\nCel jest jeden — obraz, który przyciąga i zostaje w pamięci.',
     ctaLabel:
       process.env.NEXT_PUBLIC_SERVICES_CTA_LABEL
-      || 'Skontaktuj się',
+      || 'Zapytaj o termin',
     ctaHref:
       process.env.NEXT_PUBLIC_SERVICES_CTA_HREF
       || '#cta',
@@ -334,7 +334,7 @@ export const siteContent = {
     cta: {
       title: 'Porozmawiajmy o Twoim projekcie',
       lead: 'Napisz, zadzwoń albo umów krótką rozmowę — powiem Ci, co mogę zrobić, a Ty zdecydujesz.',
-      label: 'Skontaktuj się',
+      label: 'Zapytaj o termin',
       href: '/contact',
     },
   },
@@ -389,7 +389,7 @@ export const siteContent = {
         { value: '24h', label: 'czas odpowiedzi' },
       ],
       cta: {
-        label: 'Skontaktuj się',
+        label: 'Zapytaj o termin',
         href: '#aboutme-contact-heading',
       },
     },

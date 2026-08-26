@@ -114,7 +114,10 @@ export default function HeroTextBlock({
 
       <div ref={ctaRef} className={cn('mt-8 flex flex-col gap-5', animated && styles.animHide)}>
         <div className="flex flex-wrap items-center gap-8">
-          <a href={siteContent.hero.ctaHref} className={cn(styles.ctaButton, ctaClassName)}>
+          <a
+            href={siteContent.hero.ctaHref}
+            className={cn(styles.ctaButton, styles.ctaButtonPrimary, ctaClassName)}
+          >
             {siteContent.hero.ctaLabel}
           </a>
           <a href="#about" className={cn(styles.ctaButton, styles.ctaButtonSecondary, ctaClassName)}>

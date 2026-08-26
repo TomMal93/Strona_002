@@ -36,7 +36,6 @@ const mobileNavLinkClassName =
 
 const HOME_PATH = '/'
 const ACTIVE_SECTION_PROGRESS = 2 / 3
-const SECTION_RAIL_REVEAL_PROGRESS = 0.2
 
 function getSectionHref(href: string) {
   const [, hash = ''] = href.split('#')
@@ -47,7 +46,6 @@ export default function Navbar() {
   const [scrolled, setScrolled]       = useState(false)
   const [mobileOpen, setMobileOpen]   = useState(false)
   const [activeHref, setActiveHref]   = useState('/#hero')
-  const [logoRevealed, setLogoRevealed] = useState(false)
   const headerRef                      = useRef<HTMLElement>(null)
   const mobileMenuRef                  = useRef<HTMLDivElement>(null)
   const pathname                       = usePathname()
@@ -58,7 +56,6 @@ export default function Navbar() {
 
     const updateScrolled = () => {
       setScrolled(window.scrollY > 8)
-      setLogoRevealed(window.scrollY > window.innerHeight * SECTION_RAIL_REVEAL_PROGRESS)
     }
 
     const onScroll = () => {
@@ -203,7 +200,6 @@ export default function Navbar() {
       ? mobileNavLinkClassName
       : `${mobileNavLinkClassName} opacity-70`
   )
-  const logoVisible = pathname !== HOME_PATH || logoRevealed
   const isContactPage = pathname === '/contact'
   const headerSurfaceClassName = isContactPage
     ? (scrolled || mobileOpen
@@ -224,13 +220,7 @@ export default function Navbar() {
         <Link
           href="/"
           aria-label="Strona główna"
-          aria-hidden={!logoVisible}
-          tabIndex={logoVisible ? undefined : -1}
-          className={`relative shrink-0 font-bebas text-[1.006rem] uppercase tracking-heading text-warm-white transition-[opacity,transform,color] duration-500 ease-out hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki md:absolute md:left-[20vw] ${
-            logoVisible
-              ? 'translate-y-0 opacity-100'
-              : '-translate-y-2 pointer-events-none opacity-0'
-          }`}
+          className="relative shrink-0 font-bebas text-[1.006rem] uppercase tracking-heading text-warm-white transition-colors duration-500 ease-out hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki md:absolute md:left-[20vw]"
         >
           MALESZYK
           <span className="text-[#c8503c]">.</span>
