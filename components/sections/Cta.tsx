@@ -65,6 +65,19 @@ export default function Cta() {
           <h2 ref={titleRef} id="cta-heading" className={styles.title}>{title}</h2>
           <p ref={subtitleRef} className={styles.subtitle}>{subtitle}</p>
 
+          <div ref={featuresRef} className={styles.features} aria-label="Najważniejsze informacje">
+            {features.map((feature, index) => {
+              const Icon = featureIcons[index]
+              return (
+                <div key={feature.label} className={styles.feature}>
+                  <Icon />
+                  <strong>{feature.label}</strong>
+                  <span>{featureDetails[index]}</span>
+                </div>
+              )
+            })}
+          </div>
+
           <div className={styles.actionGroup}>
             <div className={styles.actions}>
               <a
@@ -97,19 +110,6 @@ export default function Cta() {
                 </a>
               ))}
             </div>
-          </div>
-
-          <div ref={featuresRef} className={styles.features} aria-label="Najważniejsze informacje">
-            {features.map((feature, index) => {
-              const Icon = featureIcons[index]
-              return (
-                <div key={feature.label} className={styles.feature}>
-                  <Icon />
-                  <strong>{feature.label}</strong>
-                  <span>{featureDetails[index]}</span>
-                </div>
-              )
-            })}
           </div>
         </div>
 

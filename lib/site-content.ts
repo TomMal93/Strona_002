@@ -301,7 +301,7 @@ export const siteContent = {
   },
   cta: {
     eyebrow: 'Fotografia & film',
-    title: 'Gotowi, żeby opowiedzieć Waszą historię?',
+    title: 'Gotowi,\u00A0żeby\u00A0opowiedzieć\nWaszą historię?',
     subtitle:
       'Tworzę filmy, które zatrzymują emocje, prawdziwe spojrzenia i ulotne chwile.\nOpowiedzcie mi o sobie, a ja zadbam o resztę.',
     hudLabelLeft: 'FINAL CTA',

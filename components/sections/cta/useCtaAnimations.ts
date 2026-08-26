@@ -36,16 +36,16 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         }
 
         gsap.set(copy, { autoAlpha: 0, y: 24 })
-        gsap.set(actions, { autoAlpha: 0, y: 18 })
         gsap.set(features, { autoAlpha: 0, y: 16 })
+        gsap.set(actions, { autoAlpha: 0, y: 18 })
 
         gsap.timeline({ scrollTrigger: { trigger: refs.sectionRef.current, start: 'top 82%', once: true } })
           .to(refs.eyebrowRef.current, { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' })
           .to(refs.titleRef.current, { autoAlpha: 1, y: 0, duration: 0.72, ease: 'power3.out' }, '-=0.2')
           .to(refs.subtitleRef.current, { autoAlpha: 1, y: 0, duration: 0.55, ease: 'power3.out' }, '-=0.38')
+          .to(features, { autoAlpha: 1, y: 0, duration: 0.42, stagger: 0.1, ease: 'power3.out' }, '-=0.2')
           .to(refs.primaryBtnRef.current, { autoAlpha: 1, y: 0, duration: 0.55, ease: 'power3.out' }, '-=0.2')
           .to(refs.secondaryLinkRef.current, { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power3.out' }, '-=0.3')
-          .to(features, { autoAlpha: 1, y: 0, duration: 0.42, stagger: 0.1, ease: 'power3.out' }, '-=0.2')
       }, refs.sectionRef)
 
       revertContext = () => ctx.revert()
