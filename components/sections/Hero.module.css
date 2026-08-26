@@ -644,7 +644,7 @@
   .portraitHalo::before,
   .haloBrightArc,
   .haloTickRing {
-    animation: desktop-arc-rise 1.9s cubic-bezier(0.22, 1, 0.36, 1) 1.15s both;
+    animation: desktop-arc-rise 1.9s cubic-bezier(0.22, 1, 0.36, 1) 1.9s both;
   }
 }
 

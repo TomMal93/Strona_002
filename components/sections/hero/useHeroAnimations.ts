@@ -95,13 +95,13 @@ export function useHeroAnimations({
           }, '<')
         }
 
-        // CTA fades in last
+        // Tagi, przyciski i social media wchodzą razem z liniami i łukiem portretu.
         tl.to(ctaRef.current, {
           autoAlpha: 1,
           y: 0,
           duration: 1,
           ease: 'power3.out',
-        }, '-=0.3')
+        }, '<')
       }, sectionRef)
 
       revertContext = () => ctx.revert()
