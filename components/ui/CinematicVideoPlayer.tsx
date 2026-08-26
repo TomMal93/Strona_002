@@ -20,6 +20,7 @@ type CinematicVideoPlayerProps = {
   videoClassName?: string
   bottomLabel?: string
   playLabel?: string
+  muted?: boolean
   children?: ReactNode
 }
 
@@ -33,6 +34,7 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
       videoClassName,
       bottomLabel = 'H.265 s-log3',
       playLabel = 'film',
+      muted = false,
       children,
     },
     ref,
@@ -152,6 +154,7 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
           ref={videoRef}
           className={cn(styles.video, videoClassName)}
           loop
+          muted={muted}
           playsInline
           preload="metadata"
           poster={poster}
@@ -197,19 +200,21 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
         </div>
 
         <div className={styles.controls} role="group" aria-label="Kontrolki filmu">
-          <label className={styles.volumeControl}>
-            <span className={styles.controlLabel}>Volume</span>
-            <input
-              className={styles.volumeSlider}
-              type="range"
-              min="0"
-              max="1"
-              step="0.05"
-              value={volume}
-              onChange={(event) => handleVolumeChange(Number(event.currentTarget.value))}
-              aria-label="Głośność filmu"
-            />
-          </label>
+          {!muted && (
+            <label className={styles.volumeControl}>
+              <span className={styles.controlLabel}>Volume</span>
+              <input
+                className={styles.volumeSlider}
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
+                value={volume}
+                onChange={(event) => handleVolumeChange(Number(event.currentTarget.value))}
+                aria-label="Głośność filmu"
+              />
+            </label>
+          )}
           <button
             type="button"
             className={styles.controlButton}

@@ -198,6 +198,7 @@ export default function Promo() {
           poster={promo.heroVideo.poster}
           shouldLoad={shouldLoadHeroVideo}
           playLabel="film promocyjny"
+          muted
         >
           <span aria-hidden="true" data-corner-mark className={`${styles.cornerMark} ${styles.cornerTL}`} />
           <span aria-hidden="true" data-corner-mark className={`${styles.cornerMark} ${styles.cornerTR}`} />
