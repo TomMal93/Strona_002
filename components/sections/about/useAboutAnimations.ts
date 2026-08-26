@@ -16,10 +16,10 @@ export type AboutAnimationRefs = {
 }
 
 /**
- * Scroll-triggered entrance animation for the About section.
+ * A restrained, scroll-triggered entrance for the About section.
  *
- * Title + HUD → viewfinder frame → text → camera params → CTA.
- * Respects prefers-reduced-motion.
+ * Frames, copy, and portrait emerge together as one cinematic composition.
+ * The portrait takes slightly longer to reach full exposure.
  */
 export function useAboutAnimations(refs: AboutAnimationRefs): void {
   useLayoutEffect(() => {
@@ -30,145 +30,106 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
       '(prefers-reduced-motion: reduce)',
     ).matches
 
+    const getElements = () => {
+      const viewfinder = refs.viewfinderRef.current
+      const statement = refs.statementRef.current
+      const video = refs.videoRef.current
+
+      return {
+        title: refs.titleRef.current,
+        viewfinder,
+        video,
+        videoMedia: video?.querySelector<HTMLVideoElement>('video') ?? null,
+        lead: refs.leadRef.current,
+        description: refs.descriptionRef.current,
+        statement,
+        cta: refs.ctaRef.current,
+        hudLines: refs.hudBarRef.current
+          ? Array.from(refs.hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-line]'))
+          : [],
+        hudLabels: refs.hudBarRef.current
+          ? Array.from(refs.hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-label]'))
+          : [],
+        viewfinderCorners: viewfinder
+          ? Array.from(viewfinder.querySelectorAll<HTMLElement>('[class*="cornerMark"]'))
+              .filter((corner) => !statement?.contains(corner))
+          : [],
+        cameraHud: viewfinder
+          ? Array.from(
+              viewfinder.querySelectorAll<HTMLElement>(
+                '[class*="viewfinderHudTop"] > [class*="viewfinderBattery"], [class*="viewfinderHudTop"] > [class*="viewfinderHudStatus"], [class*="viewfinderHudBottom"] > span',
+              ),
+            )
+          : [],
+        divider: viewfinder?.querySelector<HTMLElement>('[class*="viewfinderDivider"]') ?? null,
+        statementCorners: statement
+          ? Array.from(statement.querySelectorAll<HTMLElement>('[class*="cornerMark"]'))
+          : [],
+        statementCopy: statement
+          ? Array.from(statement.querySelectorAll<HTMLElement>(':scope > p'))
+          : [],
+      }
+    }
+
     const setInitialStyles = () => {
-      const {
-        hudBarRef,
-        titleRef,
-        videoRef,
-        viewfinderRef,
-        leadRef,
-        descriptionRef,
-        statementRef,
-        ctaRef,
-      } = refs
-
-      const videoElement = videoRef.current
-      const videoMediaElement = videoElement?.querySelector<HTMLVideoElement>('video') ?? null
-
+      const elements = getElements()
       const fadeElements = [
-        titleRef.current,
-        leadRef.current,
-        descriptionRef.current,
-        statementRef.current,
-        ctaRef.current,
-      ] as Array<HTMLElement | null>
-      const visibleFadeElements = fadeElements.filter(
-        (el): el is HTMLElement => el !== null,
-      )
-
-      const viewfinderElement = viewfinderRef.current
-      const hudLines = hudBarRef.current
-        ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-line]'))
-        : []
-      const hudLabels = hudBarRef.current
-        ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-label]'))
-        : []
-      const viewfinderCorners = viewfinderElement
-        ? Array.from(viewfinderElement.querySelectorAll<HTMLElement>('[class*="cornerMark"]'))
-        : []
-      const statementCorners = statementRef.current
-        ? Array.from(statementRef.current.querySelectorAll<HTMLElement>('[class*="cornerMark"]'))
-        : []
-      const corners = [...viewfinderCorners, ...statementCorners]
-      const topHudItems = viewfinderElement
-        ? Array.from(
-            viewfinderElement.querySelectorAll<HTMLElement>(
-              '[class*="viewfinderBattery"], [class*="viewfinderHudStatus"]',
-            ),
-          )
-        : []
-      const bottomHudItems = viewfinderElement
-        ? Array.from(
-            viewfinderElement.querySelectorAll<HTMLElement>(
-              '[class*="viewfinderResolution"], [class*="viewfinderExposure"], [class*="viewfinderTimecode"]',
-            ),
-          )
-        : []
-      const contentElements = viewfinderElement
-        ? Array.from(
-            viewfinderElement.querySelectorAll<HTMLElement>(
-              '[class*="viewfinderLead"], [class*="viewfinderDivider"], [class*="viewfinderDesc"]',
-            ),
-          )
-        : []
+        elements.title,
+        elements.video,
+        elements.lead,
+        elements.divider,
+        elements.description,
+        elements.cta,
+        ...elements.hudLabels,
+        ...elements.viewfinderCorners,
+        ...elements.cameraHud,
+        ...elements.statementCorners,
+        ...elements.statementCopy,
+      ].filter((element): element is HTMLElement => element !== null)
 
       if (prefersReducedMotion) {
-        visibleFadeElements.forEach((el) => {
-          el.style.opacity = '1'
-          el.style.visibility = 'inherit'
-          el.style.transform = 'none'
+        fadeElements.forEach((element) => {
+          element.style.opacity = '1'
+          element.style.visibility = 'inherit'
+          element.style.transform = 'none'
+          element.style.removeProperty('filter')
         })
-        if (videoElement) {
-          videoElement.style.opacity = '1'
-          videoElement.style.visibility = 'inherit'
-          videoElement.style.transform = 'none'
-        }
-        if (videoMediaElement) {
-          videoMediaElement.style.removeProperty('filter')
-        }
-        if (viewfinderElement) {
-          viewfinderElement.style.opacity = '1'
-          viewfinderElement.style.visibility = 'inherit'
-          viewfinderElement.style.transform = 'none'
-          viewfinderElement.style.removeProperty('clip-path')
-        }
-        hudLines.forEach((el) => { el.style.transform = 'scaleX(1)' })
-        hudLabels.forEach((el) => {
-          el.style.opacity = '1'
-          el.style.visibility = 'inherit'
-          el.style.transform = 'none'
+        elements.hudLines.forEach((line) => {
+          line.style.transform = 'scaleX(1)'
+          line.style.opacity = '1'
+          line.style.removeProperty('filter')
         })
-        ;[...corners, ...topHudItems, ...bottomHudItems, ...contentElements].forEach((el) => {
-          el.style.opacity = '1'
-          el.style.visibility = 'inherit'
-          el.style.transform = 'none'
-        })
+        elements.videoMedia?.style.removeProperty('filter')
         return
       }
 
-      visibleFadeElements.forEach((el) => {
-        el.style.opacity = '0'
-        el.style.visibility = 'hidden'
-        el.style.transform = 'translate3d(0, 30px, 0)'
+      fadeElements.forEach((element) => {
+        element.style.opacity = element === elements.video ? '0.18' : '0.08'
+        element.style.visibility = 'inherit'
+        if (element !== elements.video) {
+          element.style.filter = 'brightness(0.22) blur(0.7px)'
+        }
       })
-      if (videoElement) {
-        videoElement.style.opacity = '0'
-        videoElement.style.visibility = 'hidden'
-        videoElement.style.transform = 'scale(0.94)'
+      elements.title?.style.setProperty('transform', 'translate3d(0, 18px, 0)')
+      if (elements.video) {
+        elements.video.style.opacity = '0.18'
+        elements.video.style.visibility = 'inherit'
+        elements.video.style.transform = 'translate3d(0, 6px, 0) scale(0.99)'
       }
-      if (videoMediaElement) {
-        videoMediaElement.style.filter = 'brightness(0.08) contrast(1.65) saturate(0.55)'
+      if (elements.videoMedia) {
+        elements.videoMedia.style.filter = 'brightness(0.08) contrast(1.4) saturate(0.42)'
       }
-      if (viewfinderElement) {
-        viewfinderElement.style.opacity = '0'
-        viewfinderElement.style.visibility = 'hidden'
-        viewfinderElement.style.transform = 'translate3d(0, 28px, 0) scale(0.985)'
-        viewfinderElement.style.clipPath = 'inset(0% 0% 100% 0%)'
-      }
-      hudLines.forEach((el) => { el.style.transform = 'scaleX(0)' })
-      hudLabels.forEach((el) => {
-        el.style.opacity = '0'
-        el.style.visibility = 'hidden'
-        el.style.transform = 'translate3d(0, 8px, 0)'
+      ;[elements.lead, elements.divider, elements.description].forEach((element) => {
+        element?.style.setProperty('transform', 'translate3d(0, 14px, 0)')
       })
-      corners.forEach((el) => {
-        el.style.opacity = '0'
-        el.style.visibility = 'hidden'
+      elements.statementCopy.forEach((element) => {
+        element.style.transform = 'translate3d(0, 12px, 0)'
       })
-      topHudItems.forEach((el) => {
-        el.style.opacity = '0'
-        el.style.visibility = 'hidden'
-        el.style.transform = 'translate3d(0, -10px, 0)'
-      })
-      bottomHudItems.forEach((el) => {
-        el.style.opacity = '0'
-        el.style.visibility = 'hidden'
-        el.style.transform = 'translate3d(0, 10px, 0)'
-      })
-      contentElements.forEach((el) => {
-        el.style.opacity = '0'
-        el.style.visibility = 'hidden'
-        el.style.transform = 'translate3d(0, 22px, 0)'
+      elements.cta?.style.setProperty('transform', 'translate3d(0, 8px, 0)')
+      elements.hudLines.forEach((line) => {
+        line.style.opacity = '0.08'
+        line.style.filter = 'brightness(0.22) blur(0.7px)'
+        line.style.transform = 'scaleX(0.92)'
       })
     }
 
@@ -184,311 +145,127 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
 
       gsap.registerPlugin(ScrollTrigger)
 
-      const {
-        sectionRef,
-        hudBarRef,
-        titleRef,
-        viewfinderRef,
-        leadRef,
-        descriptionRef,
-        statementRef,
-        ctaRef,
-      } = refs
-
       const ctx = gsap.context(() => {
-        const viewfinderElement = viewfinderRef.current
-        const statementElement = statementRef.current
-        const ctaElement = ctaRef.current
-        const titleElement = titleRef.current
-        const videoElement = refs.videoRef.current
-        const videoMediaElement = videoElement?.querySelector<HTMLVideoElement>('video') ?? null
-        const leadElement = leadRef.current
-        const descriptionElement = descriptionRef.current
-
-        const fadeElements = [
-          titleElement,
-          leadElement,
-          descriptionElement,
-          statementElement,
-          ctaElement,
-        ] as Array<HTMLElement | null>
-        const visibleFadeElements = fadeElements.filter(
-          (el): el is HTMLElement => el !== null,
-        )
-
-        const viewfinderCorners = viewfinderElement
-          ? Array.from(viewfinderElement.querySelectorAll('[class*="cornerMark"]'))
-          : []
-        const statementCorners = statementElement
-          ? Array.from(statementElement.querySelectorAll('[class*="cornerMark"]'))
-          : []
-        const corners = [...viewfinderCorners, ...statementCorners]
-        const hudLines = hudBarRef.current
-          ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-line]'))
-          : []
-        const hudInnerLines =
-          hudLines.length >= 4 ? [hudLines[1], hudLines[2]] : hudLines
-        const hudOuterLines =
-          hudLines.length >= 4 ? [hudLines[0], hudLines[3]] : []
-        const hudLabels = hudBarRef.current
-          ? Array.from(hudBarRef.current.querySelectorAll('[data-hud-label]'))
-          : []
-        const topHudItems = viewfinderElement
-          ? Array.from(
-              viewfinderElement.querySelectorAll(
-                '[class*="viewfinderBattery"], [class*="viewfinderHudStatus"]',
-              ),
-            )
-          : []
-        const bottomHudItems = viewfinderElement
-          ? Array.from(
-              viewfinderElement.querySelectorAll(
-                '[class*="viewfinderResolution"], [class*="viewfinderExposure"], [class*="viewfinderTimecode"]',
-              ),
-            )
-          : []
-        const contentElements = viewfinderElement
-          ? Array.from(
-              viewfinderElement.querySelectorAll(
-                '[class*="viewfinderLead"], [class*="viewfinderDivider"], [class*="viewfinderDesc"]',
-              ),
-            )
-          : []
-        /* ── Reduced motion: show everything instantly ──────────────── */
+        const elements = getElements()
+        const allVisibleElements = [
+          elements.title,
+          elements.video,
+          elements.lead,
+          elements.divider,
+          elements.description,
+          elements.cta,
+          ...elements.hudLabels,
+          ...elements.viewfinderCorners,
+          ...elements.cameraHud,
+          ...elements.statementCorners,
+          ...elements.statementCopy,
+        ].filter((element): element is HTMLElement => element !== null)
 
         if (prefersReducedMotion) {
-          gsap.set(visibleFadeElements, { autoAlpha: 1, y: 0 })
-          if (videoElement) {
-            gsap.set(videoElement, { autoAlpha: 1, scale: 1 })
-          }
-          if (videoMediaElement) {
-            gsap.set(videoMediaElement, { clearProps: 'filter' })
-          }
-          if (viewfinderElement) {
-            gsap.set(viewfinderElement, { autoAlpha: 1, y: 0, scale: 1, clearProps: 'clipPath' })
-          }
-          if (hudLines.length) gsap.set(hudLines, { scaleX: 1 })
-          if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1, y: 0 })
-          if (topHudItems.length) gsap.set(topHudItems, { autoAlpha: 1, y: 0 })
-          if (bottomHudItems.length) gsap.set(bottomHudItems, { autoAlpha: 1, y: 0 })
-          if (contentElements.length) gsap.set(contentElements, { autoAlpha: 1, y: 0 })
-          if (corners.length) gsap.set(corners, { autoAlpha: 1 })
+          gsap.set(allVisibleElements, { autoAlpha: 1, clearProps: 'transform,filter' })
+          gsap.set(elements.hudLines, { opacity: 1, scaleX: 1, clearProps: 'filter' })
+          gsap.set(elements.videoMedia, { clearProps: 'filter' })
           return
         }
 
-        /* ── Initial states ─────────────────────────────────────────── */
+        const copyElements = [elements.lead, elements.divider, elements.description]
+          .filter((element): element is HTMLElement => element !== null)
+        const shadowElements = allVisibleElements.filter(
+          (element) => element !== elements.video,
+        )
 
-        gsap.set(visibleFadeElements, { autoAlpha: 0, y: 30 })
-        if (videoElement) {
-          gsap.set(videoElement, { autoAlpha: 0, scale: 0.94 })
-        }
-        if (videoMediaElement) {
-          gsap.set(videoMediaElement, {
-            filter: 'brightness(0.08) contrast(1.65) saturate(0.55)',
-          })
-        }
-        if (viewfinderElement) {
-          gsap.set(viewfinderElement, {
-            autoAlpha: 0,
-            y: 28,
-            scale: 0.985,
-            clipPath: 'inset(0% 0% 100% 0%)',
-          })
-        }
-        if (hudLines.length) gsap.set(hudLines, { scaleX: 0 })
-        if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0, y: 8 })
-        if (topHudItems.length) gsap.set(topHudItems, { autoAlpha: 0, y: -10 })
-        if (bottomHudItems.length) gsap.set(bottomHudItems, { autoAlpha: 0, y: 10 })
-        if (contentElements.length) gsap.set(contentElements, { autoAlpha: 0, y: 22 })
-        if (corners.length) gsap.set(corners, { autoAlpha: 0 })
+        // Re-assert initial values inside the GSAP context so cleanup restores
+        // every inline style applied before the asynchronous import completed.
+        gsap.set(shadowElements, {
+          autoAlpha: 0.08,
+          filter: 'brightness(0.22) blur(0.7px)',
+        })
+        gsap.set(elements.title, { y: 18 })
+        gsap.set(elements.video, { autoAlpha: 0.18, y: 6, scale: 0.99 })
+        gsap.set(elements.videoMedia, {
+          filter: 'brightness(0.08) contrast(1.4) saturate(0.42)',
+        })
+        gsap.set(copyElements, { y: 14 })
+        gsap.set(elements.statementCopy, { y: 12 })
+        gsap.set(elements.cta, { y: 8 })
+        gsap.set(elements.hudLines, {
+          opacity: 0.08,
+          filter: 'brightness(0.22) blur(0.7px)',
+          scaleX: 0.92,
+          transformOrigin: 'center',
+        })
 
-        /* ── Scroll-triggered timeline ──────────────────────────────── */
-
-        const tl = gsap.timeline({
+        const timeline = gsap.timeline({
+          defaults: { ease: 'power3.out' },
           scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
+            trigger: refs.sectionRef.current,
+            start: 'top 78%',
             once: true,
           },
         })
 
-        tl.to(titleElement, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.45,
-          ease: 'power3.out',
-        })
-
-        if (hudInnerLines.length) {
-          tl.to(
-            hudInnerLines,
+        // The complete composition emerges in one shared, unhurried reveal.
+        timeline
+          .to(
+            shadowElements,
             {
+              autoAlpha: 1,
+              filter: 'brightness(1) blur(0px)',
+              duration: 1.3,
+              ease: 'sine.inOut',
+            },
+            0,
+          )
+          .to(elements.title, { y: 0, duration: 1.1 }, 0)
+          .to(
+            elements.hudLines,
+            {
+              opacity: 1,
+              filter: 'brightness(1) blur(0px)',
               scaleX: 1,
-              duration: 0.18,
+              duration: 1.1,
               ease: 'power2.out',
-              stagger: 0.01,
             },
-            '-=0.28',
+            0,
           )
-        }
-
-        if (hudOuterLines.length) {
-          tl.to(
-            hudOuterLines,
-            {
-              scaleX: 1,
-              duration: 0.24,
-              ease: 'power2.out',
-              stagger: 0.015,
-            },
-            '-=0.05',
+          .to(
+            copyElements,
+            { y: 0, duration: 1.2, stagger: 0.04 },
+            0,
           )
-        }
-
-        if (hudLabels.length) {
-          tl.to(
-            hudLabels,
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.14,
-              ease: 'power2.out',
-              stagger: 0.02,
-            },
-            '-=0.06',
+          .to(
+            elements.statementCopy,
+            { y: 0, duration: 1.2, stagger: 0.04 },
+            0,
           )
-        }
-
-        if (viewfinderElement) {
-          tl.to(
-            viewfinderElement,
-            {
-              autoAlpha: 1,
-              y: 0,
-              scale: 1,
-              clipPath: 'inset(0% 0% 0% 0%)',
-              duration: 0.5,
-              ease: 'power3.out',
-              onComplete: () => {
-                gsap.set(viewfinderElement, { clearProps: 'clipPath' })
-              },
-            },
-            '-=0.10',
+          .to(
+            elements.cta,
+            { y: 0, duration: 1.1 },
+            0,
           )
-        }
 
-        if (videoElement) {
-          tl.to(
-            videoElement,
-            {
-              autoAlpha: 1,
-              scale: 1,
-              duration: 0.85,
-              ease: 'power3.out',
-            },
-            '-=0.45',
+        timeline
+          .to(
+            elements.video,
+            { autoAlpha: 1, y: 0, scale: 1, duration: 1.65, ease: 'power2.out' },
+            0,
           )
-        }
-
-        if (videoMediaElement) {
-          tl.to(
-            videoMediaElement,
+          .to(
+            elements.videoMedia,
             {
               filter: 'brightness(1) contrast(1) saturate(1)',
-              duration: 1.25,
-              ease: 'power2.out',
+              duration: 1.85,
+              ease: 'sine.inOut',
             },
-            '<',
+            0,
           )
-        }
 
-        if (viewfinderCorners.length) {
-          tl.to(
-            viewfinderCorners,
-            {
-              autoAlpha: 1,
-              duration: 0.22,
-              ease: 'power2.out',
-              stagger: 0.025,
-            },
-            '-=0.40',
-          )
-        }
-
-        if (topHudItems.length) {
-          tl.to(
-            topHudItems,
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.34,
-              ease: 'power2.out',
-              stagger: 0.025,
-            },
-            '-=0.22',
-          )
-        }
-
-        if (bottomHudItems.length) {
-          tl.to(
-            bottomHudItems,
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.34,
-              ease: 'power2.out',
-              stagger: 0.025,
-            },
-            '-=0.18',
-          )
-        }
-
-        if (contentElements.length) {
-          tl.to(
-            contentElements,
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.55,
-              ease: 'power3.out',
-              stagger: 0.025,
-            },
-            '-=0.10',
-          )
-        }
-
-        tl.to(
-          statementElement,
-          { autoAlpha: 1, y: 0, duration: 0.62, ease: 'power3.out' },
-          '-=0.18',
-        )
-
-        if (statementCorners.length) {
-          tl.to(
-            statementCorners,
-            {
-              autoAlpha: 1,
-              duration: 0.22,
-              ease: 'power2.out',
-              stagger: 0.02,
-            },
-            '-=0.52',
-          )
-        }
-
-        tl.to(
-          ctaElement,
-          { autoAlpha: 1, y: 0, duration: 0.56, ease: 'power3.out' },
-          '-=0.10',
-        )
-      }, sectionRef)
+      }, refs.sectionRef)
 
       revertContext = () => ctx.revert()
     }
 
-    // Defer one frame so Hero's `h-svh` has applied and the About section's
-    // page-coord position is correct before ScrollTrigger measures it.
-    // Otherwise the trigger can see the section at scroll-top and fire immediately.
+    // Let the Hero settle before ScrollTrigger measures the section position.
     const rafId = window.requestAnimationFrame(() => {
       void initAnimations()
     })
@@ -498,6 +275,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
       window.cancelAnimationFrame(rafId)
       revertContext?.()
     }
+  // The refs are stable for the lifetime of the section.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
