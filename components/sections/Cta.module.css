@@ -19,7 +19,15 @@
   align-items: center;
 }
 
-.content { display: flex; min-width: 0; flex-direction: column; justify-content: center; padding-top: 0; }
+.content {
+  display: flex;
+  width: 100%;
+  max-width: 520px;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 0;
+}
 .eyebrow {
   margin: 0 0 1.1rem;
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
@@ -42,40 +50,65 @@
   color: rgb(231 207 149);
   text-shadow: 0 4px 34px rgb(0 0 0 / 0.65);
 }
-.title::after { display: block; width: 3.5rem; height: 1px; margin-top: 1.1rem; content: ''; background: rgb(195 153 75 / 0.72); }
+.title::after {
+  display: block;
+  width: 4rem;
+  height: 1px;
+  margin-top: 1.3rem;
+  content: '';
+  background: rgb(195 153 75 / 0.72);
+}
 .subtitle {
-  max-width: 480px;
+  width: 100%;
   margin: clamp(1.2rem, 2vh, 1.6rem) 0 0;
   white-space: pre-line;
   font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: clamp(0.78rem, 0.84vw, 0.92rem);
-  line-height: 1.7;
-  letter-spacing: 0.045em;
-  color: rgb(236 225 203 / 0.67);
+  font-size: clamp(0.82rem, 0.88vw, 0.96rem);
+  line-height: 1.75;
+  letter-spacing: 0.04em;
+  color: rgb(236 225 203 / 0.76);
+}
+.subtitleDivider {
+  display: block;
+  width: min(100%, 20rem);
+  height: 1px;
+  margin: clamp(2.4rem, 3.8vh, 3.2rem) auto;
+  content: '';
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.25) 15%,
+    rgb(255 238 175 / 0.75) 50%,
+    rgb(var(--c-gold) / 0.25) 85%,
+    transparent 100%
+  );
 }
 
 .features {
   display: grid;
-  width: min(100%, 540px);
-  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.5rem;
-  margin-top: clamp(1.6rem, 2.8vh, 2.4rem);
+  margin-top: 0;
 }
 .feature {
   position: relative;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   min-width: 0;
-  justify-items: center;
+  height: 100%;
   gap: 0.4rem;
-  padding: 0 0.65rem;
+  padding: 0 0.5rem;
   text-align: center;
   text-transform: uppercase;
   color: rgb(214 186 126);
 }
 .feature + .feature::before {
   position: absolute;
-  top: 6px;
-  bottom: 6px;
+  top: 4px;
+  bottom: 4px;
   left: 0;
   width: 1px;
   content: '';
@@ -85,6 +118,7 @@
   width: 36px;
   height: 36px;
   margin-bottom: 0.25rem;
+  flex-shrink: 0;
   fill: none;
   stroke: rgb(231 207 149);
   stroke-linecap: round;
@@ -92,30 +126,39 @@
   stroke-width: 1.5;
 }
 .feature strong {
+  display: block;
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
   font-size: 1.15rem;
   font-weight: 400;
   letter-spacing: 0.08em;
   color: rgb(238 222 178);
+  white-space: nowrap;
 }
 .feature > span {
+  display: block;
   font-family: 'Roboto Mono', monospace;
-  font-size: 0.72rem;
-  line-height: 1.4;
-  letter-spacing: 0.03em;
+  font-size: clamp(0.6rem, 0.68vw, 0.72rem);
+  line-height: 1.35;
+  letter-spacing: 0.02em;
   color: rgb(215 200 170 / 0.78);
+  white-space: nowrap;
 }
 
 .actionGroup {
-  display: inline-flex;
-  width: max-content;
-  max-width: 100%;
+  display: flex;
+  width: 100%;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 1.1rem;
   margin-top: clamp(1.8rem, 3.2vh, 2.8rem);
 }
-.actions { display: flex; align-items: center; gap: 1.5rem; }
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+}
 .actionButton {
   min-width: 150px;
   padding: 0.5rem 1rem;
@@ -129,7 +172,9 @@
 .socialRow {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1.25rem;
+  width: 100%;
 }
 .socialLink {
   display: inline-flex;
@@ -186,9 +231,10 @@
 @media (max-width: 899px) {
   .section { display: grid; min-height: 850px; place-items: center; padding: 7rem 1.5rem 5rem; }
   .layout { display: block; width: min(100%, 720px); min-height: 0; }
-  .content { position: relative; z-index: 2; align-items: center; padding: 0; text-align: center; }
-  .title { max-width: 680px; font-size: clamp(3.25rem, 10vw, 5.2rem); }
-  .title::after { margin-inline: auto; }
+  .title::after,
+  .subtitleDivider {
+    margin-inline: auto;
+  }
   .subtitle { max-width: 590px; }
   .features { margin-top: 2.4rem; width: min(100%, 640px); }
   .actionGroup { align-items: center; margin-top: 2.8rem; }

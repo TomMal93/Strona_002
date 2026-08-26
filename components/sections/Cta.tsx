@@ -30,7 +30,7 @@ const ClapperIcon = () => (
 )
 
 const featureIcons = [CameraIcon, PinIcon, ClapperIcon]
-const featureDetails = ['Od pomysłu po gotowy materiał', 'Dojadę, gdzie trzeba', 'Emocje, które zostają']
+const featureDetails = ['Od ujęć po montaż', 'Dojadę, gdzie trzeba', 'Emocje, które zostają']
 
 const stories = [
   { className: styles.storyWedding, src: '/images/cta/wedding-story.webp', label: 'Miłość / Ślub' },
@@ -64,6 +64,7 @@ export default function Cta() {
           <p ref={eyebrowRef} className={styles.eyebrow}>{eyebrow}</p>
           <h2 ref={titleRef} id="cta-heading" className={styles.title}>{title}</h2>
           <p ref={subtitleRef} className={styles.subtitle}>{subtitle}</p>
+          <div className={styles.subtitleDivider} aria-hidden="true" />
 
           <div ref={featuresRef} className={styles.features} aria-label="Najważniejsze informacje">
             {features.map((feature, index) => {

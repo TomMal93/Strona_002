@@ -303,7 +303,7 @@ export const siteContent = {
     eyebrow: 'Fotografia & film',
     title: 'Gotowi,\u00A0żeby\u00A0opowiedzieć\nWaszą historię?',
     subtitle:
-      'Tworzę filmy, które zatrzymują emocje, prawdziwe spojrzenia i ulotne chwile.\nOpowiedzcie mi o sobie, a ja zadbam o resztę.',
+      'Wasze najważniejsze momenty zasługują na to, by przeżywać je wciąż na nowo.\n\nBądźcie w pełni sobą i cieszcie się tym dniem, a ja zadbam o kadry pełne uśmiechu i wzruszeń.\n\nNapiszcie już dziś — sprawdźmy wolny termin i stwórzmy razem coś wyjątkowego!',
     hudLabelLeft: 'FINAL CTA',
     hudLabelRight: 'SCENE 08 / 08',
     ctaLabel: process.env.NEXT_PUBLIC_CTA_LABEL || 'Zapytaj o termin',
