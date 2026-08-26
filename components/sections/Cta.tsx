@@ -2,118 +2,76 @@
 
 import { useRef } from 'react'
 import { siteContent } from '@/lib/site-content'
-import { cn } from '@/lib/utils'
 import styles from './Cta.module.css'
 import { useCtaAnimations } from './cta/useCtaAnimations'
-import CtaActions from './cta/CtaActions'
-import CtaShell from './cta/CtaShell'
+
+const CameraIcon = () => (
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M4.5 10.5h5l2.2-3h8.6l2.2 3h5a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-23a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Z" />
+    <circle cx="16" cy="18" r="5.5" />
+  </svg>
+)
+
+const PinIcon = () => (
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M25 13.5c0 7-9 14-9 14s-9-7-9-14a9 9 0 1 1 18 0Z" />
+    <circle cx="16" cy="13.5" r="3" />
+  </svg>
+)
+
+const LeafIcon = () => (
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M27 5C15 5 7 11 7 20c0 3 2 5 5 5 9 0 15-8 15-20Z" />
+    <path d="M5 28c4-8 9-12 17-17" />
+  </svg>
+)
+
+const featureIcons = [CameraIcon, PinIcon, LeafIcon]
 
 export default function Cta() {
   const sectionRef = useRef<HTMLElement>(null!)
+  const eyebrowRef = useRef<HTMLParagraphElement>(null!)
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const subtitleRef = useRef<HTMLParagraphElement>(null!)
-  const hudBarRef = useRef<HTMLDivElement>(null!)
   const primaryBtnRef = useRef<HTMLAnchorElement>(null!)
-  const secondaryRowRef = useRef<HTMLDivElement>(null!)
-  const socialRowRef = useRef<HTMLDivElement>(null!)
-  const cornerTLRef = useRef<HTMLSpanElement>(null!)
-  const cornerTRRef = useRef<HTMLSpanElement>(null!)
-  const cornerBLRef = useRef<HTMLSpanElement>(null!)
-  const cornerBRRef = useRef<HTMLSpanElement>(null!)
-  const crosshairTopRef = useRef<HTMLSpanElement>(null!)
-  const crosshairBottomRef = useRef<HTMLSpanElement>(null!)
-  const glowRef = useRef<HTMLDivElement>(null!)
+  const secondaryLinkRef = useRef<HTMLAnchorElement>(null!)
+  const featuresRef = useRef<HTMLDivElement>(null!)
 
-  useCtaAnimations({
-    sectionRef,
-    titleRef,
-    subtitleRef,
-    hudBarRef,
-    primaryBtnRef,
-    secondaryRowRef,
-    socialRowRef,
-    cornerTLRef,
-    cornerTRRef,
-    cornerBLRef,
-    cornerBRRef,
-    crosshairTopRef,
-    crosshairBottomRef,
-    glowRef,
-  })
+  useCtaAnimations({ sectionRef, eyebrowRef, titleRef, subtitleRef, primaryBtnRef, secondaryLinkRef, featuresRef })
 
-  const {
-    title, subtitle, hudLabelLeft, hudLabelRight,
-    ctaLabel, ctaHref, phoneLabel, phoneHref,
-    secondaryLabel, secondaryHref, social,
-  } = siteContent.cta
-
-  const actionsData = {
-    ctaLabel, ctaHref, phoneLabel, phoneHref,
-    secondaryLabel, secondaryHref, social,
-  }
+  const { eyebrow, title, subtitle, ctaLabel, ctaHref, secondaryLabel, secondaryHref, features } = siteContent.cta
 
   return (
-    <section
-      ref={sectionRef}
-      id="cta"
-      aria-labelledby="cta-heading"
-      className={cn(
-        'bg-anthracite px-6 py-20 sm:py-24 lg:px-20 lg:py-32',
-        'section-dark-bg',
-      )}
-    >
-      <div className="mx-auto max-w-content">
-        {/* Header: title + HUD bar */}
-        <div className={cn('mx-auto max-w-3xl', styles.sectionHeader)}>
-          <h2
-            ref={titleRef}
-            id="cta-heading"
-            className={cn(
-              styles.gradientTextPrimary,
-              'text-center font-bebas text-5xl uppercase leading-[0.9] tracking-wide sm:text-6xl',
-              styles.sectionTitle,
-            )}
-          >
-            {title}
-          </h2>
-          <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
-            <span data-hud-line className={styles.hudLineLeft} />
-            <span data-hud-label className={styles.hudLabelLeft}>
-              {hudLabelLeft}
-            </span>
-            <span data-hud-line className={styles.hudLineLeft} />
-            <span data-hud-line className={styles.hudLineRight} />
-            <span data-hud-label className={styles.hudLabelRight}>
-              {hudLabelRight}
-            </span>
-            <span data-hud-line className={styles.hudLineRight} />
-          </div>
+    <section ref={sectionRef} id="cta" aria-labelledby="cta-heading" className={styles.section}>
+      <div className={styles.background} aria-hidden="true" />
+      <div className={styles.grain} aria-hidden="true" />
 
-          <p
-            ref={subtitleRef}
-            className="mt-5 whitespace-pre-line font-mono text-[0.95rem] leading-[1.85] tracking-wide text-white/50"
-          >
-            {subtitle}
-          </p>
+      <div className={styles.content}>
+        <p ref={eyebrowRef} className={styles.eyebrow}>{eyebrow}</p>
+        <h2 ref={titleRef} id="cta-heading" className={styles.title}>{title}</h2>
+        <p ref={subtitleRef} className={styles.subtitle}>{subtitle}</p>
+
+        <div className={styles.actions}>
+          <a ref={primaryBtnRef} href={ctaHref} className={styles.primaryButton}>
+            <span>{ctaLabel}</span>
+            <span className={styles.buttonArrow} aria-hidden="true">→</span>
+          </a>
+          <a ref={secondaryLinkRef} href={secondaryHref} className={styles.secondaryLink}>
+            {secondaryLabel}<span aria-hidden="true">→</span>
+          </a>
         </div>
 
-        {/* CTA content — layered composition */}
-        <CtaShell
-          glowRef={glowRef}
-          cornerTLRef={cornerTLRef}
-          cornerTRRef={cornerTRRef}
-          cornerBLRef={cornerBLRef}
-          cornerBRRef={cornerBRRef}
-          crosshairTopRef={crosshairTopRef}
-          crosshairBottomRef={crosshairBottomRef}
-        >
-          <CtaActions
-            data={actionsData}
-            primaryBtnRef={primaryBtnRef}
-            secondaryRowRef={secondaryRowRef}
-            socialRowRef={socialRowRef}
-          />
-        </CtaShell>
+        <div ref={featuresRef} className={styles.features} aria-label="Najważniejsze informacje">
+          {features.map((feature, index) => {
+            const Icon = featureIcons[index]
+            return (
+              <div key={feature.label} className={styles.feature}>
+                <Icon />
+                <span>{feature.label}</span>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </section>
   )

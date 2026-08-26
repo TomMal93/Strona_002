@@ -300,17 +300,23 @@ export const siteContent = {
     ],
   },
   cta: {
-    title: 'Gotowy na swoją historię?',
+    eyebrow: 'Fotografia & film',
+    title: 'Gotowi, żeby opowiedzieć Waszą historię?',
     subtitle:
-      'Każdy projekt zaczyna się od rozmowy.\nNapisz — odpowiem w ciągu 24h.',
+      'Tworzę filmy, które zatrzymują emocje, prawdziwe spojrzenia i ulotne chwile.\nOpowiedzcie mi o sobie, a ja zadbam o resztę.',
     hudLabelLeft: 'FINAL CTA',
     hudLabelRight: 'SCENE 08 / 08',
-    ctaLabel: process.env.NEXT_PUBLIC_CTA_LABEL || 'Napisz do mnie',
+    ctaLabel: process.env.NEXT_PUBLIC_CTA_LABEL || 'Zapytaj o termin',
     ctaHref: process.env.NEXT_PUBLIC_CTA_HREF || 'mailto:kontakt@example.com',
     phoneLabel: process.env.NEXT_PUBLIC_CTA_PHONE_LABEL || 'Zadzwoń',
     phoneHref: process.env.NEXT_PUBLIC_CTA_PHONE_HREF || 'tel:+48123456789',
-    secondaryLabel: process.env.NEXT_PUBLIC_CTA_SECONDARY_LABEL || 'Zobacz portfolio',
-    secondaryHref: process.env.NEXT_PUBLIC_CTA_SECONDARY_HREF || '#promo',
+    secondaryLabel: process.env.NEXT_PUBLIC_CTA_SECONDARY_LABEL || 'Poznaj proces',
+    secondaryHref: process.env.NEXT_PUBLIC_CTA_SECONDARY_HREF || '#process',
+    features: [
+      { label: 'Film + montaż' },
+      { label: 'Cała Polska' },
+      { label: 'Naturalne kadry' },
+    ],
     social: [
       { platform: 'facebook' as const, href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || 'https://www.facebook.com/profile.php?id=61557050460965' },
       { platform: 'youtube' as const, href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || 'https://www.youtube.com/@Maleszyk.V-log' },
