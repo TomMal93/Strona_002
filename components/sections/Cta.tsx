@@ -4,6 +4,8 @@ import { useRef } from 'react'
 import Image from 'next/image'
 import { siteContent } from '@/lib/site-content'
 import styles from './Cta.module.css'
+import heroStyles from './Hero.module.css'
+import { socialIcons } from './cta/CtaActions'
 import { useCtaAnimations } from './cta/useCtaAnimations'
 
 const CameraIcon = () => (
@@ -48,7 +50,7 @@ export default function Cta() {
 
   useCtaAnimations({ sectionRef, eyebrowRef, titleRef, subtitleRef, primaryBtnRef, secondaryLinkRef, featuresRef })
 
-  const { eyebrow, title, subtitle, ctaLabel, ctaHref, secondaryLabel, secondaryHref, features } = siteContent.cta
+  const { eyebrow, title, subtitle, ctaLabel, ctaHref, secondaryLabel, secondaryHref, features, social } = siteContent.cta
 
   return (
     <section
@@ -63,14 +65,38 @@ export default function Cta() {
           <h2 ref={titleRef} id="cta-heading" className={styles.title}>{title}</h2>
           <p ref={subtitleRef} className={styles.subtitle}>{subtitle}</p>
 
-          <div className={styles.actions}>
-            <a ref={primaryBtnRef} href={ctaHref} className={styles.primaryButton}>
-              <CameraIcon />
-              <span>{ctaLabel}</span>
-            </a>
-            <a ref={secondaryLinkRef} href={secondaryHref} className={styles.secondaryLink}>
-              {secondaryLabel}<span aria-hidden="true">→</span>
-            </a>
+          <div className={styles.actionGroup}>
+            <div className={styles.actions}>
+              <a
+                ref={primaryBtnRef}
+                href={ctaHref}
+                className={`${heroStyles.ctaButton} ${heroStyles.ctaButtonPrimary} ${styles.actionButton}`}
+              >
+                {ctaLabel}
+              </a>
+              <a
+                ref={secondaryLinkRef}
+                href={secondaryHref}
+                className={`${heroStyles.ctaButton} ${heroStyles.ctaButtonSecondary} ${styles.actionButton}`}
+              >
+                {secondaryLabel}
+              </a>
+            </div>
+
+            <div className={styles.socialRow} aria-label="Media społecznościowe">
+              {social.map(({ platform, href }) => (
+                <a
+                  key={platform}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={platform}
+                  className={styles.socialLink}
+                >
+                  {socialIcons[platform]}
+                </a>
+              ))}
+            </div>
           </div>
 
           <div ref={featuresRef} className={styles.features} aria-label="Najważniejsze informacje">
