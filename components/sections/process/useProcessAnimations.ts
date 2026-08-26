@@ -26,6 +26,7 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
 
     const setInitialStyles = () => {
       const { titleRef, hudBarRef, connectorRef, stepsContainerRef } = refs
+      const isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT
 
       const hudLines = hudBarRef.current
         ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-line]'))
@@ -78,6 +79,7 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
           el.style.opacity = '1'
           el.style.visibility = 'inherit'
           el.style.transform = 'none'
+          el.style.clipPath = 'none'
         })
         timelineLabels.forEach((el) => {
           el.style.opacity = '1'
@@ -107,7 +109,6 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
         el.style.visibility = 'hidden'
       })
       if (connectorRef.current) {
-        const isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT
         const isMobile = window.innerWidth < TABLET_BREAKPOINT
         if (isDesktop) {
           connectorRef.current.style.transform = 'scaleX(0)'
@@ -123,7 +124,10 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
       stepCards.forEach((el) => {
         el.style.opacity = '0'
         el.style.visibility = 'hidden'
-        el.style.transform = 'translate3d(0, 20px, 0)'
+        el.style.transform = isDesktop
+          ? 'translate3d(0, 15px, 0)'
+          : 'translate3d(0, 40px, 0)'
+        el.style.clipPath = isDesktop ? 'inset(0 100% 0 0)' : 'none'
       })
       timelineLabels.forEach((el) => {
         el.style.opacity = '0'
@@ -176,7 +180,9 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
           if (cornerMarks.length) gsap.set(cornerMarks, { autoAlpha: 1 })
           if (connectorRef.current) gsap.set(connectorRef.current, { scaleX: 1, scaleY: 1 })
           if (stepNodes.length) gsap.set(stepNodes, { autoAlpha: 1, scale: 1 })
-          if (stepCards.length) gsap.set(stepCards, { autoAlpha: 1, y: 0 })
+          if (stepCards.length) {
+            gsap.set(stepCards, { autoAlpha: 1, y: 0, clipPath: 'none' })
+          }
           if (timelineLabels.length) gsap.set(timelineLabels, { autoAlpha: 1 })
           return
         }
@@ -195,7 +201,13 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
           }
         }
         if (stepNodes.length) gsap.set(stepNodes, { autoAlpha: 0, scale: 0 })
-        if (stepCards.length) gsap.set(stepCards, { autoAlpha: 0, y: 20 })
+        if (stepCards.length) {
+          gsap.set(stepCards, {
+            autoAlpha: 0,
+            y: isDesktop ? 15 : 40,
+            clipPath: isDesktop ? 'inset(0 100% 0 0)' : 'none',
+          })
+        }
         if (timelineLabels.length) gsap.set(timelineLabels, { autoAlpha: 0 })
 
         // Scroll-triggered timeline
@@ -311,19 +323,34 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
           )
         }
 
-        // Phase 6: Step cards
+        // Phase 6: Step cards — mirror the Services card reveal.
         if (stepCards.length) {
-          tl.to(
-            stepCards,
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.45,
-              ease: 'power3.out',
-              stagger: 0.012,
-            },
-            '-=0.4',
-          )
+          if (isDesktop) {
+            tl.to(
+              stepCards,
+              {
+                autoAlpha: 1,
+                clipPath: 'inset(0 0% 0 0)',
+                y: 0,
+                duration: 0.45,
+                ease: 'power3.out',
+                stagger: 0.08,
+              },
+              '-=0.3',
+            )
+          } else {
+            tl.to(
+              stepCards,
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.5,
+                ease: 'power2.out',
+                stagger: 0.08,
+              },
+              '-=0.2',
+            )
+          }
         }
 
         // Phase 7: Timeline labels

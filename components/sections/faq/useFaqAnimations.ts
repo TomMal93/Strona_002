@@ -228,7 +228,8 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
           )
         }
 
-        // Phase 5: FAQ items + film markers stagger (synced)
+        // Phase 5: Questions enter in a clearly readable sequence, with each
+        // film marker following the matching accordion item.
         const phase5Pos = '-=0.1'
         if (faqItems.length) {
           tl.to(
@@ -236,9 +237,9 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.4,
+              duration: 0.45,
               ease: 'power3.out',
-              stagger: 0.01,
+              stagger: 0.12,
             },
             phase5Pos,
           )
@@ -251,7 +252,7 @@ export function useFaqAnimations(refs: FaqAnimationRefs): void {
               y: 0,
               duration: 0.3,
               ease: 'power3.out',
-              stagger: 0.01,
+              stagger: 0.12,
             },
             phase5Pos,
           )

@@ -337,14 +337,22 @@ export function useTestimonialsAnimation(
             if (!numEl || !target) return
 
             const counter = { val: 0 }
+            let displayedValue = -1
             tl.to(
               counter,
               {
                 val: target,
-                duration: 1.2,
-                ease: 'power2.out',
+                duration: 1.8,
+                ease: 'power1.out',
                 onUpdate: () => {
-                  numEl.textContent = String(Math.round(counter.val))
+                  const nextValue = Math.round(counter.val)
+                  if (nextValue === displayedValue) return
+
+                  displayedValue = nextValue
+                  numEl.textContent = String(nextValue)
+                },
+                onComplete: () => {
+                  numEl.textContent = String(target)
                 },
               },
               '<+0.15',

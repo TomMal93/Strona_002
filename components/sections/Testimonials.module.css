@@ -627,6 +627,9 @@
 .statNumber {
   display: inline-block;
   position: relative;
+  min-width: 3ch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
   background: linear-gradient(
     130deg,
     rgb(var(--c-warm)) 0%,
@@ -763,21 +766,22 @@
 
 /* ── Social proof bar entry animation ────────────────────────────────── */
 
-/* Glitch flicker keyframes for stat reveal */
-@keyframes statGlitch {
-  0% { opacity: 0; transform: translate3d(0, 0, 0); }
-  15% { opacity: 0.8; transform: translate3d(-2px, 0, 0); }
-  20% { opacity: 0.2; transform: translate3d(3px, 0, 0); }
-  35% { opacity: 0.9; transform: translate3d(0, 0, 0); }
-  40% { opacity: 0.4; transform: translate3d(-1px, 0, 0); }
-  55% { opacity: 1; transform: translate3d(1px, 0, 0); }
-  70% { opacity: 0.85; transform: translate3d(0, 0, 0); }
-  100% { opacity: 1; transform: translate3d(0, 0, 0); }
+/* Smooth reveal — the counter itself provides enough visual movement. */
+@keyframes statReveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 /* Applied by GSAP when entering viewport */
 .socialProofBar[data-revealed] .statCell {
-  animation: statGlitch 0.6s ease-out both;
+  animation: statReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .socialProofBar[data-revealed] .statCell:nth-child(2) {
