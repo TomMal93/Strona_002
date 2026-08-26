@@ -77,7 +77,7 @@ export default function SectionRail() {
       aria-label="Nawigacja sekcji"
       aria-hidden={!isRevealed}
       className={[
-        'fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 lg:block motion-reduce:!hidden',
+        'fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 min-[1405px]:block motion-reduce:!hidden',
         'transition-opacity duration-500 motion-reduce:transition-none',
         isRevealed ? 'opacity-100' : 'pointer-events-none opacity-0',
       ].join(' ')}
@@ -104,7 +104,7 @@ export default function SectionRail() {
                 <span
                   aria-hidden="true"
                   className={[
-                    'block transition-all duration-300 motion-reduce:transition-none',
+                    'hidden transition-all duration-300 min-[1520px]:block motion-reduce:transition-none',
                     isActive
                       ? 'h-0.5 w-10 bg-khaki'
                       : 'h-px w-7 bg-white',
