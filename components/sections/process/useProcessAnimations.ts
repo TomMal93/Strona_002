@@ -269,7 +269,7 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
           )
         }
 
-        // Phase 3: Corner marks
+        // Corner marks reveal with the header instead of waiting for it to finish.
         if (cornerMarks.length) {
           tl.to(
             cornerMarks,
@@ -279,7 +279,7 @@ export function useProcessAnimations(refs: ProcessAnimationRefs): void {
               ease: 'power2.out',
               stagger: 0.025,
             },
-            '-=0.3',
+            0,
           )
         }
 

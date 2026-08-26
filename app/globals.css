@@ -77,6 +77,15 @@
     rgb(13 13 13);
 }
 
+/* Compact the homepage below wide-desktop size while keeping Hero at its
+   intended viewport scale. `zoom` scales typography, spacing, media, and the
+   section's layout footprint together, avoiding transform-related gaps. */
+@media (max-width: 1749px) {
+  [data-home-sections] > section:not(#hero) {
+    zoom: 0.8;
+  }
+}
+
 /* Lenis smooth scroll — required styles (lenis/dist/lenis.css v1.1.x) */
 html.lenis,
 html.lenis body {
