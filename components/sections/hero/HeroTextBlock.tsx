@@ -113,16 +113,26 @@ export default function HeroTextBlock({
       </div>
 
       <div ref={ctaRef} className={cn('mt-8 flex flex-col gap-5', animated && styles.animHide)}>
-        <div className="flex flex-wrap items-center gap-8">
-          <a
-            href={siteContent.hero.ctaHref}
-            className={cn(styles.ctaButton, styles.ctaButtonPrimary, ctaClassName)}
-          >
-            {siteContent.hero.ctaLabel}
-          </a>
-          <a href="#about" className={cn(styles.ctaButton, styles.ctaButtonSecondary, ctaClassName)}>
-            {siteContent.hero.aboutLabel}
-          </a>
+        <div className={styles.heroCtaActions}>
+          <p className={styles.heroServiceTags} aria-label={siteContent.hero.serviceTags.join(', ')}>
+            {siteContent.hero.serviceTags.map((tag, index) => (
+              <span key={tag}>
+                {index > 0 && <span aria-hidden="true" className={styles.heroServiceTagDot}>•</span>}
+                {tag}
+              </span>
+            ))}
+          </p>
+          <div className={cn(styles.heroButtonRow, 'flex flex-wrap items-center gap-8')}>
+            <a
+              href={siteContent.hero.ctaHref}
+              className={cn(styles.ctaButton, styles.ctaButtonPrimary, ctaClassName)}
+            >
+              {siteContent.hero.ctaLabel}
+            </a>
+            <a href="#about" className={cn(styles.ctaButton, styles.ctaButtonSecondary, ctaClassName)}>
+              {siteContent.hero.aboutLabel}
+            </a>
+          </div>
         </div>
         <div className={socialRowClassName}>
           {socialLinks.map(({ platform, href }) => (

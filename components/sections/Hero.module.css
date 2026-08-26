@@ -256,6 +256,19 @@
     gap: 0.5rem;
   }
 
+  .mobileTextPanel .heroServiceTags {
+    font-size: clamp(12px, 3.4vw, 15px);
+  }
+
+  .mobileTextPanel .heroCtaActions {
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .mobileTextPanel .heroButtonRow {
+    justify-content: center;
+  }
+
   .mobileTextPanel > div:last-child > div {
     justify-content: center;
   }
@@ -298,6 +311,36 @@
 }
 
 /* ── Hero CTA buttons ────────────────────────────────────────────────────── */
+
+.heroCtaActions {
+  display: flex;
+  width: max-content;
+  max-width: 100%;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.heroServiceTags {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(213 169 91 / 0.92);
+  font-family: var(--font-bebas), sans-serif;
+  font-size: clamp(15px, 1.1vw, 17px);
+  letter-spacing: 0.20em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgb(213 169 91 / 0.18);
+}
+
+.heroServiceTagDot {
+  display: inline-block;
+  margin-inline: 0.85em;
+  color: rgb(255 238 175 / 0.62);
+  font-size: 0.72em;
+  transform: translateY(-0.08em);
+}
 
 .ctaButton {
   position: relative;

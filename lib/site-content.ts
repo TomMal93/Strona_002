@@ -17,7 +17,8 @@ export const siteContent = {
       || 'Dokumentuję to, co warto pamiętać.\nOd teledysku po weselny taniec.',
     ctaLabel: process.env.NEXT_PUBLIC_HERO_CTA_LABEL || 'Zapytaj o termin',
     ctaHref: process.env.NEXT_PUBLIC_HERO_CTA_HREF || 'tel:+48123456789',
-    aboutLabel: process.env.NEXT_PUBLIC_HERO_ABOUT_LABEL || 'O mnie',
+    aboutLabel: process.env.NEXT_PUBLIC_HERO_ABOUT_LABEL || 'Poznajmy się',
+    serviceTags: ['SESJE ZDJĘCIOWE', 'ŚLUB I WESELE', 'FILMY PROMOCYJNE'],
     social: [
       { platform: 'facebook', href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || 'https://www.facebook.com/profile.php?id=61557050460965' },
       { platform: 'youtube', href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || 'https://www.youtube.com/@Maleszyk.V-log' },

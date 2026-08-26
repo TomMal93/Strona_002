@@ -22,7 +22,7 @@ const DESKTOP_NAV_ITEMS = NAV_ITEMS.filter((item) => (
 ))
 
 const navLinkClassName = [
-  'relative font-bebas text-[16px] tracking-heading uppercase',
+  'relative font-bebas text-[16px] tracking-heading uppercase min-[1800px]:text-[20px]',
   'text-white/60 hover:text-white transition-colors duration-300',
   'after:absolute after:bottom-[-2px] after:left-0 after:h-px after:w-0 after:bg-khaki',
   'after:transition-[width] after:duration-300 hover:after:w-full',
@@ -214,13 +214,13 @@ export default function Navbar() {
       ref={headerRef}
       className="fixed top-0 left-0 right-0 z-50"
     >
-      <div className={`flex items-center justify-between px-6 py-2 md:px-12 lg:px-20 transition-[background-color,backdrop-filter] duration-500 ${headerSurfaceClassName}`}>
+      <div className={`flex items-center justify-between px-6 py-2 md:px-12 lg:px-20 min-[1800px]:px-24 min-[1800px]:py-3 transition-[background-color,backdrop-filter] duration-500 ${headerSurfaceClassName}`}>
 
         {/* Logo */}
         <Link
           href="/"
           aria-label="Strona główna"
-          className="relative shrink-0 font-bebas text-[1.006rem] uppercase tracking-heading text-warm-white transition-colors duration-500 ease-out hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki md:absolute md:left-[20vw]"
+          className="relative shrink-0 font-bebas text-[1.006rem] uppercase tracking-heading text-warm-white transition-colors duration-500 ease-out hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki md:absolute md:left-[20vw] min-[1800px]:text-[1.3rem]"
         >
           MALESZYK
           <span className="text-[#c8503c]">.</span>
@@ -230,7 +230,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop navigation */}
-        <nav className="hidden items-center gap-10 md:ml-auto md:mr-[10vw] md:flex" aria-label="Nawigacja główna">
+        <nav className="hidden items-center gap-10 md:ml-auto md:mr-[10vw] md:flex min-[1800px]:gap-14" aria-label="Nawigacja główna">
           {DESKTOP_NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
