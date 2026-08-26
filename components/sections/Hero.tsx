@@ -84,6 +84,7 @@ export default function Hero() {
           <div className={styles.desktopPortraitStage}>
             <div className={styles.portraitFrame}>
               <div aria-hidden="true" className={styles.portraitHalo}>
+                <span className={styles.haloBrightArc} />
                 <span className={styles.haloTickRing} />
                 <span className={styles.haloParticles} />
               </div>
