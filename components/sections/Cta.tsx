@@ -51,16 +51,12 @@ export default function Cta() {
   const { eyebrow, title, subtitle, ctaLabel, ctaHref, secondaryLabel, secondaryHref, features } = siteContent.cta
 
   return (
-    <section ref={sectionRef} id="cta" aria-labelledby="cta-heading" className={styles.section}>
-      <div className={styles.grain} aria-hidden="true" />
-      <span className={`${styles.corner} ${styles.cornerTL}`} aria-hidden="true" />
-      <span className={`${styles.corner} ${styles.cornerTR}`} aria-hidden="true" />
-      <span className={`${styles.corner} ${styles.cornerBL}`} aria-hidden="true" />
-      <span className={`${styles.corner} ${styles.cornerBR}`} aria-hidden="true" />
-
-      <div className={styles.recBadge} aria-hidden="true"><span>REC</span><i /></div>
-      <div className={styles.battery} aria-hidden="true"><i /><span>72%</span></div>
-
+    <section
+      ref={sectionRef}
+      id="cta"
+      aria-labelledby="cta-heading"
+      className={`${styles.section} section-dark-bg`}
+    >
       <div className={styles.layout}>
         <div className={styles.content}>
           <p ref={eyebrowRef} className={styles.eyebrow}>{eyebrow}</p>
@@ -99,11 +95,6 @@ export default function Cta() {
             </figure>
           ))}
         </div>
-      </div>
-
-      <div className={styles.cameraMeta} aria-hidden="true">
-        <span>24FPS&nbsp;&nbsp; ƒ/2.8&nbsp;&nbsp; ISO 800</span>
-        <span>00:00:24:17</span>
       </div>
     </section>
   )
