@@ -92,7 +92,7 @@ export default function SectionRail() {
                 aria-current={isActive ? 'true' : undefined}
                 onClick={(event) => event.currentTarget.blur()}
                 className={[
-                  'group flex items-center gap-3 font-bebas text-[18px] tracking-heading uppercase',
+                  'group flex items-center gap-3 font-bebas text-[15px] tracking-heading uppercase min-[1900px]:text-[18px]',
                   'transition-all duration-300',
                   'focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-khaki',
                   isActive
