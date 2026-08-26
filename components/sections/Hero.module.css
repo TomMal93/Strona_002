@@ -464,10 +464,10 @@
   border-radius: inherit;
   background: conic-gradient(
     from 0deg,
-    rgb(255 238 175 / 0.50) 0deg 5deg,
-    rgb(255 238 175 / 0.32) 12deg,
-    rgb(var(--c-gold) / 0.08) 21deg,
-    transparent 30deg 202deg,
+    rgb(255 238 175 / 0.50) 0deg,
+    rgb(255 238 175 / 0.22) 7deg,
+    rgb(var(--c-gold) / 0.06) 14deg,
+    transparent 20deg 202deg,
     rgb(var(--c-gold) / 0.10) 224deg,
     rgb(255 238 175 / 0.42) 285deg,
     rgb(255 238 175 / 0.50) 360deg
@@ -517,10 +517,10 @@
   border-radius: 50%;
   background: conic-gradient(
     from 0deg,
-    rgb(255 244 205 / 0.94) 0deg 8deg,
-    rgb(255 238 175 / 0.72) 17deg,
-    rgb(255 238 175 / 0.20) 26deg,
-    transparent 30deg 210deg,
+    rgb(255 244 205 / 0.92) 0deg,
+    rgb(255 238 175 / 0.52) 8deg,
+    rgb(255 238 175 / 0.18) 16deg,
+    transparent 24deg 210deg,
     rgb(255 238 175 / 0.18) 216deg,
     rgb(255 238 175 / 0.68) 226deg,
     rgb(255 244 205 / 0.92) 238deg 360deg
@@ -593,6 +593,10 @@
     animation: desktop-portrait-emerge 2.4s cubic-bezier(0.22, 1, 0.36, 1) 0.9s both;
   }
 
+  .portraitHalo {
+    animation: desktop-halo-pulse 5.8s ease-in-out 3.3s infinite;
+  }
+
   /* Obwódka buduje się niezależnie, pionowo od dołu do góry. */
   .portraitHalo::before,
   .haloBrightArc,
@@ -609,6 +613,17 @@
   to {
     opacity: 1;
     filter: brightness(1) saturate(1);
+  }
+}
+
+@keyframes desktop-halo-pulse {
+  0%, 100% {
+    opacity: 0.92;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.018);
   }
 }
 
@@ -666,6 +681,7 @@
   }
 
   .portraitFrame,
+  .portraitHalo,
   .portraitHalo::before,
   .haloBrightArc,
   .haloTickRing {
