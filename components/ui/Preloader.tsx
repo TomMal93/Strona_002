@@ -46,53 +46,61 @@ export default function Preloader() {
     if (prefersReducedMotion) {
       gsap.set(wordmarkRef.current, {
         autoAlpha: 1,
-        y: 0,
       })
       gsap.set(dividerRef.current, {
         autoAlpha: 1,
-        xPercent: 0,
         scaleX: 1,
       })
       gsap.set(subtitleRef.current, {
         autoAlpha: 0.7,
-        y: 0,
       })
       return
     }
 
     const ctx = gsap.context(() => {
-      gsap.set(wordmarkRef.current, { autoAlpha: 0, y: 24 })
+      gsap.set(wordmarkRef.current, { autoAlpha: 0 })
       gsap.set(dividerRef.current, {
         autoAlpha: 0,
-        xPercent: -38,
         scaleX: 0.35,
-        transformOrigin: 'left center',
+        transformOrigin: 'center center',
       })
-      gsap.set(subtitleRef.current, { autoAlpha: 0, y: 8 })
+      gsap.set(subtitleRef.current, { autoAlpha: 0 })
+    }, overlayRef)
 
-      const tl = gsap.timeline({ defaults: { overwrite: 'auto' } })
-      tl.to(wordmarkRef.current, {
+    let cancelled = false
+    let timeline: gsap.core.Timeline | null = null
+
+    const startEntrance = () => {
+      if (cancelled) return
+
+      timeline = gsap.timeline({ defaults: { overwrite: 'auto' } })
+      timeline.to(wordmarkRef.current, {
         autoAlpha: 1,
-        y: 0,
-        duration: 0.85,
-        ease: 'power3.out',
+        duration: 1,
+        ease: 'power2.out',
       })
-      tl.to(dividerRef.current, {
+      timeline.to(dividerRef.current, {
         autoAlpha: 1,
-        xPercent: 0,
         scaleX: 1,
         duration: 0.9,
         ease: 'power3.out',
       }, '-=0.45')
-      tl.to(subtitleRef.current, {
+      timeline.to(subtitleRef.current, {
         autoAlpha: 0.7,
-        y: 0,
         duration: 0.65,
         ease: 'power3.out',
       }, '-=0.55')
-    }, overlayRef)
+    }
+
+    if (document.fonts) {
+      void document.fonts.ready.then(startEntrance, startEntrance)
+    } else {
+      startEntrance()
+    }
 
     return () => {
+      cancelled = true
+      timeline?.kill()
       ctx.revert()
     }
   }, [phase])
