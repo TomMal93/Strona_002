@@ -7,7 +7,7 @@ import styles from './About.module.css'
 import heroStyles from './Hero.module.css'
 import { useAboutAnimations } from './about/useAboutAnimations'
 
-const ABOUT_SMOKE_PUFFS = 14
+const ABOUT_SMOKE_PUFFS = 24
 
 function formatHudTime(frame: number): string {
   const frames = frame % 24
@@ -87,6 +87,33 @@ export default function About() {
 
         {/* One desktop viewfinder now frames the portrait and both copy panels. */}
         <div ref={viewfinderRef} className={styles.viewfinder}>
+          <svg aria-hidden="true" focusable="false" className={styles.smokeFilterDefs}>
+            <defs>
+              <filter
+                id="about-smoke-turbulence"
+                x="-35%"
+                y="-35%"
+                width="170%"
+                height="170%"
+                colorInterpolationFilters="sRGB"
+              >
+                <feTurbulence
+                  type="fractalNoise"
+                  baseFrequency="0.011 0.027"
+                  numOctaves="3"
+                  seed="17"
+                  result="smokeNoise"
+                />
+                <feDisplacementMap
+                  in="SourceGraphic"
+                  in2="smokeNoise"
+                  scale="32"
+                  xChannelSelector="R"
+                  yChannelSelector="B"
+                />
+              </filter>
+            </defs>
+          </svg>
           <div aria-hidden="true" className={styles.smokeField}>
             {Array.from({ length: ABOUT_SMOKE_PUFFS }, (_, index) => (
               <span key={index} className={styles.smokePuff} />
