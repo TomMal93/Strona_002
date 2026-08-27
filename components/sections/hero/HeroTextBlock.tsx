@@ -48,6 +48,7 @@ export type HeroTextBlockProps = {
   subtitleWrapClassName?: string
   socialRowClassName?: string
   socialIconClassName?: string
+  showServiceTags?: boolean
   animated?: boolean
   eyebrowRef?: Ref<HTMLSpanElement>
   headingRef?: Ref<HTMLParagraphElement>
@@ -66,6 +67,7 @@ export default function HeroTextBlock({
   subtitleWrapClassName = 'max-w-[34ch]',
   socialRowClassName = 'flex items-center gap-7 md:gap-5',
   socialIconClassName = '[&>svg]:h-[21px] [&>svg]:w-[21px]',
+  showServiceTags = true,
   animated = false,
   eyebrowRef,
   headingRef,
@@ -114,14 +116,16 @@ export default function HeroTextBlock({
 
       <div ref={ctaRef} className={cn('mt-8 flex flex-col gap-5', animated && styles.animHide)}>
         <div className={styles.heroCtaActions}>
-          <p className={styles.heroServiceTags} aria-label={siteContent.hero.serviceTags.join(', ')}>
-            {siteContent.hero.serviceTags.map((tag, index) => (
-              <span key={tag}>
-                {index > 0 && <span aria-hidden="true" className={styles.heroServiceTagDot}>•</span>}
-                {tag}
-              </span>
-            ))}
-          </p>
+          {showServiceTags && (
+            <p className={styles.heroServiceTags} aria-label={siteContent.hero.serviceTags.join(', ')}>
+              {siteContent.hero.serviceTags.map((tag, index) => (
+                <span key={tag}>
+                  {index > 0 && <span aria-hidden="true" className={styles.heroServiceTagDot}>•</span>}
+                  {tag}
+                </span>
+              ))}
+            </p>
+          )}
           <div className={cn(styles.heroButtonRow, 'flex flex-wrap items-center gap-8')}>
             <a
               href={siteContent.hero.ctaHref}

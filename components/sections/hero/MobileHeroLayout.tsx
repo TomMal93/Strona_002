@@ -8,10 +8,10 @@ type MobileHeroLayoutProps = {
 
 export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
   return (
-    <div className={`relative z-10 mx-auto md:hidden ${styles.mobileFrame}`}>
+    <div className={`absolute inset-0 z-10 md:hidden ${styles.mobileFrame}`}>
       <div className={styles.mobileGroupCenter}>
-        <div className={`relative ${styles.mobileImageWrap} ${styles.mobileImageEntrance}`}>
-          <div className={`relative ${styles.mobileVideoStage}`}>
+        <div className={`${styles.mobileImageWrap} ${styles.mobileImageEntrance}`}>
+          <div className={styles.mobileVideoStage}>
             <video
               src="/videos/hero/hero-video.mp4"
               aria-label={siteContent.about.imageAlt}
@@ -19,7 +19,7 @@ export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
               loop
               muted
               playsInline
-              className={`relative z-10 h-full w-full object-cover object-center ${styles.mobileAboutVideoEffect}`}
+              className={styles.mobileHeroVideo}
             />
           </div>
         </div>
