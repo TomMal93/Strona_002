@@ -468,6 +468,7 @@
     --smoke-core: 0 0 0;
     --smoke-mid: 0 0 0;
     --smoke-edge: 20 22 19;
+    --smoke-accent-alpha: 0.1;
     position: absolute;
     display: block;
     border-radius: 50%;
@@ -476,7 +477,9 @@
       radial-gradient(circle at 29% 42%, rgb(var(--smoke-core)) 0 24%, rgb(var(--smoke-mid) / 0.96) 35%, rgb(var(--smoke-edge) / 0.38) 50%, transparent 68%),
       radial-gradient(circle at 68% 35%, rgb(var(--smoke-core)) 0 22%, rgb(var(--smoke-mid) / 0.94) 34%, rgb(var(--smoke-edge) / 0.34) 48%, transparent 66%),
       radial-gradient(ellipse at 52% 70%, rgb(var(--smoke-core)) 0 25%, rgb(var(--smoke-mid) / 0.9) 37%, rgb(var(--smoke-edge) / 0.42) 52%, transparent 70%);
-    filter: blur(1.65rem);
+    filter:
+      blur(1.65rem)
+      drop-shadow(0 0 0.45rem rgb(229 231 235 / var(--smoke-accent-alpha)));
     transform-origin: center;
     will-change: transform, opacity;
     animation: aboutSmokeBillow var(--smoke-duration) ease-in-out var(--smoke-delay) infinite;
@@ -514,7 +517,10 @@
     --smoke-core: 0 0 0;
     --smoke-mid: 0 0 0;
     --smoke-edge: 17 19 16;
-    filter: blur(1.15rem);
+    --smoke-accent-alpha: 0.14;
+    filter:
+      blur(1.15rem)
+      drop-shadow(0 0 0.45rem rgb(229 231 235 / var(--smoke-accent-alpha)));
   }
 
   .smokePuff:nth-child(3n + 2) {
@@ -524,14 +530,20 @@
     --smoke-core: 0 0 0;
     --smoke-mid: 0 0 0;
     --smoke-edge: 27 29 24;
-    filter: blur(2.15rem);
+    --smoke-accent-alpha: 0.06;
+    filter:
+      blur(2.15rem)
+      drop-shadow(0 0 0.45rem rgb(229 231 235 / var(--smoke-accent-alpha)));
   }
 
   .smokePuff:nth-child(3n) {
     --smoke-core: 0 0 0;
     --smoke-mid: 0 0 0;
     --smoke-edge: 22 25 28;
-    filter: blur(1.55rem);
+    --smoke-accent-alpha: 0.09;
+    filter:
+      blur(1.55rem)
+      drop-shadow(0 0 0.45rem rgb(229 231 235 / var(--smoke-accent-alpha)));
   }
 
   .outerCorner {
@@ -577,7 +589,7 @@
   .aboutVideoFrame {
     margin-top: 0;
     left: 3rem;
-    top: -1rem;
+    top: -2.5rem;
   }
 }
 
@@ -612,7 +624,7 @@
 
   .aboutVideoFrame {
     left: 5rem;
-    top: -1.25rem;
+    top: -3rem;
   }
 
   .photographerNote {
