@@ -12,11 +12,10 @@
   z-index: 2;
   display: grid;
   width: min(100%, 1280px);
-  min-height: min(560px, 65vh);
   margin: 0 auto;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
   gap: clamp(2rem, 3.5vw, 3.5rem);
-  align-items: center;
+  align-items: stretch;
 }
 
 .content {
@@ -26,7 +25,7 @@
   min-width: 0;
   flex-direction: column;
   justify-content: center;
-  padding-top: 0;
+  padding-block: 0;
 }
 .eyebrow {
   margin: 0 0 1.1rem;
@@ -192,12 +191,10 @@
 .mosaic {
   display: grid;
   min-width: 0;
-  min-height: 420px;
-  max-height: 540px;
-  height: 100%;
+  min-height: 0;
+  height: auto;
   grid-template: 0.95fr 0.72fr 0.82fr / 1fr 1.1fr;
   gap: 6px;
-  transform: rotate(-0.35deg);
 }
 .story { position: relative; min-width: 0; min-height: 0; overflow: hidden; margin: 0; background: #17120b; box-shadow: 0 14px 34px rgb(0 0 0 / 0.38); }
 .story::after { position: absolute; inset: 0; content: ''; background: linear-gradient(180deg, transparent 50%, rgb(0 0 0 / 0.68)); }
@@ -219,6 +216,7 @@
 .storyEvent img { object-position: 50% 48%; }
 .storyMusic { grid-column: 1 / -1; }
 .storyMusic img { object-position: 56% 42%; }
+.storyBrand { grid-column: 1 / -1; }
 .storyBrand img { object-position: 42% 48%; }
 
 @media (max-width: 1280px) {

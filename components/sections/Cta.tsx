@@ -44,11 +44,25 @@ export default function Cta() {
   const eyebrowRef = useRef<HTMLParagraphElement>(null!)
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const subtitleRef = useRef<HTMLParagraphElement>(null!)
+  const subtitleDividerRef = useRef<HTMLDivElement>(null!)
   const primaryBtnRef = useRef<HTMLAnchorElement>(null!)
   const secondaryLinkRef = useRef<HTMLAnchorElement>(null!)
   const featuresRef = useRef<HTMLDivElement>(null!)
+  const socialRef = useRef<HTMLDivElement>(null!)
+  const mosaicRef = useRef<HTMLDivElement>(null!)
 
-  useCtaAnimations({ sectionRef, eyebrowRef, titleRef, subtitleRef, primaryBtnRef, secondaryLinkRef, featuresRef })
+  useCtaAnimations({
+    sectionRef,
+    eyebrowRef,
+    titleRef,
+    subtitleRef,
+    subtitleDividerRef,
+    primaryBtnRef,
+    secondaryLinkRef,
+    featuresRef,
+    socialRef,
+    mosaicRef,
+  })
 
   const { eyebrow, title, subtitle, ctaLabel, ctaHref, secondaryLabel, secondaryHref, features, social } = siteContent.cta
 
@@ -64,7 +78,7 @@ export default function Cta() {
           <p ref={eyebrowRef} className={styles.eyebrow}>{eyebrow}</p>
           <h2 ref={titleRef} id="cta-heading" className={styles.title}>{title}</h2>
           <p ref={subtitleRef} className={styles.subtitle}>{subtitle}</p>
-          <div className={styles.subtitleDivider} aria-hidden="true" />
+          <div ref={subtitleDividerRef} className={styles.subtitleDivider} aria-hidden="true" />
 
           <div ref={featuresRef} className={styles.features} aria-label="Najważniejsze informacje">
             {features.map((feature, index) => {
@@ -97,7 +111,7 @@ export default function Cta() {
               </a>
             </div>
 
-            <div className={styles.socialRow} aria-label="Media społecznościowe">
+            <div ref={socialRef} className={styles.socialRow} aria-label="Media społecznościowe">
               {social.map(({ platform, href }) => (
                 <a
                   key={platform}
@@ -114,7 +128,7 @@ export default function Cta() {
           </div>
         </div>
 
-        <div className={styles.mosaic} aria-hidden="true">
+        <div ref={mosaicRef} className={styles.mosaic} aria-hidden="true">
           {stories.map((story) => (
             <figure key={story.label} className={`${styles.story} ${story.className}`}>
               <Image src={story.src} alt="" fill sizes="(min-width: 900px) 50vw, 100vw" />
