@@ -39,6 +39,11 @@ const stories = [
   { className: styles.storyBrand, src: '/images/cta/brand-story.webp', label: 'Marka / Komercja' },
 ]
 
+const formatPhoneNumber = (phoneHref: string): string => {
+  const number = phoneHref.replace(/^tel:/, '')
+  return number.replace(/^(\+48)(\d{3})(\d{3})(\d{3})$/, '$1 $2 $3 $4')
+}
+
 export default function Cta() {
   const sectionRef = useRef<HTMLElement>(null!)
   const eyebrowRef = useRef<HTMLParagraphElement>(null!)
@@ -64,7 +69,8 @@ export default function Cta() {
     mosaicRef,
   })
 
-  const { eyebrow, title, subtitle, ctaLabel, ctaHref, secondaryLabel, secondaryHref, features, social } = siteContent.cta
+  const { eyebrow, title, subtitle, phoneLabel, phoneHref, features, social } = siteContent.cta
+  const phoneNumber = formatPhoneNumber(phoneHref)
 
   return (
     <section
@@ -97,17 +103,18 @@ export default function Cta() {
             <div className={styles.actions}>
               <a
                 ref={primaryBtnRef}
-                href={ctaHref}
-                className={`${heroStyles.ctaButton} ${heroStyles.ctaButtonPrimary} ${styles.actionButton}`}
+                href={phoneHref}
+                className={`${heroStyles.ctaButton} ${heroStyles.ctaButtonPrimary} ${styles.actionButton} ${styles.phoneButton}`}
               >
-                {ctaLabel}
+                <span>{phoneLabel}</span>
+                <span className={styles.phoneNumber}>{phoneNumber}</span>
               </a>
               <a
                 ref={secondaryLinkRef}
-                href={secondaryHref}
+                href="/oferta"
                 className={`${heroStyles.ctaButton} ${heroStyles.ctaButtonSecondary} ${styles.actionButton}`}
               >
-                {secondaryLabel}
+                Oferta
               </a>
             </div>
 
