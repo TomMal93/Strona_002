@@ -447,7 +447,7 @@
   .smokeField {
     position: absolute;
     z-index: -2;
-    inset: -9rem -13rem -4rem;
+    inset: -7.5rem -10rem -3rem;
     display: block;
     pointer-events: none;
     filter: url('#about-smoke-turbulence');
@@ -584,15 +584,15 @@
 @keyframes aboutSmokeBillow {
   0%,
   100% {
-    transform: translate3d(0, 0, 0) rotate(0deg) scale(0.86, 0.76);
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(0.9632, 0.8512);
     opacity: var(--smoke-opacity-low);
   }
   34% {
-    transform: translate3d(var(--smoke-x-a), var(--smoke-y-a), 0) rotate(var(--smoke-rotation)) scale(1.08, 0.94);
+    transform: translate3d(var(--smoke-x-a), var(--smoke-y-a), 0) rotate(var(--smoke-rotation)) scale(1.2096, 1.0528);
     opacity: var(--smoke-opacity-high);
   }
   67% {
-    transform: translate3d(var(--smoke-x-b), var(--smoke-y-b), 0) rotate(var(--smoke-rotation-back)) scale(0.94, 1.08);
+    transform: translate3d(var(--smoke-x-b), var(--smoke-y-b), 0) rotate(var(--smoke-rotation-back)) scale(1.0528, 1.2096);
     opacity: var(--smoke-opacity-mid);
   }
 }
@@ -1071,7 +1071,7 @@
 
   .smokePuff {
     animation: none;
-    transform: scale(0.96, 0.86);
+    transform: scale(1.0752, 0.9632);
     opacity: 0.72;
   }
 
