@@ -281,51 +281,8 @@
 
 /* ── Title accent line ─────────────────────────────────────────────────── */
 
-.aboutSection {
-  isolation: isolate;
-}
-
-.aboutSection::after {
-  content: '';
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgb(0 0 0 / 0.02) 1%,
-    rgb(0 0 0 / 0.07) 2%,
-    rgb(0 0 0 / 0.15) 3%,
-    rgb(0 0 0 / 0.27) 4%,
-    rgb(0 0 0 / 0.42) 5%,
-    rgb(0 0 0 / 0.58) 6%,
-    rgb(0 0 0 / 0.73) 7%,
-    rgb(0 0 0 / 0.85) 8%,
-    rgb(0 0 0 / 0.94) 9%,
-    #000 10%,
-    #000 90%,
-    rgb(0 0 0 / 0.94) 91%,
-    rgb(0 0 0 / 0.85) 92%,
-    rgb(0 0 0 / 0.73) 93%,
-    rgb(0 0 0 / 0.58) 94%,
-    rgb(0 0 0 / 0.42) 95%,
-    rgb(0 0 0 / 0.27) 96%,
-    rgb(0 0 0 / 0.15) 97%,
-    rgb(0 0 0 / 0.07) 98%,
-    rgb(0 0 0 / 0.02) 99%,
-    transparent 100%
-  );
-}
-
-.aboutContent {
-  position: relative;
-  z-index: 1;
-}
-
 .sectionHeader {
   position: relative;
-  z-index: 2;
   width: min(100%, 48rem);
   margin-inline: auto;
   text-align: center;
