@@ -993,6 +993,24 @@
   gap: 2rem;
 }
 
+@media (max-width: 479px) {
+  .statementCta {
+    padding-inline: 0.5rem;
+  }
+
+  .statementCtaRow {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    gap: clamp(0.5rem, 2vw, 0.75rem);
+  }
+
+  .statementCtaRow > a {
+    padding: 0.6rem clamp(0.75rem, 3.2vw, 1.05rem);
+    font-size: clamp(0.98rem, 4.2vw, 1.15rem);
+  }
+}
+
 @media (min-width: 480px) {
   .statementCtaRow {
     flex-direction: row;
