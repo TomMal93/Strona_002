@@ -413,3 +413,14 @@
     --process-frame-gap: 1rem;
   }
 }
+
+/* Compensate the global section zoom introduced below 1750px. */
+@media (min-width: 768px) and (max-width: 1749px) {
+  .sectionSubtitle {
+    font-size: 1.04rem;
+  }
+
+  .stepDescription {
+    font-size: 0.96rem;
+  }
+}

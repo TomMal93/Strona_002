@@ -171,7 +171,10 @@ export default function Testimonials() {
 
           <p
             ref={subtitleRef}
-            className="mt-5 whitespace-pre-line font-mono text-[0.95rem] leading-[1.85] tracking-wide text-white/50"
+            className={cn(
+              'mt-5 whitespace-pre-line font-mono text-[0.95rem] leading-[1.85] tracking-wide text-white/50',
+              styles.sectionSubtitle,
+            )}
           >
             {subtitle}
           </p>

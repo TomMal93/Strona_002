@@ -691,3 +691,16 @@
     min-height: 14.5rem;
   }
 }
+
+/* Compensate the global 0.8 section zoom below wide desktop. */
+@media (min-width: 768px) and (max-width: 1749px) {
+  .sectionIntro {
+    font-size: 1.04rem;
+  }
+
+  .cardLead,
+  .cardDescription,
+  .bulletItem {
+    font-size: 1rem;
+  }
+}

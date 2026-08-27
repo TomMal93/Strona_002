@@ -266,6 +266,17 @@
   .actionButton { min-width: 148px; font-size: 1.16rem; }
 }
 
+/* Compensate the global section zoom introduced below 1750px. */
+@media (min-width: 768px) and (max-width: 1749px) {
+  .subtitle {
+    font-size: 1.04rem;
+  }
+
+  .feature > span {
+    font-size: 0.76rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .actionButton, .socialLink, .story img { transition: none; }
 }

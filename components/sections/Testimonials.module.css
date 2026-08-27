@@ -824,3 +824,18 @@
     gap: 5px;
   }
 }
+
+/* Compensate the global section zoom introduced below 1750px. */
+@media (min-width: 768px) and (max-width: 1749px) {
+  .sectionSubtitle {
+    font-size: 1.04rem;
+  }
+
+  .quoteText {
+    font-size: 1.08rem;
+  }
+
+  .authorContext {
+    font-size: 0.76rem;
+  }
+}

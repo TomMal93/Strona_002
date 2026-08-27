@@ -410,3 +410,18 @@
     padding-left: 2rem;
   }
 }
+
+/* Compensate the global section zoom introduced below 1750px. */
+@media (min-width: 768px) and (max-width: 1749px) {
+  .sectionSubtitle {
+    font-size: 1.04rem;
+  }
+
+  .questionText {
+    font-size: 1.06rem;
+  }
+
+  .answerText {
+    font-size: 0.96rem;
+  }
+}
