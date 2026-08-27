@@ -7,6 +7,8 @@ import styles from './About.module.css'
 import heroStyles from './Hero.module.css'
 import { useAboutAnimations } from './about/useAboutAnimations'
 
+const ABOUT_SMOKE_PUFFS = 14
+
 function formatHudTime(frame: number): string {
   const frames = frame % 24
   const totalSeconds = Math.floor(frame / 24)
@@ -85,6 +87,11 @@ export default function About() {
 
         {/* One desktop viewfinder now frames the portrait and both copy panels. */}
         <div ref={viewfinderRef} className={styles.viewfinder}>
+          <div aria-hidden="true" className={styles.smokeField}>
+            {Array.from({ length: ABOUT_SMOKE_PUFFS }, (_, index) => (
+              <span key={index} className={styles.smokePuff} />
+            ))}
+          </div>
           <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL} ${styles.outerCorner}`} />
           <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR} ${styles.outerCorner}`} />
           <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL} ${styles.outerCorner}`} />

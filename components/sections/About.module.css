@@ -401,6 +401,10 @@
   background: rgb(var(--c-gold) / 0.015);
 }
 
+.smokeField {
+  display: none;
+}
+
 @media (width >= 48rem) {
   .viewfinder {
     position: relative;
@@ -418,51 +422,51 @@
       0 0 8.5rem 2.75rem rgb(0 0 0 / 0.3);
   }
 
-  .viewfinder::before,
-  .viewfinder::after {
-    content: '';
+  .smokeField {
     position: absolute;
     z-index: -1;
+    inset: -9rem -13rem -4rem;
+    display: block;
     pointer-events: none;
-    border-radius: 42%;
-    filter: blur(2.25rem);
+  }
+
+  .smokePuff {
+    --smoke-x-a: 5%;
+    --smoke-y-a: -8%;
+    --smoke-x-b: -4%;
+    --smoke-y-b: 6%;
+    --smoke-rotation: 5deg;
+    --smoke-rotation-back: -4deg;
+    --smoke-duration: 21s;
+    --smoke-delay: -7s;
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 31% 40%, #000 0 16%, rgb(0 0 0 / 0.86) 30%, transparent 62%),
+      radial-gradient(circle at 67% 36%, rgb(0 0 0 / 0.96) 0 14%, rgb(0 0 0 / 0.76) 29%, transparent 60%),
+      radial-gradient(ellipse at 51% 69%, #000 0 17%, rgb(0 0 0 / 0.72) 33%, transparent 66%);
+    filter: blur(1.65rem);
+    opacity: 0.82;
+    transform-origin: center;
     will-change: transform, opacity;
+    animation: aboutSmokeBillow var(--smoke-duration) ease-in-out var(--smoke-delay) infinite;
   }
 
-  .viewfinder::before {
-    inset: -7.5rem -8.5rem -3rem;
-    background:
-      radial-gradient(ellipse at 8% 28%, rgb(0 0 0 / 0.82) 0 10%, rgb(0 0 0 / 0.42) 30%, transparent 57%),
-      radial-gradient(ellipse at 42% 2%, rgb(0 0 0 / 0.74) 0 9%, rgb(0 0 0 / 0.34) 28%, transparent 54%),
-      radial-gradient(ellipse at 91% 20%, rgb(0 0 0 / 0.78) 0 9%, rgb(0 0 0 / 0.38) 29%, transparent 56%),
-      radial-gradient(ellipse at 98% 68%, rgb(0 0 0 / 0.76) 0 10%, rgb(0 0 0 / 0.36) 31%, transparent 58%),
-      radial-gradient(ellipse at 58% 98%, rgb(0 0 0 / 0.8) 0 11%, rgb(0 0 0 / 0.4) 32%, transparent 60%),
-      radial-gradient(ellipse at 3% 78%, rgb(0 0 0 / 0.72) 0 9%, rgb(0 0 0 / 0.34) 30%, transparent 56%);
-    opacity: 0.96;
-    animation: aboutBackdropSmokeA 18s ease-in-out infinite alternate;
-  }
-
-  .viewfinder::after {
-    inset: -6rem -7rem -2rem;
-    background:
-      radial-gradient(ellipse 15% 18% at 10% 25%, #000 0 20%, rgb(0 0 0 / 0.76) 43%, transparent 76%),
-      radial-gradient(ellipse 13% 20% at 10% 58%, #000 0 18%, rgb(0 0 0 / 0.72) 42%, transparent 75%),
-      radial-gradient(ellipse 15% 17% at 10% 82%, rgb(0 0 0 / 0.96) 0 19%, rgb(0 0 0 / 0.7) 43%, transparent 77%),
-      radial-gradient(ellipse 18% 13% at 32% 10%, #000 0 20%, rgb(0 0 0 / 0.74) 44%, transparent 76%),
-      radial-gradient(ellipse 20% 14% at 68% 10%, rgb(0 0 0 / 0.98) 0 18%, rgb(0 0 0 / 0.7) 42%, transparent 75%),
-      radial-gradient(ellipse 15% 19% at 90% 31%, #000 0 20%, rgb(0 0 0 / 0.75) 44%, transparent 77%),
-      radial-gradient(ellipse 14% 21% at 90% 68%, rgb(0 0 0 / 0.98) 0 18%, rgb(0 0 0 / 0.72) 42%, transparent 75%),
-      radial-gradient(ellipse 20% 14% at 70% 90%, #000 0 20%, rgb(0 0 0 / 0.74) 44%, transparent 77%),
-      radial-gradient(ellipse 18% 13% at 34% 90%, rgb(0 0 0 / 0.98) 0 18%, rgb(0 0 0 / 0.7) 42%, transparent 75%),
-      radial-gradient(ellipse at 25% 0%, rgb(0 0 0 / 0.68) 0 8%, rgb(0 0 0 / 0.28) 27%, transparent 53%),
-      radial-gradient(ellipse at 75% 4%, rgb(0 0 0 / 0.62) 0 8%, rgb(0 0 0 / 0.25) 28%, transparent 54%),
-      radial-gradient(ellipse at 100% 55%, rgb(0 0 0 / 0.72) 0 9%, rgb(0 0 0 / 0.3) 30%, transparent 57%),
-      radial-gradient(ellipse at 72% 100%, rgb(0 0 0 / 0.66) 0 9%, rgb(0 0 0 / 0.27) 29%, transparent 56%),
-      radial-gradient(ellipse at 15% 96%, rgb(0 0 0 / 0.7) 0 8%, rgb(0 0 0 / 0.29) 29%, transparent 55%),
-      radial-gradient(ellipse at 0% 48%, rgb(0 0 0 / 0.65) 0 8%, rgb(0 0 0 / 0.26) 28%, transparent 54%);
-    opacity: 0.94;
-    animation: aboutBackdropSmokeB 23s ease-in-out -6s infinite alternate;
-  }
+  .smokePuff:nth-child(1) { top: 5%; left: 8%; width: 29%; height: 24%; --smoke-duration: 19s; --smoke-delay: -13s; --smoke-x-a: 8%; --smoke-y-a: -10%; }
+  .smokePuff:nth-child(2) { top: 0; left: 28%; width: 27%; height: 23%; --smoke-duration: 24s; --smoke-delay: -5s; --smoke-x-b: 7%; --smoke-y-b: -8%; --smoke-rotation: -7deg; }
+  .smokePuff:nth-child(3) { top: 3%; left: 48%; width: 31%; height: 25%; --smoke-duration: 21s; --smoke-delay: -17s; --smoke-x-a: -7%; --smoke-y-a: -11%; }
+  .smokePuff:nth-child(4) { top: 7%; left: 70%; width: 25%; height: 23%; --smoke-duration: 27s; --smoke-delay: -9s; --smoke-x-b: -8%; --smoke-y-b: -7%; --smoke-rotation: 9deg; }
+  .smokePuff:nth-child(5) { top: 17%; left: 0; width: 24%; height: 30%; --smoke-duration: 23s; --smoke-delay: -19s; --smoke-x-a: -10%; --smoke-y-a: 7%; }
+  .smokePuff:nth-child(6) { top: 38%; left: -1%; width: 25%; height: 31%; --smoke-duration: 18s; --smoke-delay: -4s; --smoke-x-b: -11%; --smoke-y-b: -6%; --smoke-rotation: -8deg; }
+  .smokePuff:nth-child(7) { top: 62%; left: 1%; width: 26%; height: 29%; --smoke-duration: 26s; --smoke-delay: -14s; --smoke-x-a: -9%; --smoke-y-a: -8%; }
+  .smokePuff:nth-child(8) { top: 18%; left: 76%; width: 25%; height: 30%; --smoke-duration: 20s; --smoke-delay: -11s; --smoke-x-a: 10%; --smoke-y-a: -7%; --smoke-rotation: 8deg; }
+  .smokePuff:nth-child(9) { top: 40%; left: 78%; width: 24%; height: 31%; --smoke-duration: 25s; --smoke-delay: -3s; --smoke-x-b: 12%; --smoke-y-b: 6%; }
+  .smokePuff:nth-child(10) { top: 63%; left: 75%; width: 27%; height: 29%; --smoke-duration: 22s; --smoke-delay: -16s; --smoke-x-a: 9%; --smoke-y-a: -9%; --smoke-rotation: -6deg; }
+  .smokePuff:nth-child(11) { top: 76%; left: 13%; width: 31%; height: 24%; --smoke-duration: 28s; --smoke-delay: -20s; --smoke-x-b: -7%; --smoke-y-b: 8%; }
+  .smokePuff:nth-child(12) { top: 79%; left: 34%; width: 30%; height: 23%; --smoke-duration: 19s; --smoke-delay: -7s; --smoke-x-a: 6%; --smoke-y-a: 9%; --smoke-rotation: 7deg; }
+  .smokePuff:nth-child(13) { top: 76%; left: 57%; width: 32%; height: 25%; --smoke-duration: 24s; --smoke-delay: -12s; --smoke-x-b: 8%; --smoke-y-b: 7%; }
+  .smokePuff:nth-child(14) { top: 10%; left: 36%; width: 29%; height: 27%; --smoke-duration: 30s; --smoke-delay: -23s; --smoke-x-a: -5%; --smoke-y-a: -12%; --smoke-rotation: -9deg; opacity: 0.68; }
 
   .outerCorner {
     display: block;
@@ -511,27 +515,19 @@
   }
 }
 
-@keyframes aboutBackdropSmokeA {
-  0% {
-    transform: translate3d(-2.5%, 1.5%, 0) scale(1.274, 1.0192);
-    opacity: 0.88;
-  }
-  50% {
-    transform: translate3d(2.5%, -1.5%, 0) scale(1.3455, 1.0764);
-    opacity: 1;
-  }
+@keyframes aboutSmokeBillow {
+  0%,
   100% {
-    transform: translate3d(4%, 2%, 0) scale(1.3195, 1.0556);
-    opacity: 0.94;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(0.86, 0.76);
+    opacity: 0.58;
   }
-}
-
-@keyframes aboutBackdropSmokeB {
-  0% {
-    transform: translate3d(3%, -1.5%, 0) scale(1.3325, 1.066);
+  34% {
+    transform: translate3d(var(--smoke-x-a), var(--smoke-y-a), 0) rotate(var(--smoke-rotation)) scale(1.08, 0.94);
+    opacity: 0.9;
   }
-  100% {
-    transform: translate3d(-4%, 2.5%, 0) scale(1.274, 1.0192);
+  67% {
+    transform: translate3d(var(--smoke-x-b), var(--smoke-y-b), 0) rotate(var(--smoke-rotation-back)) scale(0.94, 1.08);
+    opacity: 0.72;
   }
 }
 
@@ -1007,10 +1003,9 @@
     filter: none;
   }
 
-  .viewfinder::before,
-  .viewfinder::after {
+  .smokePuff {
     animation: none;
-    transform: scale(1.3, 1.04);
+    transform: scale(0.96, 0.86);
   }
 
   .viewfinderOverline::before {
