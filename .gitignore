@@ -23,6 +23,7 @@ pnpm-debug.log*
 
 # Local editor settings
 .vscode/
+.codex
 
 # OS files
 .DS_Store

@@ -390,10 +390,6 @@
   display: none;
 }
 
-.photographerNote {
-  display: none;
-}
-
 .copyPanel {
   position: relative;
   margin-top: 3.5rem;
@@ -583,28 +579,6 @@
     left: 5rem;
     top: -1.25rem;
   }
-
-  .photographerNote {
-    display: block;
-  }
-
-  .statementDivider {
-    display: block;
-  }
-}
-
-.photographerNote {
-  display: none;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  font-family: var(--font-ibm-plex-mono), monospace;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.7;
-  letter-spacing: 0.02em;
-  color: rgb(255 255 255 / 0.62);
-  text-wrap: balance;
 }
 
 .viewfinderHudTop,
@@ -895,14 +869,11 @@
   --statement-line-offset: 1.15rem;
   position: relative;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2.8rem auto 0;
+  margin: 1.8rem auto 0;
   max-width: 100%;
-  min-height: 13.5rem;
-  padding: 1.6rem 1.2rem;
-  gap: 0.85rem;
+  padding: 1.1rem 1.25rem;
   background: rgb(var(--c-gold) / 0.006);
   isolation: isolate;
 }
@@ -925,20 +896,6 @@
   letter-spacing: 0.02em;
   color: rgb(255 255 255 / 0.62);
   text-wrap: balance;
-}
-
-/* Divider — subtle gold line matching viewfinderDivider */
-.statementDivider {
-  display: none;
-  margin-inline: auto;
-  height: 1px;
-  width: min(100%, 14rem);
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgb(var(--c-gold) / 0.45) 50%,
-    transparent 100%
-  );
 }
 
 .statementCta {
@@ -1041,8 +998,7 @@
     font-size: 1.25rem;
   }
 
-  .aboutStatement,
-  .photographerNote {
+  .aboutStatement {
     font-size: 1.25rem;
   }
 

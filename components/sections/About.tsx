@@ -213,12 +213,6 @@ export default function About() {
                       return [part, <br key={`statement-break-${index}`} />]
                     })}
                 </p>
-
-                <span aria-hidden="true" className={styles.statementDivider} />
-
-                <p className={styles.photographerNote}>
-                  {siteContent.about.photographerNote}
-                </p>
               </div>
 
               <div ref={ctaRef} className={styles.statementCta}>
