@@ -15,11 +15,7 @@
 
 @media (min-width: 1024px) {
   .heroSection::before {
-    background: radial-gradient(
-      70% 50% at 50% 100%,
-      rgba(var(--c-olive) / 0.08),
-      transparent 75%
-    );
+    content: none;
   }
 }
 

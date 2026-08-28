@@ -6,21 +6,61 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { siteContent } from '@/lib/site-content'
 import CinematicVideoPlayer from '@/components/ui/CinematicVideoPlayer'
 import { useLazyVideoSource } from '@/components/ui/useLazyVideoSource'
-import { cn } from '@/lib/utils'
-import { ServiceIcon } from '@/components/sections/services/ServiceIcon'
 import styles from './OfertaServices.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
 type ServiceItem = (typeof siteContent.services.items)[number]
 
-const OFFER_DETAILS_DESCRIPTIONS: Partial<Record<ServiceItem['title'], string>> = {
+const OFFER_AUDIENCES: Record<ServiceItem['title'], string> = {
   'Film okolicznościowy':
-    'Film, który uchwyci Wasze emocje, najpiękniejsze chwile i atmosferę całego dnia — pamiątka na całe życie. Dbam o naturalne kadry, dyskretną pracę w trakcie wydarzenia i montaż, który prowadzi przez najważniejsze momenty bez sztucznego przeciągania historii. Materiał może obejmować zarówno dynamiczny skrót, jak i dłuższą formę dopasowaną do charakteru uroczystości.',
+    'Dla osób, które chcą zachować autentyczne emocje i najważniejsze wspomnienia w wyjątkowej formie.',
   'Profesjonalny montaż':
-    'Montuję filmy z Twoich materiałów, od vlogów na YouTube przez rolki na media społecznościowe. Porządkuję ujęcia, wybieram najmocniejsze fragmenty, układam tempo i dbam o spójność obrazu oraz dźwięku. W zależności od potrzeb mogę przygotować krótką, dynamiczną wersję do publikacji albo dłuższy materiał gotowy do prezentacji klientom, rodzinie lub społeczności.',
+    'Dla twórców, firm i osób, które mają nagrany materiał i potrzebują nadać mu profesjonalny rytm oraz charakter.',
   'Materiały promocyjne':
-    'Twoja marka w najlepszym świetle — przyciągnij uwagę odbiorców. Tworzę materiały, które jasno pokazują produkt, usługę lub wydarzenie i są dopasowane do miejsca publikacji: strony internetowej, kampanii reklamowej albo social mediów. Stawiam na czytelny przekaz, dobre tempo i ujęcia, które wzmacniają charakter marki zamiast tylko dekorować film.',
+    'Dla marek, lokalnych biznesów i organizatorów wydarzeń, którzy chcą skutecznie przyciągać uwagę odbiorców.',
+}
+
+const OFFER_FORMATS: Record<ServiceItem['title'], string> = {
+  'Film okolicznościowy':
+    'Krótki film idealny do udostępnienia oraz pełniejsza wersja, do której można wracać przez lata.',
+  'Profesjonalny montaż':
+    'Rolki, shorty, filmy na YouTube i dłuższe materiały dopasowane do docelowej platformy.',
+  'Materiały promocyjne':
+    'Spoty, rolki i materiały wizerunkowe przygotowane do strony internetowej oraz social mediów.',
+}
+
+type InfoIconProps = {
+  type: 'scope' | 'audience' | 'format'
+}
+
+function InfoIcon({ type }: InfoIconProps) {
+  if (type === 'audience') {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="9" cy="8" r="3" />
+        <circle cx="16.5" cy="9" r="2.5" />
+        <path d="M3.5 19c.4-4 2.5-6 5.5-6s5.1 2 5.5 6" />
+        <path d="M14 14c3.5-.6 5.8 1.1 6.5 4.5" />
+      </svg>
+    )
+  }
+
+  if (type === 'format') {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="4" y="5" width="16" height="14" rx="1" />
+        <path d="M7 8h10M7 16h10" />
+      </svg>
+    )
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3.5" y="6" width="17" height="14" rx="1" />
+      <path d="M7 3v6M17 3v6M3.5 10h17M8 14l2 2 4-4" />
+    </svg>
+  )
 }
 
 type OfertaServiceBlockProps = {
@@ -32,39 +72,10 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
   const videoFrameRef = useRef<HTMLDivElement>(null!)
   const shouldLoadVideo = useLazyVideoSource(videoFrameRef)
   const sceneNumber = String(index + 1).padStart(2, '0')
-  const mediaFirst = index % 2 === 1
-  const detailsDescription = OFFER_DETAILS_DESCRIPTIONS[item.title] ?? item.description
 
   return (
-    <article
-      data-offer-block
-      className={cn(
-        styles.block,
-        'grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start lg:gap-14',
-      )}
-    >
-      <div className={cn(styles.body, !mediaFirst && 'lg:order-2')}>
-        <div className={styles.header}>
-          <span className={styles.iconDock} aria-hidden="true">
-            <ServiceIcon icon={item.icon} className="h-6 w-6" />
-          </span>
-          <p className="ui-overline text-khaki/90">{item.tag}</p>
-          <h2
-            className={cn(
-              styles.title,
-              'font-bebas text-3xl uppercase leading-[1.0] tracking-wide text-warm-white md:text-4xl lg:text-5xl',
-            )}
-          >
-            {item.title}
-          </h2>
-        </div>
-
-        <p className="mt-6 text-center font-inter text-sm leading-relaxed text-warm-gray">
-          {item.lead}
-        </p>
-      </div>
-
-      <div className={cn(styles.media, !mediaFirst && 'lg:order-1')}>
+    <article data-offer-block className={styles.block}>
+      <div className={styles.media}>
         <CinematicVideoPlayer
           ref={videoFrameRef}
           className={styles.videoFrame}
@@ -74,28 +85,65 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
           shouldLoad={shouldLoadVideo}
           bottomLabel={item.tag}
           playLabel={item.title}
+          showPlayOverlay={false}
         >
-          <span aria-hidden="true" className={styles.sceneTag}>
-            SCENE {sceneNumber} / 03
-          </span>
+          {({ togglePlayback }) => (
+            <>
+              <span aria-hidden="true" className={styles.sceneTag}>
+                SCENA {sceneNumber} / 03
+              </span>
+
+              <div className={styles.cinematicCopy}>
+                <div className={styles.tagLine}>
+                  <span>{item.tag}</span>
+                  <span aria-hidden="true" className={styles.tagRule} />
+                </div>
+                <h2 className={styles.title}>{item.title}</h2>
+                <p className={styles.lead}>{item.lead}</p>
+                <button type="button" className={styles.previewButton} onClick={togglePlayback}>
+                  Zobacz przykład
+                  <span aria-hidden="true">▶</span>
+                </button>
+              </div>
+            </>
+          )}
         </CinematicVideoPlayer>
       </div>
 
-      <div className={cn(styles.details, 'lg:order-3')}>
-        <div className={styles.detailsHeader}>
-          <h3 className="text-center font-bebas text-2xl uppercase leading-[1.0] tracking-wide text-warm-white md:text-3xl lg:text-left">
-            Co obejmuje usługa
-          </h3>
+      <div className={styles.detailsPanel}>
+        <div className={styles.infoGrid}>
+          <div className={styles.infoItem}>
+            <span className={styles.infoIcon}><InfoIcon type="scope" /></span>
+            <div>
+              <h3>Co obejmuje</h3>
+              <p>{item.description}</p>
+            </div>
+          </div>
+          <div className={styles.infoItem}>
+            <span className={styles.infoIcon}><InfoIcon type="audience" /></span>
+            <div>
+              <h3>Dla kogo</h3>
+              <p>{OFFER_AUDIENCES[item.title]}</p>
+            </div>
+          </div>
+          <div className={styles.infoItem}>
+            <span className={styles.infoIcon}><InfoIcon type="format" /></span>
+            <div>
+              <h3>Format</h3>
+              <p>{OFFER_FORMATS[item.title]}</p>
+            </div>
+          </div>
         </div>
 
-        <p className={styles.detailsDescription}>
-          {detailsDescription}
-        </p>
+        <div className={styles.scopeHeading}>
+          <span aria-hidden="true" />
+          <h3>Zakres usługi</h3>
+          <span aria-hidden="true" />
+        </div>
 
         <ul className={styles.bullets}>
           {item.bullets.map((bullet) => (
             <li key={bullet} className={styles.bullet}>
-              <span aria-hidden="true" className={styles.bulletDot} />
               <span className={styles.bulletText}>{bullet}</span>
             </li>
           ))}

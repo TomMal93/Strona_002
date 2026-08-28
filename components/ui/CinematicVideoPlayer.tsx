@@ -21,7 +21,8 @@ type CinematicVideoPlayerProps = {
   bottomLabel?: string
   playLabel?: string
   muted?: boolean
-  children?: ReactNode
+  showPlayOverlay?: boolean
+  children?: ReactNode | ((controls: { isPlaying: boolean; togglePlayback: () => void }) => ReactNode)
 }
 
 const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProps>(
@@ -35,6 +36,7 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
       bottomLabel = 'H.265 s-log3',
       playLabel = 'film',
       muted = false,
+      showPlayOverlay = true,
       children,
     },
     ref,
@@ -46,6 +48,7 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
     const [volume, setVolume] = useState(1)
     const [isFullscreen, setIsFullscreen] = useState(false)
     const [timecode, setTimecode] = useState('00:00/00:00')
+    const sourceType = src.toLowerCase().endsWith('.webm') ? 'video/webm' : 'video/mp4'
 
     const handlePlayPause = useCallback(() => {
       const video = videoRef.current
@@ -147,7 +150,9 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
 
     return (
       <div ref={ref} className={cn(styles.frame, className)}>
-        {children}
+        {typeof children === 'function'
+          ? children({ isPlaying, togglePlayback: handlePlayPause })
+          : children}
 
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <video
@@ -159,29 +164,31 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
           preload="metadata"
           poster={poster}
         >
-          {shouldLoad && <source src={src} type="video/mp4" />}
+          {shouldLoad && <source src={src} type={sourceType} />}
         </video>
 
-        <button
-          type="button"
-          className={cn(styles.playOverlay, isPlaying && styles.playOverlayPlaying)}
-          onClick={handlePlayPause}
-          aria-label={isPlaying ? `Zatrzymaj ${playLabel}` : `Odtwórz ${playLabel}`}
-        >
-          <span className={cn(styles.playBtn, isPlaying && styles.playBtnPlaying)}>
-            <span className={cn(styles.playIcon, styles.playIconPlay)}>
-              <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
-                <path d="M8 5v14l11-7z" />
-              </svg>
+        {showPlayOverlay && (
+          <button
+            type="button"
+            className={cn(styles.playOverlay, isPlaying && styles.playOverlayPlaying)}
+            onClick={handlePlayPause}
+            aria-label={isPlaying ? `Zatrzymaj ${playLabel}` : `Odtwórz ${playLabel}`}
+          >
+            <span className={cn(styles.playBtn, isPlaying && styles.playBtnPlaying)}>
+              <span className={cn(styles.playIcon, styles.playIconPlay)}>
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+              <span className={cn(styles.playIcon, styles.playIconPause)}>
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
+                  <rect x="6" y="5" width="4" height="14" />
+                  <rect x="14" y="5" width="4" height="14" />
+                </svg>
+              </span>
             </span>
-            <span className={cn(styles.playIcon, styles.playIconPause)}>
-              <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
-                <rect x="6" y="5" width="4" height="14" />
-                <rect x="14" y="5" width="4" height="14" />
-              </svg>
-            </span>
-          </span>
-        </button>
+          </button>
+        )}
 
         <div className={styles.bottomBar}>
           <span className={styles.codec}>{bottomLabel}</span>
