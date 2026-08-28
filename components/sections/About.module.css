@@ -283,7 +283,6 @@
 
 .sectionHeader {
   position: relative;
-  z-index: 2;
   width: min(100%, 48rem);
   margin-inline: auto;
   text-align: center;
@@ -401,149 +400,15 @@
   background: rgb(var(--c-gold) / 0.015);
 }
 
-.smokeField {
-  display: none;
-}
-
-.smokeFilterDefs {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
 @media (width >= 48rem) {
   .viewfinder {
     position: relative;
-    z-index: 1;
     display: block;
-    isolation: isolate;
     width: calc(100% + 3rem);
     min-height: 46rem;
     margin-top: 2rem;
     margin-left: -1.5rem;
     padding: 2.8rem 2rem 2rem;
-    background: transparent;
-  }
-
-  .viewfinder::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(
-      ellipse 58% 58% at 50% 50%,
-      rgb(0 0 0 / 0.64) 0%,
-      rgb(0 0 0 / 0.56) 24%,
-      rgb(0 0 0 / 0.42) 44%,
-      rgb(0 0 0 / 0.24) 62%,
-      rgb(0 0 0 / 0.08) 72%,
-      transparent 84%
-    );
-  }
-
-  .smokeField {
-    position: absolute;
-    z-index: -2;
-    inset: -7.5rem -10rem -3rem;
-    display: block;
-    pointer-events: none;
-    filter: url('#about-smoke-turbulence');
-  }
-
-  .smokePuff {
-    --smoke-x-a: 5%;
-    --smoke-y-a: -8%;
-    --smoke-x-b: -4%;
-    --smoke-y-b: 6%;
-    --smoke-rotation: 5deg;
-    --smoke-rotation-back: -4deg;
-    --smoke-duration: 21s;
-    --smoke-delay: -7s;
-    --smoke-opacity-low: 0.5;
-    --smoke-opacity-high: 0.92;
-    --smoke-opacity-mid: 0.7;
-    --smoke-core: 0 0 0;
-    --smoke-mid: 0 0 0;
-    --smoke-edge: 20 22 19;
-    --smoke-accent-alpha: 0.1;
-    position: absolute;
-    display: block;
-    border-radius: 50%;
-    background:
-      radial-gradient(ellipse at 48% 7%, rgb(var(--smoke-core) / 0.72) 0 10%, rgb(var(--smoke-edge) / 0.3) 31%, transparent 58%),
-      radial-gradient(circle at 29% 42%, rgb(var(--smoke-core)) 0 24%, rgb(var(--smoke-mid) / 0.96) 35%, rgb(var(--smoke-edge) / 0.38) 50%, transparent 68%),
-      radial-gradient(circle at 68% 35%, rgb(var(--smoke-core)) 0 22%, rgb(var(--smoke-mid) / 0.94) 34%, rgb(var(--smoke-edge) / 0.34) 48%, transparent 66%),
-      radial-gradient(ellipse at 52% 70%, rgb(var(--smoke-core)) 0 25%, rgb(var(--smoke-mid) / 0.9) 37%, rgb(var(--smoke-edge) / 0.42) 52%, transparent 70%);
-    filter:
-      blur(1.65rem)
-      drop-shadow(0 0 0.45rem rgb(229 231 235 / var(--smoke-accent-alpha)));
-    transform-origin: center;
-    will-change: transform, opacity;
-    animation: aboutSmokeBillow var(--smoke-duration) ease-in-out var(--smoke-delay) infinite;
-  }
-
-  .smokePuff:nth-child(1) { top: 5%; left: 8%; width: 29%; height: 24%; --smoke-duration: 19s; --smoke-delay: -13s; --smoke-x-a: 8%; --smoke-y-a: -10%; }
-  .smokePuff:nth-child(2) { top: 0; left: 28%; width: 27%; height: 23%; --smoke-duration: 24s; --smoke-delay: -5s; --smoke-x-b: 7%; --smoke-y-b: -8%; --smoke-rotation: -7deg; }
-  .smokePuff:nth-child(3) { top: 3%; left: 48%; width: 31%; height: 25%; --smoke-duration: 21s; --smoke-delay: -17s; --smoke-x-a: -7%; --smoke-y-a: -11%; }
-  .smokePuff:nth-child(4) { top: 7%; left: 70%; width: 25%; height: 23%; --smoke-duration: 27s; --smoke-delay: -9s; --smoke-x-b: -8%; --smoke-y-b: -7%; --smoke-rotation: 9deg; }
-  .smokePuff:nth-child(5) { top: 17%; left: 0; width: 24%; height: 30%; --smoke-duration: 23s; --smoke-delay: -19s; --smoke-x-a: -10%; --smoke-y-a: 7%; }
-  .smokePuff:nth-child(6) { top: 38%; left: -1%; width: 25%; height: 31%; --smoke-duration: 18s; --smoke-delay: -4s; --smoke-x-b: -11%; --smoke-y-b: -6%; --smoke-rotation: -8deg; }
-  .smokePuff:nth-child(7) { top: 62%; left: 1%; width: 26%; height: 29%; --smoke-duration: 26s; --smoke-delay: -14s; --smoke-x-a: -9%; --smoke-y-a: -8%; }
-  .smokePuff:nth-child(8) { top: 18%; left: 76%; width: 25%; height: 30%; --smoke-duration: 20s; --smoke-delay: -11s; --smoke-x-a: 10%; --smoke-y-a: -7%; --smoke-rotation: 8deg; }
-  .smokePuff:nth-child(9) { top: 40%; left: 78%; width: 24%; height: 31%; --smoke-duration: 25s; --smoke-delay: -3s; --smoke-x-b: 12%; --smoke-y-b: 6%; }
-  .smokePuff:nth-child(10) { top: 63%; left: 75%; width: 27%; height: 29%; --smoke-duration: 22s; --smoke-delay: -16s; --smoke-x-a: 9%; --smoke-y-a: -9%; --smoke-rotation: -6deg; }
-  .smokePuff:nth-child(11) { top: 76%; left: 13%; width: 31%; height: 24%; --smoke-duration: 28s; --smoke-delay: -20s; --smoke-x-b: -7%; --smoke-y-b: 8%; }
-  .smokePuff:nth-child(12) { top: 79%; left: 34%; width: 30%; height: 23%; --smoke-duration: 19s; --smoke-delay: -7s; --smoke-x-a: 6%; --smoke-y-a: 9%; --smoke-rotation: 7deg; }
-  .smokePuff:nth-child(13) { top: 76%; left: 57%; width: 32%; height: 25%; --smoke-duration: 24s; --smoke-delay: -12s; --smoke-x-b: 8%; --smoke-y-b: 7%; }
-  .smokePuff:nth-child(14) { top: 10%; left: 36%; width: 29%; height: 27%; --smoke-duration: 30s; --smoke-delay: -23s; --smoke-x-a: -5%; --smoke-y-a: -12%; --smoke-rotation: -9deg; opacity: 0.68; }
-  .smokePuff:nth-child(15) { top: 10%; left: 14%; width: 22%; height: 21%; --smoke-duration: 22s; --smoke-delay: -18s; --smoke-x-a: 9%; --smoke-y-a: -13%; --smoke-rotation: 8deg; }
-  .smokePuff:nth-child(16) { top: 9%; left: 62%; width: 23%; height: 22%; --smoke-duration: 29s; --smoke-delay: -6s; --smoke-x-b: -10%; --smoke-y-b: -11%; --smoke-rotation: -10deg; }
-  .smokePuff:nth-child(17) { top: 28%; left: 5%; width: 21%; height: 25%; --smoke-duration: 17s; --smoke-delay: -12s; --smoke-x-a: -12%; --smoke-y-a: -5%; --smoke-rotation: 6deg; }
-  .smokePuff:nth-child(18) { top: 31%; left: 73%; width: 22%; height: 26%; --smoke-duration: 26s; --smoke-delay: -21s; --smoke-x-b: 11%; --smoke-y-b: -8%; --smoke-rotation: -7deg; }
-  .smokePuff:nth-child(19) { top: 70%; left: 23%; width: 24%; height: 22%; --smoke-duration: 20s; --smoke-delay: -9s; --smoke-x-a: -8%; --smoke-y-a: 10%; --smoke-rotation: 9deg; }
-  .smokePuff:nth-child(20) { top: 69%; left: 51%; width: 25%; height: 23%; --smoke-duration: 31s; --smoke-delay: -25s; --smoke-x-b: 9%; --smoke-y-b: 11%; --smoke-rotation: -11deg; }
-  .smokePuff:nth-child(21) { top: 8%; left: -2%; width: 27%; height: 24%; --smoke-duration: 25s; --smoke-delay: -16s; --smoke-x-a: -13%; --smoke-y-a: -10%; --smoke-rotation: -8deg; }
-  .smokePuff:nth-child(22) { top: 26%; left: 2%; width: 24%; height: 28%; --smoke-duration: 19s; --smoke-delay: -8s; --smoke-x-b: -14%; --smoke-y-b: 8%; --smoke-rotation: 10deg; }
-  .smokePuff:nth-child(23) { top: 49%; left: -3%; width: 29%; height: 30%; --smoke-duration: 28s; --smoke-delay: -22s; --smoke-x-a: -11%; --smoke-y-a: -9%; --smoke-rotation: -12deg; }
-  .smokePuff:nth-child(24) { top: 71%; left: 4%; width: 26%; height: 25%; --smoke-duration: 23s; --smoke-delay: -13s; --smoke-x-b: -12%; --smoke-y-b: 10%; --smoke-rotation: 7deg; }
-
-  .smokePuff:nth-child(3n + 1) {
-    --smoke-opacity-low: 0.58;
-    --smoke-opacity-high: 1;
-    --smoke-opacity-mid: 0.82;
-    --smoke-core: 0 0 0;
-    --smoke-mid: 0 0 0;
-    --smoke-edge: 17 19 16;
-    --smoke-accent-alpha: 0.14;
-    filter:
-      blur(1.15rem)
-      drop-shadow(0 0 0.45rem rgb(229 231 235 / var(--smoke-accent-alpha)));
-  }
-
-  .smokePuff:nth-child(3n + 2) {
-    --smoke-opacity-low: 0.38;
-    --smoke-opacity-high: 0.76;
-    --smoke-opacity-mid: 0.56;
-    --smoke-core: 0 0 0;
-    --smoke-mid: 0 0 0;
-    --smoke-edge: 27 29 24;
-    --smoke-accent-alpha: 0.06;
-    filter:
-      blur(2.15rem)
-      drop-shadow(0 0 0.45rem rgb(229 231 235 / var(--smoke-accent-alpha)));
-  }
-
-  .smokePuff:nth-child(3n) {
-    --smoke-core: 0 0 0;
-    --smoke-mid: 0 0 0;
-    --smoke-edge: 22 25 28;
-    --smoke-accent-alpha: 0.09;
-    filter:
-      blur(1.55rem)
-      drop-shadow(0 0 0.45rem rgb(229 231 235 / var(--smoke-accent-alpha)));
   }
 
   .outerCorner {
@@ -574,11 +439,6 @@
     top: -0.75rem;
     padding-top: 2.2rem;
     padding-bottom: 1.2rem;
-    background: rgb(var(--c-gold) / 0.055);
-  }
-
-  .copyColumn .statementPanel {
-    background: rgb(var(--c-gold) / 0.04);
   }
 
   .copyPanel .viewfinderContent {
@@ -589,23 +449,7 @@
   .aboutVideoFrame {
     margin-top: 0;
     left: 3rem;
-    top: -2.5rem;
-  }
-}
-
-@keyframes aboutSmokeBillow {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) rotate(0deg) scale(0.9632, 0.8512);
-    opacity: var(--smoke-opacity-low);
-  }
-  34% {
-    transform: translate3d(var(--smoke-x-a), var(--smoke-y-a), 0) rotate(var(--smoke-rotation)) scale(1.2096, 1.0528);
-    opacity: var(--smoke-opacity-high);
-  }
-  67% {
-    transform: translate3d(var(--smoke-x-b), var(--smoke-y-b), 0) rotate(var(--smoke-rotation-back)) scale(1.0528, 1.2096);
-    opacity: var(--smoke-opacity-mid);
+    top: -1rem;
   }
 }
 
@@ -624,7 +468,7 @@
 
   .aboutVideoFrame {
     left: 5rem;
-    top: -3rem;
+    top: -1.25rem;
   }
 
   .photographerNote {
@@ -1096,16 +940,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .mediaHalo {
-    filter: none;
-  }
-
-  .smokePuff {
-    animation: none;
-    transform: scale(1.0752, 0.9632);
-    opacity: 0.72;
-  }
-
-  .smokeField {
     filter: none;
   }
 
