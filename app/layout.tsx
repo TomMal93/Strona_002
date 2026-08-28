@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Bebas_Neue, Inter } from 'next/font/google'
+import { Bebas_Neue, IBM_Plex_Mono, Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import SectionRail from '@/components/layout/SectionRail'
@@ -22,6 +22,13 @@ const inter = Inter({
   weight: ['300', '400', '600'],
   subsets: ['latin', 'latin-ext'],
   variable: '--font-inter',
+  display: 'swap',
+})
+
+const ibmPlexMono = IBM_Plex_Mono({
+  weight: ['400', '500'],
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-ibm-plex-mono',
   display: 'swap',
 })
 
@@ -77,6 +84,7 @@ const enableWebVitals = process.env.NEXT_PUBLIC_ENABLE_WEB_VITALS === 'true'
 const bodyClassName = cn(
   bebasNeue.variable,
   inter.variable,
+  ibmPlexMono.variable,
   'font-inter bg-black-deep text-warm-white',
 )
 
