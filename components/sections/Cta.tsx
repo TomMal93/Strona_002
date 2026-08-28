@@ -83,7 +83,9 @@ export default function Cta() {
         <div className={styles.content}>
           <div className={styles.sectionHeader}>
             <p ref={eyebrowRef} className={styles.eyebrow}>{eyebrow}</p>
-            <h2 ref={titleRef} id="cta-heading" className={styles.title}>{title}</h2>
+            <h2 ref={titleRef} id="cta-heading" className={styles.title}>
+              {title.replaceAll('\u00A0', ' ')}
+            </h2>
           </div>
 
           <div className={styles.ctaPanel}>
