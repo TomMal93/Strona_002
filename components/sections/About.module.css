@@ -295,10 +295,16 @@
 .hudBar {
   display: flex;
   align-items: center;
-  gap: 0;
   width: 100%;
   margin-top: 1.2rem;
   pointer-events: none;
+}
+
+.hudBarHalf {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex: 1 1 50%;
 }
 
 .hudLineLeft,
@@ -1163,10 +1169,6 @@
     padding-inline: 0.45rem;
     font-size: 0.64rem;
     letter-spacing: 0.08em;
-  }
-
-  .hudBar {
-    gap: 0.9rem;
   }
 
   .statementPanel {
