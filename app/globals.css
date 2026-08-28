@@ -98,6 +98,20 @@
   }
 }
 
+/* Mobile layouts are already authored for the narrow viewport. Keep them at
+   their natural scale and give rem-based copy a little more breathing room.
+   Without this override, the global 0.8 section zoom turns 14px body copy into
+   roughly 11px text on a phone. */
+@media (max-width: 767px) {
+  html {
+    font-size: 17px;
+  }
+
+  [data-responsive-sections] > section:not(:first-child) {
+    zoom: 1;
+  }
+}
+
 /* Lenis smooth scroll — required styles (lenis/dist/lenis.css v1.1.x) */
 html.lenis,
 html.lenis body {

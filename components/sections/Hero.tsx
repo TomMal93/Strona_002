@@ -51,10 +51,10 @@ export default function Hero() {
       <MobileHeroLayout>
         <HeroTextBlock
           headingClassName="mt-1 font-bebas text-[clamp(33px,10.2vw,52px)] uppercase leading-[0.96]"
-          eyebrowClassName="block font-bebas text-[clamp(13px,3.6vw,18px)] uppercase tracking-heading opacity-90"
-          subtitleClassName="mt-2 whitespace-pre-line pb-2 font-bebas text-[clamp(14px,3.8vw,19px)] leading-[1.35] tracking-heading"
+          eyebrowClassName="block font-bebas text-[clamp(14px,3.8vw,18px)] uppercase tracking-heading opacity-90"
+          subtitleClassName="mt-2 whitespace-pre-line pb-2 font-bebas text-[clamp(16px,4.2vw,19px)] leading-[1.4] tracking-heading"
           subtitleWrapClassName="w-full"
-          ctaClassName="px-3 py-2 text-center font-bebas text-[clamp(16px,4.3vw,22px)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2"
+          ctaClassName="px-3 py-2 text-center font-bebas text-[clamp(18px,4.6vw,22px)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki focus-visible:outline-offset-2"
           socialRowClassName="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 overflow-visible"
           socialIconClassName="inline-flex h-9 w-9 items-center justify-center overflow-visible leading-none [&>svg]:block [&>svg]:h-[clamp(18px,4.8vw,24px)] [&>svg]:w-[clamp(18px,4.8vw,24px)] [&>svg]:shrink-0 [&>svg]:overflow-visible"
           underlineClassName="block h-px w-full bg-gradient-to-r from-transparent via-khaki/70 to-transparent"

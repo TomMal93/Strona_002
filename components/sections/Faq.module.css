@@ -390,7 +390,7 @@
   .hudLabelLeft,
   .hudLabelRight {
     padding-inline: 0.45rem;
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
   }
 
@@ -403,11 +403,15 @@
   }
 
   .questionText {
-    font-size: 0.92rem;
+    font-size: 1rem;
   }
 
   .answerInner {
     padding-left: 2rem;
+  }
+
+  .answerText {
+    font-size: 1rem;
   }
 }
 

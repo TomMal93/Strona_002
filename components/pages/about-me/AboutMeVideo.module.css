@@ -350,12 +350,12 @@
   .hudLabelLeft,
   .hudLabelRight {
     padding-inline: 0.45rem;
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
   }
 
   .videoBottomBar {
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     padding: 0.3rem 0.5rem;
     gap: 0.4rem;
   }

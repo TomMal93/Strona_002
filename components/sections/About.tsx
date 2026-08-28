@@ -248,14 +248,11 @@ export default function About() {
                     className={cn(
                       heroStyles.ctaButton,
                       heroStyles.ctaButtonSecondary,
-                      styles.ctaButton,
+                      'px-4 py-2 font-bebas text-[1.15rem] uppercase tracking-widest sm:text-[1.35rem]',
                     )}
                   >
-                    <span>
-                      Dowiedz się więcej
-                      <br className={styles.mobileCtaBreak} />
-                      {' '}o mnie
-                    </span>
+                    <span className={styles.desktopCtaLabel}>Dowiedz się więcej o mnie</span>
+                    <span className={styles.mobileCtaLabel}>Więcej o mnie</span>
                   </a>
 
                   <a
@@ -263,7 +260,7 @@ export default function About() {
                     className={cn(
                       heroStyles.ctaButton,
                       heroStyles.ctaButtonSecondary,
-                      styles.ctaButton,
+                      'px-4 py-2 font-bebas text-[1.15rem] uppercase tracking-widest sm:text-[1.35rem]',
                     )}
                   >
                     Zobacz realizacje

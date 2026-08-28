@@ -81,56 +81,61 @@ export default function Cta() {
     >
       <div className={styles.layout}>
         <div className={styles.content}>
-          <p ref={eyebrowRef} className={styles.eyebrow}>{eyebrow}</p>
-          <h2 ref={titleRef} id="cta-heading" className={styles.title}>{title}</h2>
-          <p ref={subtitleRef} className={styles.subtitle}>{subtitle}</p>
-          <div ref={subtitleDividerRef} className={styles.subtitleDivider} aria-hidden="true" />
-
-          <div ref={featuresRef} className={styles.features} aria-label="Najważniejsze informacje">
-            {features.map((feature, index) => {
-              const Icon = featureIcons[index]
-              return (
-                <div key={feature.label} className={styles.feature}>
-                  <Icon />
-                  <strong>{feature.label}</strong>
-                  <span>{featureDetails[index]}</span>
-                </div>
-              )
-            })}
+          <div className={styles.sectionHeader}>
+            <p ref={eyebrowRef} className={styles.eyebrow}>{eyebrow}</p>
+            <h2 ref={titleRef} id="cta-heading" className={styles.title}>{title}</h2>
           </div>
 
-          <div className={styles.actionGroup}>
-            <div className={styles.actions}>
-              <a
-                ref={primaryBtnRef}
-                href={phoneHref}
-                className={`${heroStyles.ctaButton} ${heroStyles.ctaButtonPrimary} ${styles.actionButton} ${styles.phoneButton}`}
-              >
-                <span>{phoneLabel}</span>
-                <span className={styles.phoneNumber}>{phoneNumber}</span>
-              </a>
-              <a
-                ref={secondaryLinkRef}
-                href="/oferta"
-                className={`${heroStyles.ctaButton} ${heroStyles.ctaButtonSecondary} ${styles.actionButton}`}
-              >
-                Oferta
-              </a>
+          <div className={styles.ctaPanel}>
+            <p ref={subtitleRef} className={styles.subtitle}>{subtitle}</p>
+            <div ref={subtitleDividerRef} className={styles.subtitleDivider} aria-hidden="true" />
+
+            <div ref={featuresRef} className={styles.features} aria-label="Najważniejsze informacje">
+              {features.map((feature, index) => {
+                const Icon = featureIcons[index]
+                return (
+                  <div key={feature.label} className={styles.feature}>
+                    <Icon />
+                    <strong>{feature.label}</strong>
+                    <span>{featureDetails[index]}</span>
+                  </div>
+                )
+              })}
             </div>
 
-            <div ref={socialRef} className={styles.socialRow} aria-label="Media społecznościowe">
-              {social.map(({ platform, href }) => (
+            <div className={styles.actionGroup}>
+              <div className={styles.actions}>
                 <a
-                  key={platform}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={platform}
-                  className={styles.socialLink}
+                  ref={primaryBtnRef}
+                  href={phoneHref}
+                  className={`${heroStyles.ctaButton} ${heroStyles.ctaButtonPrimary} ${styles.actionButton} ${styles.phoneButton}`}
                 >
-                  {socialIcons[platform]}
+                  <span>{phoneLabel}</span>
+                  <span className={styles.phoneNumber}>{phoneNumber}</span>
                 </a>
-              ))}
+                <a
+                  ref={secondaryLinkRef}
+                  href="/oferta"
+                  className={`${heroStyles.ctaButton} ${heroStyles.ctaButtonSecondary} ${styles.actionButton}`}
+                >
+                  Oferta
+                </a>
+              </div>
+
+              <div ref={socialRef} className={styles.socialRow} aria-label="Media społecznościowe">
+                {social.map(({ platform, href }) => (
+                  <a
+                    key={platform}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={platform}
+                    className={styles.socialLink}
+                  >
+                    {socialIcons[platform]}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>

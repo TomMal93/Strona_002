@@ -334,6 +334,15 @@
     transform: translateX(-50%);
     z-index: 1;
   }
+
+  .stepLabel,
+  .stepTimeline {
+    font-size: 0.75rem;
+  }
+
+  .stepDescription {
+    font-size: 1rem;
+  }
 }
 
 /* ── Tablet: 2x2 grid, no connector ───────────────────────────────────── */
@@ -405,7 +414,7 @@
   .hudLabelLeft,
   .hudLabelRight {
     padding-inline: 0.45rem;
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
   }
 

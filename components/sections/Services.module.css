@@ -684,6 +684,18 @@
   .cardTitle {
     max-width: none;
   }
+
+  .sceneNumber,
+  .videoMeta,
+  .playIcon {
+    font-size: 0.72rem;
+  }
+
+  .cardLead,
+  .cardDescription,
+  .bulletItem {
+    font-size: 1rem;
+  }
 }
 
 @media (min-width: 1200px) {

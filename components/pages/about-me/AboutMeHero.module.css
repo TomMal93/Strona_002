@@ -433,7 +433,7 @@
   .resolutionLabel {
     top: 1.5rem;
     right: 2.5rem;
-    font-size: 0.64rem;
+    font-size: 0.72rem;
   }
 
   .resolutionLabelBottomRight {
@@ -444,7 +444,7 @@
   .timecode {
     bottom: 1.5rem;
     right: 2.5rem;
-    font-size: 0.64rem;
+    font-size: 0.72rem;
   }
 }
 
