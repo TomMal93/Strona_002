@@ -33,15 +33,6 @@
   display: contents;
 }
 
-.eyebrow {
-  margin: 0 0 1.1rem;
-  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-  font-size: clamp(0.82rem, 0.85vw, 0.95rem);
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: rgb(204 169 101 / 0.86);
-}
-
 .title {
   max-width: 100%;
   margin: 0;
@@ -55,13 +46,36 @@
   color: rgb(231 207 149);
   text-shadow: 0 4px 34px rgb(0 0 0 / 0.65);
 }
-.title::after {
-  display: block;
-  width: 4rem;
+.hudBar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 1.2rem;
+  pointer-events: none;
+}
+.hudLineLeft,
+.hudLineRight {
   height: 1px;
-  margin-top: 1.3rem;
-  content: '';
-  background: rgb(195 153 75 / 0.72);
+  flex: 1;
+  will-change: transform, opacity;
+  background: linear-gradient(90deg, transparent 0%, rgb(var(--c-gold) / 0.3) 38%, rgb(var(--c-gold) / 0.46) 100%);
+}
+.hudLineLeft { transform-origin: right center; }
+.hudLineRight {
+  transform-origin: left center;
+  background: linear-gradient(90deg, rgb(var(--c-gold) / 0.46) 0%, rgb(var(--c-gold) / 0.3) 62%, transparent 100%);
+}
+.hudLabelLeft,
+.hudLabelRight {
+  padding: 0 0.75rem;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.54);
+  white-space: nowrap;
+  will-change: transform, opacity;
 }
 .subtitle {
   width: 100%;
@@ -266,27 +280,6 @@
     color: transparent;
     -webkit-background-clip: text;
   }
-  .title::after { display: none; }
-  .eyebrow {
-    order: 2;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    gap: 0.75rem;
-    margin: 1.2rem 0 0;
-    font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    color: rgb(255 238 175 / 0.54);
-  }
-  .eyebrow::before,
-  .eyebrow::after {
-    height: 1px;
-    flex: 1;
-    content: '';
-    background: linear-gradient(90deg, transparent, rgb(var(--c-gold) / 0.46));
-  }
-  .eyebrow::after { transform: scaleX(-1); }
   .ctaPanel {
     position: relative;
     display: flex;

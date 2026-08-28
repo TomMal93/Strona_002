@@ -46,8 +46,8 @@ const formatPhoneNumber = (phoneHref: string): string => {
 
 export default function Cta() {
   const sectionRef = useRef<HTMLElement>(null!)
-  const eyebrowRef = useRef<HTMLParagraphElement>(null!)
   const titleRef = useRef<HTMLHeadingElement>(null!)
+  const hudBarRef = useRef<HTMLDivElement>(null!)
   const subtitleRef = useRef<HTMLParagraphElement>(null!)
   const subtitleDividerRef = useRef<HTMLDivElement>(null!)
   const primaryBtnRef = useRef<HTMLAnchorElement>(null!)
@@ -58,8 +58,8 @@ export default function Cta() {
 
   useCtaAnimations({
     sectionRef,
-    eyebrowRef,
     titleRef,
+    hudBarRef,
     subtitleRef,
     subtitleDividerRef,
     primaryBtnRef,
@@ -69,7 +69,7 @@ export default function Cta() {
     mosaicRef,
   })
 
-  const { eyebrow, title, subtitle, phoneLabel, phoneHref, features, social } = siteContent.cta
+  const { title, subtitle, hudLabelLeft, hudLabelRight, phoneLabel, phoneHref, features, social } = siteContent.cta
   const phoneNumber = formatPhoneNumber(phoneHref)
 
   return (
@@ -82,10 +82,17 @@ export default function Cta() {
       <div className={styles.layout}>
         <div className={styles.content}>
           <div className={styles.sectionHeader}>
-            <p ref={eyebrowRef} className={styles.eyebrow}>{eyebrow}</p>
             <h2 ref={titleRef} id="cta-heading" className={styles.title}>
               {title.replaceAll('\u00A0', ' ')}
             </h2>
+            <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
+              <span data-hud-line className={styles.hudLineLeft} />
+              <span data-hud-label className={styles.hudLabelLeft}>{hudLabelLeft}</span>
+              <span data-hud-line className={styles.hudLineLeft} />
+              <span data-hud-line className={styles.hudLineRight} />
+              <span data-hud-label className={styles.hudLabelRight}>{hudLabelRight}</span>
+              <span data-hud-line className={styles.hudLineRight} />
+            </div>
           </div>
 
           <div className={styles.ctaPanel}>

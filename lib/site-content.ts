@@ -300,7 +300,6 @@ export const siteContent = {
     ],
   },
   cta: {
-    eyebrow: 'Fotografia & film',
     title: 'Gotowi,\u00A0żeby\u00A0opowiedzieć\nWaszą historię?',
     subtitle:
       'Wasze najważniejsze momenty zasługują na to, by przeżywać je wciąż na nowo.\n\nBądźcie w pełni sobą i cieszcie się tym dniem, a ja zadbam o kadry pełne uśmiechu i wzruszeń.\n\nNapiszcie już dziś — sprawdźmy wolny termin i stwórzmy razem coś wyjątkowego!',

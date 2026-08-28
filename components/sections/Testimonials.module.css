@@ -722,7 +722,7 @@
   border-right: 2px solid rgb(var(--c-gold) / 0.4);
 }
 
-/* ── Desktop: 2 × 2 grid + vertical dividers ────────────────────────── */
+/* ── Desktop: 4 columns + vertical dividers ──────────────────────────── */
 
 @media (min-width: 768px) {
   .socialProofBar {
@@ -730,8 +730,8 @@
   }
 
   .statsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem 0;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
   }
 
   .statDivider {
@@ -764,9 +764,6 @@
     );
   }
 
-  .statCell:nth-child(even) .statDivider {
-    display: none;
-  }
 }
 
 /* ── Social proof bar entry animation ────────────────────────────────── */

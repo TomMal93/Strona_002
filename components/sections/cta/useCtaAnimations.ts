@@ -5,8 +5,8 @@ import type { RefObject } from 'react'
 
 export type CtaAnimationRefs = {
   sectionRef: RefObject<HTMLElement>
-  eyebrowRef: RefObject<HTMLParagraphElement>
   titleRef: RefObject<HTMLHeadingElement>
+  hudBarRef: RefObject<HTMLDivElement>
   subtitleRef: RefObject<HTMLParagraphElement>
   subtitleDividerRef: RefObject<HTMLDivElement>
   primaryBtnRef: RefObject<HTMLAnchorElement>
@@ -28,7 +28,13 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
       gsap.registerPlugin(ScrollTrigger)
 
       const ctx = gsap.context(() => {
-        const copy = [refs.eyebrowRef.current, refs.titleRef.current, refs.subtitleRef.current]
+        const copy = [refs.titleRef.current, refs.subtitleRef.current]
+        const hudLines = refs.hudBarRef.current
+          ? Array.from(refs.hudBarRef.current.querySelectorAll('[data-hud-line]'))
+          : []
+        const hudLabels = refs.hudBarRef.current
+          ? Array.from(refs.hudBarRef.current.querySelectorAll('[data-hud-label]'))
+          : []
         const actions = [refs.primaryBtnRef.current, refs.secondaryLinkRef.current]
         const features = refs.featuresRef.current ? Array.from(refs.featuresRef.current.children) : []
         const socialLinks = refs.socialRef.current ? Array.from(refs.socialRef.current.children) : []
@@ -42,6 +48,8 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
 
         if (reducedMotion) {
           gsap.set(all, { autoAlpha: 1, y: 0 })
+          gsap.set(hudLines, { scaleX: 1 })
+          gsap.set(hudLabels, { autoAlpha: 1 })
           gsap.set(refs.subtitleDividerRef.current, { autoAlpha: 1, scaleX: 1 })
           gsap.set(stories, { autoAlpha: 1, clipPath: 'inset(0% 0% 0% 0%)' })
           gsap.set(storyImages, { scale: 1 })
@@ -49,6 +57,8 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         }
 
         gsap.set(copy, { autoAlpha: 0, y: 24 })
+        gsap.set(hudLines, { scaleX: 0 })
+        gsap.set(hudLabels, { autoAlpha: 0 })
         gsap.set(features, { autoAlpha: 0, y: 16 })
         gsap.set(actions, { autoAlpha: 0, y: 18 })
         gsap.set(socialLinks, { autoAlpha: 0, y: 10 })
@@ -65,19 +75,25 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         })
 
         timeline
-          .to(refs.eyebrowRef.current, {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.36,
-            ease: 'power2.out',
-          }, 0)
           .to(refs.titleRef.current, {
             autoAlpha: 1,
             y: 0,
             duration: 0.62,
             ease: 'power3.out',
-          }, 0.08)
-          .addLabel('body', 0.52)
+          }, 0)
+          .to(hudLines, {
+            scaleX: 1,
+            duration: 0.5,
+            stagger: 0.025,
+            ease: 'power2.out',
+          }, 0.18)
+          .to(hudLabels, {
+            autoAlpha: 1,
+            duration: 0.3,
+            stagger: 0.015,
+            ease: 'power2.out',
+          }, 0.38)
+          .addLabel('body', 0.62)
           .to(stories, {
             autoAlpha: 1,
             clipPath: 'inset(0% 0% 0% 0%)',
