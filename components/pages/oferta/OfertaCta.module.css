@@ -84,7 +84,7 @@
 
 .buttonRow {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
   gap: 1rem;
 }
@@ -111,7 +111,6 @@
 }
 
 .button:focus-visible,
-.portfolioLink:focus-visible,
 .socialLink:focus-visible {
   outline: 2px solid rgb(var(--c-khaki));
   outline-offset: 3px;
@@ -139,24 +138,6 @@
   border-color: rgb(var(--c-khaki) / 0.52);
   background: rgb(var(--c-khaki) / 0.07);
   color: rgb(218 226 192 / 1);
-}
-
-.portfolioLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.25rem;
-  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-  font-size: 1rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgb(218 226 192 / 0.72);
-  transition: color 250ms ease, transform 300ms ease;
-}
-
-.portfolioLink:hover {
-  color: rgb(255 238 175 / 0.95);
-  transform: translateX(2px);
 }
 
 .socialRow {
@@ -210,7 +191,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .button,
-  .portfolioLink,
   .socialLink {
     transition: none;
   }

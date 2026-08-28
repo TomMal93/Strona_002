@@ -18,7 +18,7 @@ export default function OfertaCta() {
   const { title, lead, label, href } = siteContent.offerPage.cta
   const {
     phoneLabel, phoneHref,
-    secondaryLabel, social,
+    social,
   } = siteContent.cta
 
   useEffect(() => {
@@ -83,10 +83,6 @@ export default function OfertaCta() {
                   {phoneLabel}
                 </a>
               </div>
-
-              <a href="/#promo" className={styles.portfolioLink}>
-                {secondaryLabel}
-              </a>
 
               <div className={styles.socialRow} aria-label="Media społecznościowe">
                 {social.map(({ platform, href: socialHref }) => (
