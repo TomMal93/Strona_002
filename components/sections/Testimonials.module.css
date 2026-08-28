@@ -722,7 +722,7 @@
   border-right: 2px solid rgb(var(--c-gold) / 0.4);
 }
 
-/* ── Desktop: 4 columns + vertical dividers ──────────────────────────── */
+/* ── Desktop: 2 × 2 grid + vertical dividers ────────────────────────── */
 
 @media (min-width: 768px) {
   .socialProofBar {
@@ -730,8 +730,8 @@
   }
 
   .statsGrid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 0;
   }
 
   .statDivider {
@@ -762,6 +762,10 @@
       rgb(var(--c-gold) / 0.42) 70%,
       transparent 100%
     );
+  }
+
+  .statCell:nth-child(even) .statDivider {
+    display: none;
   }
 }
 
@@ -806,8 +810,8 @@
   }
 
   .statsGrid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 0;
     padding-block: 1.5rem;
   }
 
@@ -840,6 +844,10 @@
     width: 1px;
     height: 76%;
     background: linear-gradient(180deg, transparent, rgb(var(--c-gold) / 0.2), transparent);
+  }
+
+  .statCell:nth-child(even) .statDivider {
+    display: none;
   }
 
   .logosStrip {

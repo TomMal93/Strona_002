@@ -405,7 +405,7 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="mt-12 lg:mt-14">
+        <div className="mt-8 lg:mt-10">
           <div ref={mobileCarouselRef} className={styles.mobileCarouselShell}>
             <div
               className={styles.mobileCarouselViewport}

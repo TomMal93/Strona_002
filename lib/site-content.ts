@@ -123,7 +123,7 @@ export const siteContent = {
     title: process.env.NEXT_PUBLIC_SERVICES_TITLE || 'Oferta',
     subtitle:
       process.env.NEXT_PUBLIC_SERVICES_SUBTITLE
-      || 'Od kluczowych momentów, przez montaż, po materiały dla marki.\nCel jest jeden — obraz, który przyciąga i zostaje w pamięci.',
+      || 'Od pierwszego ujęcia po finalny montaż.\nTworzę filmy, które budzą emocje i zostają w pamięci.',
     ctaLabel:
       process.env.NEXT_PUBLIC_SERVICES_CTA_LABEL
       || 'Zapytaj o termin',
@@ -198,7 +198,7 @@ export const siteContent = {
   process: {
     title: 'Proces',
     subtitle:
-      'Od pierwszego kontaktu do gotowego materiału — cztery proste kroki.\nBez niespodzianek, bez zbędnego czekania.',
+      'Ty przynosisz historię, ja dbam o każdy kolejny kadr.\nRazem przechodzimy od pomysłu do premiery.',
     hudLabelLeft: 'WORKFLOW',
     hudLabelRight: 'SCENE 05 / 08',
     steps: [
