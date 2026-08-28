@@ -150,7 +150,7 @@ export const siteContent = {
           'Urodziny',
         ],
         description:
-          'Film, który uchwyci Wasze emocje, najpiękniejsze chwile i atmosferę całego dnia — pamiątka na całe życie.',
+          'Tworzę film, który pozwala wrócić do atmosfery wydarzenia i ponownie poczuć jego najważniejsze momenty.',
         video: {
           src: '/videos/services/weeding.webm',
           poster: '/images/services/weeding.webp',
@@ -161,7 +161,7 @@ export const siteContent = {
         title: 'Profesjonalny montaż',
         tag: 'Postprodukcja',
         lead:
-          'Z surowego materiału tworzę spójną, dynamiczną historię — dbam o obraz, dźwięk i rytm, aby Twój film był gotowy do oglądania i zapadał w pamięć.',
+          'Porządkuję materiał, wydobywam z niego najmocniejsze momenty i nadaję całości profesjonalną formę.',
         bullets: [
           'Wybór najlepszych ujęć',
           'Dynamiczny montaż',
@@ -185,9 +185,10 @@ export const siteContent = {
           'Kreowanie spójnego wizerunku marki w wideo',
           'Dynamiczne ujęcia dopasowane do charakteru produktu lub usługi',
           'Materiały do mediów społecznościowych i kampanii reklamowych',
+          'Filmy produktowe i prezentacje usług',
         ],
         description:
-          'Twoja marka w najlepszym świetle — przyciągnij uwagę odbiorców.',
+          'Zamieniam wartości Twojej marki w obraz, który angażuje, buduje rozpoznawalność i zostaje w pamięci.',
         video: {
           src: '/videos/services/bieg.webm',
           poster: '/images/services/bieg.webp',
@@ -335,7 +336,7 @@ export const siteContent = {
       eyebrow: 'Usługi',
       title: 'Oferta',
       lead:
-        'Od kluczowych momentów, przez montaż, po materiały dla marki.\nCel jest jeden — obraz, który przyciąga i zostaje w pamięci.',
+        'Słucham, obserwuję i szukam tego, co najważniejsze.\nPotem zamieniam to w film pełen prawdziwych emocji.',
     },
     cta: {
       title: 'Porozmawiajmy o Twoim projekcie',
