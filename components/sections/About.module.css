@@ -408,6 +408,10 @@
   -webkit-backdrop-filter: blur(12px);
 }
 
+.mobileVideoFrame {
+  display: none;
+}
+
 .viewfinderBackdrop {
   display: none;
 }
@@ -932,74 +936,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.4rem;
+  gap: 0;
   margin-top: 1.8rem;
   width: 100%;
-}
-
-.features {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.5rem;
-  max-width: 520px;
-}
-
-.feature {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-width: 0;
-  height: 100%;
-  gap: 0.35rem;
-  padding: 0 0.4rem;
-  text-align: center;
-  text-transform: uppercase;
-  color: rgb(214 186 126);
-}
-
-.feature + .feature::before {
-  position: absolute;
-  top: 4px;
-  bottom: 4px;
-  left: 0;
-  width: 1px;
-  content: '';
-  background: linear-gradient(180deg, transparent, rgb(196 163 100 / 0.35), transparent);
-}
-
-.feature svg {
-  width: 32px;
-  height: 32px;
-  margin-bottom: 0.2rem;
-  flex-shrink: 0;
-  fill: none;
-  stroke: rgb(231 207 149);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.5;
-}
-
-.feature strong {
-  display: block;
-  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-  font-size: 1.1rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  color: rgb(238 222 178);
-  white-space: nowrap;
-}
-
-.feature > span {
-  display: block;
-  font-family: 'Roboto Mono', monospace;
-  font-size: clamp(0.58rem, 0.65vw, 0.72rem);
-  line-height: 1.35;
-  letter-spacing: 0.02em;
-  color: rgb(215 200 170 / 0.78);
-  white-space: nowrap;
 }
 
 .ctaActions {
@@ -1023,35 +962,22 @@
   flex-shrink: 0;
 }
 
+.mobileCtaBreak {
+  display: none;
+}
+
 @media (max-width: 767px) {
-  .bottomCta {
-    gap: 1.75rem;
-    margin-top: 1.5rem;
-  }
-
-  .features {
+  .mobileVideoFrame {
+    position: relative;
+    display: block;
     width: 100%;
-    gap: 0.25rem;
+    aspect-ratio: 16 / 9;
+    margin-top: 1.8rem;
+    overflow: hidden;
   }
 
-  .feature {
-    padding-inline: 0.2rem;
-    gap: 0.25rem;
-  }
-
-  .feature strong {
-    font-size: 0.95rem;
-    letter-spacing: 0.06em;
-  }
-
-  .feature > span {
-    font-size: 0.58rem;
-    line-height: 1.25;
-  }
-
-  .feature svg {
-    width: 28px;
-    height: 28px;
+  .bottomCta {
+    margin-top: 1.5rem;
   }
 
   .ctaActions {
@@ -1059,22 +985,34 @@
   }
 
   .ctaButton {
-    font-size: 1.05rem;
-    padding: 0.55rem 0.85rem;
+    min-height: 4rem;
+    font-size: 1.1rem;
+    padding: 0.65rem 1rem;
+  }
+
+  .mobileCtaBreak {
+    display: block;
   }
 }
 
 @media (max-width: 479px) {
   .ctaActions {
     flex-direction: row;
+    align-items: stretch;
     gap: 0.6rem;
   }
 
   .ctaButton {
     flex: 1;
+    width: auto;
     max-width: 175px;
-    font-size: 0.98rem;
-    padding: 0.55rem 0.5rem;
+    min-height: 4.25rem;
+    font-size: 1rem;
+    line-height: 1.05;
+    letter-spacing: 0.06em;
+    white-space: normal;
+    text-wrap: balance;
+    padding: 0.65rem 0.5rem;
   }
 }
 
@@ -1164,6 +1102,11 @@
 }
 
 @media (width < 48rem) {
+  .viewfinderLead,
+  .viewfinderDesc {
+    font-size: 1.15rem;
+  }
+
   .hudModeLabel,
   .hudTimecode {
     padding-inline: 0.45rem;
@@ -1172,7 +1115,7 @@
   }
 
   .statementPanel {
-    padding: 0.95rem 0.95rem 1rem;
+    display: none;
   }
 
   .copyPanel {

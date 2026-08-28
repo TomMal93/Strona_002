@@ -384,6 +384,10 @@
 /* ── Responsive: small screens ────────────────────────────────────────── */
 
 @media (width < 48rem) {
+  .videoFrame {
+    display: none;
+  }
+
   .bottomTimeline {
     display: none;
   }

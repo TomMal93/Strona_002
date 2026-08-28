@@ -38,7 +38,7 @@ export const siteContent = {
     statement:
       process.env.NEXT_PUBLIC_ABOUT_STATEMENT
       || 'Nazywam się Przemek Malxxxxx. Tworzę treści audiowizualne, które pokazują Cię tak, jak chcesz być zapamiętany.',
-    ctaLabel: process.env.NEXT_PUBLIC_ABOUT_CTA_LABEL || 'Zobacz jak pracuję',
+    ctaLabel: process.env.NEXT_PUBLIC_ABOUT_CTA_LABEL || 'Dowiedz się więcej o mnie',
     imageAlt:
       process.env.NEXT_PUBLIC_ABOUT_IMAGE_ALT
       || 'Fotograf i operator drona — portret z dronem i kontrolerem',
