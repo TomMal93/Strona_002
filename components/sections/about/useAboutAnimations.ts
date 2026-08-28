@@ -66,7 +66,11 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
           ? Array.from(statement.querySelectorAll<HTMLElement>('[class*="cornerMark"]'))
           : [],
         statementCopy: statement
-          ? Array.from(statement.querySelectorAll<HTMLElement>(':scope > p'))
+          ? Array.from(
+              statement.querySelectorAll<HTMLElement>(
+                ':scope > p, :scope > [class*="Divider"]',
+              ),
+            )
           : [],
       }
     }

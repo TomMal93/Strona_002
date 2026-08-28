@@ -214,6 +214,8 @@ export default function About() {
                     })}
                 </p>
 
+                <span aria-hidden="true" className={styles.statementDivider} />
+
                 <p className={styles.photographerNote}>
                   {siteContent.about.photographerNote}
                 </p>

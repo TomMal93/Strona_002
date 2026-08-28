@@ -588,15 +588,15 @@
     display: block;
   }
 
-  .aboutStatement::after {
-    display: none;
+  .statementDivider {
+    display: block;
   }
 }
 
 .photographerNote {
-  grid-row: 2;
+  display: none;
   margin: 0;
-  padding: 0.4rem 1.4rem 1.15rem;
+  padding: 0;
   text-align: center;
   font-family: var(--font-ibm-plex-mono), monospace;
   font-size: 1rem;
@@ -890,32 +890,33 @@
 }
 
 /* ── About statement ───────────────────────────────────────────────────── */
-
+ 
 .statementPanel {
   --statement-line-offset: 1.15rem;
   position: relative;
-  display: grid;
-  grid-template-rows: 1fr auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 2.8rem auto 0;
   max-width: 100%;
   min-height: 13.5rem;
-  padding: 0;
+  padding: 1.6rem 1.2rem;
+  gap: 0.85rem;
   background: rgb(var(--c-gold) / 0.006);
   isolation: isolate;
 }
 
 .aboutStatement {
   position: relative;
-  grid-row: 1;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 0;
-  height: 100%;
   box-sizing: border-box;
   margin: 0;
-  padding: 1rem 1.2rem 10px;
+  padding: 0;
   text-align: center;
   font-family: var(--font-ibm-plex-mono), monospace;
   font-size: 1rem;
@@ -926,21 +927,18 @@
   text-wrap: balance;
 }
 
-.aboutStatement::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  width: calc(100% - (var(--statement-line-offset) * 2));
-  transform: translateX(-50%);
-  bottom: 0;
+/* Divider — subtle gold line matching viewfinderDivider */
+.statementDivider {
+  display: none;
+  margin-inline: auto;
   height: 1px;
+  width: min(100%, 14rem);
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgb(255 238 175 / 0.15) 50%,
+    rgb(var(--c-gold) / 0.45) 50%,
     transparent 100%
   );
-  opacity: 0.72;
 }
 
 .statementCta {
