@@ -49,6 +49,7 @@ export default function About() {
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const videoRef = useRef<HTMLDivElement>(null!)
   const viewfinderRef = useRef<HTMLDivElement>(null!)
+  const backdropRef = useRef<HTMLDivElement>(null!)
   const leadRef = useRef<HTMLParagraphElement>(null!)
   const descriptionRef = useRef<HTMLParagraphElement>(null!)
   const statementRef = useRef<HTMLDivElement>(null!)
@@ -71,6 +72,7 @@ export default function About() {
     titleRef,
     videoRef,
     viewfinderRef,
+    backdropRef,
     leadRef,
     descriptionRef,
     statementRef,
@@ -109,6 +111,7 @@ export default function About() {
 
         {/* One desktop viewfinder now frames the portrait and both copy panels. */}
         <div ref={viewfinderRef} className={styles.viewfinder}>
+          <div ref={backdropRef} className={styles.viewfinderBackdrop} aria-hidden="true" />
           <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL} ${styles.outerCorner}`} />
           <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR} ${styles.outerCorner}`} />
           <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL} ${styles.outerCorner}`} />
