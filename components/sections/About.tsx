@@ -176,6 +176,14 @@ export default function About() {
                       })
                       .flatMap((part, index) => {
                         if (typeof part !== 'string') return [part]
+                        const chunks = part.split('Potem obrazem.')
+                        return chunks.flatMap((chunk, chunkIndex) => {
+                          if (chunkIndex === chunks.length - 1) return [chunk]
+                          return [chunk, 'Potem obrazem.', <br key={`lead-break-obrazem-${index}-${chunkIndex}`} />]
+                        })
+                      })
+                      .flatMap((part, index) => {
+                        if (typeof part !== 'string') return [part]
                         const chunks = part.split('pisać.')
                         return chunks.flatMap((chunk, chunkIndex) => {
                           if (chunkIndex === chunks.length - 1) return [chunk]

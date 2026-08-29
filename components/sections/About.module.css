@@ -547,21 +547,31 @@
   }
 
   .copyColumn {
-    position: relative;
     grid-column: span 7 / span 7;
     align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-sizing: border-box;
-    padding-bottom: 7rem;
+    display: grid;
+    grid-template-rows: minmax(0, 0.45fr) auto auto minmax(0, 1fr);
+  }
+
+  .copyColumn::before {
+    content: '';
+    grid-row: 1;
+  }
+
+  .copyColumn .copyPanel {
+    grid-row: 2;
+  }
+
+  .copyColumn .statementPanel {
+    grid-row: 3;
   }
 
   .copyColumn .bottomCta {
-    position: absolute;
-    right: 0;
-    bottom: 1.75rem;
-    left: 0;
+    position: relative;
+    top: 4px;
+    grid-row: 4;
+    align-self: stretch;
+    justify-content: center;
     margin-top: 0;
   }
 
@@ -1092,7 +1102,7 @@
 @media (width < 48rem) {
   .viewfinderLead,
   .viewfinderDesc {
-    font-size: 1.15rem;
+    font-size: 16px;
   }
 
   .hudModeLabel,
