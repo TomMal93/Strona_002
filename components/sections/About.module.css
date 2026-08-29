@@ -547,7 +547,22 @@
   }
 
   .copyColumn {
+    position: relative;
     grid-column: span 7 / span 7;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    padding-bottom: 7rem;
+  }
+
+  .copyColumn .bottomCta {
+    position: absolute;
+    right: 0;
+    bottom: 1.75rem;
+    left: 0;
+    margin-top: 0;
   }
 
   .copyPanel {
@@ -900,8 +915,10 @@
   justify-content: center;
   align-items: center;
   margin: 1.8rem auto 0;
+  width: 100%;
   max-width: 100%;
-  padding: 1.1rem 1.25rem;
+  box-sizing: border-box;
+  padding: 1.5rem 1.25rem;
   background: rgb(12 11 10 / 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
