@@ -49,7 +49,6 @@ export default function Cta() {
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const hudBarRef = useRef<HTMLDivElement>(null!)
   const subtitleRef = useRef<HTMLParagraphElement>(null!)
-  const subtitleDividerRef = useRef<HTMLDivElement>(null!)
   const primaryBtnRef = useRef<HTMLAnchorElement>(null!)
   const secondaryLinkRef = useRef<HTMLAnchorElement>(null!)
   const featuresRef = useRef<HTMLDivElement>(null!)
@@ -61,7 +60,6 @@ export default function Cta() {
     titleRef,
     hudBarRef,
     subtitleRef,
-    subtitleDividerRef,
     primaryBtnRef,
     secondaryLinkRef,
     featuresRef,
@@ -83,7 +81,9 @@ export default function Cta() {
         <div className={styles.content}>
           <div className={styles.sectionHeader}>
             <h2 ref={titleRef} id="cta-heading" className={styles.title}>
-              {title.replaceAll('\u00A0', ' ')}
+              {title.split('\n').map((line) => (
+                <span key={line} className={styles.titleLine}>{line}</span>
+              ))}
             </h2>
             <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
               <span data-hud-line className={styles.hudLineLeft} />
@@ -96,8 +96,7 @@ export default function Cta() {
           </div>
 
           <div className={styles.ctaPanel}>
-            <p ref={subtitleRef} className={styles.subtitle}>{subtitle}</p>
-            <div ref={subtitleDividerRef} className={styles.subtitleDivider} aria-hidden="true" />
+            <p ref={subtitleRef} className={`${styles.subtitle} section-subtitle-responsive`}>{subtitle}</p>
 
             <div ref={featuresRef} className={styles.features} aria-label="Najważniejsze informacje">
               {features.map((feature, index) => {

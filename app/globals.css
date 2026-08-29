@@ -112,6 +112,31 @@
   }
 }
 
+/* Keep subtitles beneath section headings visually consistent despite the
+   responsive section zoom above. Desktop/tablet values compensate that zoom
+   so the rendered sizes match the intended breakpoint scale. */
+.section-subtitle-responsive.section-subtitle-responsive {
+  font-size: 16px;
+}
+
+@media (min-width: 1200px) and (max-width: 1749px) {
+  .section-subtitle-responsive.section-subtitle-responsive {
+    font-size: 18.75px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .section-subtitle-responsive.section-subtitle-responsive {
+    font-size: 20.3125px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-subtitle-responsive.section-subtitle-responsive {
+    font-size: 15px;
+  }
+}
+
 /* Lenis smooth scroll — required styles (lenis/dist/lenis.css v1.1.x) */
 html.lenis,
 html.lenis body {

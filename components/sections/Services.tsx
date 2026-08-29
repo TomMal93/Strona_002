@@ -397,7 +397,7 @@ export default function Services() {
           <p
             ref={introRef}
             className={cn(
-              'mt-5 whitespace-pre-line font-mono text-[0.95rem] leading-[1.85] tracking-wide text-white/50',
+              'section-subtitle-responsive mt-5 whitespace-pre-line font-mono text-[0.95rem] leading-[1.85] tracking-wide text-white/50',
               styles.sectionIntro,
             )}
           >

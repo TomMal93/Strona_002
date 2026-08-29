@@ -8,7 +8,6 @@ export type CtaAnimationRefs = {
   titleRef: RefObject<HTMLHeadingElement>
   hudBarRef: RefObject<HTMLDivElement>
   subtitleRef: RefObject<HTMLParagraphElement>
-  subtitleDividerRef: RefObject<HTMLDivElement>
   primaryBtnRef: RefObject<HTMLAnchorElement>
   secondaryLinkRef: RefObject<HTMLAnchorElement>
   featuresRef: RefObject<HTMLDivElement>
@@ -50,7 +49,6 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
           gsap.set(all, { autoAlpha: 1, y: 0 })
           gsap.set(hudLines, { scaleX: 1 })
           gsap.set(hudLabels, { autoAlpha: 1 })
-          gsap.set(refs.subtitleDividerRef.current, { autoAlpha: 1, scaleX: 1 })
           gsap.set(stories, { autoAlpha: 1, clipPath: 'inset(0% 0% 0% 0%)' })
           gsap.set(storyImages, { scale: 1 })
           return
@@ -62,7 +60,6 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
         gsap.set(features, { autoAlpha: 0, y: 16 })
         gsap.set(actions, { autoAlpha: 0, y: 18 })
         gsap.set(socialLinks, { autoAlpha: 0, y: 10 })
-        gsap.set(refs.subtitleDividerRef.current, { autoAlpha: 0, scaleX: 0 })
         gsap.set(stories, {
           autoAlpha: 0,
           clipPath: 'inset(0% 0% 100% 0%)',
@@ -120,12 +117,6 @@ export function useCtaAnimations(refs: CtaAnimationRefs): void {
             y: 0,
             duration: 0.42,
             stagger: 0.1,
-            ease: 'power3.out',
-          }, 'body+=0.15')
-          .to(refs.subtitleDividerRef.current, {
-            autoAlpha: 1,
-            scaleX: 1,
-            duration: 0.55,
             ease: 'power3.out',
           }, 'body+=0.15')
           .to(refs.primaryBtnRef.current, {

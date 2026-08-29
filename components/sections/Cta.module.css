@@ -21,7 +21,7 @@
 .content {
   display: flex;
   width: 100%;
-  max-width: 520px;
+  max-width: 600px;
   min-width: 0;
   flex-direction: column;
   justify-content: center;
@@ -40,11 +40,22 @@
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
   font-size: clamp(2.35rem, 2.9vw, 3.6rem);
   font-weight: 400;
-  line-height: 0.95;
-  letter-spacing: 0.012em;
+  line-height: 0.9;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: rgb(231 207 149);
-  text-shadow: 0 4px 34px rgb(0 0 0 / 0.65);
+  background: linear-gradient(
+    130deg,
+    rgb(var(--c-warm)) 0%,
+    rgb(255 238 175) 45%,
+    rgb(var(--c-gold)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.titleLine {
+  display: block;
+  white-space: nowrap;
 }
 .hudBar {
   display: flex;
@@ -87,28 +98,13 @@
   letter-spacing: 0.04em;
   color: rgb(236 225 203 / 0.76);
 }
-.subtitleDivider {
-  display: block;
-  width: min(100%, 20rem);
-  height: 1px;
-  margin: clamp(2.4rem, 3.8vh, 3.2rem) auto;
-  content: '';
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgb(var(--c-gold) / 0.25) 15%,
-    rgb(255 238 175 / 0.75) 50%,
-    rgb(var(--c-gold) / 0.25) 85%,
-    transparent 100%
-  );
-}
 
 .features {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.5rem;
-  margin-top: 0;
+  margin-top: clamp(2.5rem, 4vh, 3.5rem);
 }
 .feature {
   position: relative;
@@ -225,6 +221,7 @@
   min-width: 0;
   min-height: 0;
   height: auto;
+  margin-left: clamp(2rem, 3vw, 4rem);
   grid-template: 0.95fr 0.72fr 0.82fr / 1fr 1.1fr;
   gap: 6px;
 }
@@ -270,7 +267,6 @@
     margin-bottom: 1.75rem;
   }
   .title {
-    order: 1;
     font-size: clamp(3rem, 8vw, 4rem);
     line-height: 0.9;
     letter-spacing: 0.05em;
@@ -293,8 +289,7 @@
     box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 18px 42px rgb(0 0 0 / 0.22);
   }
   .subtitle { max-width: 590px; margin: 0 auto; text-align: center; }
-  .subtitleDivider { margin-block: 2.25rem; }
-  .features { width: min(100%, 640px); margin-top: 0; }
+  .features { width: min(100%, 640px); margin-top: 2.25rem; }
   .actionGroup { align-items: center; margin-top: 3rem; }
   .mosaic { display: none; }
 }
@@ -304,7 +299,7 @@
   .sectionHeader { margin-bottom: 1.5rem; }
   .title {
     max-width: 100%;
-    font-size: clamp(2.35rem, 11vw, 3rem);
+    font-size: clamp(1.75rem, 9.5vw, 3rem);
     text-wrap: balance;
   }
   .ctaPanel { max-width: 30rem; padding: 1.5rem 1rem 1.75rem; }
@@ -313,12 +308,11 @@
     font-size: 0.9rem;
     line-height: 1.7;
   }
-  .subtitleDivider { margin-block: 1.75rem; }
   .features {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     width: 100%;
     gap: 0;
-    margin-top: 0;
+    margin-top: 1.75rem;
   }
   .feature {
     padding: 0.75rem 0.25rem;
@@ -358,6 +352,22 @@
 
   .feature > span {
     font-size: 0.76rem;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1749px) {
+  .title {
+    width: 100%;
+    max-width: 100%;
+    font-size: 3.75rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .title {
+    width: 100%;
+    max-width: 100%;
+    font-size: 3.75rem;
   }
 }
 
