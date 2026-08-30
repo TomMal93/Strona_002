@@ -28,6 +28,40 @@
   }
 }
 
+/* A dimmed copy of the portrait carries its colour into the otherwise empty
+   sides without competing with the sharp, framed image. */
+.heroAmbient {
+  display: none;
+  position: absolute;
+  inset: -4rem;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@media (width >= 48rem) {
+  .heroAmbient {
+    display: block;
+  }
+
+  .heroAmbient img {
+    object-fit: cover;
+    object-position: center 42%;
+    opacity: 0.38;
+    filter: blur(56px) brightness(0.88) saturate(0.95);
+    transform: scale(1.12);
+  }
+
+  .heroAmbient::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgb(13 13 13 / 0.34), transparent 28%, transparent 72%, rgb(13 13 13 / 0.34)),
+      linear-gradient(0deg, rgb(13 13 13 / 0.42), transparent 48%, rgb(13 13 13 / 0.16));
+  }
+}
+
 /* ── Parallax background ─────────────────────────────────────────────── */
 
 .heroBg {
@@ -79,17 +113,19 @@
 @media (width >= 48rem) {
   .heroBgFramed {
     background: transparent;
+    box-shadow: none;
   }
 
   .heroBgFramed img {
-    -webkit-mask-image:
-      linear-gradient(to right, transparent 0%, rgb(0 0 0) 14%, rgb(0 0 0) 86%, transparent 100%),
-      linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(0 0 0) 78%, transparent 100%);
-    mask-image:
-      linear-gradient(to right, transparent 0%, rgb(0 0 0) 14%, rgb(0 0 0) 86%, transparent 100%),
-      linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(0 0 0) 78%, transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-composite: intersect;
+    -webkit-mask-image: url('/images/contact/contact-hero-edge-mask.svg');
+    mask-image: url('/images/contact/contact-hero-edge-mask.svg');
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    mask-mode: alpha;
   }
 
   .heroSectionFramed .heroBgFramed::after {

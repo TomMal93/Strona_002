@@ -55,6 +55,19 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
         hero.framedImage && styles.heroSectionFramed,
       )}
     >
+      {hero.framedImage ? (
+        <div className={styles.heroAmbient} aria-hidden="true">
+          <Image
+            src={hero.backgroundImage}
+            alt=""
+            fill
+            sizes="100vw"
+            quality={imageQuality}
+            unoptimized={hero.imageUnoptimized}
+          />
+        </div>
+      ) : null}
+
       {/* Parallax background */}
       <div
         ref={bgRef}
