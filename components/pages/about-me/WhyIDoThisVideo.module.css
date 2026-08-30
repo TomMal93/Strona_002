@@ -331,6 +331,14 @@
 
 /* ── Responsive ──────────────────────────────────────────────────────── */
 
+@media (48rem <= width < 64rem) {
+  .videoFramePortrait,
+  .videoShellPortrait,
+  .sprocketPortrait {
+    max-width: min(100%, 28rem);
+  }
+}
+
 @media (width < 48rem) {
   .hudLabelLeft,
   .hudLabelRight {
@@ -346,13 +354,13 @@
   }
 
   .videoFramePortrait {
-    max-width: min(100%, 20rem);
+    max-width: min(100%, 22rem);
     height: clamp(24rem, 72svh, 30rem);
     aspect-ratio: auto;
   }
 
   .videoShellPortrait,
   .sprocketPortrait {
-    max-width: min(100%, 20rem);
+    max-width: min(100%, 22rem);
   }
 }

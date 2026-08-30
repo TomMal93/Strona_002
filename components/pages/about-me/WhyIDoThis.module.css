@@ -317,6 +317,17 @@
   pointer-events: none;
 }
 
+@media (width < 64rem) {
+  .videoFeatureLayout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .videoFeatureColumn {
+    display: none;
+  }
+}
+
 @media (width >= 64rem) {
   .bioPanelText .bioText {
     text-align: center;
@@ -407,10 +418,6 @@
   }
 
   .bioPanelVideo .videoSeparator {
-    display: none;
-  }
-
-  .videoFeatureColumn {
     display: none;
   }
 
