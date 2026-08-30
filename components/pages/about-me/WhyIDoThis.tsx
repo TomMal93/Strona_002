@@ -87,8 +87,8 @@ export default function WhyIDoThis() {
                 <div className={styles.frameTop}><span>H.265/LOG3</span><span>00:00:02:14</span></div>
                 <div className={styles.imageStage}>
                   <Image
-                    src="/images/contact/contact-hero.webp"
-                    alt="Przemek z aparatem podczas pracy w plenerze"
+                    src="/images/contact/why-act-1-journey-v1.webp"
+                    alt="Filmowiec z aparatem na górskim szlaku o świcie"
                     fill
                     sizes="(max-width: 767px) 100vw, 58vw"
                     className={styles.sceneImage}
@@ -103,8 +103,8 @@ export default function WhyIDoThis() {
                 <div className={styles.frameTop}><span>H.265/LOG3</span><span>00:00:06:47</span></div>
                 <div className={styles.imageStage}>
                   <Image
-                    src="/images/Hero_v4.png"
-                    alt="Filmowy portret w ciepłym świetle"
+                    src="/images/contact/why-act-2-campfire-v1.webp"
+                    alt="Filmowiec przy ognisku w lesie o zmierzchu"
                     fill
                     sizes="(max-width: 767px) 100vw, 56vw"
                     className={styles.sceneImage}

@@ -3,14 +3,6 @@
   color: rgb(255 255 255 / 0.62);
 }
 
-.section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 50% 18%, rgb(var(--c-warm) / 0.055), transparent 44%);
-}
-
 .container {
   position: relative;
   z-index: 1;
@@ -125,7 +117,7 @@
   margin: 0 0 1.5rem;
   color: rgb(229 186 124 / 0.82);
   font-family: var(--font-bebas), sans-serif;
-  font-size: clamp(2.3rem, 3.1vw, 3.45rem);
+  font-size: clamp(2.05rem, 2.7vw, 3rem);
   font-weight: 400;
   line-height: 0.98;
   letter-spacing: 0.06em;
@@ -133,7 +125,7 @@
 }
 
 .sceneThree h3 {
-  font-size: clamp(2.15rem, 2.7vw, 3rem);
+  font-size: clamp(1.95rem, 2.4vw, 2.65rem);
   white-space: nowrap;
 }
 
@@ -198,7 +190,7 @@
 
 .quoteFrame .sceneImage {
   object-position: center 44%;
-  filter: saturate(0.6) contrast(1.14) brightness(0.55) sepia(0.22);
+  filter: saturate(0.72) contrast(1.08) brightness(0.72) sepia(0.12);
 }
 
 .quoteFrame blockquote {
@@ -347,7 +339,7 @@
   .scene, .sceneTwo { grid-template-columns: 1fr 1.35fr; gap: 2rem; padding-left: 2rem; }
   .sceneTwo { grid-template-columns: 1.35fr 1fr; }
   .sceneThree { grid-template-columns: 1fr minmax(18rem, 0.7fr); }
-  .sceneCopy h3 { font-size: 2.4rem; }
+  .sceneCopy h3 { font-size: 2.2rem; }
   .tags span { padding-inline: 0.6rem; }
 }
 
@@ -361,7 +353,7 @@
   .scene, .sceneTwo { display: flex; flex-direction: column; gap: 1.6rem; align-items: stretch; padding-left: 1.8rem; }
   .sceneThree { display: flex; }
   .sceneTwo .sceneCopy { order: -1; }
-  .sceneCopy h3 { font-size: 2.55rem; }
+  .sceneCopy h3 { font-size: 2.25rem; }
   .sceneThree h3 { white-space: normal; }
   .sceneHeading { margin-bottom: 1.65rem; }
   .sceneRule { width: 100%; }
