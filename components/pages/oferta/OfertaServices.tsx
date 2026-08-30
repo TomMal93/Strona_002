@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { siteContent } from '@/lib/site-content'
 import CinematicVideoPlayer from '@/components/ui/CinematicVideoPlayer'
 import { useLazyVideoSource } from '@/components/ui/useLazyVideoSource'
 import styles from './OfertaServices.module.css'
+import { OFERTA_HERO_ENTERED_EVENT } from './ofertaAnimation'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -156,25 +157,39 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
 export default function OfertaServices() {
   const sectionRef = useRef<HTMLElement>(null!)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) return
 
-    const ctx = gsap.context(() => {
+    const ctx = gsap.context((_, contextSafe) => {
       const blocks = gsap.utils.toArray<HTMLElement>('[data-offer-block]')
-      blocks.forEach((block) => {
-        gsap.from(block, {
-          y: 40,
-          autoAlpha: 0,
-          duration: 0.9,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: block,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
+      gsap.set(blocks, { y: 40, autoAlpha: 0 })
+
+      const animateBlocks = () => {
+        blocks.forEach((block) => {
+          gsap.to(block, {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.9,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: block,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          })
         })
-      })
+
+        ScrollTrigger.refresh()
+      }
+
+      const revealBlocks = contextSafe
+        ? (contextSafe(animateBlocks) as () => void)
+        : animateBlocks
+
+      window.addEventListener(OFERTA_HERO_ENTERED_EVENT, revealBlocks, { once: true })
+
+      return () => window.removeEventListener(OFERTA_HERO_ENTERED_EVENT, revealBlocks)
     }, sectionRef)
 
     return () => ctx.revert()

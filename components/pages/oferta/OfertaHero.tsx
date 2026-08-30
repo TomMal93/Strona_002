@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils'
 import styles from './OfertaHero.module.css'
 import heroStyles from '@/components/sections/Hero.module.css'
 import servicesStyles from '@/components/sections/Services.module.css'
+import { OFERTA_HERO_ENTERED_EVENT } from './ofertaAnimation'
 
 export default function OfertaHero() {
   const sectionRef = useRef<HTMLElement>(null!)
@@ -28,7 +29,12 @@ export default function OfertaHero() {
       if (hudLines.length) gsap.set(hudLines, { scaleX: 0 })
       if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0, y: 8 })
 
-      const tl = gsap.timeline({ delay: 0.15 })
+      const tl = gsap.timeline({
+        delay: 0.15,
+        onComplete: () => {
+          window.dispatchEvent(new Event(OFERTA_HERO_ENTERED_EVENT))
+        },
+      })
 
       if (hudLines.length) {
         tl.to(hudLines, {
