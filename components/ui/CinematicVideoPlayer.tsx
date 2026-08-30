@@ -22,6 +22,7 @@ type CinematicVideoPlayerProps = {
   playLabel?: string
   muted?: boolean
   showPlayOverlay?: boolean
+  clickToToggle?: boolean
   children?: ReactNode | ((controls: { isPlaying: boolean; togglePlayback: () => void }) => ReactNode)
 }
 
@@ -37,6 +38,7 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
       playLabel = 'film',
       muted = false,
       showPlayOverlay = true,
+      clickToToggle = false,
       children,
     },
     ref,
@@ -157,7 +159,8 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <video
           ref={videoRef}
-          className={cn(styles.video, videoClassName)}
+          className={cn(styles.video, clickToToggle && styles.videoClickable, videoClassName)}
+          onClick={clickToToggle ? handlePlayPause : undefined}
           loop
           muted={muted}
           playsInline

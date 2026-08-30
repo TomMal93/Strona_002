@@ -87,6 +87,7 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
           bottomLabel={item.tag}
           playLabel={item.title}
           showPlayOverlay={false}
+          clickToToggle
         >
           {({ togglePlayback }) => (
             <>

@@ -144,13 +144,19 @@
   margin: 0;
   padding: 2.75rem 2.5rem 2.5rem;
   overflow: hidden;
-  border: 1px solid rgba(var(--c-gold) / 0.18);
+  border: 1px solid rgb(var(--c-khaki) / 0.08);
   border-top: 0;
   border-radius: 0 0 5px 5px;
   background:
     radial-gradient(circle at 50% 0%, rgba(var(--c-gold) / 0.07), transparent 48%),
-    linear-gradient(135deg, rgba(31, 29, 25, 0.68), rgba(14, 14, 14, 0.78));
+    linear-gradient(135deg, rgba(31, 29, 25, 0.28), rgba(14, 14, 14, 0.38));
   box-shadow: 0 20px 55px rgba(0, 0, 0, 0.24);
+  transition: border-color 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.block:hover .detailsPanel,
+.block:focus-within .detailsPanel {
+  border-color: rgb(var(--c-gold) / 0.3);
 }
 
 .infoGrid {
