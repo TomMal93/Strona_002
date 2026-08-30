@@ -94,6 +94,24 @@
   max-width: 24rem;
 }
 
+.videoShellEmbedded {
+  max-width: none;
+}
+
+.videoShellEmbedded .sprocketTop,
+.videoShellEmbedded .sprocketBottom {
+  display: none;
+}
+
+.videoShellEmbedded .videoFramePortrait {
+  max-width: none;
+}
+
+.videoShellEmbedded .videoFrame video {
+  object-fit: contain;
+  object-position: center;
+}
+
 .videoHalo {
   position: absolute;
   inset: -15% -10%;

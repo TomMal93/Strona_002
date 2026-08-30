@@ -9,6 +9,7 @@ import { useWhyIDoThisVideoAnimations } from './useWhyIDoThisVideoAnimations'
 
 type WhyIDoThisVideoProps = {
   embedded?: boolean
+  landscape?: boolean
   videoOverride?: {
     title?: string
     hudLabelLeft?: string
@@ -20,7 +21,7 @@ type WhyIDoThisVideoProps = {
   }
 }
 
-export default function WhyIDoThisVideo({ embedded = false, videoOverride }: WhyIDoThisVideoProps) {
+export default function WhyIDoThisVideo({ embedded = false, landscape = false, videoOverride }: WhyIDoThisVideoProps) {
   const sectionRef = useRef<HTMLElement>(null!)
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const subtitleRef = useRef<HTMLParagraphElement>(null!)
@@ -37,6 +38,7 @@ export default function WhyIDoThisVideo({ embedded = false, videoOverride }: Why
     ...videoOverride,
   }
   const isYouTube = video.type === 'youtube'
+  const isLandscape = isYouTube || landscape
   const shouldLoadVideo = useLazyVideoSource(videoShellRef, !isYouTube)
 
   const handlePlayPause = useCallback(() => {
@@ -93,7 +95,8 @@ export default function WhyIDoThisVideo({ embedded = false, videoOverride }: Why
       ref={videoShellRef}
       className={cn(
         styles.videoShell,
-        isYouTube ? styles.videoShellLandscape : styles.videoShellPortrait,
+        isLandscape ? styles.videoShellLandscape : styles.videoShellPortrait,
+        embedded && styles.videoShellEmbedded,
       )}
     >
       <div className={styles.videoHalo} aria-hidden="true" />
@@ -102,7 +105,7 @@ export default function WhyIDoThisVideo({ embedded = false, videoOverride }: Why
       <div
         className={cn(
           styles.sprocketTop,
-          isYouTube ? styles.sprocketLandscape : styles.sprocketPortrait,
+          isLandscape ? styles.sprocketLandscape : styles.sprocketPortrait,
         )}
         aria-hidden="true"
       />
@@ -110,7 +113,7 @@ export default function WhyIDoThisVideo({ embedded = false, videoOverride }: Why
       <div
         className={cn(
           styles.videoFrame,
-          isYouTube ? styles.videoFrameLandscape : styles.videoFramePortrait,
+          isLandscape ? styles.videoFrameLandscape : styles.videoFramePortrait,
         )}
       >
         <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerTL)} />
@@ -185,7 +188,7 @@ export default function WhyIDoThisVideo({ embedded = false, videoOverride }: Why
       <div
         className={cn(
           styles.sprocketBottom,
-          isYouTube ? styles.sprocketLandscape : styles.sprocketPortrait,
+          isLandscape ? styles.sprocketLandscape : styles.sprocketPortrait,
         )}
         aria-hidden="true"
       />
