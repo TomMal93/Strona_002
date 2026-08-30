@@ -200,7 +200,7 @@ export default function OfertaServices() {
     <section
       ref={sectionRef}
       aria-label="Szczegóły oferty"
-      className="section-dark-bg px-6 pb-20 pt-2 sm:py-24 lg:px-20 lg:pb-28 lg:pt-6"
+      className="section-dark-bg px-6 pb-20 pt-2 sm:pb-24 sm:pt-4 lg:px-20 lg:pb-28 lg:pt-6"
     >
       <div className="mx-auto flex max-w-content flex-col gap-16 sm:gap-20 lg:gap-24">
         {siteContent.services.items.map((item, index) => (

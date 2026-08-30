@@ -71,7 +71,7 @@ export default function OfertaHero() {
       ref={sectionRef}
       aria-labelledby="oferta-heading"
       className={cn(
-        'section-dark-bg bg-anthracite px-6 pt-32 pb-4 sm:pt-36 sm:pb-24 lg:px-20 lg:pt-40 lg:pb-10',
+        'section-dark-bg bg-anthracite px-6 pb-6 pt-32 sm:pb-8 sm:pt-36 lg:px-20 lg:pb-10 lg:pt-40',
         styles.heroSection,
       )}
     >
