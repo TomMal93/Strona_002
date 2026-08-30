@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils'
 // --- Typography (design.md) ---
 const bebasNeue = Bebas_Neue({
   weight: '400',
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-bebas',
   display: 'swap',
 })
