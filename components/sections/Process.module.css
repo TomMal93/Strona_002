@@ -424,12 +424,44 @@
 }
 
 /* Compensate the global section zoom introduced below 1750px. */
-@media (min-width: 768px) and (max-width: 1749px) {
+@media (min-width: 768px) and (max-width: 1199px) {
   .sectionSubtitle {
     font-size: 1.04rem;
   }
 
+  .stepLabel {
+    /* 14.84375px × 0.64 zoom = 9.5px */
+    font-size: 14.84375px;
+  }
+
   .stepDescription {
-    font-size: 0.96rem;
+    /* 18.75px × 0.64 zoom = 12px */
+    font-size: 18.75px;
+  }
+
+  .stepTimeline {
+    /* 12.5px × 0.64 zoom = 8px */
+    font-size: 12.5px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1749px) {
+  .sectionSubtitle {
+    font-size: 1.04rem;
+  }
+
+  .stepLabel {
+    /* 13.125px × 0.8 zoom = 10.5px */
+    font-size: 13.125px;
+  }
+
+  .stepDescription {
+    /* 17.5px × 0.8 zoom = 14px */
+    font-size: 17.5px;
+  }
+
+  .stepTimeline {
+    /* 12.5px × 0.8 zoom = 10px */
+    font-size: 12.5px;
   }
 }

@@ -416,16 +416,36 @@
 }
 
 /* Compensate the global section zoom introduced below 1750px. */
-@media (min-width: 768px) and (max-width: 1749px) {
+@media (min-width: 768px) and (max-width: 1199px) {
   .sectionSubtitle {
     font-size: 1.04rem;
   }
 
+  .questionNumber,
   .questionText {
-    font-size: 1.06rem;
+    /* 19.53125px × 0.64 zoom = 12.5px */
+    font-size: 19.53125px;
   }
 
   .answerText {
-    font-size: 0.96rem;
+    /* 18.75px × 0.64 zoom = 12px */
+    font-size: 18.75px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1749px) {
+  .sectionSubtitle {
+    font-size: 1.04rem;
+  }
+
+  .questionNumber,
+  .questionText {
+    /* 18.125px × 0.8 zoom = 14.5px */
+    font-size: 18.125px;
+  }
+
+  .answerText {
+    /* 17.5px × 0.8 zoom = 14px */
+    font-size: 17.5px;
   }
 }

@@ -917,16 +917,73 @@
 }
 
 /* Compensate the global section zoom introduced below 1750px. */
-@media (min-width: 768px) and (max-width: 1749px) {
+@media (min-width: 768px) and (max-width: 1199px) {
   .sectionSubtitle {
     font-size: 1.04rem;
   }
 
-  .quoteText {
-    font-size: 1.08rem;
+  .cardTagline,
+  .authorContext,
+  .statLabel {
+    /* 14.84375px × 0.64 zoom = 9.5px */
+    font-size: 14.84375px;
   }
 
-  .authorContext {
-    font-size: 0.76rem;
+  .cardNumber {
+    /* 19.53125px × 0.64 zoom = 12.5px */
+    font-size: 19.53125px;
+  }
+
+  .quoteText {
+    /* 20.3125px × 0.64 zoom = 13px */
+    font-size: 20.3125px;
+  }
+
+  .authorName {
+    /* 22.65625px × 0.64 zoom = 14.5px */
+    font-size: 22.65625px;
+  }
+
+  .statTag {
+    /* 12.5px × 0.64 zoom = 8px */
+    font-size: 12.5px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1749px) {
+  .sectionSubtitle {
+    font-size: 1.04rem;
+  }
+
+  .cardTagline,
+  .authorContext,
+  .statLabel {
+    /* 13.125px × 0.8 zoom = 10.5px */
+    font-size: 13.125px;
+  }
+
+  .cardNumber {
+    /* 18.125px × 0.8 zoom = 14.5px */
+    font-size: 18.125px;
+  }
+
+  .quoteText {
+    /* 17.5px × 0.8 zoom = 14px */
+    font-size: 17.5px;
+  }
+
+  .statTag {
+    /* 12.5px × 0.8 zoom = 10px */
+    font-size: 12.5px;
+  }
+}
+
+@media (max-width: 767px) {
+  .quoteText {
+    font-size: 13px;
+  }
+
+  .authorName {
+    font-size: 14.5px;
   }
 }
