@@ -320,7 +320,7 @@ export default function Promo() {
         </div>
 
         <blockquote className={styles.promoQuote}>
-          <p>Film to nie to, co pokazujesz. To to, co zostaje widzom po seansie.</p>
+          <p>Najsilniejszy przekaz nie mówi, co myśleć. Sprawia, że zaczynasz czuć.</p>
         </blockquote>
       </div>
     </section>

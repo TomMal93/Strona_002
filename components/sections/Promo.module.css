@@ -628,7 +628,7 @@
   .processItem strong {
     color: rgb(218 177 111 / 0.76);
     font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 400;
     letter-spacing: 0.12em;
   }
@@ -637,7 +637,7 @@
     margin-top: 0.25rem;
     color: rgb(194 151 88 / 0.48);
     font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-    font-size: 0.7rem;
+    font-size: 0.76rem;
     letter-spacing: 0.13em;
   }
 
