@@ -114,7 +114,6 @@
   pointer-events: auto;
 }
 
-.codec,
 .timecode {
   white-space: nowrap;
 }

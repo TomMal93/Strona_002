@@ -66,13 +66,11 @@ function InfoIcon({ type }: InfoIconProps) {
 
 type OfertaServiceBlockProps = {
   item: ServiceItem
-  index: number
 }
 
-function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
+function OfertaServiceBlock({ item }: OfertaServiceBlockProps) {
   const videoFrameRef = useRef<HTMLDivElement>(null!)
   const shouldLoadVideo = useLazyVideoSource(videoFrameRef)
-  const sceneNumber = String(index + 1).padStart(2, '0')
 
   return (
     <article data-offer-block className={styles.block}>
@@ -84,17 +82,12 @@ function OfertaServiceBlock({ item, index }: OfertaServiceBlockProps) {
           src={item.video.src}
           poster={item.video.poster}
           shouldLoad={shouldLoadVideo}
-          bottomLabel={item.tag}
           playLabel={item.title}
           showPlayOverlay={false}
           clickToToggle
         >
           {({ togglePlayback }) => (
             <>
-              <span aria-hidden="true" className={styles.sceneTag}>
-                SCENA {sceneNumber} / 03
-              </span>
-
               <div className={styles.cinematicCopy}>
                 <div className={styles.tagLine}>
                   <span>{item.tag}</span>
@@ -203,8 +196,8 @@ export default function OfertaServices() {
       className="section-dark-bg px-6 pb-20 pt-2 sm:pb-24 sm:pt-4 lg:px-20 lg:pb-28 lg:pt-6"
     >
       <div className="mx-auto flex max-w-content flex-col gap-16 sm:gap-20 lg:gap-24">
-        {siteContent.services.items.map((item, index) => (
-          <OfertaServiceBlock key={item.title} item={item} index={index} />
+        {siteContent.services.items.map((item) => (
+          <OfertaServiceBlock key={item.title} item={item} />
         ))}
       </div>
     </section>

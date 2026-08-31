@@ -18,7 +18,6 @@ type CinematicVideoPlayerProps = {
   shouldLoad: boolean
   className?: string
   videoClassName?: string
-  bottomLabel?: string
   playLabel?: string
   muted?: boolean
   showPlayOverlay?: boolean
@@ -34,7 +33,6 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
       shouldLoad,
       className,
       videoClassName,
-      bottomLabel = 'H.265 s-log3',
       playLabel = 'film',
       muted = false,
       showPlayOverlay = true,
@@ -194,7 +192,6 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
         )}
 
         <div className={styles.bottomBar}>
-          <span className={styles.codec}>{bottomLabel}</span>
           <button
             ref={progressRef}
             type="button"

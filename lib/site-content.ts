@@ -165,7 +165,7 @@ export const siteContent = {
         bullets: [
           'Wybór najlepszych ujęć',
           'Dynamiczny montaż',
-          'Dodanie efektów wizualnych oraz dźwiękowych',
+          'Efekty i dźwięk',
           'Korekcja kolorów',
         ],
         description:
@@ -182,10 +182,10 @@ export const siteContent = {
         lead:
           'Tworzę wideo promocyjne, które pokazuje Twoją markę w najlepszym świetle i przyciąga uwagę odbiorców.',
         bullets: [
-          'Kreowanie spójnego wizerunku marki w wideo',
-          'Dynamiczne ujęcia dopasowane do charakteru produktu lub usługi',
-          'Materiały do mediów społecznościowych i kampanii reklamowych',
-          'Filmy produktowe i prezentacje usług',
+          'Spójny wizerunek marki',
+          'Dynamiczne ujęcia',
+          'Kampanie social media',
+          'Filmy produktowe',
         ],
         description:
           'Zamieniam wartości Twojej marki w obraz, który angażuje, buduje rozpoznawalność i zostaje w pamięci.',

@@ -48,17 +48,6 @@
   transform: scale(1.018);
 }
 
-.sceneTag {
-  position: absolute;
-  top: 1.75rem;
-  right: 2rem;
-  z-index: 5;
-  font-family: var(--font-bebas), sans-serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.28em;
-  color: rgba(255, 213, 138, 0.66);
-}
-
 .cinematicCopy {
   position: absolute;
   top: 50%;
@@ -147,9 +136,7 @@
   border: 1px solid rgb(var(--c-khaki) / 0.08);
   border-top: 0;
   border-radius: 0 0 5px 5px;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(var(--c-gold) / 0.07), transparent 48%),
-    linear-gradient(135deg, rgba(31, 29, 25, 0.28), rgba(14, 14, 14, 0.38));
+  background: transparent;
   box-shadow: 0 20px 55px rgba(0, 0, 0, 0.24);
   transition: border-color 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -331,12 +318,6 @@
       linear-gradient(90deg, rgba(3, 3, 3, 0.28), transparent);
   }
 
-  .sceneTag {
-    top: 1rem;
-    right: 1rem;
-    font-size: 0.66rem;
-  }
-
   .cinematicCopy {
     top: auto;
     right: 1.25rem;
@@ -351,7 +332,7 @@
   }
 
   .title {
-    font-size: clamp(2.7rem, 14vw, 4rem);
+    font-size: clamp(calc(2.7rem - 4px), calc(14vw - 4px), calc(4rem - 4px));
   }
 
   .lead {
