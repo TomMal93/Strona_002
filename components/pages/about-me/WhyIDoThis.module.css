@@ -313,7 +313,6 @@
   width: min(100%, 28rem);
   align-self: start;
   justify-self: start;
-  padding: 0;
   overflow: hidden;
 }
 
@@ -332,7 +331,6 @@
 
 .quoteFooter p { margin: 0; }
 .quoteMark { font: 4.5rem/0.4 Georgia, serif; color: rgb(var(--c-gold) / 0.46); }
-.signature { font: italic 1.65rem/1 Georgia, serif; text-transform: none; letter-spacing: 0; }
 
 @media (width < 64rem) {
   .storyRail::before { left: 0.1rem; }
@@ -346,13 +344,22 @@
 @media (width < 48rem) {
   .section { padding-inline: 1.15rem; }
   .sectionHeader { margin-bottom: 3.5rem; }
-  .sectionTitle { font-size: clamp(3.25rem, 16vw, 4.8rem); }
+  .sectionTitle { font-size: 3rem; }
   .sectionKicker { gap: 0.55rem; font-size: 0.61rem; letter-spacing: 0.12em; }
   .storyRail::before { left: 0.32rem; bottom: 6.8rem; }
   .story { gap: 4.25rem; }
-  .scene, .sceneTwo { display: flex; flex-direction: column; gap: 1.6rem; align-items: stretch; padding-left: 1.8rem; }
+  .scene, .sceneTwo { display: flex; flex-direction: column; gap: 0; align-items: stretch; padding-left: 1.8rem; }
   .sceneThree { display: flex; }
-  .sceneTwo .sceneCopy { order: -1; }
+  .sceneCopy { display: contents; }
+  .sceneHeading { order: 1; }
+  .sceneCopy h3 { order: 2; }
+  .sceneCopy > p:not(.microLabel) { order: 3; }
+  .scene > .frame { order: 4; margin-block: 0.35rem 1.6rem; }
+  .sceneThree > .frame { margin-bottom: 0.5rem; }
+  .tagsBlock,
+  .directorNotes { order: 5; }
+  .directorNotes { margin-top: 0; }
+  .missionBlock { order: 6; }
   .sceneCopy h3 { font-size: 2.25rem; }
   .sceneThree h3 { white-space: normal; }
   .sceneHeading { margin-bottom: 1.65rem; }
@@ -361,6 +368,14 @@
   .tags { display: grid; grid-template-columns: 1fr; }
   .tags span { text-align: center; }
   .missionItem { padding-inline: 0.35rem; font-size: 0.52rem; }
-  .quoteFooter { grid-template-columns: auto 1fr; margin-left: 1.8rem; padding: 1.1rem; line-height: 1.75; }
-  .signature { display: none; }
+  .quoteFooter {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-left: 0;
+    padding: 1.1rem 0;
+    border: 0;
+    line-height: 1.75;
+    text-align: center;
+  }
 }

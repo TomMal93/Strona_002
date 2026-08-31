@@ -68,7 +68,7 @@ export default function WhyIDoThis() {
             {bio.title}
           </h2>
           <p ref={subtitleRef} className={styles.sectionKicker}>
-            Notatki reżysera <span aria-hidden="true">•</span> Trzy akty mojej drogi
+            Trzy akty mojej drogi
           </p>
         </header>
 
@@ -167,6 +167,7 @@ export default function WhyIDoThis() {
               </div>
 
               <div data-why-video-block className={cn(styles.frame, styles.videoFrame)}>
+                <div className={styles.frameTop}><span>H.265/LOG3</span><span>00:00:10:21</span></div>
                 <WhyIDoThisVideo
                   embedded
                   videoOverride={{
@@ -175,13 +176,13 @@ export default function WhyIDoThis() {
                     poster: '/images/contact/bio.webp',
                   }}
                 />
+                <div className={styles.frameBottom}><span>03</span><span>Akt III</span></div>
               </div>
             </article>
 
             <footer className={styles.quoteFooter}>
               <span aria-hidden="true" className={styles.quoteMark}>“</span>
               <p>Film to nie to, co widać. To to, co czuje widz, gdy światła gasną.</p>
-              <span className={styles.signature}>Przemek</span>
             </footer>
           </div>
         </div>
