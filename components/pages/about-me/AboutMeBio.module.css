@@ -134,3 +134,105 @@
   .gearItem small { font-size: .68rem; }
   .profileCtaLink { width: 100%; justify-content: center; font-size: 1rem; }
 }
+
+/* Compensate the global section zoom introduced below 1750px. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .introLead {
+    /* 23.4375px * 0.64 zoom = 15px */
+    font-size: 23.4375px;
+  }
+
+  .introMiddle,
+  .introBody {
+    /* 20.3125px * 0.64 zoom = 13px */
+    font-size: 20.3125px;
+  }
+
+  .infoTitle {
+    /* 20.3125px * 0.64 zoom = 13px */
+    font-size: 20.3125px;
+  }
+
+  .detailList li {
+    /* 18.75px * 0.64 zoom = 12px */
+    font-size: 18.75px;
+  }
+
+  .hudLabel,
+  .frameLabel,
+  .cameraMeta {
+    /* 12.5px * 0.64 zoom = 8px */
+    font-size: 12.5px;
+  }
+
+  .statLabel {
+    /* 14.84375px * 0.64 zoom = 9.5px */
+    font-size: 14.84375px;
+  }
+
+  .gearItem strong {
+    /* 20.3125px * 0.64 zoom = 13px */
+    font-size: 20.3125px;
+  }
+
+  .gearItem small {
+    /* 14.84375px * 0.64 zoom = 9.5px */
+    font-size: 14.84375px;
+  }
+
+  .profileCtaLink {
+    /* 23.4375px * 0.64 zoom = 15px */
+    font-size: 23.4375px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1749px) {
+  .introLead {
+    /* 20px * 0.8 zoom = 16px */
+    font-size: 20px;
+  }
+
+  .introMiddle,
+  .introBody {
+    /* 17.5px * 0.8 zoom = 14px */
+    font-size: 17.5px;
+  }
+
+  .infoTitle {
+    /* 17.5px * 0.8 zoom = 14px */
+    font-size: 17.5px;
+  }
+
+  .detailList li {
+    /* 16.25px * 0.8 zoom = 13px */
+    font-size: 16.25px;
+  }
+
+  .hudLabel,
+  .frameLabel,
+  .cameraMeta {
+    /* 12.5px * 0.8 zoom = 10px */
+    font-size: 12.5px;
+  }
+
+  .statLabel {
+    /* 13.125px * 0.8 zoom = 10.5px */
+    font-size: 13.125px;
+  }
+
+  .gearItem strong {
+    /* 17.5px * 0.8 zoom = 14px */
+    font-size: 17.5px;
+  }
+
+  .gearItem small {
+    /* 13.125px * 0.8 zoom = 10.5px */
+    font-size: 13.125px;
+  }
+
+  .profileCtaLink {
+    /* 20px * 0.8 zoom = 16px */
+    font-size: 20px;
+  }
+}
+

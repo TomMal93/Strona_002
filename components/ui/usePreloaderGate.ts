@@ -4,7 +4,7 @@ const MIN_VISIBLE_MS = 1100
 const MAX_WAIT_MS = 6000
 
 const MOBILE_QUERY = '(max-width: 767px)'
-const DESKTOP_HERO_IMAGE = '/images/Hero_v4.png'
+const DESKTOP_HERO_IMAGE = '/images/Hero.webp'
 const MOBILE_HERO_VIDEO = '/videos/hero/hero-video.mp4'
 
 type GateState = 'loading' | 'ready'

@@ -345,6 +345,25 @@ export const siteContent = {
       href: '/contact',
     },
   },
+  contactPage: {
+    meta: {
+      title: process.env.NEXT_PUBLIC_CONTACT_META_TITLE || 'Kontakt',
+      description:
+        process.env.NEXT_PUBLIC_CONTACT_META_DESC
+        || 'Porozmawiajmy o filmie, fotografii lub materiale promocyjnym dla Twojej marki.',
+    },
+    hero: {
+      eyebrow: 'Kontakt',
+      titleLine1: 'Zacznijmy',
+      titleLine2: 'od rozmowy',
+      lead:
+        'Masz pomysł, termin albo dopiero pierwszą myśl? Opowiedz mi o niej. Wrócę z konkretną odpowiedzią i wspólnie ustalimy, co możemy stworzyć.',
+      availability: 'Odpowiadam zwykle w ciągu 24 godzin',
+      location: 'Realizacje w całej Polsce i za granicą',
+      image: '/images/contact/contact.webp',
+      imageAlt: 'Filmowiec z aparatem podczas pracy w plenerze',
+    },
+  },
   aboutMe: {
     meta: {
       title: process.env.NEXT_PUBLIC_ABOUTME_META_TITLE || 'O mnie',

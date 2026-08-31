@@ -382,3 +382,23 @@
     max-width: min(100%, 22rem);
   }
 }
+
+/* Compensate the global section zoom introduced below 1750px. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .hudLabelLeft,
+  .hudLabelRight,
+  .videoBottomBar {
+    /* 12.5px * 0.64 zoom = 8px */
+    font-size: 12.5px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1749px) {
+  .hudLabelLeft,
+  .hudLabelRight,
+  .videoBottomBar {
+    /* 12.5px * 0.8 zoom = 10px */
+    font-size: 12.5px;
+  }
+}
+

@@ -500,3 +500,19 @@
     animation: none;
   }
 }
+
+/* Compensate the first-child section zoom (0.8) between 768px and 1199px. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .heroTagline {
+    /* 16.25px * 0.8 zoom = 13px */
+    font-size: 16.25px;
+  }
+
+  .recIndicator,
+  .resolutionLabel,
+  .timecode {
+    /* 12.5px * 0.8 zoom = 10px */
+    font-size: 12.5px;
+  }
+}
+

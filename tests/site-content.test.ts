@@ -18,6 +18,9 @@ test('site content exposes required SEO, Hero, About and Services copy fields', 
   assert.equal(typeof siteContent.services.title, 'string')
   assert.equal(typeof siteContent.services.subtitle, 'string')
   assert.equal(typeof siteContent.services.ctaLabel, 'string')
+  assert.equal(typeof siteContent.contactPage.hero.titleLine1, 'string')
+  assert.equal(typeof siteContent.contactPage.hero.titleLine2, 'string')
+  assert.equal(typeof siteContent.contactPage.hero.lead, 'string')
   assert.ok(Array.isArray(siteContent.services.items))
   assert.equal(siteContent.services.items.length, 3)
 

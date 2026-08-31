@@ -393,3 +393,101 @@
     text-align: center;
   }
 }
+
+/* Compensate the global section zoom introduced below 1750px. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .sectionKicker {
+    /* 20.3125px * 0.64 zoom = 13px */
+    font-size: 20.3125px;
+  }
+
+  .sceneNumber {
+    /* 25px * 0.64 zoom = 16px */
+    font-size: 25px;
+  }
+
+  .sceneCopy h3 {
+    /* 43.75px * 0.64 zoom = 28px */
+    font-size: 43.75px;
+  }
+
+  .sceneCopy > p:not(.microLabel),
+  .noteRow p {
+    /* 20.3125px * 0.64 zoom = 13px */
+    font-size: 20.3125px;
+  }
+
+  .microLabel {
+    /* 14.84375px * 0.64 zoom = 9.5px */
+    font-size: 14.84375px;
+  }
+
+  .tags span,
+  .missionItem,
+  .frameTop,
+  .frameBottom,
+  .noteRow > span {
+    /* 12.5px * 0.64 zoom = 8px */
+    font-size: 12.5px;
+  }
+
+  .noteRow strong {
+    /* 21.875px * 0.64 zoom = 14px */
+    font-size: 21.875px;
+  }
+
+  .quoteFooter {
+    /* 15.625px * 0.64 zoom = 10px */
+    font-size: 15.625px;
+  }
+
+  .quoteFrame blockquote {
+    /* 17.1875px * 0.64 zoom = 11px */
+    font-size: 17.1875px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1749px) {
+  .sectionKicker {
+    /* 18.75px * 0.8 zoom = 15px */
+    font-size: 18.75px;
+  }
+
+  .sceneCopy > p:not(.microLabel),
+  .noteRow p {
+    /* 17.5px * 0.8 zoom = 14px */
+    font-size: 17.5px;
+  }
+
+  .microLabel {
+    /* 13.125px * 0.8 zoom = 10.5px */
+    font-size: 13.125px;
+  }
+
+  .tags span,
+  .missionItem,
+  .frameTop,
+  .frameBottom,
+  .noteRow > span {
+    /* 12.5px * 0.8 zoom = 10px */
+    font-size: 12.5px;
+  }
+
+  .quoteFooter {
+    /* 13.125px * 0.8 zoom = 10.5px */
+    font-size: 13.125px;
+  }
+}
+
+@media (max-width: 767px) {
+  .sceneCopy > p:not(.microLabel) {
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  .noteRow p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+}
+

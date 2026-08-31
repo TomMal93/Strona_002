@@ -90,7 +90,7 @@ export default function Hero() {
                 <span className={styles.haloParticles} />
               </div>
               <Image
-                src="/images/Hero_v4.png"
+                src="/images/Hero.webp"
                 alt="Fotograf i operator drona — portret z dronem i kontrolerem"
                 fill
                 className={`relative z-10 object-contain object-center ${styles.desktopPortraitImage}`}

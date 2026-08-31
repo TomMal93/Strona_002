@@ -372,3 +372,61 @@
     transition: none;
   }
 }
+
+/* Compensate the global section zoom introduced below 1750px. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .subtitle {
+    /* 20.3125px * 0.64 zoom = 13px */
+    font-size: 20.3125px;
+  }
+
+  .contactLabel {
+    /* 19.53125px * 0.64 zoom = 12.5px */
+    font-size: 19.53125px;
+  }
+
+  .contactValue {
+    /* 20.3125px * 0.64 zoom = 13px */
+    font-size: 20.3125px;
+  }
+
+  .hudLabelLeft,
+  .hudLabelRight {
+    /* 12.5px * 0.64 zoom = 8px */
+    font-size: 12.5px;
+  }
+
+  .button {
+    /* 23.4375px * 0.64 zoom = 15px */
+    font-size: 23.4375px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1749px) {
+  .subtitle {
+    /* 18.75px * 0.8 zoom = 15px */
+    font-size: 18.75px;
+  }
+
+  .contactLabel {
+    /* 17.5px * 0.8 zoom = 14px */
+    font-size: 17.5px;
+  }
+
+  .contactValue {
+    /* 17.5px * 0.8 zoom = 14px */
+    font-size: 17.5px;
+  }
+
+  .hudLabelLeft,
+  .hudLabelRight {
+    /* 12.5px * 0.8 zoom = 10px */
+    font-size: 12.5px;
+  }
+
+  .button {
+    /* 20px * 0.8 zoom = 16px */
+    font-size: 20px;
+  }
+}
+
