@@ -94,7 +94,7 @@ export default function Hero() {
                 alt="Fotograf i operator drona — portret z dronem i kontrolerem"
                 fill
                 className={`relative z-10 object-contain object-center ${styles.desktopPortraitImage}`}
-                loading="eager"
+                priority
                 quality={85}
                 sizes="(min-width: 1440px) 46vw, (min-width: 768px) 44vw, 1px"
               />

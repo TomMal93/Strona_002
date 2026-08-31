@@ -117,6 +117,16 @@ const nextConfig = {
           },
         ],
       },
+      // Publiczne wideo — 30 dni, rewalidacja w tle
+      {
+        source: '/videos/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2592000, stale-while-revalidate=86400',
+          },
+        ],
+      },
       securityHeaders,
     ]
   },

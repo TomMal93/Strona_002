@@ -151,7 +151,12 @@ function SceneCard({ item, index, animate = true, className }: SceneCardProps) {
             playsInline
             onClick={toggleVideo}
           >
-            {shouldLoadVideo && <source src={item.video.src} type="video/mp4" />}
+            {shouldLoadVideo && (
+              <source
+                src={item.video.src}
+                type={item.video.src.toLowerCase().endsWith('.webm') ? 'video/webm' : 'video/mp4'}
+              />
+            )}
           </video>
 
           <button
