@@ -84,15 +84,8 @@ export default function Footer() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-3 font-inter text-xs text-warm-gray md:justify-self-end">
-          <Link
-            href="/contact"
-            className="uppercase tracking-overline transition-colors duration-200 hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki"
-          >
-            Kontakt
-          </Link>
-          <span aria-hidden="true">·</span>
-          <p className="md:text-right">
+        <div className="font-inter text-[10px] text-warm-gray sm:text-xs md:justify-self-end">
+          <p className="whitespace-nowrap md:text-right">
             © {year} Maleszyk.Media · Wszelkie prawa zastrzeżone
           </p>
         </div>
