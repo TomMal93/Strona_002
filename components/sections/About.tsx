@@ -33,6 +33,7 @@ export default function About() {
   const descriptionRef = useRef<HTMLParagraphElement>(null!)
   const statementRef = useRef<HTMLDivElement>(null!)
   const ctaRef = useRef<HTMLDivElement>(null!)
+  const shouldLoadDesktopVideo = useLazyVideoSource(videoRef)
   const shouldLoadMobileVideo = useLazyVideoSource(mobileVideoRef)
 
   useEffect(() => {
@@ -122,9 +123,10 @@ export default function About() {
           <div className={styles.aboutLayout}>
             <div className={styles.videoColumn}>
               <div ref={videoRef} className={cn('relative mx-auto aspect-[3/4] w-3/4', styles.aboutVideoFrame)}>
+                {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
                 <video
-                  src="/videos/hero/hero-video.mp4"
                   aria-label={siteContent.about.imageAlt}
+                  poster="/images/Hero.webp"
                   autoPlay
                   loop
                   muted
@@ -133,7 +135,9 @@ export default function About() {
                     'pointer-events-none relative z-10 h-full w-full origin-center translate-x-[-25%] scale-[1.725] object-contain object-center',
                     styles.aboutVideoMedia,
                   )}
-                />
+                >
+                  {shouldLoadDesktopVideo && <source src="/videos/hero/hero-video.mp4" type="video/mp4" />}
+                </video>
               </div>
 
             </div>

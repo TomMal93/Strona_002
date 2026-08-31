@@ -64,6 +64,7 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
             sizes="100vw"
             quality={imageQuality}
             unoptimized={hero.imageUnoptimized}
+            priority
           />
         </div>
       ) : null}
@@ -110,6 +111,11 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
         </h1>
         <p ref={taglineRef} className={styles.heroTagline}>
           {hero.tagline}
+        </p>
+        <p className={styles.heroLead}>
+          Tworzę obrazy, które opowiadają prawdziwe historie.
+          <br />
+          Łączę światło, ruch i emocje w spójną opowieść.
         </p>
       </div>
 

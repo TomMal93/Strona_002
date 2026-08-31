@@ -127,6 +127,7 @@ export default function WhyIDoThisVideo({ embedded = false, landscape = false, v
             title={video.title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            loading="lazy"
           />
         ) : (
           <>

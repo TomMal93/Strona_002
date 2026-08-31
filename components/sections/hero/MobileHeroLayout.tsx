@@ -14,6 +14,7 @@ export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
           <div className={styles.mobileVideoStage}>
             <video
               src="/videos/hero/hero-video.mp4"
+              poster="/images/Hero.webp"
               aria-label={siteContent.about.imageAlt}
               autoPlay
               loop

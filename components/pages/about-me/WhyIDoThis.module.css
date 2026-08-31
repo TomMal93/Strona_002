@@ -1,6 +1,25 @@
 .section {
+  position: relative;
   padding: clamp(5.5rem, 8vw, 8rem) clamp(1.25rem, 5vw, 5rem);
   color: rgb(255 255 255 / 0.62);
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: clamp(7rem, 16vw, 14rem);
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgb(7 8 8) 0%,
+    rgb(9 10 9 / 0.88) 24%,
+    rgb(11 12 11 / 0.45) 58%,
+    transparent 100%
+  );
 }
 
 .container {
@@ -490,4 +509,3 @@
     line-height: 1.7;
   }
 }
-

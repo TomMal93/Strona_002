@@ -354,14 +354,14 @@ export const siteContent = {
     },
     hero: {
       eyebrow: 'Kontakt',
-      titleLine1: 'Zacznijmy',
-      titleLine2: 'od rozmowy',
+      titleLine1: 'Masz historię',
+      titleLine2: 'do opowiedzenia?',
       lead:
-        'Masz pomysł, termin albo dopiero pierwszą myśl? Opowiedz mi o niej. Wrócę z konkretną odpowiedzią i wspólnie ustalimy, co możemy stworzyć.',
+        'Napisz, co chcesz stworzyć.\nOdezwę się z konkretną propozycją.',
       availability: 'Odpowiadam zwykle w ciągu 24 godzin',
-      location: 'Realizacje w całej Polsce i za granicą',
-      image: '/images/contact/contact.webp',
-      imageAlt: 'Filmowiec z aparatem podczas pracy w plenerze',
+      location: 'Polska / realizacje w całym kraju',
+      image: '/images/contact/contact-camera-sunset.webp',
+      imageAlt: 'Profesjonalna kamera filmowa rejestrująca górski krajobraz o zachodzie słońca',
     },
   },
   aboutMe: {
@@ -454,8 +454,8 @@ export const siteContent = {
       title: 'Kontakt',
       hudLabelLeft: 'CONTACT',
       hudLabelRight: 'SCENE 03 / 03',
-      phone: process.env.NEXT_PUBLIC_ABOUTME_PHONE || '+48 123 456 789',
-      email: process.env.NEXT_PUBLIC_ABOUTME_EMAIL || 'kontakt@example.com',
+      phone: process.env.NEXT_PUBLIC_ABOUTME_PHONE || '+48 791 705 230',
+      email: process.env.NEXT_PUBLIC_ABOUTME_EMAIL || 'kontakt@maleszyk.media',
       ctaLabel: process.env.NEXT_PUBLIC_ABOUTME_CTA_LABEL || 'Porozmawiajmy',
       ctaHref: process.env.NEXT_PUBLIC_ABOUTME_CTA_HREF || 'mailto:kontakt@example.com',
       socials: [
