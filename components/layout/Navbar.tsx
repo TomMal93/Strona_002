@@ -15,10 +15,14 @@ const NAV_ITEMS = [
   { label: 'FAQ', href: '/#faq' },
   { label: 'WSPÓŁPRACA', href: '/#cta' },
   { label: 'O MNIE', href: '/o-mnie' },
+  { label: 'KONTAKT', href: '/contact' },
 ] as const
 
 const DESKTOP_NAV_ITEMS = NAV_ITEMS.filter((item) => (
-  item.href === '/#hero' || item.href === '/oferta' || item.href === '/o-mnie'
+  item.href === '/#hero'
+  || item.href === '/oferta'
+  || item.href === '/o-mnie'
+  || item.href === '/contact'
 ))
 
 const navLinkClassName = [
@@ -200,8 +204,8 @@ export default function Navbar() {
       ? mobileNavLinkClassName
       : `${mobileNavLinkClassName} opacity-70`
   )
-  const isAboutMePage = pathname === '/o-mnie'
-  const headerSurfaceClassName = isAboutMePage
+  const hasSolidHeader = pathname === '/o-mnie' || pathname === '/contact'
+  const headerSurfaceClassName = hasSolidHeader
     ? (scrolled || mobileOpen
         ? 'bg-[#0f0f12]/68 backdrop-blur-md'
         : 'bg-[#0f0f12]')

@@ -342,7 +342,7 @@ export const siteContent = {
       title: 'Porozmawiajmy o Twoim projekcie',
       lead: 'Napisz, zadzwoń albo umów krótką rozmowę — powiem Ci, co mogę zrobić, a Ty zdecydujesz.',
       label: 'Zapytaj o termin',
-      href: '/o-mnie',
+      href: '/contact',
     },
   },
   aboutMe: {

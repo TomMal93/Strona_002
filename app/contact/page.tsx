@@ -1,5 +1,10 @@
-import { redirect } from 'next/navigation'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Kontakt',
+  description: 'Skontaktuj się z Maleszyk Media.',
+}
 
 export default function ContactPage() {
-  redirect('/o-mnie')
+  return <main className="section-dark-bg min-h-screen" />
 }
