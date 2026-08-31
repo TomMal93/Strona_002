@@ -440,12 +440,6 @@
     padding-bottom: 1.5rem;
   }
 
-  .sectionHeaderShell h2 {
-    max-width: 19rem;
-    font-size: clamp(3rem, 15vw, 4rem);
-    line-height: 0.94;
-  }
-
   .hudBar {
     margin-top: 1.45rem;
   }
