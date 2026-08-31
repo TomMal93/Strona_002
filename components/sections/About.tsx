@@ -252,7 +252,7 @@ export default function About() {
               <div ref={ctaRef} className={styles.bottomCta}>
                 <div className={styles.ctaActions}>
                   <a
-                    href="/contact#bio"
+                    href="/o-mnie#bio"
                     className={cn(
                       heroStyles.ctaButton,
                       heroStyles.ctaButtonSecondary,
