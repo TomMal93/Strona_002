@@ -8,6 +8,7 @@ export type AboutMeHeroAnimationRefs = {
   bgRef: RefObject<HTMLDivElement>
   nameRef: RefObject<HTMLHeadingElement>
   taglineRef: RefObject<HTMLParagraphElement>
+  leadRef: RefObject<HTMLParagraphElement>
 }
 
 export function useAboutMeHeroAnimations(refs: AboutMeHeroAnimationRefs): void {
@@ -19,7 +20,7 @@ export function useAboutMeHeroAnimations(refs: AboutMeHeroAnimationRefs): void {
       '(prefers-reduced-motion: reduce)',
     ).matches
 
-    const { nameRef, taglineRef } = refs
+    const { nameRef, taglineRef, leadRef } = refs
 
     if (prefersReducedMotion) {
       if (nameRef.current) {
@@ -29,6 +30,10 @@ export function useAboutMeHeroAnimations(refs: AboutMeHeroAnimationRefs): void {
       if (taglineRef.current) {
         taglineRef.current.style.opacity = '1'
         taglineRef.current.style.transform = 'none'
+      }
+      if (leadRef.current) {
+        leadRef.current.style.opacity = '1'
+        leadRef.current.style.transform = 'none'
       }
       return
     }
@@ -41,6 +46,10 @@ export function useAboutMeHeroAnimations(refs: AboutMeHeroAnimationRefs): void {
     if (taglineRef.current) {
       taglineRef.current.style.opacity = '0'
       taglineRef.current.style.transform = 'translate3d(0, 20px, 0)'
+    }
+    if (leadRef.current) {
+      leadRef.current.style.opacity = '0'
+      leadRef.current.style.transform = 'translate3d(0, 20px, 0)'
     }
 
     const initAnimations = async () => {
@@ -80,7 +89,20 @@ export function useAboutMeHeroAnimations(refs: AboutMeHeroAnimationRefs): void {
           )
         }
 
-        const textElements = [nameRef.current, taglineRef.current].filter(Boolean)
+        if (leadRef.current) {
+          tl.to(
+            leadRef.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: 'power2.out',
+            },
+            '-=0.35',
+          )
+        }
+
+        const textElements = [nameRef.current, taglineRef.current, leadRef.current].filter(Boolean)
         if (textElements.length > 0) {
           ScrollTrigger.create({
             trigger: refs.sectionRef.current,

@@ -28,12 +28,14 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
   const bgRef = useRef<HTMLDivElement>(null!)
   const nameRef = useRef<HTMLHeadingElement>(null!)
   const taglineRef = useRef<HTMLParagraphElement>(null!)
+  const leadRef = useRef<HTMLParagraphElement>(null!)
 
   useAboutMeHeroAnimations({
     sectionRef,
     bgRef,
     nameRef,
     taglineRef,
+    leadRef,
   })
 
   const hero = {
@@ -112,7 +114,7 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
         <p ref={taglineRef} className={styles.heroTagline}>
           {hero.tagline}
         </p>
-        <p className={styles.heroLead}>
+        <p ref={leadRef} className={styles.heroLead}>
           Tworzę obrazy, które opowiadają prawdziwe historie.
           <br />
           Łączę światło, ruch i emocje w spójną opowieść.
