@@ -2,9 +2,6 @@
   position: relative;
   min-height: 100svh;
   overflow: hidden;
-  background:
-    linear-gradient(rgb(10 11 10 / 0.96), rgb(10 11 10 / 0.96)),
-    repeating-linear-gradient(45deg, rgb(var(--c-olive) / 0.11) 0 1px, transparent 1px 18px);
   color: rgb(227 210 171 / 0.9);
 }
 
@@ -42,8 +39,8 @@
   grid-template-columns: minmax(0, 0.9fr) minmax(480px, 1.12fr);
   align-items: center;
   gap: clamp(3.5rem, 6vw, 7rem);
-  min-height: calc(100svh - 18rem);
-  padding: 0 clamp(0rem, 1.5vw, 1.5rem) clamp(2.5rem, 5vh, 4rem);
+  min-height: calc(100svh - 22rem);
+  padding: 0 clamp(0rem, 1.5vw, 1.5rem) clamp(1.5rem, 3vh, 2.5rem);
 }
 
 .content {
@@ -96,50 +93,73 @@
   outline-offset: 4px;
 }
 
-.contactGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.7rem;
-  margin-top: clamp(2.6rem, 5vh, 4rem);
-}
-
-.contactItem {
+.contactPanel {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: 2rem minmax(0, 1fr);
-  gap: 0.75rem;
-  min-width: 0;
-  min-height: 92px;
-  padding: 1.15rem 1rem;
-  border: 1px solid rgb(var(--c-khaki) / 0.15);
+  margin-top: clamp(2.3rem, 4vh, 3.2rem);
+  border: 1px solid rgb(var(--c-gold) / 0.14);
   border-radius: 0.25rem;
-  background: rgb(255 255 255 / 0.02);
-  color: inherit;
-  transition: color 220ms ease, border-color 320ms ease, background-color 320ms ease, box-shadow 320ms ease;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgb(var(--c-gold) / 0.055), transparent 62%),
+    rgb(13 13 13 / 0.58);
+  transition: border-color 320ms ease, background-color 320ms ease, box-shadow 320ms ease;
 }
 
-.contactItem::before {
+.contactPanel::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  border-radius: inherit;
-  background: radial-gradient(ellipse at 30% 20%, rgb(var(--c-khaki) / 0.11), transparent 60%);
-  opacity: 0.55;
+  background: radial-gradient(ellipse at 30% 20%, rgb(var(--c-khaki) / 0.1), transparent 60%);
+  opacity: 0.5;
   transition: opacity 320ms ease;
 }
 
-.contactItem:hover {
-  border-color: rgb(var(--c-gold) / 0.55);
-  background: rgb(255 255 255 / 0.035);
-  color: rgb(255 225 168 / 1);
-  box-shadow: 0 14px 34px rgb(0 0 0 / 0.3), 0 0 28px rgb(var(--c-gold) / 0.12);
+.contactPanel:hover,
+.contactPanel:focus-within {
+  border-color: rgb(var(--c-gold) / 0.5);
+  background-color: rgb(255 255 255 / 0.025);
+  box-shadow: 0 18px 44px rgb(0 0 0 / 0.3), 0 0 32px rgb(var(--c-gold) / 0.13);
 }
 
-.contactItem:hover::before {
+.contactPanel:hover::before,
+.contactPanel:focus-within::before {
   opacity: 1;
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 1.6rem 1.25rem;
+}
+
+.contactItem {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.75rem;
+  min-width: 0;
+  min-height: 68px;
+  align-items: center;
+  padding: 0.35rem 1rem;
+  color: inherit;
+  transition: color 220ms ease, transform 260ms ease;
+}
+
+.contactItem:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: 0;
+  width: 1px;
+  height: 80%;
+  background: linear-gradient(180deg, transparent, rgb(var(--c-gold) / 0.28), transparent);
+}
+
+.contactItem:hover {
+  color: rgb(255 225 168 / 1);
+  transform: translateY(-2px);
 }
 
 .contactIcon {
@@ -176,8 +196,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
-  margin-top: clamp(2.5rem, 5vh, 4rem);
-  padding-top: 1.7rem;
+  padding: 1.25rem 1.5rem 1.45rem;
   border-top: 1px solid rgb(var(--c-gold) / 0.22);
 }
 
@@ -208,6 +227,20 @@
   font-size: 1.65rem;
   color: rgb(213 176 111 / 0.86);
 }
+
+.panelCorner {
+  position: absolute;
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  border-color: rgb(var(--c-gold) / 0.42);
+  pointer-events: none;
+}
+
+.panelCornerTL { top: -1px; left: -1px; border-top: 2px solid; border-left: 2px solid; }
+.panelCornerTR { top: -1px; right: -1px; border-top: 2px solid; border-right: 2px solid; }
+.panelCornerBL { bottom: -1px; left: -1px; border-bottom: 2px solid; border-left: 2px solid; }
+.panelCornerBR { right: -1px; bottom: -1px; border-right: 2px solid; border-bottom: 2px solid; }
 
 .monitor {
   position: relative;
@@ -260,8 +293,7 @@
   pointer-events: none;
 }
 
-.monitorCorner,
-.viewportCorner {
+.monitorCorner {
   position: absolute;
   width: 22px;
   height: 22px;
@@ -273,9 +305,6 @@
 .monitorCornerTR { top: -24px; right: -24px; border-top: 1px solid; border-right: 1px solid; }
 .monitorCornerBL { bottom: -24px; left: -24px; border-bottom: 1px solid; border-left: 1px solid; }
 .monitorCornerBR { right: -24px; bottom: -24px; border-right: 1px solid; border-bottom: 1px solid; }
-
-.viewportCornerTL { top: 4.8rem; left: 5%; border-top: 1px solid; border-left: 1px solid; }
-.viewportCornerTR { top: 4.8rem; right: 5%; border-top: 1px solid; border-right: 1px solid; }
 
 .bottomStrip {
   display: grid;
@@ -356,11 +385,21 @@
 
   .contactGrid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    padding: 1rem;
   }
 
   .contactItem {
-    padding-block: 0.9rem;
+    padding-block: 0.75rem;
+  }
+
+  .contactItem:not(:last-child)::after {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(var(--c-gold) / 0.24), transparent);
   }
 
   .benefits {
@@ -420,8 +459,7 @@
 
   .contactGrid {
     grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-top: 2.5rem;
+    padding: 0.8rem;
   }
 
   .contactItem {
@@ -478,9 +516,6 @@
     gap: 1rem;
   }
 
-  .viewportCorner {
-    display: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

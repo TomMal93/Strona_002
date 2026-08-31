@@ -62,10 +62,11 @@ export default function ContactHero() {
   }, [])
 
   return (
-    <section ref={sectionRef} aria-labelledby="contact-heading" className={styles.section}>
-      <span className={`${styles.viewportCorner} ${styles.viewportCornerTL}`} aria-hidden="true" />
-      <span className={`${styles.viewportCorner} ${styles.viewportCornerTR}`} aria-hidden="true" />
-
+    <section
+      ref={sectionRef}
+      aria-labelledby="contact-heading"
+      className={cn('section-dark-bg', styles.section)}
+    >
       <div className={styles.shell}>
         <div className={styles.mainGrid}>
           <div ref={contentRef} className={styles.content}>
