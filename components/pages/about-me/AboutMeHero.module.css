@@ -269,6 +269,7 @@
 @media (width < 48rem) {
   .heroSectionFramed {
     clip-path: inset(0);
+    background: rgb(13 13 13);
   }
 
   .heroBgFramed {
@@ -284,6 +285,24 @@
 
   .heroBgFramed img {
     transform: none !important;
+  }
+
+  .heroSectionFramed .heroOverlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgb(13 13 13 / 0.03) 0%,
+        rgb(13 13 13 / 0.08) 45%,
+        rgb(13 13 13 / 0.26) 66%,
+        rgb(13 13 13 / 0.54) 84%,
+        rgb(13 13 13 / 0.78) 100%
+      ),
+      radial-gradient(
+        ellipse at 50% 72%,
+        transparent 0 32%,
+        rgb(13 13 13 / 0.14) 72%,
+        rgb(13 13 13 / 0.32) 100%
+      );
   }
 
   .filmStripLeft,

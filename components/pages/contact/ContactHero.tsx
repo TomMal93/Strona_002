@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { gsap } from 'gsap'
 import { siteContent } from '@/lib/site-content'
 import { socialIcons } from '@/components/sections/cta/CtaActions'
+import { cn } from '@/lib/utils'
+import heroStyles from '@/components/sections/Hero.module.css'
 import styles from './ContactHero.module.css'
 
 const contactItems = [
@@ -67,12 +69,6 @@ export default function ContactHero() {
       <div className={styles.shell}>
         <div className={styles.mainGrid}>
           <div ref={contentRef} className={styles.content}>
-            <div data-contact-hero-item className={styles.kicker}>
-              <span>Contact</span>
-              <span className={styles.kickerLine} aria-hidden="true" />
-              <span>Scene 08 / 08</span>
-            </div>
-
             <h1 id="contact-heading" data-contact-hero-item className={styles.title}>
               <span>{hero.titleLine1}</span>
               <span>{hero.titleLine2}</span>
@@ -80,40 +76,51 @@ export default function ContactHero() {
 
             <p data-contact-hero-item className={styles.lead}>{hero.lead}</p>
 
-            <a data-contact-hero-item href={`mailto:${contact.email}`} className={styles.primaryAction}>
+            <a
+              data-contact-hero-item
+              href={`mailto:${contact.email}`}
+              className={cn(heroStyles.ctaButton, heroStyles.ctaButtonPrimary, styles.primaryAction)}
+            >
               <span>Zapytaj o termin</span>
               <span aria-hidden="true">→</span>
             </a>
 
-            <div data-contact-hero-item className={styles.contactGrid}>
-              {contactItems.map((item, index) => {
-                const href = index === 0 ? `mailto:${contact.email}` : index === 1 ? phoneHref : undefined
-                const body = (
-                  <>
-                    <span className={styles.contactIcon} aria-hidden="true">{item.icon}</span>
-                    <span>
-                      <strong>{item.label}</strong>
-                      <small>{contactValues[index]}</small>
-                    </span>
-                  </>
-                )
+            <div data-contact-hero-item className={styles.contactPanel}>
+              <span className={`${styles.panelCorner} ${styles.panelCornerTL}`} aria-hidden="true" />
+              <span className={`${styles.panelCorner} ${styles.panelCornerTR}`} aria-hidden="true" />
+              <span className={`${styles.panelCorner} ${styles.panelCornerBL}`} aria-hidden="true" />
+              <span className={`${styles.panelCorner} ${styles.panelCornerBR}`} aria-hidden="true" />
 
-                return href ? (
-                  <a key={item.label} href={href} className={styles.contactItem}>{body}</a>
-                ) : (
-                  <div key={item.label} className={styles.contactItem}>{body}</div>
-                )
-              })}
-            </div>
+              <div className={styles.contactGrid}>
+                {contactItems.map((item, index) => {
+                  const href = index === 0 ? `mailto:${contact.email}` : index === 1 ? phoneHref : undefined
+                  const body = (
+                    <>
+                      <span className={styles.contactIcon} aria-hidden="true">{item.icon}</span>
+                      <span>
+                        <strong>{item.label}</strong>
+                        <small>{contactValues[index]}</small>
+                      </span>
+                    </>
+                  )
 
-            <div data-contact-hero-item className={styles.benefits}>
-              {benefits.map((benefit, index) => (
-                <div key={benefit.lines[0]} className={styles.benefit}>
-                  <span className={styles.benefitIcon} aria-hidden="true">{benefit.icon}</span>
-                  <span>{benefit.lines[0]}<br />{benefit.lines[1]}</span>
-                  {index < benefits.length - 1 ? <i aria-hidden="true" /> : null}
-                </div>
-              ))}
+                  return href ? (
+                    <a key={item.label} href={href} className={styles.contactItem}>{body}</a>
+                  ) : (
+                    <div key={item.label} className={styles.contactItem}>{body}</div>
+                  )
+                })}
+              </div>
+
+              <div className={styles.benefits}>
+                {benefits.map((benefit, index) => (
+                  <div key={benefit.lines[0]} className={styles.benefit}>
+                    <span className={styles.benefitIcon} aria-hidden="true">{benefit.icon}</span>
+                    <span>{benefit.lines[0]}<br />{benefit.lines[1]}</span>
+                    {index < benefits.length - 1 ? <i aria-hidden="true" /> : null}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 

@@ -378,7 +378,53 @@
 }
 
 @media (width < 48rem) {
-  .section { padding-inline: 1.15rem; }
+  .section.section {
+    --mobile-transition-overlap: clamp(8rem, 32vw, 11rem);
+
+    margin-top: calc(var(--mobile-transition-overlap) * -1);
+    padding-top: calc(clamp(6.75rem, 24vw, 8.25rem) + var(--mobile-transition-overlap));
+    padding-inline: 1.15rem;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgb(13 13 13 / 0.12) calc(var(--mobile-transition-overlap) * 0.2),
+      rgb(13 13 13 / 0.48) calc(var(--mobile-transition-overlap) * 0.5),
+      rgb(13 13 13 / 0.84) calc(var(--mobile-transition-overlap) * 0.78),
+      rgb(13 13 13) var(--mobile-transition-overlap),
+      rgb(13 13 13) 100%
+    );
+  }
+
+  .section::before {
+    inset: 0;
+    height: auto;
+    background:
+      radial-gradient(
+        ellipse at 50% 0%,
+        rgb(var(--c-gold) / 0.045) 0%,
+        transparent min(24rem, 42%)
+      ),
+      repeating-linear-gradient(
+        45deg,
+        rgb(var(--c-olive) / 0.09) 0,
+        rgb(var(--c-olive) / 0.09) 1px,
+        transparent 1px,
+        transparent 22px
+      );
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      transparent 0,
+      rgb(0 0 0 / 0.2) calc(var(--mobile-transition-overlap) * 0.35),
+      #000 var(--mobile-transition-overlap)
+    );
+    mask-image: linear-gradient(
+      180deg,
+      transparent 0,
+      rgb(0 0 0 / 0.2) calc(var(--mobile-transition-overlap) * 0.35),
+      #000 var(--mobile-transition-overlap)
+    );
+  }
+
   .sectionHeader { margin-bottom: 3.5rem; }
   .sectionKicker { gap: 0.55rem; font-size: 0.61rem; letter-spacing: 0.12em; }
   .storyRail::before { left: 0.32rem; bottom: 6.8rem; }
