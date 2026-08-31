@@ -450,8 +450,6 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
-    will-change: mask-position, mask-size;
-    animation: aboutBackdropEdges 12s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
   }
 
   .viewfinderBackdrop::before {
@@ -591,27 +589,6 @@
     margin-top: 0;
     left: 3rem;
     top: -1rem;
-  }
-}
-
-@keyframes aboutBackdropEdges {
-  0% {
-    -webkit-mask-position: 48% 48.4%;
-    mask-position: 48% 48.4%;
-    -webkit-mask-size: 103% 102%;
-    mask-size: 103% 102%;
-  }
-  48% {
-    -webkit-mask-position: 52% 50.9%;
-    mask-position: 52% 50.9%;
-    -webkit-mask-size: 99.2% 103%;
-    mask-size: 99.2% 103%;
-  }
-  100% {
-    -webkit-mask-position: 49% 52%;
-    mask-position: 49% 52%;
-    -webkit-mask-size: 102.5% 99.5%;
-    mask-size: 102.5% 99.5%;
   }
 }
 

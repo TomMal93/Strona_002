@@ -527,4 +527,3 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
-
