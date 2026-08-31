@@ -194,6 +194,21 @@ export default function About() {
 
                   <span aria-hidden="true" className={styles.viewfinderDivider} />
 
+                  <CinematicVideoPlayer
+                    ref={mobileVideoRef}
+                    className={styles.mobileVideoFrame}
+                    src={siteContent.promo.heroVideo.src}
+                    poster={siteContent.promo.heroVideo.poster}
+                    shouldLoad={shouldLoadMobileVideo}
+                    playLabel="film promocyjny"
+                    muted
+                  >
+                    <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />
+                    <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR}`} />
+                    <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL}`} />
+                    <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR}`} />
+                  </CinematicVideoPlayer>
+
                   <p ref={descriptionRef} className={styles.viewfinderDesc}>
                     {siteContent.about.description
                       .split('I tutaj zaczyna się moja rola.')[0]
@@ -216,21 +231,6 @@ export default function About() {
                   </p>
                 </div>
               </div>
-
-              <CinematicVideoPlayer
-                ref={mobileVideoRef}
-                className={styles.mobileVideoFrame}
-                src={siteContent.promo.heroVideo.src}
-                poster={siteContent.promo.heroVideo.poster}
-                shouldLoad={shouldLoadMobileVideo}
-                playLabel="film promocyjny"
-                muted
-              >
-                <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />
-                <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR}`} />
-                <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL}`} />
-                <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR}`} />
-              </CinematicVideoPlayer>
 
               <div ref={statementRef} className={styles.statementPanel}>
                 <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />

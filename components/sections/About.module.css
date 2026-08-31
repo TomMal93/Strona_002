@@ -964,8 +964,12 @@
     display: block;
     width: 100%;
     aspect-ratio: 16 / 9;
-    margin-top: 1.8rem;
+    margin-block: 0.35rem;
     overflow: hidden;
+  }
+
+  .viewfinderDivider {
+    display: none;
   }
 
   .bottomCta {
