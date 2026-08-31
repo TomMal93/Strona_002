@@ -368,25 +368,25 @@ export const siteContent = {
       subtitle: 'Profile',
       intro:
         process.env.NEXT_PUBLIC_ABOUTME_PROFILE_INTRO
-        || 'Nazywam się Przemek Malxxxxx. Jestem fotografem, operatorem i filmowcem — łączę doświadczenie z planu zdjęciowego z wrażliwością na ludzi, dzięki czemu moje filmy oddają nie tylko obraz, ale i atmosferę.',
+        || 'Nazywam się Przemek Malxxxxx. Tworzę filmy z wydarzeń, w których liczą się prawdziwe emocje i tempo chwili. Szukam gestów, spojrzeń i momentów, które łatwo przeoczyć — pracuję spokojnie, reaguję szybko i nie próbuję reżyserować tego, co powinno wydarzyć się naturalnie. Dzięki temu otrzymujesz nie tylko zapis wydarzenia, ale film, który pozwala poczuć jego atmosferę jeszcze raz.',
       locationLabel: 'Gdzie pracuję',
       locationText:
         process.env.NEXT_PUBLIC_ABOUTME_PROFILE_LOCATION
-        || 'Baza w Polsce, działam na terenie całego kraju, a większe projekty realizuję także za granicą. Plener, teren, off-road i sale eventowe — czuję się dobrze tam, gdzie dzieje się historia.',
+        || 'Pracuję w całej Polsce. Chętnie realizuję również projekty zagraniczne. Dobrze czuję się zarówno w terenie i błocie, jak i na ślubie, koncercie czy planie marki.',
       specialtiesLabel: 'W czym się specjalizuję',
       specialties: [
-        'Filmy ślubne i okolicznościowe',
-        'Materiały promocyjne dla marek',
+        'Filmy ślubne i rodzinne historie',
         'Relacje z eventów i koncertów',
-        'Off-road, plener, drony',
-        'Profesjonalny montaż w DaVinci Resolve',
+        'Filmy promocyjne dla firm i marek',
+        'Produkcje terenowe, off-road i ujęcia z drona',
+        'Montaż materiałów z charakterem',
       ],
-      gearLabel: 'Sprzęt',
+      gearLabel: 'Zaplecze techniczne',
       gear: [
-        'Kamery Sony — system Alpha 4K',
-        'Mikrofony Rode — czyste audio',
-        'Drony — ujęcia z powietrza',
-        'Profesjonalne oświetlenie — plan i studio',
+        'Obraz — realizacja w jakości 4K',
+        'Dźwięk — czyste i wyraźne nagrania',
+        'Ujęcia z powietrza — filmowa perspektywa',
+        'Światło — praca w plenerze i na planie',
       ],
       statsLabel: 'Liczby',
       stats: [

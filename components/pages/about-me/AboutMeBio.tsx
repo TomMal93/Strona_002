@@ -7,8 +7,12 @@ import { cn } from '@/lib/utils'
 import styles from './AboutMeBio.module.css'
 import { useAboutMeBioAnimations } from './useAboutMeBioAnimations'
 
-const statIcons = ['◎', '▱', '4K', '◷'] as const
-const gearIcons = ['▣', '◉', '✣', '◌'] as const
+function GearIcon({ index }: { index: number }) {
+  if (index === 0) return <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 10h7l2-3h6l2 3h7v16H4V10Z" /><circle cx="16" cy="18" r="5" /></svg>
+  if (index === 1) return <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="11" y="4" width="10" height="17" rx="5" /><path d="M7 16v1a9 9 0 0 0 18 0v-1M16 26v3M11 29h10" /></svg>
+  if (index === 2) return <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="8" cy="8" r="4" /><circle cx="24" cy="8" r="4" /><circle cx="8" cy="24" r="4" /><circle cx="24" cy="24" r="4" /><path d="m11 11 10 10m0-10L11 21M13 16h6" /></svg>
+  return <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6" /><path d="M16 2v5M16 25v5M2 16h5M25 16h5M6 6l4 4M22 22l4 4M26 6l-4 4M10 22l-4 4" /></svg>
+}
 
 export default function AboutMeBio() {
   const sectionRef = useRef<HTMLElement>(null!)
@@ -24,13 +28,6 @@ export default function AboutMeBio() {
 
   return (
     <section ref={sectionRef} id="bio" aria-labelledby="aboutme-bio-heading" className={cn(styles.section, 'section-dark-bg')}>
-      <span aria-hidden="true" className={cn(styles.pageCorner, styles.pageCornerTL)} />
-      <span aria-hidden="true" className={cn(styles.pageCorner, styles.pageCornerTR)} />
-      <span aria-hidden="true" className={cn(styles.pageCorner, styles.pageCornerBL)} />
-      <span aria-hidden="true" className={cn(styles.pageCorner, styles.pageCornerBR)} />
-      <span aria-hidden="true" className={styles.logLabel}>M.265 / LOG3</span>
-      <span aria-hidden="true" className={styles.timecode}>00:00:16</span>
-
       <div className={styles.container}>
         <header className={styles.sectionHeader}>
           <h2 ref={titleRef} id="aboutme-bio-heading" className={styles.sectionTitle}>{profile.title}</h2>
@@ -38,7 +35,6 @@ export default function AboutMeBio() {
             <span data-hud-line className={styles.hudLine} />
             <span data-hud-label className={styles.hudLabel}>{profile.hudLabelLeft}</span>
             <span data-hud-line className={styles.hudLineShort} />
-            <span className={styles.reticle}>+</span>
             <span data-hud-line className={styles.hudLineShort} />
             <span data-hud-label className={styles.hudLabel}>{profile.hudLabelRight}</span>
             <span data-hud-line className={styles.hudLine} />
@@ -60,14 +56,14 @@ export default function AboutMeBio() {
 
               <div className={styles.infoGrid}>
                 <article data-bio-block className={styles.infoBlock}>
-                  <h3 className={styles.infoTitle}><span aria-hidden="true" className={styles.titleIcon}>⌖</span>{profile.locationLabel}</h3>
+                  <h3 className={styles.infoTitle}>{profile.locationLabel}</h3>
                   <ul className={styles.detailList}>
                     {profile.locationText.split(/, |\. /).filter(Boolean).map((item) => <li key={item}>{item.replace(/\.$/, '')}</li>)}
                   </ul>
                 </article>
 
                 <article data-bio-block className={styles.infoBlock}>
-                  <h3 className={styles.infoTitle}><span aria-hidden="true" className={styles.titleIcon}>☆</span>{profile.specialtiesLabel}</h3>
+                  <h3 className={styles.infoTitle}>{profile.specialtiesLabel}</h3>
                   <ul className={styles.detailList}>
                     {profile.specialties.map((item) => <li key={item}>{item}</li>)}
                   </ul>
@@ -88,28 +84,26 @@ export default function AboutMeBio() {
             </figure>
           </div>
 
-          <section data-bio-block className={styles.statsBlock} aria-label={profile.statsLabel}>
-            {profile.stats.map((stat, index) => (
-              <div key={stat.label} className={styles.statItem}>
-                <span aria-hidden="true" className={styles.statIcon}>{statIcons[index]}</span>
-                <span className={styles.statValue}>{stat.value}</span>
-                <span className={styles.statLabel}>{stat.label}</span>
-              </div>
-            ))}
-          </section>
-
           <section data-bio-block className={styles.gearBlock} aria-label={profile.gearLabel}>
-            <h3 className={styles.gearHeading}><span />{profile.gearLabel}<span /></h3>
+            <section className={styles.statsBlock} aria-label={profile.statsLabel}>
+              {profile.stats.map((stat, index) => (
+                <div key={stat.label} className={styles.statItem}>
+                  <span className={styles.statValue}>{stat.value}</span>
+                  <span className={styles.statLabel}>{stat.label}</span>
+                  {index < profile.stats.length - 1 && <span aria-hidden="true" className={styles.statDivider} />}
+                </div>
+              ))}
+            </section>
             <ul className={styles.gearList}>
               {profile.gear.map((item, index) => {
                 const [label, detail] = item.split(' — ')
-                return <li key={item} className={styles.gearItem}><span aria-hidden="true" className={styles.gearIcon}>{gearIcons[index]}</span><span><strong>{label}</strong>{detail && <small>{detail}</small>}</span></li>
+                return <li key={item} className={styles.gearItem}><span className={styles.gearIcon}><GearIcon index={index} /></span><span><strong>{label}</strong>{detail && <small>{detail}</small>}</span></li>
               })}
             </ul>
           </section>
 
           <div data-bio-block className={styles.profileCta}>
-            <a href={profile.cta.href} className={styles.profileCtaLink}>{profile.cta.label}<span aria-hidden="true">→</span></a>
+            <a href={profile.cta.href} className={styles.profileCtaLink}>{profile.cta.label}</a>
           </div>
         </div>
       </div>
