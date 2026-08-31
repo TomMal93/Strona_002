@@ -63,7 +63,7 @@
 
 .promoCanvas {
   width: 100%;
-  max-width: 1680px;
+  max-width: calc(1280px + 6rem);
   margin-inline: auto;
 }
 
