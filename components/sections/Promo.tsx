@@ -290,7 +290,9 @@ export default function Promo() {
           ))}
         </div>
 
-        <div className={styles.creativeProcess} aria-label="Proces twórczy">
+        <div className={styles.creativeProcess} data-promo-process aria-label="Proces twórczy">
+          <span data-promo-line className={`${styles.processLine} ${styles.processLineTop}`} aria-hidden="true" />
+          <span data-promo-line className={`${styles.processLine} ${styles.processLineBottom}`} aria-hidden="true" />
           <p className={styles.processHeading}>Proces twórczy</p>
           <ProcessItem
             title="Scenariusz"
@@ -319,7 +321,8 @@ export default function Promo() {
           ))}
         </div>
 
-        <blockquote className={styles.promoQuote}>
+        <blockquote className={styles.promoQuote} data-promo-quote>
+          <span data-promo-line className={styles.quoteLine} aria-hidden="true" />
           <p>Najsilniejszy przekaz nie mówi, co myśleć. Sprawia, że zaczynasz czuć.</p>
         </blockquote>
       </div>

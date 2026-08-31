@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 120" preserveAspectRatio="none">
+  <defs>
+    <filter id="rough-edge" x="-5%" y="-35%" width="110%" height="170%" color-interpolation-filters="sRGB">
+      <feTurbulence
+        type="fractalNoise"
+        baseFrequency="0.008 0.075"
+        numOctaves="3"
+        seed="23"
+        result="edge-noise"
+      />
+      <feDisplacementMap
+        in="SourceGraphic"
+        in2="edge-noise"
+        scale="25"
+        xChannelSelector="R"
+        yChannelSelector="G"
+        result="rough-shape"
+      />
+      <feGaussianBlur in="rough-shape" stdDeviation="2.2" />
+    </filter>
+  </defs>
+  <rect width="1600" height="120" fill="black" fill-opacity="0" />
+  <rect
+    x="-40"
+    y="56"
+    width="1680"
+    height="84"
+    fill="white"
+    filter="url(#rough-edge)"
+  />
+</svg>

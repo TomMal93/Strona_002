@@ -1,10 +1,14 @@
 'use client'
 
+import Image from 'next/image'
 import { useRef } from 'react'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './AboutMeBio.module.css'
 import { useAboutMeBioAnimations } from './useAboutMeBioAnimations'
+
+const statIcons = ['◎', '▱', '4K', '◷'] as const
+const gearIcons = ['▣', '◉', '✣', '◌'] as const
 
 export default function AboutMeBio() {
   const sectionRef = useRef<HTMLElement>(null!)
@@ -13,180 +17,99 @@ export default function AboutMeBio() {
   const hudBarRef = useRef<HTMLDivElement>(null!)
   const bioPanelRef = useRef<HTMLDivElement>(null!)
 
-  useAboutMeBioAnimations({
-    sectionRef,
-    titleRef,
-    subtitleRef,
-    hudBarRef,
-    bioPanelRef,
-  })
+  useAboutMeBioAnimations({ sectionRef, titleRef, subtitleRef, hudBarRef, bioPanelRef })
 
   const { profile } = siteContent.aboutMe
-  const introWords = profile.intro.split(/(\s+)/)
+  const [introLead, introBody = ''] = profile.intro.split(' — ')
 
   return (
-    <section
-      ref={sectionRef}
-      id="bio"
-      aria-labelledby="aboutme-bio-heading"
-      className={cn(
-        'bg-anthracite px-6 py-20 sm:py-24 lg:px-20 lg:py-32',
-        'section-dark-bg',
-      )}
-    >
-      <div className="mx-auto max-w-content">
-        {/* Header */}
-        <div className={cn('mx-auto max-w-3xl', styles.sectionHeader)}>
-          <h2
-            ref={titleRef}
-            id="aboutme-bio-heading"
-            className={cn(
-              styles.gradientTextPrimary,
-              'text-center font-bebas text-5xl uppercase leading-[0.9] tracking-wide sm:text-6xl',
-              styles.sectionTitle,
-            )}
-          >
-            {profile.title}
-          </h2>
+    <section ref={sectionRef} id="bio" aria-labelledby="aboutme-bio-heading" className={cn(styles.section, 'section-dark-bg')}>
+      <span aria-hidden="true" className={cn(styles.pageCorner, styles.pageCornerTL)} />
+      <span aria-hidden="true" className={cn(styles.pageCorner, styles.pageCornerTR)} />
+      <span aria-hidden="true" className={cn(styles.pageCorner, styles.pageCornerBL)} />
+      <span aria-hidden="true" className={cn(styles.pageCorner, styles.pageCornerBR)} />
+      <span aria-hidden="true" className={styles.logLabel}>M.265 / LOG3</span>
+      <span aria-hidden="true" className={styles.timecode}>00:00:16</span>
+
+      <div className={styles.container}>
+        <header className={styles.sectionHeader}>
+          <h2 ref={titleRef} id="aboutme-bio-heading" className={styles.sectionTitle}>{profile.title}</h2>
           <div ref={hudBarRef} aria-hidden="true" className={styles.hudBar}>
-            <span data-hud-line className={styles.hudLineLeft} />
-            <span data-hud-label className={styles.hudLabelLeft}>
-              {profile.hudLabelLeft}
-            </span>
-            <span data-hud-line className={styles.hudLineLeft} />
-            <span data-hud-line className={styles.hudLineRight} />
-            <span data-hud-label className={styles.hudLabelRight}>
-              {profile.hudLabelRight}
-            </span>
-            <span data-hud-line className={styles.hudLineRight} />
+            <span data-hud-line className={styles.hudLine} />
+            <span data-hud-label className={styles.hudLabel}>{profile.hudLabelLeft}</span>
+            <span data-hud-line className={styles.hudLineShort} />
+            <span className={styles.reticle}>+</span>
+            <span data-hud-line className={styles.hudLineShort} />
+            <span data-hud-label className={styles.hudLabel}>{profile.hudLabelRight}</span>
+            <span data-hud-line className={styles.hudLine} />
+          </div>
+        </header>
+
+        <div ref={bioPanelRef} className={styles.profilePanel}>
+          <div className={styles.identityGrid}>
+            <div className={styles.copyColumn}>
+              <div data-bio-block className={styles.introBlock}>
+                <p className={styles.introLead}>
+                  {introLead.split(/(\s+)/).map((token, index) => /^\s+$/.test(token)
+                    ? token
+                    : <span key={`${token}-${index}`} data-bio-word>{token}</span>)}
+                </p>
+                {introBody && <p className={styles.introBody}>{introBody}</p>}
+                <span aria-hidden="true" className={styles.accentRule} />
+              </div>
+
+              <div className={styles.infoGrid}>
+                <article data-bio-block className={styles.infoBlock}>
+                  <h3 className={styles.infoTitle}><span aria-hidden="true" className={styles.titleIcon}>⌖</span>{profile.locationLabel}</h3>
+                  <ul className={styles.detailList}>
+                    {profile.locationText.split(/, |\. /).filter(Boolean).map((item) => <li key={item}>{item.replace(/\.$/, '')}</li>)}
+                  </ul>
+                </article>
+
+                <article data-bio-block className={styles.infoBlock}>
+                  <h3 className={styles.infoTitle}><span aria-hidden="true" className={styles.titleIcon}>☆</span>{profile.specialtiesLabel}</h3>
+                  <ul className={styles.detailList}>
+                    {profile.specialties.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                </article>
+              </div>
+            </div>
+
+            <figure data-bio-block className={styles.portraitFrame}>
+              <Image src="/images/contact/contact.webp" alt="Przemek z aparatem podczas pracy w plenerze" fill sizes="(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 620px" className={styles.portraitImage} />
+              <span aria-hidden="true" className={styles.portraitShade} />
+              <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerTL)} />
+              <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerTR)} />
+              <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerBL)} />
+              <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerBR)} />
+              <span className={cn(styles.frameLabel, styles.frameLabelLeft)}>FILMMAKER</span>
+              <span className={cn(styles.frameLabel, styles.frameLabelRight)}>VISUAL STORYTELLER</span>
+              <figcaption className={styles.cameraMeta}>4K &nbsp; | &nbsp; 25FPS &nbsp; | &nbsp; CINEMATIC</figcaption>
+            </figure>
           </div>
 
-          <p
-            ref={subtitleRef}
-            className="mt-5 whitespace-pre-line font-mono text-[0.95rem] leading-[1.85] tracking-wide text-white/50"
-          >
-            {profile.subtitle}
-          </p>
-        </div>
-
-        {/* Profile panel */}
-        <div ref={bioPanelRef} className={styles.bioPanel}>
-          {/* Outer corner marks — visible on desktop, hidden on mobile */}
-          <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerOuter, styles.cornerTL)} />
-          <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerOuter, styles.cornerTR)} />
-          <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerOuter, styles.cornerBL)} />
-          <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerOuter, styles.cornerBR)} />
-          <span aria-hidden="true" className={cn(styles.notesLabel, styles.notesLabelOuter)}>NOTES</span>
-
-          {/* Intro sub-panel */}
-          <div data-bio-block className={styles.bioPanelText}>
-            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTL)} />
-            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTR)} />
-            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBL)} />
-            <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBR)} />
-            <span aria-hidden="true" className={cn(styles.notesLabel, styles.notesLabelInner)}>NOTES</span>
-
-            <p className={cn(styles.bioText, styles.bioTextIntro)}>
-              {introWords.map((token, i) =>
-                /^\s+$/.test(token) ? (
-                  token
-                ) : (
-                  <span key={`intro-${i}`} data-bio-word className={styles.bioWord}>
-                    {token}
-                  </span>
-                ),
-              )}
-            </p>
-          </div>
-
-          {/* Profile grid: location + specialties */}
-          <div className={styles.profileGrid}>
-            <article data-bio-block className={styles.infoBlock}>
-              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTL)} />
-              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTR)} />
-              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBL)} />
-              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBR)} />
-              <span aria-hidden="true" className={cn(styles.notesLabel, styles.notesLabelInner)}>NOTES</span>
-
-              <header className={styles.infoHeader}>
-                <span aria-hidden="true" className={styles.infoRule} />
-                <h3 className={styles.infoLabel}>{profile.locationLabel}</h3>
-                <span aria-hidden="true" className={styles.infoRule} />
-              </header>
-              <p className={styles.infoBody}>{profile.locationText}</p>
-            </article>
-
-            <article data-bio-block className={styles.infoBlock}>
-              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTL)} />
-              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerTR)} />
-              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBL)} />
-              <span aria-hidden="true" className={cn(styles.cornerMark, styles.cornerInner, styles.cornerBR)} />
-              <span aria-hidden="true" className={cn(styles.notesLabel, styles.notesLabelInner)}>NOTES</span>
-
-              <header className={styles.infoHeader}>
-                <span aria-hidden="true" className={styles.infoRule} />
-                <h3 className={styles.infoLabel}>{profile.specialtiesLabel}</h3>
-                <span aria-hidden="true" className={styles.infoRule} />
-              </header>
-              <ul className={styles.specialtiesList}>
-                {profile.specialties.map((item) => (
-                  <li key={item} className={styles.specialtyItem}>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </div>
-
-          {/* Stats row */}
           <section data-bio-block className={styles.statsBlock} aria-label={profile.statsLabel}>
-            <header className={styles.infoHeader}>
-              <span aria-hidden="true" className={styles.infoRule} />
-              <h3 className={styles.infoLabel}>{profile.statsLabel}</h3>
-              <span aria-hidden="true" className={styles.infoRule} />
-            </header>
-            <ul className={styles.statsRow}>
-              {profile.stats.map((stat) => (
-                <li key={stat.label} className={styles.statBlock}>
-                  <span className={cn(styles.statValue, styles.gradientTextPrimary)}>{stat.value}</span>
-                  <span className={styles.statLabel}>{stat.label}</span>
-                </li>
-              ))}
-            </ul>
+            {profile.stats.map((stat, index) => (
+              <div key={stat.label} className={styles.statItem}>
+                <span aria-hidden="true" className={styles.statIcon}>{statIcons[index]}</span>
+                <span className={styles.statValue}>{stat.value}</span>
+                <span className={styles.statLabel}>{stat.label}</span>
+              </div>
+            ))}
           </section>
 
-          {/* Gear */}
           <section data-bio-block className={styles.gearBlock} aria-label={profile.gearLabel}>
-            <header className={styles.infoHeader}>
-              <span aria-hidden="true" className={styles.infoRule} />
-              <h3 className={styles.infoLabel}>{profile.gearLabel}</h3>
-              <span aria-hidden="true" className={styles.infoRule} />
-            </header>
+            <h3 className={styles.gearHeading}><span />{profile.gearLabel}<span /></h3>
             <ul className={styles.gearList}>
-              {profile.gear.map((item) => {
+              {profile.gear.map((item, index) => {
                 const [label, detail] = item.split(' — ')
-                return (
-                  <li key={item} className={styles.gearItem}>
-                    <span className="flex items-center justify-center gap-2">
-                      <span>{label}</span>
-                      {detail && (
-                        <span className="hidden md:inline opacity-50">
-                          — {detail}
-                        </span>
-                      )}
-                    </span>
-                  </li>
-                )
+                return <li key={item} className={styles.gearItem}><span aria-hidden="true" className={styles.gearIcon}>{gearIcons[index]}</span><span><strong>{label}</strong>{detail && <small>{detail}</small>}</span></li>
               })}
             </ul>
           </section>
 
-          {/* Mini CTA */}
           <div data-bio-block className={styles.profileCta}>
-            <a href={profile.cta.href} className={styles.profileCtaLink}>
-              {profile.cta.label}
-              <span aria-hidden="true" className={styles.profileCtaArrow}>↓</span>
-            </a>
+            <a href={profile.cta.href} className={styles.profileCtaLink}>{profile.cta.label}<span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>

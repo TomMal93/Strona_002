@@ -581,8 +581,26 @@
     min-height: 9rem;
     margin-top: 2.5rem;
     padding: 2.1rem clamp(5rem, 11vw, 12rem) 1.1rem;
-    border-top: 1px solid rgb(var(--c-gold) / 0.24);
-    border-bottom: 1px solid rgb(var(--c-gold) / 0.18);
+  }
+
+  .processLine,
+  .quoteLine {
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 1px;
+    pointer-events: none;
+    transform-origin: center;
+  }
+
+  .processLineTop {
+    top: 0;
+    background: rgb(var(--c-gold) / 0.24);
+  }
+
+  .processLineBottom {
+    bottom: 0;
+    background: rgb(var(--c-gold) / 0.18);
   }
 
   .processHeading {
@@ -651,14 +669,19 @@
 
   .promoQuote {
     grid-area: quote;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 7rem;
     margin-top: 2.5rem;
     padding: 1.25rem 2rem;
-    border-top: 1px solid rgb(var(--c-gold) / 0.13);
     color: rgb(204 164 100 / 0.52);
+  }
+
+  .quoteLine {
+    top: 0;
+    background: rgb(var(--c-gold) / 0.13);
   }
 
   .promoQuote p {

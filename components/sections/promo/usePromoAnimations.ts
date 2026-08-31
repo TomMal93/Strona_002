@@ -25,6 +25,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
 
     const setInitialStyles = () => {
       const {
+        sectionRef,
         hudBarRef,
         titleRef,
         subtitleRef,
@@ -55,6 +56,11 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
       const bottomDiamonds = bottomTimelineRef.current
         ? Array.from(bottomTimelineRef.current.querySelectorAll<HTMLElement>('[data-bottom-diamond]'))
         : []
+      const promoLines = sectionRef.current
+        ? Array.from(sectionRef.current.querySelectorAll<HTMLElement>('[data-promo-line]'))
+        : []
+      const promoProcess = sectionRef.current?.querySelector<HTMLElement>('[data-promo-process]') ?? null
+      const promoQuote = sectionRef.current?.querySelector<HTMLElement>('[data-promo-quote]') ?? null
 
         if (prefersReducedMotion) {
           visibleFadeElements.forEach((el) => {
@@ -82,12 +88,24 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
           el.style.visibility = 'inherit'
           el.style.transform = 'none'
         })
+        if (ytGridRef.current) {
+          ytGridRef.current.style.opacity = '1'
+          ytGridRef.current.style.visibility = 'inherit'
+          ytGridRef.current.style.transform = 'none'
+        }
         if (carouselShell) {
           carouselShell.style.opacity = '1'
           carouselShell.style.visibility = 'inherit'
           carouselShell.style.transform = 'none'
         }
         if (bottomLine) bottomLine.style.transform = 'scaleX(1)'
+        promoLines.forEach((el) => { el.style.transform = 'scaleX(1)' })
+        ;[promoProcess, promoQuote].forEach((el) => {
+          if (!el) return
+          el.style.opacity = '1'
+          el.style.visibility = 'inherit'
+          el.style.transform = 'none'
+        })
         bottomDiamonds.forEach((el) => {
           el.style.opacity = '1'
           el.style.visibility = 'inherit'
@@ -120,12 +138,28 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         el.style.visibility = 'hidden'
         el.style.transform = 'translate3d(0, 20px, 0)'
       })
+      if (ytGridRef.current) {
+        ytGridRef.current.style.opacity = '0'
+        ytGridRef.current.style.visibility = 'hidden'
+        ytGridRef.current.style.transform = 'translate3d(-18px, 0, 0)'
+      }
       if (carouselShell) {
         carouselShell.style.opacity = '0'
         carouselShell.style.visibility = 'hidden'
         carouselShell.style.transform = 'translate3d(0, 24px, 0)'
       }
       if (bottomLine) bottomLine.style.transform = 'scaleX(0)'
+      promoLines.forEach((el) => { el.style.transform = 'scaleX(0)' })
+      if (promoProcess) {
+        promoProcess.style.opacity = '0'
+        promoProcess.style.visibility = 'hidden'
+        promoProcess.style.transform = 'translate3d(0, 22px, 0)'
+      }
+      if (promoQuote) {
+        promoQuote.style.opacity = '0'
+        promoQuote.style.visibility = 'hidden'
+        promoQuote.style.transform = 'translate3d(0, 14px, 0)'
+      }
       bottomDiamonds.forEach((el) => {
         el.style.opacity = '0'
         el.style.visibility = 'hidden'
@@ -179,6 +213,17 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         const bottomDiamonds = bottomTimelineRef.current
           ? Array.from(bottomTimelineRef.current.querySelectorAll('[data-bottom-diamond]'))
           : []
+        const promoLines = sectionRef.current
+          ? Array.from(sectionRef.current.querySelectorAll('[data-promo-line]'))
+          : []
+        const promoProcess = sectionRef.current?.querySelector('[data-promo-process]') ?? null
+        const promoQuote = sectionRef.current?.querySelector('[data-promo-quote]') ?? null
+        const processLines = promoProcess
+          ? Array.from(promoProcess.querySelectorAll('[data-promo-line]'))
+          : []
+        const quoteLines = promoQuote
+          ? Array.from(promoQuote.querySelectorAll('[data-promo-line]'))
+          : []
 
         if (prefersReducedMotion) {
           gsap.set([titleRef.current, subtitleRef.current, videoFrameRef.current], { autoAlpha: 1, y: 0 })
@@ -186,8 +231,12 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
           if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 1, y: 0 })
           if (corners.length) gsap.set(corners, { autoAlpha: 1 })
           if (ytCards.length) gsap.set(ytCards, { autoAlpha: 1, y: 0 })
+          if (ytGridRef.current) gsap.set(ytGridRef.current, { autoAlpha: 1, x: 0 })
           if (carouselShell) gsap.set(carouselShell, { autoAlpha: 1, y: 0 })
           if (bottomLine) gsap.set(bottomLine, { scaleX: 1 })
+          if (promoLines.length) gsap.set(promoLines, { scaleX: 1 })
+          if (promoProcess) gsap.set(promoProcess, { autoAlpha: 1, y: 0 })
+          if (promoQuote) gsap.set(promoQuote, { autoAlpha: 1, y: 0 })
           if (bottomDiamonds.length) gsap.set(bottomDiamonds, { autoAlpha: 1 })
           return
         }
@@ -200,8 +249,12 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0, y: 8 })
         if (corners.length) gsap.set(corners, { autoAlpha: 0 })
         if (ytCards.length) gsap.set(ytCards, { autoAlpha: 0, y: 20 })
+        if (ytGridRef.current) gsap.set(ytGridRef.current, { autoAlpha: 0, x: -18 })
         if (carouselShell) gsap.set(carouselShell, { autoAlpha: 0, y: 24 })
         if (bottomLine) gsap.set(bottomLine, { scaleX: 0 })
+        if (promoLines.length) gsap.set(promoLines, { scaleX: 0 })
+        if (promoProcess) gsap.set(promoProcess, { autoAlpha: 0, y: 22 })
+        if (promoQuote) gsap.set(promoQuote, { autoAlpha: 0, y: 14 })
         if (bottomDiamonds.length) gsap.set(bottomDiamonds, { autoAlpha: 0 })
 
         /* ── Scroll-triggered timeline ──────────────────────────────── */
@@ -268,11 +321,16 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
           }, '-=0.4')
         }
 
-        // 7. YouTube cards (desktop grid) / mobile carousel shell
+        // 7. Desktop playlist frame and cards / mobile carousel shell
+        if (ytGridRef.current) {
+          tl.to(ytGridRef.current, {
+            autoAlpha: 1, x: 0, duration: 0.55, ease: 'power3.out',
+          }, '-=0.55')
+        }
         if (ytCards.length) {
           tl.to(ytCards, {
             autoAlpha: 1, y: 0, duration: 0.45, ease: 'power3.out', stagger: 0.008,
-          }, '-=0.2')
+          }, '-=0.35')
         }
         if (carouselShell) {
           tl.to(carouselShell, {
@@ -280,7 +338,34 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
           }, '-=0.35')
         }
 
-        // 8. Bottom timeline
+        // 8. Creative process panel and its separator lines
+        if (promoProcess) {
+          tl.to(promoProcess, {
+            autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out',
+          }, '-=0.25')
+        }
+        if (processLines.length) {
+          tl.to(processLines, {
+            scaleX: 1,
+            duration: 0.55,
+            ease: 'power2.out',
+            stagger: 0.06,
+          }, '-=0.38')
+        }
+
+        // 9. Closing quote
+        if (promoQuote) {
+          tl.to(promoQuote, {
+            autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out',
+          }, '-=0.3')
+        }
+        if (quoteLines.length) {
+          tl.to(quoteLines, {
+            scaleX: 1, duration: 0.5, ease: 'power2.out',
+          }, '-=0.45')
+        }
+
+        // 10. Legacy mobile timeline
         if (bottomLine) {
           tl.to(bottomLine, { scaleX: 1, duration: 0.5, ease: 'power2.out' }, '-=0.3')
         }
