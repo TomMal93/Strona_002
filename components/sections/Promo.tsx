@@ -5,6 +5,7 @@ import {
   useState,
   useCallback,
   type PointerEvent as ReactPointerEvent,
+  type ReactNode,
 } from 'react'
 import { siteContent } from '@/lib/site-content'
 import CinematicVideoPlayer from '@/components/ui/CinematicVideoPlayer'
@@ -152,11 +153,11 @@ export default function Promo() {
       id="promo"
       aria-labelledby="promo-heading"
       className={cn(
-        'bg-anthracite px-6 py-20 sm:py-24 lg:px-20 lg:py-32',
+        'bg-anthracite px-6 py-20 sm:py-24 lg:px-20 lg:py-16',
         'section-dark-bg',
       )}
     >
-      <div className="mx-auto max-w-content">
+      <div className={styles.promoCanvas}>
         {/* ── Header ──────────────────────────────────────────────── */}
         <div className={cn('mx-auto flex max-w-3xl flex-col items-center text-center', styles.sectionHeaderShell)}>
           <h2
@@ -200,6 +201,9 @@ export default function Promo() {
           playLabel="film promocyjny"
           muted
         >
+          <span aria-hidden="true" className={styles.frameCodec}>H.265 / LOG3</span>
+          <span aria-hidden="true" className={styles.frameDuration}>00:00:16</span>
+          <span aria-hidden="true" className={styles.framePreview}>Director&apos;s preview</span>
           <span aria-hidden="true" data-corner-mark className={`${styles.cornerMark} ${styles.cornerTL}`} />
           <span aria-hidden="true" data-corner-mark className={`${styles.cornerMark} ${styles.cornerTR}`} />
           <span aria-hidden="true" data-corner-mark className={`${styles.cornerMark} ${styles.cornerBL}`} />
@@ -276,13 +280,35 @@ export default function Promo() {
         </div>
 
         <div ref={ytGridRef} className={styles.ytGrid}>
-          {promo.youtubeVideos.map((video) => (
+          {promo.youtubeVideos.map((video, index) => (
             <YouTubeFacade
               key={video.id + video.title}
               videoId={video.id}
               title={video.title}
+              index={index}
             />
           ))}
+        </div>
+
+        <div className={styles.creativeProcess} aria-label="Proces twórczy">
+          <p className={styles.processHeading}>Proces twórczy</p>
+          <ProcessItem
+            title="Scenariusz"
+            subtitle="Koncepcja i historia"
+            icon={<path d="M4 3h13v18H4zM8 7h5M8 11h5M8 15h4M17 7h3v12h-3" />}
+          />
+          <span className={styles.processDot} aria-hidden="true">•</span>
+          <ProcessItem
+            title="Zdjęcia"
+            subtitle="Obraz i atmosfera"
+            icon={<><path d="M4 8h16v11H4zM8 8l1.4-3h5.2L16 8" /><circle cx="12" cy="13.5" r="3.5" /></>}
+          />
+          <span className={styles.processDot} aria-hidden="true">•</span>
+          <ProcessItem
+            title="Montaż"
+            subtitle="Rytm i emocje"
+            icon={<><path d="M5 4l14 16M19 4L5 20" /><circle cx="5" cy="20" r="2" /><circle cx="19" cy="20" r="2" /></>}
+          />
         </div>
 
         {/* ── Bottom timeline ─────────────────────────────────────── */}
@@ -292,7 +318,31 @@ export default function Promo() {
             <span key={video.id + video.title} data-bottom-diamond className={styles.bottomTimelineDiamond}>◆</span>
           ))}
         </div>
+
+        <blockquote className={styles.promoQuote}>
+          <p>Film to nie to, co pokazujesz. To to, co zostaje widzom po seansie.</p>
+        </blockquote>
       </div>
     </section>
+  )
+}
+
+function ProcessItem({
+  title,
+  subtitle,
+  icon,
+}: {
+  title: string
+  subtitle: string
+  icon: ReactNode
+}) {
+  return (
+    <div className={styles.processItem}>
+      <svg viewBox="0 0 24 24" aria-hidden="true">{icon}</svg>
+      <div>
+        <strong>{title}</strong>
+        <span>{subtitle}</span>
+      </div>
+    </div>
   )
 }

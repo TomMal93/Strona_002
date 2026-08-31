@@ -7,9 +7,10 @@ import styles from '../Promo.module.css'
 type YouTubeFacadeProps = {
   videoId: string
   title: string
+  index?: number
 }
 
-export function YouTubeFacade({ videoId, title }: YouTubeFacadeProps) {
+export function YouTubeFacade({ videoId, title, index }: YouTubeFacadeProps) {
   const [loaded, setLoaded] = useState(false)
 
   const handleClick = useCallback(() => {
@@ -38,7 +39,7 @@ export function YouTubeFacade({ videoId, title }: YouTubeFacadeProps) {
             className={styles.ytIframe}
           />
         </div>
-        <p className={styles.ytTitle}>{title}</p>
+        <VideoDetails title={title} index={index} />
       </div>
     )
   }
@@ -67,7 +68,25 @@ export function YouTubeFacade({ videoId, title }: YouTubeFacadeProps) {
           </svg>
         </span>
       </button>
-      <p className={styles.ytTitle}>{title}</p>
+      <VideoDetails title={title} index={index} />
+    </div>
+  )
+}
+
+function VideoDetails({
+  title,
+  index,
+}: Pick<YouTubeFacadeProps, 'title' | 'index'>) {
+  return (
+    <div className={styles.ytDetails}>
+      {typeof index === 'number' && (
+        <span className={styles.ytIndex} aria-hidden="true">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+      )}
+      <div className={styles.ytCopy}>
+        <p className={styles.ytTitle}>{title}</p>
+      </div>
     </div>
   )
 }
