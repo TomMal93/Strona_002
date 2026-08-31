@@ -295,6 +295,10 @@
   .mosaic { display: none; }
 }
 
+@media (max-width: 767px) {
+  .ctaPanel { border: none; }
+}
+
 @media (max-width: 560px) {
   .section { min-height: 790px; padding: 6.25rem 1rem 4.5rem; }
   .sectionHeader { margin-bottom: 1.5rem; }

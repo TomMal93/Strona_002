@@ -802,6 +802,20 @@
 /* ── Small mobile adjustments ─────────────────────────────────────────── */
 
 @media (max-width: 767px) {
+  .carouselViewport {
+    margin-block: -1.25rem;
+    padding-block: 1.25rem;
+  }
+
+  .carouselSlide:not([data-inactive]) {
+    transform: scale(1.04);
+  }
+
+  .carouselSlide:not([data-inactive]):hover,
+  .carouselSlide:not([data-inactive]):focus-within {
+    transform: translateY(-8px) scale(1.04);
+  }
+
   .trustedSection {
     padding-bottom: 1.75rem;
   }
@@ -911,7 +925,7 @@
   }
 
   .authorContext {
-    font-size: 0.8rem;
+    font-size: calc(0.8rem - 2px);
   }
 
 }
@@ -980,10 +994,10 @@
 
 @media (max-width: 767px) {
   .quoteText {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .authorName {
-    font-size: 14.5px;
+    font-size: 16.5px;
   }
 }
