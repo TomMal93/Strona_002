@@ -24,7 +24,8 @@ export default function AboutMeBio() {
   useAboutMeBioAnimations({ sectionRef, titleRef, subtitleRef, hudBarRef, bioPanelRef })
 
   const { profile } = siteContent.aboutMe
-  const [introLead, introBody = ''] = profile.intro.split(' — ')
+  const [introLead, introMiddle = '', ...introBodyLines] = profile.intro.split('\n')
+  const introBody = introBodyLines.join('\n')
 
   return (
     <section ref={sectionRef} id="bio" aria-labelledby="aboutme-bio-heading" className={cn(styles.section, 'section-dark-bg')}>
@@ -50,6 +51,7 @@ export default function AboutMeBio() {
                     ? token
                     : <span key={`${token}-${index}`} data-bio-word>{token}</span>)}
                 </p>
+                {introMiddle && <p className={styles.introMiddle}>{introMiddle}</p>}
                 {introBody && <p className={styles.introBody}>{introBody}</p>}
                 <span aria-hidden="true" className={styles.accentRule} />
               </div>

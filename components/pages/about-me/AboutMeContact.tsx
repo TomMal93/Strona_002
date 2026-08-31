@@ -65,7 +65,8 @@ export default function AboutMeContact() {
               </div>
 
               <p ref={subtitleRef} className={styles.subtitle}>
-                Każdy dobry projekt zaczyna się od rozmowy. Napisz lub zadzwoń.
+                Masz wydarzenie, historię albo pomysł, który warto pokazać? Opowiedz mi o nim.
+                Wspólnie ustalimy, jak zamienić go w film z charakterem.
               </p>
             </div>
 

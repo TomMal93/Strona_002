@@ -368,7 +368,7 @@ export const siteContent = {
       subtitle: 'Profile',
       intro:
         process.env.NEXT_PUBLIC_ABOUTME_PROFILE_INTRO
-        || 'Nazywam się Przemek Malxxxxx. Tworzę filmy z wydarzeń, w których liczą się prawdziwe emocje i tempo chwili. Szukam gestów, spojrzeń i momentów, które łatwo przeoczyć — pracuję spokojnie, reaguję szybko i nie próbuję reżyserować tego, co powinno wydarzyć się naturalnie. Dzięki temu otrzymujesz nie tylko zapis wydarzenia, ale film, który pozwala poczuć jego atmosferę jeszcze raz.',
+        || 'Nazywam się Przemek Malxxxxx.\nTworzę filmy z wydarzeń, w których liczą się prawdziwe emocje i tempo chwili. Szukam gestów, spojrzeń i momentów, które łatwo przeoczyć.\nPracuję spokojnie, reaguję szybko i nie próbuję reżyserować tego, co powinno wydarzyć się naturalnie. Dzięki temu otrzymujesz nie tylko zapis wydarzenia, ale film, który pozwala poczuć jego atmosferę jeszcze raz.',
       locationLabel: 'Gdzie pracuję',
       locationText:
         process.env.NEXT_PUBLIC_ABOUTME_PROFILE_LOCATION
