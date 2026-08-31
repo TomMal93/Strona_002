@@ -9,8 +9,8 @@ import { useWhyIDoThisAnimations } from './useWhyIDoThisAnimations'
 import WhyIDoThisVideo from './WhyIDoThisVideo'
 
 const sceneTags = [
-  ['Wyczucie chwili', 'Naturalne emocje', 'Spokój w działaniu'],
-  ['Filmowe spojrzenie', 'Prawdziwe tempo', 'Kadry z charakterem'],
+  ['Wyczucie chwili', 'Naturalne emocje', 'Spokój w działaniu', 'Szczerość momentu'],
+  ['Filmowe spojrzenie', 'Prawdziwe tempo', 'Kadry z charakterem', 'Światło i dźwięk'],
 ]
 
 function SceneHeading({ number }: { number: string }) {

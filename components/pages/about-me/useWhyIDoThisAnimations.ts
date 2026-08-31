@@ -22,6 +22,7 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
     ).matches
 
     const { titleRef, subtitleRef, hudBarRef, bioPanelRef } = refs
+    const storyRail = hudBarRef.current
 
     const hudLines = hudBarRef.current
       ? Array.from(hudBarRef.current.querySelectorAll<HTMLElement>('[data-hud-line]'))
@@ -58,6 +59,7 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
         }
       })
       hudLines.forEach((el) => { el.style.transform = 'scaleX(1)' })
+      storyRail?.style.setProperty('--story-line-scale', '1')
       hudLabels.forEach((el) => {
         el.style.opacity = '1'
         el.style.visibility = 'inherit'
@@ -97,6 +99,7 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
       bioPanelRef.current.style.transform = 'translate3d(0, 20px, 0)'
     }
     hudLines.forEach((el) => { el.style.transform = 'scaleX(0)' })
+    storyRail?.style.setProperty('--story-line-scale', '0')
     hudLabels.forEach((el) => {
       el.style.opacity = '0'
       el.style.visibility = 'hidden'
@@ -169,6 +172,15 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
           tl.to(bioPanelRef.current, {
             autoAlpha: 1, y: 0, duration: 0.55, ease: 'power3.out',
           }, '-=0.2')
+        }
+
+        // Draw the vertical story axis from top to bottom on section entry
+        if (storyRail) {
+          tl.to(storyRail, {
+            '--story-line-scale': 1,
+            duration: 1.2,
+            ease: 'power2.out',
+          }, '-=0.4')
         }
 
         // Words become visible immediately so paragraph-level stagger drives the reveal
