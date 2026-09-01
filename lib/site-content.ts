@@ -357,7 +357,7 @@ export const siteContent = {
       titleLine1: 'Masz historię',
       titleLine2: 'do opowiedzenia?',
       lead:
-        'Napisz, co chcesz stworzyć.\nOdezwę się z konkretną propozycją.',
+        'Napisz, co chcesz stworzyć.\nOpowiedz mi o swoim pomyśle, terminie i miejscu realizacji.\nOdezwę się z konkretną propozycją dopasowaną do Twojej historii.',
       availability: 'Odpowiadam zwykle w ciągu 24 godzin',
       location: 'Polska / realizacje w całym kraju',
       image: '/images/contact/contact-camera-sunset.webp',

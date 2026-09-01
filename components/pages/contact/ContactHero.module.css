@@ -97,13 +97,8 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  margin-top: clamp(2.3rem, 4vh, 3.2rem);
-  border: 1px solid rgb(var(--c-gold) / 0.14);
-  border-radius: 0.25rem;
-  background:
-    radial-gradient(ellipse at 50% 0%, rgb(var(--c-gold) / 0.055), transparent 62%),
-    rgb(13 13 13 / 0.58);
-  transition: border-color 320ms ease, background-color 320ms ease, box-shadow 320ms ease;
+  margin-top: clamp(1.5rem, 3vh, 2.3rem);
+  background: radial-gradient(circle at 50% 48%, rgb(var(--c-gold) / 0.055), transparent 68%);
 }
 
 .contactPanel::before {
@@ -111,62 +106,59 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(ellipse at 30% 20%, rgb(var(--c-khaki) / 0.1), transparent 60%);
-  opacity: 0.5;
-  transition: opacity 320ms ease;
-}
-
-.contactPanel:hover,
-.contactPanel:focus-within {
-  border-color: rgb(var(--c-gold) / 0.5);
-  background-color: rgb(255 255 255 / 0.025);
-  box-shadow: 0 18px 44px rgb(0 0 0 / 0.3), 0 0 32px rgb(var(--c-gold) / 0.13);
-}
-
-.contactPanel:hover::before,
-.contactPanel:focus-within::before {
-  opacity: 1;
+  background: linear-gradient(90deg, rgb(var(--c-gold) / 0.025), transparent 35%, transparent 65%, rgb(var(--c-gold) / 0.025));
 }
 
 .contactGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding: 1.6rem 1.25rem;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  padding: 1rem;
 }
 
 .contactItem {
   position: relative;
   display: grid;
-  grid-template-columns: 2rem minmax(0, 1fr);
-  gap: 0.75rem;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  gap: 0.65rem;
   min-width: 0;
-  min-height: 68px;
+  min-height: 62px;
   align-items: center;
-  padding: 0.35rem 1rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgb(var(--c-khaki) / 0.3);
+  border-radius: 8px;
+  background: rgb(var(--c-khaki) / 0.025);
   color: inherit;
-  transition: color 220ms ease, transform 260ms ease;
-}
-
-.contactItem:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  top: 10%;
-  right: 0;
-  width: 1px;
-  height: 80%;
-  background: linear-gradient(180deg, transparent, rgb(var(--c-gold) / 0.28), transparent);
+  transition: color 220ms ease, transform 260ms ease, border-color 260ms ease, background-color 260ms ease, box-shadow 260ms ease;
 }
 
 .contactItem:hover {
-  color: rgb(255 225 168 / 1);
+  color: rgb(218 226 192 / 1);
   transform: translateY(-2px);
+  border-color: rgb(var(--c-khaki) / 0.52);
+  background-color: rgb(var(--c-khaki) / 0.07);
+  box-shadow: 0 8px 24px rgb(var(--c-gold) / 0.08);
 }
 
 .contactIcon {
-  font-family: var(--font-ibm-plex-mono), monospace;
-  font-size: 1.45rem;
-  line-height: 1;
-  color: rgb(213 176 111 / 0.86);
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  color: rgb(255 238 175 / 0.72);
+}
+
+.contactIcon svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contactItemCopy {
+  min-width: 0;
 }
 
 .contactItem strong,
@@ -196,8 +188,8 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
-  padding: 1.25rem 1.5rem 1.45rem;
-  border-top: 1px solid rgb(var(--c-gold) / 0.22);
+  padding: 0.9rem 1.25rem 1.05rem;
+  border-top: 1px solid rgb(var(--c-gold) / 0.16);
 }
 
 .benefit {
@@ -227,20 +219,6 @@
   font-size: 1.65rem;
   color: rgb(213 176 111 / 0.86);
 }
-
-.panelCorner {
-  position: absolute;
-  z-index: 2;
-  width: 22px;
-  height: 22px;
-  border-color: rgb(var(--c-gold) / 0.42);
-  pointer-events: none;
-}
-
-.panelCornerTL { top: -1px; left: -1px; border-top: 2px solid; border-left: 2px solid; }
-.panelCornerTR { top: -1px; right: -1px; border-top: 2px solid; border-right: 2px solid; }
-.panelCornerBL { bottom: -1px; left: -1px; border-bottom: 2px solid; border-left: 2px solid; }
-.panelCornerBR { right: -1px; bottom: -1px; border-right: 2px solid; border-bottom: 2px solid; }
 
 .monitor {
   position: relative;
@@ -373,6 +351,35 @@
   height: 100%;
 }
 
+@media (min-width: 768px) {
+  .section {
+    height: 100svh;
+    min-height: 0;
+  }
+
+  .shell {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    height: 100%;
+    padding-top: clamp(4rem, 8svh, 7.5rem);
+  }
+
+  .mainGrid {
+    min-height: 0;
+    padding-bottom: clamp(0.75rem, 2svh, 2.5rem);
+  }
+
+  .monitorImage {
+    height: clamp(16rem, 44svh, 37rem);
+    aspect-ratio: auto;
+  }
+
+  .bottomStrip {
+    min-height: clamp(5.625rem, 14svh, 9.375rem);
+    padding-block: clamp(1rem, 2svh, 2rem);
+  }
+}
+
 @media (max-width: 1199px) {
   .mainGrid {
     grid-template-columns: minmax(0, 0.9fr) minmax(390px, 1fr);
@@ -390,16 +397,6 @@
 
   .contactItem {
     padding-block: 0.75rem;
-  }
-
-  .contactItem:not(:last-child)::after {
-    top: auto;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgb(var(--c-gold) / 0.24), transparent);
   }
 
   .benefits {
@@ -423,6 +420,79 @@
   .socials a {
     font-size: 0;
   }
+
+}
+
+@media (min-width: 768px) and (max-width: 1199px) and (max-height: 900px) {
+  .mainGrid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    gap: 2rem;
+  }
+
+  .title {
+    font-size: clamp(2.75rem, 5.5vw, 3.5rem);
+  }
+
+  .lead {
+    margin-top: 1rem;
+    line-height: 1.6;
+  }
+
+  .primaryAction {
+    min-height: 50px;
+    margin-top: 1.25rem;
+  }
+
+  .contactPanel {
+    margin-top: 1.25rem;
+  }
+
+  .contactGrid {
+    grid-template-columns: 1fr;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .contactItem {
+    grid-template-columns: 1.75rem minmax(0, 1fr);
+    gap: 0.4rem;
+    min-height: 60px;
+    padding: 0.3rem 0.45rem;
+  }
+
+  .contactIcon {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .contactIcon svg {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+
+  .contactItem strong {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+  }
+
+  .contactItem small {
+    font-size: 0.58rem;
+  }
+
+  .benefits {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.35rem;
+    padding: 0.75rem;
+  }
+
+  .benefit {
+    gap: 0.4rem;
+    font-size: 0.52rem;
+  }
+
+  .benefitIcon {
+    font-size: 1.1rem;
+  }
+
 }
 
 @media (max-width: 767px) {
