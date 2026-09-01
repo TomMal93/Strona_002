@@ -205,6 +205,7 @@ export default function About() {
                     poster={siteContent.promo.heroVideo.poster}
                     shouldLoad={shouldLoadMobileVideo}
                     playLabel="film promocyjny"
+                    showFullscreen={false}
                     muted
                   >
                     <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />

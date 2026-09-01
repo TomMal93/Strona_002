@@ -21,6 +21,7 @@ type CinematicVideoPlayerProps = {
   playLabel?: string
   muted?: boolean
   showPlayOverlay?: boolean
+  showFullscreen?: boolean
   clickToToggle?: boolean
   children?: ReactNode | ((controls: { isPlaying: boolean; togglePlayback: () => void }) => ReactNode)
 }
@@ -36,6 +37,7 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
       playLabel = 'film',
       muted = false,
       showPlayOverlay = true,
+      showFullscreen = true,
       clickToToggle = false,
       children,
     },
@@ -220,45 +222,49 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
           <span className={styles.timecode}>{timecode}</span>
         </div>
 
-        <div className={styles.controls} role="group" aria-label="Kontrolki filmu">
-          {!muted && (
-            <label className={styles.volumeControl}>
-              <span className={styles.controlLabel}>Volume</span>
-              <input
-                className={styles.volumeSlider}
-                type="range"
-                min="0"
-                max="1"
-                step="0.05"
-                value={volume}
-                onChange={(event) => handleVolumeChange(Number(event.currentTarget.value))}
-                aria-label="Głośność filmu"
-              />
-            </label>
-          )}
-          <button
-            type="button"
-            className={styles.controlButton}
-            onClick={handleFullscreen}
-            aria-label={isFullscreen ? 'Wyłącz pełny ekran' : 'Włącz pełny ekran'}
-          >
-            {isFullscreen ? (
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M9 3v6H3" />
-                <path d="M15 3v6h6" />
-                <path d="M9 21v-6H3" />
-                <path d="M15 21v-6h6" />
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M8 3H3v5" />
-                <path d="M16 3h5v5" />
-                <path d="M8 21H3v-5" />
-                <path d="M16 21h5v-5" />
-              </svg>
+        {(!muted || showFullscreen) && (
+          <div className={styles.controls} role="group" aria-label="Kontrolki filmu">
+            {!muted && (
+              <label className={styles.volumeControl}>
+                <span className={styles.controlLabel}>Volume</span>
+                <input
+                  className={styles.volumeSlider}
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.05"
+                  value={volume}
+                  onChange={(event) => handleVolumeChange(Number(event.currentTarget.value))}
+                  aria-label="Głośność filmu"
+                />
+              </label>
             )}
-          </button>
-        </div>
+            {showFullscreen && (
+              <button
+                type="button"
+                className={styles.controlButton}
+                onClick={handleFullscreen}
+                aria-label={isFullscreen ? 'Wyłącz pełny ekran' : 'Włącz pełny ekran'}
+              >
+                {isFullscreen ? (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 3v6H3" />
+                    <path d="M15 3v6h6" />
+                    <path d="M9 21v-6H3" />
+                    <path d="M15 21v-6h6" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 3H3v5" />
+                    <path d="M16 3h5v5" />
+                    <path d="M8 21H3v-5" />
+                    <path d="M16 21h5v-5" />
+                  </svg>
+                )}
+              </button>
+            )}
+          </div>
+        )}
       </div>
     )
   },

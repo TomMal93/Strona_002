@@ -119,9 +119,9 @@ export default function HeroTextBlock({
           {showServiceTags && (
             <p className={styles.heroServiceTags} aria-label={siteContent.hero.serviceTags.join(', ')}>
               {siteContent.hero.serviceTags.map((tag, index) => (
-                <span key={tag}>
+                <span key={tag} className={styles.heroServiceTagGroup}>
                   {index > 0 && <span aria-hidden="true" className={styles.heroServiceTagDot}>•</span>}
-                  {tag}
+                  <span className={styles.heroServiceTagItem}>{tag}</span>
                 </span>
               ))}
             </p>

@@ -268,7 +268,27 @@
   letter-spacing: 0.20em;
   line-height: 1;
   text-transform: uppercase;
+}
+
+.heroServiceTagGroup {
+  display: inline-flex;
+  align-items: center;
+}
+
+.heroServiceTagItem {
+  display: inline-block;
+  cursor: default;
   text-shadow: 0 0 10px rgb(213 169 91 / 0.18);
+  transition:
+    color 300ms ease,
+    text-shadow 300ms ease;
+}
+
+.heroServiceTagItem:hover {
+  color: rgb(245 210 135 / 1);
+  text-shadow:
+    0 0 12px rgb(213 169 91 / 0.6),
+    0 0 24px rgb(213 169 91 / 0.35);
 }
 
 .heroServiceTagDot {
@@ -277,6 +297,15 @@
   color: rgb(255 238 175 / 0.62);
   font-size: 0.72em;
   transform: translateY(-0.08em);
+  text-shadow: 0 0 10px rgb(213 169 91 / 0.18);
+  transition:
+    color 300ms ease,
+    text-shadow 300ms ease;
+}
+
+.heroServiceTagDot:hover {
+  color: rgb(255 245 200 / 0.95);
+  text-shadow: 0 0 8px rgb(255 238 175 / 0.65);
 }
 
 .ctaButton {
