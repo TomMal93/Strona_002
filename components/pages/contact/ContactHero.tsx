@@ -101,65 +101,62 @@ export default function ContactHero() {
               <span>{hero.titleLine2}</span>
             </h1>
 
-            <p data-contact-hero-item className={styles.lead}>{hero.lead}</p>
+            <div className={styles.contactFrame}>
+              <p data-contact-hero-item className={styles.lead}>{hero.lead}</p>
 
-            <div data-contact-hero-item className={styles.contactPanel}>
-              <div className={styles.contactGrid}>
-                {contactItems.map((item, index) => {
-                  const href = index === 0
-                    ? `mailto:${contact.email}`
-                    : index === 1
-                      ? phoneHref
-                      : 'https://www.google.com/maps/search/?api=1&query=Polska'
-                  const isExternal = index === 2
+              <div data-contact-hero-item className={styles.contactPanel}>
+                <div className={styles.contactGrid}>
+                  {contactItems.map((item, index) => {
+                    const href = index === 0
+                      ? `mailto:${contact.email}`
+                      : index === 1
+                        ? phoneHref
+                        : 'https://www.google.com/maps/search/?api=1&query=Polska'
+                    const isExternal = index === 2
 
-                  return (
-                    <a
-                      key={item.label}
-                      href={href}
-                      className={styles.contactItem}
-                      target={isExternal ? '_blank' : undefined}
-                      rel={isExternal ? 'noopener noreferrer' : undefined}
-                    >
-                      <span className={styles.contactIcon}>
-                        <ContactIcon type={item.icon} />
-                      </span>
-                      <span className={styles.contactItemCopy}>
-                        <strong>{item.label}</strong>
-                        <small>{contactValues[index]}</small>
-                      </span>
-                    </a>
-                  )
-                })}
+                    return (
+                      <a
+                        key={item.label}
+                        href={href}
+                        className={styles.contactItem}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noopener noreferrer' : undefined}
+                      >
+                        <span className={styles.contactIcon}>
+                          <ContactIcon type={item.icon} />
+                        </span>
+                        <span className={styles.contactItemCopy}>
+                          <strong>{item.label}</strong>
+                          <small>{contactValues[index]}</small>
+                        </span>
+                      </a>
+                    )
+                  })}
+                </div>
+
+                <div className={styles.benefits}>
+                  {benefits.map((benefit, index) => (
+                    <div key={benefit.lines[0]} className={styles.benefit}>
+                      <span className={styles.benefitIcon} aria-hidden="true">{benefit.icon}</span>
+                      <span>{benefit.lines[0]}<br />{benefit.lines[1]}</span>
+                      {index < benefits.length - 1 ? <i aria-hidden="true" /> : null}
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className={styles.benefits}>
-                {benefits.map((benefit, index) => (
-                  <div key={benefit.lines[0]} className={styles.benefit}>
-                    <span className={styles.benefitIcon} aria-hidden="true">{benefit.icon}</span>
-                    <span>{benefit.lines[0]}<br />{benefit.lines[1]}</span>
-                    {index < benefits.length - 1 ? <i aria-hidden="true" /> : null}
-                  </div>
-                ))}
-              </div>
+              <a
+                data-contact-hero-item
+                href={`mailto:${contact.email}`}
+                className={cn(heroStyles.ctaButton, heroStyles.ctaButtonPrimary, styles.primaryAction)}
+              >
+                <span>Zapytaj o termin</span>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
-
-            <a
-              data-contact-hero-item
-              href={`mailto:${contact.email}`}
-              className={cn(heroStyles.ctaButton, heroStyles.ctaButtonPrimary, styles.primaryAction)}
-            >
-              <span>Zapytaj o termin</span>
-              <span aria-hidden="true">→</span>
-            </a>
           </div>
 
           <figure ref={monitorRef} className={styles.monitor}>
-            <span className={`${styles.monitorCorner} ${styles.monitorCornerTL}`} aria-hidden="true" />
-            <span className={`${styles.monitorCorner} ${styles.monitorCornerTR}`} aria-hidden="true" />
-            <span className={`${styles.monitorCorner} ${styles.monitorCornerBL}`} aria-hidden="true" />
-            <span className={`${styles.monitorCorner} ${styles.monitorCornerBR}`} aria-hidden="true" />
-
             <div className={styles.monitorBar} aria-hidden="true">
               <span>H.265 / LOG3</span>
               <span>00:00:00:00</span>
