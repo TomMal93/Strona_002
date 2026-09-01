@@ -57,7 +57,7 @@ export default function Footer() {
       <div className="mx-auto flex max-w-content flex-col items-center gap-4 text-center md:grid md:grid-cols-3 md:gap-6">
         <Link
           href="/#hero"
-          className="font-bebas text-sm uppercase tracking-heading text-warm-white transition-colors duration-200 hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki md:justify-self-start"
+          className="font-bebas text-lg sm:text-xl uppercase tracking-heading text-warm-white transition-colors duration-200 hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki md:justify-self-start"
         >
           MALESZYK
           <span className="text-[#c8503c]">.</span>
