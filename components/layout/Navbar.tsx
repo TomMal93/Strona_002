@@ -224,7 +224,7 @@ export default function Navbar() {
         <Link
           href="/"
           aria-label="Strona główna"
-          className="relative shrink-0 font-bebas text-[1.006rem] uppercase tracking-heading text-warm-white transition-colors duration-500 ease-out hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki md:absolute md:left-[20vw] min-[1800px]:text-[1.3rem]"
+          className="relative shrink-0 font-bebas text-[1.006rem] uppercase tracking-heading text-warm-white transition-colors duration-500 ease-out hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki min-[1800px]:text-[1.3rem]"
         >
           MALESZYK
           <span className="text-[#c8503c]">.</span>
@@ -234,7 +234,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop navigation */}
-        <nav className="hidden items-center gap-10 md:ml-auto md:mr-[10vw] md:flex min-[1800px]:gap-14" aria-label="Nawigacja główna">
+        <nav className="hidden items-center gap-6 md:flex lg:gap-10 min-[1800px]:gap-14" aria-label="Nawigacja główna">
           {DESKTOP_NAV_ITEMS.map((item) => (
             <Link
               key={item.href}

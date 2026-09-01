@@ -468,37 +468,6 @@
   transform: scale(1.035);
 }
 
-.videoBadge,
-.videoStatus {
-  position: absolute;
-  z-index: 2;
-  top: 0.65rem;
-  display: inline-flex;
-  align-items: center;
-  min-height: 1.75rem;
-  padding: 0.15rem 0.55rem;
-  border-radius: 0.25rem;
-  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.64rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  backdrop-filter: blur(10px);
-}
-
-.videoBadge {
-  left: 0.65rem;
-  color: rgb(255 238 175 / 0.7);
-  background: rgb(16 16 18 / 0.65);
-  border: 1px solid rgb(var(--c-gold) / 0.2);
-}
-
-.videoStatus {
-  right: 0.65rem;
-  color: rgb(255 255 255 / 0.6);
-  background: rgb(16 16 18 / 0.55);
-  border: 1px solid rgb(255 255 255 / 0.08);
-}
-
 .playButton {
   position: absolute;
   inset: auto auto 0.65rem 0.65rem;
@@ -677,10 +646,6 @@
     padding: 0.9rem;
   }
 
-  .videoStatus {
-    display: none;
-  }
-
   .cardTitle {
     max-width: none;
   }
@@ -723,8 +688,6 @@
   }
 
   .sceneNumber,
-  .videoBadge,
-  .videoStatus,
   .playIcon {
     /* 12.5px × 0.64 zoom = 8px */
     font-size: 12.5px;
@@ -749,8 +712,6 @@
   }
 
   .sceneNumber,
-  .videoBadge,
-  .videoStatus,
   .playIcon {
     /* 12.5px × 0.8 zoom = 10px */
     font-size: 12.5px;

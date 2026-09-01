@@ -34,8 +34,6 @@ type VariantClassNames = {
   videoFrame: string
   bullet: string
   bulletDot: string
-  playButton: string
-  playButtonPlaying: string
 }
 
 const VARIANT_CLASSES: Record<CardVariant, VariantClassNames> = {
@@ -50,8 +48,6 @@ const VARIANT_CLASSES: Record<CardVariant, VariantClassNames> = {
     videoFrame: styles.videoFrameHighlight,
     bullet: styles.bulletHighlight,
     bulletDot: styles.bulletDotHighlight,
-    playButton: styles.playButtonHighlight,
-    playButtonPlaying: styles.playButtonPlayingHighlight,
   },
   military: {
     card: styles.sceneCardMilitary,
@@ -64,8 +60,6 @@ const VARIANT_CLASSES: Record<CardVariant, VariantClassNames> = {
     videoFrame: styles.videoFrameMilitary,
     bullet: styles.bulletMilitary,
     bulletDot: styles.bulletDotMilitary,
-    playButton: styles.playButtonMilitary,
-    playButtonPlaying: styles.playButtonPlayingMilitary,
   },
 }
 
@@ -82,8 +76,6 @@ function SceneCard({ item, index, animate = true, className }: SceneCardProps) {
   const videoFrameRef = useRef<HTMLDivElement>(null!)
   const videoRef = useRef<HTMLVideoElement>(null!)
   const shouldLoadVideo = useLazyVideoSource(videoFrameRef)
-  const [isPlaying, setIsPlaying] = useState(false)
-
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
@@ -152,8 +144,14 @@ function SceneCard({ item, index, animate = true, className }: SceneCardProps) {
         </div>
 
         <div ref={videoFrameRef} className={cn(styles.videoFrame, v.videoFrame)}>
-          <span className={styles.videoBadge}>{item.tag}</span>
-          <span className={styles.videoStatus}>{isPlaying ? 'preview on' : 'click to play'}</span>
+          <button
+            type="button"
+            className={styles.videoStatus}
+            onClick={toggleVideo}
+            aria-label={isPlaying ? `Zatrzymaj podgląd: ${item.title}` : `Odtwórz podgląd: ${item.title}`}
+          >
+            {isPlaying ? 'preview on' : 'click to play'}
+          </button>
 
           {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
           <video
@@ -172,22 +170,6 @@ function SceneCard({ item, index, animate = true, className }: SceneCardProps) {
               />
             )}
           </video>
-
-          <button
-            type="button"
-            className={cn(
-              styles.playButton,
-              v.playButton,
-              isPlaying && styles.playButtonPlaying,
-              isPlaying && v.playButtonPlaying,
-            )}
-            onClick={toggleVideo}
-            aria-label={isPlaying ? `Zatrzymaj podgląd: ${item.title}` : `Odtwórz podgląd: ${item.title}`}
-          >
-            <span className={styles.playIcon}>
-              {isPlaying ? 'II' : 'PLAY'}
-            </span>
-          </button>
         </div>
 
         <div className={styles.cardBody}>
