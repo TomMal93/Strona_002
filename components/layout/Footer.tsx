@@ -84,10 +84,16 @@ export default function Footer() {
           ))}
         </ul>
 
-        <div className="font-inter text-[10px] text-warm-gray sm:text-xs md:justify-self-end">
+        <div className="flex flex-col items-center gap-1 font-inter text-[10px] text-warm-gray sm:text-xs md:items-end md:justify-self-end">
           <p className="whitespace-nowrap md:text-right">
             © {year} Maleszyk.Media · Wszelkie prawa zastrzeżone
           </p>
+          <Link
+            href="/polityka-prywatnosci"
+            className="text-warm-gray/70 underline underline-offset-2 transition-colors hover:text-khaki"
+          >
+            Polityka prywatności i RODO
+          </Link>
         </div>
       </div>
     </footer>
