@@ -757,6 +757,9 @@
   width: 18px;
   height: 18px;
   pointer-events: none;
+  transition:
+    border-color 300ms ease,
+    box-shadow 300ms ease;
 }
 
 /* Each corner uses two borders to form an L-shape */
@@ -795,6 +798,7 @@
   padding-top: 0.6rem;
   padding-bottom: 1.6rem;
   text-align: center;
+  cursor: default;
 }
 
 /* "REC" indicator — camera-style overline */
@@ -845,6 +849,16 @@
   letter-spacing: 0.02em;
   width: 100%;
   max-width: none;
+  transition:
+    color 300ms ease,
+    text-shadow 300ms ease;
+}
+
+.viewfinderContent:hover .viewfinderLead {
+  color: rgb(255 255 255 / 0.92);
+  text-shadow:
+    0 0 14px rgb(255 255 255 / 0.35),
+    0 0 24px rgb(213 169 91 / 0.25);
 }
 
 @media (width >= 48rem) {
@@ -865,6 +879,19 @@
     rgb(var(--c-gold) / 0.45) 50%,
     transparent 100%
   );
+  transition:
+    background 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.viewfinderContent:hover .viewfinderDivider {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--c-gold) / 0.85) 50%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px rgb(var(--c-gold) / 0.35);
 }
 
 /* Description — muted, supporting text */
@@ -877,6 +904,16 @@
   letter-spacing: 0.02em;
   width: 100%;
   max-width: none;
+  transition:
+    color 300ms ease,
+    text-shadow 300ms ease;
+}
+
+.viewfinderContent:hover .viewfinderDesc {
+  color: rgb(255 255 255 / 0.92);
+  text-shadow:
+    0 0 14px rgb(255 255 255 / 0.35),
+    0 0 24px rgb(213 169 91 / 0.25);
 }
 
 @media (width >= 48rem) {
@@ -891,6 +928,16 @@
   font-weight: 500;
   letter-spacing: 0.02em;
   color: rgb(253 230 138 / 0.9);
+  transition:
+    color 300ms ease,
+    text-shadow 300ms ease;
+}
+
+.viewfinderContent:hover .viewfinderEmphasis {
+  color: rgb(255 242 170 / 1);
+  text-shadow:
+    0 0 12px rgb(213 169 91 / 0.7),
+    0 0 24px rgb(213 169 91 / 0.4);
 }
 
 /* ── About statement ───────────────────────────────────────────────────── */
@@ -910,6 +957,16 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   isolation: isolate;
+  cursor: default;
+  transition:
+    background 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.statementPanel:hover .cornerMark {
+  border-color: rgb(var(--c-gold) / 0.9);
+  box-shadow: 0 0 8px rgb(var(--c-gold) / 0.35);
 }
 
 .aboutStatement {
@@ -930,6 +987,16 @@
   letter-spacing: 0.02em;
   color: rgb(255 255 255 / 0.62);
   text-wrap: balance;
+  transition:
+    color 300ms ease,
+    text-shadow 300ms ease;
+}
+
+.statementPanel:hover .aboutStatement {
+  color: rgb(255 255 255 / 0.92);
+  text-shadow:
+    0 0 14px rgb(255 255 255 / 0.35),
+    0 0 24px rgb(213 169 91 / 0.25);
 }
 
 /* ── Bottom CTA & Features ─────────────────────────────────────────────── */
