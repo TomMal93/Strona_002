@@ -584,6 +584,17 @@
     border: 1px solid rgb(var(--c-gold) / 0.19);
     border-radius: 0.45rem;
     background: rgb(255 255 255 / 0.012);
+    cursor: default;
+    transition:
+      border-color 300ms ease,
+      background 300ms ease,
+      box-shadow 300ms ease;
+  }
+
+  .processItem:hover {
+    border-color: rgb(var(--c-gold) / 0.45);
+    background: rgb(var(--c-gold) / 0.04);
+    box-shadow: 0 0 20px rgb(var(--c-gold) / 0.12);
   }
 
   .processItem::after {
@@ -596,6 +607,14 @@
     transform: translateY(-50%);
     border-radius: 50%;
     background: rgb(231 191 126 / 0.9);
+    transition:
+      background 300ms ease,
+      box-shadow 300ms ease;
+  }
+
+  .processItem:hover::after {
+    background: rgb(255 225 165 / 1);
+    box-shadow: 0 0 8px rgb(231 191 126 / 0.8);
   }
 
   .processItem svg {
@@ -606,12 +625,23 @@
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 1.2;
+    transition:
+      stroke 300ms ease,
+      filter 300ms ease;
+  }
+
+  .processItem:hover svg {
+    stroke: rgb(255 225 165 / 1);
+    filter: drop-shadow(0 0 6px rgb(231 191 126 / 0.6));
   }
 
   .processItem strong,
   .processItem span {
     display: block;
     text-transform: uppercase;
+    transition:
+      color 300ms ease,
+      text-shadow 300ms ease;
   }
 
   .processItem strong {
@@ -622,12 +652,24 @@
     letter-spacing: 0.13em;
   }
 
+  .processItem:hover strong {
+    color: rgb(255 225 165 / 1);
+    text-shadow:
+      0 0 12px rgb(213 169 91 / 0.6),
+      0 0 24px rgb(213 169 91 / 0.35);
+  }
+
   .processItem span {
     margin-top: 0.18rem;
     color: rgb(215 200 170 / 0.78);
     font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
     font-size: 0.58rem;
     letter-spacing: 0.13em;
+  }
+
+  .processItem:hover span {
+    color: rgb(255 245 220 / 0.95);
+    text-shadow: 0 0 10px rgb(213 169 91 / 0.3);
   }
 
   .processDot {
@@ -640,8 +682,18 @@
     margin: 0.4rem 0 0;
     padding: 0.2rem 0.4rem 0;
     color: rgb(204 164 100 / 0.6);
+    cursor: default;
+    transition:
+      color 300ms ease,
+      text-shadow 300ms ease;
   }
 
+  .promoQuote:hover {
+    color: rgb(255 235 180 / 0.95);
+    text-shadow:
+      0 0 14px rgb(213 169 91 / 0.5),
+      0 0 24px rgb(213 169 91 / 0.25);
+  }
 
   .promoQuote p {
     margin: 0;
@@ -863,6 +915,7 @@
     justify-content: center;
     gap: 1rem;
     text-align: center;
+    cursor: default;
   }
 
   .processItem svg {
@@ -873,12 +926,23 @@
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 1.2;
+    transition:
+      stroke 300ms ease,
+      filter 300ms ease;
+  }
+
+  .processItem:hover svg {
+    stroke: rgb(255 225 165 / 1);
+    filter: drop-shadow(0 0 8px rgb(225 191 134 / 0.6));
   }
 
   .processItem strong,
   .processItem span {
     display: block;
     text-transform: uppercase;
+    transition:
+      color 300ms ease,
+      text-shadow 300ms ease;
   }
 
   .processItem strong {
@@ -889,12 +953,24 @@
     letter-spacing: 0.12em;
   }
 
+  .processItem:hover strong {
+    color: rgb(255 225 165 / 1);
+    text-shadow:
+      0 0 12px rgb(213 169 91 / 0.6),
+      0 0 24px rgb(213 169 91 / 0.35);
+  }
+
   .processItem span {
     margin-top: 0.25rem;
     color: rgb(215 200 170 / 0.78);
     font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
     font-size: 0.76rem;
     letter-spacing: 0.13em;
+  }
+
+  .processItem:hover span {
+    color: rgb(255 245 220 / 0.95);
+    text-shadow: 0 0 10px rgb(213 169 91 / 0.3);
   }
 
   .processDot {
@@ -915,8 +991,18 @@
     margin-top: 0.25rem;
     padding: 0.25rem 2rem;
     color: rgb(204 164 100 / 0.52);
+    cursor: default;
+    transition:
+      color 300ms ease,
+      text-shadow 300ms ease;
   }
 
+  .promoQuote:hover {
+    color: rgb(255 235 180 / 0.95);
+    text-shadow:
+      0 0 14px rgb(213 169 91 / 0.5),
+      0 0 24px rgb(213 169 91 / 0.25);
+  }
 
   .promoQuote p {
     margin: 0;

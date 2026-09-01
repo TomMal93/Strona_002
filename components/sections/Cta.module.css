@@ -121,6 +121,7 @@
   text-align: center;
   text-transform: uppercase;
   color: rgb(214 186 126);
+  cursor: default;
 }
 .feature + .feature::before {
   position: absolute;
@@ -141,6 +142,13 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.5;
+  transition:
+    stroke 300ms ease,
+    filter 300ms ease;
+}
+.feature:hover svg {
+  stroke: rgb(255 235 180 / 1);
+  filter: drop-shadow(0 0 8px rgb(231 207 149 / 0.65));
 }
 .feature strong {
   display: block;
@@ -150,6 +158,15 @@
   letter-spacing: 0.08em;
   color: rgb(238 222 178);
   white-space: nowrap;
+  transition:
+    color 300ms ease,
+    text-shadow 300ms ease;
+}
+.feature:hover strong {
+  color: rgb(255 240 200 / 1);
+  text-shadow:
+    0 0 12px rgb(213 169 91 / 0.6),
+    0 0 24px rgb(213 169 91 / 0.35);
 }
 .feature > span {
   display: block;
@@ -159,6 +176,13 @@
   letter-spacing: 0.02em;
   color: rgb(215 200 170 / 0.78);
   white-space: nowrap;
+  transition:
+    color 300ms ease,
+    text-shadow 300ms ease;
+}
+.feature:hover > span {
+  color: rgb(255 245 220 / 0.95);
+  text-shadow: 0 0 10px rgb(213 169 91 / 0.3);
 }
 
 .actionGroup {
