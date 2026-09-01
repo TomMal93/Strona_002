@@ -17,15 +17,6 @@ export default function PrivacyPolicyPage() {
       {/* Top Header / Hero */}
       <section className="relative px-6 pb-8 pt-24 sm:pb-10 sm:pt-28 lg:px-20 lg:pt-32">
         <div className="mx-auto max-w-4xl text-center">
-          {/* Breadcrumb / Back button */}
-          <div className="mb-5 flex justify-center">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 rounded-micro border border-khaki/30 bg-anthracite/80 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-widest text-khaki transition-all duration-200 hover:-translate-y-0.5 hover:border-khaki hover:bg-khaki/10 hover:text-warm-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki"
-            >
-              <span aria-hidden="true">←</span> Strona główna
-            </Link>
-          </div>
 
           <span className="ui-overline mb-2 block text-center text-[11px]">
             DOKUMENTACJA PRAWNA · MALESZYK.MEDIA
