@@ -468,49 +468,35 @@
   transform: scale(1.035);
 }
 
-.playButton {
+.videoStatus {
   position: absolute;
-  inset: auto auto 0.65rem 0.65rem;
   z-index: 2;
+  top: 0.65rem;
+  right: 0.65rem;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-width: 4.5rem;
-  height: 2.4rem;
+  min-height: 1.75rem;
+  padding: 0.15rem 0.55rem;
   border-radius: 0.25rem;
-  border: 1px solid rgb(var(--c-gold) / 0.3);
-  background: rgb(12 12 14 / 0.72);
-  color: rgb(255 238 175 / 0.7);
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  color: rgb(255 255 255 / 0.75);
+  background: rgb(16 16 18 / 0.65);
+  border: 1px solid rgb(255 255 255 / 0.12);
   cursor: pointer;
   transition:
     background-color 220ms ease,
-    border-color 220ms ease;
+    border-color 220ms ease,
+    color 220ms ease;
 }
 
-.playButton:hover {
-  border-color: rgb(var(--c-gold) / 0.6);
-  background: rgb(255 255 255 / 0.05);
-  color: rgb(255 238 175 / 1);
-}
-
-.playButtonPlaying {
-  min-width: 4rem;
-}
-
-.playButtonHighlight,
-.playButtonMilitary {
-  /* Unified style */
-}
-
-.playButtonPlayingHighlight,
-.playButtonPlayingMilitary {
-  background: rgb(var(--c-gold) / 0.15);
-}
-
-.playIcon {
-  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
+.videoStatus:hover {
+  background: rgb(16 16 18 / 0.85);
+  border-color: rgb(var(--c-gold) / 0.4);
+  color: rgb(255 238 175 / 0.95);
 }
 
 /* ── Body copy ────────────────────────────────────────────────────────── */
@@ -652,7 +638,7 @@
 
   .sceneNumber,
   .videoMeta,
-  .playIcon {
+  .videoStatus {
     font-size: 0.72rem;
   }
 
@@ -688,7 +674,7 @@
   }
 
   .sceneNumber,
-  .playIcon {
+  .videoStatus {
     /* 12.5px × 0.64 zoom = 8px */
     font-size: 12.5px;
   }
@@ -712,7 +698,7 @@
   }
 
   .sceneNumber,
-  .playIcon {
+  .videoStatus {
     /* 12.5px × 0.8 zoom = 10px */
     font-size: 12.5px;
   }

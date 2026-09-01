@@ -76,6 +76,8 @@ function SceneCard({ item, index, animate = true, className }: SceneCardProps) {
   const videoFrameRef = useRef<HTMLDivElement>(null!)
   const videoRef = useRef<HTMLVideoElement>(null!)
   const shouldLoadVideo = useLazyVideoSource(videoFrameRef)
+  const [isPlaying, setIsPlaying] = useState(false)
+
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
