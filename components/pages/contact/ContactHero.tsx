@@ -14,18 +14,36 @@ const contactItems = [
   { icon: 'location', label: 'Lokalizacja' },
 ] as const
 
-const benefits = [
-  { icon: '◴', lines: ['Szybka', 'odpowiedź'] },
-  { icon: '▱', lines: ['Konkretna', 'rozmowa'] },
-  { icon: '▰', lines: ['Pomysł →', 'realizacja'] },
-] as const
+const CameraIcon = () => (
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M4.5 10.5h5l2.2-3h8.6l2.2 3h5a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-23a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Z" />
+    <circle cx="16" cy="18" r="5.5" />
+  </svg>
+)
+
+const PinIcon = () => (
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M25 13.5c0 7-9 14-9 14s-9-7-9-14a9 9 0 1 1 18 0Z" />
+    <circle cx="16" cy="13.5" r="3" />
+  </svg>
+)
+
+const ClapperIcon = () => (
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M5 12h22v15H5zM5 12l2-7 21-3-2 7-21 3Z" />
+    <path d="m10 5 3 5m4-7 3 5m4-6 3 5M11 12v15" />
+  </svg>
+)
+
+const featureIcons = [CameraIcon, PinIcon, ClapperIcon]
+const featureDetails = ['Od ujęć po montaż', 'Dojadę, gdzie trzeba', 'Emocje, które zostają']
 
 function ContactIcon({ type }: { type: (typeof contactItems)[number]['icon'] }) {
   if (type === 'mail') {
     return (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M4.5 6.5h15v11h-15z" />
-        <path d="m5.2 7.3 6.8 5.4 6.8-5.4" />
+        <rect width="20" height="16" x="2" y="4" rx="2" />
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
       </svg>
     )
   }
@@ -33,15 +51,15 @@ function ContactIcon({ type }: { type: (typeof contactItems)[number]['icon'] }) 
   if (type === 'phone') {
     return (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M8.1 4.5 10 8.2 8.4 9.8c1 2.1 2.7 3.8 4.8 4.8l1.6-1.6 3.7 1.9-.4 3c-.1.9-.9 1.6-1.8 1.6A12.8 12.8 0 0 1 4.5 7.7c0-.9.7-1.7 1.6-1.8l2-.4Z" />
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
       </svg>
     )
   }
 
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M12 21s6-5.4 6-11a6 6 0 1 0-12 0c0 5.6 6 11 6 11Z" />
-      <circle cx="12" cy="10" r="2.2" />
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
     </svg>
   )
 }
@@ -50,6 +68,7 @@ export default function ContactHero() {
   const sectionRef = useRef<HTMLElement>(null!)
   const contentRef = useRef<HTMLDivElement>(null!)
   const monitorRef = useRef<HTMLElement>(null!)
+  const { features } = siteContent.cta
   const { hero } = siteContent.contactPage
   const { contact } = siteContent.aboutMe
   const phoneHref = `tel:${contact.phone.replace(/\s/g, '')}`
@@ -119,15 +138,15 @@ export default function ContactHero() {
                           key={item.label}
                           href={href}
                           className={styles.contactItem}
+                          aria-label={`${item.label}: ${contactValues[index]}`}
                           target={isExternal ? '_blank' : undefined}
                           rel={isExternal ? 'noopener noreferrer' : undefined}
                         >
                           <span className={styles.contactIcon}>
                             <ContactIcon type={item.icon} />
                           </span>
-                          <span className={styles.contactItemCopy}>
-                            <strong>{item.label}</strong>
-                            <small>{contactValues[index]}</small>
+                          <span className={styles.contactValue}>
+                            {contactValues[index]}
                           </span>
                         </a>
                       )
@@ -152,14 +171,17 @@ export default function ContactHero() {
                   </aside>
                 </div>
 
-                <div className={styles.benefits}>
-                  {benefits.map((benefit, index) => (
-                    <div key={benefit.lines[0]} className={styles.benefit}>
-                      <span className={styles.benefitIcon} aria-hidden="true">{benefit.icon}</span>
-                      <span>{benefit.lines[0]}<br />{benefit.lines[1]}</span>
-                      {index < benefits.length - 1 ? <i aria-hidden="true" /> : null}
-                    </div>
-                  ))}
+                <div className={styles.features} aria-label="Najważniejsze informacje">
+                  {features.map((feature, index) => {
+                    const Icon = featureIcons[index]
+                    return (
+                      <div key={feature.label} className={styles.feature}>
+                        <Icon />
+                        <strong>{feature.label}</strong>
+                        <span>{featureDetails[index]}</span>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             </div>
