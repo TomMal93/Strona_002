@@ -37,7 +37,7 @@
 .sectionTitle {
   margin: 0;
   font-family: var(--font-bebas), sans-serif;
-  font-size: 3rem;
+  font-size: clamp(48px, 8vw, 60px);
   font-weight: 400;
   line-height: 0.92;
   letter-spacing: 0.075em;
@@ -45,10 +45,6 @@
   background: linear-gradient(120deg, rgb(var(--c-warm)), rgb(255 229 165) 48%, rgb(var(--c-gold)));
   background-clip: text;
   color: transparent;
-}
-
-@media (width >= 40rem) {
-  .sectionTitle { font-size: 3.75rem; }
 }
 
 .sectionKicker,
@@ -443,7 +439,7 @@
   }
 
   .sectionHeader { margin-bottom: 3.5rem; }
-  .sectionKicker { gap: 0.55rem; font-size: 0.61rem; letter-spacing: 0.12em; }
+  .sectionKicker { gap: 0.55rem; font-size: 13px; letter-spacing: 0.12em; }
   .storyRail::before { left: 0.32rem; bottom: 6.8rem; }
   .story { gap: 4.25rem; }
   .scene, .sceneTwo { display: flex; flex-direction: column; gap: 0; align-items: stretch; padding-left: 1.8rem; }
@@ -458,7 +454,7 @@
   .directorNotes { order: 5; }
   .directorNotes { margin-top: 0; }
   .missionBlock { order: 6; }
-  .sceneCopy h3 { font-size: 2.25rem; }
+  .sceneCopy h3 { font-size: 32px; }
   .sceneThree h3 { white-space: normal; }
   .sceneHeading { margin-bottom: 1.65rem; }
   .sceneRule { width: 100%; }
@@ -478,6 +474,11 @@
 
 /* Compensate the global section zoom introduced below 1750px. */
 @media (min-width: 768px) and (max-width: 1199px) {
+  .sectionTitle {
+    /* 93.75px * 0.64 zoom = 60px */
+    font-size: 93.75px;
+  }
+
   .sectionKicker {
     /* 20.3125px * 0.64 zoom = 13px */
     font-size: 20.3125px;
@@ -489,8 +490,8 @@
   }
 
   .sceneCopy h3 {
-    /* 43.75px * 0.64 zoom = 28px */
-    font-size: 43.75px;
+    /* 50px * 0.64 zoom = 32px */
+    font-size: 50px;
   }
 
   .sceneCopy > p:not(.microLabel),
@@ -509,8 +510,8 @@
   .frameTop,
   .frameBottom,
   .noteRow > span {
-    /* 12.5px * 0.64 zoom = 8px */
-    font-size: 12.5px;
+    /* 15.625px * 0.64 zoom = 10px */
+    font-size: 15.625px;
   }
 
   .noteRow strong {
@@ -524,12 +525,22 @@
   }
 
   .quoteFrame blockquote {
-    /* 17.1875px * 0.64 zoom = 11px */
-    font-size: 17.1875px;
+    /* 20.3125px * 0.64 zoom = 13px */
+    font-size: 20.3125px;
   }
 }
 
 @media (min-width: 1200px) and (max-width: 1749px) {
+  .sectionTitle {
+    /* 75px * 0.8 zoom = 60px */
+    font-size: 75px;
+  }
+
+  .sceneCopy h3 {
+    /* Grows from about 32px to 47px after the 0.8 zoom. */
+    font-size: clamp(40px, 3.375vw, 59px);
+  }
+
   .sectionKicker {
     /* 18.75px * 0.8 zoom = 15px */
     font-size: 18.75px;
@@ -558,6 +569,11 @@
   .quoteFooter {
     /* 13.125px * 0.8 zoom = 10.5px */
     font-size: 13.125px;
+  }
+
+  .quoteFrame blockquote {
+    /* 17.5px * 0.8 zoom = 14px */
+    font-size: 17.5px;
   }
 }
 

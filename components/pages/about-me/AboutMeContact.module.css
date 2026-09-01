@@ -94,7 +94,7 @@
   background-clip: text;
   color: transparent;
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-  font-size: clamp(3rem, 5vw, 4rem);
+  font-size: clamp(48px, 8vw, 60px);
   line-height: 0.9;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -375,6 +375,11 @@
 
 /* Compensate the global section zoom introduced below 1750px. */
 @media (min-width: 768px) and (max-width: 1199px) {
+  .sectionTitle {
+    /* 93.75px * 0.64 zoom = 60px */
+    font-size: 93.75px;
+  }
+
   .subtitle {
     /* 20.3125px * 0.64 zoom = 13px */
     font-size: 20.3125px;
@@ -392,17 +397,22 @@
 
   .hudLabelLeft,
   .hudLabelRight {
-    /* 12.5px * 0.64 zoom = 8px */
-    font-size: 12.5px;
+    /* 15.625px * 0.64 zoom = 10px */
+    font-size: 15.625px;
   }
 
   .button {
-    /* 23.4375px * 0.64 zoom = 15px */
-    font-size: 23.4375px;
+    /* 25px * 0.64 zoom = 16px */
+    font-size: 25px;
   }
 }
 
 @media (min-width: 1200px) and (max-width: 1749px) {
+  .sectionTitle {
+    /* 75px * 0.8 zoom = 60px */
+    font-size: 75px;
+  }
+
   .subtitle {
     /* 18.75px * 0.8 zoom = 15px */
     font-size: 18.75px;
@@ -429,4 +439,3 @@
     font-size: 20px;
   }
 }
-

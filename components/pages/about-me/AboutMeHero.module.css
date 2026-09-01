@@ -365,7 +365,7 @@
     display: block;
     margin-top: 1.75rem;
     font-family: var(--font-inter), sans-serif;
-    font-size: clamp(0.76rem, 0.78vw, 0.9rem);
+    font-size: clamp(15px, 0.85vw, 16px);
     font-weight: 400;
     line-height: 1.75;
     letter-spacing: 0.025em;
@@ -377,7 +377,7 @@
 
 .heroName {
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-  font-size: clamp(48px, 10vw, 110px);
+  font-size: clamp(52px, 10vw, 64px);
   line-height: 0.9;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -394,7 +394,7 @@
 
 @media (width >= 48rem) {
   .heroName {
-    font-size: clamp(3.35rem, 4.2vw, 5.4rem);
+    font-size: clamp(72px, 5vw, 90px);
     line-height: 0.95;
     letter-spacing: 0.035em;
     color: rgb(226 184 116);
@@ -410,7 +410,7 @@
 .heroTagline {
   margin-top: 0.5rem;
   font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.85rem;
+  font-size: 14px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgb(255 238 175 / 0.6);
@@ -420,7 +420,7 @@
   .heroTagline {
     margin-top: 0.8rem;
     font-family: var(--font-ibm-plex-mono), monospace;
-    font-size: clamp(0.66rem, 0.7vw, 0.78rem);
+    font-size: clamp(14px, 0.8vw, 15px);
     font-weight: 500;
     letter-spacing: 0.38em;
     color: rgb(217 176 109 / 0.78);
@@ -602,9 +602,19 @@
 
 /* Compensate the first-child section zoom (0.8) between 768px and 1199px. */
 @media (min-width: 768px) and (max-width: 1199px) {
+  .heroName {
+    /* 80-90px * 0.8 zoom = 64-72px */
+    font-size: clamp(80px, 7.5vw, 90px);
+  }
+
   .heroTagline {
-    /* 16.25px * 0.8 zoom = 13px */
-    font-size: 16.25px;
+    /* 17.5px * 0.8 zoom = 14px */
+    font-size: 17.5px;
+  }
+
+  .heroLead {
+    /* 18.75px * 0.8 zoom = 15px */
+    font-size: 18.75px;
   }
 
   .recIndicator,
