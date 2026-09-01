@@ -15,36 +15,36 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="section-dark-bg min-h-screen">
       {/* Top Header / Hero */}
-      <section className="relative px-6 pb-12 pt-32 sm:pb-16 sm:pt-36 lg:px-20 lg:pt-40">
+      <section className="relative px-6 pb-8 pt-24 sm:pb-10 sm:pt-28 lg:px-20 lg:pt-32">
         <div className="mx-auto max-w-4xl text-center">
           {/* Breadcrumb / Back button */}
-          <div className="mb-8 flex justify-center">
+          <div className="mb-5 flex justify-center">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 rounded-micro border border-khaki/40 bg-anthracite/80 px-4 py-2 font-mono text-xs uppercase tracking-widest text-khaki transition-all duration-300 hover:-translate-y-0.5 hover:border-khaki hover:bg-khaki/15 hover:text-warm-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki"
+              className="inline-flex items-center gap-1.5 rounded-micro border border-khaki/30 bg-anthracite/80 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-widest text-khaki transition-all duration-200 hover:-translate-y-0.5 hover:border-khaki hover:bg-khaki/10 hover:text-warm-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki"
             >
-              <span aria-hidden="true" className="text-sm">←</span> Strona główna
+              <span aria-hidden="true">←</span> Strona główna
             </Link>
           </div>
 
-          <span className="ui-overline mb-3 block text-center">
+          <span className="ui-overline mb-2 block text-center text-[11px]">
             DOKUMENTACJA PRAWNA · MALESZYK.MEDIA
           </span>
 
-          <h1 className="bg-[linear-gradient(130deg,rgb(var(--c-warm))_0%,rgb(255_238_175)_45%,rgb(var(--c-gold))_100%)] bg-clip-text font-bebas text-5xl uppercase leading-[0.9] tracking-wide text-transparent sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="bg-[linear-gradient(130deg,rgb(var(--c-warm))_0%,rgb(255_238_175)_45%,rgb(var(--c-gold))_100%)] bg-clip-text font-bebas text-4xl uppercase leading-[0.95] tracking-wide text-transparent sm:text-5xl md:text-6xl">
             Polityka Prywatności & RODO
           </h1>
 
           {/* HUD Line Bar */}
-          <div aria-hidden="true" className="mt-6 flex items-center justify-center gap-3">
-            <span className="h-px flex-1 max-w-[120px] bg-gradient-to-r from-transparent via-khaki/40 to-khaki/80" />
-            <span className="rounded-micro border border-khaki/30 bg-anthracite px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-khaki">
+          <div aria-hidden="true" className="mt-4 flex items-center justify-center gap-3">
+            <span className="h-px flex-1 max-w-[90px] bg-gradient-to-r from-transparent via-khaki/40 to-khaki/80" />
+            <span className="rounded-micro border border-khaki/30 bg-anthracite px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-khaki">
               DOC. ID: PRIVACY-RODO-V1
             </span>
-            <span className="h-px flex-1 max-w-[120px] bg-gradient-to-l from-transparent via-khaki/40 to-khaki/80" />
+            <span className="h-px flex-1 max-w-[90px] bg-gradient-to-l from-transparent via-khaki/40 to-khaki/80" />
           </div>
 
-          <p className="mx-auto mt-5 max-w-2xl font-mono text-xs leading-relaxed text-white/50 sm:text-sm">
+          <p className="mx-auto mt-3.5 max-w-xl font-mono text-xs leading-relaxed text-white/50 sm:text-[13px]">
             Zasady ochrony prywatności, celów przetwarzania danych osobowych oraz praw przysługujących odwiedzającym i klientom Maleszyk.Media.
           </p>
         </div>
