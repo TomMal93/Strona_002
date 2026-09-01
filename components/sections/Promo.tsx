@@ -309,7 +309,7 @@ export default function Promo() {
           <ProcessItem
             title="Montaż"
             subtitle="Rytm i emocje"
-            icon={<><path d="M5 4l14 16M19 4L5 20" /><circle cx="5" cy="20" r="2" /><circle cx="19" cy="20" r="2" /></>}
+            icon={<><circle cx="6" cy="6" r="3" /><path d="M8.12 8.12 12 12" /><path d="M20 4 8.12 15.88" /><circle cx="6" cy="18" r="3" /><path d="M14.8 14.8 20 20" /></>}
           />
         </div>
 
