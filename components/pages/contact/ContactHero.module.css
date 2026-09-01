@@ -187,8 +187,8 @@
   min-width: 0;
   overflow-wrap: anywhere;
   font-family: var(--font-ibm-plex-mono), monospace;
-  font-size: clamp(13px, 0.8vw, 14px);
-  font-weight: 450;
+  font-size: clamp(14px, 0.88vw, 15.5px);
+  font-weight: 500;
   line-height: 1.35;
   letter-spacing: 0.02em;
   color: rgb(255 255 255 / 0.85);
@@ -609,7 +609,7 @@
   }
 
   .contactValue {
-    font-size: 0.72rem;
+    font-size: 0.76rem;
   }
 
   .stepsList li {
@@ -723,7 +723,7 @@
   }
 
   .contactValue {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .stepsPanel {
@@ -776,8 +776,8 @@
   }
 
   .contactValue {
-    /* 16.25px * 0.8 zoom = 13px */
-    font-size: 16.25px;
+    /* 17.5px * 0.8 zoom = 14px */
+    font-size: 17.5px;
   }
 
   .stepsList li > span {

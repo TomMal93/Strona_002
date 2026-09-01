@@ -11,7 +11,7 @@ import styles from './ContactHero.module.css'
 const contactItems = [
   { icon: 'mail', label: 'E-mail' },
   { icon: 'phone', label: 'Telefon' },
-  { icon: 'location', label: 'Lokalizacja' },
+  { icon: 'whatsapp', label: 'WhatsApp' },
 ] as const
 
 const CameraIcon = () => (
@@ -93,8 +93,8 @@ function ContactIcon({ type }: { type: (typeof contactItems)[number]['icon'] }) 
 
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-      <circle cx="12" cy="10" r="3" />
+      <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z" />
+      <path d="M8.5 9.5c.3-.6.6-.7 1.1-.7h.6c.3 0 .6.2.7.5l.8 2c.1.3.1.6-.1.8l-.5.6c-.2.2-.2.4-.1.6.5.9 1.3 1.7 2.2 2.2.2.1.4.1.6-.1l.6-.5c.2-.2.5-.2.8-.1l2 .8c.3.1.5.4.5.7v.6c0 .5-.1.8-.7 1.1-1 .5-2.6.4-5.1-1.2-2.5-1.6-3.8-3.7-4.1-5.1-.2-.8.1-1.3.6-1.6z" />
     </svg>
   )
 }
@@ -108,7 +108,8 @@ export default function ContactHero() {
   const { hero } = siteContent.contactPage
   const { contact } = siteContent.aboutMe
   const phoneHref = `tel:${contact.phone.replace(/\s/g, '')}`
-  const contactValues = [contact.email, contact.phone, hero.location]
+  const whatsappHref = `https://wa.me/${contact.phone.replace(/\D/g, '')}`
+  const contactValues = [contact.email, contact.phone, 'WhatsApp']
   const visibleSocials = siteContent.cta.social.filter(({ platform }) => (
     platform === 'instagram' || platform === 'facebook' || platform === 'youtube'
   ))
@@ -192,7 +193,7 @@ export default function ContactHero() {
                         ? `mailto:${contact.email}`
                         : index === 1
                           ? phoneHref
-                          : 'https://www.google.com/maps/search/?api=1&query=Polska'
+                          : whatsappHref
                       const isExternal = index === 2
 
                       return (
