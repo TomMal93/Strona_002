@@ -595,14 +595,14 @@
     height: 0.38rem;
     transform: translateY(-50%);
     border-radius: 50%;
-    background: rgb(231 207 149);
+    background: rgb(231 191 126 / 0.9);
   }
 
   .processItem svg {
     width: 2.35rem;
     height: 2.35rem;
     fill: none;
-    stroke: rgb(231 207 149);
+    stroke: rgb(231 191 126 / 0.9);
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 1.2;
@@ -615,7 +615,7 @@
   }
 
   .processItem strong {
-    color: rgb(238 222 178);
+    color: rgb(231 191 126 / 0.9);
     font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
     font-size: 1.18rem;
     font-weight: 400;
@@ -869,7 +869,7 @@
     width: 2.7rem;
     height: 2.7rem;
     fill: none;
-    stroke: rgb(231 207 149);
+    stroke: rgb(225 191 134 / 0.82);
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 1.2;
@@ -882,7 +882,7 @@
   }
 
   .processItem strong {
-    color: rgb(238 222 178);
+    color: rgb(225 191 134 / 0.82);
     font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
     font-size: 1.4rem;
     font-weight: 400;
