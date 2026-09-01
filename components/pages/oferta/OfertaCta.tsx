@@ -64,12 +64,13 @@ export default function OfertaCta() {
                 id="oferta-cta-heading"
                 className={cn(
                   heroStyles.gradientTextPrimary,
-                  'font-bebas text-5xl uppercase leading-[0.9] tracking-wide sm:text-6xl',
+                  'font-bebas uppercase leading-[0.9] tracking-wide',
+                  styles.title,
                 )}
               >
                 {title}
               </h2>
-              <p className="mt-5 whitespace-pre-line font-mono text-[0.95rem] leading-[1.85] tracking-wide text-white/50">
+              <p className={cn('mt-5 whitespace-pre-line font-mono leading-[1.85] tracking-wide text-white/50', styles.lead)}>
                 {lead}
               </p>
             </div>

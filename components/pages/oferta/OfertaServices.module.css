@@ -337,14 +337,14 @@
 
   .lead {
     margin-top: 1rem;
-    font-size: 0.82rem;
+    font-size: 15px;
     line-height: 1.6;
   }
 
   .previewButton {
     margin-top: 1.25rem;
     padding: 0.75rem 1rem;
-    font-size: 0.8rem;
+    font-size: 16px;
   }
 
   .detailsPanel {
@@ -365,7 +365,7 @@
   }
 
   .scopeHeading h3 {
-    font-size: 0.88rem;
+    font-size: 12px;
     letter-spacing: 0.24em;
   }
 
@@ -380,9 +380,79 @@
   }
 
   .bulletText {
-    font-size: 0.84rem;
+    font-size: 14px;
     line-height: 1.2;
     letter-spacing: 0.09em;
+  }
+}
+
+/* OfertaServices is globally zoomed below 1750px. Compensate typography here
+   so body copy stays readable and headings do not jump at 768/1200/1750px. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .tagLine {
+    font-size: 18.75px;
+  }
+
+  .title {
+    font-size: 93.75px;
+  }
+
+  .lead {
+    font-size: 23.4375px;
+  }
+
+  .previewButton {
+    font-size: 25px;
+  }
+
+  .infoItem h3 {
+    font-size: 31.25px;
+  }
+
+  .infoItem p {
+    font-size: 23.4375px;
+  }
+
+  .scopeHeading h3 {
+    font-size: 18.75px;
+  }
+
+  .bulletText {
+    font-size: 21.875px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1749px) {
+  .tagLine {
+    font-size: 15px;
+  }
+
+  .title {
+    font-size: clamp(75px, 6.5vw, 113.75px);
+  }
+
+  .lead {
+    font-size: 18.75px;
+  }
+
+  .previewButton {
+    font-size: 20px;
+  }
+
+  .infoItem h3 {
+    font-size: 25px;
+  }
+
+  .infoItem p {
+    font-size: 18.75px;
+  }
+
+  .scopeHeading h3 {
+    font-size: 15px;
+  }
+
+  .bulletText {
+    font-size: 17.5px;
   }
 }
 

@@ -86,7 +86,8 @@ export default function OfertaHero() {
           id="oferta-heading"
           className={cn(
             heroStyles.gradientTextPrimary,
-            'text-center font-bebas text-6xl uppercase leading-[0.9] tracking-wide sm:text-7xl lg:text-8xl',
+            'text-center font-bebas uppercase leading-[0.9] tracking-wide',
+            styles.title,
           )}
         >
           {title}
@@ -100,7 +101,7 @@ export default function OfertaHero() {
         <p
           ref={leadRef}
           className={cn(
-            'mt-5 whitespace-pre-line font-mono text-[0.95rem] leading-[1.85] tracking-wide text-white/50',
+            'mt-5 whitespace-pre-line font-mono leading-[1.85] tracking-wide text-white/50',
             styles.lead,
           )}
         >

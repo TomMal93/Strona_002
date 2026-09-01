@@ -24,3 +24,33 @@
 .lead {
   position: relative;
 }
+
+.title {
+  font-size: clamp(52px, 10vw, 64px);
+}
+
+.lead {
+  font-size: 15px;
+}
+
+/* The first section is zoomed to 80% between 768px and 1199px.
+   These values keep the visible type scale continuous at both breakpoints. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .title {
+    font-size: clamp(80px, 10vw, 120px);
+  }
+
+  .lead {
+    font-size: 18.75px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .title {
+    font-size: 96px;
+  }
+
+  .lead {
+    font-size: 16px;
+  }
+}

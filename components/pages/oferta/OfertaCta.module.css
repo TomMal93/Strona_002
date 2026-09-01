@@ -39,6 +39,14 @@
   z-index: 1;
 }
 
+.title {
+  font-size: clamp(48px, 8vw, 60px);
+}
+
+.lead {
+  font-size: 15px;
+}
+
 .corner {
   position: absolute;
   width: 24px;
@@ -186,6 +194,45 @@
   .corner {
     width: 18px;
     height: 18px;
+  }
+}
+
+/* The CTA is a content section, so it uses the global 64%/80% zoom scale. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .title {
+    font-size: 93.75px;
+  }
+
+  .lead {
+    font-size: 23.4375px;
+  }
+
+  .button {
+    font-size: 28.125px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1749px) {
+  .title {
+    font-size: 75px;
+  }
+
+  .lead {
+    font-size: 18.75px;
+  }
+
+  .button {
+    font-size: 22.5px;
+  }
+}
+
+@media (min-width: 1750px) {
+  .title {
+    font-size: 60px;
+  }
+
+  .lead {
+    font-size: 16px;
   }
 }
 
