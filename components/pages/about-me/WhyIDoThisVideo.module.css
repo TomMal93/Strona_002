@@ -112,6 +112,18 @@
   object-position: center;
 }
 
+@media (min-width: 768px) and (max-width: 1749px) {
+  .embeddedFillHeight,
+  .embeddedFillHeight .videoShell,
+  .embeddedFillHeight .videoFramePortrait {
+    height: 100%;
+  }
+
+  .embeddedFillHeight .videoFramePortrait {
+    aspect-ratio: auto;
+  }
+}
+
 .videoHalo {
   position: absolute;
   inset: -15% -10%;
@@ -401,4 +413,3 @@
     font-size: 12.5px;
   }
 }
-

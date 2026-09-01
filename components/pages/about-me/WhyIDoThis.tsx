@@ -170,6 +170,7 @@ export default function WhyIDoThis() {
                 <div className={styles.frameTop}><span>H.265/LOG3</span><span>00:00:10:21</span></div>
                 <WhyIDoThisVideo
                   embedded
+                  fillAvailableHeight
                   videoOverride={{
                     type: 'self-hosted',
                     src: '/videos/contact/contact.mp4',
@@ -180,7 +181,7 @@ export default function WhyIDoThis() {
               </div>
             </article>
 
-            <footer className={styles.quoteFooter}>
+            <footer data-why-quote-footer className={styles.quoteFooter}>
               <span aria-hidden="true" className={styles.quoteMark}>“</span>
               <p>Film to nie to, co widać. To to, co czuje widz, gdy światła gasną.</p>
             </footer>

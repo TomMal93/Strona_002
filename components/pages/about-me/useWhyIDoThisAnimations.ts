@@ -15,6 +15,7 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
   useLayoutEffect(() => {
     let shouldCleanup = false
     let observer: IntersectionObserver | undefined
+    let layoutObserver: ResizeObserver | undefined
     let revertContext: (() => void) | undefined
 
     const prefersReducedMotion = window.matchMedia(
@@ -39,6 +40,9 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
     const videoBlock = bioPanelRef.current
       ? bioPanelRef.current.querySelector<HTMLElement>('[data-why-video-block]')
       : null
+    const quoteFooter = bioPanelRef.current
+      ? bioPanelRef.current.querySelector<HTMLElement>('[data-why-quote-footer]')
+      : null
     const featureTitlesRaw = bioPanelRef.current
       ? Array.from(bioPanelRef.current.querySelectorAll<HTMLElement>('[data-why-feature-card]'))
       : []
@@ -49,6 +53,38 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
       if (rowA !== rowB) return rowA - rowB
       return featureTitlesRaw.indexOf(a) - featureTitlesRaw.indexOf(b)
     })
+
+    const desktopLayout = window.matchMedia('(min-width: 48rem)')
+    const canAttachFooterToVideo = window.matchMedia('(min-width: 1200px)')
+    const alignQuoteFooterWithVideo = () => {
+      if (!quoteFooter || !storyRail || !videoBlock || !desktopLayout.matches) {
+        quoteFooter?.style.removeProperty('margin-right')
+        quoteFooter?.style.removeProperty('margin-top')
+        return
+      }
+
+      const railRight = storyRail.getBoundingClientRect().right
+      const videoRect = videoBlock.getBoundingClientRect()
+      const footerTop = quoteFooter.getBoundingClientRect().top
+      const currentMarginTop = Number.parseFloat(getComputedStyle(quoteFooter).marginTop) || 0
+
+      const videoRight = videoRect.right
+      quoteFooter.style.marginRight = `${Math.max(0, railRight - videoRight)}px`
+      if (canAttachFooterToVideo.matches) {
+        quoteFooter.style.marginTop = `${currentMarginTop + videoRect.bottom - footerTop}px`
+      } else {
+        quoteFooter.style.removeProperty('margin-top')
+      }
+    }
+
+    if (quoteFooter && storyRail && videoBlock) {
+      alignQuoteFooterWithVideo()
+      layoutObserver = new ResizeObserver(alignQuoteFooterWithVideo)
+      layoutObserver.observe(storyRail)
+      layoutObserver.observe(videoBlock)
+      desktopLayout.addEventListener('change', alignQuoteFooterWithVideo)
+      canAttachFooterToVideo.addEventListener('change', alignQuoteFooterWithVideo)
+    }
 
     if (prefersReducedMotion) {
       ;[titleRef.current, subtitleRef.current, bioPanelRef.current].forEach((el) => {
@@ -82,7 +118,11 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
         el.style.visibility = 'inherit'
         el.style.transform = 'none'
       })
-      return
+      return () => {
+        layoutObserver?.disconnect()
+        desktopLayout.removeEventListener('change', alignQuoteFooterWithVideo)
+        canAttachFooterToVideo.removeEventListener('change', alignQuoteFooterWithVideo)
+      }
     }
 
     // Initial hidden states
@@ -167,28 +207,30 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
           }, '-=0.3')
         }
 
-        // Bio panel fade in
+        // Reveal act headings and their animated text in the same timeline window.
+        tl.addLabel('actsEnter')
+
         if (bioPanelRef.current) {
           tl.to(bioPanelRef.current, {
             autoAlpha: 1, y: 0, duration: 0.55, ease: 'power3.out',
-          }, '-=0.2')
+          }, 'actsEnter')
         }
 
-        // Draw the vertical story axis from top to bottom on section entry
+        // Draw the vertical story axis while the acts enter.
         if (storyRail) {
           tl.to(storyRail, {
             '--story-line-scale': 1,
             duration: 1.2,
             ease: 'power2.out',
-          }, '-=0.4')
+          }, 'actsEnter+=0.1')
         }
 
-        // Words become visible immediately so paragraph-level stagger drives the reveal
+        // Words become visible as soon as the act headings start entering.
         if (bioWords.length) {
-          tl.set(bioWords, { opacity: 1 }, '<')
+          tl.set(bioWords, { opacity: 1 }, 'actsEnter')
         }
 
-        // Paragraphs cascade in from top to bottom
+        // Keep the paragraph reveal, but start it together with the act headings.
         if (bioParagraphs.length) {
           tl.to(bioParagraphs, {
             autoAlpha: 1,
@@ -196,20 +238,10 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
             duration: 0.6,
             ease: 'power3.out',
             stagger: 0.18,
-          }, '-=0.25')
+          }, 'actsEnter')
         }
 
-        // Video block reveals after the text
-        if (videoBlock) {
-          tl.to(videoBlock, {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.6,
-            ease: 'power3.out',
-          }, '+=0.05')
-        }
-
-        // Feature titles cascade in from top to bottom (row by row, both columns)
+        // Feature text belongs to the acts, so it should not wait for the video.
         if (featureTitles.length) {
           tl.to(featureTitles, {
             autoAlpha: 1,
@@ -217,7 +249,17 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
             duration: 0.5,
             ease: 'power3.out',
             stagger: 0.12,
-          }, '-=0.2')
+          }, 'actsEnter+=0.1')
+        }
+
+        // Video block keeps its own reveal after the act content has started.
+        if (videoBlock) {
+          tl.to(videoBlock, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+          }, '+=0.05')
         }
       }, refs.sectionRef)
 
@@ -239,6 +281,9 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
     return () => {
       shouldCleanup = true
       observer?.disconnect()
+      layoutObserver?.disconnect()
+      desktopLayout.removeEventListener('change', alignQuoteFooterWithVideo)
+      canAttachFooterToVideo.removeEventListener('change', alignQuoteFooterWithVideo)
       revertContext?.()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

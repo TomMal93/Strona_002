@@ -9,6 +9,7 @@ import { useWhyIDoThisVideoAnimations } from './useWhyIDoThisVideoAnimations'
 
 type WhyIDoThisVideoProps = {
   embedded?: boolean
+  fillAvailableHeight?: boolean
   landscape?: boolean
   videoOverride?: {
     title?: string
@@ -21,7 +22,7 @@ type WhyIDoThisVideoProps = {
   }
 }
 
-export default function WhyIDoThisVideo({ embedded = false, landscape = false, videoOverride }: WhyIDoThisVideoProps) {
+export default function WhyIDoThisVideo({ embedded = false, fillAvailableHeight = false, landscape = false, videoOverride }: WhyIDoThisVideoProps) {
   const sectionRef = useRef<HTMLElement>(null!)
   const titleRef = useRef<HTMLHeadingElement>(null!)
   const subtitleRef = useRef<HTMLParagraphElement>(null!)
@@ -199,6 +200,8 @@ export default function WhyIDoThisVideo({ embedded = false, landscape = false, v
   if (embedded) {
     return (
       <div
+        className={cn(fillAvailableHeight && styles.embeddedFillHeight)}
+        data-why-embedded-video
         ref={(el) => {
           sectionRef.current = el as HTMLElement
         }}
