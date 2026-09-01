@@ -66,28 +66,30 @@ export default function Footer() {
           </span>
         </Link>
 
-        <ul className="flex items-center gap-1 md:justify-self-center">
-          {socials.map(({ platform, href }) => (
-            <li key={platform}>
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={platformLabels[platform]}
-                className={socialLinkClassName}
-              >
-                <span className="h-4 w-4 [&>svg]:h-full [&>svg]:w-full">
-                  {socialIcons[platform]}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex flex-col items-center gap-1 font-inter text-[10px] text-warm-gray sm:text-xs md:items-end md:justify-self-end">
-          <p className="whitespace-nowrap md:text-right">
+        <div className="flex flex-col items-center gap-1.5 md:justify-self-center">
+          <ul className="flex items-center gap-1">
+            {socials.map(({ platform, href }) => (
+              <li key={platform}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={platformLabels[platform]}
+                  className={socialLinkClassName}
+                >
+                  <span className="h-4 w-4 [&>svg]:h-full [&>svg]:w-full">
+                    {socialIcons[platform]}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="whitespace-nowrap font-inter text-[10px] text-warm-gray sm:text-xs">
             © {year} Maleszyk.Media · Wszelkie prawa zastrzeżone
           </p>
+        </div>
+
+        <div className="flex flex-col items-center gap-1 font-inter text-[10px] text-warm-gray sm:text-xs md:items-end md:justify-self-end -translate-y-1 md:-translate-y-2">
           <Link
             href="/polityka-prywatnosci"
             className="text-warm-gray/70 underline underline-offset-2 transition-colors hover:text-khaki"
