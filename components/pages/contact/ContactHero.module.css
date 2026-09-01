@@ -90,18 +90,6 @@
   border-bottom: 1px solid rgb(var(--c-khaki) / 0.16);
 }
 
-.primaryAction {
-  gap: 2.5rem;
-  min-width: 250px;
-  min-height: 58px;
-  margin-top: clamp(2rem, 4vh, 3rem);
-  padding: 0.85rem 1.5rem;
-  font-family: var(--font-bebas), sans-serif;
-  font-size: 20px;
-  text-transform: uppercase;
-}
-
-.primaryAction:focus-visible,
 .contactItem:focus-visible,
 .socials a:focus-visible {
   outline: 2px solid rgb(var(--c-khaki));
@@ -128,11 +116,18 @@
   background: linear-gradient(90deg, rgb(var(--c-gold) / 0.025), transparent 35%, transparent 65%, rgb(var(--c-gold) / 0.025));
 }
 
+.contactActionsRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1rem 1rem 0;
+}
+
 .contactGrid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 0;
 }
 
 .contactItem {
@@ -188,7 +183,7 @@
 .contactItem strong {
   margin-bottom: 0.45rem;
   font-family: var(--font-bebas), sans-serif;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 400;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -198,9 +193,72 @@
 .contactItem small {
   overflow-wrap: anywhere;
   font-family: var(--font-ibm-plex-mono), monospace;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.45;
   color: rgb(255 255 255 / 0.5);
+}
+
+.stepsPanel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid rgb(var(--c-khaki) / 0.2);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgb(var(--c-warm) / 0.08), transparent 52%),
+    rgb(var(--c-khaki) / 0.02);
+}
+
+.stepsList {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stepsList li {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 48px;
+  border-top: 1px solid rgb(var(--c-khaki) / 0.14);
+}
+
+.stepsList li > span {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  color: rgb(213 176 111 / 0.72);
+}
+
+.stepsList p {
+  margin: 0;
+}
+
+.stepsList b,
+.stepsList small {
+  display: block;
+}
+
+.stepsList b {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(255 238 175 / 0.78);
+}
+
+.stepsList small {
+  margin-top: 0.1rem;
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 10px;
+  line-height: 1.35;
+  color: rgb(255 255 255 / 0.4);
 }
 
 .benefits {
@@ -411,10 +469,6 @@
     margin-top: auto;
   }
 
-  .primaryAction {
-    align-self: flex-start;
-  }
-
   .monitor {
     display: grid;
     grid-template-rows: auto minmax(0, 1fr) auto;
@@ -446,7 +500,7 @@
 
   .contactGrid {
     grid-template-columns: 1fr;
-    padding: 1rem;
+    padding: 0;
   }
 
   .contactItem {
@@ -494,18 +548,13 @@
     line-height: 1.6;
   }
 
-  .primaryAction {
-    min-height: 50px;
-    margin-top: 1.25rem;
-  }
-
   .contactPanel {
     margin-top: 1.25rem;
   }
 
   .contactGrid {
     grid-template-columns: 1fr;
-    padding: 0.75rem 0.5rem;
+    padding: 0;
   }
 
   .contactItem {
@@ -578,15 +627,14 @@
     font-size: 14px;
   }
 
-  .primaryAction {
-    width: 100%;
-    min-height: 54px;
-    font-size: 20px;
-  }
-
   .contactGrid {
     grid-template-columns: 1fr;
-    padding: 0.8rem;
+    padding: 0;
+  }
+
+  .contactActionsRow {
+    grid-template-columns: 1fr;
+    padding: 0.8rem 0;
   }
 
   .contactItem {
@@ -663,11 +711,6 @@
     font-size: 18.75px;
   }
 
-  .primaryAction {
-    /* 20px * 0.8 zoom = 16px */
-    font-size: 20px;
-  }
-
   .contactItem strong {
     /* 16.25px * 0.8 zoom = 13px */
     font-size: 16.25px;
@@ -692,7 +735,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .primaryAction,
   .contactItem,
   .socials a {
     transition: none;

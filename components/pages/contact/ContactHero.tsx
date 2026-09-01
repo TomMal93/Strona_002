@@ -6,7 +6,6 @@ import { gsap } from 'gsap'
 import { siteContent } from '@/lib/site-content'
 import { socialIcons } from '@/components/sections/cta/CtaActions'
 import { cn } from '@/lib/utils'
-import heroStyles from '@/components/sections/Hero.module.css'
 import styles from './ContactHero.module.css'
 
 const contactItems = [
@@ -105,33 +104,52 @@ export default function ContactHero() {
               <p data-contact-hero-item className={styles.lead}>{hero.lead}</p>
 
               <div data-contact-hero-item className={styles.contactPanel}>
-                <div className={styles.contactGrid}>
-                  {contactItems.map((item, index) => {
-                    const href = index === 0
-                      ? `mailto:${contact.email}`
-                      : index === 1
-                        ? phoneHref
-                        : 'https://www.google.com/maps/search/?api=1&query=Polska'
-                    const isExternal = index === 2
+                <div className={styles.contactActionsRow}>
+                  <div className={styles.contactGrid}>
+                    {contactItems.map((item, index) => {
+                      const href = index === 0
+                        ? `mailto:${contact.email}`
+                        : index === 1
+                          ? phoneHref
+                          : 'https://www.google.com/maps/search/?api=1&query=Polska'
+                      const isExternal = index === 2
 
-                    return (
-                      <a
-                        key={item.label}
-                        href={href}
-                        className={styles.contactItem}
-                        target={isExternal ? '_blank' : undefined}
-                        rel={isExternal ? 'noopener noreferrer' : undefined}
-                      >
-                        <span className={styles.contactIcon}>
-                          <ContactIcon type={item.icon} />
-                        </span>
-                        <span className={styles.contactItemCopy}>
-                          <strong>{item.label}</strong>
-                          <small>{contactValues[index]}</small>
-                        </span>
-                      </a>
-                    )
-                  })}
+                      return (
+                        <a
+                          key={item.label}
+                          href={href}
+                          className={styles.contactItem}
+                          target={isExternal ? '_blank' : undefined}
+                          rel={isExternal ? 'noopener noreferrer' : undefined}
+                        >
+                          <span className={styles.contactIcon}>
+                            <ContactIcon type={item.icon} />
+                          </span>
+                          <span className={styles.contactItemCopy}>
+                            <strong>{item.label}</strong>
+                            <small>{contactValues[index]}</small>
+                          </span>
+                        </a>
+                      )
+                    })}
+                  </div>
+
+                  <aside className={styles.stepsPanel} aria-label="Etapy rozpoczęcia współpracy">
+                    <ol className={styles.stepsList}>
+                      <li>
+                        <span>01</span>
+                        <p><b>Opowiedz</b><small>Napisz, czego potrzebujesz.</small></p>
+                      </li>
+                      <li>
+                        <span>02</span>
+                        <p><b>Ustalamy kierunek</b><small>Dobieramy formę i termin.</small></p>
+                      </li>
+                      <li>
+                        <span>03</span>
+                        <p><b>Realizujemy</b><small>Zamieniamy pomysł w film.</small></p>
+                      </li>
+                    </ol>
+                  </aside>
                 </div>
 
                 <div className={styles.benefits}>
@@ -144,15 +162,6 @@ export default function ContactHero() {
                   ))}
                 </div>
               </div>
-
-              <a
-                data-contact-hero-item
-                href={`mailto:${contact.email}`}
-                className={cn(heroStyles.ctaButton, heroStyles.ctaButtonPrimary, styles.primaryAction)}
-              >
-                <span>Zapytaj o termin</span>
-                <span aria-hidden="true">→</span>
-              </a>
             </div>
           </div>
 
