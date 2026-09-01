@@ -23,14 +23,6 @@ export default function PrivacyPolicyPage() {
             Polityka Prywatności & RODO
           </h1>
 
-          {/* HUD Line Bar */}
-          <div aria-hidden="true" className="mt-4 flex items-center justify-center gap-3">
-            <span className="h-px flex-1 max-w-[90px] bg-gradient-to-r from-transparent via-khaki/40 to-khaki/80" />
-            <span className="rounded-micro border border-khaki/30 bg-anthracite px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-khaki">
-              DOC. ID: PRIVACY-RODO-V1
-            </span>
-            <span className="h-px flex-1 max-w-[90px] bg-gradient-to-l from-transparent via-khaki/40 to-khaki/80" />
-          </div>
 
           <p className="mx-auto mt-3.5 max-w-xl font-mono text-xs leading-relaxed text-white/50 sm:text-[13px]">
             Zasady ochrony prywatności, celów przetwarzania danych osobowych oraz praw przysługujących odwiedzającym i klientom Maleszyk.Media.
