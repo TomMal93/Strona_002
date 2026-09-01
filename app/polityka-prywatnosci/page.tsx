@@ -18,9 +18,6 @@ export default function PrivacyPolicyPage() {
       <section className="relative px-6 pb-8 pt-24 sm:pb-10 sm:pt-28 lg:px-20 lg:pt-32">
         <div className="mx-auto max-w-4xl text-center">
 
-          <span className="ui-overline mb-2 block text-center text-[11px]">
-            DOKUMENTACJA PRAWNA · MALESZYK.MEDIA
-          </span>
 
           <h1 className="bg-[linear-gradient(130deg,rgb(var(--c-warm))_0%,rgb(255_238_175)_45%,rgb(var(--c-gold))_100%)] bg-clip-text font-bebas text-4xl uppercase leading-[0.95] tracking-wide text-transparent sm:text-5xl md:text-6xl">
             Polityka Prywatności & RODO
