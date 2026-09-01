@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { siteContent } from '@/lib/site-content'
 
 export const metadata: Metadata = {
-  title: 'Polityka Prywatności i RODO',
+  title: 'Polityka Prywatności i RODO | Maleszyk Media',
   description:
-    'Zasady przetwarzania danych osobowych (RODO) oraz wykorzystywania plików cookies w serwisie Maleszyk.Media.',
+    'Zasady przetwarzania danych osobowych (RODO), prawa użytkowników oraz polityka plików cookies w serwisie Maleszyk.Media.',
 }
 
 export default function PrivacyPolicyPage() {
@@ -13,216 +13,435 @@ export default function PrivacyPolicyPage() {
   const phone = siteContent.aboutMe.contact.phone
 
   return (
-    <main className="section-dark-bg min-h-screen px-6 py-28 text-warm-white/90 sm:py-32 lg:px-20">
-      <div className="mx-auto max-w-4xl">
-        {/* Breadcrumb / Back button */}
-        <div className="mb-8">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-khaki transition-colors hover:text-warm-white"
-          >
-            <span aria-hidden="true">←</span> Wróć do strony głównej
-          </Link>
-        </div>
+    <div className="section-dark-bg min-h-screen">
+      {/* Top Header / Hero */}
+      <section className="relative px-6 pb-12 pt-32 sm:pb-16 sm:pt-36 lg:px-20 lg:pt-40">
+        <div className="mx-auto max-w-4xl text-center">
+          {/* Breadcrumb / Back button */}
+          <div className="mb-8 flex justify-center">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 rounded-micro border border-khaki/40 bg-anthracite/80 px-4 py-2 font-mono text-xs uppercase tracking-widest text-khaki transition-all duration-300 hover:-translate-y-0.5 hover:border-khaki hover:bg-khaki/15 hover:text-warm-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki"
+            >
+              <span aria-hidden="true" className="text-sm">←</span> Strona główna
+            </Link>
+          </div>
 
-        {/* Header */}
-        <header className="mb-12 border-b border-warm-gray/15 pb-8">
-          <span className="font-mono text-xs uppercase tracking-widest text-khaki">
-            Ochrona danych i prywatność
+          <span className="ui-overline mb-3 block text-center">
+            DOKUMENTACJA PRAWNA · MALESZYK.MEDIA
           </span>
-          <h1 className="mt-2 font-bebas text-4xl uppercase tracking-wide text-warm-white sm:text-5xl lg:text-6xl">
-            Polityka Prywatności i Informacja RODO
+
+          <h1 className="bg-[linear-gradient(130deg,rgb(var(--c-warm))_0%,rgb(255_238_175)_45%,rgb(var(--c-gold))_100%)] bg-clip-text font-bebas text-5xl uppercase leading-[0.9] tracking-wide text-transparent sm:text-6xl md:text-7xl lg:text-8xl">
+            Polityka Prywatności & RODO
           </h1>
-          <p className="mt-3 font-mono text-xs text-warm-gray sm:text-sm">
-            Ostatnia aktualizacja: {new Date().toLocaleDateString('pl-PL', { year: 'numeric', month: 'long', day: 'numeric' })}
+
+          {/* HUD Line Bar */}
+          <div aria-hidden="true" className="mt-6 flex items-center justify-center gap-3">
+            <span className="h-px flex-1 max-w-[120px] bg-gradient-to-r from-transparent via-khaki/40 to-khaki/80" />
+            <span className="rounded-micro border border-khaki/30 bg-anthracite px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-khaki">
+              DOC. ID: PRIVACY-RODO-V1
+            </span>
+            <span className="h-px flex-1 max-w-[120px] bg-gradient-to-l from-transparent via-khaki/40 to-khaki/80" />
+          </div>
+
+          <p className="mx-auto mt-5 max-w-2xl font-mono text-xs leading-relaxed text-white/50 sm:text-sm">
+            Zasady ochrony prywatności, celów przetwarzania danych osobowych oraz praw przysługujących odwiedzającym i klientom Maleszyk.Media.
           </p>
-        </header>
-
-        {/* Content sections */}
-        <div className="space-y-10 font-inter text-sm leading-relaxed text-warm-white/80 sm:text-base">
-          {/* Section 1 */}
-          <section className="space-y-3">
-            <h2 className="font-bebas text-2xl uppercase tracking-wide text-warm-white sm:text-3xl">
-              1. Administrator Danych Osobowych
-            </h2>
-            <p>
-              Administratorem Twoich danych osobowych w rozumieniu Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. (RODO) jest:
-            </p>
-            <div className="rounded-sm border border-warm-gray/15 bg-white/[0.02] p-4 font-mono text-xs text-warm-white/90 sm:text-sm">
-              <p className="font-semibold text-khaki">Maleszyk.Media — Przemysław Maleszyk</p>
-              <p className="mt-1">E-mail do kontaktu: <a href={`mailto:${email}`} className="text-khaki hover:underline">{email}</a></p>
-              <p>Telefon: <a href={`tel:${phone.replace(/\s/g, '')}`} className="text-khaki hover:underline">{phone}</a></p>
-              <p>Działalność realizowana na terenie: Rzeczpospolita Polska oraz projekty międzynarodowe</p>
-            </div>
-            <p className="text-xs text-warm-gray sm:text-sm">
-              W sprawach związanych z ochroną danych osobowych możesz skontaktować się bezpośrednio pod adresem e-mail wskazanym powyżej.
-            </p>
-          </section>
-
-          {/* Section 2 */}
-          <section className="space-y-3">
-            <h2 className="font-bebas text-2xl uppercase tracking-wide text-warm-white sm:text-3xl">
-              2. Jakie dane zbieramy i skąd je posiadamy?
-            </h2>
-            <p>
-              Dane pozyskujemy bezpośrednio od Ciebie, kiedy:
-            </p>
-            <ul className="list-inside list-disc space-y-1 pl-2 text-warm-white/75">
-              <li>Kontaktujesz się ze mną przez pocztę e-mail, telefon, WhatsApp lub formularze / wiadomości w mediach społecznościowych,</li>
-              <li>Przesyłasz zapytanie o ofertę, wycenę projektu wideo lub rezerwację terminu sesji,</li>
-              <li>Zawierasz ze mną umowę na realizację usług fotograficznych, wideo lub montażowych.</li>
-            </ul>
-            <p>
-              Zakres przetwarzanych danych może obejmować: imię i nazwisko, adres e-mail, numer telefonu, treść wiadomości, ewentualnie dane firmy (w tym NIP) potrzebne do wystawienia faktury lub przygotowania umowy.
-            </p>
-          </section>
-
-          {/* Section 3 */}
-          <section className="space-y-3">
-            <h2 className="font-bebas text-2xl uppercase tracking-wide text-warm-white sm:text-3xl">
-              3. Cele i podstawy prawne przetwarzania danych (RODO)
-            </h2>
-            <p>Twoje dane osobowe przetwarzane są w następujących celach:</p>
-            <div className="space-y-3">
-              <div className="border-l-2 border-khaki/60 pl-4">
-                <p className="font-semibold text-warm-white">Obsługa zapytań i przygotowanie oferty</p>
-                <p className="text-xs text-warm-gray sm:text-sm">
-                  <strong>Podstawa prawna:</strong> art. 6 ust. 1 lit. b RODO (podjęcie działań na żądanie osoby przed zawarciem umowy) lub art. 6 ust. 1 lit. f RODO (prawnie uzasadniony interes Administratora polegający na budowaniu relacji z klientami i odpowiadaniu na zapytania).
-                </p>
-              </div>
-
-              <div className="border-l-2 border-khaki/60 pl-4">
-                <p className="font-semibold text-warm-white">Zawarcie i realizacja umowy na usługi wideo/foto</p>
-                <p className="text-xs text-warm-gray sm:text-sm">
-                  <strong>Podstawa prawna:</strong> art. 6 ust. 1 lit. b RODO (niezbędność do wykonania umowy, której stroną jest osoba, której dane dotyczą).
-                </p>
-              </div>
-
-              <div className="border-l-2 border-khaki/60 pl-4">
-                <p className="font-semibold text-warm-white">Rozliczenia księgowe i podatkowe</p>
-                <p className="text-xs text-warm-gray sm:text-sm">
-                  <strong>Podstawa prawna:</strong> art. 6 ust. 1 lit. c RODO (wypełnienie obowiązku prawnego ciążącego na Administratorze, m.in. ustawy o rachunkowości oraz przepisów podatkowych).
-                </p>
-              </div>
-
-              <div className="border-l-2 border-khaki/60 pl-4">
-                <p className="font-semibold text-warm-white">Obrona przed roszczeniami lub ich dochodzenie</p>
-                <p className="text-xs text-warm-gray sm:text-sm">
-                  <strong>Podstawa prawna:</strong> art. 6 ust. 1 lit. f RODO (prawnie uzasadniony interes Administratora).
-                </p>
-              </div>
-
-              <div className="border-l-2 border-khaki/60 pl-4">
-                <p className="font-semibold text-warm-white">Publikacja wizerunku i materiałów w portfolio</p>
-                <p className="text-xs text-warm-gray sm:text-sm">
-                  <strong>Podstawa prawna:</strong> art. 6 ust. 1 lit. a RODO (dobrowolna, wyraźna zgoda wyrażona w umowie lub osobnym oświadczeniu).
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 4 */}
-          <section className="space-y-3">
-            <h2 className="font-bebas text-2xl uppercase tracking-wide text-warm-white sm:text-3xl">
-              4. Odbiorcy danych
-            </h2>
-            <p>
-              Dane mogą być przekazywane wyłącznie zaufanym podmiotom wspierającym realizację usług:
-            </p>
-            <ul className="list-inside list-disc space-y-1 pl-2 text-warm-white/75">
-              <li>Dostawcom usług hostingowych i serwerowych utrzymującym serwis internetowy,</li>
-              <li>Operatorom poczty elektronicznej i systemów łączności,</li>
-              <li>Biuru rachunkowo-księgowemu (w przypadku wystawiania dokumentów sprzedaży),</li>
-              <li>Organom publicznym, jeżeli taki obowiązek wynika z bezwzględnie obowiązujących przepisów prawa.</li>
-            </ul>
-          </section>
-
-          {/* Section 5 */}
-          <section className="space-y-3">
-            <h2 className="font-bebas text-2xl uppercase tracking-wide text-warm-white sm:text-3xl">
-              5. Okres przechowywania danych
-            </h2>
-            <p>
-              Twoje dane osobowe będą przechowywane przez okres:
-            </p>
-            <ul className="list-inside list-disc space-y-1 pl-2 text-warm-white/75">
-              <li>Trwania kontaktu lub negocjacji oferty — a po ich zakończeniu do 12 miesięcy w celach archiwalnych,</li>
-              <li>Trwania umowy oraz po jej zakończeniu przez czas wymagany przepisami prawa podatkowego (5 lat od końca roku kalendarzowego),</li>
-              <li>Do upływu okresu przedawnienia ewentualnych roszczeń wynikających z umowy,</li>
-              <li>W przypadku zgody na publikację wizerunku w portfolio — do momentu ewentualnego wycofania udzielonej zgody.</li>
-            </ul>
-          </section>
-
-          {/* Section 6 */}
-          <section className="space-y-3">
-            <h2 className="font-bebas text-2xl uppercase tracking-wide text-warm-white sm:text-3xl">
-              6. Twoje prawa zgodnie z RODO
-            </h2>
-            <p>W związku z przetwarzaniem Twoich danych osobowych przysługuje Ci:</p>
-            <ul className="grid grid-cols-1 gap-2 pt-1 sm:grid-cols-2">
-              <li className="rounded-sm border border-warm-gray/10 bg-white/[0.01] p-3">
-                <span className="font-semibold text-khaki">Prawo dostępu do danych</span>
-                <p className="mt-1 text-xs text-warm-gray">Możliwość uzyskania informacji o tym, jakie dane przetwarzamy i otrzymania ich kopii.</p>
-              </li>
-              <li className="rounded-sm border border-warm-gray/10 bg-white/[0.01] p-3">
-                <span className="font-semibold text-khaki">Prawo do sprostowania</span>
-                <p className="mt-1 text-xs text-warm-gray">Możliwość poprawienia danych, jeśli są nieprawidłowe lub niekompletne.</p>
-              </li>
-              <li className="rounded-sm border border-warm-gray/10 bg-white/[0.01] p-3">
-                <span className="font-semibold text-khaki">Prawo do usunięcia („bycia zapomnianym”)</span>
-                <p className="mt-1 text-xs text-warm-gray">Żądanie usunięcia danych, o ile nie ma prawnego obowiązku ich dalszego przechowywania.</p>
-              </li>
-              <li className="rounded-sm border border-warm-gray/10 bg-white/[0.01] p-3">
-                <span className="font-semibold text-khaki">Prawo do ograniczenia i sprzeciwu</span>
-                <p className="mt-1 text-xs text-warm-gray">Możliwość wniesienia sprzeciwu wobec przetwarzania opartego na prawnie uzasadnionym interesie.</p>
-              </li>
-            </ul>
-            <p className="pt-2 text-xs text-warm-gray sm:text-sm">
-              W przypadku uznania, że przetwarzanie danych narusza przepisy RODO, masz również prawo wniesienia skargi do organu nadzorczego — <strong>Prezesa Urzędu Ochrony Danych Osobowych (UODO)</strong>, ul. Stawki 2, 00-193 Warszawa.
-            </p>
-          </section>
-
-          {/* Section 7 */}
-          <section className="space-y-3">
-            <h2 className="font-bebas text-2xl uppercase tracking-wide text-warm-white sm:text-3xl">
-              7. Pliki Cookies, SessionStorage i technologie przeglądarki
-            </h2>
-            <p>
-              Strona internetowa stosuje mechanizmy pamięci podręcznej przeglądarki (np. <code className="rounded bg-white/10 px-1 py-0.5 text-xs text-khaki">sessionStorage</code>) wyłącznie w celach technicznych:
-            </p>
-            <ul className="list-inside list-disc space-y-1 pl-2 text-warm-white/75">
-              <li>Prawidłowe wyświetlanie strony oraz zapamiętywanie stanu animacji powitalnej (intro/preloader) w ramach jednej sesji, aby nie utrudniać przeglądania serwisu,</li>
-              <li>Optymalizacja wydajności renderowania treści audiowizualnych.</li>
-            </ul>
-            <p>
-              W przypadku odtwarzania osadzonych materiałów z serwisu YouTube (np. poprzez kliknięcie miniatury wideo), serwis YouTube (Google Ireland Ltd.) może stosować własne pliki cookies i identyfikatory na zasadach określonych w ich polityce prywatności.
-            </p>
-            <p className="text-xs text-warm-gray sm:text-sm">
-              Możesz w każdej chwili zmienić ustawienia dotyczące plików cookies lub wyczyścić pamięć podręczną bezpośrednio w opcjach swojej przeglądarki internetowej.
-            </p>
-          </section>
-
-          {/* Section 8 */}
-          <section className="space-y-3 border-t border-warm-gray/15 pt-8">
-            <h2 className="font-bebas text-2xl uppercase tracking-wide text-warm-white sm:text-3xl">
-              8. Zmiany w Polityce Prywatności
-            </h2>
-            <p>
-              Polityka Prywatności może być okresowo aktualizowana w celu dostosowania jej do zmian prawnych, technologicznych lub organizacyjnych. Aktualna wersja dokumentu jest zawsze dostępna pod adresem tej podstrony.
-            </p>
-          </section>
         </div>
+      </section>
 
-        {/* Back CTA */}
-        <div className="mt-14 border-t border-warm-gray/15 pt-8">
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-micro border border-khaki/30 bg-khaki/10 px-6 py-3 font-mono text-xs uppercase tracking-wider text-khaki transition-colors hover:border-khaki hover:bg-khaki hover:text-black-deep"
-          >
-            Masz pytania? Skontaktuj się
-          </Link>
+      {/* Main Content Sections */}
+      <main className="px-6 pb-24 lg:px-20">
+        <div className="mx-auto max-w-4xl space-y-8">
+          
+          {/* Section 1: Administrator */}
+          <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.12),transparent_65%)]" />
+            
+            <div className="relative z-10">
+              <div className="mb-4 flex items-center justify-between border-b border-warm-gray/10 pb-3">
+                <span className="font-mono text-xs uppercase tracking-widest text-khaki">
+                  SEKCJA 01
+                </span>
+                <span className="font-mono text-[11px] text-warm-gray/60">
+                  ART. 13 RODO
+                </span>
+              </div>
+
+              <h2 className="font-bebas text-3xl uppercase tracking-wide text-warm-white sm:text-4xl">
+                Administrator Danych Osobowych
+              </h2>
+
+              <p className="mt-3 font-inter text-sm leading-relaxed text-warm-white/80 sm:text-base">
+                Administratorem Twoich danych osobowych w rozumieniu Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. (RODO) jest:
+              </p>
+
+              <div className="mt-5 rounded-micro border border-khaki/30 bg-black-deep/70 p-5 font-mono text-xs leading-relaxed text-warm-white/90 sm:text-sm">
+                <p className="font-bebas text-xl uppercase tracking-wider text-khaki">
+                  Maleszyk.Media — Przemysław Maleszyk
+                </p>
+                <div className="mt-3 space-y-1.5 text-warm-white/80">
+                  <p className="flex flex-wrap items-center gap-2">
+                    <span className="text-khaki/80">E-mail:</span>
+                    <a href={`mailto:${email}`} className="text-warm-white underline decoration-khaki/50 underline-offset-4 transition-colors hover:text-khaki">
+                      {email}
+                    </a>
+                  </p>
+                  <p className="flex flex-wrap items-center gap-2">
+                    <span className="text-khaki/80">Telefon:</span>
+                    <a href={`tel:${phone.replace(/\s/g, '')}`} className="text-warm-white underline decoration-khaki/50 underline-offset-4 transition-colors hover:text-khaki">
+                      {phone}
+                    </a>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <span className="text-khaki/80">Obszar działalności:</span>
+                    <span>Polska oraz produkcje międzynarodowe</span>
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-4 font-inter text-xs text-warm-gray/80 sm:text-sm">
+                Wszelkie pytania, wnioski lub wątpliwości dotyczące ochrony prywatności możesz kierować bezpośrednio na wskazany adres e-mail.
+              </p>
+            </div>
+          </article>
+
+          {/* Section 2: Zbieranie danych */}
+          <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.10),transparent_65%)]" />
+            
+            <div className="relative z-10">
+              <div className="mb-4 flex items-center justify-between border-b border-warm-gray/10 pb-3">
+                <span className="font-mono text-xs uppercase tracking-widest text-khaki">
+                  SEKCJA 02
+                </span>
+                <span className="font-mono text-[11px] text-warm-gray/60">
+                  ZAKRES DANYCH
+                </span>
+              </div>
+
+              <h2 className="font-bebas text-3xl uppercase tracking-wide text-warm-white sm:text-4xl">
+                Jakie dane przetwarzamy i jak je pozyskujemy?
+              </h2>
+
+              <p className="mt-3 font-inter text-sm leading-relaxed text-warm-white/80 sm:text-base">
+                Dane osobowe przekazujesz dobrowolnie podczas bezpośredniego kontaktu lub nawiązywania współpracy:
+              </p>
+
+              <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/50 p-4">
+                  <span className="font-mono text-xs uppercase tracking-wider text-khaki">01 · Kontakt</span>
+                  <p className="mt-1 font-inter text-xs text-warm-white/75">
+                    Wiadomości e-mail, połączenia telefoniczne, WhatsApp, komunikatory social media (imię, numer, e-mail).
+                  </p>
+                </div>
+
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/50 p-4">
+                  <span className="font-mono text-xs uppercase tracking-wider text-khaki">02 · Oferta & Wycena</span>
+                  <p className="mt-1 font-inter text-xs text-warm-white/75">
+                    Szczegóły planowanego projektu wideo/foto, lokalizacja, termin, budżet oraz preferencje realizacji.
+                  </p>
+                </div>
+
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/50 p-4">
+                  <span className="font-mono text-xs uppercase tracking-wider text-khaki">03 · Umowa & Faktura</span>
+                  <p className="mt-1 font-inter text-xs text-warm-white/75">
+                    Dane niezbędne do zawarcia umowy oraz wystawienia rachunku lub faktury (w tym NIP, adres firmy/zamieszkania).
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          {/* Section 3: Podstawy prawne */}
+          <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.10),transparent_65%)]" />
+            
+            <div className="relative z-10">
+              <div className="mb-4 flex items-center justify-between border-b border-warm-gray/10 pb-3">
+                <span className="font-mono text-xs uppercase tracking-widest text-khaki">
+                  SEKCJA 03
+                </span>
+                <span className="font-mono text-[11px] text-warm-gray/60">
+                  ART. 6 RODO
+                </span>
+              </div>
+
+              <h2 className="font-bebas text-3xl uppercase tracking-wide text-warm-white sm:text-4xl">
+                Cele i podstawy prawne przetwarzania danych
+              </h2>
+
+              <div className="mt-5 space-y-4">
+                <div className="rounded-micro border-l-2 border-khaki bg-black-deep/60 p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="font-bebas text-xl uppercase tracking-wide text-warm-white">
+                      Obsługa zapytań i przygotowanie wyceny
+                    </h3>
+                    <span className="rounded-micro border border-khaki/40 bg-khaki/10 px-2 py-0.5 font-mono text-[11px] text-khaki">
+                      Art. 6 ust. 1 lit. b oraz f RODO
+                    </span>
+                  </div>
+                  <p className="mt-1.5 font-inter text-xs leading-relaxed text-warm-white/75 sm:text-sm">
+                    Podjęcie działań na Twoje żądanie przed ewentualnym zawarciem umowy oraz prawnie uzasadniony interes Administratora polegający na sprawnej komunikacji z potencjalnymi klientami.
+                  </p>
+                </div>
+
+                <div className="rounded-micro border-l-2 border-khaki bg-black-deep/60 p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="font-bebas text-xl uppercase tracking-wide text-warm-white">
+                      Realizacja umowy na produkcję wideo i fotografię
+                    </h3>
+                    <span className="rounded-micro border border-khaki/40 bg-khaki/10 px-2 py-0.5 font-mono text-[11px] text-khaki">
+                      Art. 6 ust. 1 lit. b RODO
+                    </span>
+                  </div>
+                  <p className="mt-1.5 font-inter text-xs leading-relaxed text-warm-white/75 sm:text-sm">
+                    Niezbędność do wykonania umowy o świadczenie usług audiowizualnych, w tym organizacji planu zdjęciowego, montażu i przekazania gotowego materiału.
+                  </p>
+                </div>
+
+                <div className="rounded-micro border-l-2 border-khaki bg-black-deep/60 p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="font-bebas text-xl uppercase tracking-wide text-warm-white">
+                      Wypełnienie obowiązków księgowo-podatkowych
+                    </h3>
+                    <span className="rounded-micro border border-khaki/40 bg-khaki/10 px-2 py-0.5 font-mono text-[11px] text-khaki">
+                      Art. 6 ust. 1 lit. c RODO
+                    </span>
+                  </div>
+                  <p className="mt-1.5 font-inter text-xs leading-relaxed text-warm-white/75 sm:text-sm">
+                    Ciążący na Administratorze obowiązek prawny wynikający z przepisów ustawy o rachunkowości oraz ordynacji podatkowej (wystawianie faktur, ewidencja księgowa).
+                  </p>
+                </div>
+
+                <div className="rounded-micro border-l-2 border-khaki bg-black-deep/60 p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="font-bebas text-xl uppercase tracking-wide text-warm-white">
+                      Obrona przed roszczeniami lub ich dochodzenie
+                    </h3>
+                    <span className="rounded-micro border border-khaki/40 bg-khaki/10 px-2 py-0.5 font-mono text-[11px] text-khaki">
+                      Art. 6 ust. 1 lit. f RODO
+                    </span>
+                  </div>
+                  <p className="mt-1.5 font-inter text-xs leading-relaxed text-warm-white/75 sm:text-sm">
+                    Prawnie uzasadniony interes Administratora polegający na zabezpieczeniu dowodów wykonania zlecenia i ochronie interesu prawnego.
+                  </p>
+                </div>
+
+                <div className="rounded-micro border-l-2 border-khaki bg-black-deep/60 p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="font-bebas text-xl uppercase tracking-wide text-warm-white">
+                      Publikacja wizerunku w portfolio i social mediach
+                    </h3>
+                    <span className="rounded-micro border border-khaki/40 bg-khaki/10 px-2 py-0.5 font-mono text-[11px] text-khaki">
+                      Art. 6 ust. 1 lit. a RODO
+                    </span>
+                  </div>
+                  <p className="mt-1.5 font-inter text-xs leading-relaxed text-warm-white/75 sm:text-sm">
+                    Dobrowolna, wyraźna zgoda wyrażona w umowie lub osobnym oświadczeniu (z możliwością jej wycofania w dowolnym momencie).
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          {/* Section 4 & 5: Odbiorcy i czas przechowywania */}
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            {/* Odbiorcy */}
+            <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.08),transparent_65%)]" />
+              
+              <div className="relative z-10">
+                <span className="font-mono text-xs uppercase tracking-widest text-khaki">
+                  SEKCJA 04 · ODBIORCY
+                </span>
+                <h2 className="mt-2 font-bebas text-2xl uppercase tracking-wide text-warm-white sm:text-3xl">
+                  Komu powierzamy dane?
+                </h2>
+                <p className="mt-3 font-inter text-xs leading-relaxed text-warm-white/75 sm:text-sm">
+                  Dane przekazujemy wyłącznie zaufanym partnerom technologicznym na podstawie umów powierzenia:
+                </p>
+                <ul className="mt-4 space-y-2 font-inter text-xs text-warm-white/70 sm:text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-khaki">›</span>
+                    <span>Dostawcy usług hostingowych i serwerów pocztowych</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-khaki">›</span>
+                    <span>Biuro księgowe rozliczające transakcje</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-khaki">›</span>
+                    <span>Uprawnione organy państwowe (na wezwanie prawne)</span>
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            {/* Czas przechowywania */}
+            <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.08),transparent_65%)]" />
+              
+              <div className="relative z-10">
+                <span className="font-mono text-xs uppercase tracking-widest text-khaki">
+                  SEKCJA 05 · RETENCJA
+                </span>
+                <h2 className="mt-2 font-bebas text-2xl uppercase tracking-wide text-warm-white sm:text-3xl">
+                  Okres przechowywania
+                </h2>
+                <p className="mt-3 font-inter text-xs leading-relaxed text-warm-white/75 sm:text-sm">
+                  Dane przechowujemy tylko tak długo, jak to niezbędne:
+                </p>
+                <ul className="mt-4 space-y-2 font-inter text-xs text-warm-white/70 sm:text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-khaki">›</span>
+                    <span><strong>Zapytania ofertowe:</strong> do 12 miesięcy od zakończenia kontaktu</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-khaki">›</span>
+                    <span><strong>Księgowość:</strong> 5 lat od końca roku obrachunkowego</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-khaki">›</span>
+                    <span><strong>Portfolio:</strong> do czasu wycofania zgody</span>
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+          {/* Section 6: Prawa użytkownika */}
+          <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.10),transparent_65%)]" />
+            
+            <div className="relative z-10">
+              <div className="mb-4 flex items-center justify-between border-b border-warm-gray/10 pb-3">
+                <span className="font-mono text-xs uppercase tracking-widest text-khaki">
+                  SEKCJA 06
+                </span>
+                <span className="font-mono text-[11px] text-warm-gray/60">
+                  TWOJE UPRAWNIENIA
+                </span>
+              </div>
+
+              <h2 className="font-bebas text-3xl uppercase tracking-wide text-warm-white sm:text-4xl">
+                Twoje prawa zgodnie z RODO
+              </h2>
+
+              <p className="mt-3 font-inter text-sm leading-relaxed text-warm-white/80 sm:text-base">
+                W każdym momencie przysługuje Ci pełen zestaw praw gwarantowanych przez unijne rozporządzenie:
+              </p>
+
+              <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/60 p-4">
+                  <span className="font-bebas text-lg uppercase tracking-wide text-khaki">Prawo dostępu i kopii</span>
+                  <p className="mt-1 font-inter text-xs text-warm-white/70">
+                    Masz prawo uzyskać potwierdzenie, czy Twoje dane są przetwarzane, oraz otrzymać ich kompletną kopię.
+                  </p>
+                </div>
+
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/60 p-4">
+                  <span className="font-bebas text-lg uppercase tracking-wide text-khaki">Prawo do sprostowania</span>
+                  <p className="mt-1 font-inter text-xs text-warm-white/70">
+                    Możesz żądać niezwłocznego poprawienia nieprawidłowych lub uzupełnienia niekompletnych danych.
+                  </p>
+                </div>
+
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/60 p-4">
+                  <span className="font-bebas text-lg uppercase tracking-wide text-khaki">Prawo do usunięcia („bycia zapomnianym”)</span>
+                  <p className="mt-1 font-inter text-xs text-warm-white/70">
+                    Możesz wnioskować o usunięcie danych, o ile brak jest obowiązku prawnego ich dalszego przechowywania.
+                  </p>
+                </div>
+
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/60 p-4">
+                  <span className="font-bebas text-lg uppercase tracking-wide text-khaki">Prawo do sprzeciwu</span>
+                  <p className="mt-1 font-inter text-xs text-warm-white/70">
+                    Możesz w dowolnym momencie wnieść sprzeciw wobec przetwarzania opartego na prawnie uzasadnionym interesie.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 rounded-micro border border-warm-gray/10 bg-black-deep/40 p-4 font-inter text-xs text-warm-gray/80 sm:text-sm">
+                <p>
+                  Jeżeli uważasz, że Twoje dane są przetwarzane niezgodnie z prawem, przysługuje Ci prawo do wniesienia skargi do organu nadzorczego: <strong>Prezes Urzędu Ochrony Danych Osobowych (UODO)</strong>, ul. Stawki 2, 00-193 Warszawa.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          {/* Section 7: Cookies i SessionStorage */}
+          <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.10),transparent_65%)]" />
+            
+            <div className="relative z-10">
+              <div className="mb-4 flex items-center justify-between border-b border-warm-gray/10 pb-3">
+                <span className="font-mono text-xs uppercase tracking-widest text-khaki">
+                  SEKCJA 07
+                </span>
+                <span className="font-mono text-[11px] text-warm-gray/60">
+                  TECHNOLOGIA
+                </span>
+              </div>
+
+              <h2 className="font-bebas text-3xl uppercase tracking-wide text-warm-white sm:text-4xl">
+                Pliki Cookies i technologie przeglądarki
+              </h2>
+
+              <p className="mt-3 font-inter text-sm leading-relaxed text-warm-white/80 sm:text-base">
+                Serwis internetowy wykorzystuje technologie pamięci lokalnej przeglądarki w sposób maksymalnie bezpieczny i nienaruszający Twojej prywatności:
+              </p>
+
+              <div className="mt-4 space-y-3 font-inter text-xs leading-relaxed text-warm-white/75 sm:text-sm">
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/50 p-4">
+                  <div className="flex items-center gap-2 font-mono text-xs text-khaki">
+                    <span className="rounded bg-khaki/15 px-1.5 py-0.5">sessionStorage</span>
+                    <span>Pamięć sesyjna interfejsu</span>
+                  </div>
+                  <p className="mt-2 text-warm-white/70">
+                    Służy wyłącznie do zapamiętania, czy podczas obecnej wizyty odtworzono animację powitalną (preloader). Pozwala to uniknąć uciążliwego ponownego ładowania animacji przy przechodzeniu między podstronami. Dane te znikają po zamknięciu karty przeglądarki.
+                  </p>
+                </div>
+
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/50 p-4">
+                  <div className="flex items-center gap-2 font-mono text-xs text-khaki">
+                    <span className="rounded bg-khaki/15 px-1.5 py-0.5">Multimedia</span>
+                    <span>Osadzone wideo YouTube</span>
+                  </div>
+                  <p className="mt-2 text-warm-white/70">
+                    W przypadku uruchomienia odtwarzacza wideo z serwisu YouTube (Google Ireland Ltd.), platforma ta może zapisywać własne identyfikatory i cookies zgodnie ze swoją polityką prywatności.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          {/* Section 8: Podsumowanie i CTA */}
+          <div className="rounded-micro border border-khaki/40 bg-gradient-to-br from-anthracite via-black-deep to-anthracite p-8 text-center sm:p-10">
+            <h2 className="font-bebas text-3xl uppercase tracking-wide text-warm-white sm:text-4xl">
+              Masz pytania dotyczące swoich danych?
+            </h2>
+            <p className="mx-auto mt-2 max-w-xl font-mono text-xs text-warm-gray sm:text-sm">
+              Skontaktuj się bezpośrednio ze mną — chętnie odpowiem na wszelkie pytania dotyczące ochrony prywatności i realizacji projektów.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+              <a
+                href={`mailto:${email}`}
+                className="inline-flex items-center justify-center rounded-micro border border-khaki bg-khaki px-6 py-3 font-bebas text-lg uppercase tracking-wider text-black-deep transition-all duration-300 hover:bg-military-green hover:text-warm-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki"
+              >
+                Napisz wiadomość e-mail
+              </a>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-micro border border-khaki/50 bg-transparent px-6 py-3 font-bebas text-lg uppercase tracking-wider text-khaki transition-all duration-300 hover:border-khaki hover:bg-khaki/10 hover:text-warm-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki"
+              >
+                Przejdź do kontaktu
+              </Link>
+            </div>
+          </div>
+
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   )
 }
