@@ -160,6 +160,7 @@
   min-width: 0;
   padding: 0 2rem;
   border-right: 1px solid rgba(var(--c-gold) / 0.16);
+  cursor: default;
 }
 
 .infoItem:first-child {
@@ -180,6 +181,18 @@
   border: 1px solid rgba(var(--c-gold) / 0.52);
   border-radius: 50%;
   color: rgba(255, 207, 123, 0.82);
+  transition:
+    border-color 300ms ease,
+    color 300ms ease,
+    background-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.infoItem:hover .infoIcon {
+  border-color: rgba(var(--c-gold) / 0.85);
+  color: rgba(255, 235, 180, 1);
+  background-color: rgba(var(--c-gold) / 0.1);
+  box-shadow: 0 0 16px rgba(var(--c-gold) / 0.35);
 }
 
 .infoIcon svg {
@@ -190,6 +203,11 @@
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
+  transition: filter 300ms ease;
+}
+
+.infoItem:hover .infoIcon svg {
+  filter: drop-shadow(0 0 6px rgba(255, 207, 123, 0.65));
 }
 
 .infoItem h3 {
@@ -200,6 +218,16 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(255, 213, 138, 0.92);
+  transition:
+    color 300ms ease,
+    text-shadow 300ms ease;
+}
+
+.infoItem:hover h3 {
+  color: rgba(255, 235, 180, 1);
+  text-shadow:
+    0 0 12px rgba(213, 169, 91, 0.6),
+    0 0 24px rgba(213, 169, 91, 0.35);
 }
 
 .infoItem p {
@@ -208,6 +236,16 @@
   font-size: 0.96rem;
   line-height: 1.72;
   color: rgba(255, 255, 255, 0.7);
+  transition:
+    color 300ms ease,
+    text-shadow 300ms ease;
+}
+
+.infoItem:hover p {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow:
+    0 0 14px rgba(255, 255, 255, 0.3),
+    0 0 24px rgba(213, 169, 91, 0.2);
 }
 
 .scopeHeading {
