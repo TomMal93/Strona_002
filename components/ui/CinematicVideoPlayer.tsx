@@ -120,20 +120,34 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
         setVolume(video.volume)
       }
 
-      const onPlay = () => setIsPlaying(true)
+      const onPlay = () => {
+        setIsPlaying(true)
+        window.dispatchEvent(
+          new CustomEvent('app:video-play', { detail: { target: video } }),
+        )
+      }
       const onPause = () => setIsPlaying(false)
+
+      const onOtherVideoPlay = (e: Event) => {
+        const customEvent = e as CustomEvent<{ target: HTMLVideoElement }>
+        if (customEvent.detail?.target !== video && !video.paused) {
+          video.pause()
+        }
+      }
 
       video.addEventListener('timeupdate', onTimeUpdate)
       video.addEventListener('loadedmetadata', onLoadedMetadata)
       video.addEventListener('volumechange', onVolumeChange)
       video.addEventListener('play', onPlay)
       video.addEventListener('pause', onPause)
+      window.addEventListener('app:video-play', onOtherVideoPlay)
       return () => {
         video.removeEventListener('timeupdate', onTimeUpdate)
         video.removeEventListener('loadedmetadata', onLoadedMetadata)
         video.removeEventListener('volumechange', onVolumeChange)
         video.removeEventListener('play', onPlay)
         video.removeEventListener('pause', onPause)
+        window.removeEventListener('app:video-play', onOtherVideoPlay)
       }
     }, [])
 

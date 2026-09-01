@@ -72,11 +72,32 @@ export default function AboutMeVideo({ embedded = false, videoOverride }: AboutM
       setTimecode(`00:00/${formatTime(vid.duration)}`)
     }
 
+    const onPlay = () => {
+      setIsPlaying(true)
+      window.dispatchEvent(
+        new CustomEvent('app:video-play', { detail: { target: vid } }),
+      )
+    }
+    const onPause = () => setIsPlaying(false)
+
+    const onOtherVideoPlay = (e: Event) => {
+      const customEvent = e as CustomEvent<{ target: HTMLVideoElement }>
+      if (customEvent.detail?.target !== vid && !vid.paused) {
+        vid.pause()
+      }
+    }
+
     vid.addEventListener('timeupdate', onTimeUpdate)
     vid.addEventListener('loadedmetadata', onLoadedMetadata)
+    vid.addEventListener('play', onPlay)
+    vid.addEventListener('pause', onPause)
+    window.addEventListener('app:video-play', onOtherVideoPlay)
     return () => {
       vid.removeEventListener('timeupdate', onTimeUpdate)
       vid.removeEventListener('loadedmetadata', onLoadedMetadata)
+      vid.removeEventListener('play', onPlay)
+      vid.removeEventListener('pause', onPause)
+      window.removeEventListener('app:video-play', onOtherVideoPlay)
     }
   }, [isYouTube])
 

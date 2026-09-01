@@ -89,20 +89,34 @@ function SceneCard({ item, index, animate = true, className }: SceneCardProps) {
     if (!video) return
 
     const onPause = () => setIsPlaying(false)
-    const onPlay = () => setIsPlaying(true)
+    const onPlay = () => {
+      setIsPlaying(true)
+      window.dispatchEvent(
+        new CustomEvent('app:video-play', { detail: { target: video } }),
+      )
+    }
     const onEnded = () => {
       setIsPlaying(false)
       video.currentTime = 0
     }
 
+    const onOtherVideoPlay = (e: Event) => {
+      const customEvent = e as CustomEvent<{ target: HTMLVideoElement }>
+      if (customEvent.detail?.target !== video && !video.paused) {
+        video.pause()
+      }
+    }
+
     video.addEventListener('pause', onPause)
     video.addEventListener('play', onPlay)
     video.addEventListener('ended', onEnded)
+    window.addEventListener('app:video-play', onOtherVideoPlay)
 
     return () => {
       video.removeEventListener('pause', onPause)
       video.removeEventListener('play', onPlay)
       video.removeEventListener('ended', onEnded)
+      window.removeEventListener('app:video-play', onOtherVideoPlay)
     }
   }, [])
 

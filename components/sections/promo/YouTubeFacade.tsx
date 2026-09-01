@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useId } from 'react'
 import Image from 'next/image'
 import styles from '../Promo.module.css'
 
@@ -11,11 +11,29 @@ type YouTubeFacadeProps = {
 }
 
 export function YouTubeFacade({ videoId, title, index }: YouTubeFacadeProps) {
+  const instanceId = useId()
   const [loaded, setLoaded] = useState(false)
 
   const handleClick = useCallback(() => {
     setLoaded(true)
-  }, [])
+    window.dispatchEvent(
+      new CustomEvent('app:video-play', { detail: { target: instanceId } }),
+    )
+  }, [instanceId])
+
+  useEffect(() => {
+    const onOtherVideoPlay = (e: Event) => {
+      const customEvent = e as CustomEvent<{ target: unknown }>
+      if (customEvent.detail?.target !== instanceId) {
+        setLoaded(false)
+      }
+    }
+
+    window.addEventListener('app:video-play', onOtherVideoPlay)
+    return () => {
+      window.removeEventListener('app:video-play', onOtherVideoPlay)
+    }
+  }, [instanceId])
 
   const cornerMarks = (
     <>
