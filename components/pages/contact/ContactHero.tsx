@@ -38,6 +38,41 @@ const ClapperIcon = () => (
 const featureIcons = [CameraIcon, PinIcon, ClapperIcon]
 const featureDetails = ['Od ujęć po montaż', 'Dojadę, gdzie trzeba', 'Emocje, które zostają']
 
+function MonitorFigure({
+  className,
+  forwardRef,
+  priority = false,
+}: {
+  className?: string
+  forwardRef?: React.Ref<HTMLElement>
+  priority?: boolean
+}) {
+  const { hero } = siteContent.contactPage
+  return (
+    <figure ref={forwardRef} className={cn(styles.monitor, className)}>
+      <div className={styles.monitorBar} aria-hidden="true">
+        <span>H.265 / LOG3</span>
+        <span>00:00:00:00</span>
+      </div>
+      <div className={styles.monitorImage}>
+        <Image
+          src={hero.image}
+          alt={hero.imageAlt}
+          fill
+          priority={priority}
+          quality={88}
+          sizes="(max-width: 767px) 94vw, (max-width: 1199px) 52vw, 720px"
+        />
+        <span className={styles.monitorShade} aria-hidden="true" />
+      </div>
+      <figcaption className={styles.monitorBar}>
+        <span>Real people. Real stories.</span>
+        <span>4K / 25FPS</span>
+      </figcaption>
+    </figure>
+  )
+}
+
 function ContactIcon({ type }: { type: (typeof contactItems)[number]['icon'] }) {
   if (type === 'mail') {
     return (
@@ -120,6 +155,10 @@ export default function ContactHero() {
             </h1>
 
             <div className={styles.contactFrame}>
+              <div data-contact-hero-item className={styles.monitorMobileWrapper}>
+                <MonitorFigure priority />
+              </div>
+
               <p data-contact-hero-item className={styles.lead}>{hero.lead}</p>
 
               <div data-contact-hero-item className={styles.contactPanel}>
@@ -178,7 +217,7 @@ export default function ContactHero() {
                       <div key={feature.label} className={styles.feature}>
                         <Icon />
                         <strong>{feature.label}</strong>
-                        <span>{featureDetails[index]}</span>
+                        <span className={styles.featureDetail}>{featureDetails[index]}</span>
                       </div>
                     )
                   })}
@@ -187,27 +226,10 @@ export default function ContactHero() {
             </div>
           </div>
 
-          <figure ref={monitorRef} className={styles.monitor}>
-            <div className={styles.monitorBar} aria-hidden="true">
-              <span>H.265 / LOG3</span>
-              <span>00:00:00:00</span>
-            </div>
-            <div className={styles.monitorImage}>
-              <Image
-                src={hero.image}
-                alt={hero.imageAlt}
-                fill
-                priority
-                quality={88}
-                sizes="(max-width: 767px) 94vw, (max-width: 1199px) 52vw, 720px"
-              />
-              <span className={styles.monitorShade} aria-hidden="true" />
-            </div>
-            <figcaption className={styles.monitorBar}>
-              <span>Real people. Real stories.</span>
-              <span>4K / 25FPS</span>
-            </figcaption>
-          </figure>
+          <MonitorFigure
+            forwardRef={monitorRef}
+            className={styles.monitorDesktop}
+          />
         </div>
 
         <div className={styles.bottomStrip}>

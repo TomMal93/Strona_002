@@ -272,7 +272,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.45rem;
   margin-top: 1.1rem;
-  padding: 0.7rem 1.15rem 0.85rem;
+  padding: 0.65rem 1.15rem 0.75rem;
 }
 
 .feature {
@@ -283,7 +283,7 @@
   justify-content: flex-start;
   min-width: 0;
   height: 100%;
-  gap: 0.28rem;
+  gap: 0.35rem;
   padding: 0 0.4rem;
   text-align: center;
   text-transform: uppercase;
@@ -303,7 +303,6 @@
 .feature svg {
   width: 29px;
   height: 29px;
-  margin-bottom: 0.18rem;
   flex-shrink: 0;
   fill: none;
   stroke: rgb(231 207 149);
@@ -322,7 +321,7 @@
   white-space: nowrap;
 }
 
-.feature > span {
+.featureDetail {
   display: block;
   font-family: var(--font-ibm-plex-mono), monospace;
   font-size: 10.5px;
@@ -330,6 +329,10 @@
   letter-spacing: 0.02em;
   color: rgb(215 200 170 / 0.78);
   white-space: nowrap;
+}
+
+.monitorMobileWrapper {
+  display: none;
 }
 
 .monitor {
@@ -633,7 +636,7 @@
     font-size: 0.8rem;
   }
 
-  .feature > span {
+  .featureDetail {
     font-size: 0.52rem;
   }
 
@@ -649,8 +652,8 @@
     display: flex;
     min-height: auto;
     flex-direction: column;
-    gap: 3.25rem;
-    padding: 0 0 3.5rem;
+    gap: 0;
+    padding: 0 0 2.5rem;
   }
 
   .content {
@@ -658,11 +661,36 @@
   }
 
   .title {
+    align-items: center;
+    text-align: center;
     font-size: clamp(52px, 10vw, 64px);
   }
 
+  .monitorDesktop {
+    display: none;
+  }
+
+  .monitorMobileWrapper {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.85rem;
+  }
+
+  .monitorMobileWrapper .monitor {
+    width: 100%;
+    margin: 0;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .monitorBar {
+    min-height: 32px;
+    font-size: 10px;
+    padding: 0 0.75rem;
+  }
+
   .lead {
-    margin-top: 1.5rem;
+    margin-top: 0;
     font-size: 14px;
   }
 
@@ -699,68 +727,38 @@
   }
 
   .stepsPanel {
-    padding: 1.15rem 1.2rem;
-  }
-
-  .stepsList li {
-    min-height: 64px;
+    display: none;
   }
 
   .features {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.25rem;
-    padding: 0.75rem 0.3rem;
+    gap: 0.35rem;
+    padding: 0.85rem 0.35rem;
   }
 
   .feature {
-    gap: 0.18rem;
-    padding: 0 0.18rem;
+    gap: 0.25rem;
+    padding: 0 0.25rem;
   }
 
   .feature svg {
-    width: 22px;
-    height: 22px;
-    margin-bottom: 0.08rem;
+    width: 28px;
+    height: 28px;
+    margin-bottom: 0.1rem;
   }
 
   .feature strong {
-    font-size: 11.5px;
+    font-size: 14.5px;
+    letter-spacing: 0.06em;
   }
 
-  .feature > span {
-    font-size: 8px;
-  }
-
-  .monitor {
-    width: calc(100% - 1.25rem);
-  }
-
-  .monitorBar {
-    min-height: 34px;
-    font-size: 10px;
-  }
-
-  .bottomStrip {
-    grid-template-columns: 1fr auto;
-    gap: 1.5rem;
-    min-height: 92px;
-    margin-bottom: 1rem;
-    padding: 1.25rem;
-  }
-
-  .bottomStrip p {
-    font-size: 20px;
-  }
-
-  .bottomDivider,
-  .bottomStrip small {
+  .featureDetail {
     display: none;
   }
 
-  .socials {
-    gap: 1rem;
+  .bottomStrip {
+    display: none;
   }
-
 }
 
 /* ContactHero is the first page section and is globally zoomed to 80%
@@ -802,7 +800,7 @@
     font-size: 20.5px;
   }
 
-  .feature > span {
+  .featureDetail {
     /* 13px * 0.8 zoom = 10.4px */
     font-size: 13px;
   }
