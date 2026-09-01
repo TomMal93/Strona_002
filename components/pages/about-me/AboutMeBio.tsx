@@ -8,10 +8,39 @@ import styles from './AboutMeBio.module.css'
 import { useAboutMeBioAnimations } from './useAboutMeBioAnimations'
 
 function GearIcon({ index }: { index: number }) {
-  if (index === 0) return <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 10h7l2-3h6l2 3h7v16H4V10Z" /><circle cx="16" cy="18" r="5" /></svg>
-  if (index === 1) return <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="11" y="4" width="10" height="17" rx="5" /><path d="M7 16v1a9 9 0 0 0 18 0v-1M16 26v3M11 29h10" /></svg>
-  if (index === 2) return <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="8" cy="8" r="4" /><circle cx="24" cy="8" r="4" /><circle cx="8" cy="24" r="4" /><circle cx="24" cy="24" r="4" /><path d="m11 11 10 10m0-10L11 21M13 16h6" /></svg>
-  return <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6" /><path d="M16 2v5M16 25v5M2 16h5M25 16h5M6 6l4 4M22 22l4 4M26 6l-4 4M10 22l-4 4" /></svg>
+  if (index === 0) {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 7h4l2-3h6l2 3h4v13H3V7Z" />
+        <circle cx="12" cy="13.5" r="3.5" />
+      </svg>
+    )
+  }
+  if (index === 1) {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="9" y="3" width="6" height="12" rx="3" />
+        <path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8" />
+      </svg>
+    )
+  }
+  if (index === 2) {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="6" cy="6" r="3" />
+        <circle cx="18" cy="6" r="3" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="18" cy="18" r="3" />
+        <path d="m8.5 8.5 7 7m0-7-7 7M10 12h4" />
+      </svg>
+    )
+  }
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M19.07 4.93l-2.12 2.12M7.05 16.95l-2.12 2.12" />
+    </svg>
+  )
 }
 
 export default function AboutMeBio() {
@@ -99,7 +128,17 @@ export default function AboutMeBio() {
             <ul className={styles.gearList}>
               {profile.gear.map((item, index) => {
                 const [label, detail] = item.split(' — ')
-                return <li key={item} className={styles.gearItem}><span className={styles.gearIcon}><GearIcon index={index} /></span><span><strong>{label}</strong>{detail && <small>{detail}</small>}</span></li>
+                return (
+                  <li key={item} className={styles.gearItem}>
+                    <span className={styles.gearIcon}>
+                      <GearIcon index={index} />
+                    </span>
+                    <div>
+                      <strong>{label}</strong>
+                      {detail && <span>{detail}</span>}
+                    </div>
+                  </li>
+                )
               })}
             </ul>
           </section>

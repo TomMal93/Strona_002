@@ -36,12 +36,27 @@ function Tags({ items, label }: { items: string[]; label: string }) {
 
 function MissionIcon({ type }: { type: 'mountain' | 'camera' | 'story' }) {
   if (type === 'mountain') {
-    return <svg viewBox="0 0 48 40" aria-hidden="true"><path d="m3 35 13-24 8 13 5-8 16 19H3Z" /><path d="m12 19 5 5 4-5" /></svg>
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m2 20 7-11 5 7 4-5 4 9H2Z" />
+        <path d="m8 11 3 4 3-4" />
+      </svg>
+    )
   }
   if (type === 'camera') {
-    return <svg viewBox="0 0 48 40" aria-hidden="true"><path d="M5 13h10l3-5h13l3 5h9v22H5V13Z" /><circle cx="24" cy="24" r="8" /><path d="M38 18h1" /></svg>
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 7h4l2-3h6l2 3h4v13H3V7Z" />
+        <circle cx="12" cy="13.5" r="3.5" />
+      </svg>
+    )
   }
-  return <svg viewBox="0 0 48 40" aria-hidden="true"><rect x="4" y="8" width="40" height="27" rx="3" /><path d="m20 16 11 6.5L20 29V16Z" /></svg>
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m10 9 6 3-6 3V9Z" />
+    </svg>
+  )
 }
 
 export default function WhyIDoThis() {
@@ -153,13 +168,21 @@ export default function WhyIDoThis() {
                   <p className={styles.microLabel}>To moja misja</p>
                   <div className={styles.missionGrid}>
                     {[
-                      ['mountain', 'Prawdziwa atmosfera'],
-                      ['camera', 'Autentyczne chwile'],
-                      ['story', 'Opowieść w obrazie'],
-                    ].map(([type, label], index) => (
-                      <div key={label} data-why-feature-card data-why-feature-row={index + 6} className={styles.missionItem}>
-                        <MissionIcon type={type as 'mountain' | 'camera' | 'story'} />
-                        <span>{label}</span>
+                      { type: 'mountain', title: 'Atmosfera', subtitle: 'Prawdziwy klimat' },
+                      { type: 'camera', title: 'Autentyczność', subtitle: 'Prawdziwe chwile' },
+                      { type: 'story', title: 'Opowieść', subtitle: 'Historia w obrazie' },
+                    ].map((item, index) => (
+                      <div
+                        key={item.title}
+                        data-why-feature-card
+                        data-why-feature-row={index + 6}
+                        className={styles.missionItem}
+                      >
+                        <MissionIcon type={item.type as 'mountain' | 'camera' | 'story'} />
+                        <div>
+                          <strong>{item.title}</strong>
+                          <span>{item.subtitle}</span>
+                        </div>
                       </div>
                     ))}
                   </div>

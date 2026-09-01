@@ -249,77 +249,100 @@
   color: rgb(239 204 154 / 0.72) !important;
 }
 
+.missionBlock {
+  margin-top: clamp(2.75rem, 4vw, 3.5rem);
+  background: transparent;
+}
+
+.missionBlock > .microLabel {
+  margin: 0 0 0.85rem;
+  padding: 0;
+  color: rgb(220 174 108 / 0.58);
+  font-size: 0.65rem;
+}
+
 .missionGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
 }
 
-.missionBlock {
-  margin-top: 2.5rem;
-  background: transparent;
-}
-
-@media (max-width: 1749px) {
-  .missionBlock { display: none; }
-}
-
-@media (min-width: 768px) and (max-width: 1749px) {
-  .sceneThree > .videoFrame {
-    display: grid;
-    grid-template-rows: auto minmax(0, 1fr) auto;
-    align-self: stretch;
-  }
-
-  .sceneThree > .videoFrame > [data-why-embedded-video] {
-    min-height: 0;
-    height: 100%;
-  }
-}
-
-.missionBlock > .microLabel {
-  margin: 2rem 0 0.8rem;
-  padding: 0;
-  color: rgb(220 174 108 / 0.58);
-  font-size: 0.68rem;
-}
-
 .missionItem {
-  display: grid;
-  justify-items: center;
-  gap: 0.75rem;
-  padding: 1.2rem 0.7rem 0.35rem;
-  color: rgb(231 193 137 / 0.64);
-  font-size: 0.57rem;
-  line-height: 1.5;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.75rem 0.4rem 0.5rem;
   text-align: center;
-  transition: color 240ms ease;
+  cursor: default;
+  transition:
+    background 300ms ease,
+    border-color 300ms ease;
 }
 
 .missionItem + .missionItem {
   border-left: 1px solid rgb(var(--c-gold) / 0.14);
 }
 
-.missionItem:hover {
-  color: rgb(244 211 162 / 0.88);
-}
-
 .missionItem svg {
-  width: 2.8rem;
-  height: 2.8rem;
-  padding: 0.42rem;
+  width: 1.95rem;
+  height: 1.95rem;
   fill: none;
-  stroke: rgb(var(--c-gold) / 0.62);
-  stroke-width: 1.4;
-  border-radius: 50%;
-  background: rgb(var(--c-gold) / 0.055);
-  transition: stroke 240ms ease, transform 240ms ease, background 240ms ease;
+  stroke: rgb(225 191 134 / 0.82);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.2;
+  transition:
+    stroke 300ms ease,
+    filter 300ms ease,
+    transform 300ms ease;
 }
 
 .missionItem:hover svg {
-  stroke: rgb(241 203 146 / 0.9);
-  background: rgb(var(--c-gold) / 0.11);
+  stroke: rgb(255 225 165 / 1);
+  filter: drop-shadow(0 0 8px rgb(225 191 134 / 0.6));
   transform: translateY(-2px);
+}
+
+.missionItem strong,
+.missionItem span {
+  display: block;
+  text-transform: uppercase;
+  transition:
+    color 300ms ease,
+    text-shadow 300ms ease;
+}
+
+.missionItem strong {
+  color: rgb(225 191 134 / 0.82);
+  font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  line-height: 1.1;
+}
+
+.missionItem:hover strong {
+  color: rgb(255 225 165 / 1);
+  text-shadow:
+    0 0 12px rgb(213 169 91 / 0.6),
+    0 0 24px rgb(213 169 91 / 0.35);
+}
+
+.missionItem span {
+  margin-top: 0.18rem;
+  color: rgb(215 200 170 / 0.78);
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+}
+
+.missionItem:hover span {
+  color: rgb(255 245 220 / 0.95);
+  text-shadow: 0 0 10px rgb(213 169 91 / 0.3);
 }
 
 .directorNotes {
@@ -456,13 +479,89 @@
   .tagsBlock,
   .directorNotes { order: 5; }
   .directorNotes { margin-top: 0; }
-  .missionBlock { order: 6; }
+  .missionBlock { order: 6; margin-top: 2.25rem; }
   .sceneCopy h3 { font-size: 32px; }
   .sceneThree h3 { white-space: normal; }
   .sceneHeading { margin-bottom: 1.65rem; }
   .sceneRule { width: 100%; }
   .timelineDot { left: -0.02rem; }
-  .missionItem { padding-inline: 0.35rem; font-size: 0.52rem; }
+  .missionGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .missionItem {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.6rem 1fr;
+    align-items: center;
+    min-height: 3.7rem;
+    gap: 0.75rem;
+    padding: 0.45rem 1.8rem 0.45rem 0.85rem;
+    border: 1px solid rgb(var(--c-gold) / 0.19);
+    border-radius: 0.4rem;
+    background: rgb(255 255 255 / 0.012);
+    text-align: left;
+  }
+
+  .missionItem + .missionItem {
+    border-left: 1px solid rgb(var(--c-gold) / 0.19);
+  }
+
+  .missionItem:hover {
+    border-color: rgb(var(--c-gold) / 0.45);
+    background: rgb(var(--c-gold) / 0.04);
+    box-shadow: 0 0 20px rgb(var(--c-gold) / 0.12);
+  }
+
+  .missionItem::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0.85rem;
+    width: 0.32rem;
+    height: 0.32rem;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: rgb(231 191 126 / 0.9);
+    transition:
+      background 300ms ease,
+      box-shadow 300ms ease;
+  }
+
+  .missionItem:hover::after {
+    background: rgb(255 225 165 / 1);
+    box-shadow: 0 0 8px rgb(231 191 126 / 0.8);
+  }
+
+  .missionItem svg {
+    width: 1.85rem;
+    height: 1.85rem;
+    stroke: rgb(231 191 126 / 0.9);
+    stroke-width: 1.2;
+    transform: none;
+  }
+
+  .missionItem:hover svg {
+    stroke: rgb(255 225 165 / 1);
+    filter: drop-shadow(0 0 6px rgb(231 191 126 / 0.6));
+    transform: none;
+  }
+
+  .missionItem strong {
+    color: rgb(231 191 126 / 0.9);
+    font-size: 1.02rem;
+    letter-spacing: 0.12em;
+  }
+
+  .missionItem span {
+    margin-top: 0.12rem;
+    color: rgb(215 200 170 / 0.78);
+    font-size: 0.52rem;
+    letter-spacing: 0.12em;
+  }
+
   .quoteFooter {
     display: flex;
     flex-direction: column;
@@ -509,12 +608,19 @@
   }
 
   .tags span,
-  .missionItem,
   .frameTop,
   .frameBottom,
   .noteRow > span {
     /* 15.625px * 0.64 zoom = 10px */
     font-size: 15.625px;
+  }
+
+  .missionItem strong {
+    font-size: 16.4px;
+  }
+
+  .missionItem span {
+    font-size: 8.2px;
   }
 
   .noteRow strong {
@@ -561,12 +667,19 @@
   }
 
   .tags span,
-  .missionItem,
   .frameTop,
   .frameBottom,
   .noteRow > span {
     /* 12.5px * 0.8 zoom = 10px */
     font-size: 12.5px;
+  }
+
+  .missionItem strong {
+    font-size: 13.5px;
+  }
+
+  .missionItem span {
+    font-size: 6.75px;
   }
 
   .quoteFooter {
