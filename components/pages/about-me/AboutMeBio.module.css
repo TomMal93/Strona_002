@@ -50,8 +50,17 @@
 .accentRule { display: block; width: 4.8rem; height: 2px; margin-top: 1.7rem; background: rgb(var(--c-gold) / .62); }
 
 .infoGrid { display: grid; grid-template-columns: 1fr 1.08fr; margin-top: 3.15rem; }
-.infoBlock { min-width: 0; padding-right: 2.3rem; }
-.infoBlock + .infoBlock { border-left: 1px solid rgb(var(--c-gold) / .34); padding: 0 0 0 2.3rem; }
+.infoBlock { position: relative; min-width: 0; padding-right: 2.3rem; }
+.infoBlock + .infoBlock { padding: 0 0 0 2.3rem; }
+.infoBlock + .infoBlock::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgb(var(--c-gold) / .2) 30%, rgb(var(--c-gold) / .2) 70%, transparent);
+}
 .infoTitle { display: flex; align-items: center; gap: .8rem; margin: 0 0 1.2rem; font: 400 clamp(1rem, 1.2vw, 1.3rem)/1 var(--font-bebas, 'Bebas Neue', sans-serif); letter-spacing: .14em; text-transform: uppercase; color: rgb(222 181 111 / .86); }
 .detailList { display: grid; gap: .72rem; margin: 0; padding: 0; list-style: none; }
 .detailList li { position: relative; padding-left: 1.25rem; font: 400 clamp(.76rem, .78vw, .87rem)/1.65 'Roboto Mono', monospace; color: rgb(232 229 220 / .56); }
@@ -96,7 +105,14 @@
 @media (max-width: 74rem) {
   .identityGrid { grid-template-columns: minmax(0, 1fr) minmax(23rem, .9fr); gap: 2.8rem; }
   .infoGrid { grid-template-columns: 1fr; gap: 2rem; }
-  .infoBlock + .infoBlock { border-left: 0; border-top: 1px solid rgb(var(--c-gold) / .25); padding: 2rem 0 0; }
+  .infoBlock + .infoBlock { padding: 2rem 0 0; }
+  .infoBlock + .infoBlock::before {
+    right: 0;
+    bottom: auto;
+    width: auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(var(--c-gold) / .2) 30%, rgb(var(--c-gold) / .2) 70%, transparent);
+  }
   .gearItem { padding-inline: .65rem; }
   .gearIcon { flex-basis: 1.9rem; width: 1.9rem; height: 1.9rem; }
 }
@@ -115,7 +131,14 @@
   .introMiddle { font-size: .8rem; letter-spacing: .07em; }
   .introBody { font-size: .8rem; line-height: 1.8; }
   .infoBlock { padding: 0 1rem 0 0; }
-  .infoBlock + .infoBlock { border-top: 0; border-left: 1px solid rgb(var(--c-gold) / .25); padding: 0 0 0 1rem; }
+  .infoBlock + .infoBlock { padding: 0 0 0 1rem; }
+  .infoBlock + .infoBlock::before {
+    right: auto;
+    bottom: 0;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, transparent, rgb(var(--c-gold) / .2) 30%, rgb(var(--c-gold) / .2) 70%, transparent);
+  }
   .infoTitle { font-size: 1rem; line-height: 1.15; }
   .detailList li { font-size: .78rem; }
   .statsBlock { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 0; padding-block: 1.5rem; }
@@ -235,4 +258,3 @@
     font-size: 20px;
   }
 }
-
