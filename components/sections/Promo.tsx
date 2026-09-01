@@ -322,7 +322,6 @@ export default function Promo() {
         </div>
 
         <blockquote className={styles.promoQuote} data-promo-quote>
-          <span data-promo-line className={styles.quoteLine} aria-hidden="true" />
           <p>Najsilniejszy przekaz nie mówi, co myśleć. Sprawia, że zaczynasz czuć.</p>
         </blockquote>
       </div>

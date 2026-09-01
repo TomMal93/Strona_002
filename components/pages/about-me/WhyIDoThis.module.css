@@ -93,7 +93,7 @@
   display: grid;
   grid-template-columns: minmax(18rem, 0.78fr) minmax(0, 1.55fr);
   gap: clamp(2.5rem, 5vw, 5.25rem);
-  align-items: center;
+  align-items: stretch;
   padding-left: 2.9rem;
 }
 
@@ -103,7 +103,7 @@
   gap: clamp(1.25rem, 2.5vw, 2.5rem);
   align-items: stretch;
 }
-.sceneCopy { min-width: 0; }
+.sceneCopy { min-width: 0; align-self: center; }
 
 .sceneHeading {
   display: flex;
@@ -188,6 +188,8 @@
 
 .frame {
   position: relative;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0.45rem;
   border: 1px solid rgb(var(--c-gold) / 0.2);
@@ -197,6 +199,7 @@
 
 .imageStage {
   position: relative;
+  flex: 1 1 auto;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: #090909;

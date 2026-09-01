@@ -538,8 +538,7 @@
     padding-top: 1.25rem;
   }
 
-  .processLine,
-  .quoteLine {
+  .processLine {
     position: absolute;
     right: 0;
     left: 0;
@@ -596,14 +595,14 @@
     height: 0.38rem;
     transform: translateY(-50%);
     border-radius: 50%;
-    background: rgb(224 181 112 / 0.88);
+    background: rgb(231 207 149);
   }
 
   .processItem svg {
     width: 2.35rem;
     height: 2.35rem;
     fill: none;
-    stroke: rgb(199 154 88 / 0.72);
+    stroke: rgb(231 207 149);
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 1.2;
@@ -616,7 +615,7 @@
   }
 
   .processItem strong {
-    color: rgb(226 184 117 / 0.86);
+    color: rgb(238 222 178);
     font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
     font-size: 1.18rem;
     font-weight: 400;
@@ -625,7 +624,7 @@
 
   .processItem span {
     margin-top: 0.18rem;
-    color: rgb(197 154 91 / 0.52);
+    color: rgb(215 200 170 / 0.78);
     font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
     font-size: 0.58rem;
     letter-spacing: 0.13em;
@@ -638,29 +637,11 @@
   .promoQuote {
     position: relative;
     display: block;
-    margin: 2.8rem 0 0;
-    padding: 2rem 0.4rem 0;
+    margin: 1.2rem 0 0;
+    padding: 0.8rem 0.4rem 0;
     color: rgb(204 164 100 / 0.6);
   }
 
-  .quoteLine {
-    top: 0;
-    background: linear-gradient(90deg, transparent, rgb(var(--c-gold) / 0.34) 10%, rgb(var(--c-gold) / 0.34) 90%, transparent);
-  }
-
-  .promoQuote::before {
-    content: '\201C';
-    position: absolute;
-    top: -0.7rem;
-    left: 50%;
-    padding-inline: 0.75rem;
-    transform: translateX(-50%);
-    background: rgb(13 13 13);
-    color: rgb(224 181 112 / 0.8);
-    font-family: Georgia, serif;
-    font-size: 2.4rem;
-    line-height: 1;
-  }
 
   .promoQuote p {
     margin: 0;
@@ -841,8 +822,7 @@
     padding: 2.1rem clamp(5rem, 11vw, 12rem) 1.1rem;
   }
 
-  .processLine,
-  .quoteLine {
+  .processLine {
     position: absolute;
     right: 0;
     left: 0;
@@ -889,7 +869,7 @@
     width: 2.7rem;
     height: 2.7rem;
     fill: none;
-    stroke: rgb(196 151 86 / 0.65);
+    stroke: rgb(231 207 149);
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 1.2;
@@ -902,7 +882,7 @@
   }
 
   .processItem strong {
-    color: rgb(218 177 111 / 0.76);
+    color: rgb(238 222 178);
     font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
     font-size: 1.4rem;
     font-weight: 400;
@@ -911,7 +891,7 @@
 
   .processItem span {
     margin-top: 0.25rem;
-    color: rgb(194 151 88 / 0.48);
+    color: rgb(215 200 170 / 0.78);
     font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
     font-size: 0.76rem;
     letter-spacing: 0.13em;
@@ -932,15 +912,11 @@
     align-items: center;
     justify-content: center;
     min-height: 7rem;
-    margin-top: 2.5rem;
-    padding: 1.25rem 2rem;
+    margin-top: 1rem;
+    padding: 0.75rem 2rem;
     color: rgb(204 164 100 / 0.52);
   }
 
-  .quoteLine {
-    top: 0;
-    background: rgb(var(--c-gold) / 0.13);
-  }
 
   .promoQuote p {
     margin: 0;

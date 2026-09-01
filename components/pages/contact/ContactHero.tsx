@@ -103,6 +103,7 @@ export default function ContactHero() {
   const sectionRef = useRef<HTMLElement>(null!)
   const contentRef = useRef<HTMLDivElement>(null!)
   const monitorRef = useRef<HTMLElement>(null!)
+  const bottomStripRef = useRef<HTMLDivElement>(null!)
   const { features } = siteContent.cta
   const { hero } = siteContent.contactPage
   const { contact } = siteContent.aboutMe
@@ -117,24 +118,46 @@ export default function ContactHero() {
     if (prefersReducedMotion) return
 
     const ctx = gsap.context(() => {
-      const contentItems = contentRef.current.querySelectorAll('[data-contact-hero-item]')
+      const title = contentRef.current.querySelector('[data-contact-title]')
+      const frame = contentRef.current.querySelector('[data-contact-frame]')
+      const lead = contentRef.current.querySelector('[data-contact-lead]')
+      const panel = contentRef.current.querySelector('[data-contact-panel]')
+      const featureItems = contentRef.current.querySelectorAll('[data-contact-feature]')
+      const strip = bottomStripRef.current
+      const stripChildren = strip ? Array.from(strip.children) : []
 
-      gsap.from(contentItems, {
-        y: 24,
-        autoAlpha: 0,
-        duration: 0.7,
-        ease: 'power3.out',
-        stagger: 0.08,
-        delay: 0.18,
+      // Initial hidden states
+      const shells = [title, frame, strip].filter(Boolean) as Element[]
+      gsap.set(shells, { autoAlpha: 0, y: 24 })
+
+      const innerContent = [lead, panel, ...Array.from(featureItems)].filter(Boolean) as Element[]
+      gsap.set(innerContent, { autoAlpha: 0, y: 16 })
+      gsap.set(stripChildren, { autoAlpha: 0, y: 10 })
+      if (monitorRef.current) gsap.set(monitorRef.current, { autoAlpha: 0, x: 28 })
+
+      const tl = gsap.timeline({ delay: 0.15 })
+
+      // Beat 1 — header, frame, bottom strip
+      tl.to(shells, {
+        autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out',
       })
 
-      gsap.from(monitorRef.current, {
-        x: 28,
-        autoAlpha: 0,
-        duration: 1,
-        ease: 'power3.out',
-        delay: 0.28,
-      })
+      // Beat 2 — text, buttons, benefits, bottom strip content, image
+      tl.to(innerContent, {
+        autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out',
+      }, '-=0.15')
+
+      if (stripChildren.length) {
+        tl.to(stripChildren, {
+          autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out',
+        }, '<')
+      }
+
+      if (monitorRef.current) {
+        tl.to(monitorRef.current, {
+          autoAlpha: 1, x: 0, duration: 0.8, ease: 'power3.out',
+        }, '<')
+      }
     }, sectionRef)
 
     return () => ctx.revert()
@@ -149,19 +172,19 @@ export default function ContactHero() {
       <div className={styles.shell}>
         <div className={styles.mainGrid}>
           <div ref={contentRef} className={styles.content}>
-            <h1 id="contact-heading" data-contact-hero-item className={styles.title}>
+            <h1 id="contact-heading" data-contact-title className={styles.title}>
               <span>{hero.titleLine1}</span>
               <span>{hero.titleLine2}</span>
             </h1>
 
-            <div className={styles.contactFrame}>
-              <div data-contact-hero-item className={styles.monitorMobileWrapper}>
+            <div data-contact-frame className={styles.contactFrame}>
+              <div className={styles.monitorMobileWrapper}>
                 <MonitorFigure priority />
               </div>
 
-              <p data-contact-hero-item className={styles.lead}>{hero.lead}</p>
+              <p data-contact-lead className={styles.lead}>{hero.lead}</p>
 
-              <div data-contact-hero-item className={styles.contactPanel}>
+              <div data-contact-panel className={styles.contactPanel}>
                 <div className={styles.contactActionsRow}>
                   <div className={styles.contactGrid}>
                     {contactItems.map((item, index) => {
@@ -214,7 +237,7 @@ export default function ContactHero() {
                   {features.map((feature, index) => {
                     const Icon = featureIcons[index]
                     return (
-                      <div key={feature.label} className={styles.feature}>
+                      <div key={feature.label} data-contact-feature className={styles.feature}>
                         <Icon />
                         <strong>{feature.label}</strong>
                         <span className={styles.featureDetail}>{featureDetails[index]}</span>
@@ -232,7 +255,7 @@ export default function ContactHero() {
           />
         </div>
 
-        <div className={styles.bottomStrip}>
+        <div ref={bottomStripRef} className={styles.bottomStrip}>
           <p>Od pierwszej wiadomości<br />do gotowego filmu.</p>
           <span className={styles.bottomDivider} aria-hidden="true" />
           <small>Dobre historie<br />zaczynają się od rozmowy.</small>

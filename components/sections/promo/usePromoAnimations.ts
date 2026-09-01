@@ -221,9 +221,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
         const processLines = promoProcess
           ? Array.from(promoProcess.querySelectorAll('[data-promo-line]'))
           : []
-        const quoteLines = promoQuote
-          ? Array.from(promoQuote.querySelectorAll('[data-promo-line]'))
-          : []
+
 
         if (prefersReducedMotion) {
           gsap.set([titleRef.current, subtitleRef.current, videoFrameRef.current], { autoAlpha: 1, y: 0 })
@@ -359,11 +357,7 @@ export function usePromoAnimations(refs: PromoAnimationRefs): void {
             autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out',
           }, '-=0.3')
         }
-        if (quoteLines.length) {
-          tl.to(quoteLines, {
-            scaleX: 1, duration: 0.5, ease: 'power2.out',
-          }, '-=0.45')
-        }
+
 
         // 10. Legacy mobile timeline
         if (bottomLine) {
