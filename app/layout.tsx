@@ -32,8 +32,8 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: 'swap',
 })
 
-const siteUrl    = process.env.SITE_URL    ?? 'https://example.com'
-const authorName = process.env.AUTHOR_NAME ?? 'Autor'
+const siteUrl    = process.env.SITE_URL    ?? 'https://maleszyk.media'
+const authorName = process.env.AUTHOR_NAME ?? 'Maleszyk Media'
 const heroImagePath = '/images/Hero.webp'
 
 export const metadata: Metadata = {

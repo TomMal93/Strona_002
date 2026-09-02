@@ -2,10 +2,36 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { siteContent } from '@/lib/site-content'
 
+const pageTitle = 'Polityka prywatności i RODO | Maleszyk Media'
+const pageDescription =
+  'Zasady przetwarzania danych osobowych, prawa użytkowników oraz informacje o technologiach używanych w serwisie Maleszyk Media.'
+
 export const metadata: Metadata = {
-  title: 'Polityka Prywatności i RODO | Maleszyk Media',
-  description:
-    'Zasady przetwarzania danych osobowych (RODO), prawa użytkowników oraz polityka plików cookies w serwisie Maleszyk.Media.',
+  title: { absolute: pageTitle },
+  description: pageDescription,
+  alternates: {
+    canonical: '/polityka-prywatnosci',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'pl_PL',
+    url: '/polityka-prywatnosci',
+    siteName: 'Maleszyk Media',
+    title: pageTitle,
+    description: pageDescription,
+    images: [
+      {
+        url: '/images/Hero.webp',
+        alt: 'Maleszyk Media — fotografia i film',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: pageTitle,
+    description: pageDescription,
+    images: ['/images/Hero.webp'],
+  },
 }
 
 export default function PrivacyPolicyPage() {
@@ -26,6 +52,9 @@ export default function PrivacyPolicyPage() {
 
           <p className="mx-auto mt-3.5 max-w-xl font-mono text-xs leading-relaxed text-white/50 sm:text-[13px]">
             Zasady ochrony prywatności, celów przetwarzania danych osobowych oraz praw przysługujących odwiedzającym i klientom Maleszyk.Media.
+          </p>
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-wider text-khaki/80">
+            Ostatnia aktualizacja: 2 września 2026 r.
           </p>
         </div>
       </section>
@@ -105,7 +134,7 @@ export default function PrivacyPolicyPage() {
               </h2>
 
               <p className="mt-3 font-inter text-sm leading-relaxed text-warm-white/80 sm:text-base">
-                Dane osobowe przekazujesz dobrowolnie podczas bezpośredniego kontaktu lub nawiązywania współpracy:
+                Dane osobowe pozyskujemy bezpośrednio od Ciebie podczas kontaktu lub nawiązywania współpracy:
               </p>
 
               <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -129,6 +158,12 @@ export default function PrivacyPolicyPage() {
                     Dane niezbędne do zawarcia umowy oraz wystawienia rachunku lub faktury (w tym NIP, adres firmy/zamieszkania).
                   </p>
                 </div>
+              </div>
+
+              <div className="mt-5 rounded-micro border border-warm-gray/10 bg-black-deep/50 p-4 font-inter text-xs leading-relaxed text-warm-white/75 sm:text-sm">
+                <p>
+                  Podanie danych na etapie zapytania jest dobrowolne, ale bez danych kontaktowych i informacji o projekcie możemy nie być w stanie odpowiedzieć ani przygotować wyceny. Dane wymagane do zawarcia i wykonania umowy oraz wystawienia dokumentu księgowego są niezbędne do współpracy; ich niepodanie może uniemożliwić zawarcie lub realizację umowy.
+                </p>
               </div>
             </div>
           </article>
@@ -236,25 +271,33 @@ export default function PrivacyPolicyPage() {
                   SEKCJA 04 · ODBIORCY
                 </span>
                 <h2 className="mt-2 font-bebas text-2xl uppercase tracking-wide text-warm-white sm:text-3xl">
-                  Komu powierzamy dane?
+                  Kto może otrzymać dane?
                 </h2>
                 <p className="mt-3 font-inter text-xs leading-relaxed text-warm-white/75 sm:text-sm">
-                  Dane przekazujemy wyłącznie zaufanym partnerom technologicznym na podstawie umów powierzenia:
+                  Dane mogą otrzymywać podmioty wspierające Administratora oraz inni uprawnieni odbiorcy, wyłącznie w zakresie niezbędnym do danego celu:
                 </p>
                 <ul className="mt-4 space-y-2 font-inter text-xs text-warm-white/70 sm:text-sm">
                   <li className="flex items-start gap-2">
                     <span className="text-khaki">›</span>
-                    <span>Dostawcy usług hostingowych i serwerów pocztowych</span>
+                    <span>Dostawcy hostingu, poczty elektronicznej i usług IT — jako podmioty przetwarzające na podstawie umowy powierzenia, gdy jest ona wymagana</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-khaki">›</span>
-                    <span>Biuro księgowe rozliczające transakcje</span>
+                    <span>Biuro księgowe, banki, operatorzy płatności oraz doradcy prawni — zgodnie z zakresem świadczonych usług i ich rolą prawną</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-khaki">›</span>
-                    <span>Uprawnione organy państwowe (na wezwanie prawne)</span>
+                    <span>Google Ireland Ltd. (YouTube) oraz dostawcy wybranego przez Ciebie komunikatora lub serwisu społecznościowego</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-khaki">›</span>
+                    <span>Uprawnione organy publiczne — wyłącznie wtedy, gdy obowiązek udostępnienia wynika z prawa</span>
                   </li>
                 </ul>
+
+                <p className="mt-4 font-inter text-xs leading-relaxed text-warm-white/70 sm:text-sm">
+                  Niektórzy dostawcy technologiczni mogą przetwarzać dane poza Europejskim Obszarem Gospodarczym. W takim przypadku transfer odbywa się na podstawie mechanizmu dopuszczonego przez RODO, w szczególności decyzji stwierdzającej odpowiedni stopień ochrony albo standardowych klauzul umownych Komisji Europejskiej. Zakres transferu zależy od użytej usługi i wybranego kanału kontaktu.
+                </p>
               </div>
             </article>
 
@@ -279,11 +322,15 @@ export default function PrivacyPolicyPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-khaki">›</span>
-                    <span><strong>Księgowość:</strong> 5 lat od końca roku obrachunkowego</span>
+                    <span><strong>Umowy i realizacja zleceń:</strong> przez czas wykonywania umowy, a następnie do upływu terminów przedawnienia roszczeń</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-khaki">›</span>
-                    <span><strong>Portfolio:</strong> do czasu wycofania zgody</span>
+                    <span><strong>Dokumentacja podatkowa:</strong> co do zasady 5 lat od końca roku kalendarzowego, w którym upłynął termin płatności podatku; okres może ulec wydłużeniu w przypadkach przewidzianych prawem</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-khaki">›</span>
+                    <span><strong>Portfolio:</strong> do czasu wycofania zgody lub wcześniejszego osiągnięcia celu przetwarzania</span>
                   </li>
                 </ul>
               </div>
@@ -309,7 +356,7 @@ export default function PrivacyPolicyPage() {
               </h2>
 
               <p className="mt-3 font-inter text-sm leading-relaxed text-warm-white/80 sm:text-base">
-                W każdym momencie przysługuje Ci pełen zestaw praw gwarantowanych przez unijne rozporządzenie:
+                W zależności od podstawy i okoliczności przetwarzania możesz skorzystać z praw przewidzianych w RODO:
               </p>
 
               <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -340,11 +387,38 @@ export default function PrivacyPolicyPage() {
                     Możesz w dowolnym momencie wnieść sprzeciw wobec przetwarzania opartego na prawnie uzasadnionym interesie.
                   </p>
                 </div>
+
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/60 p-4">
+                  <span className="font-bebas text-lg uppercase tracking-wide text-khaki">Prawo do ograniczenia przetwarzania</span>
+                  <p className="mt-1 font-inter text-xs text-warm-white/70">
+                    W przypadkach wskazanych w RODO możesz żądać czasowego ograniczenia sposobu wykorzystywania danych.
+                  </p>
+                </div>
+
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/60 p-4">
+                  <span className="font-bebas text-lg uppercase tracking-wide text-khaki">Prawo do przenoszenia danych</span>
+                  <p className="mt-1 font-inter text-xs text-warm-white/70">
+                    Gdy przetwarzanie odbywa się na podstawie zgody lub umowy i w sposób zautomatyzowany, możesz otrzymać przekazane dane w ustrukturyzowanym formacie.
+                  </p>
+                </div>
+
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/60 p-4 sm:col-span-2">
+                  <span className="font-bebas text-lg uppercase tracking-wide text-khaki">Prawo do wycofania zgody</span>
+                  <p className="mt-1 font-inter text-xs text-warm-white/70">
+                    Zgodę możesz wycofać w dowolnym momencie. Nie wpływa to na zgodność z prawem przetwarzania dokonanego przed jej wycofaniem.
+                  </p>
+                </div>
               </div>
 
               <div className="mt-5 rounded-micro border border-warm-gray/10 bg-black-deep/40 p-4 font-inter text-xs text-warm-gray/80 sm:text-sm">
                 <p>
                   Jeżeli uważasz, że Twoje dane są przetwarzane niezgodnie z prawem, przysługuje Ci prawo do wniesienia skargi do organu nadzorczego: <strong>Prezes Urzędu Ochrony Danych Osobowych (UODO)</strong>, ul. Stawki 2, 00-193 Warszawa.
+                </p>
+              </div>
+
+              <div className="mt-3 rounded-micro border border-warm-gray/10 bg-black-deep/40 p-4 font-inter text-xs text-warm-gray/80 sm:text-sm">
+                <p>
+                  Administrator nie podejmuje wobec Ciebie decyzji opartych wyłącznie na zautomatyzowanym przetwarzaniu, które wywoływałyby skutki prawne lub w podobny sposób istotnie na Ciebie wpływały, i nie prowadzi profilowania w takim celu.
                 </p>
               </div>
             </div>
@@ -369,7 +443,7 @@ export default function PrivacyPolicyPage() {
               </h2>
 
               <p className="mt-3 font-inter text-sm leading-relaxed text-warm-white/80 sm:text-base">
-                Serwis internetowy wykorzystuje technologie pamięci lokalnej przeglądarki w sposób maksymalnie bezpieczny i nienaruszający Twojej prywatności:
+                Serwis korzysta z poniższych technologii pamięci przeglądarki i integracji zewnętrznych:
               </p>
 
               <div className="mt-4 space-y-3 font-inter text-xs leading-relaxed text-warm-white/75 sm:text-sm">
@@ -389,7 +463,17 @@ export default function PrivacyPolicyPage() {
                     <span>Osadzone wideo YouTube</span>
                   </div>
                   <p className="mt-2 text-warm-white/70">
-                    W przypadku uruchomienia odtwarzacza wideo z serwisu YouTube (Google Ireland Ltd.), platforma ta może zapisywać własne identyfikatory i cookies zgodnie ze swoją polityką prywatności.
+                    Miniatury filmów są wyświetlane bez uruchamiania odtwarzacza. Dopiero po wybraniu przycisku odtwarzania przeglądarka nawiązuje połączenie z odtwarzaczem YouTube w trybie zwiększonej prywatności. Google może wtedy otrzymać informacje techniczne, w tym adres IP, dane urządzenia i informacje o odtworzeniu, oraz stosować własne identyfikatory zgodnie ze swoją polityką prywatności.
+                  </p>
+                </div>
+
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/50 p-4">
+                  <div className="flex items-center gap-2 font-mono text-xs text-khaki">
+                    <span className="rounded bg-khaki/15 px-1.5 py-0.5">Cookies</span>
+                    <span>Brak własnych cookies analitycznych i marketingowych</span>
+                  </div>
+                  <p className="mt-2 text-warm-white/70">
+                    Serwis nie zapisuje własnych cookies analitycznych ani marketingowych. Jeżeli zakres używanych technologii zostanie rozszerzony, informacja zostanie zaktualizowana, a tam, gdzie wymaga tego prawo, użytkownik otrzyma możliwość wyrażenia zgody przed ich uruchomieniem.
                   </p>
                 </div>
               </div>
