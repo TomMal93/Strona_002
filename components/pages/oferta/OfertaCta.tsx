@@ -15,7 +15,7 @@ export default function OfertaCta() {
   const sectionRef = useRef<HTMLElement>(null!)
   const contentRef = useRef<HTMLDivElement>(null!)
 
-  const { title, lead, label, href } = siteContent.offerPage.cta
+  const { title, lead } = siteContent.offerPage.cta
   const {
     phoneLabel, phoneHref,
     social,
@@ -77,11 +77,11 @@ export default function OfertaCta() {
 
             <div className={styles.actions}>
               <div className={styles.buttonRow}>
-                <a href={href} className={cn(styles.button, styles.buttonPrimary)}>
-                  {label}
-                </a>
-                <a href={phoneHref} className={cn(styles.button, styles.buttonSecondary)}>
+                <a href={phoneHref} className={cn(styles.button, styles.buttonPrimary)}>
                   {phoneLabel}
+                </a>
+                <a href="/contact" className={cn(styles.button, styles.buttonSecondary)}>
+                  Inne formy kontaktu
                 </a>
               </div>
 

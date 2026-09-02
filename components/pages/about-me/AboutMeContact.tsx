@@ -84,11 +84,11 @@ export default function AboutMeContact() {
 
               <div className={styles.actions}>
                 <div className={styles.buttonRow}>
-                  <a href={contact.ctaHref} className={cn(styles.button, styles.buttonPrimary)}>
+                  <a href={phoneHref} className={cn(styles.button, styles.buttonPrimary)}>
                     {contact.ctaLabel}
                   </a>
-                  <a href={phoneHref} className={cn(styles.button, styles.buttonSecondary)}>
-                    Zadzwoń
+                  <a href="/oferta" className={cn(styles.button, styles.buttonSecondary)}>
+                    Sprawdź ofertę
                   </a>
                 </div>
 
