@@ -263,7 +263,7 @@
 
 .missionGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 0;
 }
 
@@ -357,6 +357,10 @@
   border-bottom: 1px solid rgb(var(--c-gold) / 0.14);
 }
 
+.noteRow:last-child {
+  border-bottom: 0;
+}
+
 .noteRow > span {
   padding-top: 0.15rem;
   color: rgb(226 180 113 / 0.5);
@@ -436,6 +440,7 @@
     grid-column: 2;
     grid-row: 1;
     height: 100%;
+    contain: size;
     align-self: stretch;
   }
 
@@ -457,14 +462,8 @@
   }
 
   .sceneThree .missionGrid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     width: 100%;
-  }
-}
-
-@media (min-width: 1749px) {
-  .missionItem:nth-child(n + 4) {
-    display: none;
   }
 }
 

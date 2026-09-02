@@ -167,7 +167,6 @@ export default function WhyIDoThis() {
                     się naprawdę.
                   </p>
                   <div className={styles.directorNotes}>
-                    <p className={styles.microLabel}>Notatki z planu</p>
                     {[
                       ['01', 'Obserwuję', 'Szukam gestów i reakcji, których nie da się wyreżyserować.'],
                       ['02', 'Czekam', 'Daję wydarzeniom własne tempo, żeby emocje pozostały prawdziwe.'],
@@ -185,14 +184,12 @@ export default function WhyIDoThis() {
                 </div>
 
                 <div data-why-mission-block className={styles.missionBlock}>
-                  <p className={styles.microLabel}>To moja misja</p>
                   <div className={styles.missionGrid}>
                     {[
                       { type: 'mountain', title: 'Atmosfera', subtitle: 'Prawdziwy klimat' },
                       { type: 'camera', title: 'Autentyczność', subtitle: 'Prawdziwe chwile' },
                       { type: 'story', title: 'Opowieść', subtitle: 'Historia w obrazie' },
                       { type: 'light', title: 'Światło', subtitle: 'Buduje nastrój' },
-                      { type: 'sound', title: 'Dźwięk', subtitle: 'Wzmacnia emocje' },
                     ].map((item, index) => (
                       <div
                         key={item.title}
