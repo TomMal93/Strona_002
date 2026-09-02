@@ -10,6 +10,7 @@ export type AboutAnimationRefs = {
   videoRef: RefObject<HTMLDivElement>
   viewfinderRef: RefObject<HTMLDivElement>
   backdropRef: RefObject<HTMLDivElement>
+  copyPanelRef: RefObject<HTMLDivElement>
   leadRef: RefObject<HTMLParagraphElement>
   descriptionRef: RefObject<HTMLParagraphElement>
   statementRef: RefObject<HTMLDivElement>
@@ -43,6 +44,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         title: refs.titleRef.current,
         viewfinder,
         backdrop: refs.backdropRef.current,
+        copyPanel: refs.copyPanelRef.current,
         video,
         lead: refs.leadRef.current,
         description: refs.descriptionRef.current,
@@ -88,6 +90,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         const allElements = [
           elements.title,
           elements.backdrop,
+          elements.copyPanel,
           elements.video,
           elements.lead,
           elements.divider,
@@ -155,6 +158,12 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         elements.video.style.opacity = '0'
         elements.video.style.visibility = 'hidden'
         elements.video.style.transform = 'translate3d(0, 20px, 0) scale(0.98)'
+      }
+
+      if (elements.copyPanel) {
+        elements.copyPanel.style.opacity = '0'
+        elements.copyPanel.style.visibility = 'hidden'
+        elements.copyPanel.style.transform = 'translate3d(0, 16px, 0)'
       }
 
       if (elements.lead) {
@@ -226,6 +235,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         const allAnimatedElements = [
           elements.title,
           elements.backdrop,
+          elements.copyPanel,
           elements.video,
           elements.lead,
           elements.divider,
@@ -271,6 +281,9 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         }
         if (elements.video) {
           gsap.set(elements.video, { autoAlpha: 0, y: 20, scale: 0.98 })
+        }
+        if (elements.copyPanel) {
+          gsap.set(elements.copyPanel, { autoAlpha: 0, y: 16 })
         }
         if (elements.lead) {
           gsap.set(elements.lead, { autoAlpha: 0, y: 16 })
@@ -373,6 +386,19 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         const contentStart = 0.35
 
         // Viewfinder frame corners & camera HUD
+        if (elements.copyPanel) {
+          tl.to(
+            elements.copyPanel,
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.5,
+              ease: 'power3.out',
+            },
+            contentStart,
+          )
+        }
+
         if (elements.viewfinderCorners.length) {
           tl.to(
             elements.viewfinderCorners,

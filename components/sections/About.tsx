@@ -29,6 +29,7 @@ export default function About() {
   const mobileVideoRef = useRef<HTMLDivElement>(null!)
   const viewfinderRef = useRef<HTMLDivElement>(null!)
   const backdropRef = useRef<HTMLDivElement>(null!)
+  const copyPanelRef = useRef<HTMLDivElement>(null!)
   const leadRef = useRef<HTMLParagraphElement>(null!)
   const descriptionRef = useRef<HTMLParagraphElement>(null!)
   const statementRef = useRef<HTMLDivElement>(null!)
@@ -54,6 +55,7 @@ export default function About() {
     videoRef,
     viewfinderRef,
     backdropRef,
+    copyPanelRef,
     leadRef,
     descriptionRef,
     statementRef,
@@ -143,7 +145,7 @@ export default function About() {
             </div>
 
             <div className={styles.copyColumn}>
-              <div className={styles.copyPanel}>
+              <div ref={copyPanelRef} className={styles.copyPanel}>
                 {/* Corner marks */}
                 <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL}`} />
                 <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR}`} />
