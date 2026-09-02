@@ -34,7 +34,9 @@ function Tags({ items, label }: { items: string[]; label: string }) {
   )
 }
 
-function MissionIcon({ type }: { type: 'mountain' | 'camera' | 'story' }) {
+type MissionIconType = 'mountain' | 'camera' | 'story' | 'light' | 'sound'
+
+function MissionIcon({ type }: { type: MissionIconType }) {
   if (type === 'mountain') {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -48,6 +50,22 @@ function MissionIcon({ type }: { type: 'mountain' | 'camera' | 'story' }) {
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M3 7h4l2-3h6l2 3h4v13H3V7Z" />
         <circle cx="12" cy="13.5" r="3.5" />
+      </svg>
+    )
+  }
+  if (type === 'light') {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="3.5" />
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1" />
+      </svg>
+    )
+  }
+  if (type === 'sound') {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 10v4h4l5 4V6l-5 4H4Z" />
+        <path d="M16 9c1.5 1.5 1.5 4.5 0 6M18.5 6.5c3 3 3 8 0 11" />
       </svg>
     )
   }
@@ -173,6 +191,8 @@ export default function WhyIDoThis() {
                       { type: 'mountain', title: 'Atmosfera', subtitle: 'Prawdziwy klimat' },
                       { type: 'camera', title: 'Autentyczność', subtitle: 'Prawdziwe chwile' },
                       { type: 'story', title: 'Opowieść', subtitle: 'Historia w obrazie' },
+                      { type: 'light', title: 'Światło', subtitle: 'Buduje nastrój' },
+                      { type: 'sound', title: 'Dźwięk', subtitle: 'Wzmacnia emocje' },
                     ].map((item, index) => (
                       <div
                         key={item.title}
@@ -180,7 +200,7 @@ export default function WhyIDoThis() {
                         data-why-feature-row={index + 6}
                         className={styles.missionItem}
                       >
-                        <MissionIcon type={item.type as 'mountain' | 'camera' | 'story'} />
+                        <MissionIcon type={item.type as MissionIconType} />
                         <div>
                           <strong>{item.title}</strong>
                           <span>{item.subtitle}</span>
