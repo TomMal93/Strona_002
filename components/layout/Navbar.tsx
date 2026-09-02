@@ -364,9 +364,6 @@ export default function Navbar() {
               aria-hidden="true"
               className="h-px flex-1 bg-gradient-to-r from-khaki/45 to-transparent"
             />
-            <p className="font-inter text-[10px] uppercase tracking-overline text-warm-gray/55">
-              Maleszyk.Media
-            </p>
           </div>
 
           <div className="flex flex-1 flex-col justify-start pt-8">
