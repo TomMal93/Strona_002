@@ -567,28 +567,138 @@
 
 }
 
-@media (min-width: 768px) and (max-width: 1199px) and (max-height: 900px) {
+/* Tablet layout
+ *
+ * The global page scale compresses first sections to 80% in this range. That
+ * works for the multi-section pages, but made the contact page both visually
+ * undersized and too dense: its two-column hero contained another two-column
+ * panel and was forced into a single viewport height. Keep this standalone
+ * hero at its natural size and give the camera frame the full content width.
+ */
+@media (min-width: 768px) and (max-width: 1199px) {
+  :global([data-responsive-sections]) > .section {
+    zoom: 1;
+  }
+
+  .section {
+    height: auto;
+    min-height: 100svh;
+    overflow: hidden;
+  }
+
+  .shell {
+    display: block;
+    width: min(100% - 3rem, 960px);
+    height: auto;
+    padding: clamp(7rem, 13vw, 8.5rem) 0 2rem;
+  }
+
   .mainGrid {
-    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
-    gap: 2rem;
+    display: block;
+    padding: 0;
+  }
+
+  .content,
+  .contactFrame,
+  .contactPanel {
+    display: block;
   }
 
   .title {
-    font-size: clamp(2.75rem, 5.5vw, 3.5rem);
+    align-items: center;
+    font-size: clamp(64px, 9vw, 84px);
+    text-align: center;
+  }
+
+  .contactFrame {
+    margin-top: 2rem;
+    padding: 1.15rem;
+  }
+
+  .monitorDesktop {
+    display: none;
+  }
+
+  .monitorMobileWrapper {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .monitorMobileWrapper .monitor {
+    overflow: hidden;
+    border-radius: 6px;
+  }
+
+  .monitorImage {
+    min-height: 0;
+    aspect-ratio: 16 / 9;
   }
 
   .lead {
-    margin-top: 1rem;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.75;
   }
 
-  .contactPanel {
+  .contactActionsRow {
+    gap: 1rem;
+    padding: 1rem 0 0;
+  }
+
+  .contactItem,
+  .stepsList li {
+    min-height: 64px;
+  }
+
+  .contactValue {
+    font-size: 14px;
+  }
+
+  .stepsList li > span {
+    font-size: 24px;
+  }
+
+  .stepsList b {
+    font-size: 18px;
+  }
+
+  .stepsList small {
+    font-size: 12px;
+  }
+
+  .features {
     margin-top: 1.25rem;
+    padding-inline: 0.75rem;
   }
 
-  .contactGrid {
-    grid-template-columns: 1fr;
-    padding: 0;
+  .feature strong {
+    font-size: 16px;
+  }
+
+  .featureDetail {
+    font-size: 10.5px;
+  }
+
+  .bottomStrip {
+    grid-template-columns: minmax(0, 1fr) auto;
+    min-height: 88px;
+    margin: 1.25rem 0 0;
+    gap: 1.5rem;
+  }
+
+  .bottomDivider,
+  .bottomStrip small {
+    display: none;
+  }
+
+  .bottomStrip p {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) and (max-height: 900px) {
+  .lead {
+    line-height: 1.6;
   }
 
   .contactItem {
@@ -606,10 +716,6 @@
   .contactIcon svg {
     width: 1.05rem;
     height: 1.05rem;
-  }
-
-  .contactValue {
-    font-size: 0.76rem;
   }
 
   .stepsList li {
@@ -630,14 +736,6 @@
     width: 22px;
     height: 22px;
     margin-bottom: 0.08rem;
-  }
-
-  .feature strong {
-    font-size: 0.8rem;
-  }
-
-  .featureDetail {
-    font-size: 0.52rem;
   }
 
 }
@@ -758,62 +856,6 @@
 
   .bottomStrip {
     display: none;
-  }
-}
-
-/* ContactHero is the first page section and is globally zoomed to 80%
-   between 768px and 1199px. Compensate type so its visible hierarchy stays
-   continuous with mobile and desktop, including short browser windows. */
-@media (min-width: 768px) and (max-width: 1199px) {
-  .title {
-    /* 80-90px * 0.8 zoom = 64-72px */
-    font-size: clamp(80px, 7.5vw, 90px);
-  }
-
-  .lead {
-    /* 18.75px * 0.8 zoom = 15px */
-    font-size: 18.75px;
-  }
-
-  .contactValue {
-    /* 17.5px * 0.8 zoom = 14px */
-    font-size: 17.5px;
-  }
-
-  .stepsList li > span {
-    /* 30px * 0.8 zoom = 24px */
-    font-size: 30px;
-  }
-
-  .stepsList b {
-    /* 22.5px * 0.8 zoom = 18px */
-    font-size: 22.5px;
-  }
-
-  .stepsList small {
-    /* 15.6px * 0.8 zoom = 12.5px */
-    font-size: 15.6px;
-  }
-
-  .feature strong {
-    /* 20.5px * 0.8 zoom = 16.4px */
-    font-size: 20.5px;
-  }
-
-  .featureDetail {
-    /* 13px * 0.8 zoom = 10.4px */
-    font-size: 13px;
-  }
-
-  .monitorBar,
-  .bottomStrip small {
-    /* 12.5px * 0.8 zoom = 10px */
-    font-size: 12.5px;
-  }
-
-  .bottomStrip p {
-    /* 25px * 0.8 zoom = 20px */
-    font-size: 25px;
   }
 }
 
