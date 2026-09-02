@@ -1,9 +1,11 @@
 'use client'
 
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { gsap } from 'gsap'
+import { cn } from '@/lib/utils'
+import styles from './Navbar.module.css'
 
 const NAV_ITEMS = [
   { label: 'STRONA GŁÓWNA', href: '/#hero' },
@@ -32,11 +34,12 @@ const navLinkClassName = [
   'after:transition-[width] after:duration-300 hover:after:w-full',
 ].join(' ')
 
-const mobileNavLinkClassName =
-  [
-    'relative font-bebas text-[28px] tracking-heading uppercase py-2 transition-opacity duration-200 hover:opacity-80',
-    'bg-[linear-gradient(130deg,rgb(var(--c-warm))_0%,rgb(255_238_175)_45%,rgb(var(--c-gold))_100%)] bg-clip-text text-transparent',
-  ].join(' ')
+const mobileNavLinkClassName = [
+  styles.mobileNavLink,
+  'flex min-h-16 w-full items-center gap-4 py-3',
+  'font-bebas uppercase text-warm-white transition-colors duration-300',
+  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki',
+].join(' ')
 
 const HOME_PATH = '/'
 const ACTIVE_SECTION_PROGRESS = 2 / 3
@@ -52,6 +55,8 @@ export default function Navbar() {
   const [activeHref, setActiveHref]   = useState('/#hero')
   const headerRef                      = useRef<HTMLElement>(null)
   const mobileMenuRef                  = useRef<HTMLDivElement>(null)
+  const mobileToggleRef                = useRef<HTMLButtonElement>(null)
+  const firstMobileLinkRef             = useRef<HTMLAnchorElement>(null)
   const pathname                       = usePathname()
 
   /* Enable blurred background shortly after user starts scrolling */
@@ -104,25 +109,79 @@ export default function Navbar() {
     const el = mobileMenuRef.current
     if (!el) return
 
-    if (mobileOpen) {
-      gsap.fromTo(
-        el,
-        { autoAlpha: 0, y: -10 },
-        { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' },
-      )
-    } else {
-      gsap.to(el, { autoAlpha: 0, y: -10, duration: 0.2, ease: 'power2.in' })
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const ctx = gsap.context(() => {
+      if (mobileOpen) {
+        gsap.fromTo(
+          el,
+          { autoAlpha: 0, y: -8 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: prefersReducedMotion ? 0 : 0.35,
+            ease: 'power3.out',
+          },
+        )
+        gsap.fromTo(
+          el.querySelectorAll('[data-mobile-menu-item]'),
+          { autoAlpha: 0, y: 16 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: prefersReducedMotion ? 0 : 0.45,
+            stagger: prefersReducedMotion ? 0 : 0.055,
+            delay: prefersReducedMotion ? 0 : 0.08,
+            ease: 'power3.out',
+          },
+        )
+        window.requestAnimationFrame(() => firstMobileLinkRef.current?.focus())
+      } else {
+        gsap.to(el, {
+          autoAlpha: 0,
+          y: -8,
+          duration: prefersReducedMotion ? 0 : 0.2,
+          ease: 'power2.in',
+        })
+      }
+    }, el)
+
+    return () => ctx.revert()
+  }, [mobileOpen])
+
+  /* Keep the page behind the full-screen menu still and close it on desktop. */
+  useEffect(() => {
+    if (!mobileOpen) return
+
+    const previousOverflow = document.body.style.overflow
+    const desktopQuery = window.matchMedia('(min-width: 768px)')
+    const closeOnDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setMobileOpen(false)
+    }
+
+    document.body.style.overflow = 'hidden'
+    desktopQuery.addEventListener('change', closeOnDesktop)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      desktopQuery.removeEventListener('change', closeOnDesktop)
     }
   }, [mobileOpen])
 
   /* Close mobile menu on Escape */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setMobileOpen(false)
+      if (e.key === 'Escape' && mobileOpen) {
+        setMobileOpen(false)
+        mobileToggleRef.current?.focus()
+      }
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [])
+  }, [mobileOpen])
+
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [pathname])
 
   /* Highlight the current section in the homepage navigation */
   useEffect(() => {
@@ -199,10 +258,11 @@ export default function Navbar() {
       : navLinkClassName
   )
 
-  const getMobileLinkClassName = (href: string) => (
+  const getMobileLinkClassName = (href: string) => cn(
+    mobileNavLinkClassName,
     href === activeHref
-      ? mobileNavLinkClassName
-      : `${mobileNavLinkClassName} opacity-70`
+      ? styles.mobileNavLinkActive
+      : 'text-warm-gray hover:text-warm-white',
   )
   const hasSolidHeader = pathname === '/o-mnie' || pathname === '/contact'
   const headerSurfaceClassName = hasSolidHeader
@@ -218,7 +278,7 @@ export default function Navbar() {
       ref={headerRef}
       className="fixed top-0 left-0 right-0 z-50"
     >
-      <div className={`flex items-center justify-between px-6 py-2 md:px-12 lg:px-20 min-[1800px]:px-24 min-[1800px]:py-3 transition-[background-color,backdrop-filter] duration-500 ${headerSurfaceClassName}`}>
+      <div className={`flex min-h-[60px] items-center justify-between px-5 py-2 md:min-h-0 md:px-12 lg:px-20 min-[1800px]:px-24 min-[1800px]:py-3 transition-[background-color,backdrop-filter] duration-500 ${headerSurfaceClassName}`}>
 
         {/* Logo */}
         <Link
@@ -249,24 +309,32 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden flex flex-col justify-center gap-[5px] p-1"
+          ref={mobileToggleRef}
+          className={cn(
+            'flex h-11 w-11 flex-col items-center justify-center gap-[5px] border md:hidden',
+            'transition-[border-color,background-color] duration-300',
+            'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-khaki',
+            mobileOpen
+              ? 'border-khaki/55 bg-khaki/10'
+              : 'border-white/15 bg-black-deep/20 hover:border-khaki/45',
+          )}
           onClick={() => setMobileOpen((prev) => !prev)}
           aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
           aria-expanded={mobileOpen}
           aria-controls="mobile-menu"
         >
           <span
-            className={`block h-px w-6 bg-white origin-center transition-transform duration-300 ${
+            className={`block h-px w-5 bg-warm-white origin-center transition-transform duration-300 ${
               mobileOpen ? 'translate-y-[6px] rotate-45' : ''
             }`}
           />
           <span
-            className={`block h-px w-6 bg-white transition-opacity duration-300 ${
+            className={`block h-px w-5 bg-warm-white transition-opacity duration-300 ${
               mobileOpen ? 'opacity-0' : ''
             }`}
           />
           <span
-            className={`block h-px w-6 bg-white origin-center transition-transform duration-300 ${
+            className={`block h-px w-5 bg-warm-white origin-center transition-transform duration-300 ${
               mobileOpen ? 'translate-y-[-6px] -rotate-45' : ''
             }`}
           />
@@ -277,31 +345,65 @@ export default function Navbar() {
       <div
         ref={mobileMenuRef}
         id="mobile-menu"
-        className="invisible md:hidden absolute left-0 right-0 top-full border-t border-white/10 bg-[#0f0f12]/70 backdrop-blur-md"
+        className={cn(
+          styles.mobileMenu,
+          'invisible pointer-events-none absolute left-0 right-0 top-full border-t border-khaki/25 md:hidden',
+          mobileOpen && 'pointer-events-auto',
+        )}
         aria-hidden={!mobileOpen}
       >
         <nav
-          className="flex flex-col items-center gap-1 px-6 py-6 text-center"
+          className="mx-auto flex h-full w-full max-w-content flex-col px-6 pb-6 pt-8"
           aria-label="Nawigacja mobilna"
         >
-          {DESKTOP_NAV_ITEMS.map((item, index) => (
-            <Fragment key={item.href}>
+          <div data-mobile-menu-item className="mb-5 flex items-center justify-between gap-4">
+            <p className="font-inter text-[10px] uppercase tracking-overline text-khaki">
+              Nawigacja
+            </p>
+            <span
+              aria-hidden="true"
+              className="h-px flex-1 bg-gradient-to-r from-khaki/45 to-transparent"
+            />
+            <p className="font-inter text-[10px] uppercase tracking-overline text-warm-gray/55">
+              Maleszyk.Media
+            </p>
+          </div>
+
+          <div className="flex flex-1 flex-col justify-start pt-8">
+            {DESKTOP_NAV_ITEMS.map((item, index) => (
               <Link
+                key={item.href}
+                ref={index === 0 ? firstMobileLinkRef : undefined}
                 href={item.href}
                 className={getMobileLinkClassName(item.href)}
                 aria-current={item.href === activeHref ? 'location' : undefined}
+                data-mobile-menu-item
                 onClick={() => setMobileOpen(false)}
               >
-                {item.label}
+                <span className="w-6 shrink-0 font-inter text-[10px] tracking-overline text-khaki/70">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className={cn(
+                  'text-[clamp(2rem,10vw,3.25rem)] leading-none tracking-heading',
+                  item.href === activeHref && [
+                    'bg-[linear-gradient(130deg,rgb(var(--c-warm))_0%,rgb(255_238_175)_45%,rgb(var(--c-gold))_100%)]',
+                    'bg-clip-text text-transparent',
+                  ],
+                )}>
+                  {item.label}
+                </span>
               </Link>
-              {index < DESKTOP_NAV_ITEMS.length - 1 && (
-                <span
-                  aria-hidden="true"
-                  className="block h-px w-[clamp(180px,32vw,420px)] bg-[linear-gradient(90deg,transparent_0%,rgb(var(--c-gold)/0.70)_50%,transparent_100%)]"
-                />
-              )}
-            </Fragment>
-          ))}
+            ))}
+          </div>
+
+          <div data-mobile-menu-item className="mt-5 border-l border-khaki/55 pl-4">
+            <p className="font-bebas text-lg uppercase tracking-heading text-warm-white">
+              Kadry z charakterem.
+            </p>
+            <p className="font-inter text-[11px] text-warm-gray/65">
+              Historie z emocją.
+            </p>
+          </div>
         </nav>
       </div>
     </header>
