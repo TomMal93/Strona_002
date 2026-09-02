@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { siteContent } from '@/lib/site-content'
+import styles from './PrivacyPolicy.module.css'
 
 const pageTitle = 'Polityka prywatności i RODO | Maleszyk Media'
 const pageDescription =
@@ -37,34 +38,37 @@ export const metadata: Metadata = {
 export default function PrivacyPolicyPage() {
   const email = siteContent.aboutMe.contact.email
   const phone = siteContent.aboutMe.contact.phone
+  const cardClassName = `${styles.documentCard} relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8`
+  const compactCardClassName = `${styles.documentCard} ${styles.compactCard} relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8`
 
   return (
-    <div className="section-dark-bg min-h-screen">
+    <div className={`${styles.page} section-dark-bg min-h-screen`}>
+      <div aria-hidden="true" className={styles.ambientGlow} />
+      <div aria-hidden="true" className={styles.sideTelemetry}>
+        <span>PRIVACY PROTOCOL</span>
+        <span>MM / DATA / 2026</span>
+      </div>
+
       {/* Top Header / Hero */}
-      <section className="relative px-6 pb-8 pt-24 sm:pb-10 sm:pt-28 lg:px-20 lg:pt-32">
-        <div className="mx-auto max-w-4xl text-center">
-
-
-          <h1 className="bg-[linear-gradient(130deg,rgb(var(--c-warm))_0%,rgb(255_238_175)_45%,rgb(var(--c-gold))_100%)] bg-clip-text font-bebas text-4xl uppercase leading-[0.95] tracking-wide text-transparent sm:text-5xl md:text-6xl">
-            Polityka Prywatności & RODO
+      <section className={`${styles.hero} relative px-6 pb-8 pt-24 sm:pb-10 sm:pt-28 lg:px-20 lg:pt-32`}>
+        <div className={`${styles.heroInner} mx-auto max-w-4xl text-center`}>
+          <h1 className={`${styles.heroTitle} bg-[linear-gradient(130deg,rgb(var(--c-warm))_0%,rgb(255_238_175)_45%,rgb(var(--c-gold))_100%)] bg-clip-text font-bebas text-4xl uppercase leading-[0.95] tracking-wide text-transparent sm:text-5xl md:text-6xl`}>
+            <span>Polityka prywatności</span>
+            <span>&amp; RODO</span>
           </h1>
 
-
-          <p className="mx-auto mt-3.5 max-w-xl font-mono text-xs leading-relaxed text-white/50 sm:text-[13px]">
+          <p className={`${styles.heroLead} mx-auto mt-3.5 max-w-xl font-mono text-xs leading-relaxed text-white/50 sm:text-[13px]`}>
             Zasady ochrony prywatności, celów przetwarzania danych osobowych oraz praw przysługujących odwiedzającym i klientom Maleszyk.Media.
-          </p>
-          <p className="mt-3 font-mono text-[11px] uppercase tracking-wider text-khaki/80">
-            Ostatnia aktualizacja: 2 września 2026 r.
           </p>
         </div>
       </section>
 
       {/* Main Content Sections */}
-      <main className="px-6 pb-24 lg:px-20">
-        <div className="mx-auto max-w-4xl space-y-8">
+      <main className={`${styles.main} px-6 pb-24 lg:px-20`}>
+        <div className={`${styles.content} mx-auto max-w-4xl space-y-8`}>
           
           {/* Section 1: Administrator */}
-          <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+          <article className={cardClassName}>
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.12),transparent_65%)]" />
             
             <div className="relative z-10">
@@ -116,7 +120,7 @@ export default function PrivacyPolicyPage() {
           </article>
 
           {/* Section 2: Zbieranie danych */}
-          <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+          <article className={cardClassName}>
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.10),transparent_65%)]" />
             
             <div className="relative z-10">
@@ -169,7 +173,7 @@ export default function PrivacyPolicyPage() {
           </article>
 
           {/* Section 3: Podstawy prawne */}
-          <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+          <article className={cardClassName}>
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.10),transparent_65%)]" />
             
             <div className="relative z-10">
@@ -261,9 +265,9 @@ export default function PrivacyPolicyPage() {
           </article>
 
           {/* Section 4 & 5: Odbiorcy i czas przechowywania */}
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div className={`${styles.splitGrid} grid grid-cols-1 gap-8 md:grid-cols-2`}>
             {/* Odbiorcy */}
-            <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+            <article className={compactCardClassName}>
               <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.08),transparent_65%)]" />
               
               <div className="relative z-10">
@@ -302,7 +306,7 @@ export default function PrivacyPolicyPage() {
             </article>
 
             {/* Czas przechowywania */}
-            <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+            <article className={compactCardClassName}>
               <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.08),transparent_65%)]" />
               
               <div className="relative z-10">
@@ -338,7 +342,7 @@ export default function PrivacyPolicyPage() {
           </div>
 
           {/* Section 6: Prawa użytkownika */}
-          <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+          <article className={cardClassName}>
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.10),transparent_65%)]" />
             
             <div className="relative z-10">
@@ -425,7 +429,7 @@ export default function PrivacyPolicyPage() {
           </article>
 
           {/* Section 7: Cookies i SessionStorage */}
-          <article className="relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8">
+          <article className={cardClassName}>
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(139_115_85/0.10),transparent_65%)]" />
             
             <div className="relative z-10">
@@ -481,23 +485,23 @@ export default function PrivacyPolicyPage() {
           </article>
 
           {/* Section 8: Podsumowanie i CTA */}
-          <div className="rounded-micro border border-khaki/40 bg-gradient-to-br from-anthracite via-black-deep to-anthracite p-8 text-center sm:p-10">
+          <div className={`${styles.ctaCard} rounded-micro border border-khaki/40 bg-gradient-to-br from-anthracite via-black-deep to-anthracite p-8 text-center sm:p-10`}>
             <h2 className="font-bebas text-3xl uppercase tracking-wide text-warm-white sm:text-4xl">
               Masz pytania dotyczące swoich danych?
             </h2>
             <p className="mx-auto mt-2 max-w-xl font-mono text-xs text-warm-gray sm:text-sm">
               Skontaktuj się bezpośrednio ze mną — chętnie odpowiem na wszelkie pytania dotyczące ochrony prywatności i realizacji projektów.
             </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+            <div className={`${styles.ctaActions} mt-6 flex flex-wrap items-center justify-center gap-4`}>
               <a
                 href={`mailto:${email}`}
-                className="inline-flex items-center justify-center rounded-micro border border-khaki bg-khaki px-6 py-3 font-bebas text-lg uppercase tracking-wider text-black-deep transition-all duration-300 hover:bg-military-green hover:text-warm-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki"
+                className={`${styles.ctaSecondary} inline-flex items-center justify-center rounded-micro border border-khaki/50 bg-transparent px-6 py-3 font-bebas text-lg uppercase tracking-wider text-khaki transition-all duration-300 hover:border-khaki hover:bg-khaki/10 hover:text-warm-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki`}
               >
                 Napisz wiadomość e-mail
               </a>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-micro border border-khaki/50 bg-transparent px-6 py-3 font-bebas text-lg uppercase tracking-wider text-khaki transition-all duration-300 hover:border-khaki hover:bg-khaki/10 hover:text-warm-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki"
+                className={`${styles.ctaSecondary} inline-flex items-center justify-center rounded-micro border border-khaki/50 bg-transparent px-6 py-3 font-bebas text-lg uppercase tracking-wider text-khaki transition-all duration-300 hover:border-khaki hover:bg-khaki/10 hover:text-warm-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-khaki`}
               >
                 Przejdź do kontaktu
               </Link>

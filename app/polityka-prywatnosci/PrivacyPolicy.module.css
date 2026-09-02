@@ -1,0 +1,361 @@
+.page {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  color: rgb(232 229 220 / 0.78);
+}
+
+.page::before {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background: radial-gradient(ellipse 55% 32% at 50% 0%, rgb(var(--c-warm) / 0.075), transparent 72%);
+}
+
+.ambientGlow {
+  position: absolute;
+  z-index: -1;
+  top: 22rem;
+  left: 50%;
+  width: min(92vw, 76rem);
+  height: 38rem;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgb(var(--c-gold) / 0.055), transparent 68%);
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+.sideTelemetry {
+  position: fixed;
+  z-index: 2;
+  top: 50%;
+  right: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: rgb(var(--c-gold) / 0.3);
+  pointer-events: none;
+}
+
+.sideTelemetry::before,
+.sideTelemetry::after {
+  width: 1px;
+  height: 3.4rem;
+  content: '';
+  background: linear-gradient(180deg, transparent, rgb(var(--c-gold) / 0.42), transparent);
+}
+
+.hero {
+  display: grid;
+  min-height: clamp(25rem, 42svh, 31rem);
+  padding-top: 6.5rem !important;
+  padding-bottom: 2.5rem !important;
+  place-items: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background:
+    linear-gradient(180deg, rgb(5 6 6 / 0.1), transparent 46%, rgb(13 13 13 / 0.96)),
+    repeating-linear-gradient(90deg, transparent 0 11.9%, rgb(var(--c-gold) / 0.035) 12%, transparent 12.1% 24.9%);
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent 86%);
+  mask-image: linear-gradient(180deg, #000, transparent 86%);
+}
+
+.hero::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: min(calc(100% - 3rem), 76rem);
+  height: 1px;
+  transform: translateX(-50%);
+  content: '';
+  background: linear-gradient(90deg, transparent, rgb(var(--c-gold) / 0.52) 18%, rgb(var(--c-gold) / 0.2) 50%, rgb(var(--c-gold) / 0.52) 82%, transparent);
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 76rem);
+}
+
+.heroInner::before,
+.heroInner::after {
+  position: absolute;
+  top: 50%;
+  width: clamp(2rem, 10vw, 9rem);
+  height: 1px;
+  content: '';
+  background: linear-gradient(90deg, transparent, rgb(var(--c-gold) / 0.34));
+}
+
+.heroInner::before { left: 0; }
+.heroInner::after { right: 0; transform: rotate(180deg); }
+
+.heroTitle {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-size: clamp(3.2rem, 5.6vw, 5.2rem) !important;
+  line-height: 0.88 !important;
+  letter-spacing: 0.055em !important;
+  filter: drop-shadow(0 0 26px rgb(var(--c-warm) / 0.1));
+}
+
+.heroTitle span:last-child {
+  margin-top: 0.1em;
+  font-size: 0.54em;
+  letter-spacing: 0.16em;
+}
+
+.heroLead {
+  max-width: 58ch !important;
+  margin-top: 1rem !important;
+  font-size: clamp(0.74rem, 0.95vw, 0.88rem) !important;
+  line-height: 1.85 !important;
+  letter-spacing: 0.035em;
+  color: rgb(255 255 255 / 0.56) !important;
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+  padding-top: clamp(3.2rem, 5vw, 5rem);
+}
+
+.content {
+  width: min(100%, 76rem);
+  max-width: 76rem !important;
+}
+
+.documentCard {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(1.5rem, 3vw, 2.5rem) !important;
+  border-color: rgb(var(--c-gold) / 0.28) !important;
+  border-radius: 0.55rem !important;
+  background: transparent !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.018);
+  transition:
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 300ms ease,
+    box-shadow 360ms ease !important;
+}
+
+.documentCard:hover {
+  transform: translateY(-3px);
+  border-color: rgb(var(--c-gold) / 0.52) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.04),
+    0 0 28px rgb(var(--c-gold) / 0.045);
+}
+
+.documentCard h2 {
+  font-size: clamp(2rem, 3.2vw, 3rem) !important;
+  line-height: 0.95;
+  letter-spacing: 0.075em !important;
+  color: rgb(255 238 175 / 0.92) !important;
+}
+
+.documentCard h3 {
+  letter-spacing: 0.08em !important;
+  color: rgb(247 220 169 / 0.88) !important;
+}
+
+.documentCard p,
+.documentCard li {
+  line-height: 1.75;
+}
+
+.documentCard :is(a, button):focus-visible,
+.ctaCard :is(a, button):focus-visible {
+  outline: 2px solid rgb(var(--c-khaki));
+  outline-offset: 4px;
+}
+
+.documentCard :is(div, li)[class*='bg-black-deep'] {
+  border-color: rgb(var(--c-gold) / 0.16);
+  background:
+    linear-gradient(115deg, rgb(var(--c-gold) / 0.04), transparent 46%),
+    rgb(8 8 8 / 0.52) !important;
+}
+
+.splitGrid {
+  gap: clamp(1.25rem, 2.2vw, 2rem) !important;
+}
+
+.compactCard {
+  height: 100%;
+}
+
+.compactCard h2 {
+  font-size: clamp(1.75rem, 2.4vw, 2.35rem) !important;
+}
+
+.ctaCard {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(2.5rem, 5vw, 4.5rem) !important;
+  border-radius: 0.55rem !important;
+  background:
+    radial-gradient(ellipse 48% 120% at 50% 120%, rgb(var(--c-gold) / 0.13), transparent 70%),
+    linear-gradient(135deg, rgb(25 25 24 / 0.96), rgb(9 9 9 / 0.98)) !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.035);
+}
+
+.ctaCard::before,
+.ctaCard::after {
+  position: absolute;
+  top: 50%;
+  width: 22%;
+  height: 1px;
+  content: '';
+  background: linear-gradient(90deg, transparent, rgb(var(--c-gold) / 0.48));
+}
+
+.ctaCard::before { left: 0; }
+.ctaCard::after { right: 0; transform: rotate(180deg); }
+
+.ctaCard h2 {
+  font-size: clamp(2.4rem, 4.8vw, 4rem) !important;
+  line-height: 0.95;
+  letter-spacing: 0.075em !important;
+  background: linear-gradient(130deg, rgb(var(--c-warm)), rgb(255 238 175) 45%, rgb(var(--c-gold)));
+  background-clip: text;
+  color: transparent !important;
+}
+
+.ctaActions {
+  gap: 0.8rem !important;
+}
+
+.ctaSecondary {
+  min-width: 14rem;
+  min-height: 3.5rem;
+  padding: 0.85rem 1.5rem !important;
+  border-radius: 0.45rem !important;
+  font-size: 1.08rem !important;
+  line-height: 1;
+  letter-spacing: 0.11em !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.09);
+  transition:
+    color 220ms ease,
+    border-color 260ms ease,
+    background 260ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 320ms ease !important;
+}
+
+.ctaSecondary {
+  border-color: rgb(var(--c-gold) / 0.48) !important;
+  background: rgb(var(--c-gold) / 0.035) !important;
+  color: rgb(238 210 158 / 0.9) !important;
+}
+
+.ctaSecondary:hover {
+  transform: translateY(-2px);
+  border-color: rgb(255 225 168 / 0.68) !important;
+  background: rgb(var(--c-gold) / 0.1) !important;
+  color: rgb(255 238 175) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.1),
+    0 12px 28px rgb(0 0 0 / 0.18);
+}
+
+@media (max-width: 87.5rem) {
+  .sideTelemetry { display: none; }
+}
+
+@media (max-width: 47.99rem) {
+  .hero {
+    min-height: 24rem;
+    padding-top: 5.25rem !important;
+    padding-bottom: 2rem !important;
+    padding-inline: 1.15rem !important;
+  }
+
+  .heroInner::before,
+  .heroInner::after {
+    top: 49%;
+    width: 1.25rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.8rem, 13vw, 3.65rem) !important;
+    line-height: 0.9 !important;
+  }
+
+  .heroTitle span:first-child {
+    max-width: 9ch;
+    margin-inline: auto;
+  }
+
+  .heroLead {
+    max-width: 38ch !important;
+    font-size: 0.72rem !important;
+  }
+
+  .main {
+    padding: 2.5rem 1rem 5rem !important;
+  }
+
+  .content {
+    --card-gap: 1rem;
+  }
+
+  .documentCard {
+    padding: 1.35rem !important;
+  }
+
+  .documentCard:hover {
+    transform: none;
+  }
+
+  .documentCard h2 {
+    font-size: clamp(1.75rem, 9vw, 2.35rem) !important;
+  }
+
+  .documentCard p,
+  .documentCard li {
+    line-height: 1.65;
+  }
+
+  .ctaCard::before,
+  .ctaCard::after {
+    display: none;
+  }
+
+  .ctaActions {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .ctaSecondary {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .documentCard {
+    transition: border-color 150ms ease !important;
+  }
+
+  .documentCard:hover {
+    transform: none;
+  }
+}
