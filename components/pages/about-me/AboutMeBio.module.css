@@ -144,7 +144,7 @@
 .gearItem strong {
   color: rgb(225 191 134 / 0.82);
   font-family: var(--font-bebas, 'Bebas Neue', sans-serif);
-  font-size: 1.05rem;
+  font-size: calc(1.05rem + 1px);
   font-weight: 400;
   letter-spacing: 0.12em;
   line-height: 1.1;
@@ -159,7 +159,7 @@
   margin-top: 0.18rem;
   color: rgb(215 200 170 / 0.78);
   font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.52rem;
+  font-size: calc(0.52rem + 1px);
   letter-spacing: 0.12em;
   line-height: 1.35;
 }
@@ -276,13 +276,13 @@
   }
   .gearItem strong {
     color: rgb(231 191 126 / 0.9);
-    font-size: 1.02rem;
+    font-size: calc(1.02rem + 4px);
     letter-spacing: 0.12em;
   }
   .gearItem span {
     margin-top: 0.12rem;
     color: rgb(215 200 170 / 0.78);
-    font-size: 0.52rem;
+    font-size: calc(0.52rem + 4px);
     letter-spacing: 0.12em;
   }
   .profileCtaLink { width: 100%; justify-content: center; font-size: 1rem; }
@@ -329,11 +329,11 @@
   }
 
   .gearItem strong {
-    font-size: 16.4px;
+    font-size: 20.4px;
   }
 
   .gearItem span {
-    font-size: 8.2px;
+    font-size: 12.2px;
   }
 
   .profileCtaLink {
@@ -382,15 +382,25 @@
   }
 
   .gearItem strong {
-    font-size: 13.5px;
+    font-size: 14.5px;
   }
 
   .gearItem span {
-    font-size: 6.75px;
+    font-size: 7.75px;
   }
 
   .profileCtaLink {
     /* 20px * 0.8 zoom = 16px */
     font-size: 20px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1748px) {
+  .gearItem strong {
+    font-size: 17.5px;
+  }
+
+  .gearItem span {
+    font-size: 10.75px;
   }
 }

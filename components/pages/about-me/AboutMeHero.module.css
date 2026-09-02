@@ -353,11 +353,12 @@
 @media (width >= 48rem) {
   .heroContent {
     position: absolute;
-    top: 90%;
+    top: auto;
+    bottom: clamp(2.75rem, 8svh, 5.5rem);
     left: 50%;
     width: min(760px, 68vw);
     padding: 0;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     text-align: center;
   }
 

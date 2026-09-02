@@ -103,6 +103,7 @@
   gap: clamp(1.25rem, 2.5vw, 2.5rem);
   align-items: stretch;
 }
+.sceneCopyColumn { min-width: 0; align-self: center; }
 .sceneCopy { min-width: 0; align-self: center; }
 
 .sceneHeading {
@@ -181,7 +182,7 @@
   padding: 0.72rem 0.9rem;
   border: 1px solid rgb(var(--c-gold) / 0.3);
   color: rgb(238 206 158 / 0.63);
-  font-size: 0.58rem;
+  font-size: calc(0.58rem + 1px);
   line-height: 1;
   text-align: center;
 }
@@ -246,7 +247,6 @@
 .highlightLine {
   padding: 0.7rem 0.9rem;
   border: 1px solid rgb(var(--c-gold) / 0.24);
-  color: rgb(239 204 154 / 0.72) !important;
 }
 
 .missionBlock {
@@ -416,6 +416,46 @@
   .tags span { padding-inline: 0.6rem; }
 }
 
+@media (min-width: 768px) and (max-width: 1748px) {
+  .sceneThree {
+    grid-template-rows: auto auto;
+  }
+
+  .sceneThree > .sceneCopyColumn {
+    display: contents;
+  }
+
+  .sceneThree > .sceneCopyColumn > .sceneCopy {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: stretch;
+  }
+
+  .sceneThree > .videoFrame {
+    grid-column: 2;
+    grid-row: 1;
+    height: 100%;
+    align-self: stretch;
+  }
+
+  .sceneThree > .videoFrame > [data-why-embedded-video] {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto;
+  }
+
+  .sceneThree > .sceneCopyColumn > .missionBlock {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: stretch;
+    margin-top: 0;
+    padding-block: clamp(1.5rem, 3vw, 2.75rem);
+  }
+}
+
 @media (width < 48rem) {
   .section.section {
     --mobile-transition-overlap: clamp(8rem, 32vw, 11rem);
@@ -470,6 +510,7 @@
   .story { gap: 4.25rem; }
   .scene, .sceneTwo { display: flex; flex-direction: column; gap: 0; align-items: stretch; padding-left: 1.8rem; }
   .sceneThree { display: flex; }
+  .sceneCopyColumn,
   .sceneCopy { display: contents; }
   .sceneHeading { order: 1; }
   .sceneCopy h3 { order: 2; }
@@ -536,8 +577,8 @@
   }
 
   .missionItem svg {
-    width: 1.85rem;
-    height: 1.85rem;
+    width: calc(1.85rem + 2px);
+    height: calc(1.85rem + 2px);
     stroke: rgb(231 191 126 / 0.9);
     stroke-width: 1.2;
     transform: none;
@@ -551,14 +592,14 @@
 
   .missionItem strong {
     color: rgb(231 191 126 / 0.9);
-    font-size: 1.02rem;
+    font-size: calc(1.02rem + 2px);
     letter-spacing: 0.12em;
   }
 
   .missionItem span {
     margin-top: 0.12rem;
     color: rgb(215 200 170 / 0.78);
-    font-size: 0.52rem;
+    font-size: calc(0.52rem + 2px);
     letter-spacing: 0.12em;
   }
 
@@ -615,12 +656,21 @@
     font-size: 15.625px;
   }
 
+  .tags span {
+    font-size: 16.625px;
+  }
+
   .missionItem strong {
-    font-size: 16.4px;
+    font-size: 18.4px;
   }
 
   .missionItem span {
-    font-size: 8.2px;
+    font-size: 10.2px;
+  }
+
+  .missionItem svg {
+    width: calc(1.95rem + 2px);
+    height: calc(1.95rem + 2px);
   }
 
   .noteRow strong {
@@ -674,6 +724,10 @@
     font-size: 12.5px;
   }
 
+  .tags span {
+    font-size: 13.5px;
+  }
+
   .missionItem strong {
     font-size: 13.5px;
   }
@@ -690,6 +744,21 @@
   .quoteFrame blockquote {
     /* 17.5px * 0.8 zoom = 14px */
     font-size: 17.5px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1748px) {
+  .missionItem strong {
+    font-size: 15.5px;
+  }
+
+  .missionItem span {
+    font-size: 8.75px;
+  }
+
+  .missionItem svg {
+    width: calc(1.95rem + 2px);
+    height: calc(1.95rem + 2px);
   }
 }
 

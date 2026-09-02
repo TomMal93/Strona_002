@@ -43,6 +43,9 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
     const quoteFooter = bioPanelRef.current
       ? bioPanelRef.current.querySelector<HTMLElement>('[data-why-quote-footer]')
       : null
+    const missionBlock = bioPanelRef.current
+      ? bioPanelRef.current.querySelector<HTMLElement>('[data-why-mission-block]')
+      : null
     const featureTitlesRaw = bioPanelRef.current
       ? Array.from(bioPanelRef.current.querySelectorAll<HTMLElement>('[data-why-feature-card]'))
       : []
@@ -65,13 +68,19 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
 
       const railRight = storyRail.getBoundingClientRect().right
       const videoRect = videoBlock.getBoundingClientRect()
+      const missionBottom = missionBlock?.getBoundingClientRect().bottom ?? 0
       const footerTop = quoteFooter.getBoundingClientRect().top
       const currentMarginTop = Number.parseFloat(getComputedStyle(quoteFooter).marginTop) || 0
+      const footerRect = quoteFooter.getBoundingClientRect()
+      const layoutScale = quoteFooter.offsetWidth > 0
+        ? footerRect.width / quoteFooter.offsetWidth
+        : 1
 
       const videoRight = videoRect.right
-      quoteFooter.style.marginRight = `${Math.max(0, railRight - videoRight)}px`
+      quoteFooter.style.marginRight = `${Math.max(0, railRight - videoRight) / layoutScale}px`
       if (canAttachFooterToVideo.matches) {
-        quoteFooter.style.marginTop = `${currentMarginTop + videoRect.bottom - footerTop}px`
+        const contentBottom = Math.max(videoRect.bottom, missionBottom)
+        quoteFooter.style.marginTop = `${currentMarginTop + (contentBottom - footerTop) / layoutScale}px`
       } else {
         quoteFooter.style.removeProperty('margin-top')
       }
@@ -82,6 +91,7 @@ export function useWhyIDoThisAnimations(refs: WhyIDoThisAnimationRefs): void {
       layoutObserver = new ResizeObserver(alignQuoteFooterWithVideo)
       layoutObserver.observe(storyRail)
       layoutObserver.observe(videoBlock)
+      if (missionBlock) layoutObserver.observe(missionBlock)
       desktopLayout.addEventListener('change', alignQuoteFooterWithVideo)
       canAttachFooterToVideo.addEventListener('change', alignQuoteFooterWithVideo)
     }

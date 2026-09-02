@@ -138,33 +138,35 @@ export default function WhyIDoThis() {
             </article>
 
             <article className={cn(styles.scene, styles.sceneThree)}>
-              <div className={styles.sceneCopy}>
-                <SceneHeading number="III" />
-                <h3>Dziś buduję opowieści</h3>
-                <p data-why-paragraph className={styles.highlightLine}>
-                  Dziś nie tylko nagrywam — buduję opowieści. Każdy projekt zaczynam od uważnej
-                  obserwacji ludzi, miejsca i emocji. Łączę obraz, ruch i dźwięk tak, aby historia
-                  miała własny rytm. Powstaje film, który pozwala na nowo przeżyć to, co wydarzyło
-                  się naprawdę.
-                </p>
-                <div className={styles.directorNotes}>
-                  <p className={styles.microLabel}>Notatki z planu</p>
-                  {[
-                    ['01', 'Obserwuję', 'Szukam gestów i reakcji, których nie da się wyreżyserować.'],
-                    ['02', 'Czekam', 'Daję wydarzeniom własne tempo, żeby emocje pozostały prawdziwe.'],
-                    ['03', 'Opowiadam', 'Łączę światło, ruch i dźwięk w historię, do której chce się wracać.'],
-                  ].map(([number, title, description], index) => (
-                    <div key={number} data-why-feature-card data-why-feature-row={index + 3} className={styles.noteRow}>
-                      <span>{number}</span>
-                      <div>
-                        <strong>{title}</strong>
-                        <p>{description}</p>
+              <div className={styles.sceneCopyColumn}>
+                <div className={styles.sceneCopy}>
+                  <SceneHeading number="III" />
+                  <h3>Dziś buduję opowieści</h3>
+                  <p data-why-paragraph className={styles.highlightLine}>
+                    Dziś nie tylko nagrywam — buduję opowieści. Każdy projekt zaczynam od uważnej
+                    obserwacji ludzi, miejsca i emocji. Łączę obraz, ruch i dźwięk tak, aby historia
+                    miała własny rytm. Powstaje film, który pozwala na nowo przeżyć to, co wydarzyło
+                    się naprawdę.
+                  </p>
+                  <div className={styles.directorNotes}>
+                    <p className={styles.microLabel}>Notatki z planu</p>
+                    {[
+                      ['01', 'Obserwuję', 'Szukam gestów i reakcji, których nie da się wyreżyserować.'],
+                      ['02', 'Czekam', 'Daję wydarzeniom własne tempo, żeby emocje pozostały prawdziwe.'],
+                      ['03', 'Opowiadam', 'Łączę światło, ruch i dźwięk w historię, do której chce się wracać.'],
+                    ].map(([number, title, description], index) => (
+                      <div key={number} data-why-feature-card data-why-feature-row={index + 3} className={styles.noteRow}>
+                        <span>{number}</span>
+                        <div>
+                          <strong>{title}</strong>
+                          <p>{description}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
 
-                <div className={styles.missionBlock}>
+                <div data-why-mission-block className={styles.missionBlock}>
                   <p className={styles.microLabel}>To moja misja</p>
                   <div className={styles.missionGrid}>
                     {[
