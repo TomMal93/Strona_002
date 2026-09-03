@@ -23,6 +23,7 @@ const inter = Inter({
   subsets: ['latin', 'latin-ext'],
   variable: '--font-inter',
   display: 'swap',
+  preload: false,
 })
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -30,6 +31,7 @@ const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin', 'latin-ext'],
   variable: '--font-ibm-plex-mono',
   display: 'swap',
+  preload: false,
 })
 
 const siteUrl    = process.env.SITE_URL    ?? 'https://maleszyk.media'
