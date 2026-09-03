@@ -103,7 +103,7 @@ export default function AboutMeBio() {
             </div>
 
             <figure data-bio-block className={styles.portraitFrame}>
-              <Image src="/images/contact/contact.webp" alt="Przemek z aparatem podczas pracy w plenerze" fill sizes="(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 620px" className={styles.portraitImage} />
+              <Image src="/images/contact/contact.webp" alt="Fotograf z aparatem podczas pracy w plenerze" fill sizes="(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 620px" className={styles.portraitImage} />
               <span aria-hidden="true" className={styles.portraitShade} />
               <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerTL)} />
               <span aria-hidden="true" className={cn(styles.frameCorner, styles.frameCornerTR)} />

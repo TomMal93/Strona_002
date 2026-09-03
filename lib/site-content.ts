@@ -16,15 +16,15 @@ export const siteContent = {
       process.env.NEXT_PUBLIC_HERO_SUBTITLE
       || 'Dokumentuję to, co warto pamiętać.\nOd teledysku po weselny taniec.',
     ctaLabel: process.env.NEXT_PUBLIC_HERO_CTA_LABEL || 'Zapytaj o termin',
-    ctaHref: process.env.NEXT_PUBLIC_HERO_CTA_HREF || 'tel:+48123456789',
+    ctaHref: process.env.NEXT_PUBLIC_HERO_CTA_HREF || '#contact',
     aboutLabel: process.env.NEXT_PUBLIC_HERO_ABOUT_LABEL || 'Poznajmy się',
     serviceTags: ['SESJE ZDJĘCIOWE', 'ŚLUB I WESELE', 'FILMY PROMOCYJNE'],
     social: [
-      { platform: 'facebook', href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || 'https://www.facebook.com/profile.php?id=61557050460965' },
-      { platform: 'youtube', href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || 'https://www.youtube.com/@Maleszyk.V-log' },
-      { platform: 'instagram', href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || 'https://www.instagram.com/maleszyk.media/' },
-      { platform: 'whatsapp', href: process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP || 'https://wa.me/48123456789' },
-      { platform: 'messenger', href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || 'https://m.me/maleszyk.media' },
+      { platform: 'facebook', href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || '#' },
+      { platform: 'youtube', href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || '#' },
+      { platform: 'instagram', href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || '#' },
+      { platform: 'whatsapp', href: process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP || '#' },
+      { platform: 'messenger', href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || '#' },
     ],
   },
   about: {
@@ -37,7 +37,7 @@ export const siteContent = {
       || 'Dziś opowiadamy historie filmem.\nW XXI wieku to właśnie film stał się językiem emocji, marek i wspomnień.\n\nI tutaj zaczyna się moja rola.',
     statement:
       process.env.NEXT_PUBLIC_ABOUT_STATEMENT
-      || 'Nazywam się Przemek Malxxxxx. Tworzę treści audiowizualne, które pokazują Cię tak, jak chcesz być zapamiętany.',
+      || 'Tworzę treści audiowizualne, które pokazują Cię tak, jak chcesz być zapamiętany.',
     ctaLabel: process.env.NEXT_PUBLIC_ABOUT_CTA_LABEL || 'Dowiedz się więcej o mnie',
     imageAlt:
       process.env.NEXT_PUBLIC_ABOUT_IMAGE_ALT
@@ -307,9 +307,9 @@ export const siteContent = {
     hudLabelLeft: 'FINAL CTA',
     hudLabelRight: 'SCENE 08 / 08',
     ctaLabel: process.env.NEXT_PUBLIC_CTA_LABEL || 'Zapytaj o termin',
-    ctaHref: process.env.NEXT_PUBLIC_CTA_HREF || 'mailto:kontakt@example.com',
+    ctaHref: process.env.NEXT_PUBLIC_CTA_HREF || '#contact',
     phoneLabel: process.env.NEXT_PUBLIC_CTA_PHONE_LABEL || 'Zadzwoń',
-    phoneHref: process.env.NEXT_PUBLIC_CTA_PHONE_HREF || 'tel:+48123456789',
+    phoneHref: process.env.NEXT_PUBLIC_CTA_PHONE_HREF || '#contact',
     secondaryLabel: process.env.NEXT_PUBLIC_CTA_SECONDARY_LABEL || 'Poznaj proces',
     secondaryHref: process.env.NEXT_PUBLIC_CTA_SECONDARY_HREF || '#process',
     features: [
@@ -318,11 +318,11 @@ export const siteContent = {
       { label: 'Naturalne kadry' },
     ],
     social: [
-      { platform: 'facebook' as const, href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || 'https://www.facebook.com/profile.php?id=61557050460965' },
-      { platform: 'youtube' as const, href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || 'https://www.youtube.com/@Maleszyk.V-log' },
-      { platform: 'instagram' as const, href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || 'https://www.instagram.com/maleszyk.media/' },
-      { platform: 'whatsapp' as const, href: process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP || 'https://wa.me/48123456789' },
-      { platform: 'messenger' as const, href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || 'https://m.me/maleszyk.media' },
+      { platform: 'facebook' as const, href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || '#' },
+      { platform: 'youtube' as const, href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || '#' },
+      { platform: 'instagram' as const, href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || '#' },
+      { platform: 'whatsapp' as const, href: process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP || '#' },
+      { platform: 'messenger' as const, href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || '#' },
     ],
   },
   offerPage: {
@@ -372,7 +372,7 @@ export const siteContent = {
         || 'Poznaj fotografa i operatora wideo stojącego za kamerą — doświadczenie, sprzęt i pasja w jednym.',
     },
     hero: {
-      name: process.env.NEXT_PUBLIC_ABOUTME_HERO_NAME || 'Przemek Malxxxxx',
+      name: process.env.NEXT_PUBLIC_ABOUTME_HERO_NAME || 'Fotograf i filmowiec',
       tagline: process.env.NEXT_PUBLIC_ABOUTME_HERO_TAGLINE || 'Fotograf · Operator · Filmowiec',
       resolution: '4K DCI / 25P',
       backgroundImage:
@@ -387,7 +387,7 @@ export const siteContent = {
       subtitle: 'Profile',
       intro:
         process.env.NEXT_PUBLIC_ABOUTME_PROFILE_INTRO
-        || 'Nazywam się Przemek Malxxxxx.\nTworzę filmy z wydarzeń, w których liczą się prawdziwe emocje i tempo chwili. Szukam gestów, spojrzeń i momentów, które łatwo przeoczyć.\nPracuję spokojnie, reaguję szybko i nie próbuję reżyserować tego, co powinno wydarzyć się naturalnie. Dzięki temu otrzymujesz nie tylko zapis wydarzenia, ale film, który pozwala poczuć jego atmosferę jeszcze raz.',
+        || 'Tworzę filmy z wydarzeń, w których liczą się prawdziwe emocje i tempo chwili. Szukam gestów, spojrzeń i momentów, które łatwo przeoczyć.\nPracuję spokojnie, reaguję szybko i nie próbuję reżyserować tego, co powinno wydarzyć się naturalnie. Dzięki temu otrzymujesz nie tylko zapis wydarzenia, ale film, który pozwala poczuć jego atmosferę jeszcze raz.',
       locationLabel: 'Gdzie pracuję',
       locationText:
         process.env.NEXT_PUBLIC_ABOUTME_PROFILE_LOCATION
@@ -454,16 +454,16 @@ export const siteContent = {
       title: 'Kontakt',
       hudLabelLeft: 'CONTACT',
       hudLabelRight: 'SCENE 03 / 03',
-      phone: process.env.NEXT_PUBLIC_ABOUTME_PHONE || '+48 791 705 230',
-      email: process.env.NEXT_PUBLIC_ABOUTME_EMAIL || 'kontakt@maleszyk.media',
+      phone: process.env.NEXT_PUBLIC_ABOUTME_PHONE || '',
+      email: process.env.NEXT_PUBLIC_ABOUTME_EMAIL || '',
       ctaLabel: process.env.NEXT_PUBLIC_ABOUTME_CTA_LABEL || 'Porozmawiajmy',
-      ctaHref: process.env.NEXT_PUBLIC_ABOUTME_CTA_HREF || 'mailto:kontakt@example.com',
+      ctaHref: process.env.NEXT_PUBLIC_ABOUTME_CTA_HREF || '#contact',
       socials: [
         { platform: 'facebook', href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || '#', label: 'Facebook' },
         { platform: 'youtube', href: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || '#', label: 'YouTube' },
         { platform: 'instagram', href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || '#', label: 'Instagram' },
-        { platform: 'whatsapp', href: process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP || 'https://wa.me/48123456789', label: 'WhatsApp' },
-        { platform: 'messenger', href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || 'https://m.me/maleszyk.media', label: 'Messenger' },
+        { platform: 'whatsapp', href: process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP || '#', label: 'WhatsApp' },
+        { platform: 'messenger', href: process.env.NEXT_PUBLIC_SOCIAL_MESSENGER || '#', label: 'Messenger' },
       ],
     },
   },

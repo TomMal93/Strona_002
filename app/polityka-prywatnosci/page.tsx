@@ -36,6 +36,7 @@ export const metadata: Metadata = {
 }
 
 export default function PrivacyPolicyPage() {
+  const administratorName = process.env.PRIVACY_ADMIN_NAME || 'Administrator danych osobowych'
   const email = siteContent.aboutMe.contact.email
   const phone = siteContent.aboutMe.contact.phone
   const cardClassName = `${styles.documentCard} relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8`
@@ -91,7 +92,7 @@ export default function PrivacyPolicyPage() {
 
               <div className="mt-5 rounded-micro border border-khaki/30 bg-black-deep/70 p-5 font-mono text-xs leading-relaxed text-warm-white/90 sm:text-sm">
                 <p className="font-bebas text-xl uppercase tracking-wider text-khaki">
-                  Maleszyk.Media — Przemysław Maleszyk
+                  {administratorName}
                 </p>
                 <div className="mt-3 space-y-1.5 text-warm-white/80">
                   <p className="flex flex-wrap items-center gap-2">
