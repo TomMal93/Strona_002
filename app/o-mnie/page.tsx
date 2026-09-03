@@ -4,6 +4,8 @@ import AboutMeHero from '@/components/pages/about-me/AboutMeHero'
 import AboutMeBio from '@/components/pages/about-me/AboutMeBio'
 import WhyIDoThis from '@/components/pages/about-me/WhyIDoThis'
 import AboutMeContact from '@/components/pages/about-me/AboutMeContact'
+import StructuredData from '@/components/seo/StructuredData'
+import { createPageStructuredData } from '@/lib/structured-data'
 
 const socialTitle = `${siteContent.aboutMe.meta.title} | Maleszyk Media`
 
@@ -41,6 +43,15 @@ export const metadata: Metadata = {
 export default function AboutMePage() {
   return (
     <main data-responsive-sections>
+      <StructuredData
+        data={createPageStructuredData({
+          path: '/o-mnie',
+          name: socialTitle,
+          description: siteContent.aboutMe.meta.description,
+          breadcrumbName: 'O mnie',
+          type: 'AboutPage',
+        })}
+      />
       <AboutMeHero
         heroOverride={{
           backgroundImage: '/images/contact/contact-hero.webp',

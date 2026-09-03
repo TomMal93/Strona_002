@@ -7,6 +7,8 @@ import Services from '@/components/sections/Services'
 import Process from '@/components/sections/Process'
 import Faq from '@/components/sections/Faq'
 import Cta from '@/components/sections/Cta'
+import StructuredData from '@/components/seo/StructuredData'
+import { createSiteStructuredData } from '@/lib/structured-data'
 
 export const metadata: Metadata = {
   alternates: {
@@ -22,6 +24,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main data-responsive-sections>
+      <StructuredData data={createSiteStructuredData()} />
       <Hero />
       <About />
       <Promo />

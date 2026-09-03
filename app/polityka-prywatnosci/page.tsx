@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { siteContent } from '@/lib/site-content'
+import StructuredData from '@/components/seo/StructuredData'
+import { createPageStructuredData } from '@/lib/structured-data'
 import styles from './PrivacyPolicy.module.css'
 
 const pageTitle = 'Polityka prywatności i RODO | Maleszyk Media'
@@ -44,6 +46,14 @@ export default function PrivacyPolicyPage() {
 
   return (
     <div className={`${styles.page} section-dark-bg min-h-screen`}>
+      <StructuredData
+        data={createPageStructuredData({
+          path: '/polityka-prywatnosci',
+          name: pageTitle,
+          description: pageDescription,
+          breadcrumbName: 'Polityka prywatności',
+        })}
+      />
       <div aria-hidden="true" className={styles.ambientGlow} />
       <div aria-hidden="true" className={styles.sideTelemetry}>
         <span>PRIVACY PROTOCOL</span>

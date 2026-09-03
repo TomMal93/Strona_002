@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import ContactHero from '@/components/pages/contact/ContactHero'
 import { siteContent } from '@/lib/site-content'
+import StructuredData from '@/components/seo/StructuredData'
+import { createPageStructuredData } from '@/lib/structured-data'
 
 const socialTitle = `${siteContent.contactPage.meta.title} | Maleszyk Media`
 
@@ -38,6 +40,15 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <main data-responsive-sections>
+      <StructuredData
+        data={createPageStructuredData({
+          path: '/contact',
+          name: socialTitle,
+          description: siteContent.contactPage.meta.description,
+          breadcrumbName: 'Kontakt',
+          type: 'ContactPage',
+        })}
+      />
       <ContactHero />
     </main>
   )

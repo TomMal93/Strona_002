@@ -72,16 +72,6 @@ export const metadata: Metadata = {
   },
 }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: authorName,
-  url: siteUrl,
-  description: siteContent.structuredDataDescription,
-  serviceType: ['Fotografia', 'Film', 'Drony'],
-  areaServed: { '@type': 'Country', name: 'Poland' },
-}
-const jsonLdString = JSON.stringify(jsonLd).replace(/<\//g, '<\\/')
 const bodyClassName = cn(
   bebasNeue.variable,
   inter.variable,
@@ -93,10 +83,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pl" suppressHydrationWarning>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: jsonLdString }}
-        />
         {/* Synchronous boot: marks <html> for the preloader so returning visitors
             (sessionStorage) don't flash the overlay on hydration. Must run before
             paint, hence inline in <head>. */}

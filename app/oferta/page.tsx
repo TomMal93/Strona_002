@@ -3,6 +3,8 @@ import { siteContent } from '@/lib/site-content'
 import OfertaHero from '@/components/pages/oferta/OfertaHero'
 import OfertaServices from '@/components/pages/oferta/OfertaServices'
 import OfertaCta from '@/components/pages/oferta/OfertaCta'
+import StructuredData from '@/components/seo/StructuredData'
+import { createPageStructuredData } from '@/lib/structured-data'
 
 const socialTitle = `${siteContent.offerPage.meta.title} | Maleszyk Media`
 
@@ -40,6 +42,15 @@ export const metadata: Metadata = {
 export default function OfertaPage() {
   return (
     <main data-responsive-sections>
+      <StructuredData
+        data={createPageStructuredData({
+          path: '/oferta',
+          name: socialTitle,
+          description: siteContent.offerPage.meta.description,
+          breadcrumbName: 'Oferta',
+          type: 'CollectionPage',
+        })}
+      />
       <OfertaHero />
       <OfertaServices />
       <OfertaCta />
