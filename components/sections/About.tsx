@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect } from 'react'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import CinematicVideoPlayer from '@/components/ui/CinematicVideoPlayer'
@@ -19,9 +19,9 @@ function formatHudTime(frame: number): string {
   return [hours, minutes, seconds, frames].map(value => String(value).padStart(2, '0')).join(':')
 }
 
-export default function About() {
-  const [hudFrame, setHudFrame] = useState(307458)
+const INITIAL_HUD_FRAME = 307458
 
+export default function About() {
   const sectionRef = useRef<HTMLElement>(null!)
   const hudBarRef = useRef<HTMLDivElement>(null!)
   const titleRef = useRef<HTMLHeadingElement>(null!)
@@ -34,6 +34,8 @@ export default function About() {
   const descriptionRef = useRef<HTMLParagraphElement>(null!)
   const statementRef = useRef<HTMLDivElement>(null!)
   const ctaRef = useRef<HTMLDivElement>(null!)
+  const outerTimecodeRef = useRef<HTMLSpanElement>(null!)
+  const innerTimecodeRef = useRef<HTMLSpanElement>(null!)
   const shouldLoadDesktopVideo = useLazyVideoSource(videoRef)
   const shouldLoadMobileVideo = useLazyVideoSource(mobileVideoRef)
 
@@ -41,8 +43,13 @@ export default function About() {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (mediaQuery.matches) return undefined
 
+    let frame = INITIAL_HUD_FRAME
     const timer = window.setInterval(() => {
-      setHudFrame(current => current + 1)
+      frame += 1
+      const timecode = `TC ${formatHudTime(frame)}`
+
+      if (outerTimecodeRef.current) outerTimecodeRef.current.textContent = timecode
+      if (innerTimecodeRef.current) innerTimecodeRef.current.textContent = timecode
     }, 80)
 
     return () => window.clearInterval(timer)
@@ -119,7 +126,9 @@ export default function About() {
           </div>
           <div aria-hidden="true" className={cn(styles.viewfinderHudBottom, styles.outerHudOnly)}>
             <span className={styles.viewfinderResolution}>4K DCI / 25P</span>
-            <span className={styles.viewfinderTimecode}>TC {formatHudTime(hudFrame)}</span>
+            <span ref={outerTimecodeRef} className={styles.viewfinderTimecode}>
+              TC {formatHudTime(INITIAL_HUD_FRAME)}
+            </span>
           </div>
 
           <div className={styles.aboutLayout}>
@@ -168,7 +177,9 @@ export default function About() {
                 <div aria-hidden="true" className={cn(styles.viewfinderHudBottom, styles.innerHudOnly)}>
                   <span className={styles.viewfinderResolution}>4K DCI / 25P</span>
                   <span className={cn(styles.viewfinderExposure, styles.hideOnMobile)}>ISO 800&nbsp;&nbsp;1/50</span>
-                  <span className={styles.viewfinderTimecode}>TC {formatHudTime(hudFrame)}</span>
+                  <span ref={innerTimecodeRef} className={styles.viewfinderTimecode}>
+                    TC {formatHudTime(INITIAL_HUD_FRAME)}
+                  </span>
                 </div>
 
                 {/* Content inside the viewfinder */}
