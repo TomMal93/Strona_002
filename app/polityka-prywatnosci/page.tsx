@@ -251,6 +251,20 @@ export default function PrivacyPolicyPage() {
                 <div className="rounded-micro border-l-2 border-khaki bg-black-deep/60 p-4">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <h3 className="font-bebas text-xl uppercase tracking-wide text-warm-white">
+                      Pomiar i poprawa wydajności serwisu
+                    </h3>
+                    <span className="rounded-micro border border-khaki/40 bg-khaki/10 px-2 py-0.5 font-mono text-[11px] text-khaki">
+                      Art. 6 ust. 1 lit. f RODO
+                    </span>
+                  </div>
+                  <p className="mt-1.5 font-inter text-xs leading-relaxed text-warm-white/75 sm:text-sm">
+                    Prawnie uzasadniony interes Administratora polegający na monitorowaniu technicznej jakości serwisu, wykrywaniu problemów z szybkością działania oraz poprawie komfortu korzystania ze strony. Pomiary są prowadzone za pomocą Vercel Speed Insights i nie służą profilowaniu ani identyfikowaniu użytkowników.
+                  </p>
+                </div>
+
+                <div className="rounded-micro border-l-2 border-khaki bg-black-deep/60 p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="font-bebas text-xl uppercase tracking-wide text-warm-white">
                       Publikacja wizerunku w portfolio i social mediach
                     </h3>
                     <span className="rounded-micro border border-khaki/40 bg-khaki/10 px-2 py-0.5 font-mono text-[11px] text-khaki">
@@ -285,6 +299,10 @@ export default function PrivacyPolicyPage() {
                   <li className="flex items-start gap-2">
                     <span className="text-khaki">›</span>
                     <span>Dostawcy hostingu, poczty elektronicznej i usług IT — jako podmioty przetwarzające na podstawie umowy powierzenia, gdy jest ona wymagana</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-khaki">›</span>
+                    <span>Vercel Inc. — dostawca hostingu, sieci CDN oraz usługi Vercel Speed Insights służącej do anonimowego pomiaru wydajności serwisu</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-khaki">›</span>
@@ -336,6 +354,10 @@ export default function PrivacyPolicyPage() {
                   <li className="flex items-start gap-2">
                     <span className="text-khaki">›</span>
                     <span><strong>Portfolio:</strong> do czasu wycofania zgody lub wcześniejszego osiągnięcia celu przetwarzania</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-khaki">›</span>
+                    <span><strong>Pomiary wydajności:</strong> przez okres dostępności zagregowanych statystyk w usłudze Vercel Speed Insights, zgodnie z ustawieniami i zasadami retencji dostawcy</span>
                   </li>
                 </ul>
               </div>
@@ -469,6 +491,27 @@ export default function PrivacyPolicyPage() {
                   </div>
                   <p className="mt-2 text-warm-white/70">
                     Miniatury filmów są wyświetlane bez uruchamiania odtwarzacza. Dopiero po wybraniu przycisku odtwarzania przeglądarka nawiązuje połączenie z odtwarzaczem YouTube w trybie zwiększonej prywatności. Google może wtedy otrzymać informacje techniczne, w tym adres IP, dane urządzenia i informacje o odtworzeniu, oraz stosować własne identyfikatory zgodnie ze swoją polityką prywatności.
+                  </p>
+                </div>
+
+                <div className="rounded-micro border border-warm-gray/10 bg-black-deep/50 p-4">
+                  <div className="flex items-center gap-2 font-mono text-xs text-khaki">
+                    <span className="rounded bg-khaki/15 px-1.5 py-0.5">Speed Insights</span>
+                    <span>Anonimowy pomiar wydajności</span>
+                  </div>
+                  <p className="mt-2 text-warm-white/70">
+                    Serwis korzysta z Vercel Speed Insights do pomiaru rzeczywistej szybkości ładowania, responsywności i stabilności wizualnej strony. Do Vercel przesyłane są anonimowe punkty pomiarowe, takie jak odwiedzona trasa i adres strony, rodzaj urządzenia, przeglądarka, system operacyjny, przybliżony kraj, typ połączenia, wartości Web Vitals oraz czas pomiaru. Vercel deklaruje, że dane nie są wiązane z konkretnym użytkownikiem ani adresem IP i nie pozwalają odtworzyć jego sesji pomiędzy podstronami.
+                  </p>
+                  <p className="mt-2 text-warm-white/70">
+                    Speed Insights wykorzystuje natywne interfejsy przeglądarki i nie zapisuje własnych cookies analitycznych ani identyfikatorów służących do śledzenia użytkownika. Więcej informacji znajduje się w{' '}
+                    <a
+                      href="https://vercel.com/docs/speed-insights/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-khaki underline decoration-khaki/50 underline-offset-4 transition-colors hover:text-warm-white"
+                    >
+                      informacji Vercel o prywatności Speed Insights
+                    </a>.
                   </p>
                 </div>
 

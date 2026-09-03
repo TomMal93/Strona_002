@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Bebas_Neue, IBM_Plex_Mono, Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
@@ -6,7 +7,6 @@ import SectionRail from '@/components/layout/SectionRail'
 import Footer from '@/components/layout/Footer'
 import SmoothScroll from '@/components/layout/SmoothScroll'
 import Preloader from '@/components/ui/Preloader'
-import WebVitalsReporter from '@/components/analytics/WebVitalsReporter'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 
@@ -82,7 +82,6 @@ const jsonLd = {
   areaServed: { '@type': 'Country', name: 'Poland' },
 }
 const jsonLdString = JSON.stringify(jsonLd).replace(/<\//g, '<\\/')
-const enableWebVitals = process.env.NEXT_PUBLIC_ENABLE_WEB_VITALS === 'true'
 const bodyClassName = cn(
   bebasNeue.variable,
   inter.variable,
@@ -109,12 +108,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={bodyClassName}>
-        {enableWebVitals ? <WebVitalsReporter /> : null}
         <Preloader />
         <Navbar />
         <SectionRail />
         <SmoothScroll>{children}</SmoothScroll>
         <Footer />
+        <SpeedInsights />
       </body>
     </html>
   )
