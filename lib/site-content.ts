@@ -327,7 +327,7 @@ export const siteContent = {
   },
   offerPage: {
     meta: {
-      title: process.env.NEXT_PUBLIC_OFFER_META_TITLE || 'Oferta — Maleszyk Media',
+      title: process.env.NEXT_PUBLIC_OFFER_META_TITLE || 'Oferta filmowa',
       description:
         process.env.NEXT_PUBLIC_OFFER_META_DESC
         || 'Film okolicznościowy, profesjonalny montaż i materiały promocyjne — pełna oferta usług filmowych.',

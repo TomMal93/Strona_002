@@ -5,11 +5,36 @@ import AboutMeBio from '@/components/pages/about-me/AboutMeBio'
 import WhyIDoThis from '@/components/pages/about-me/WhyIDoThis'
 import AboutMeContact from '@/components/pages/about-me/AboutMeContact'
 
+const socialTitle = `${siteContent.aboutMe.meta.title} | Maleszyk Media`
+
 export const metadata: Metadata = {
   title: siteContent.aboutMe.meta.title,
   description: siteContent.aboutMe.meta.description,
   alternates: {
     canonical: '/o-mnie',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'pl_PL',
+    url: '/o-mnie',
+    siteName: 'Maleszyk Media — Fotografia i Film',
+    title: socialTitle,
+    description: siteContent.aboutMe.meta.description,
+    images: [
+      {
+        url: '/images/Hero.webp',
+        width: 1024,
+        height: 1024,
+        type: 'image/webp',
+        alt: 'Przemek Maleszyk — fotograf i filmowiec',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: socialTitle,
+    description: siteContent.aboutMe.meta.description,
+    images: ['/images/Hero.webp'],
   },
 }
 
