@@ -5,6 +5,9 @@ import { siteContent } from '@/lib/site-content'
 export const metadata: Metadata = {
   title: siteContent.contactPage.meta.title,
   description: siteContent.contactPage.meta.description,
+  alternates: {
+    canonical: '/contact',
+  },
 }
 
 export default function ContactPage() {

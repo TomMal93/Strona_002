@@ -7,6 +7,9 @@ import OfertaCta from '@/components/pages/oferta/OfertaCta'
 export const metadata: Metadata = {
   title: siteContent.offerPage.meta.title,
   description: siteContent.offerPage.meta.description,
+  alternates: {
+    canonical: '/oferta',
+  },
 }
 
 export default function OfertaPage() {

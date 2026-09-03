@@ -246,7 +246,7 @@ export default function About() {
                 <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBR}`} />
                 <p className={styles.aboutStatement}>
                   {siteContent.about.statement
-                    .replace('Malxxxxx. ', 'Malxxxxx.\n')
+                    .replace('Maleszyk. ', 'Maleszyk.\n')
                     .replace('tak, jak', 'tak,\njak')
                     .split('\n')
                     .flatMap((part, index, array) => {

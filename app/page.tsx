@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Promo from '@/components/sections/Promo'
@@ -6,6 +7,12 @@ import Services from '@/components/sections/Services'
 import Process from '@/components/sections/Process'
 import Faq from '@/components/sections/Faq'
 import Cta from '@/components/sections/Cta'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+}
 
 /**
  * Strona główna — sekcje Hero + About + Promo + Testimonials + Services + Process + FAQ + CTA.

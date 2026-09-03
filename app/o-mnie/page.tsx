@@ -8,6 +8,9 @@ import AboutMeContact from '@/components/pages/about-me/AboutMeContact'
 export const metadata: Metadata = {
   title: siteContent.aboutMe.meta.title,
   description: siteContent.aboutMe.meta.description,
+  alternates: {
+    canonical: '/o-mnie',
+  },
 }
 
 export default function AboutMePage() {
