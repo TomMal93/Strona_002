@@ -131,7 +131,6 @@
   mask-composite: intersect, add;
   filter: none;
   opacity: 1;
-  will-change: filter, opacity;
 }
 
 .mediaFrame::before,
@@ -311,7 +310,6 @@
 .hudLineRight {
   flex: 1;
   height: 1px;
-  will-change: transform, opacity;
   background: linear-gradient(
     90deg,
     transparent 0%,
@@ -347,7 +345,6 @@
   text-transform: uppercase;
   color: rgb(255 238 175 / 0.54);
   white-space: nowrap;
-  will-change: transform, opacity;
 }
 
 .sectionTitleAccent {
@@ -434,7 +431,6 @@
     inset: 0;
     pointer-events: none;
     z-index: -1;
-    will-change: transform, opacity;
   }
 
   .viewfinderBackdrop::before,

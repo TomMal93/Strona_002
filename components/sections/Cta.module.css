@@ -70,7 +70,6 @@
 .hudLineRight {
   height: 1px;
   flex: 1;
-  will-change: transform, opacity;
   background: linear-gradient(90deg, transparent 0%, rgb(var(--c-gold) / 0.3) 38%, rgb(var(--c-gold) / 0.46) 100%);
 }
 .hudLineLeft { transform-origin: right center; }
@@ -88,7 +87,6 @@
   text-transform: uppercase;
   color: rgb(255 238 175 / 0.54);
   white-space: nowrap;
-  will-change: transform, opacity;
 }
 .subtitle {
   width: 100%;

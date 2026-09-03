@@ -38,7 +38,6 @@
 .hudLineRight {
   flex: 1;
   height: 1px;
-  will-change: transform, opacity;
   background: linear-gradient(
     90deg,
     transparent 0%,
@@ -74,7 +73,6 @@
   text-transform: uppercase;
   color: rgb(255 238 175 / 0.54);
   white-space: nowrap;
-  will-change: transform, opacity;
 }
 
 /* ── Grid / timeline ──────────────────────────────────────────────────── */
