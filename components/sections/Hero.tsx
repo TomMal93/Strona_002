@@ -62,7 +62,10 @@ export default function Hero() {
         />
       </MobileHeroLayout>
 
-      <div className="relative z-10 mx-auto hidden h-full w-full max-w-[2000px] md:grid md:grid-cols-2 md:grid-rows-1 md:items-center md:justify-center md:gap-0 md:px-8 lg:px-12">
+      <div
+        className={`relative z-10 mx-auto h-full w-full max-w-[2000px] md:grid-cols-2 md:grid-rows-1 md:items-center md:justify-center md:gap-0 md:px-8 lg:px-12 ${styles.desktopHeroLayout}`}
+        style={{ display: 'none' }}
+      >
         {/* ── Content column ───────────────────────────────────────────────── */}
         <div className="md:flex md:flex-none md:flex-col md:items-center md:justify-center md:py-0">
           <div className="w-full max-w-[600px] text-left md:translate-y-10 lg:translate-y-14">
