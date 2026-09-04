@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 
 export default function OfertaPage() {
   return (
-    <main data-responsive-sections>
+    <main data-subpage data-responsive-sections>
       <StructuredData
         data={createPageStructuredData({
           path: '/oferta',

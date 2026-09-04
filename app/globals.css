@@ -72,16 +72,17 @@ body:has(> [data-contact-page]) > [data-contact-page] > section > div {
   margin-block: auto;
 }
 
-body:has(> [data-contact-page]) > footer {
+/* Subpages use the compact footer variant established on the contact page. */
+body:has(> [data-subpage]) > footer {
   padding-block: 0.75rem;
 }
 
-body:has(> [data-contact-page]) > footer > div > a {
+body:has(> [data-subpage]) > footer > div > a {
   font-size: 1rem;
 }
 
-body:has(> [data-contact-page]) > footer p,
-body:has(> [data-contact-page]) > footer > div > div:last-child {
+body:has(> [data-subpage]) > footer p,
+body:has(> [data-subpage]) > footer > div > div:last-child {
   font-size: 9px;
 }
 
