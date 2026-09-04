@@ -11,23 +11,23 @@
 
 ## Podsumowanie wykonawcze
 
-Projekt buduje się produkcyjnie, wszystkie trasy są statycznie prerenderowane, testy techniczne przechodzą, odpowiedź dla nieistniejącej trasy ma prawidłowy status `404`, a robots, canonicale, Open Graph, Twitter Card, nagłówki, atrybuty `alt` i JSON-LD mają dobre podstawy.
+Projekt buduje się produkcyjnie, testy techniczne przechodzą, odpowiedź dla nieistniejącej trasy ma prawidłowy status `404`, a robots, canonicale, Open Graph, Twitter Card, nagłówki, atrybuty `alt` i JSON-LD mają dobre podstawy. Po wdrożeniu CSP z nonce strony aplikacji są renderowane dynamicznie, ponieważ nonce jest unikalny dla każdego żądania.
 
 Etapu 4 nie można jednak zamknąć pozytywnie. Blokery przedwdrożeniowe to:
 
 1. brak pomiarów Lighthouse i Core Web Vitals na Mobile/Desktop;
 2. produkcja kieruje canonicale, sitemapę, JSON-LD i obrazy OG do `https://maleszykmedia.pl`, ale domena zostanie uruchomiona dopiero po zakończeniu testów;
 3. polityka prywatności nie zawiera adresu, NIP ani REGON administratora — zadanie zapisano w TODO;
-4. wynik Mozilla Observatory to B+ zamiast wymaganego A/A+, a test CSP oblał przez `'unsafe-inline'`;
+4. publiczne wdrożenie nadal ma historyczny wynik Mozilla Observatory B+; poprawka CSP jest gotowa lokalnie, ale wymaga wdrożenia i ponownego skanu do A/A+;
 5. narzędzie `perf:bundle` nie ma zdefiniowanego progu pass/fail, a wspólny JS obecny w HTML tras wynosi około 217,8 kB gzip.
 
-W ramach działań po pierwszym przebiegu poprawiono opisy SEO, dodano `theme-color`, daty `lastmod`, cache obrazu OG i ikon oraz skrócono preloader do około 1 s. Udokumentowano także decyzję o pozostaniu wyłącznie przy Vercel Speed Insights.
+W ramach działań po pierwszym przebiegu poprawiono opisy SEO, dodano `theme-color`, daty `lastmod`, cache obrazu OG i ikon, skrócono preloader do około 1 s oraz wdrożono CSP z nonce. Udokumentowano także decyzję o pozostaniu wyłącznie przy Vercel Speed Insights.
 
 ## 1. Metoda i ograniczenia
 
 Wykonano:
 
-- `npm run check` — typecheck, ESLint i 6 testów Node;
+- `npm run check` — typecheck, ESLint i 7 testów Node;
 - produkcyjny build Next.js 16.3.4 przez Webpack;
 - `npm run perf:bundle` i analizę skryptów faktycznie wskazanych w HTML każdej trasy;
 - uruchomienie lokalnego serwera produkcyjnego i test odpowiedzi HTTP;
@@ -174,7 +174,7 @@ Testy jednostkowe `structured-data` przechodzą, a wszystkie bloki z HTML dają 
 - `<SpeedInsights />` jest osadzony globalnie w `app/layout.tsx`.
 - produkcyjny `/_vercel/speed-insights/script.js` zwraca HTTP 200 i ma cache `public, max-age=2678400`;
 - wygenerowany klient ładuje `/_vercel/speed-insights/script.js` i nie znaleziono w jego kodzie zapisu `document.cookie` ani trwałego identyfikatora użytkownika;
-- CSP `connect-src 'self' https:` obejmuje endpointy Vercel, ale jest szersze niż konieczne; instrukcja oczekiwała jawnego `https://vitals.vercel-insights.com`;
+- lokalna CSP ogranicza `connect-src` do `'self'` i `https://vitals.vercel-insights.com`;
 - widoczność LCP/INP/CLS w panelu Vercel: NOT TESTED — brak dostępu do panelu i brak aktywnej domeny.
 
 ### GA4 / GTM
@@ -198,7 +198,7 @@ Testy jednostkowe `structured-data` przechodzą, a wszystkie bloki z HTML dają 
 | `/videos/promo-reel.webm` | `max-age=2592000, stale-while-revalidate=86400` | zgodne | PASS |
 | `/og-image.jpg` | `max-age=2592000, stale-while-revalidate=86400` | zgodne lokalnie po poprawce; wdrożenie oczekuje publikacji | PASS implementacji |
 
-HTML jest statycznie prerenderowany i na Vercel zwraca `public, max-age=0, must-revalidate` wraz z `x-vercel-cache: HIT/PRERENDER`.
+Aktualne publiczne wdrożenie nadal zawiera statycznie prerenderowany HTML i zwraca `public, max-age=0, must-revalidate` wraz z `x-vercel-cache: HIT/PRERENDER`. Po publikacji mechanizmu nonce strony aplikacji będą renderowane dynamicznie; należy wtedy ponownie ocenić cache i wpływ na TTFB.
 
 ### CSP i pozostałe nagłówki
 
@@ -223,12 +223,14 @@ Mozilla Observatory, [skan `119015166`](https://developer.mozilla.org/en-US/obse
 | Testy | 11/12 PASS |
 | Jedyny test niezaliczony | Content Security Policy |
 
-Problemy:
+Problemy zarejestrowane na publicznym wdrożeniu przed poprawką:
 
 - `connect-src 'self' https:` dopuszcza dowolny endpoint HTTPS zamiast minimalnej listy;
 - `script-src` i `style-src` zawierają `'unsafe-inline'`; Observatory odjęło 20 punktów za CSP `csp-implemented-with-unsafe-inline`.
 
-SecurityHeaders.com: NOT TESTED z powodu ochrony Cloudflare. Mozilla Observatory potwierdza HSTS, ale ocena B+ nie spełnia oczekiwanego A/A+.
+Lokalna poprawka generuje osobny kryptograficzny nonce dla każdego żądania i przekazuje go do skryptów Next.js, boot skryptu preloadera oraz JSON-LD. Produkcyjna dyrektywa `script-src` nie zawiera `'unsafe-inline'`, a `connect-src` dopuszcza wyłącznie `'self'` i `https://vitals.vercel-insights.com`. `style-src` akceptuje tylko arkusze własne i bloki z nonce; `'unsafe-inline'` pozostaje wyłącznie w wąskiej dyrektywie `style-src-attr`, wymaganej przez dynamiczne style animacji. Lokalny test odpowiedzi potwierdził zgodny nonce we wszystkich 20 tagach `<script>`.
+
+SecurityHeaders.com: NOT TESTED z powodu ochrony Cloudflare. Lokalna implementacja CSP: PASS. Ocena publicznego wdrożenia pozostaje B+ do czasu publikacji i ponownego skanu A/A+.
 
 ## 8. Polityka prywatności i RODO
 
@@ -265,7 +267,7 @@ Braki blokujące kryterium etapu:
 - [x] Wszystkie obrazy SSR mają atrybut `alt`.
 - [ ] Speed Insights raportuje w panelu Vercel — komponent PASS, panel NOT TESTED.
 - [x] Cache JS/CSS, obrazów i wideo jest zgodny na publicznym wdrożeniu.
-- [ ] HSTS PASS, lecz ocena Mozilla Observatory B+ zamiast A/A+ — FAIL.
+- [ ] HSTS PASS; poprawka CSP przechodzi lokalnie, lecz Mozilla Observatory B+ musi zostać powtórzone po wdrożeniu — oczekuje na weryfikację.
 - [x] Decyzja klienta w sprawie GA4/GTM — tylko Vercel Speed Insights, bez GA4/GTM.
 - [ ] Polityka zawiera zatwierdzone dane firmy: adres, NIP, REGON — FAIL.
 - [ ] Strona działa poprawnie na Fast 3G — NOT TESTED; preloader skrócony do około 1 s.
@@ -276,7 +278,7 @@ Braki blokujące kryterium etapu:
 
 1. Uzupełnić i zatwierdzić w polityce: pełną nazwę podmiotu, adres, NIP, REGON i kontakt ds. danych.
 2. Po zakończeniu testów podłączyć i uruchomić DNS/TLS dla `maleszykmedia.pl`. Canonicale, robots, sitemap, JSON-LD i OG muszą wtedy wskazywać działający host.
-3. Zaostrzyć CSP tak, aby usunąć `'unsafe-inline'` z `script-src` (nonce/hash) i ograniczyć ogólne źródła; powtórzyć Observatory do A/A+.
+3. Wdrożyć gotową CSP z nonce i powtórzyć Observatory do A/A+; sprawdzić także raporty naruszeń w konsoli oraz wpływ renderowania dynamicznego na TTFB.
 
 ### P1 — SEO i wydajność
 

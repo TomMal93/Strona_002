@@ -85,4 +85,4 @@ Projekt pozostaje wyłącznie przy **Vercel Speed Insights**. Nie wdrażać GA4 
 ## 7. Zadania odroczone do końca testów
 
 - Po zakończeniu testów podłączyć docelową domenę `maleszykmedia.pl` i dopiero wtedy zweryfikować DNS, TLS, canonicale, robots, sitemap, JSON-LD oraz Open Graph.
-- Zaostrzyć Content Security Policy: usunąć `'unsafe-inline'` z `script-src` z użyciem nonce/hash i ograniczyć `connect-src` do wymaganych hostów. Powtórzyć Mozilla Observatory do wyniku A/A+.
+- Po wdrożeniu CSP z nonce powtórzyć Mozilla Observatory i potwierdzić wynik A/A+ oraz brak naruszeń CSP w przeglądarce. Implementacja usuwa `'unsafe-inline'` z `script-src` i ogranicza `connect-src` do strony oraz Vercel Speed Insights.

@@ -1,12 +1,16 @@
+import { headers } from 'next/headers'
+
 type StructuredDataProps = {
   data: unknown
 }
 
-export default function StructuredData({ data }: StructuredDataProps) {
+export default async function StructuredData({ data }: StructuredDataProps) {
+  const nonce = (await headers()).get('x-nonce') ?? undefined
   const json = JSON.stringify(data).replace(/</g, '\\u003c')
 
   return (
     <script
+      nonce={nonce}
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: json }}
     />

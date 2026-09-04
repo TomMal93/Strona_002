@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { headers } from 'next/headers'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Bebas_Neue, IBM_Plex_Mono, Inter } from 'next/font/google'
 import './globals.css'
@@ -86,7 +87,9 @@ const bodyClassName = cn(
   'font-inter bg-black-deep text-warm-white',
 )
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const nonce = (await headers()).get('x-nonce') ?? undefined
+
   return (
     <html lang="pl" suppressHydrationWarning>
       <head>
@@ -94,6 +97,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             (sessionStorage) don't flash the overlay on hydration. Must run before
             paint, hence inline in <head>. */}
         <script
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html:
               "try{if(sessionStorage.getItem('intro:played:v1')==='1')document.documentElement.classList.add('intro-played')}catch(e){}",
