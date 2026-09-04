@@ -147,7 +147,10 @@ body:has(> [data-subpage]) > footer > div > div:last-child {
 }
 
 @media (min-width: 2500px) {
-  [data-responsive-sections] > section[data-fullscreen-hero] {
+  [data-responsive-sections] > section#hero[data-fullscreen-hero] {
+    /* Compensate the layout height for zoom so the enlarged Hero remains
+       centred inside one physical viewport instead of becoming 120vh tall. */
+    height: 83.3333dvh;
     zoom: 1.2;
   }
 }
