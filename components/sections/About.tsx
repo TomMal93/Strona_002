@@ -134,7 +134,6 @@ export default function About() {
           <div className={styles.aboutLayout}>
             <div className={styles.videoColumn}>
               <div ref={videoRef} className={cn('relative mx-auto aspect-[3/4] w-3/4', styles.aboutVideoFrame)}>
-                {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
                 <video
                   aria-label={siteContent.about.imageAlt}
                   poster="/images/Hero.webp"

@@ -149,7 +149,6 @@ export default function AboutMeVideo({ embedded = false, videoOverride }: AboutM
           />
         ) : (
           <>
-            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video
               ref={videoRef}
               muted

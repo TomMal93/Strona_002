@@ -77,36 +77,6 @@ const nextConfig = {
     if (isDev) return [securityHeaders]
 
     return [
-      // Statyczne pliki Next.js (JS/CSS bundles) — immutable, 1 rok
-      {
-        source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      // Fonty z next/font (self-hosted w _next/static/media) — immutable, 1 rok
-      {
-        source: '/_next/static/media/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      // Zoptymalizowane obrazy Next Image — cache 30 dni + SWR
-      {
-        source: '/_next/image',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=2592000, stale-while-revalidate=86400',
-          },
-        ],
-      },
       // Publiczne obrazy — 30 dni, rewalidacja w tle
       {
         source: '/images/:path*',

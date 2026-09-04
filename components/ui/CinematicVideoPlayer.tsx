@@ -172,7 +172,6 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
           ? children({ isPlaying, togglePlayback: handlePlayPause })
           : children}
 
-        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <video
           ref={videoRef}
           className={cn(styles.video, clickToToggle && styles.videoClickable, videoClassName)}

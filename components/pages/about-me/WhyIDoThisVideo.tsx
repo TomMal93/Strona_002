@@ -153,7 +153,6 @@ export default function WhyIDoThisVideo({ embedded = false, fillAvailableHeight 
           />
         ) : (
           <>
-            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video
               ref={videoRef}
               loop

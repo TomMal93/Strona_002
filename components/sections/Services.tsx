@@ -155,7 +155,6 @@ function SceneCard({ item, index, animate = true, className }: SceneCardProps) {
             {isPlaying ? 'preview on' : 'click to play'}
           </button>
 
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
           <video
             ref={videoRef}
             className={styles.cardVideo}

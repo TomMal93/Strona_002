@@ -8,11 +8,11 @@
 
 **Gałąź i commit bazowy:** `main`, `823051b0ee92ff8b6d24deac5dae3efa4feed8a4`
 
-**Wynik:** **FAIL — etap 2 wstrzymany**
+**Wynik:** **WARUNKOWY PASS — oczekiwanie na zdalny przebieg CI**
 
 ## Podsumowanie
 
-Kod przechodzi lokalnie pełną weryfikację statyczną i buduje wszystkie wymagane trasy jako statyczne. Naprawiono konfigurację CI, usunięto wyświetlanie surowego komunikatu wyjątku na stronie 500, częściowo zaktualizowano zależności produkcyjne i obniżono First Load JS `/oferta` poniżej budżetu. Etapu nie można jednak zamknąć wynikiem pozytywnym z powodu jednej podatności produkcyjnej o poziomie `high` oraz braku zielonego przebiegu CI po poprawce.
+Kod przechodzi lokalnie pełną weryfikację statyczną i buduje wszystkie wymagane trasy jako statyczne. Naprawiono konfigurację CI, usunięto wyświetlanie surowego komunikatu wyjątku na stronie 500, obniżono First Load JS `/oferta` poniżej budżetu oraz wykonano kontrolowaną migrację do Next.js 16.3.4 i React 19.2.8. Audyt produkcyjny nie wykazuje już podatności. Do pełnego zamknięcia etapu pozostało potwierdzenie zielonego przebiegu CI po pushu.
 
 ## 1. Weryfikacja statyczna
 
@@ -44,7 +44,7 @@ Status końcowy: **PASS**, kod wyjścia `0`.
 
 Polecenie: `npm audit --omit=dev`
 
-Status końcowy: **FAIL**, kod wyjścia `1`.
+Status końcowy: **PASS**, kod wyjścia `0`.
 
 Stan początkowy:
 
@@ -70,17 +70,21 @@ fix available via npm audit fix --force
 Will install next@16.3.4, which is a breaking change
 ```
 
-Pozostała podatność dotyczy `postcss@8.4.31` zagnieżdżonego w Next.js 15. Automatyczna naprawa wymaga migracji do Next.js 16.3.4, dlatego świadomie nie wykonano ryzykownego `npm audit fix --force`. Wymagana jest kontrolowana migracja do Next.js 16 i pełna regresja.
+Wykonano kontrolowaną migrację do Next.js `16.3.4` i React/React DOM `19.2.8`, wraz z wymaganym przejściem na ESLint 9 i flat config. Wynik końcowego audytu:
+
+```text
+found 0 vulnerabilities
+```
 
 ## 3. Build produkcyjny
 
 Polecenie: `npm run build`
 
-Status końcowy: **PASS**, kod wyjścia `0`, Next.js `15.5.25`.
+Status końcowy: **PASS**, kod wyjścia `0`, Next.js `16.3.4` (Turbopack).
 
 ```text
-✓ Compiled successfully in 4.8s
-✓ Generating static pages (10/10)
+✓ Compiled successfully in 2.3s
+✓ Generating static pages using 10 workers (9/9)
 ○ (Static) prerendered as static content
 ```
 
@@ -95,9 +99,11 @@ Wszystkie wymagane strony wygenerowano statycznie:
 
 Dodatkowo statycznie wygenerowano `/robots.txt` i `/sitemap.xml`. Nie wystąpiły błędy prerenderowania ani ostrzeżenia o niedozwolonych bibliotekach serwerowych.
 
+Test uruchomieniowy `next start` po migracji potwierdził HTTP 200 dla wszystkich stron, `/robots.txt` i `/sitemap.xml` oraz HTTP 404 dla nieistniejącego adresu.
+
 ## 4. First Load JS i analiza chunków
 
-Pomiar: tabela wynikowa `npm run build`
+Pomiar porównawczy sprzed migracji do Next.js 16: tabela wynikowa `npm run build`
 
 Status końcowy: **PASS**.
 
@@ -124,6 +130,8 @@ Największe chunki według gzip:
 
 Łącznie przed optymalizacją: `1111.3 kB raw`, `346.8 kB gzip`. Zidentyfikowano synchroniczne ładowanie `ScrollTrigger` przez layout oraz dwa komponenty `/oferta`. Po zmianie plugin jest pobierany asynchronicznie po hydratacji, natomiast wszystkie parametry animacji pozostały bez zmian. First Load JS `/oferta` spadł z `174 kB` do `157 kB`, czyli o `17 kB`.
 
+Next.js 16 usunął metrykę First Load JS z raportu `next build`, dlatego powyższa tabela pozostaje ostatnim bezpośrednio porównywalnym pomiarem z Next.js 15. Po migracji `npm run perf:bundle` raportuje łącznie `1080.6 kB raw` i `334.3 kB gzip` dla wszystkich chunków.
+
 Kontrola regresji objęła TypeScript, ESLint, testy jednostkowe i produkcyjny build. Automatyczny test wizualny nie był możliwy, ponieważ w sesji audytowej nie była dostępna sterowalna przeglądarka. Użytkownik wykonał następnie ręczny test `/oferta` i potwierdził poprawne działanie animacji po optymalizacji.
 
 ## 5. Higiena kodu i obsługa błędów
@@ -136,10 +144,10 @@ Przeszukano `app/`, `components/` i `lib/` pod kątem `console.log`, `console.wa
 
 ## 6. Środowisko i repozytorium
 
-- Lokalny Node.js: `v22.23.1` — zgodny z Next.js 15 i skryptem testowym.
+- Lokalny Node.js: `v22.23.1` — zgodny z wymaganiem Next.js 16 (`>=20.9`) i skryptem testowym.
 - npm: `10.9.8`.
 - CI po poprawce: Node.js `22`, zgodny z lokalną główną wersją runtime.
-- Wersji Node.js ustawionej w panelu Vercel nie można potwierdzić na podstawie repozytorium — wymaga kontroli w panelu projektu.
+- Vercel: Node.js `24.x` — ustawienie potwierdzone przez użytkownika na podstawie panelu Production Deployment; wersja spełnia wymagania projektu.
 - Śledzony jest wyłącznie `.env.example`.
 - `.env`, `.env.local` i `.env.production` są ignorowane przez `.gitignore`.
 - Nie znaleziono prywatnych tokenów lub kluczy API oznaczonych prefiksem `NEXT_PUBLIC_`. Zmienne publiczne zawierają wyłącznie treści, dane kontaktowe i adresy profili.
@@ -175,22 +183,24 @@ Wprowadzona poprawka:
 - `actions/setup-node@v4` → `actions/setup-node@v5`,
 - Node.js `20` → `22`.
 
-Konfiguracja nadal wykonuje pełną sekwencję `npm ci` → `npm run check` → `npm run build`. `concurrency.cancel-in-progress` ma wartość `true`. Cache npm jest włączony przez `actions/setup-node` z `cache: npm`; API przebiegu potwierdza powodzenie kroku instalacji, lecz nie udostępnia jednoznacznej informacji, czy w tym konkretnym przebiegu wystąpił cache hit. Poprawkę sprawdzono lokalnie na Node.js 22, ale zielony status zdalny będzie możliwy dopiero po commit/push i ponownym uruchomieniu workflow.
+Konfiguracja nadal wykonuje pełną sekwencję `npm ci` → `npm run check` → `npm run build`. `concurrency.cancel-in-progress` ma wartość `true`. Cache npm jest włączony przez `actions/setup-node` z `cache: npm`; API przebiegu potwierdza powodzenie kroku instalacji, lecz nie udostępnia jednoznacznej informacji, czy w tym konkretnym przebiegu wystąpił cache hit. Pełną sekwencję CI odtworzono w czystym katalogu tymczasowym po migracji do Next.js 16: instalacja, typy, lint, 6/6 testów i build zakończyły się powodzeniem. Zielony status zdalny będzie możliwy dopiero po commit/push i ponownym uruchomieniu workflow.
 
 ## 8. Naprawione usterki
 
 1. Dopasowano runtime CI do skryptu testowego i usunięto przyczynę kodu wyjścia 9.
 2. Podniesiono wersje akcji GitHub do wariantów opartych na Node.js 24, usuwając ostrzeżenie o wycofanym runtime akcji.
 3. Usunięto ujawnianie surowego `error.message` na stronie 500.
-4. Usunięto podatne `nanoid@3.3.11` i podniesiono Next.js w obrębie wersji 15 do `15.5.25`.
+4. Usunięto podatne `nanoid@3.3.11`, a następnie wykonano migrację do Next.js `16.3.4` i React `19.2.8`; końcowy audyt produkcyjny wykazuje 0 podatności.
 5. Odroczono ładowanie `ScrollTrigger` bez zmiany parametrów animacji; First Load JS `/oferta` spadł o 17 kB.
+6. Przeniesiono linting ze starego `.eslintrc` do flat config wymaganego przez Next.js 16 i ESLint 9.
+7. Usunięto niestandardowe nagłówki `Cache-Control` dla `/_next/*`, które w Next.js 16 powodowały ostrzeżenia i mogły kolidować z cache frameworka.
 
 ## 9. Checklista akceptacyjna
 
 - [x] `tsc --noEmit` kończy się kodem `0`.
 - [x] `eslint .` kończy się kodem `0`.
 - [x] Wszystkie istniejące testy przechodzą: 6/6.
-- [ ] `npm audit --omit=dev` bez podatności `high`/`critical` — pozostała 1 `high` w zagnieżdżonym PostCSS.
+- [x] `npm audit --omit=dev` kończy się kodem `0`: 0 podatności.
 - [x] `next build` kończy się kodem `0`.
 - [x] Wszystkie 5 głównych tras oraz 404 są statyczne.
 - [x] Brak wycieków sekretów w `NEXT_PUBLIC_`.
@@ -199,14 +209,13 @@ Konfiguracja nadal wykonuje pełną sekwencję `npm ci` → `npm run check` → 
 - [ ] Zielony pipeline na `main` — poprawka jest lokalna i nie została jeszcze uruchomiona zdalnie.
 - [x] Wszystkie trasy poniżej 160 kB First Load JS — `/oferta` ma po optymalizacji 157 kB.
 - [x] Ręczna regresja wizualna animacji `/oferta` po optymalizacji.
+- [x] Runtime Vercel zweryfikowany: Node.js `24.x`.
+- [x] Rozbieżność dokumentacji (11 testów) i repozytorium (6 testów) zaakceptowana decyzją użytkownika jako niewstrzymująca etap.
 
 ## Rekomendacja
 
-**Nie zezwalać jeszcze na przejście do etapu 2.**
+**Zezwolić na przejście do etapu 2 po potwierdzeniu zielonego CI.**
 
-Blokery do zamknięcia:
+Pozostały warunek:
 
-1. Zaplanować i wykonać kontrolowaną migrację Next.js 15 → 16, następnie potwierdzić `npm audit --omit=dev` bez podatności `high`/`critical`.
-2. Przejrzeć zmiany, wykonać commit/push i potwierdzić zielony przebieg CI na `main`.
-3. Potwierdzić zgodną wersję Node.js w ustawieniach Vercel.
-4. Uzgodnić, czy dokumentacja ma wymagać 6 obecnych testów, czy repozytorium powinno zostać uzupełnione do deklarowanych 11 testów.
+1. Przejrzeć zmiany, wykonać commit/push i potwierdzić zielony przebieg CI na `main`.
