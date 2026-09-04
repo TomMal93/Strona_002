@@ -139,6 +139,19 @@ body:has(> [data-subpage]) > footer > div > div:last-child {
   }
 }
 
+/* Hero must stay at its authored 1:1 scale on every non-mobile viewport. */
+@media (min-width: 768px) {
+  [data-responsive-sections] > section[data-fullscreen-hero] {
+    zoom: 1;
+  }
+}
+
+@media (min-width: 2500px) {
+  [data-responsive-sections] > section[data-fullscreen-hero] {
+    zoom: 1.2;
+  }
+}
+
 /* Mobile layouts are already authored for the narrow viewport. Keep them at
    their natural scale and give rem-based copy a little more breathing room.
    Without this override, the global 0.8 section zoom turns 14px body copy into
