@@ -36,7 +36,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 const siteUrl    = process.env.SITE_URL    ?? 'https://maleszyk.media'
 const authorName = process.env.AUTHOR_NAME ?? 'Maleszyk Media'
-const heroImagePath = '/images/Hero.webp'
+const socialImagePath = '/og-image.jpg'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -55,7 +55,10 @@ export const metadata: Metadata = {
     description: siteContent.seoDescription,
     images: [
       {
-        url: heroImagePath,
+        url: socialImagePath,
+        width: 1200,
+        height: 630,
+        type: 'image/jpeg',
         alt: `${authorName} — Fotografia i Film`,
       },
     ],
@@ -64,7 +67,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `Portfolio Fotograficzno-Wideo | ${authorName}`,
     description: siteContent.seoDescription,
-    images: [heroImagePath],
+    images: [socialImagePath],
   },
   icons: {
     icon: '/favicon.ico',

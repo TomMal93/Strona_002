@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     description: siteContent.contactPage.meta.description,
     images: [
       {
-        url: '/images/Hero.webp',
-        width: 1024,
-        height: 1024,
-        type: 'image/webp',
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        type: 'image/jpeg',
         alt: 'Kontakt z Maleszyk Media',
       },
     ],
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: socialTitle,
     description: siteContent.contactPage.meta.description,
-    images: ['/images/Hero.webp'],
+    images: ['/og-image.jpg'],
   },
 }
 
