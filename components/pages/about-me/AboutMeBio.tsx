@@ -53,7 +53,7 @@ export default function AboutMeBio() {
   useAboutMeBioAnimations({ sectionRef, titleRef, subtitleRef, hudBarRef, bioPanelRef })
 
   const { profile } = siteContent.aboutMe
-  const [introLead, introMiddle = '', ...introBodyLines] = profile.intro.split('\n')
+  const [introLead, introMiddle = '', ...introBodyLines] = (profile.intro || '').replace(/\\n/g, '\n').split('\n')
   const introBody = introBodyLines.join('\n')
 
   return (

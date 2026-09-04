@@ -2,14 +2,11 @@
 
 import { useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { siteContent } from '@/lib/site-content'
 import CinematicVideoPlayer from '@/components/ui/CinematicVideoPlayer'
 import { useLazyVideoSource } from '@/components/ui/useLazyVideoSource'
 import styles from './OfertaServices.module.css'
 import { OFERTA_HERO_ENTERED_EVENT } from './ofertaAnimation'
-
-gsap.registerPlugin(ScrollTrigger)
 
 type ServiceItem = (typeof siteContent.services.items)[number]
 
@@ -162,38 +159,56 @@ export default function OfertaServices() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) return
 
-    const ctx = gsap.context((_, contextSafe) => {
-      const blocks = gsap.utils.toArray<HTMLElement>('[data-offer-block]')
-      gsap.set(blocks, { y: 40, autoAlpha: 0 })
+    let disposed = false
+    let heroEntered = false
+    let ctx: ReturnType<typeof gsap.context> | undefined
+    let revealBlocks: (() => void) | undefined
 
-      const animateBlocks = () => {
-        blocks.forEach((block) => {
-          gsap.to(block, {
-            y: 0,
-            autoAlpha: 1,
-            duration: 0.9,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: block,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
+    const onHeroEntered = () => {
+      heroEntered = true
+      revealBlocks?.()
+    }
+    window.addEventListener(OFERTA_HERO_ENTERED_EVENT, onHeroEntered, { once: true })
+
+    void import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+      if (disposed) return
+
+      gsap.registerPlugin(ScrollTrigger)
+      ctx = gsap.context((_, contextSafe) => {
+        const blocks = gsap.utils.toArray<HTMLElement>('[data-offer-block]')
+        gsap.set(blocks, { y: 40, autoAlpha: 0 })
+
+        const animateBlocks = () => {
+          blocks.forEach((block) => {
+            gsap.to(block, {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.9,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: block,
+                start: 'top 85%',
+                toggleActions: 'play none none none',
+              },
+            })
           })
-        })
 
-        ScrollTrigger.refresh()
-      }
+          ScrollTrigger.refresh()
+        }
 
-      const revealBlocks = contextSafe
-        ? (contextSafe(animateBlocks) as () => void)
-        : animateBlocks
+        revealBlocks = contextSafe
+          ? (contextSafe(animateBlocks) as () => void)
+          : animateBlocks
 
-      window.addEventListener(OFERTA_HERO_ENTERED_EVENT, revealBlocks, { once: true })
+        if (heroEntered) revealBlocks()
+      }, sectionRef)
+    })
 
-      return () => window.removeEventListener(OFERTA_HERO_ENTERED_EVENT, revealBlocks)
-    }, sectionRef)
-
-    return () => ctx.revert()
+    return () => {
+      disposed = true
+      window.removeEventListener(OFERTA_HERO_ENTERED_EVENT, onHeroEntered)
+      ctx?.revert()
+    }
   }, [])
 
   return (

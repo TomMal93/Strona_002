@@ -7,7 +7,7 @@ type ErrorPageProps = {
   reset: () => void
 }
 
-export default function ErrorPage({ error, reset }: ErrorPageProps) {
+export default function ErrorPage({ reset }: ErrorPageProps) {
   return (
     <main className="page-shell">
       <div className="page-panel">
@@ -16,10 +16,6 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
         <p className="mt-4 font-inter text-base text-warm-white/85">
           Nie udalo sie poprawnie zaladowac tej strony. Sprobuj ponownie.
         </p>
-        <p className="mt-2 font-inter text-sm text-warm-white/60 break-all">
-          {error.message || 'Nieznany blad aplikacji.'}
-        </p>
-
         <div className="mt-8 flex flex-wrap gap-3">
           <Button
             type="button"

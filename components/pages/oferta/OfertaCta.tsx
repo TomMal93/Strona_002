@@ -2,14 +2,11 @@
 
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import { socialIcons } from '@/components/sections/cta/CtaActions'
 import heroStyles from '@/components/sections/Hero.module.css'
 import styles from './OfertaCta.module.css'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export default function OfertaCta() {
   const sectionRef = useRef<HTMLElement>(null!)
@@ -25,21 +22,32 @@ export default function OfertaCta() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) return
 
-    const ctx = gsap.context(() => {
-      gsap.from(contentRef.current, {
-        y: 28,
-        autoAlpha: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      })
-    }, sectionRef)
+    let disposed = false
+    let ctx: ReturnType<typeof gsap.context> | undefined
 
-    return () => ctx.revert()
+    void import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+      if (disposed) return
+
+      gsap.registerPlugin(ScrollTrigger)
+      ctx = gsap.context(() => {
+        gsap.from(contentRef.current, {
+          y: 28,
+          autoAlpha: 0,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          },
+        })
+      }, sectionRef)
+    })
+
+    return () => {
+      disposed = true
+      ctx?.revert()
+    }
   }, [])
 
   return (
