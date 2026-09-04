@@ -16,6 +16,9 @@ const personName = process.env.PERSON_NAME ?? 'Przemysław Maleszyk'
 const personAlternateName = process.env.NEXT_PUBLIC_ABOUTME_HERO_NAME ?? 'Przemek Maleszyk'
 const phone = process.env.NEXT_PUBLIC_ABOUTME_PHONE ?? '+48 791 705 230'
 const email = process.env.NEXT_PUBLIC_ABOUTME_EMAIL ?? 'kontakt@maleszyk.media'
+const organizationAddress = process.env.PRIVACY_ADMIN_ADDRESS?.trim()
+const organizationNip = process.env.PRIVACY_ADMIN_NIP?.trim()
+const organizationRegon = process.env.PRIVACY_ADMIN_REGON?.trim()
 
 const socialProfiles = [
   process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK
@@ -66,6 +69,9 @@ export function createSiteStructuredData() {
         description: siteContent.structuredDataDescription,
         email,
         telephone: phone,
+        ...(organizationAddress ? { address: organizationAddress } : {}),
+        ...(organizationNip ? { vatID: organizationNip } : {}),
+        ...(organizationRegon ? { identifier: organizationRegon } : {}),
         image: { '@id': structuredDataIds.primaryImage },
         sameAs: socialProfiles,
         founder: { '@id': structuredDataIds.person },

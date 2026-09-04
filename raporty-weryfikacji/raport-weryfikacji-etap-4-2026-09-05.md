@@ -1,0 +1,297 @@
+# Raport weryfikacji przedwdrożeniowej — etap 4
+
+**Projekt:** Strona_002
+
+**Etap:** Wydajność, SEO, analityka i wymagania prawne
+
+**Data wykonania:** 2026-09-05
+
+**Gałąź i commit końcowy audytu:** `main`, `8b97560dab4275a908a47aeaf03484d8c2d34131`
+**Wynik:** **FAIL / BRAK ZGODY NA ROZPOCZĘCIE ETAPU 5**
+
+## Podsumowanie wykonawcze
+
+Projekt buduje się produkcyjnie, wszystkie trasy są statycznie prerenderowane, testy techniczne przechodzą, odpowiedź dla nieistniejącej trasy ma prawidłowy status `404`, a robots, canonicale, Open Graph, Twitter Card, nagłówki, atrybuty `alt` i JSON-LD mają dobre podstawy.
+
+Etapu 4 nie można jednak zamknąć pozytywnie. Blokery przedwdrożeniowe to:
+
+1. brak pomiarów Lighthouse i Core Web Vitals na Mobile/Desktop;
+2. produkcja kieruje canonicale, sitemapę, JSON-LD i obrazy OG do `https://maleszykmedia.pl`, ale domena zostanie uruchomiona dopiero po zakończeniu testów;
+3. polityka prywatności nie zawiera adresu, NIP ani REGON administratora — zadanie zapisano w TODO;
+4. wynik Mozilla Observatory to B+ zamiast wymaganego A/A+, a test CSP oblał przez `'unsafe-inline'`;
+5. narzędzie `perf:bundle` nie ma zdefiniowanego progu pass/fail, a wspólny JS obecny w HTML tras wynosi około 217,8 kB gzip.
+
+W ramach działań po pierwszym przebiegu poprawiono opisy SEO, dodano `theme-color`, daty `lastmod`, cache obrazu OG i ikon oraz skrócono preloader do około 1 s. Udokumentowano także decyzję o pozostaniu wyłącznie przy Vercel Speed Insights.
+
+## 1. Metoda i ograniczenia
+
+Wykonano:
+
+- `npm run check` — typecheck, ESLint i 6 testów Node;
+- produkcyjny build Next.js 16.3.4 przez Webpack;
+- `npm run perf:bundle` i analizę skryptów faktycznie wskazanych w HTML każdej trasy;
+- uruchomienie lokalnego serwera produkcyjnego i test odpowiedzi HTTP;
+- test publicznego wdrożenia `https://strona-002.vercel.app/` przez HTTP/2;
+- analizę wyrenderowanego HTML pięciu tras;
+- kontrolę metadanych, canonicali, Open Graph, Twitter Card, nagłówków `h1–h6`, obrazów i JSON-LD;
+- kontrolę robots, sitemap, 404, cache, CSP i pozostałych nagłówków bezpieczeństwa;
+- przegląd konfiguracji Speed Insights, GA4/GTM, preloadera, polityki prywatności i odnośników prawnych.
+
+Nie wykonano:
+
+- Lighthouse Mobile/Desktop, LCP, INP, CLS ani testu Fast/Slow 3G — w sesji nie było dostępnej sterowalnej przeglądarki ani Chromium/Lighthouse;
+- testów Facebook Sharing Debugger, LinkedIn Post Inspector i X Card Validator;
+- Google Rich Results Test;
+- SecurityHeaders.com — serwis zwrócił wyzwanie Cloudflare zamiast raportu;
+- potwierdzenia metryk w panelu Vercel — brak dostępu do projektu.
+
+Oficjalne API Google PageSpeed Insights zostało wywołane dla Mobile i Desktop, ale dla obu profili zwróciło HTTP 429 `RESOURCE_EXHAUSTED` (brak dostępnego dziennego limitu API). Mozilla Observatory wykonało skan poprawnie.
+
+Wartości nieweryfikowalnych pozycji oznaczono jako `NOT TESTED`, a nie jako PASS.
+
+Domyślny `next build` zatrzymał się po kompilacji na wewnętrznym wywołaniu TypeScript (`Could not parse output from TypeScript's --showConfig`). Samodzielny `tsc --showConfig` i `npm run typecheck` działały poprawnie. Build produkcyjny zakończył się powodzeniem przez Webpack po tymczasowym przełączeniu Next na API TypeScript (`experimental.useTypeScriptCli: false`). Zmianę wycofano natychmiast po buildzie; nie pozostała w kodzie.
+
+## 2. Lighthouse, Core Web Vitals i wolna sieć
+
+| Profil / metryka | Cel | Wynik | Status |
+|---|---:|---:|---|
+| Lighthouse Performance Mobile | ≥ 90 | brak pomiaru | NOT TESTED |
+| Lighthouse Accessibility Mobile | ≥ 85 | brak pomiaru | NOT TESTED |
+| Lighthouse SEO Mobile | ≥ 90 | brak pomiaru | NOT TESTED |
+| Lighthouse Performance Desktop | ≥ 90 | brak pomiaru | NOT TESTED |
+| Lighthouse Accessibility Desktop | ≥ 85 | brak pomiaru | NOT TESTED |
+| Lighthouse SEO Desktop | ≥ 90 | brak pomiaru | NOT TESTED |
+| LCP | ≤ 2,5 s | brak pomiaru | NOT TESTED |
+| INP | ≤ 200 ms | brak pomiaru | NOT TESTED |
+| CLS | ≤ 0,1 | brak pomiaru | NOT TESTED |
+| Fast/Slow 3G | brak zawieszenia i blokowania First Paint | brak pomiaru | NOT TESTED |
+
+### Preloader i fonty
+
+- `usePreloaderGate` wymusza `MIN_VISIBLE_MS = 600`.
+- Wszystkie elementy animacji wyjścia są uruchamiane równolegle, a najdłuższy tween trwa 400 ms. Budżet blokującej sekwencji wynosi około **1,0 s**.
+- Powracający użytkownik w tej samej sesji pomija intro dzięki `sessionStorage`.
+- Przy `prefers-reduced-motion` wyjście następuje bez animacji po otwarciu gate.
+- Treść jest prerenderowana w HTML, więc bot nie musi czekać na JavaScript, ale użytkownik nadal widzi blokującą nakładkę.
+- W wygenerowanym CSS potwierdzono `font-display: swap` dla Bebas Neue, Inter i IBM Plex Mono.
+- Wideo poniżej fold korzysta z lazy source, a materiały zostały odchudzone w etapie 3, lecz zachowania na ograniczonej sieci nie udało się zmierzyć.
+
+**Status implementacji:** PASS — preloader skrócono do ustalonej 1 s. Rzeczywisty pomiar przeglądarkowy pozostaje NOT TESTED.
+
+## 3. JavaScript i budżet pakietu
+
+`npm run perf:bundle` zakończył się kodem 0:
+
+| Wielkość | Wynik |
+|---|---:|
+| Wszystkie chunki JS raw | 1266,6 kB |
+| Wszystkie chunki JS gzip | 392,9 kB |
+| Największy chunk gzip | 64,1 kB |
+| Wspólne skrypty obecne w HTML każdej trasy | ok. 217,8 kB gzip |
+
+Szacowany koszt skryptów wskazanych w HTML (suma gzip plików; bez uwzględnienia cache między trasami):
+
+| Trasa | Skrypty | JS gzip |
+|---|---:|---:|
+| `/` | 16 | 258,8 kB |
+| `/contact` | 15 | 236,1 kB |
+| `/o-mnie` | 15 | 243,4 kB |
+| `/oferta` | 15 | 235,2 kB |
+| `/polityka-prywatnosci` | 13 | 218,2 kB |
+
+Skrypt `scripts/analyze-bundle.mjs` wyłącznie drukuje rozmiary — nie definiuje ani nie egzekwuje budżetu. Nie można więc uznać kryterium „budżet nieprzekroczony” za automatycznie zaliczone. Wartość wspólna przekracza cel `< 75 kB` przyjęty w audycie 007.
+
+**Status:** FAIL — zdefiniować mierzalny budżet CI i ograniczyć globalny JS (szczególnie Lenis, GSAP, navbar, preloader i Speed Insights ładowane z layoutu).
+
+## 4. SEO On-Page
+
+| Trasa | Title | Opis (znaki) | Canonical | H1 | Hierarchia | OG/Twitter |
+|---|---|---:|---|---:|---|---|
+| `/` | `Portfolio Fotograficzno-Wideo \| Maleszyk Media` | 142 | `https://maleszykmedia.pl` | 1 | bez przeskoków | kompletne, lecz URL odroczony |
+| `/contact` | `Kontakt \| Maleszyk Media` | 154 | `https://maleszykmedia.pl/contact` | 1 | bez przeskoków | kompletne, lecz URL odroczony |
+| `/o-mnie` | `O mnie \| Maleszyk Media` | 143 | `https://maleszykmedia.pl/o-mnie` | 1 | bez przeskoków | kompletne, lecz URL odroczony |
+| `/oferta` | `Oferta filmowa \| Maleszyk Media` | 148 | `https://maleszykmedia.pl/oferta` | 1 | bez przeskoków | kompletne, lecz URL odroczony |
+| `/polityka-prywatnosci` | `Polityka prywatności i RODO \| Maleszyk Media` | 145 | `https://maleszykmedia.pl/polityka-prywatnosci` | 1 | bez przeskoków | kompletne, lecz URL odroczony |
+
+Wszystkie tytuły są unikalne i mają wymagany format marki. Wszystkie opisy są unikalne i mieszczą się w przyjętym zakresie 140–160 znaków.
+
+Na wszystkich trasach:
+
+- `robots` ma `index, follow`;
+- `og:title`, `og:description`, bezwzględny `og:image` i `twitter:card=summary_large_image` są obecne;
+- `og:image` wskazuje `https://maleszykmedia.pl/og-image.jpg`;
+- brak obrazów `<img>` bez atrybutu `alt` w HTML SSR (puste `alt` są używane dla elementów dekoracyjnych);
+- dokładnie jeden `<h1>` i brak przeskoku poziomu nagłówków.
+
+### Open Graph, favicony i theme color
+
+- `public/og-image.jpg`: PASS — 1200×630 px, JPEG, 33 470 B, poniżej 300 kB.
+- `favicon.ico`: PASS — istnieje i zawiera warianty ikon.
+- `apple-touch-icon.png`: PASS — 180×180 px.
+- Podglądy Facebook/LinkedIn/X w oficjalnych UI: NOT TESTED — brak sterowalnej przeglądarki.
+- Funkcjonalność OG na produkcji: **FAIL** — bezpośredni `/og-image.jpg` na Vercel zwraca 200, ale metadane wskazują nierozwiązującą się domenę `maleszykmedia.pl`, więc bot społecznościowy nie pobierze miniatury.
+- `theme-color`: PASS — `#0a0a0a` na wszystkich pięciu trasach.
+- Cache `og-image.jpg`, favicony i Apple Touch Icon: PASS — `public, max-age=2592000, stale-while-revalidate=86400`.
+
+## 5. Robots, sitemap, 404 i dane strukturalne
+
+### Robots i sitemap
+
+- `/robots.txt` zwraca 200, `User-Agent: *`, `Allow: /`, `Host: https://maleszykmedia.pl` i adres sitemap w tej samej domenie.
+- `/sitemap.xml` zwraca 200 i obejmuje `/`, `/oferta`, `/o-mnie`, `/contact`, `/polityka-prywatnosci`.
+- Wszystkie adresy używają HTTPS.
+- **FAIL:** host robots, adresy sitemap, canonicale, `og:url`, `og:image` i URL-e JSON-LD wskazują `maleszykmedia.pl`, która w czasie audytu zwracała błąd DNS `Could not resolve host`. Działający adres `strona-002.vercel.app` nie jest wskazany jako źródło kanoniczne.
+- Wpisy sitemap zawierają 5 dat `lastmod`, kontrolowanych zmienną `SITE_LAST_MODIFIED` — PASS.
+
+### 404
+
+`HEAD /nieistnieje-test-etap-4` zwrócił:
+
+```text
+HTTP/1.1 404 Not Found
+Cache-Control: private, no-cache, no-store, max-age=0, must-revalidate
+```
+
+**Status:** PASS — brak Soft 404 w lokalnym serwerze produkcyjnym.
+
+### JSON-LD
+
+| Trasa | Liczba bloków | Typy | Parsowanie JSON |
+|---|---:|---|---|
+| `/` | 1 | WebSite, Organization, Person, ImageObject, WebPage | PASS |
+| `/contact` | 1 | ContactPage, BreadcrumbList | PASS |
+| `/o-mnie` | 1 | AboutPage, BreadcrumbList | PASS |
+| `/oferta` | 1 | CollectionPage, BreadcrumbList | PASS |
+| `/polityka-prywatnosci` | 1 | WebPage, BreadcrumbList | PASS |
+
+Testy jednostkowe `structured-data` przechodzą, a wszystkie bloki z HTML dają się sparsować jako JSON. Oficjalny Google Rich Results Test pozostaje `NOT TESTED`; poprawność składniowa nie jest równoznaczna z kwalifikacją do rich result.
+
+## 6. Analityka
+
+### Vercel Speed Insights
+
+- `@vercel/speed-insights` 2.0.0 jest zależnością produkcyjną.
+- `<SpeedInsights />` jest osadzony globalnie w `app/layout.tsx`.
+- produkcyjny `/_vercel/speed-insights/script.js` zwraca HTTP 200 i ma cache `public, max-age=2678400`;
+- wygenerowany klient ładuje `/_vercel/speed-insights/script.js` i nie znaleziono w jego kodzie zapisu `document.cookie` ani trwałego identyfikatora użytkownika;
+- CSP `connect-src 'self' https:` obejmuje endpointy Vercel, ale jest szersze niż konieczne; instrukcja oczekiwała jawnego `https://vitals.vercel-insights.com`;
+- widoczność LCP/INP/CLS w panelu Vercel: NOT TESTED — brak dostępu do panelu i brak aktywnej domeny.
+
+### GA4 / GTM
+
+- brak zależności, identyfikatorów, skryptów i domen GA4/GTM w kodzie;
+- nie ma Consent Mode v2 ani banera cookies;
+- przy obecnym zakresie aplikacji nie wykryto własnych cookies analitycznych lub marketingowych;
+- polityka opisuje `sessionStorage`, Speed Insights oraz YouTube w trybie `youtube-nocookie.com`;
+- decyzja biznesowa została udokumentowana: projekt pozostaje wyłącznie przy Vercel Speed Insights, bez GA4/GTM.
+
+**Status:** PASS dla obecnego wariantu bez GA4/GTM. Jeżeli decyzja zostanie zmieniona, przed uruchomieniem należy wdrożyć Consent Mode v2, mechanizm zgody, domeny CSP i zaktualizować politykę.
+
+## 7. Cache i nagłówki bezpieczeństwa
+
+### Cache-Control na publicznym wdrożeniu Vercel
+
+| Zasób | Oczekiwane | Otrzymane | Status |
+|---|---|---|---|
+| `/_next/static/chunks/*.js` | `max-age=31536000, immutable` | `public, max-age=31536000, immutable` | PASS |
+| `/images/Hero.webp` | `max-age=2592000, stale-while-revalidate=86400` | zgodne | PASS |
+| `/videos/promo-reel.webm` | `max-age=2592000, stale-while-revalidate=86400` | zgodne | PASS |
+| `/og-image.jpg` | `max-age=2592000, stale-while-revalidate=86400` | zgodne lokalnie po poprawce; wdrożenie oczekuje publikacji | PASS implementacji |
+
+HTML jest statycznie prerenderowany i na Vercel zwraca `public, max-age=0, must-revalidate` wraz z `x-vercel-cache: HIT/PRERENDER`.
+
+### CSP i pozostałe nagłówki
+
+Na publicznym wdrożeniu obecne są:
+
+- `X-Content-Type-Options: nosniff`;
+- `X-Frame-Options: DENY`;
+- `Referrer-Policy: strict-origin-when-cross-origin`;
+- `Permissions-Policy: camera=(), microphone=(), geolocation=()`;
+- `frame-ancestors 'none'`, `object-src 'none'`, `base-uri 'self'`, `form-action 'self'`;
+- `frame-src https://www.youtube-nocookie.com` — zgodne z embedami;
+- `img-src` i `media-src` dopuszczają HTTPS; `remotePatterns` dopuszcza używaną miniaturę `img.youtube.com`.
+
+Vercel dodaje prawidłowy nagłówek `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload`, mimo że nie jest on zdefiniowany w `next.config.mjs`. Żądanie HTTP zwraca `308 Permanent Redirect` do HTTPS. Przekierowanie HTTP → HTTPS i HSTS są zaliczone.
+
+Mozilla Observatory, [skan `119015166`](https://developer.mozilla.org/en-US/observatory/analyze?host=strona-002.vercel.app) z 2026-09-05:
+
+| Wynik | Wartość |
+|---|---:|
+| Ocena | **B+** |
+| Punkty | **80/100** |
+| Testy | 11/12 PASS |
+| Jedyny test niezaliczony | Content Security Policy |
+
+Problemy:
+
+- `connect-src 'self' https:` dopuszcza dowolny endpoint HTTPS zamiast minimalnej listy;
+- `script-src` i `style-src` zawierają `'unsafe-inline'`; Observatory odjęło 20 punktów za CSP `csp-implemented-with-unsafe-inline`.
+
+SecurityHeaders.com: NOT TESTED z powodu ochrony Cloudflare. Mozilla Observatory potwierdza HSTS, ale ocena B+ nie spełnia oczekiwanego A/A+.
+
+## 8. Polityka prywatności i RODO
+
+Pozytywne elementy:
+
+- administrator ma ustawioną nazwę `Maleszyk.Media — Przemysław Maleszyk`;
+- podano e-mail i telefon;
+- opisano cele i podstawy przetwarzania, odbiorców, okresy retencji, prawa osoby, UODO, brak profilowania, sessionStorage, Speed Insights i YouTube;
+- stopka na każdej trasie zawiera odnośnik do polityki prywatności;
+- nie znaleziono placeholdera administratora w aktywnych plikach środowiskowych.
+
+Braki blokujące kryterium etapu:
+
+- kod i pliki env obsługują adres, NIP oraz REGON, ale ich wartości pozostają puste do czasu przekazania oficjalnych danych;
+- e-mail do spraw ochrony danych jest podłączony przez `PRIVACY_CONTACT_EMAIL` i tymczasowo używa `kontakt@maleszyk.media`;
+- dokument pokazuje datę z `PRIVACY_POLICY_UPDATED_AT` (`2026-09-05`);
+- dane firmy powinny zostać zatwierdzone przez klienta i — z uwagi na charakter prawny — przez osobę odpowiedzialną za zgodność prawną.
+
+**Status:** FAIL.
+
+## 9. Checklista akceptacyjna
+
+- [ ] Lighthouse: Performance ≥ 90, Accessibility ≥ 85, SEO ≥ 90 — NOT TESTED.
+- [ ] `robots.txt` i `sitemap.xml` działają i używają HTTPS, ale wskazują domenę bez DNS — FAIL.
+- [x] Sitemap zawiera daty ostatniej modyfikacji — PASS po poprawce.
+- [x] Każda podstrona ma title, opis 140–160 znaków i deklarację OG image; działanie docelowego URL OG pozostaje odroczone z domeną.
+- [ ] Debuggery Facebook/LinkedIn/X — UI NOT TESTED; pobranie OG z adresu w metadanych FAIL przez DNS.
+- [x] Favicona i Apple Touch Icon są poprawnymi zasobami.
+- [x] `theme-color: #0a0a0a` — PASS.
+- [x] Nieistniejąca trasa zwraca rzeczywiste 404.
+- [x] JSON-LD jest poprawnym JSON i ma oczekiwane typy.
+- [ ] Google Rich Results Test — NOT TESTED.
+- [x] Dokładnie jeden H1 na każdej trasie, bez przeskoków hierarchii.
+- [x] Wszystkie obrazy SSR mają atrybut `alt`.
+- [ ] Speed Insights raportuje w panelu Vercel — komponent PASS, panel NOT TESTED.
+- [x] Cache JS/CSS, obrazów i wideo jest zgodny na publicznym wdrożeniu.
+- [ ] HSTS PASS, lecz ocena Mozilla Observatory B+ zamiast A/A+ — FAIL.
+- [x] Decyzja klienta w sprawie GA4/GTM — tylko Vercel Speed Insights, bez GA4/GTM.
+- [ ] Polityka zawiera zatwierdzone dane firmy: adres, NIP, REGON — FAIL.
+- [ ] Strona działa poprawnie na Fast 3G — NOT TESTED; preloader skrócony do około 1 s.
+
+## 10. Lista działań przed ponownym odbiorem etapu 4
+
+### P0 — blokery formalne i bezpieczeństwa
+
+1. Uzupełnić i zatwierdzić w polityce: pełną nazwę podmiotu, adres, NIP, REGON i kontakt ds. danych.
+2. Po zakończeniu testów podłączyć i uruchomić DNS/TLS dla `maleszykmedia.pl`. Canonicale, robots, sitemap, JSON-LD i OG muszą wtedy wskazywać działający host.
+3. Zaostrzyć CSP tak, aby usunąć `'unsafe-inline'` z `script-src` (nonce/hash) i ograniczyć ogólne źródła; powtórzyć Observatory do A/A+.
+
+### P1 — SEO i wydajność
+
+1. Dodać egzekwowany budżet `perf:bundle` i stopniowo zmniejszać globalny JS.
+
+### P2 — odbiór na publicznym URL
+
+1. Wykonać Lighthouse co najmniej 3–5 razy dla Mobile i Desktop oraz zapisać medianę.
+2. Wykonać Fast/Slow 3G, pierwszą i kolejną wizytę, reduced motion oraz Save-Data.
+3. Zweryfikować Google Rich Results, Facebook, LinkedIn i X.
+4. Powtórzyć SecurityHeaders.com i Mozilla Observatory po zmianie CSP; realne nagłówki CDN są już potwierdzone.
+5. Potwierdzić dane LCP/INP/CLS w Vercel Speed Insights po zebraniu ruchu.
+
+## Decyzja
+
+**Brak zgody na rozpoczęcie procedury wdrożeniowej (Etap 5).**
+
+Po usunięciu braków P0/P1 i wykonaniu pomiarów na działającym publicznym URL należy powtórzyć etap 4. Aktualny build jest technicznie stabilny, lecz kryteria wydajnościowe, bezpieczeństwa produkcyjnego i kompletności prawnej nie mają jeszcze wymaganych dowodów albo są niespełnione.

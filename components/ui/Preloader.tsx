@@ -6,7 +6,7 @@ import { usePreloaderGate } from './usePreloaderGate'
 import styles from './Preloader.module.css'
 
 const SESSION_KEY = 'intro:played:v1'
-const FADE_OUT_MS = 600
+const FADE_OUT_MS = 400
 
 type Phase = 'visible' | 'gone'
 
@@ -76,20 +76,20 @@ export default function Preloader() {
       timeline = gsap.timeline({ defaults: { overwrite: 'auto' } })
       timeline.to(wordmarkRef.current, {
         autoAlpha: 1,
-        duration: 1,
+        duration: 0.4,
         ease: 'power2.out',
       })
       timeline.to(dividerRef.current, {
         autoAlpha: 1,
         scaleX: 1,
-        duration: 0.9,
+        duration: 0.3,
         ease: 'power3.out',
-      }, '-=0.45')
+      }, '-=0.15')
       timeline.to(subtitleRef.current, {
         autoAlpha: 0.7,
-        duration: 0.65,
+        duration: 0.2,
         ease: 'power3.out',
-      }, '-=0.55')
+      }, '-=0.15')
     }
 
     if (document.fonts) {
@@ -136,27 +136,27 @@ export default function Preloader() {
         autoAlpha: 0,
         xPercent: 130,
         scaleX: 0.82,
-        duration: 0.46,
+        duration: 0.25,
         ease: 'power3.in',
       })
       tl.to(subtitleRef.current, {
         autoAlpha: 0,
         y: -6,
-        duration: 0.35,
+        duration: 0.2,
         ease: 'power2.in',
       }, '<')
       tl.to(wordmarkRef.current, {
         autoAlpha: 0,
         y: -8,
-        duration: 0.38,
+        duration: 0.25,
         ease: 'power2.in',
-      }, '<+=0.05')
+      }, '<')
       tl.to(overlayRef.current, {
         autoAlpha: 0,
         scale: 1.04,
         duration: FADE_OUT_MS / 1000,
         ease: 'power2.inOut',
-      }, '-=0.08')
+      }, '<')
     }, overlayRef)
 
     return () => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const MIN_VISIBLE_MS = 1100
+const MIN_VISIBLE_MS = 600
 
 type GateState = 'loading' | 'ready'
 

@@ -62,3 +62,27 @@ Po przywróceniu dostępu do internetu:
 - Zainstalować `vitest`, `jsdom`, `@testing-library/react`, `@testing-library/jest-dom`
 - Przenieść testy smoke z `node:test` do Vitest + Testing Library
 - Dodać konfigurację `vitest.config.ts` oraz `test/setup.ts`
+
+---
+
+## 5. Uzupełnić i zatwierdzić dane prawne
+
+Przed finalnym wdrożeniem uzupełnić w Polityce Prywatności i zatwierdzić z klientem:
+
+- pełną nazwę podmiotu / administratora danych;
+- adres siedziby lub adres administratora;
+- NIP;
+- REGON;
+- dedykowany adres e-mail do spraw ochrony danych;
+- datę obowiązywania lub ostatniej aktualizacji dokumentu.
+
+Kod i pliki środowiskowe obsługują już `PRIVACY_ADMIN_NAME`, `PRIVACY_ADMIN_ADDRESS`, `PRIVACY_ADMIN_NIP`, `PRIVACY_ADMIN_REGON`, `PRIVACY_CONTACT_EMAIL` oraz `PRIVACY_POLICY_UPDATED_AT`. Do uzupełnienia pozostają prawdziwe wartości adresu, NIP-u i REGON-u.
+
+## 6. Decyzja analityczna — bez GA4/GTM
+
+Projekt pozostaje wyłącznie przy **Vercel Speed Insights**. Nie wdrażać GA4 ani GTM, a więc również Google Consent Mode v2, dopóki klient nie zmieni tej decyzji. Przed odbiorem potwierdzić w panelu Vercel, że metryki LCP, INP i CLS są zbierane.
+
+## 7. Zadania odroczone do końca testów
+
+- Po zakończeniu testów podłączyć docelową domenę `maleszykmedia.pl` i dopiero wtedy zweryfikować DNS, TLS, canonicale, robots, sitemap, JSON-LD oraz Open Graph.
+- Zaostrzyć Content Security Policy: usunąć `'unsafe-inline'` z `script-src` z użyciem nonce/hash i ograniczyć `connect-src` do wymaganych hostów. Powtórzyć Mozilla Observatory do wyniku A/A+.

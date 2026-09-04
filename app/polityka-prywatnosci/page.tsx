@@ -7,7 +7,7 @@ import styles from './PrivacyPolicy.module.css'
 
 const pageTitle = 'Polityka prywatności i RODO | Maleszyk Media'
 const pageDescription =
-  'Zasady przetwarzania danych osobowych, prawa użytkowników oraz informacje o technologiach używanych w serwisie Maleszyk Media.'
+  'Dowiedz się, jak Maleszyk Media przetwarza i chroni dane osobowe, z jakich technologii korzysta serwis oraz jakie prawa przysługują użytkownikom.'
 
 export const metadata: Metadata = {
   title: { absolute: pageTitle },
@@ -42,7 +42,12 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   const administratorName = process.env.PRIVACY_ADMIN_NAME || 'Administrator danych osobowych'
+  const administratorAddress = process.env.PRIVACY_ADMIN_ADDRESS?.trim()
+  const administratorNip = process.env.PRIVACY_ADMIN_NIP?.trim()
+  const administratorRegon = process.env.PRIVACY_ADMIN_REGON?.trim()
   const email = siteContent.aboutMe.contact.email
+  const privacyEmail = process.env.PRIVACY_CONTACT_EMAIL?.trim() || email
+  const policyUpdatedAt = process.env.PRIVACY_POLICY_UPDATED_AT?.trim() || '2026-09-05'
   const phone = siteContent.aboutMe.contact.phone
   const cardClassName = `${styles.documentCard} relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8`
   const compactCardClassName = `${styles.documentCard} ${styles.compactCard} relative overflow-hidden rounded-micro border border-khaki/25 bg-anthracite/90 p-6 transition-colors duration-300 hover:border-khaki/40 sm:p-8`
@@ -108,10 +113,28 @@ export default function PrivacyPolicyPage() {
                   {administratorName}
                 </p>
                 <div className="mt-3 space-y-1.5 text-warm-white/80">
+                  {administratorAddress && (
+                    <p className="flex flex-wrap items-center gap-2">
+                      <span className="text-khaki/80">Adres:</span>
+                      <span>{administratorAddress}</span>
+                    </p>
+                  )}
+                  {administratorNip && (
+                    <p className="flex flex-wrap items-center gap-2">
+                      <span className="text-khaki/80">NIP:</span>
+                      <span>{administratorNip}</span>
+                    </p>
+                  )}
+                  {administratorRegon && (
+                    <p className="flex flex-wrap items-center gap-2">
+                      <span className="text-khaki/80">REGON:</span>
+                      <span>{administratorRegon}</span>
+                    </p>
+                  )}
                   <p className="flex flex-wrap items-center gap-2">
-                    <span className="text-khaki/80">E-mail:</span>
-                    <a href={`mailto:${email}`} className="text-warm-white underline decoration-khaki/50 underline-offset-4 transition-colors hover:text-khaki">
-                      {email}
+                    <span className="text-khaki/80">E-mail ds. ochrony danych:</span>
+                    <a href={`mailto:${privacyEmail}`} className="text-warm-white underline decoration-khaki/50 underline-offset-4 transition-colors hover:text-khaki">
+                      {privacyEmail}
                     </a>
                   </p>
                   <p className="flex flex-wrap items-center gap-2">
@@ -129,6 +152,9 @@ export default function PrivacyPolicyPage() {
 
               <p className="mt-4 font-inter text-xs text-warm-gray/80 sm:text-sm">
                 Wszelkie pytania, wnioski lub wątpliwości dotyczące ochrony prywatności możesz kierować bezpośrednio na wskazany adres e-mail.
+              </p>
+              <p className="mt-2 font-mono text-[11px] text-warm-gray/60 sm:text-xs">
+                Ostatnia aktualizacja polityki: {policyUpdatedAt}
               </p>
             </div>
           </article>

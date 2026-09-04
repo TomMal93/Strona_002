@@ -58,4 +58,16 @@ test('site content exposes required SEO, Hero, About and Services copy fields', 
   assert.ok(siteContent.services.title.length > 0)
   assert.ok(siteContent.services.subtitle.length > 0)
   assert.ok(siteContent.services.ctaLabel.length > 0)
+
+  const seoDescriptions = [
+    siteContent.seoDescription,
+    siteContent.offerPage.meta.description,
+    siteContent.contactPage.meta.description,
+    siteContent.aboutMe.meta.description,
+  ]
+
+  for (const description of seoDescriptions) {
+    assert.ok(description.length >= 140)
+    assert.ok(description.length <= 160)
+  }
 })

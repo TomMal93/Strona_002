@@ -4,7 +4,7 @@ export const siteContent = {
   // Using || instead of ?? so that empty-string env vars also fall back to defaults.
   seoDescription:
     process.env.NEXT_PUBLIC_SITE_DESCRIPTION
-    || 'Portfolio fotografa i operatora wideo — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
+    || 'Fotografia i film z charakterem — śluby, eventy, marki, off-road, drony i rodzinne historie. Maleszyk Media realizuje projekty w całej Polsce.',
   structuredDataDescription:
     process.env.NEXT_PUBLIC_STRUCTURED_DATA_DESCRIPTION
     || 'Fotografia i film — wydarzenia militarne, survival, drony, off-road, śluby i sesje rodzinne.',
@@ -333,7 +333,7 @@ export const siteContent = {
       title: process.env.NEXT_PUBLIC_OFFER_META_TITLE || 'Oferta filmowa',
       description:
         process.env.NEXT_PUBLIC_OFFER_META_DESC
-        || 'Film okolicznościowy, profesjonalny montaż i materiały promocyjne — pełna oferta usług filmowych.',
+        || 'Filmy ślubne, eventowe i promocyjne, profesjonalny montaż oraz ujęcia z drona. Poznaj ofertę Maleszyk Media dla klientów z całej Polski i zagranicy.',
     },
     hero: {
       eyebrow: 'Usługi',
@@ -353,7 +353,7 @@ export const siteContent = {
       title: process.env.NEXT_PUBLIC_CONTACT_META_TITLE || 'Kontakt',
       description:
         process.env.NEXT_PUBLIC_CONTACT_META_DESC
-        || 'Porozmawiajmy o filmie, fotografii lub materiale promocyjnym dla Twojej marki.',
+        || 'Skontaktuj się z Maleszyk Media i opowiedz o planowanym filmie, sesji lub materiale promocyjnym. Realizacje w całej Polsce, odpowiedź zwykle do 24 godzin.',
     },
     hero: {
       eyebrow: 'Kontakt',
@@ -372,7 +372,7 @@ export const siteContent = {
       title: process.env.NEXT_PUBLIC_ABOUTME_META_TITLE || 'O mnie',
       description:
         process.env.NEXT_PUBLIC_ABOUTME_META_DESC
-        || 'Poznaj fotografa i operatora wideo stojącego za kamerą — doświadczenie, sprzęt i pasja w jednym.',
+        || 'Poznaj Przemka Maleszyka — fotografa i filmowca, który tworzy naturalne kadry, filmy ślubne, eventowe i promocyjne dla klientów w całej Polsce.',
     },
     hero: {
       name: process.env.NEXT_PUBLIC_ABOUTME_HERO_NAME || 'Fotograf i filmowiec',

@@ -99,6 +99,16 @@ const nextConfig = {
           },
         ],
       },
+      // Zasoby identyfikacji i podglądów społecznościowych — 30 dni.
+      {
+        source: '/:asset(og-image.jpg|favicon.ico|apple-touch-icon.png)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2592000, stale-while-revalidate=86400',
+          },
+        ],
+      },
       securityHeaders,
     ]
   },
