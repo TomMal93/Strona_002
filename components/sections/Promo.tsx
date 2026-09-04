@@ -196,6 +196,7 @@ export default function Promo() {
           ref={videoFrameRef}
           className={styles.videoFrame}
           src={promo.heroVideo.src}
+          fallbackSrc="/videos/promo-reel.mp4"
           poster={promo.heroVideo.poster}
           shouldLoad={shouldLoadHeroVideo}
           playLabel="film promocyjny"

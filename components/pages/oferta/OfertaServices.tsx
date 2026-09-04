@@ -83,6 +83,7 @@ function OfertaServiceBlock({ item }: OfertaServiceBlockProps) {
           className={styles.videoFrame}
           videoClassName={styles.video}
           src={item.video.src}
+          fallbackSrc={item.video.fallbackSrc}
           poster={item.video.poster}
           shouldLoad={shouldLoadVideo}
           playLabel={item.title}

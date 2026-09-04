@@ -159,16 +159,19 @@ function SceneCard({ item, index, animate = true, className }: SceneCardProps) {
             ref={videoRef}
             className={styles.cardVideo}
             poster={item.video.poster}
-            preload="metadata"
+            preload="none"
             muted
             playsInline
             onClick={toggleVideo}
           >
             {shouldLoadVideo && (
-              <source
-                src={item.video.src}
-                type={item.video.src.toLowerCase().endsWith('.webm') ? 'video/webm' : 'video/mp4'}
-              />
+              <>
+                <source
+                  src={item.video.src}
+                  type={item.video.src.toLowerCase().endsWith('.webm') ? 'video/webm' : 'video/mp4'}
+                />
+                <source src={item.video.fallbackSrc} type="video/mp4" />
+              </>
             )}
           </video>
         </div>

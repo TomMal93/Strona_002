@@ -45,12 +45,13 @@ export default function MobileHeroLayout({ children }: MobileHeroLayoutProps) {
             {shouldLoadVideo ? (
               <video
                 src="/videos/hero/hero-video.mp4"
+                poster="/images/hero/hero-video-poster.webp"
                 aria-label={siteContent.about.imageAlt}
                 autoPlay
                 loop
                 muted
                 playsInline
-                preload="auto"
+                preload="none"
                 onLoadedData={() => setIsVideoReady(true)}
                 className={`${styles.mobileHeroVideo} ${isVideoReady ? styles.mobileHeroVideoReady : ''}`}
               />

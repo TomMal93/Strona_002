@@ -104,6 +104,7 @@ export default function Faq() {
                   data-faq-item
                 >
                   <button
+                    id={`faq-question-${i}`}
                     className={styles.faqQuestion}
                     aria-expanded={isOpen}
                     aria-controls={`faq-answer-${i}`}

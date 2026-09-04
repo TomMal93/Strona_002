@@ -141,6 +141,7 @@ export default function About() {
                   loop
                   muted
                   playsInline
+                  preload="none"
                   className={cn(
                     'pointer-events-none relative z-10 h-full w-full origin-center translate-x-[-25%] scale-[1.725] object-contain object-center',
                     styles.aboutVideoMedia,
@@ -214,6 +215,7 @@ export default function About() {
                     ref={mobileVideoRef}
                     className={styles.mobileVideoFrame}
                     src={siteContent.promo.heroVideo.src}
+                    fallbackSrc="/videos/promo-reel.mp4"
                     poster={siteContent.promo.heroVideo.poster}
                     shouldLoad={shouldLoadMobileVideo}
                     playLabel="film promocyjny"

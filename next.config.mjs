@@ -28,6 +28,8 @@ const nextConfig = {
   images: {
     // Serwuj AVIF (priority) i WebP — znacząco mniejsze pliki niż PNG/JPEG
     formats: ['image/avif', 'image/webp'],
+    // Next.js 16 wymaga jawnej listy wszystkich wartości przekazywanych przez `quality`.
+    qualities: [68, 75, 85, 88],
     // Cache'uj zoptymalizowane obrazy przez 30 dni (domyślnie: 60 s)
     minimumCacheTTL: 60 * 60 * 24 * 30,
     remotePatterns: [

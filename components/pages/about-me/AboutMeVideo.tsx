@@ -154,7 +154,7 @@ export default function AboutMeVideo({ embedded = false, videoOverride }: AboutM
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="none"
               poster={video.poster}
             >
               {shouldLoadVideo && <source src={video.src} type="video/mp4" />}

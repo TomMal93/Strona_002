@@ -108,7 +108,8 @@ export default function ContactHero() {
   const { hero } = siteContent.contactPage
   const { contact } = siteContent.aboutMe
   const phoneHref = `tel:${contact.phone.replace(/\s/g, '')}`
-  const whatsappHref = `https://wa.me/${contact.phone.replace(/\D/g, '')}`
+  const emailHref = `mailto:${contact.email}?subject=${encodeURIComponent('Zapytanie ofertowe')}`
+  const whatsappHref = `https://wa.me/${contact.phone.replace(/\D/g, '')}?text=${encodeURIComponent('Dzień dobry, chciałbym zapytać o ofertę.')}`
   const contactValues = [contact.email, contact.phone, 'WhatsApp']
   const visibleSocials = siteContent.cta.social.filter(({ platform }) => (
     platform === 'instagram' || platform === 'facebook' || platform === 'youtube'
@@ -190,7 +191,7 @@ export default function ContactHero() {
                   <div className={styles.contactGrid}>
                     {contactItems.map((item, index) => {
                       const href = index === 0
-                        ? `mailto:${contact.email}`
+                        ? emailHref
                         : index === 1
                           ? phoneHref
                           : whatsappHref

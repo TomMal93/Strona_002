@@ -6,7 +6,8 @@ import {
   useEffect,
   useRef,
   useState,
-  type MouseEvent as ReactMouseEvent,
+  type KeyboardEvent as ReactKeyboardEvent,
+  type PointerEvent as ReactPointerEvent,
   type ReactNode,
 } from 'react'
 import { cn } from '@/lib/utils'
@@ -14,6 +15,7 @@ import styles from './CinematicVideoPlayer.module.css'
 
 type CinematicVideoPlayerProps = {
   src: string
+  fallbackSrc?: string
   poster: string
   shouldLoad: boolean
   className?: string
@@ -31,6 +33,7 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
   (
     {
       src,
+      fallbackSrc,
       poster,
       shouldLoad,
       className,
@@ -51,6 +54,7 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
     const [progress, setProgress] = useState(0)
     const [volume, setVolume] = useState(1)
     const [isFullscreen, setIsFullscreen] = useState(false)
+    const [hasError, setHasError] = useState(false)
     const [timecode, setTimecode] = useState('00:00/00:00')
     const sourceType = src.toLowerCase().endsWith('.webm') ? 'video/webm' : 'video/mp4'
 
@@ -59,8 +63,10 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
       if (!video) return
 
       if (video.paused) {
-        void video.play()
-        setIsPlaying(true)
+        void video.play().catch(() => {
+          setIsPlaying(false)
+          setHasError(true)
+        })
         return
       }
 
@@ -84,21 +90,71 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
         return
       }
 
-      void frame.requestFullscreen()
+      if (frame.requestFullscreen) {
+        void frame.requestFullscreen()
+        return
+      }
+
+      const webkitVideo = videoRef.current as HTMLVideoElement & {
+        webkitEnterFullscreen?: () => void
+      }
+      webkitVideo.webkitEnterFullscreen?.()
     }, [])
 
-    const handleProgressSeek = useCallback((event: ReactMouseEvent<HTMLButtonElement>) => {
+    const seekToClientX = useCallback((clientX: number) => {
       const video = videoRef.current
       const progressEl = progressRef.current
       if (!video || !progressEl || !Number.isFinite(video.duration) || video.duration <= 0) return
 
       const rect = progressEl.getBoundingClientRect()
-      const clickRatio = (event.clientX - rect.left) / rect.width
+      const clickRatio = (clientX - rect.left) / rect.width
       const nextProgress = Math.min(1, Math.max(0, clickRatio))
 
       video.currentTime = video.duration * nextProgress
       setProgress(nextProgress)
     }, [])
+
+    const handleProgressPointerDown = useCallback((event: ReactPointerEvent<HTMLButtonElement>) => {
+      event.currentTarget.setPointerCapture(event.pointerId)
+      seekToClientX(event.clientX)
+    }, [seekToClientX])
+
+    const handleProgressPointerMove = useCallback((event: ReactPointerEvent<HTMLButtonElement>) => {
+      if (!event.currentTarget.hasPointerCapture(event.pointerId)) return
+      seekToClientX(event.clientX)
+    }, [seekToClientX])
+
+    const handleProgressKeyDown = useCallback((event: ReactKeyboardEvent<HTMLButtonElement>) => {
+      const video = videoRef.current
+      if (!video || !Number.isFinite(video.duration) || video.duration <= 0) return
+
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault()
+        const delta = event.key === 'ArrowLeft' ? -5 : 5
+        video.currentTime = Math.min(video.duration, Math.max(0, video.currentTime + delta))
+      } else if (event.key === 'Home' || event.key === 'End') {
+        event.preventDefault()
+        video.currentTime = event.key === 'Home' ? 0 : video.duration
+      }
+    }, [])
+
+    const handleKeyboard = useCallback((event: ReactKeyboardEvent<HTMLDivElement>) => {
+      if (event.target !== event.currentTarget) return
+
+      const video = videoRef.current
+      if (!video) return
+
+      if (event.key === ' ' || event.key === 'Enter') {
+        event.preventDefault()
+        handlePlayPause()
+      } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault()
+        const delta = event.key === 'ArrowLeft' ? -5 : 5
+        video.currentTime = Math.min(video.duration || 0, Math.max(0, video.currentTime + delta))
+      } else if (event.key === 'Escape' && document.fullscreenElement) {
+        void document.exitFullscreen()
+      }
+    }, [handlePlayPause])
 
     useEffect(() => {
       const video = videoRef.current
@@ -117,6 +173,7 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
       }
 
       const onLoadedMetadata = () => {
+        setHasError(false)
         setTimecode(`00:00/${formatTime(video.duration)}`)
       }
 
@@ -167,7 +224,14 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
     }, [])
 
     return (
-      <div ref={ref} className={cn(styles.frame, className)}>
+      <div
+        ref={ref}
+        className={cn(styles.frame, className)}
+        tabIndex={0}
+        onKeyDown={handleKeyboard}
+        role="group"
+        aria-label={`Odtwarzacz: ${playLabel}`}
+      >
         {typeof children === 'function'
           ? children({ isPlaying, togglePlayback: handlePlayPause })
           : children}
@@ -179,13 +243,28 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
           loop
           muted={muted}
           playsInline
-          preload="metadata"
+          preload="none"
           poster={poster}
+          onError={() => {
+            setHasError(true)
+            setIsPlaying(false)
+          }}
         >
-          {shouldLoad && <source src={src} type={sourceType} />}
+          {shouldLoad && (
+            <>
+              <source src={src} type={sourceType} />
+              {fallbackSrc && <source src={fallbackSrc} type="video/mp4" />}
+            </>
+          )}
         </video>
 
-        {showPlayOverlay && (
+        {hasError && (
+          <div className={styles.errorMessage} role="alert">
+            Nie udało się załadować filmu. Spróbuj ponownie później.
+          </div>
+        )}
+
+        {showPlayOverlay && !hasError && (
           <button
             type="button"
             className={cn(styles.playOverlay, isPlaying && styles.playOverlayPlaying)}
@@ -213,7 +292,9 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
             ref={progressRef}
             type="button"
             className={styles.progress}
-            onClick={handleProgressSeek}
+            onPointerDown={handleProgressPointerDown}
+            onPointerMove={handleProgressPointerMove}
+            onKeyDown={handleProgressKeyDown}
             aria-label="Przewiń film do wybranego momentu"
           >
             <span className={styles.progressTrack}>

@@ -157,7 +157,7 @@ export default function WhyIDoThisVideo({ embedded = false, fillAvailableHeight 
               ref={videoRef}
               loop
               playsInline
-              preload="metadata"
+              preload="none"
               poster={video.poster}
             >
               {shouldLoadVideo && <source src={video.src} type="video/mp4" />}

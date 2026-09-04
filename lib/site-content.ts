@@ -153,6 +153,7 @@ export const siteContent = {
           'Tworzę film, który pozwala wrócić do atmosfery wydarzenia i ponownie poczuć jego najważniejsze momenty.',
         video: {
           src: '/videos/services/weeding.webm',
+          fallbackSrc: '/videos/services/weeding.mp4',
           poster: '/images/services/weeding.webp',
         },
       },
@@ -172,6 +173,7 @@ export const siteContent = {
           'Montuję filmy z Twoich materiałów, od vlogów na YouTube przez rolki na media społecznościowe.',
         video: {
           src: '/videos/services/montage.webm',
+          fallbackSrc: '/videos/services/montage.mp4',
           poster: '/images/services/montage.webp',
         },
       },
@@ -191,6 +193,7 @@ export const siteContent = {
           'Zamieniam wartości Twojej marki w obraz, który angażuje, buduje rozpoznawalność i zostaje w pamięci.',
         video: {
           src: '/videos/services/bieg.webm',
+          fallbackSrc: '/videos/services/bieg.mp4',
           poster: '/images/services/bieg.webp',
         },
       },
