@@ -13,6 +13,12 @@ gsap.registerPlugin(ScrollTrigger)
 
 type ServiceItem = (typeof siteContent.services.items)[number]
 
+const OFFER_SCOPES: Record<ServiceItem['title'], readonly string[]> = {
+  'Film okolicznościowy': ['Śluby', 'Studniówki', 'Chrzciny', 'Urodziny'],
+  'Profesjonalny montaż': ['Selekcja ujęć', 'Montaż', 'Efekty audio', 'Koloryzacja'],
+  'Materiały promocyjne': ['Wizerunek', 'Ujęcia promo', 'Social media', 'Produkty'],
+}
+
 const OFFER_AUDIENCES: Record<ServiceItem['title'], string> = {
   'Film okolicznościowy':
     'Dla osób, które chcą zachować autentyczne emocje i najważniejsze wspomnienia w wyjątkowej formie.',
@@ -83,6 +89,7 @@ function OfertaServiceBlock({ item }: OfertaServiceBlockProps) {
           poster={item.video.poster}
           shouldLoad={shouldLoadVideo}
           playLabel={item.title}
+          showVolume={false}
           showPlayOverlay={false}
           clickToToggle
         >
@@ -137,7 +144,7 @@ function OfertaServiceBlock({ item }: OfertaServiceBlockProps) {
         </div>
 
         <ul className={styles.bullets}>
-          {item.bullets.map((bullet) => (
+          {OFFER_SCOPES[item.title].map((bullet) => (
             <li key={bullet} className={styles.bullet}>
               <span className={styles.bulletText}>{bullet}</span>
             </li>

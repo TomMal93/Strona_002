@@ -268,7 +268,7 @@
 .scopeHeading h3 {
   margin: 0;
   font-family: var(--font-bebas), sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.5rem;
   letter-spacing: 0.36em;
   text-transform: uppercase;
   color: rgba(255, 213, 138, 0.76);
@@ -305,7 +305,7 @@
 
 .bulletText {
   font-family: var(--font-bebas), sans-serif;
-  font-size: 1.08rem;
+  font-size: calc(1.08rem + 1px);
   letter-spacing: 0.14em;
   text-align: center;
   text-transform: uppercase;
@@ -403,7 +403,7 @@
   }
 
   .scopeHeading h3 {
-    font-size: 16px;
+    font-size: 20px;
     letter-spacing: 0.24em;
   }
 
@@ -418,7 +418,7 @@
   }
 
   .bulletText {
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.2;
     letter-spacing: 0.09em;
   }
@@ -452,11 +452,11 @@
   }
 
   .scopeHeading h3 {
-    font-size: 18.75px;
+    font-size: 25px;
   }
 
   .bulletText {
-    font-size: 21.875px;
+    font-size: 22.875px;
   }
 }
 
@@ -486,11 +486,11 @@
   }
 
   .scopeHeading h3 {
-    font-size: 15px;
+    font-size: 20px;
   }
 
   .bulletText {
-    font-size: 17.5px;
+    font-size: 18.5px;
   }
 }
 

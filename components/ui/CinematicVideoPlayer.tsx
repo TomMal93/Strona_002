@@ -20,6 +20,7 @@ type CinematicVideoPlayerProps = {
   videoClassName?: string
   playLabel?: string
   muted?: boolean
+  showVolume?: boolean
   showPlayOverlay?: boolean
   showFullscreen?: boolean
   clickToToggle?: boolean
@@ -36,6 +37,7 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
       videoClassName,
       playLabel = 'film',
       muted = false,
+      showVolume = true,
       showPlayOverlay = true,
       showFullscreen = true,
       clickToToggle = false,
@@ -222,9 +224,9 @@ const CinematicVideoPlayer = forwardRef<HTMLDivElement, CinematicVideoPlayerProp
           <span className={styles.timecode}>{timecode}</span>
         </div>
 
-        {(!muted || showFullscreen) && (
+        {((showVolume && !muted) || showFullscreen) && (
           <div className={styles.controls} role="group" aria-label="Kontrolki filmu">
-            {!muted && (
+            {showVolume && !muted && (
               <label className={styles.volumeControl}>
                 <span className={styles.controlLabel}>Volume</span>
                 <input
