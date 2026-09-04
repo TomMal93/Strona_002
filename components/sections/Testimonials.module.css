@@ -304,8 +304,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border: 1px solid rgb(var(--c-gold) / 0.3);
   border-radius: 0.25rem;
   background: rgb(255 255 255 / 0.02);
@@ -337,19 +337,33 @@
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  position: relative;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  border: 1px solid rgb(var(--c-gold) / 0.3);
+  border: 0;
   background: transparent;
   cursor: pointer;
   padding: 0;
   transition: background 0.3s ease, border-color 0.3s ease;
 }
 
+.dot::before {
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgb(var(--c-gold) / 0.3);
+  border-radius: 50%;
+  background: transparent;
+  content: '';
+}
+
 .dotActive {
-  background: rgb(var(--c-gold) / 0.6);
+  background: transparent;
+}
+
+.dotActive::before {
   border-color: rgb(var(--c-gold) / 0.6);
+  background: rgb(var(--c-gold) / 0.6);
 }
 
 /* ── Trusted section (inside social proof bar) ──────────────────────── */

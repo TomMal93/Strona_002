@@ -78,7 +78,7 @@ export default function PrivacyPolicyPage() {
       </section>
 
       {/* Main Content Sections */}
-      <main data-subpage className={`${styles.main} px-6 pb-24 lg:px-20`}>
+      <main id="main-content" data-subpage className={`${styles.main} px-6 pb-24 lg:px-20`}>
         <div className={`${styles.content} mx-auto max-w-4xl space-y-8`}>
           
           {/* Section 1: Administrator */}

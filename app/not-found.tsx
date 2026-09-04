@@ -2,7 +2,7 @@ import Button from '@/components/ui/Button'
 
 export default function NotFoundPage() {
   return (
-    <main className="page-shell">
+    <main id="main-content" className="page-shell">
       <div className="page-panel">
         <p className="ui-overline">404</p>
         <h1 className="mt-3 font-bebas text-5xl leading-none sm:text-6xl">Nie znaleziono strony</h1>

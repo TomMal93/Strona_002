@@ -121,7 +121,7 @@
 .progress {
   position: relative;
   flex: 1;
-  height: 1rem;
+  min-height: 44px;
   padding: 0;
   overflow: hidden;
   border: 0;
@@ -223,8 +223,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 44px;
+  height: 44px;
   border: 1px solid rgb(var(--c-gold) / 0.35);
   background: rgb(0 0 0 / 0.28);
   color: rgb(255 238 175 / 0.82);
@@ -280,7 +280,7 @@
   }
 
   .controlButton {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 44px;
+    height: 44px;
   }
 }

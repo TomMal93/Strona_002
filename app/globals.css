@@ -12,6 +12,7 @@
  * Globalny kontekst (Tailwind utilities): z-10 = layout divs Hero, z-50 = Navbar.
  */
 :root {
+  color-scheme: dark;
   --c-gold:   139 115 85;   /* złoto / khaki — #8B7355 */
   --c-olive:   74  82 64;   /* oliwka — #4A5240 */
   --c-khaki:  146 154 117;  /* militarny khaki jasny */
@@ -23,10 +24,19 @@
 }
 
 @layer base {
+  html {
+    scroll-padding-top: 72px;
+  }
+
   body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--c-khaki));
+    outline-offset: 3px;
   }
 
   /* While the intro overlay is up, lock native scroll. Lenis is stopped via event listener. */
@@ -39,6 +49,26 @@
   html.intro-played [data-intro-overlay] {
     display: none !important;
   }
+}
+
+.skipLink {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 200;
+  padding: 0.75rem 1rem;
+  border: 2px solid rgb(var(--c-khaki));
+  background: rgb(13 13 13);
+  color: rgb(245 241 232);
+  font-weight: 600;
+  transform: translateY(calc(-100% - 1rem));
+  transition: transform 180ms ease;
+}
+
+.skipLink:focus {
+  transform: translateY(0);
+  outline: 2px solid rgb(245 241 232);
+  outline-offset: 3px;
 }
 
 /* Keep the global footer at the bottom of the viewport on the short contact
@@ -227,5 +257,66 @@ html.lenis body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+  }
+
+  header,
+  footer,
+  [data-intro-overlay],
+  video,
+  iframe,
+  button,
+  .skipLink {
+    display: none !important;
+  }
+
+  html,
+  body,
+  main,
+  section,
+  article,
+  div {
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    filter: none !important;
+  }
+
+  body,
+  body * {
+    color: #000 !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    font-size: 11pt;
+  }
+
+  a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+
+  img {
+    max-width: 100% !important;
+    break-inside: avoid;
+  }
+
+  section,
+  article {
+    break-inside: avoid;
+    padding-block: 1rem !important;
   }
 }

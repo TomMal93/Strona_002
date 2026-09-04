@@ -9,7 +9,7 @@ type ErrorPageProps = {
 
 export default function ErrorPage({ reset }: ErrorPageProps) {
   return (
-    <main className="page-shell">
+    <main id="main-content" className="page-shell">
       <div className="page-panel">
         <p className="ui-overline">500</p>
         <h1 className="mt-3 font-bebas text-5xl leading-none sm:text-6xl">Wystapil blad</h1>

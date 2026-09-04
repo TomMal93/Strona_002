@@ -97,6 +97,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={bodyClassName}>
+        <a className="skipLink" href="#main-content">
+          Przejdź do treści
+        </a>
         <Preloader />
         <Navbar />
         <SectionRail />

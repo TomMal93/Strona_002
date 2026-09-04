@@ -42,7 +42,7 @@ const platformLabels: Record<SocialPlatform, string> = {
 }
 
 const socialLinkClassName = [
-  'inline-flex h-9 w-9 items-center justify-center rounded-micro',
+  'inline-flex h-11 w-11 items-center justify-center rounded-micro',
   'text-warm-gray transition-[color,transform] duration-200 md:duration-300',
   'hover:text-khaki md:hover:-translate-y-0.5',
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-khaki',

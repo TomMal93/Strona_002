@@ -28,7 +28,7 @@ const DESKTOP_NAV_ITEMS = NAV_ITEMS.filter((item) => (
 ))
 
 const navLinkClassName = [
-  'relative font-bebas text-[16px] tracking-heading uppercase min-[1800px]:text-[20px]',
+  'relative inline-flex min-h-11 items-center font-bebas text-[16px] tracking-heading uppercase min-[1800px]:text-[20px]',
   'text-white/60 hover:text-white transition-colors duration-300',
   'after:absolute after:bottom-[-2px] after:left-0 after:h-px after:w-0 after:bg-khaki',
   'after:transition-[width] after:duration-300 hover:after:w-full',
@@ -170,9 +170,38 @@ export default function Navbar() {
   /* Close mobile menu on Escape */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && mobileOpen) {
+      if (!mobileOpen) return
+
+      if (e.key === 'Escape') {
         setMobileOpen(false)
         mobileToggleRef.current?.focus()
+        return
+      }
+
+      if (e.key !== 'Tab') return
+
+      const menu = mobileMenuRef.current
+      if (!menu) return
+
+      const focusable = Array.from(menu.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      )).filter((element) => !element.hasAttribute('disabled'))
+
+      if (focusable.length === 0) {
+        e.preventDefault()
+        return
+      }
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      const active = document.activeElement
+
+      if (e.shiftKey && (active === first || !menu.contains(active))) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault()
+        first.focus()
       }
     }
     document.addEventListener('keydown', onKey)
@@ -284,7 +313,7 @@ export default function Navbar() {
         <Link
           href="/"
           aria-label="Strona główna"
-          className="relative shrink-0 font-bebas text-[1.006rem] uppercase tracking-heading text-warm-white transition-colors duration-500 ease-out hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki min-[1800px]:text-[1.3rem]"
+          className="relative inline-flex min-h-11 shrink-0 items-center font-bebas text-[1.006rem] uppercase tracking-heading text-warm-white transition-colors duration-500 ease-out hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki min-[1800px]:text-[1.3rem]"
         >
           MALESZYK
           <span className="text-[#c8503c]">.</span>
@@ -351,6 +380,9 @@ export default function Navbar() {
           mobileOpen && 'pointer-events-auto',
         )}
         aria-hidden={!mobileOpen}
+        role="dialog"
+        aria-modal={mobileOpen ? 'true' : undefined}
+        aria-label="Menu mobilne"
       >
         <nav
           className="mx-auto flex h-full w-full max-w-content flex-col px-6 pb-6 pt-8"

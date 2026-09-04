@@ -22,9 +22,20 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       const lenis = new Lenis({
         duration: 0.9,
         smoothWheel: true,
+        anchors: {
+          offset: -72,
+        },
       })
 
       lenis.on('scroll', ScrollTrigger.update)
+
+      let refreshRafId = 0
+      const refreshScrollTriggers = () => {
+        window.cancelAnimationFrame(refreshRafId)
+        refreshRafId = window.requestAnimationFrame(() => ScrollTrigger.refresh())
+      }
+      window.addEventListener('resize', refreshScrollTriggers)
+      window.addEventListener('orientationchange', refreshScrollTriggers)
 
       let rafId = 0
       const rafHandler = (time: number) => {
@@ -45,6 +56,9 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
       disposeLenis = () => {
         window.cancelAnimationFrame(rafId)
+        window.cancelAnimationFrame(refreshRafId)
+        window.removeEventListener('resize', refreshScrollTriggers)
+        window.removeEventListener('orientationchange', refreshScrollTriggers)
         window.removeEventListener('intro:active', onIntroActive)
         window.removeEventListener('intro:done', onIntroDone)
         lenis.off('scroll', ScrollTrigger.update)

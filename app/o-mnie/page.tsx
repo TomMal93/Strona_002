@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 
 export default function AboutMePage() {
   return (
-    <main data-subpage data-responsive-sections>
+    <main id="main-content" data-subpage data-responsive-sections>
       <StructuredData
         data={createPageStructuredData({
           path: '/o-mnie',

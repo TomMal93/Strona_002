@@ -23,7 +23,7 @@ export const metadata: Metadata = {
  */
 export default function Home() {
   return (
-    <main data-responsive-sections>
+    <main id="main-content" data-responsive-sections>
       <StructuredData data={createSiteStructuredData()} />
       <Hero />
       <About />
