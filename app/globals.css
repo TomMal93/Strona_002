@@ -81,19 +81,15 @@
    leading Hero at its intended viewport scale. `zoom` scales typography,
    spacing, media, and the section's layout footprint together. */
 @media (max-width: 1749px) {
-  [data-responsive-sections] > section:not(:first-child) {
+  [data-responsive-sections] > section:not(:first-child):not([data-fullscreen-hero]) {
     zoom: 0.8;
   }
 }
 
-/* Below 1200px every section is reduced by another 20%. Content sections
-   compound the two responsive scales: 0.8 × 0.8 = 0.64. */
+/* Below 1200px content sections are reduced further. Fullscreen Hero sections
+   keep their natural scale so their viewport height continues to fill the screen. */
 @media (min-width: 768px) and (max-width: 1199px) {
-  [data-responsive-sections] > section:first-child {
-    zoom: 0.8;
-  }
-
-  [data-responsive-sections] > section:not(:first-child) {
+  [data-responsive-sections] > section:not(:first-child):not([data-fullscreen-hero]) {
     zoom: 0.64;
   }
 }
@@ -107,7 +103,7 @@
     font-size: 17px;
   }
 
-  [data-responsive-sections] > section:not(:first-child) {
+  [data-responsive-sections] > section:not(:first-child):not([data-fullscreen-hero]) {
     zoom: 1;
   }
 }

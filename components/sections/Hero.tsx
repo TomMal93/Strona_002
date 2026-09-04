@@ -40,6 +40,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
+      data-fullscreen-hero
       aria-label="Sekcja główna"
       className={`h-svh md:h-dvh w-full section-dark-bg flex flex-col justify-end md:block ${styles.heroSection}`}
     >

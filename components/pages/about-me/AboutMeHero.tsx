@@ -51,6 +51,7 @@ export default function AboutMeHero({ heroOverride }: AboutMeHeroProps) {
   return (
     <section
       ref={sectionRef}
+      data-fullscreen-hero
       aria-label="Profil reżysera"
       className={cn(
         styles.heroSection,
