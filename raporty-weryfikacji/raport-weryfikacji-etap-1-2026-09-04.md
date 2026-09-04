@@ -8,11 +8,11 @@
 
 **Gałąź i commit bazowy:** `main`, `823051b0ee92ff8b6d24deac5dae3efa4feed8a4`
 
-**Wynik:** **WARUNKOWY PASS — oczekiwanie na zdalny przebieg CI**
+**Wynik:** **PASS — etap 1 zakończony**
 
 ## Podsumowanie
 
-Kod przechodzi lokalnie pełną weryfikację statyczną i buduje wszystkie wymagane trasy jako statyczne. Naprawiono konfigurację CI, usunięto wyświetlanie surowego komunikatu wyjątku na stronie 500, obniżono First Load JS `/oferta` poniżej budżetu oraz wykonano kontrolowaną migrację do Next.js 16.3.4 i React 19.2.8. Audyt produkcyjny nie wykazuje już podatności. Do pełnego zamknięcia etapu pozostało potwierdzenie zielonego przebiegu CI po pushu.
+Kod przechodzi lokalnie pełną weryfikację statyczną i buduje wszystkie wymagane trasy jako statyczne. Naprawiono konfigurację CI, usunięto wyświetlanie surowego komunikatu wyjątku na stronie 500, obniżono First Load JS `/oferta` poniżej budżetu oraz wykonano kontrolowaną migrację do Next.js 16.3.4 i React 19.2.8. Audyt produkcyjny nie wykazuje podatności, a aktualny przebieg CI na gałęzi `main` zakończył się powodzeniem.
 
 ## 1. Weryfikacja statyczna
 
@@ -164,7 +164,7 @@ Zmiany te należały do użytkownika i zostały zachowane. Audyt dodał zmiany w
 
 ## 7. Pipeline CI/CD
 
-Ostatni zdalny przebieg workflow `CI` na `main`:
+Początkowy nieudany przebieg workflow `CI` na `main`:
 
 - run: [#2 — GitHub Actions](https://github.com/TomMal93/Strona_002/actions/runs/33885661479),
 - commit: `823051b0ee92ff8b6d24deac5dae3efa4feed8a4`,
@@ -183,7 +183,7 @@ Wprowadzona poprawka:
 - `actions/setup-node@v4` → `actions/setup-node@v5`,
 - Node.js `20` → `22`.
 
-Konfiguracja nadal wykonuje pełną sekwencję `npm ci` → `npm run check` → `npm run build`. `concurrency.cancel-in-progress` ma wartość `true`. Cache npm jest włączony przez `actions/setup-node` z `cache: npm`; API przebiegu potwierdza powodzenie kroku instalacji, lecz nie udostępnia jednoznacznej informacji, czy w tym konkretnym przebiegu wystąpił cache hit. Pełną sekwencję CI odtworzono w czystym katalogu tymczasowym po migracji do Next.js 16: instalacja, typy, lint, 6/6 testów i build zakończyły się powodzeniem. Zielony status zdalny będzie możliwy dopiero po commit/push i ponownym uruchomieniu workflow.
+Konfiguracja nadal wykonuje pełną sekwencję `npm ci` → `npm run check` → `npm run build`. `concurrency.cancel-in-progress` ma wartość `true`. Cache npm jest włączony przez `actions/setup-node` z `cache: npm`; API przebiegu potwierdza powodzenie kroku instalacji, lecz nie udostępnia jednoznacznej informacji, czy w tym konkretnym przebiegu wystąpił cache hit. Pełną sekwencję CI odtworzono w czystym katalogu tymczasowym po migracji do Next.js 16: instalacja, typy, lint, 6/6 testów i build zakończyły się powodzeniem. Aktualny przebieg CI nr 3 dla `main`, obejmujący commit migracji `cfcfc82` jako przodka bieżącego `HEAD`, również zakończył się powodzeniem, co potwierdza zielony status na załączonym zrzucie GitHub Actions.
 
 ## 8. Naprawione usterki
 
@@ -206,7 +206,7 @@ Konfiguracja nadal wykonuje pełną sekwencję `npm ci` → `npm run check` → 
 - [x] Brak wycieków sekretów w `NEXT_PUBLIC_`.
 - [x] Brak niepożądanych wywołań `console.log` w kodzie produkcyjnym.
 - [ ] Czyste drzewo Git — zmiany istniały przed audytem i doszły poprawki audytowe.
-- [ ] Zielony pipeline na `main` — poprawka jest lokalna i nie została jeszcze uruchomiona zdalnie.
+- [x] Pipeline na aktualnym `main` zakończony zielonym statusem.
 - [x] Wszystkie trasy poniżej 160 kB First Load JS — `/oferta` ma po optymalizacji 157 kB.
 - [x] Ręczna regresja wizualna animacji `/oferta` po optymalizacji.
 - [x] Runtime Vercel zweryfikowany: Node.js `24.x`.
@@ -214,8 +214,4 @@ Konfiguracja nadal wykonuje pełną sekwencję `npm ci` → `npm run check` → 
 
 ## Rekomendacja
 
-**Zezwolić na przejście do etapu 2 po potwierdzeniu zielonego CI.**
-
-Pozostały warunek:
-
-1. Przejrzeć zmiany, wykonać commit/push i potwierdzić zielony przebieg CI na `main`.
+**Zezwolić na przejście do etapu 2.** Wszystkie uzgodnione kryteria etapu 1 zostały spełnione.
