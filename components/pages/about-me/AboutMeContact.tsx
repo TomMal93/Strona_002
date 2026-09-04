@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import Link from 'next/link'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import { socialIcons } from '@/components/sections/cta/CtaActions'
@@ -87,9 +88,9 @@ export default function AboutMeContact() {
                   <a href={phoneHref} className={cn(styles.button, styles.buttonPrimary)}>
                     {contact.ctaLabel}
                   </a>
-                  <a href="/oferta" className={cn(styles.button, styles.buttonSecondary)}>
+                  <Link href="/oferta" className={cn(styles.button, styles.buttonSecondary)}>
                     Sprawdź ofertę
-                  </a>
+                  </Link>
                 </div>
 
                 <div className={styles.socialRow} aria-label="Media społecznościowe">

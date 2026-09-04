@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { siteContent } from '@/lib/site-content'
 import styles from './Cta.module.css'
 import heroStyles from './Hero.module.css'
@@ -121,13 +122,13 @@ export default function Cta() {
                   <span>{phoneLabel}</span>
                   <span className={styles.phoneNumber}>{phoneNumber}</span>
                 </a>
-                <a
+                <Link
                   ref={secondaryLinkRef}
                   href="/oferta"
                   className={`${heroStyles.ctaButton} ${heroStyles.ctaButtonSecondary} ${styles.actionButton}`}
                 >
                   Oferta
-                </a>
+                </Link>
               </div>
 
               <div ref={socialRef} className={styles.socialRow} aria-label="Media społecznościowe">

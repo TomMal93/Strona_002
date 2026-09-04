@@ -7,6 +7,7 @@ import React, {
   useCallback,
   type PointerEvent as ReactPointerEvent,
 } from 'react'
+import Link from 'next/link'
 import { siteContent } from '@/lib/site-content'
 import { useLazyVideoSource } from '@/components/ui/useLazyVideoSource'
 import { cn } from '@/lib/utils'
@@ -507,7 +508,7 @@ export default function Services() {
             {siteContent.services.ctaLabel}
           </a>
 
-          <a
+          <Link
             href={siteContent.services.secondaryCtaHref}
             data-cta-link
             className={cn(
@@ -517,7 +518,7 @@ export default function Services() {
             )}
           >
             {siteContent.services.secondaryCtaLabel}
-          </a>
+          </Link>
         </div>
       </div>
     </section>

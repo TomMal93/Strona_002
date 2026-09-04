@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import Link from 'next/link'
 import { gsap } from 'gsap'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
@@ -88,9 +89,9 @@ export default function OfertaCta() {
                 <a href={phoneHref} className={cn(styles.button, styles.buttonPrimary)}>
                   {phoneLabel}
                 </a>
-                <a href="/contact" className={cn(styles.button, styles.buttonSecondary)}>
+                <Link href="/contact" className={cn(styles.button, styles.buttonSecondary)}>
                   Inne formy kontaktu
-                </a>
+                </Link>
               </div>
 
               <div className={styles.socialRow} aria-label="Media społecznościowe">

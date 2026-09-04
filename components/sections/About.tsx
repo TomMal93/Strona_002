@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useEffect } from 'react'
+import Link from 'next/link'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import CinematicVideoPlayer from '@/components/ui/CinematicVideoPlayer'
@@ -270,7 +271,7 @@ export default function About() {
 
               <div ref={ctaRef} className={styles.bottomCta}>
                 <div className={styles.ctaActions}>
-                  <a
+                  <Link
                     href="/o-mnie#bio"
                     className={cn(
                       heroStyles.ctaButton,
@@ -280,7 +281,7 @@ export default function About() {
                   >
                     <span className={styles.desktopCtaLabel}>Dowiedz się więcej o mnie</span>
                     <span className={styles.mobileCtaLabel}>Więcej o mnie</span>
-                  </a>
+                  </Link>
 
                   <a
                     href="#promo"
