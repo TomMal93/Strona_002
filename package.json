@@ -9,7 +9,7 @@
     "perf:bundle": "node scripts/analyze-bundle.mjs",
     "perf:report": "npm run perf:build && npm run perf:bundle",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --test tests/**/*.test.ts",
     "check": "npm run typecheck && npm run lint && npm run test"
@@ -19,7 +19,7 @@
     "clsx": "^2.1.1",
     "gsap": "^3.12.5",
     "lenis": "^1.1.13",
-    "next": "^14.2.35",
+    "next": "^15.5.24",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwind-merge": "^3.5.0"
@@ -32,7 +32,7 @@
     "@typescript-eslint/parser": "^8.56.0",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "^14.2.35",
+    "eslint-config-next": "^15.5.24",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-tailwindcss": "^3.18.2",
     "postcss": "^8",
