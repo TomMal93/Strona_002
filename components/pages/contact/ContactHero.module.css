@@ -183,6 +183,11 @@
   stroke-linejoin: round;
 }
 
+.contactIcon .whatsappIcon {
+  fill: currentColor;
+  stroke: none;
+}
+
 .contactValue {
   min-width: 0;
   overflow-wrap: anywhere;
