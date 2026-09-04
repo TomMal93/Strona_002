@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main data-responsive-sections>
+    <main data-contact-page data-responsive-sections>
       <StructuredData
         data={createPageStructuredData({
           path: '/contact',

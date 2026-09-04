@@ -41,6 +41,50 @@
   }
 }
 
+/* Keep the global footer at the bottom of the viewport on the short contact
+   page. The contact section fills the available space and can still grow when
+   its content needs more room on smaller screens. */
+body:has(> [data-contact-page]) {
+  display: flex;
+  min-height: 100svh;
+  min-height: 100dvh;
+  flex-direction: column;
+}
+
+body:has(> [data-contact-page]) > [data-contact-page] {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+body:has(> [data-contact-page]) > [data-contact-page] > section {
+  display: flex;
+  height: auto;
+  min-height: 0;
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
+  zoom: 1;
+}
+
+body:has(> [data-contact-page]) > [data-contact-page] > section > div {
+  height: auto;
+  margin-block: auto;
+}
+
+body:has(> [data-contact-page]) > footer {
+  padding-block: 0.75rem;
+}
+
+body:has(> [data-contact-page]) > footer > div > a {
+  font-size: 1rem;
+}
+
+body:has(> [data-contact-page]) > footer p,
+body:has(> [data-contact-page]) > footer > div > div:last-child {
+  font-size: 9px;
+}
+
 @layer components {
   .page-shell {
     @apply min-h-screen bg-black-deep px-6 py-16 text-warm-white;
