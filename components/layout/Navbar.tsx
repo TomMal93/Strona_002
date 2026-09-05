@@ -386,16 +386,6 @@ export default function Navbar() {
           className="mx-auto flex h-full w-full max-w-content flex-col px-6 pb-6 pt-8"
           aria-label="Nawigacja mobilna"
         >
-          <div data-mobile-menu-item className="mb-5 flex items-center justify-between gap-4">
-            <p className="font-inter text-[10px] uppercase tracking-overline text-khaki">
-              Nawigacja
-            </p>
-            <span
-              aria-hidden="true"
-              className="h-px flex-1 bg-gradient-to-r from-khaki/45 to-transparent"
-            />
-          </div>
-
           <div className="flex flex-1 flex-col justify-start pt-8">
             {DESKTOP_NAV_ITEMS.map((item, index) => (
               <Link
@@ -423,12 +413,12 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div data-mobile-menu-item className="mt-5 border-l border-khaki/55 pl-4">
-            <p className="font-bebas text-lg uppercase tracking-heading text-warm-white">
-              Kadry z charakterem.
+          <div data-mobile-menu-item className="mt-6 border-t border-khaki/30 pt-4">
+            <p className="font-bebas text-2xl uppercase tracking-heading text-warm-white">
+              Twój moment.
             </p>
-            <p className="font-inter text-[11px] text-warm-gray/65">
-              Historie z emocją.
+            <p className="mt-1 font-inter text-[10px] uppercase tracking-overline text-khaki/80">
+              Moje spojrzenie.
             </p>
           </div>
         </nav>
