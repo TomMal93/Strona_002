@@ -471,7 +471,22 @@ test.describe('P2 — zachowania runtime', () => {
     await context.close()
   })
 
-  test('Save-Data zachowuje treść i nie pobiera wideo poniżej fold', async ({ browser, browserName }) => {
+  test('mobilne Hero od początku wyświetla i odtwarza wideo bez postera', async ({ page }) => {
+    await skipIntro(page)
+    await page.setViewportSize({ width: 393, height: 852 })
+    await visit(page, '/')
+
+    const heroVideo = page.locator('#hero video[src="/videos/hero/hero-video.mp4"]')
+    await expect(heroVideo).toBeVisible()
+    await expect(heroVideo).toHaveAttribute('autoplay', '')
+    await expect(heroVideo).toHaveAttribute('playsinline', '')
+    await expect(heroVideo).toHaveAttribute('preload', 'auto')
+    await expect(heroVideo).not.toHaveAttribute('poster', /.+/)
+    await expect(page.locator('#hero img[src*="hero-video-poster"]')).toHaveCount(0)
+    await expect.poll(() => heroVideo.evaluate((video: HTMLVideoElement) => video.currentTime)).toBeGreaterThan(0)
+  })
+
+  test('Save-Data zachowuje treść i pobiera tylko wymagane wideo Hero', async ({ browser, browserName }) => {
     test.skip(browserName !== 'chromium', 'Kontrola nagłówka Save-Data jest wykonywana w Chromium')
     const context = await browser.newContext({
       baseURL: 'http://localhost:3000',
@@ -490,7 +505,8 @@ test.describe('P2 — zachowania runtime', () => {
     await visit(page, '/')
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     expect(documentSaveData).toBe('on')
-    expect(videoRequests).toEqual([])
+    expect(videoRequests.length).toBeGreaterThan(0)
+    expect(videoRequests.every((url) => url.includes('/videos/hero/hero-video.mp4'))).toBe(true)
     await context.close()
   })
 })

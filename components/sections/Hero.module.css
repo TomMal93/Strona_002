@@ -55,7 +55,6 @@
   background: rgb(13 13 13);
 }
 
-.mobileHeroPoster,
 .mobileHeroVideo {
   position: absolute;
   inset: 0;
@@ -66,20 +65,7 @@
   object-position: center;
   transform: translateY(1.5%) scale(1.04);
   transform-origin: center;
-}
-
-.mobileHeroPoster {
   z-index: 1;
-}
-
-.mobileHeroVideo {
-  z-index: 2;
-  opacity: 0;
-  transition: opacity 360ms ease;
-}
-
-.mobileHeroVideoReady {
-  opacity: 1;
 }
 
 .mobileTextWrap {
