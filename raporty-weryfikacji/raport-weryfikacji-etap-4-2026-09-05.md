@@ -15,7 +15,7 @@ Projekt buduje się produkcyjnie, testy techniczne przechodzą, odpowiedź dla n
 
 Etapu 4 nie można jednak zamknąć pozytywnie. Blokery przedwdrożeniowe to:
 
-1. brak pomiarów Lighthouse i Core Web Vitals na Mobile/Desktop;
+1. mediana Lighthouse Performance Mobile wynosi 78 i nie spełnia celu ≥ 90; głównym problemem jest LCP 5,50 s dla mobilnego wideo Hero;
 2. produkcja kieruje canonicale, sitemapę, JSON-LD i obrazy OG do `https://maleszykmedia.pl`, ale domena zostanie uruchomiona dopiero po zakończeniu testów;
 3. polityka prywatności nie zawiera adresu, NIP ani REGON administratora — zadanie zapisano w TODO;
 4. odczyt konsoli przeglądarki pod kątem naruszeń CSP nadal wymaga dostępnej sesji przeglądarki;
@@ -41,13 +41,13 @@ Wykonano:
 
 Nie wykonano:
 
-- Lighthouse Mobile/Desktop, LCP, INP, CLS ani testu Fast/Slow 3G — w sesji nie było dostępnej sterowalnej przeglądarki ani Chromium/Lighthouse;
+- pomiaru terenowego INP ani testu Fast/Slow 3G;
 - testów Facebook Sharing Debugger, LinkedIn Post Inspector i X Card Validator;
 - Google Rich Results Test;
 - SecurityHeaders.com — serwis zwrócił wyzwanie Cloudflare zamiast raportu;
 - potwierdzenia metryk w panelu Vercel — brak dostępu do projektu.
 
-Oficjalne API Google PageSpeed Insights zostało wywołane dla Mobile i Desktop, ale dla obu profili zwróciło HTTP 429 `RESOURCE_EXHAUSTED` (brak dostępnego dziennego limitu API). Mozilla Observatory wykonało skan poprawnie.
+Oficjalne API Google PageSpeed Insights zostało wywołane dla Mobile i Desktop, ale dla obu profili zwróciło HTTP 429 `RESOURCE_EXHAUSTED` (brak dostępnego dziennego limitu API). Pomiary laboratoryjne wykonano następnie lokalnym Lighthouse 13.0.1 i Chrome for Testing 149.0.7827.55. Mozilla Observatory wykonało skan poprawnie.
 
 Wartości nieweryfikowalnych pozycji oznaczono jako `NOT TESTED`, a nie jako PASS.
 
@@ -55,18 +55,38 @@ Domyślny `next build` zatrzymał się po kompilacji na wewnętrznym wywołaniu 
 
 ## 2. Lighthouse, Core Web Vitals i wolna sieć
 
-| Profil / metryka | Cel | Wynik | Status |
+2026-09-05 wykonano po trzy sekwencyjne przebiegi strony głównej `https://strona-002.vercel.app/` dla każdego profilu. Lighthouse 13.0.1 korzystał z Chrome for Testing 149.0.7827.55 i symulowanego throttlingu. Mobile: viewport 412×823, RTT 150 ms, 1638,4 Kb/s i spowolnienie CPU ×4. Desktop: viewport 1350×940, RTT 40 ms i 10240 Kb/s.
+
+| Profil / przebieg | Performance | Accessibility | Best Practices | SEO |
+|---|---:|---:|---:|---:|
+| Mobile 1 | 75 | 96 | 100 | 100 |
+| Mobile 2 | 78 | 96 | 100 | 100 |
+| Mobile 3 | 79 | 96 | 100 | 100 |
+| **Mobile — mediana** | **78** | **96** | **100** | **100** |
+| Desktop 1 | 96 | 96 | 100 | 100 |
+| Desktop 2 | 98 | 96 | 100 | 100 |
+| Desktop 3 | 98 | 96 | 100 | 100 |
+| **Desktop — mediana** | **98** | **96** | **100** | **100** |
+
+| Profil / mediana | FCP | LCP | Speed Index | TBT | CLS | Czas odpowiedzi serwera |
+|---|---:|---:|---:|---:|---:|---:|
+| Mobile | 1,26 s | **5,50 s** | 3,77 s | 47 ms | 0 | 51 ms |
+| Desktop | 0,32 s | **1,07 s** | 1,13 s | 0 ms | 0,015 | 48 ms |
+
+| Kryterium | Cel | Mediana | Status |
 |---|---:|---:|---|
-| Lighthouse Performance Mobile | ≥ 90 | brak pomiaru | NOT TESTED |
-| Lighthouse Accessibility Mobile | ≥ 85 | brak pomiaru | NOT TESTED |
-| Lighthouse SEO Mobile | ≥ 90 | brak pomiaru | NOT TESTED |
-| Lighthouse Performance Desktop | ≥ 90 | brak pomiaru | NOT TESTED |
-| Lighthouse Accessibility Desktop | ≥ 85 | brak pomiaru | NOT TESTED |
-| Lighthouse SEO Desktop | ≥ 90 | brak pomiaru | NOT TESTED |
-| LCP | ≤ 2,5 s | brak pomiaru | NOT TESTED |
-| INP | ≤ 200 ms | brak pomiaru | NOT TESTED |
-| CLS | ≤ 0,1 | brak pomiaru | NOT TESTED |
-| Fast/Slow 3G | brak zawieszenia i blokowania First Paint | brak pomiaru | NOT TESTED |
+| Performance Mobile | ≥ 90 | 78 | **FAIL** |
+| Accessibility Mobile/Desktop | ≥ 85 | 96 / 96 | PASS |
+| SEO Mobile/Desktop | ≥ 90 | 100 / 100 | PASS |
+| Performance Desktop | ≥ 90 | 98 | PASS |
+| LCP Mobile / Desktop | ≤ 2,5 s | 5,50 s / 1,07 s | **FAIL / PASS** |
+| CLS Mobile / Desktop | ≤ 0,1 | 0 / 0,015 | PASS / PASS |
+| INP | ≤ 200 ms | brak danych terenowych | NOT TESTED |
+| Fast/Slow 3G | brak zawieszenia i blokowania First Paint | brak osobnego pomiaru | NOT TESTED |
+
+Mobile przegrywa przede wszystkim przez element LCP: `<video>` w Hero z `preload="none"`. Lighthouse wskazał, że zasób LCP nie jest odkrywany w początkowym HTML i nie ma `fetchpriority="high"`; LCP pozostawał stabilny w trzech próbach (5,46–5,51 s). Dalsze możliwości to responsywne wersje posterów obrazów (szacowana oszczędność 206 KiB), ograniczenie nieużywanego CSS/JS i skrócenie łańcuchów żądań krytycznych.
+
+Accessibility 96 wynika z dwóch powtarzalnych problemów: `aria-label` na dwóch elementach `<div>` bez odpowiedniej roli w CTA oraz niezgodności widocznej etykiety logo „MALESZYK.MEDIA” z nazwą dostępną „Strona główna”. INP nie jest metryką laboratoryjną Lighthouse; przed odbiorem należy potwierdzić go danymi terenowymi z Vercel Speed Insights.
 
 ### Preloader i fonty
 
@@ -78,7 +98,7 @@ Domyślny `next build` zatrzymał się po kompilacji na wewnętrznym wywołaniu 
 - W wygenerowanym CSS potwierdzono `font-display: swap` dla Bebas Neue, Inter i IBM Plex Mono.
 - Wideo poniżej fold korzysta z lazy source, a materiały zostały odchudzone w etapie 3, lecz zachowania na ograniczonej sieci nie udało się zmierzyć.
 
-**Status implementacji:** PASS — preloader skrócono do ustalonej 1 s. Rzeczywisty pomiar przeglądarkowy pozostaje NOT TESTED.
+**Status implementacji:** PASS — preloader skrócono do ustalonej 1 s. Lighthouse potwierdza stabilny CLS i niski TBT, ale mobilny LCP wymaga poprawy.
 
 ## 3. JavaScript i budżet pakietu
 
@@ -259,7 +279,7 @@ Braki blokujące kryterium etapu:
 
 ## 9. Checklista akceptacyjna
 
-- [ ] Lighthouse: Performance ≥ 90, Accessibility ≥ 85, SEO ≥ 90 — NOT TESTED.
+- [ ] Lighthouse: Desktop spełnia cele (Performance 98, Accessibility 96, SEO 100), lecz Mobile Performance ma medianę 78 przy celu ≥ 90 — FAIL.
 - [ ] `robots.txt` i `sitemap.xml` działają i używają HTTPS, ale wskazują domenę bez DNS — FAIL.
 - [x] Sitemap zawiera daty ostatniej modyfikacji — PASS po poprawce.
 - [x] Każda podstrona ma title, opis 140–160 znaków i deklarację OG image; działanie docelowego URL OG pozostaje odroczone z domeną.
@@ -289,11 +309,13 @@ Braki blokujące kryterium etapu:
 
 ### P1 — SEO i wydajność
 
-1. Dodać egzekwowany budżet `perf:bundle` i stopniowo zmniejszać globalny JS.
+1. Poprawić mobilny element LCP w Hero: zapewnić wczesne odkrywanie zasobu/postera, właściwy priorytet pobierania i zweryfikować zasadność `preload="none"` dla elementu above the fold.
+2. Dodać egzekwowany budżet `perf:bundle` i stopniowo zmniejszać globalny JS.
+3. Poprawić dwa błędy dostępności wskazane przez Lighthouse: etykiety grup CTA i nazwę dostępną linku-logo.
 
 ### P2 — odbiór na publicznym URL
 
-1. Wykonać Lighthouse co najmniej 3–5 razy dla Mobile i Desktop oraz zapisać medianę.
+1. Po optymalizacji Hero powtórzyć po 3–5 pomiarów Lighthouse i potwierdzić Mobile Performance ≥ 90 oraz LCP ≤ 2,5 s.
 2. Wykonać Fast/Slow 3G, pierwszą i kolejną wizytę, reduced motion oraz Save-Data.
 3. Zweryfikować Google Rich Results, Facebook, LinkedIn i X.
 4. Powtórzyć SecurityHeaders.com; Mozilla Observatory po zmianie CSP osiągnęło A+, a realne nagłówki CDN są potwierdzone.
