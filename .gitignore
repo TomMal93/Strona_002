@@ -11,6 +11,9 @@
 # Coverage
 /coverage
 
+# Browser-test artifacts
+/artifacts/
+
 # Logs
 npm-debug.log*
 yarn-debug.log*

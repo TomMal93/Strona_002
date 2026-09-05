@@ -12,23 +12,23 @@ export default function ErrorPage({ reset }: ErrorPageProps) {
     <main id="main-content" className="page-shell">
       <div className="page-panel">
         <p className="ui-overline">500</p>
-        <h1 className="mt-3 font-bebas text-5xl leading-none sm:text-6xl">Wystapil blad</h1>
+        <h1 className="mt-3 font-bebas text-5xl leading-none sm:text-6xl">Wystąpił błąd</h1>
         <p className="mt-4 font-inter text-base text-warm-white/85">
-          Nie udalo sie poprawnie zaladowac tej strony. Sprobuj ponownie.
+          Nie udało się poprawnie załadować tej strony. Spróbuj ponownie.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Button
             type="button"
             onClick={reset}
           >
-            Sprobuj ponownie
+            Spróbuj ponownie
           </Button>
           <Button
             as="a"
             href="/"
             variant="outline"
           >
-            Wroc na start
+            Wróć na start
           </Button>
         </div>
       </div>

@@ -110,6 +110,26 @@ export default function Navbar() {
     if (!el) return
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const menuItems = el.querySelectorAll('[data-mobile-menu-item]')
+
+    if (prefersReducedMotion) {
+      gsap.set(el, {
+        autoAlpha: mobileOpen ? 1 : 0,
+        y: 0,
+      })
+      gsap.set(menuItems, {
+        autoAlpha: mobileOpen ? 1 : 0,
+        y: 0,
+      })
+      if (!mobileOpen) return
+
+      // Move focus after the button's native click focus has settled.
+      const focusTimer = window.setTimeout(() => {
+        firstMobileLinkRef.current?.focus({ preventScroll: true })
+      }, 0)
+      return () => window.clearTimeout(focusTimer)
+    }
+
     const ctx = gsap.context(() => {
       if (mobileOpen) {
         gsap.fromTo(
@@ -123,14 +143,14 @@ export default function Navbar() {
           },
         )
         gsap.fromTo(
-          el.querySelectorAll('[data-mobile-menu-item]'),
+          menuItems,
           { autoAlpha: 0, y: 16 },
           {
             autoAlpha: 1,
             y: 0,
-            duration: prefersReducedMotion ? 0 : 0.45,
-            stagger: prefersReducedMotion ? 0 : 0.055,
-            delay: prefersReducedMotion ? 0 : 0.08,
+            duration: 0.45,
+            stagger: 0.055,
+            delay: 0.08,
             ease: 'power3.out',
           },
         )
@@ -139,7 +159,7 @@ export default function Navbar() {
         gsap.to(el, {
           autoAlpha: 0,
           y: -8,
-          duration: prefersReducedMotion ? 0 : 0.2,
+          duration: 0.2,
           ease: 'power2.in',
         })
       }
@@ -307,7 +327,7 @@ export default function Navbar() {
       ref={headerRef}
       className="fixed top-0 left-0 right-0 z-50"
     >
-      <div className={`flex min-h-[60px] items-center justify-between px-5 py-2 md:min-h-0 md:px-12 lg:px-20 min-[1800px]:px-24 min-[1800px]:py-3 transition-[background-color,backdrop-filter] duration-500 ${headerSurfaceClassName}`}>
+      <div className={`flex h-[60px] items-center justify-between px-5 py-0 md:h-auto md:min-h-0 md:px-12 md:py-2 lg:px-20 min-[1800px]:px-24 min-[1800px]:py-3 transition-[background-color,backdrop-filter] duration-500 ${headerSurfaceClassName}`}>
 
         {/* Logo */}
         <Link

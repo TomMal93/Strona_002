@@ -91,22 +91,22 @@ Mozilla Observatory oraz statyczna kontrola nonce są już zaliczone: `A+`, 120 
 
 ### Macierz viewportów i RWD
 
-- [ ] Przetestować wszystkie trasy przy `360x800`.
-- [ ] Przetestować wszystkie trasy przy `375x667`.
-- [ ] Przetestować wszystkie trasy przy `393x852`.
-- [ ] Przetestować wszystkie trasy przy `412x915`.
-- [ ] Przetestować wszystkie trasy przy `768x1024`.
-- [ ] Przetestować wszystkie trasy przy `1024x768`.
-- [ ] Przetestować mobile landscape przy `667x375` i `844x390`.
-- [ ] Przetestować desktop przy `1440x900`, `1920x1080` i `2560x1440`.
-- [ ] Zmierzyć `scrollWidth` i potwierdzić brak poziomego overflow na każdej trasie.
-- [ ] Potwierdzić użyteczność i przewijanie menu mobilnego w orientacji poziomej.
+- [x] Przetestować wszystkie trasy przy `360x800`.
+- [x] Przetestować wszystkie trasy przy `375x667`.
+- [x] Przetestować wszystkie trasy przy `393x852`.
+- [x] Przetestować wszystkie trasy przy `412x915`.
+- [x] Przetestować wszystkie trasy przy `768x1024`.
+- [x] Przetestować wszystkie trasy przy `1024x768`.
+- [x] Przetestować mobile landscape przy `667x375` i `844x390`.
+- [x] Przetestować desktop przy `1440x900`, `1920x1080` i `2560x1440`.
+- [x] Zmierzyć `scrollWidth` i potwierdzić brak poziomego overflow na każdej trasie.
+- [x] Potwierdzić użyteczność i przewijanie menu mobilnego w orientacji poziomej.
 - [ ] Sprawdzić zachowanie paska adresu i dynamicznej wysokości viewportu w iOS Safari.
 
 ### Przeglądarki i urządzenia
 
-- [ ] Wykonać regresję w Chrome/Chromium desktop.
-- [ ] Wykonać regresję w Firefox desktop.
+- [x] Wykonać regresję w Chrome/Chromium desktop.
+- [x] Wykonać regresję w Firefox desktop.
 - [ ] Wykonać regresję w Edge desktop.
 - [ ] Wykonać regresję na fizycznym iPhonie w iOS Safari.
 - [ ] Wykonać regresję na fizycznym Androidzie w Chrome Android.
@@ -114,29 +114,29 @@ Mozilla Observatory oraz statyczna kontrola nonce są już zaliczone: `A+`, 120 
 - [ ] Sprawdzić tap, swipe, pinch-to-zoom i systemowe cofanie.
 - [ ] Sprawdzić autoplay, play/pause, scrubber, głośność, fullscreen i zmianę orientacji.
 - [ ] Potwierdzić płynność GSAP, ScrollTrigger i Lenis podczas przewijania w dół i w górę, także na słabszym telefonie.
-- [ ] Sprawdzić faktyczne uruchomienie YouTubeFacade po tapnięciu.
+- [x] Sprawdzić faktyczne uruchomienie YouTubeFacade po tapnięciu.
 
 ### Klawiatura i WCAG
 
 - [ ] Przejść wszystkie trasy klawiaturą: Tab, Shift+Tab, Enter, Space i Escape.
-- [ ] Potwierdzić focus trap menu, zamykanie Escape i powrót fokusu na hamburger.
+- [x] Potwierdzić focus trap menu, zamykanie Escape i powrót fokusu na hamburger.
 - [ ] Sprawdzić widoczność fokusu oraz logiczną kolejność nawigacji.
-- [ ] Zmierzyć kontrast WCAG 2.1 AA w axe, WAVE lub równoważnym narzędziu.
-- [ ] Sprawdzić skalowanie tekstu do 200% bez utraty treści lub funkcji.
+- [x] Zmierzyć kontrast WCAG 2.1 AA w axe, WAVE lub równoważnym narzędziu.
+- [x] Sprawdzić skalowanie tekstu do 200% bez utraty treści lub funkcji.
 - [ ] Wykonać podstawową regresję z czytnikiem ekranu.
-- [ ] Sprawdzić działanie przy `prefers-reduced-motion: reduce`.
+- [x] Sprawdzić działanie przy `prefers-reduced-motion: reduce`.
 - [ ] Sprawdzić Force Dark Mode.
 
 ### Pozostałe testy runtime
 
-- [ ] Potwierdzić działanie preloadera przy pierwszej wizycie, kolejnej wizycie w tej samej sesji i w trybie incognito.
-- [ ] Potwierdzić działanie SectionRail: aktywna sekcja, kliknięcia, hashe i breakpoint widoczności.
-- [ ] Sprawdzić wizualnie stronę 404.
+- [x] Potwierdzić działanie preloadera przy pierwszej wizycie, kolejnej wizycie w tej samej sesji i w trybie incognito.
+- [x] Potwierdzić działanie SectionRail: aktywna sekcja, kliknięcia, hashe i breakpoint widoczności.
+- [x] Sprawdzić wizualnie stronę 404.
 - [ ] Kontrolowanie wywołać boundary 500 i sprawdzić reset oraz responsywność.
-- [ ] Sprawdzić podgląd wydruku `/oferta` i `/contact`.
-- [ ] Wykonać test Fast 3G i Slow 3G.
-- [ ] Przetestować pierwszą i kolejną wizytę przy ograniczonej sieci.
-- [ ] Sprawdzić tryb Save-Data.
+- [x] Sprawdzić podgląd wydruku `/oferta` i `/contact`.
+- [x] Wykonać test Fast 3G i Slow 3G.
+- [x] Przetestować pierwszą i kolejną wizytę przy ograniczonej sieci.
+- [x] Sprawdzić tryb Save-Data.
 
 ## P3 — kanały kontaktu, SEO i zewnętrzne walidatory
 
