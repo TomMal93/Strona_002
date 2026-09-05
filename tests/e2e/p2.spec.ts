@@ -471,7 +471,7 @@ test.describe('P2 — zachowania runtime', () => {
     await context.close()
   })
 
-  test('mobilne Hero od początku wyświetla i odtwarza wideo bez postera', async ({ page }) => {
+  test('mobilne Hero płynnie przechodzi z pierwszej klatki do odtwarzanego wideo', async ({ page }) => {
     await skipIntro(page)
     await page.setViewportSize({ width: 393, height: 852 })
     await visit(page, '/')
@@ -481,7 +481,7 @@ test.describe('P2 — zachowania runtime', () => {
     await expect(heroVideo).toHaveAttribute('autoplay', '')
     await expect(heroVideo).toHaveAttribute('playsinline', '')
     await expect(heroVideo).toHaveAttribute('preload', 'auto')
-    await expect(heroVideo).not.toHaveAttribute('poster', /.+/)
+    await expect(heroVideo).toHaveAttribute('poster', '/images/hero/hero-video-poster.webp')
     await expect(page.locator('#hero img[src*="hero-video-poster"]')).toHaveCount(0)
     await expect.poll(() => heroVideo.evaluate((video: HTMLVideoElement) => video.currentTime)).toBeGreaterThan(0)
   })
