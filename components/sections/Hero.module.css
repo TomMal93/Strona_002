@@ -70,9 +70,6 @@
 
 .mobileHeroPoster {
   z-index: 1;
-  background-image: url('/images/hero/hero-video-poster.webp');
-  background-position: center;
-  background-size: cover;
 }
 
 .mobileHeroVideo {

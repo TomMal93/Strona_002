@@ -72,7 +72,7 @@ export default function AboutMeContact() {
             </div>
 
             <div ref={contactPanelRef} className={styles.contactPanel}>
-              <div className={styles.contactInfo} aria-label="Dane kontaktowe">
+              <div className={styles.contactInfo} role="group" aria-label="Dane kontaktowe">
                 <a href={phoneHref} className={styles.contactItem}>
                   <span className={styles.contactLabel}>Telefon</span>
                   <span className={styles.contactValue}>{contact.phone}</span>
@@ -93,7 +93,7 @@ export default function AboutMeContact() {
                   </Link>
                 </div>
 
-                <div className={styles.socialRow} aria-label="Media społecznościowe">
+                <nav className={styles.socialRow} aria-label="Media społecznościowe">
                   {contact.socials.map((social) => (
                     <a
                       key={social.platform}
@@ -106,7 +106,7 @@ export default function AboutMeContact() {
                       {socialIcons[social.platform]}
                     </a>
                   ))}
-                </div>
+                </nav>
               </div>
             </div>
           </div>

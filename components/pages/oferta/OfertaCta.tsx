@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { gsap } from 'gsap'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import { socialIcons } from '@/components/sections/cta/CtaActions'
@@ -24,13 +23,13 @@ export default function OfertaCta() {
     if (prefersReducedMotion) return
 
     let disposed = false
-    let ctx: ReturnType<typeof gsap.context> | undefined
+    let revert: (() => void) | undefined
 
-    void import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+    void Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(([{ gsap }, { ScrollTrigger }]) => {
       if (disposed) return
 
       gsap.registerPlugin(ScrollTrigger)
-      ctx = gsap.context(() => {
+      const ctx = gsap.context(() => {
         gsap.from(contentRef.current, {
           y: 28,
           autoAlpha: 0,
@@ -43,11 +42,12 @@ export default function OfertaCta() {
           },
         })
       }, sectionRef)
+      revert = () => ctx.revert()
     })
 
     return () => {
       disposed = true
-      ctx?.revert()
+      revert?.()
     }
   }, [])
 
@@ -94,7 +94,7 @@ export default function OfertaCta() {
                 </Link>
               </div>
 
-              <div className={styles.socialRow} aria-label="Media społecznościowe">
+              <nav className={styles.socialRow} aria-label="Media społecznościowe">
                 {social.map(({ platform, href: socialHref }) => (
                   <a
                     key={platform}
@@ -107,7 +107,7 @@ export default function OfertaCta() {
                     {socialIcons[platform]}
                   </a>
                 ))}
-              </div>
+              </nav>
             </div>
           </div>
         </div>

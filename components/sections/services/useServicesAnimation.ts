@@ -25,6 +25,8 @@ const DESKTOP_BREAKPOINT = 1024
  */
 export function useServicesAnimation(refs: ServicesAnimationRefs): void {
   useLayoutEffect(() => {
+    if (window.matchMedia('(max-width: 767px)').matches) return
+
     let shouldCleanup = false
     let revertContext: (() => void) | undefined
 

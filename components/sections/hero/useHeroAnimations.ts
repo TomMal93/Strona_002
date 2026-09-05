@@ -19,6 +19,8 @@ export function useHeroAnimations({
   ctaRef,
 }: HeroRefs) {
   useEffect(() => {
+    if (window.matchMedia('(max-width: 767px)').matches) return
+
     let shouldCleanup = false
     let revertContext: (() => void) | undefined
 
@@ -29,7 +31,6 @@ export function useHeroAnimations({
       const prefersReducedMotion = window.matchMedia(
         '(prefers-reduced-motion: reduce)',
       ).matches
-      const isMobileViewport = window.matchMedia('(max-width: 767px)').matches
 
       const ctx = gsap.context(() => {
         const fadeTargets = [
@@ -39,7 +40,7 @@ export function useHeroAnimations({
           ctaRef.current,
         ].filter((el): el is HTMLElement => el !== null)
 
-        if (prefersReducedMotion || isMobileViewport) {
+        if (prefersReducedMotion) {
           gsap.set([headingRef.current, descriptionRef.current, ctaRef.current].filter((el): el is HTMLElement => el !== null), { autoAlpha: 1, y: 0 })
           if (eyebrowRef.current) gsap.set(eyebrowRef.current, { opacity: 0.5, visibility: 'visible', y: 0 })
           if (underlineRef.current) gsap.set(underlineRef.current, { scaleX: 1 })

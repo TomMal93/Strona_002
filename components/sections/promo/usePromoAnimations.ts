@@ -16,6 +16,8 @@ export type PromoAnimationRefs = {
 
 export function usePromoAnimations(refs: PromoAnimationRefs): void {
   useLayoutEffect(() => {
+    if (window.matchMedia('(max-width: 767px)').matches) return
+
     let shouldCleanup = false
     let revertContext: (() => void) | undefined
 

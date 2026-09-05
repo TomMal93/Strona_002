@@ -1,27 +1,17 @@
 'use client'
 
-import { gsap } from 'gsap'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usePreloaderGate } from './usePreloaderGate'
 import styles from './Preloader.module.css'
 
 const SESSION_KEY = 'intro:played:v1'
 const FADE_OUT_MS = 400
 
-type Phase = 'visible' | 'gone'
+type Phase = 'visible' | 'leaving' | 'gone'
 
-// Default to 'visible' so the overlay is part of the first paint (no FOUC
-// where Hero flashes before the loader). The inline boot script in layout.tsx
-// adds `html.intro-played` for returning visitors — we read it in useEffect
-// and immediately switch to 'gone' for them.
 export default function Preloader() {
   const [phase, setPhase] = useState<Phase>('visible')
-  const overlayRef = useRef<HTMLDivElement>(null)
-  const wordmarkRef = useRef<HTMLDivElement>(null)
-  const dividerRef = useRef<HTMLSpanElement>(null)
-  const subtitleRef = useRef<HTMLSpanElement>(null)
 
-  // Skip immediately for returning visitors (within the same session).
   useEffect(() => {
     let alreadyPlayed = false
     try {
@@ -29,154 +19,65 @@ export default function Preloader() {
     } catch {
       // sessionStorage unavailable — fall back to playing the intro.
     }
-    if (alreadyPlayed) {
+
+    // On small screens the poster is the critical visual and must paint
+    // immediately; the decorative intro is reserved for larger viewports.
+    const isSmallViewport = window.matchMedia('(max-width: 767px)').matches
+    if (alreadyPlayed || isSmallViewport) {
+      if (isSmallViewport) {
+        try {
+          window.sessionStorage.setItem(SESSION_KEY, '1')
+        } catch {
+          // sessionStorage is optional.
+        }
+      }
+      document.body.classList.remove('intro-active')
+      window.dispatchEvent(new CustomEvent('intro:done'))
       setPhase('gone')
       return
     }
+
     document.body.classList.add('intro-active')
     window.dispatchEvent(new CustomEvent('intro:active'))
   }, [])
 
   const gate = usePreloaderGate(phase === 'visible')
 
-  // Entrance animation while visible.
-  useLayoutEffect(() => {
-    if (phase !== 'visible') return
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) {
-      gsap.set(wordmarkRef.current, {
-        autoAlpha: 1,
-      })
-      gsap.set(dividerRef.current, {
-        autoAlpha: 1,
-        scaleX: 1,
-      })
-      gsap.set(subtitleRef.current, {
-        autoAlpha: 0.7,
-      })
-      return
-    }
-
-    const ctx = gsap.context(() => {
-      gsap.set(wordmarkRef.current, { autoAlpha: 0 })
-      gsap.set(dividerRef.current, {
-        autoAlpha: 0,
-        scaleX: 0.35,
-        transformOrigin: 'center center',
-      })
-      gsap.set(subtitleRef.current, { autoAlpha: 0 })
-    }, overlayRef)
-
-    let cancelled = false
-    let timeline: gsap.core.Timeline | null = null
-
-    const startEntrance = () => {
-      if (cancelled) return
-
-      timeline = gsap.timeline({ defaults: { overwrite: 'auto' } })
-      timeline.to(wordmarkRef.current, {
-        autoAlpha: 1,
-        duration: 0.4,
-        ease: 'power2.out',
-      })
-      timeline.to(dividerRef.current, {
-        autoAlpha: 1,
-        scaleX: 1,
-        duration: 0.3,
-        ease: 'power3.out',
-      }, '-=0.15')
-      timeline.to(subtitleRef.current, {
-        autoAlpha: 0.7,
-        duration: 0.2,
-        ease: 'power3.out',
-      }, '-=0.15')
-    }
-
-    if (document.fonts) {
-      void document.fonts.ready.then(startEntrance, startEntrance)
-    } else {
-      startEntrance()
-    }
-
-    return () => {
-      cancelled = true
-      timeline?.kill()
-      ctx.revert()
-    }
-  }, [phase])
-
-  // Leave when the gate opens.
   useEffect(() => {
     if (phase !== 'visible' || gate !== 'ready') return
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    const finish = () => {
-      try {
-        window.sessionStorage.setItem(SESSION_KEY, '1')
-      } catch {
-        // ignore
-      }
-      document.body.classList.remove('intro-active')
-      window.dispatchEvent(new CustomEvent('intro:done'))
-      setPhase('gone')
+    try {
+      window.sessionStorage.setItem(SESSION_KEY, '1')
+    } catch {
+      // sessionStorage is optional.
     }
+    document.body.classList.remove('intro-active')
+    window.dispatchEvent(new CustomEvent('intro:done'))
 
-    if (prefersReducedMotion) {
-      finish()
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setPhase('gone')
       return
     }
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        defaults: { overwrite: 'auto' },
-        onComplete: finish,
-      })
-      tl.to(dividerRef.current, {
-        autoAlpha: 0,
-        xPercent: 130,
-        scaleX: 0.82,
-        duration: 0.25,
-        ease: 'power3.in',
-      })
-      tl.to(subtitleRef.current, {
-        autoAlpha: 0,
-        y: -6,
-        duration: 0.2,
-        ease: 'power2.in',
-      }, '<')
-      tl.to(wordmarkRef.current, {
-        autoAlpha: 0,
-        y: -8,
-        duration: 0.25,
-        ease: 'power2.in',
-      }, '<')
-      tl.to(overlayRef.current, {
-        autoAlpha: 0,
-        scale: 1.04,
-        duration: FADE_OUT_MS / 1000,
-        ease: 'power2.inOut',
-      }, '<')
-    }, overlayRef)
-
-    return () => {
-      ctx.revert()
-    }
+    setPhase('leaving')
   }, [phase, gate])
 
-  // Cleanup body class if component unmounts mid-intro.
   useEffect(() => {
-    return () => {
-      document.body.classList.remove('intro-active')
-    }
+    if (phase !== 'leaving') return
+
+    const timeoutId = window.setTimeout(() => setPhase('gone'), FADE_OUT_MS)
+    return () => window.clearTimeout(timeoutId)
+  }, [phase])
+
+  useEffect(() => () => {
+    document.body.classList.remove('intro-active')
   }, [])
 
   if (phase === 'gone') return null
 
   return (
     <div
-      ref={overlayRef}
-      className={styles.overlay}
+      className={`${styles.overlay} ${phase === 'leaving' ? styles.overlayLeaving : ''}`}
       role="status"
       aria-live="polite"
       aria-label="Ładowanie strony"
@@ -184,15 +85,13 @@ export default function Preloader() {
     >
       <div aria-hidden="true" className={styles.halo} />
       <div className={styles.wordmarkRow}>
-        <div ref={wordmarkRef} className={styles.wordmark}>
+        <div className={styles.wordmark}>
           MALESZYK
           <span className={styles.dot}>.</span>
           <span className={styles.media}>MEDIA</span>
         </div>
-        <span ref={dividerRef} aria-hidden="true" className={styles.divider} />
-        <span ref={subtitleRef} className={styles.subtitle}>
-          Fotografia &amp; Film
-        </span>
+        <span aria-hidden="true" className={styles.divider} />
+        <span className={styles.subtitle}>Fotografia &amp; Film</span>
       </div>
     </div>
   )

@@ -17,6 +17,8 @@ const TABLET_BREAKPOINT = 768
 
 export function useProcessAnimations(refs: ProcessAnimationRefs): void {
   useLayoutEffect(() => {
+    if (window.matchMedia('(max-width: 767px)').matches) return
+
     let shouldCleanup = false
     let revertContext: (() => void) | undefined
 

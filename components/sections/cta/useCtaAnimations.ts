@@ -17,6 +17,8 @@ export type CtaAnimationRefs = {
 
 export function useCtaAnimations(refs: CtaAnimationRefs): void {
   useLayoutEffect(() => {
+    if (window.matchMedia('(max-width: 767px)').matches) return
+
     let shouldCleanup = false
     let revertContext: (() => void) | undefined
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches

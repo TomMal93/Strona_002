@@ -27,6 +27,8 @@ export type AboutAnimationRefs = {
  */
 export function useAboutAnimations(refs: AboutAnimationRefs): void {
   useLayoutEffect(() => {
+    if (window.matchMedia('(max-width: 767px)').matches) return
+
     let shouldCleanup = false
     let revertContext: (() => void) | undefined
 

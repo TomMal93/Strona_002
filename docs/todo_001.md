@@ -146,30 +146,30 @@ Kod obsługuje już zmienne `PRIVACY_ADMIN_NAME`, `PRIVACY_ADMIN_ADDRESS`, `PRIV
 
 Stan bazowy: Lighthouse Mobile Performance `78`, LCP `5,50 s`; cele: Performance `>= 90`, LCP `<= 2,5 s`.
 
-- [ ] Poprawić mobilny element LCP w Hero.
-- [ ] Zapewnić wczesne odkrywanie właściwego zasobu lub postera Hero.
-- [ ] Ustawić właściwy priorytet pobierania zasobu LCP.
-- [ ] Zweryfikować zasadność `preload="none"` dla wideo above the fold.
-- [ ] Rozważyć responsywne warianty postera i dalsze ograniczenie krytycznego łańcucha żądań.
-- [ ] Po optymalizacji wykonać 3–5 pomiarów Lighthouse Mobile i Desktop.
+- [x] Poprawić mobilny element LCP w Hero.
+- [x] Zapewnić wczesne odkrywanie właściwego zasobu lub postera Hero.
+- [x] Ustawić właściwy priorytet pobierania zasobu LCP.
+- [x] Zweryfikować zasadność `preload="none"` dla wideo above the fold.
+- [x] Rozważyć responsywne warianty postera i dalsze ograniczenie krytycznego łańcucha żądań.
+- [x] Po optymalizacji wykonać 3–5 pomiarów Lighthouse Mobile i Desktop.
 - [ ] Potwierdzić medianę Mobile Performance `>= 90` oraz LCP `<= 2,5 s`.
-- [ ] Potwierdzić brak regresji CLS, TBT, Accessibility, Best Practices i SEO.
+- [x] Potwierdzić brak regresji CLS, TBT, Accessibility, Best Practices i SEO.
 
 ### Budżet JavaScript
 
 Stan bazowy: wspólne skrypty obecne na każdej trasie mają około `217,8 kB gzip`; `perf:bundle` obecnie tylko drukuje wynik.
 
-- [ ] Ustalić realny, mierzalny budżet JS dla całej aplikacji i poszczególnych tras.
-- [ ] Dodać próg pass/fail do `npm run perf:bundle`.
-- [ ] Egzekwować budżet w CI.
-- [ ] Ograniczyć globalny JS, analizując szczególnie Lenis, GSAP, Navbar, preloader i Speed Insights ładowane z layoutu.
-- [ ] Zapisać wynik bazowy i wynik po optymalizacji w ponownym raporcie etapu 4.
+- [x] Ustalić realny, mierzalny budżet JS dla całej aplikacji i poszczególnych tras.
+- [x] Dodać próg pass/fail do `npm run perf:bundle`.
+- [x] Egzekwować budżet w CI.
+- [x] Ograniczyć globalny JS, analizując szczególnie Lenis, GSAP, Navbar, preloader i Speed Insights ładowane z layoutu.
+- [x] Zapisać wynik bazowy i wynik po optymalizacji w ponownym raporcie etapu 4.
 
 ### Dostępność wskazana przez Lighthouse
 
-- [ ] Poprawić `aria-label` na dwóch elementach `<div>` grup CTA: zastosować prawidłową semantykę albo usunąć niepoprawny atrybut.
-- [ ] Ujednolicić widoczny tekst logo „MALESZYK.MEDIA” z jego nazwą dostępną.
-- [ ] Powtórzyć Lighthouse i potwierdzić brak tych błędów.
+- [x] Poprawić `aria-label` na dwóch elementach `<div>` grup CTA: zastosować prawidłową semantykę albo usunąć niepoprawny atrybut.
+- [x] Ujednolicić widoczny tekst logo „MALESZYK.MEDIA” z jego nazwą dostępną.
+- [x] Powtórzyć Lighthouse i potwierdzić brak tych błędów.
 
 ### CSP i bezpieczeństwo runtime
 
@@ -178,6 +178,8 @@ Stan bazowy: wspólne skrypty obecne na każdej trasie mają około `217,8 kB gz
 - [ ] Powtórzyć SecurityHeaders.com, jeśli serwis będzie dostępny.
 
 Mozilla Observatory oraz statyczna kontrola nonce są już zaliczone: `A+`, 120 punktów, 12/12 testów PASS.
+
+Lokalna kontrola produkcyjnego buildu po zmianach P1 objęła wszystkie pięć tras i nie wykazała błędów konsoli ani naruszeń CSP. Publiczne potwierdzenie, Speed Insights i ponowny skan nagłówków pozostają zależne od wdrożenia kandydata.
 
 ## P2 — zaległe testy wizualne, dostępności i cross-browser
 

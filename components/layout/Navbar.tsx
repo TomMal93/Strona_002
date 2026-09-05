@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { gsap } from 'gsap'
 import { cn } from '@/lib/utils'
 import styles from './Navbar.module.css'
 
@@ -91,17 +90,15 @@ export default function Navbar() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) return
 
-    const ctx = gsap.context(() => {
-      gsap.from(headerRef.current, {
-        y: -24,
-        autoAlpha: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-        delay: 0.15,
-      })
-    })
+    const animation = headerRef.current?.animate(
+      [
+        { opacity: 0, transform: 'translateY(-24px)' },
+        { opacity: 1, transform: 'translateY(0)' },
+      ],
+      { duration: 900, delay: 150, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'backwards' },
+    )
 
-    return () => ctx.revert()
+    return () => animation?.cancel()
   }, [])
 
   /* GSAP mobile menu open / close */
@@ -110,17 +107,11 @@ export default function Navbar() {
     if (!el) return
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const menuItems = el.querySelectorAll('[data-mobile-menu-item]')
+    const menuItems = Array.from(el.querySelectorAll<HTMLElement>('[data-mobile-menu-item]'))
 
     if (prefersReducedMotion) {
-      gsap.set(el, {
-        autoAlpha: mobileOpen ? 1 : 0,
-        y: 0,
-      })
-      gsap.set(menuItems, {
-        autoAlpha: mobileOpen ? 1 : 0,
-        y: 0,
-      })
+      el.style.visibility = mobileOpen ? 'visible' : 'hidden'
+      el.style.opacity = mobileOpen ? '1' : '0'
       if (!mobileOpen) return
 
       // Move focus after the button's native click focus has settled.
@@ -130,42 +121,29 @@ export default function Navbar() {
       return () => window.clearTimeout(focusTimer)
     }
 
-    const ctx = gsap.context(() => {
-      if (mobileOpen) {
-        gsap.fromTo(
-          el,
-          { autoAlpha: 0, y: -8 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: prefersReducedMotion ? 0 : 0.35,
-            ease: 'power3.out',
-          },
-        )
-        gsap.fromTo(
-          menuItems,
-          { autoAlpha: 0, y: 16 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.45,
-            stagger: 0.055,
-            delay: 0.08,
-            ease: 'power3.out',
-          },
-        )
-        window.requestAnimationFrame(() => firstMobileLinkRef.current?.focus())
-      } else {
-        gsap.to(el, {
-          autoAlpha: 0,
-          y: -8,
-          duration: 0.2,
-          ease: 'power2.in',
-        })
-      }
-    }, el)
+    const animations: Animation[] = []
+    el.style.visibility = 'visible'
 
-    return () => ctx.revert()
+    if (mobileOpen) {
+      animations.push(el.animate(
+        [{ opacity: 0, transform: 'translateY(-8px)' }, { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 350, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' },
+      ))
+      menuItems.forEach((item, index) => {
+        animations.push(item.animate(
+          [{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'translateY(0)' }],
+          { duration: 450, delay: 80 + index * 55, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'backwards' },
+        ))
+      })
+      window.requestAnimationFrame(() => firstMobileLinkRef.current?.focus())
+    } else {
+      el.style.visibility = 'hidden'
+      el.style.opacity = '0'
+    }
+
+    return () => {
+      animations.forEach((animation) => animation.cancel())
+    }
   }, [mobileOpen])
 
   /* Keep the page behind the full-screen menu still and close it on desktop. */
@@ -332,7 +310,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          aria-label="Strona główna"
+          aria-label="MALESZYK.MEDIA"
           className="relative inline-flex min-h-11 shrink-0 items-center font-bebas text-[1.006rem] uppercase tracking-heading text-warm-white transition-colors duration-500 ease-out hover:text-khaki focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-khaki min-[1800px]:text-[1.3rem]"
         >
           MALESZYK

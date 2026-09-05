@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import Lenis from 'lenis'
 
 /**
  * SmoothScroll — wraps the app with Lenis smooth-scroll.
@@ -11,12 +10,16 @@ import Lenis from 'lenis'
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) return
+    const isMobileViewport = window.matchMedia('(max-width: 767px)').matches
+    if (prefersReducedMotion || isMobileViewport) return
 
     let disposed = false
     let disposeLenis: (() => void) | undefined
 
-    void import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+    void Promise.all([
+      import('lenis'),
+      import('gsap/ScrollTrigger'),
+    ]).then(([{ default: Lenis }, { ScrollTrigger }]) => {
       if (disposed) return
 
       const lenis = new Lenis({

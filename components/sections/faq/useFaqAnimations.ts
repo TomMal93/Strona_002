@@ -13,6 +13,8 @@ export type FaqAnimationRefs = {
 
 export function useFaqAnimations(refs: FaqAnimationRefs): void {
   useLayoutEffect(() => {
+    if (window.matchMedia('(max-width: 767px)').matches) return
+
     let shouldCleanup = false
     let revertContext: (() => void) | undefined
 

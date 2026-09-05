@@ -321,15 +321,23 @@ test.describe('P2 — zachowania runtime', () => {
     })
   }
 
-  test('preloader uruchamia się raz w sesji i ponownie w świeżym kontekście', async ({ browser }) => {
-    const firstContext = await browser.newContext({ reducedMotion: 'reduce' })
+  test('preloader odblokowuje scroll, uruchamia się raz w sesji i ponownie w świeżym kontekście', async ({ browser }) => {
+    const firstContext = await browser.newContext({ reducedMotion: 'no-preference' })
     const firstPage = await firstContext.newPage()
     await firstPage.goto('/', { waitUntil: 'domcontentloaded' })
     await expect(firstPage.locator('[data-intro-overlay]')).toBeVisible()
     await expect(firstPage.locator('[data-intro-overlay]')).toBeHidden({ timeout: 4_000 })
     expect(await firstPage.evaluate(() => sessionStorage.getItem('intro:played:v1'))).toBe('1')
+    await expect.poll(() => firstPage.evaluate(() => ({
+      bodyLocked: document.body.classList.contains('intro-active'),
+      lenisStopped: document.documentElement.classList.contains('lenis-stopped'),
+    }))).toEqual({ bodyLocked: false, lenisStopped: false })
+    const initialScrollY = await firstPage.evaluate(() => scrollY)
+    await firstPage.mouse.wheel(0, 900)
+    await expect.poll(() => firstPage.evaluate(() => scrollY)).toBeGreaterThan(initialScrollY)
     await firstPage.reload({ waitUntil: 'domcontentloaded' })
     await expect(firstPage.locator('[data-intro-overlay]')).toBeHidden()
+    await expect(firstPage.locator('body')).not.toHaveClass(/intro-active/)
     await firstContext.close()
 
     const freshContext = await browser.newContext({ reducedMotion: 'reduce' })

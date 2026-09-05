@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
 import { siteContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 import styles from './OfertaHero.module.css'
@@ -21,49 +20,41 @@ export default function OfertaHero() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) return
 
-    const ctx = gsap.context(() => {
-      const hudLines = hudBarRef.current?.querySelectorAll<HTMLElement>('[data-hud-line]') ?? []
-      const hudLabels = hudBarRef.current?.querySelectorAll<HTMLElement>('[data-hud-label]') ?? []
+    let disposed = false
+    let revert: (() => void) | undefined
 
-      gsap.set([titleRef.current, leadRef.current], { autoAlpha: 0, y: 28 })
-      if (hudLines.length) gsap.set(hudLines, { scaleX: 0 })
-      if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0, y: 8 })
+    void import('gsap').then(({ gsap }) => {
+      if (disposed) return
+      const ctx = gsap.context(() => {
+        const hudLines = hudBarRef.current?.querySelectorAll<HTMLElement>('[data-hud-line]') ?? []
+        const hudLabels = hudBarRef.current?.querySelectorAll<HTMLElement>('[data-hud-label]') ?? []
 
-      const tl = gsap.timeline({
-        delay: 0.15,
-        onComplete: () => {
-          window.dispatchEvent(new Event(OFERTA_HERO_ENTERED_EVENT))
-        },
-      })
+        gsap.set([titleRef.current, leadRef.current], { autoAlpha: 0, y: 28 })
+        if (hudLines.length) gsap.set(hudLines, { scaleX: 0 })
+        if (hudLabels.length) gsap.set(hudLabels, { autoAlpha: 0, y: 8 })
 
-      if (hudLines.length) {
-        tl.to(hudLines, {
-          scaleX: 1,
-          duration: 0.5,
-          ease: 'power2.out',
-          stagger: 0.05,
+        const tl = gsap.timeline({
+          delay: 0.15,
+          onComplete: () => {
+            window.dispatchEvent(new Event(OFERTA_HERO_ENTERED_EVENT))
+          },
         })
-      }
-      if (hudLabels.length) {
-        tl.to(
-          hudLabels,
-          { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out', stagger: 0.06 },
-          '-=0.18',
-        )
-      }
-      tl.to(
-        titleRef.current,
-        { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' },
-        '-=0.1',
-      )
-      tl.to(
-        leadRef.current,
-        { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-        '-=0.3',
-      )
-    }, sectionRef)
+        if (hudLines.length) {
+          tl.to(hudLines, { scaleX: 1, duration: 0.5, ease: 'power2.out', stagger: 0.05 })
+        }
+        if (hudLabels.length) {
+          tl.to(hudLabels, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out', stagger: 0.06 }, '-=0.18')
+        }
+        tl.to(titleRef.current, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.1')
+        tl.to(leadRef.current, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3')
+      }, sectionRef)
+      revert = () => ctx.revert()
+    })
 
-    return () => ctx.revert()
+    return () => {
+      disposed = true
+      revert?.()
+    }
   }, [])
 
   return (

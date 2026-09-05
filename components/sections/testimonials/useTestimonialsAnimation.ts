@@ -392,10 +392,21 @@ export function useTestimonialsAnimation(
       revertContext = () => ctx.revert()
     }
 
-    void initAnimations()
+    let observer: IntersectionObserver | undefined
+    if ('IntersectionObserver' in window && refs.sectionRef.current) {
+      observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return
+        observer?.disconnect()
+        void initAnimations()
+      }, { rootMargin: '400px 0px' })
+      observer.observe(refs.sectionRef.current)
+    } else {
+      void initAnimations()
+    }
 
     return () => {
       shouldCleanup = true
+      observer?.disconnect()
       revertContext?.()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

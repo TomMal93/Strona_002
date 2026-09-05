@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
-import { gsap } from 'gsap'
 import { siteContent } from '@/lib/site-content'
 import { socialIcons } from '@/components/sections/cta/CtaActions'
 import { cn } from '@/lib/utils'
@@ -60,6 +59,8 @@ function MonitorFigure({
           alt={hero.imageAlt}
           fill
           priority={priority}
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : 'auto'}
           quality={88}
           sizes="(max-width: 767px) 94vw, (max-width: 1199px) 52vw, 720px"
         />
@@ -122,50 +123,44 @@ export default function ContactHero() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) return
 
-    const ctx = gsap.context(() => {
-      const title = contentRef.current.querySelector('[data-contact-title]')
-      const frame = contentRef.current.querySelector('[data-contact-frame]')
-      const lead = contentRef.current.querySelector('[data-contact-lead]')
-      const panel = contentRef.current.querySelector('[data-contact-panel]')
-      const featureItems = contentRef.current.querySelectorAll('[data-contact-feature]')
-      const strip = bottomStripRef.current
-      const stripChildren = strip ? Array.from(strip.children) : []
+    let disposed = false
+    let revert: (() => void) | undefined
 
-      // Initial hidden states
-      const shells = [title, frame, strip].filter(Boolean) as Element[]
-      gsap.set(shells, { autoAlpha: 0, y: 24 })
+    void import('gsap').then(({ gsap }) => {
+      if (disposed) return
+      const ctx = gsap.context(() => {
+        const title = contentRef.current.querySelector('[data-contact-title]')
+        const frame = contentRef.current.querySelector('[data-contact-frame]')
+        const lead = contentRef.current.querySelector('[data-contact-lead]')
+        const panel = contentRef.current.querySelector('[data-contact-panel]')
+        const featureItems = contentRef.current.querySelectorAll('[data-contact-feature]')
+        const strip = bottomStripRef.current
+        const stripChildren = strip ? Array.from(strip.children) : []
+        const shells = [title, frame, strip].filter(Boolean) as Element[]
+        const innerContent = [lead, panel, ...Array.from(featureItems)].filter(Boolean) as Element[]
 
-      const innerContent = [lead, panel, ...Array.from(featureItems)].filter(Boolean) as Element[]
-      gsap.set(innerContent, { autoAlpha: 0, y: 16 })
-      gsap.set(stripChildren, { autoAlpha: 0, y: 10 })
-      if (monitorRef.current) gsap.set(monitorRef.current, { autoAlpha: 0, x: 28 })
+        gsap.set(shells, { autoAlpha: 0, y: 24 })
+        gsap.set(innerContent, { autoAlpha: 0, y: 16 })
+        gsap.set(stripChildren, { autoAlpha: 0, y: 10 })
+        if (monitorRef.current) gsap.set(monitorRef.current, { autoAlpha: 0, x: 28 })
 
-      const tl = gsap.timeline({ delay: 0.15 })
+        const tl = gsap.timeline({ delay: 0.15 })
+        tl.to(shells, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out' })
+        tl.to(innerContent, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out' }, '-=0.15')
+        if (stripChildren.length) {
+          tl.to(stripChildren, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out' }, '<')
+        }
+        if (monitorRef.current) {
+          tl.to(monitorRef.current, { autoAlpha: 1, x: 0, duration: 0.8, ease: 'power3.out' }, '<')
+        }
+      }, sectionRef)
+      revert = () => ctx.revert()
+    })
 
-      // Beat 1 — header, frame, bottom strip
-      tl.to(shells, {
-        autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out',
-      })
-
-      // Beat 2 — text, buttons, benefits, bottom strip content, image
-      tl.to(innerContent, {
-        autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out',
-      }, '-=0.15')
-
-      if (stripChildren.length) {
-        tl.to(stripChildren, {
-          autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out',
-        }, '<')
-      }
-
-      if (monitorRef.current) {
-        tl.to(monitorRef.current, {
-          autoAlpha: 1, x: 0, duration: 0.8, ease: 'power3.out',
-        }, '<')
-      }
-    }, sectionRef)
-
-    return () => ctx.revert()
+    return () => {
+      disposed = true
+      revert?.()
+    }
   }, [])
 
   return (
@@ -238,11 +233,11 @@ export default function ContactHero() {
                   </aside>
                 </div>
 
-                <div className={styles.features} aria-label="Najważniejsze informacje">
+                <div className={styles.features} role="list" aria-label="Najważniejsze informacje">
                   {features.map((feature, index) => {
                     const Icon = featureIcons[index]
                     return (
-                      <div key={feature.label} data-contact-feature className={styles.feature}>
+                      <div key={feature.label} data-contact-feature className={styles.feature} role="listitem">
                         <Icon />
                         <strong>{feature.label}</strong>
                         <span className={styles.featureDetail}>{featureDetails[index]}</span>

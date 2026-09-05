@@ -1,7 +1,6 @@
 'use client'
 
 import { useLayoutEffect, useRef } from 'react'
-import { gsap } from 'gsap'
 import { siteContent } from '@/lib/site-content'
 import CinematicVideoPlayer from '@/components/ui/CinematicVideoPlayer'
 import { useLazyVideoSource } from '@/components/ui/useLazyVideoSource'
@@ -162,7 +161,7 @@ export default function OfertaServices() {
 
     let disposed = false
     let heroEntered = false
-    let ctx: ReturnType<typeof gsap.context> | undefined
+    let revert: (() => void) | undefined
     let revealBlocks: (() => void) | undefined
 
     const onHeroEntered = () => {
@@ -171,11 +170,11 @@ export default function OfertaServices() {
     }
     window.addEventListener(OFERTA_HERO_ENTERED_EVENT, onHeroEntered, { once: true })
 
-    void import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+    void Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(([{ gsap }, { ScrollTrigger }]) => {
       if (disposed) return
 
       gsap.registerPlugin(ScrollTrigger)
-      ctx = gsap.context((_, contextSafe) => {
+      const ctx = gsap.context((_, contextSafe) => {
         const blocks = gsap.utils.toArray<HTMLElement>('[data-offer-block]')
         gsap.set(blocks, { y: 40, autoAlpha: 0 })
 
@@ -203,12 +202,13 @@ export default function OfertaServices() {
 
         if (heroEntered) revealBlocks()
       }, sectionRef)
+      revert = () => ctx.revert()
     })
 
     return () => {
       disposed = true
       window.removeEventListener(OFERTA_HERO_ENTERED_EVENT, onHeroEntered)
-      ctx?.revert()
+      revert?.()
     }
   }, [])
 

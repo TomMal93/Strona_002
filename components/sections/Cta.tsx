@@ -99,11 +99,11 @@ export default function Cta() {
           <div className={styles.ctaPanel}>
             <p ref={subtitleRef} className={`${styles.subtitle} section-subtitle-responsive`}>{subtitle}</p>
 
-            <div ref={featuresRef} className={styles.features} aria-label="Najważniejsze informacje">
+            <div ref={featuresRef} className={styles.features} role="list" aria-label="Najważniejsze informacje">
               {features.map((feature, index) => {
                 const Icon = featureIcons[index]
                 return (
-                  <div key={feature.label} className={styles.feature}>
+                  <div key={feature.label} className={styles.feature} role="listitem">
                     <Icon />
                     <strong>{feature.label}</strong>
                     <span>{featureDetails[index]}</span>
@@ -131,7 +131,7 @@ export default function Cta() {
                 </Link>
               </div>
 
-              <div ref={socialRef} className={styles.socialRow} aria-label="Media społecznościowe">
+              <nav ref={socialRef} className={styles.socialRow} aria-label="Media społecznościowe">
                 {social.map(({ platform, href }) => (
                   <a
                     key={platform}
@@ -144,7 +144,7 @@ export default function Cta() {
                     {socialIcons[platform]}
                   </a>
                 ))}
-              </div>
+              </nav>
             </div>
           </div>
         </div>

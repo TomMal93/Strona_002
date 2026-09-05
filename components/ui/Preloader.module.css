@@ -17,6 +17,11 @@
   isolation: isolate;
 }
 
+.overlayLeaving {
+  pointer-events: none;
+  animation: preloader-overlay-out 400ms ease-in-out both;
+}
+
 .halo {
   position: absolute;
   inset: 18% 18%;
@@ -73,6 +78,7 @@
   color: rgb(245 241 232);
   white-space: nowrap;
   opacity: 0;
+  animation: preloader-wordmark-in 400ms ease-out both;
 }
 
 .dot {
@@ -103,6 +109,7 @@
   opacity: 0;
   transform: scaleX(0.35);
   transform-origin: center center;
+  animation: preloader-divider-in 300ms 250ms ease-out both;
 }
 
 .subtitle {
@@ -112,6 +119,29 @@
   text-transform: uppercase;
   color: rgb(var(--c-khaki));
   opacity: 0;
+  animation: preloader-subtitle-in 200ms 400ms ease-out both;
+}
+
+@keyframes preloader-wordmark-in {
+  to { opacity: 1; }
+}
+
+@keyframes preloader-divider-in {
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes preloader-subtitle-in {
+  to { opacity: 0.7; }
+}
+
+@keyframes preloader-overlay-out {
+  to { opacity: 0; transform: scale(1.04); }
+}
+
+@media (max-width: 767px) {
+  .overlay {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -122,6 +152,7 @@
   .wordmark,
   .divider,
   .subtitle {
+    animation: none;
     transform: none;
   }
 

@@ -38,6 +38,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 const siteUrl    = process.env.SITE_URL    ?? 'https://maleszyk.media'
 const authorName = process.env.AUTHOR_NAME ?? 'Maleszyk Media'
 const socialImagePath = '/og-image.jpg'
+const isVercelDeployment = process.env.VERCEL === '1'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -113,7 +114,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <SectionRail />
         <SmoothScroll>{children}</SmoothScroll>
         <Footer />
-        <SpeedInsights />
+        {isVercelDeployment ? <SpeedInsights /> : null}
       </body>
     </html>
   )
