@@ -8,6 +8,98 @@
 
 Etap 1 jest zamknięty. Etap 2 ma status `PARTIAL`, etap 3 `PASS WARUNKOWY`, etap 4 `FAIL`, a etap 5 `BLOCKED / NO-GO`. Przed wdrożeniem trzeba formalnie domknąć zaległe testy etapów 2–3, ponownie zaliczyć etap 4 i dopiero potem przeprowadzić etap 5.
 
+## Podział odpowiedzialności
+
+Poniższy podział jest indeksem odpowiedzialności. Status każdego zadania należy nadal oznaczać wyłącznie na właściwej liście P0–P5, aby nie tworzyć zduplikowanych checkboxów.
+
+### Odłożone
+
+- P0 pozostaje świadomie odłożone do czasu wznowienia ustaleń z klientem.
+- Odłożenie P0 nie oznacza jego zaliczenia i nadal blokuje finalny go-live.
+
+### Właściciel projektu — testy fizyczne, konta i decyzje
+
+Po wykonaniu testu fizycznego zapisać wynik `PASS` albo `FAIL`, urządzenie, system, przeglądarkę oraz krótki opis ewentualnego problemu.
+
+#### Urządzenia i przeglądarki
+
+- iPhone i iOS Safari: dynamiczny pasek adresu, wysokość Hero, tap, swipe, pinch-to-zoom, cofanie systemowe, autoplay, play/pause, scrubber, głośność, fullscreen i zmiana orientacji.
+- Fizyczny Android i Chrome Android: ten sam zakres interakcji i multimediów.
+- Samsung Internet: podstawowa regresja wszystkich tras, interakcji i multimediów.
+- Ocena płynności GSAP, ScrollTrigger i Lenis, szczególnie na słabszym telefonie.
+- Force Dark Mode na urządzeniu mobilnym.
+- Podstawowa regresja z czytnikiem ekranu, jeśli jest dostępny.
+
+#### Kontakt i aplikacje
+
+- `tel:`: potwierdzenie właściwego numeru.
+- `mailto:`: potwierdzenie adresu i tematu wiadomości.
+- Kontrolny e-mail: potwierdzenie dostarczalności w obie strony.
+- WhatsApp: potwierdzenie numeru i treści startowej.
+- Messenger: ręczna kontrola `m.me/maleszyk.media` w zalogowanej aplikacji.
+- Pozostałe odnośniki społecznościowe: potwierdzenie docelowych profili.
+
+#### Panele, dostępy i decyzje wdrożeniowe
+
+- Zapewnienie dostępu do Vercel, DNS domeny i Google Search Console.
+- Eksport bieżącej strefy DNS z home.pl.
+- Potwierdzenie operatora poczty i istniejących rekordów MX, SPF, DKIM i DMARC.
+- Decyzja, czy wersją kanoniczną ma być apex `maleszykmedia.pl`, czy `www.maleszykmedia.pl`.
+- Potwierdzenie w panelu Vercel, że Speed Insights zbiera dane.
+- Potwierdzenie dostępów klienta do Vercel, repozytorium i Google Search Console.
+- Informacja, czy pod którąkolwiek domeną istniała wcześniej witryna.
+- Ostateczna akceptacja stagingu, zgoda na zmianę DNS i podpisanie protokołu odbioru.
+
+### Codex — kod, automatyzacja i weryfikacja techniczna
+
+#### P1 — wydajność i dostępność
+
+- Przebudowa mobilnego Hero tak, aby poster był wcześnie wykrywanym elementem LCP.
+- Ustawienie właściwego priorytetu i responsywnych rozmiarów obrazu Hero.
+- Optymalizacja ładowania wideo above the fold i krytycznego łańcucha żądań.
+- Ustalenie oraz wdrożenie budżetu JavaScript.
+- Dodanie progu pass/fail do `npm run perf:bundle` i egzekwowanie go w CI.
+- Ograniczenie globalnego JS, ze szczególną kontrolą GSAP, Lenis, Navbar, preloadera i Speed Insights.
+- Zapisanie pomiarów bazowych i wyników po optymalizacji.
+- Poprawa semantyki grup CTA oraz dostępnej nazwy linku-logo.
+- Wykonanie builda, testów i 3–5 pomiarów Lighthouse Mobile i Desktop.
+- Potwierdzenie wyników Performance, LCP, CLS, TBT, Accessibility, Best Practices i SEO.
+
+#### P2 — testy możliwe do wykonania automatycznie
+
+- Pełna nawigacja klawiaturą na wszystkich trasach.
+- Widoczność fokusu i logiczna kolejność nawigacji.
+- Kontrolowane wywołanie boundary 500 oraz sprawdzenie resetu i responsywności.
+- Regresja Edge, jeśli przeglądarka będzie dostępna w środowisku.
+- Testy emulowane uzupełniające testy fizycznych urządzeń; nie zastępują odbioru na sprzęcie.
+
+#### P3 — publiczne walidatory
+
+Po uruchomieniu publicznej domeny:
+
+- Google Rich Results Test.
+- Facebook Sharing Debugger, LinkedIn Post Inspector i X Card Validator.
+- Kontrola canonicali, Open Graph, robots, sitemap i JSON-LD.
+- Kontrola odpowiedzi dla botów społecznościowych.
+- Kontrola konsoli wszystkich tras pod kątem CSP.
+- Ponowna kontrola SecurityHeaders.com lub Mozilla Observatory.
+
+#### P4–P5 — techniczna część wdrożenia
+
+- Ujednolicenie `SITE_URL` po potwierdzeniu konfiguracji docelowej.
+- Pełny check, build, kontrola diffu i przygotowanie kandydata wydaniowego.
+- Przygotowanie przekierowań 301 po otrzymaniu potwierdzonej listy starych adresów.
+- Weryfikacja deploymentu, logów, domen i rollbacku po uzyskaniu dostępu.
+- Produkcyjny smoke test tras, zasobów, SEO i kanałów kontaktu.
+- Techniczny monitoring po wdrożeniu.
+- Utworzenie tagu `v1.0.0` po potwierdzeniu właściwego wdrożonego commita.
+
+### Zadania współdzielone
+
+- Właściciel projektu wykonuje czynności wymagające fizycznego urządzenia, zalogowanego konta, decyzji lub formalnej akceptacji i przekazuje wynik.
+- Codex wykonuje zmiany w kodzie, automatyzację, pomiary techniczne oraz aktualizuje właściwe checkboxy na podstawie otrzymanych wyników.
+- Zmiany DNS, promocja deploymentu, tagowanie wydania i rollback wymagają każdorazowo wskazania zatwierdzonego celu oraz zgody właściciela projektu.
+
 ## P0 — dane i decyzje wymagane od klienta
 
 ### Dane firmy i polityka prywatności
@@ -118,9 +210,9 @@ Mozilla Observatory oraz statyczna kontrola nonce są już zaliczone: `A+`, 120 
 
 ### Klawiatura i WCAG
 
-- [ ] Przejść wszystkie trasy klawiaturą: Tab, Shift+Tab, Enter, Space i Escape.
+- [x] Przejść wszystkie trasy klawiaturą: Tab, Shift+Tab, Enter, Space i Escape.
 - [x] Potwierdzić focus trap menu, zamykanie Escape i powrót fokusu na hamburger.
-- [ ] Sprawdzić widoczność fokusu oraz logiczną kolejność nawigacji.
+- [x] Sprawdzić widoczność fokusu oraz logiczną kolejność nawigacji.
 - [x] Zmierzyć kontrast WCAG 2.1 AA w axe, WAVE lub równoważnym narzędziu.
 - [x] Sprawdzić skalowanie tekstu do 200% bez utraty treści lub funkcji.
 - [ ] Wykonać podstawową regresję z czytnikiem ekranu.
@@ -132,7 +224,7 @@ Mozilla Observatory oraz statyczna kontrola nonce są już zaliczone: `A+`, 120 
 - [x] Potwierdzić działanie preloadera przy pierwszej wizycie, kolejnej wizycie w tej samej sesji i w trybie incognito.
 - [x] Potwierdzić działanie SectionRail: aktywna sekcja, kliknięcia, hashe i breakpoint widoczności.
 - [x] Sprawdzić wizualnie stronę 404.
-- [ ] Kontrolowanie wywołać boundary 500 i sprawdzić reset oraz responsywność.
+- [x] Kontrolowanie wywołać boundary 500 i sprawdzić reset oraz responsywność.
 - [x] Sprawdzić podgląd wydruku `/oferta` i `/contact`.
 - [x] Wykonać test Fast 3G i Slow 3G.
 - [x] Przetestować pierwszą i kolejną wizytę przy ograniczonej sieci.

@@ -4,23 +4,26 @@
 
 **Zakres:** viewporty, overflow, klawiatura, WCAG, reduced motion, wydruk i wybrane zachowania runtime
 
-**Wynik automatyczny:** **PASS — 75 PASS, 3 SKIP**
+**Wynik automatyczny:** **PASS — 91 PASS, 3 SKIP**
 
 **Status całego P2:** **PARTIAL — pozostają testy urządzeń fizycznych i wybrane testy ręczne**
 
 ## Wykonane kontrole
 
-- Chromium: 39/39 PASS.
-- Firefox: 36 PASS, 3 SKIP dla testów zależnych od CDP Chromium.
+- Chromium: 47/47 PASS.
+- Firefox: 44 PASS, 3 SKIP dla testów zależnych od CDP Chromium.
 - Wszystkie pięć tras sprawdzono przy 11 viewportach od 360×800 do 2560×1440.
 - `documentElement.scrollWidth` i `body.scrollWidth` nie przekraczają szerokości viewportu.
 - Menu mobilne działa w orientacji poziomej, zatrzymuje tło, przewija się, obsługuje focus trap i Escape oraz zwraca fokus na hamburger.
+- Pełna natywna kolejność Tab i Shift+Tab na wszystkich pięciu trasach odpowiada kolejności DOM, nie zawiera dodatnich `tabindex`, a każdy odwiedzony element ma widoczny wskaźnik fokusu.
+- Enter uruchamia link pomijający na każdej trasie, Space otwiera menu mobilne, a Escape je zamyka i zwraca fokus.
 - Skalowanie tekstu do 200% nie powoduje poziomego overflow.
 - axe 4.13.0 nie wykrył naruszeń reguł WCAG 2.1 A/AA na trasach zakresowych.
 - `prefers-reduced-motion: reduce` wyłącza Lenis i zachowuje dostępność treści.
 - Preloader działa przy pierwszej wizycie, nie wraca w tej samej sesji i pojawia się w świeżym kontekście przeglądarki.
 - SectionRail poprawnie obsługuje aktywną sekcję, kliknięcie, hash oraz breakpoint 1405 px.
 - 404, warianty wydruku `/oferta` i `/contact`, YouTubeFacade oraz mobilna karuzela przeszły testy runtime.
+- Boundary 500 został kontrolowanie wywołany i poprawnie zresetowany przy 360×800 oraz 1440×900 w Chromium i Firefox; w obu rozmiarach nie występuje poziomy overflow.
 - Fast 3G, Slow 3G, pierwsza i kolejna wizyta przy ograniczonej sieci oraz Save-Data przeszły testy w Chromium.
 
 Uwaga: pierwszy widok przy emulowanym Slow 3G na serwerze deweloperskim potrzebował około 32 s do zamknięcia preloadera. Test zakończył się powodzeniem, ale wynik wzmacnia potrzebę osobnego domknięcia optymalizacji wydajności z P1 i ponownego pomiaru na buildzie produkcyjnym.
@@ -33,11 +36,15 @@ Uwaga: pierwszy widok przy emulowanym Slow 3G na serwerze deweloperskim potrzebo
 ## Niewykonane / wymagające środowiska zewnętrznego
 
 - WebKit został pobrany, lecz nie uruchamia się bez systemowych `libicu74` i `libjpeg-turbo8`; instalacja wymaga hasła `sudo`.
-- Edge desktop, fizyczny iPhone/iOS Safari, fizyczny Android/Chrome i Samsung Internet.
+- Edge desktop (przeglądarka nie jest zainstalowana w środowisku), fizyczny iPhone/iOS Safari, fizyczny Android/Chrome i Samsung Internet.
 - Pasek adresu i dynamiczna wysokość viewportu w rzeczywistym iOS Safari.
 - Pinch-to-zoom, systemowe cofanie, pełna obsługa multimediów i płynność animacji na słabszym telefonie.
-- Pełny ręczny przebieg całej strony klawiaturą i podstawowa regresja czytnikiem ekranu.
-- Force Dark Mode i kontrolowane wywołanie boundary 500.
+- Podstawowa regresja czytnikiem ekranu.
+- Force Dark Mode.
+
+## Implementacja testu boundary 500
+
+Trasa `/p2-test/error-boundary` jest sondą techniczną niedostępną w buildzie produkcyjnym i przy zwykłych żądaniach (zwraca 404). W trybie deweloperskim Playwright odblokowuje ją wyłącznie nagłówkiem `x-p2-error-probe: 1`, wywołuje kontrolowany wyjątek klientowy przez `sessionStorage`, usuwa przyczynę błędu i sprawdza działanie przycisku „Spróbuj ponownie”.
 
 ## Uruchamianie
 

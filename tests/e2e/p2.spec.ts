@@ -28,6 +28,78 @@ async function visit(page: Page, route: string) {
   await page.waitForTimeout(80)
 }
 
+type FocusTarget = { id: string; label: string }
+
+async function getTabOrder(page: Page, includeNativeMedia: boolean): Promise<FocusTarget[]> {
+  return page.evaluate((shouldIncludeNativeMedia) => {
+    const selectors = [
+      'a[href]',
+      'button:not([disabled])',
+      'input:not([disabled]):not([type="hidden"])',
+      'select:not([disabled])',
+      'textarea:not([disabled])',
+      'iframe',
+      'object',
+      'embed',
+      '[tabindex]:not([tabindex="-1"])',
+      '[contenteditable="true"]',
+    ]
+    if (shouldIncludeNativeMedia) selectors.push('audio', 'video')
+    const selector = selectors.join(',')
+    const isVisible = (element: HTMLElement) => {
+      const style = getComputedStyle(element)
+      const rect = element.getBoundingClientRect()
+      return style.display !== 'none'
+        && style.visibility !== 'hidden'
+        && Number.parseFloat(style.opacity) > 0
+        && rect.width > 0
+        && rect.height > 0
+        && !element.closest('[aria-hidden="true"], [inert]')
+    }
+    const candidates = Array.from(document.querySelectorAll<HTMLElement>(selector))
+      .filter(isVisible)
+      .map((element, domIndex) => ({ element, domIndex, tabIndex: element.tabIndex }))
+      .filter(({ tabIndex }) => tabIndex >= 0)
+      .sort((left, right) => {
+        const leftPositive = left.tabIndex > 0
+        const rightPositive = right.tabIndex > 0
+        if (leftPositive && rightPositive) return left.tabIndex - right.tabIndex || left.domIndex - right.domIndex
+        if (leftPositive) return -1
+        if (rightPositive) return 1
+        return left.domIndex - right.domIndex
+      })
+
+    return candidates.map(({ element }, index) => {
+      const id = `p2-focus-${index}`
+      element.dataset.p2FocusId = id
+      return {
+        id,
+        label: element.getAttribute('aria-label')
+          ?? element.textContent?.replace(/\s+/g, ' ').trim().slice(0, 80)
+          ?? element.tagName,
+      }
+    })
+  }, includeNativeMedia)
+}
+
+async function expectVisibleKeyboardFocus(page: Page, route: string, target: FocusTarget) {
+  const focus = await page.evaluate(() => {
+    const element = document.activeElement as HTMLElement | null
+    if (!element) return null
+    const style = getComputedStyle(element)
+    return {
+      id: element.dataset.p2FocusId ?? '',
+      outlineStyle: style.outlineStyle,
+      outlineWidth: Number.parseFloat(style.outlineWidth),
+      boxShadow: style.boxShadow,
+    }
+  })
+  expect(focus?.id, `${route}: aktywny element „${target.label}”`).toBe(target.id)
+  const hasOutline = focus?.outlineStyle !== 'none' && (focus?.outlineWidth ?? 0) >= 1
+  const hasBoxShadow = Boolean(focus?.boxShadow && focus.boxShadow !== 'none')
+  expect(hasOutline || hasBoxShadow, `${route}: widoczny fokus „${target.label}”`).toBe(true)
+}
+
 test.describe('P2 — macierz RWD i horizontal overflow', () => {
   test.beforeEach(async ({ page }) => skipIntro(page))
 
@@ -103,27 +175,54 @@ test.describe('P2 — menu mobilne i klawiatura', () => {
   })
 
   for (const route of routes) {
-    test(`${route}: fokus klawiatury jest widoczny i nie wpada w body`, async ({ page }) => {
+    test(`${route}: pełny porządek Tab i Shift+Tab jest logiczny, a fokus widoczny`, async ({ browserName, page }) => {
       await page.setViewportSize({ width: 1440, height: 900 })
       await visit(page, route)
 
-      for (let index = 0; index < 12; index += 1) {
+      const positiveTabIndexes = await page.locator('[tabindex]').evaluateAll((elements) => (
+        elements
+          .map((element) => Number(element.getAttribute('tabindex')))
+          .filter((tabIndex) => tabIndex > 0)
+      ))
+      expect(positiveTabIndexes, `${route}: brak ręcznie wymuszonej kolejności`).toEqual([])
+
+      const tabOrder = await getTabOrder(page, browserName === 'firefox')
+      expect(tabOrder.length, `${route}: liczba elementów w kolejności klawiatury`).toBeGreaterThan(4)
+      await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur())
+
+      for (const target of tabOrder) {
         await page.keyboard.press('Tab')
-        const focused = await page.evaluate(() => {
-          const element = document.activeElement as HTMLElement | null
-          if (!element) return null
-          const style = getComputedStyle(element)
-          return {
-            tag: element.tagName,
-            outlineStyle: style.outlineStyle,
-            outlineWidth: Number.parseFloat(style.outlineWidth),
-          }
-        })
-        expect(focused?.tag).not.toBe('BODY')
-        expect((focused?.outlineStyle !== 'none' && (focused?.outlineWidth ?? 0) >= 1), `focus ${index + 1} na ${route}`).toBe(true)
+        await expectVisibleKeyboardFocus(page, route, target)
+      }
+
+      for (let index = tabOrder.length - 2; index >= 0; index -= 1) {
+        await page.keyboard.press('Shift+Tab')
+        await expectVisibleKeyboardFocus(page, route, tabOrder[index])
       }
     })
+
+    test(`${route}: Enter uruchamia link pomijający`, async ({ page }) => {
+      await page.setViewportSize({ width: 1440, height: 900 })
+      await visit(page, route)
+      await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur())
+      await page.keyboard.press('Tab')
+      await expect(page.getByRole('link', { name: 'Przejdź do treści' })).toBeFocused()
+      await page.keyboard.press('Enter')
+      await expect(page).toHaveURL(new RegExp(`${route === '/' ? '/' : route}#main-content$`))
+    })
   }
+
+  test('Space otwiera menu, a Escape je zamyka i zwraca fokus', async ({ page }) => {
+    await page.setViewportSize({ width: 393, height: 852 })
+    await visit(page, '/')
+    const toggle = page.getByRole('button', { name: 'Otwórz menu' })
+    await toggle.focus()
+    await page.keyboard.press('Space')
+    await expect(page.getByRole('dialog', { name: 'Menu mobilne' })).toBeVisible()
+    await page.keyboard.press('Escape')
+    await expect(page.getByRole('dialog', { name: 'Menu mobilne' })).toBeHidden()
+    await expect(toggle).toBeFocused()
+  })
 })
 
 test.describe('P2 — ustawienia dostępności', () => {
@@ -191,6 +290,37 @@ test.describe('P2 — WCAG 2.1 AA', () => {
 })
 
 test.describe('P2 — zachowania runtime', () => {
+  for (const viewport of [
+    { name: 'mobile', width: 360, height: 800 },
+    { name: 'desktop', width: 1440, height: 900 },
+  ]) {
+    test(`boundary 500: reset i responsywność — ${viewport.name}`, async ({ context, page }) => {
+      await page.setViewportSize(viewport)
+      await context.setExtraHTTPHeaders({ 'x-p2-error-probe': '1' })
+      await page.addInitScript(() => sessionStorage.setItem('p2:error-boundary', 'throw'))
+      await page.goto('/p2-test/error-boundary', { waitUntil: 'domcontentloaded' })
+
+      await expect(page.getByRole('heading', { name: 'Wystąpił błąd' })).toBeVisible()
+      const widths = await page.evaluate(() => ({
+        viewport: innerWidth,
+        root: document.documentElement.scrollWidth,
+        body: document.body.scrollWidth,
+      }))
+      expect.soft(widths.root).toBeLessThanOrEqual(widths.viewport + 1)
+      expect.soft(widths.body).toBeLessThanOrEqual(widths.viewport + 1)
+
+      await page.evaluate(() => sessionStorage.removeItem('p2:error-boundary'))
+      await page.getByRole('button', { name: 'Spróbuj ponownie' }).click()
+      await expect(page.getByRole('heading', { name: 'Boundary 500 zresetowane' })).toBeVisible()
+      await expect(page.locator('#main-content')).toBeVisible()
+
+      await context.setExtraHTTPHeaders({})
+      const guardedResponse = await page.goto('/p2-test/error-boundary', { waitUntil: 'domcontentloaded' })
+      expect(guardedResponse?.status()).toBe(404)
+      await expect(page.getByRole('heading', { name: 'Nie znaleziono strony' })).toBeVisible()
+    })
+  }
+
   test('preloader uruchamia się raz w sesji i ponownie w świeżym kontekście', async ({ browser }) => {
     const firstContext = await browser.newContext({ reducedMotion: 'reduce' })
     const firstPage = await firstContext.newPage()
