@@ -104,41 +104,41 @@ Po uruchomieniu publicznej domeny:
 
 ### Dane firmy i polityka prywatności
 
-- [ ] Potwierdzić pełną nazwę podmiotu / administratora danych.
-- [ ] Uzyskać pełny adres administratora lub siedziby.
-- [ ] Uzyskać NIP.
-- [ ] Uzyskać REGON.
-- [ ] Jeśli NIP lub REGON nie mają zastosowania, uzyskać formalne potwierdzenie i odpowiednio dostosować politykę.
-- [ ] Potwierdzić właściwy adres e-mail do spraw ochrony danych.
-- [ ] Uzyskać akceptację danych i treści polityki od klienta oraz osoby odpowiedzialnej za zgodność prawną.
-- [ ] Uzupełnić zatwierdzone wartości w konfiguracji produkcyjnej i sprawdzić ich prezentację na `/polityka-prywatnosci`.
+- [x] Potwierdzić pełną nazwę podmiotu / administratora danych.
+- [x] Uzyskać pełny adres administratora lub siedziby.
+- [x] Uzyskać NIP.
+- [x] Uzyskać REGON.
+- [x] Jeśli NIP lub REGON nie mają zastosowania, uzyskać formalne potwierdzenie i odpowiednio dostosować politykę. Nie dotyczy — NIP i REGON są podane.
+- [x] Potwierdzić właściwy adres e-mail do spraw ochrony danych.
+- [x] Uzyskać akceptację danych i treści polityki od klienta oraz osoby odpowiedzialnej za zgodność prawną.
+- [x] Uzupełnić zatwierdzone wartości w konfiguracji produkcyjnej i sprawdzić ich prezentację na `/polityka-prywatnosci`.
 
 Kod obsługuje już zmienne `PRIVACY_ADMIN_NAME`, `PRIVACY_ADMIN_ADDRESS`, `PRIVACY_ADMIN_NIP`, `PRIVACY_ADMIN_REGON`, `PRIVACY_CONTACT_EMAIL` i `PRIVACY_POLICY_UPDATED_AT`.
 
 ### Akceptacja zakresu i materiałów
 
-- [ ] Uzyskać pisemną akceptację wszystkich treści oraz proofreadingu stagingu.
-- [ ] Uzyskać pisemną akceptację zakresu v1 bez portfolio i dynamicznego feedu Instagram.
-- [ ] Ustalić, czy v1 ma publikować ceny/pakiety, czy pozostać przy wycenie indywidualnej.
-- [ ] Uzyskać pisemną akceptację modelu kontaktu bez klasycznego formularza.
-- [ ] Uzyskać oświadczenie o prawach do zdjęć, filmów i pozostałych materiałów.
-- [ ] Uzyskać potwierdzenie zgód na wykorzystanie wizerunku.
-- [ ] Domknąć Q-4 dotyczące materiałów i praw.
-- [ ] Potwierdzić właściciela numeru `+48 791 705 230`.
+- [x] Uzyskać pisemną akceptację wszystkich treści oraz proofreadingu stagingu.
+- [x] Uzyskać pisemną akceptację zakresu v1 bez portfolio i dynamicznego feedu Instagram.
+- [x] Ustalić, czy v1 ma publikować ceny/pakiety, czy pozostać przy wycenie indywidualnej. V1 pozostaje przy wycenie indywidualnej.
+- [x] Uzyskać pisemną akceptację modelu kontaktu bez klasycznego formularza.
+- [x] Uzyskać oświadczenie o prawach do zdjęć, filmów i pozostałych materiałów.
+- [x] Uzyskać potwierdzenie zgód na wykorzystanie wizerunku.
+- [x] Domknąć Q-4 dotyczące materiałów i praw.
+- [x] Potwierdzić właściciela numeru `+48 791 705 230`.
 
 ### Domena i poczta
 
-- [ ] Potwierdzić docelowy adres e-mail publikowany na stronie.
-- [ ] Potwierdzić operatora poczty i domenę obsługującą skrzynkę.
-- [ ] Wyjaśnić rozbieżność: strona ma działać pod `maleszykmedia.pl`, a obecny adres kontaktowy używa `@maleszyk.media`, której DNS podczas audytu zwracał `NXDOMAIN`.
-- [ ] Domknąć pocztową część Q-3.
+- [x] Potwierdzić docelowy adres e-mail publikowany na stronie: `przemyslawmaleszyk@gmail.com`.
+- [x] Potwierdzić operatora poczty i domenę obsługującą skrzynkę: Google / `gmail.com`.
+- [x] Wyjaśnić rozbieżność: strona działa docelowo pod `maleszykmedia.pl`, a kontakt wykorzystuje potwierdzony adres `przemyslawmaleszyk@gmail.com`; niedziałający adres `@maleszyk.media` został usunięty z publicznych tras.
+- [x] Domknąć pocztową część Q-3.
 
 ### Odbiór i utrzymanie
 
-- [ ] Ustalić okres gwarancji: 14 albo 30 dni.
-- [ ] Ustalić właściciela decyzji o rollbacku podczas wdrożenia.
-- [ ] Uzgodnić zakres instrukcji obsługi i statystyk przekazywanej klientowi.
-- [ ] Przygotować i zatwierdzić protokół zdawczo-odbiorczy.
+- [x] Ustalić okres gwarancji: 0 dni.
+- [x] Ustalić właściciela decyzji o rollbacku podczas wdrożenia.
+- [x] Uzgodnić zakres instrukcji obsługi i statystyk przekazywanej klientowi.
+- [x] Przygotować i zatwierdzić protokół zdawczo-odbiorczy.
 
 ## P1 — blokery techniczne etapu 4
 
