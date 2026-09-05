@@ -85,4 +85,6 @@ Projekt pozostaje wyłącznie przy **Vercel Speed Insights**. Nie wdrażać GA4 
 ## 7. Zadania odroczone do końca testów
 
 - Po zakończeniu testów podłączyć docelową domenę `maleszykmedia.pl` i dopiero wtedy zweryfikować DNS, TLS, canonicale, robots, sitemap, JSON-LD oraz Open Graph.
-- Po wdrożeniu CSP z nonce powtórzyć Mozilla Observatory i potwierdzić wynik A/A+ oraz brak naruszeń CSP w przeglądarce. Implementacja usuwa `'unsafe-inline'` z `script-src` i ogranicza `connect-src` do strony oraz Vercel Speed Insights.
+- [x] Po wdrożeniu CSP z nonce powtórzyć Mozilla Observatory — wynik **A+**, 120 punktów, 12/12 testów PASS (skan `119083516`, 2026-09-05). Produkcyjny HTML ma zgodny nonce we wszystkich 18 tagach `<script>`.
+- [x] Zmierzyć wpływ renderowania dynamicznego na TTFB — mediana **303 ms** dla HTML wobec **36 ms** dla zasobu statycznego na współdzielonym połączeniu HTTP/2; szacowany narzut około **267 ms**. W osobnych połączeniach mediany tras HTML: **387–498 ms**.
+- [ ] Sprawdzić konsolę dostępnej przeglądarki pod kątem naruszeń CSP — podczas weryfikacji nie była dostępna sesja przeglądarki; statyczna zgodność nonce i Observatory są zaliczone, ale nie zastępują odczytu konsoli runtime.
