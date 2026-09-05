@@ -85,6 +85,8 @@ Projekt pozostaje wyłącznie przy **Vercel Speed Insights**. Nie wdrażać GA4 
 ## 7. Zadania odroczone do końca testów
 
 - Po zakończeniu testów podłączyć docelową domenę `maleszykmedia.pl` i dopiero wtedy zweryfikować DNS, TLS, canonicale, robots, sitemap, JSON-LD oraz Open Graph.
+- [ ] Po uruchomieniu DNS wykonać Google Rich Results Test w dostępnym interfejsie przeglądarkowym. Publiczny JSON-LD parsuje się poprawnie, lecz test kwalifikacji pozostaje niewykonany.
+- [ ] Po uruchomieniu DNS sprawdzić oficjalne podglądy Facebook/LinkedIn/X. Boty otrzymują ze stagingu HTTP 200, ale obecne `og:image`, `twitter:image`, `og:url` i canonical wskazują nierozwiązującą się domenę `maleszykmedia.pl`.
 - [x] Wykonać po trzy pomiary Lighthouse Mobile/Desktop i zapisać mediany — Mobile: Performance **78**, Accessibility **96**, Best Practices **100**, SEO **100**; Desktop: **98/96/100/100**. Mobile LCP **5,50 s** nie spełnia celu; Desktop LCP **1,07 s** spełnia cel.
 - [ ] Zoptymalizować mobilny LCP w Hero (wideo z `preload="none"`, brak wczesnego odkrycia zasobu LCP i `fetchpriority="high"`) i powtórzyć Lighthouse do Performance ≥ 90 oraz LCP ≤ 2,5 s.
 - [ ] Poprawić problemy dostępności z Lighthouse: `aria-label` na dwóch `<div>` CTA bez roli oraz niezgodność widocznej etykiety logo z nazwą dostępną „Strona główna”.

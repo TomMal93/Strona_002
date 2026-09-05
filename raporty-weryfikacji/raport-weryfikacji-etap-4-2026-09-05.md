@@ -150,8 +150,9 @@ Na wszystkich trasach:
 - `public/og-image.jpg`: PASS — 1200×630 px, JPEG, 33 470 B, poniżej 300 kB.
 - `favicon.ico`: PASS — istnieje i zawiera warianty ikon.
 - `apple-touch-icon.png`: PASS — 180×180 px.
-- Podglądy Facebook/LinkedIn/X w oficjalnych UI: NOT TESTED — brak sterowalnej przeglądarki.
-- Funkcjonalność OG na produkcji: **FAIL** — bezpośredni `/og-image.jpg` na Vercel zwraca 200, ale metadane wskazują nierozwiązującą się domenę `maleszykmedia.pl`, więc bot społecznościowy nie pobierze miniatury.
+- Podglądy Facebook/LinkedIn/X w oficjalnych UI: NOT TESTED — ponowna próba z 2026-09-05 nie mogła zostać wykonana, ponieważ sesja nie udostępniała żadnej przeglądarki; narzędzia wymagają interakcji z UI, a część z nich może wymagać logowania.
+- Kontrola odpowiedzi dla `facebookexternalhit`, `LinkedInBot` i `Twitterbot` na adresie Vercel: PASS — wszystkie trzy żądania otrzymały HTTP 200.
+- Funkcjonalność OG na produkcji: **FAIL** — bezpośredni `https://strona-002.vercel.app/og-image.jpg` zwraca 200 i `image/jpeg`, ale `og:url`, `og:image`, `twitter:image` i canonical wskazują nierozwiązującą się domenę `maleszykmedia.pl`. Bot pobierze HTML ze stagingu, lecz nie pobierze wskazanej miniatury ani docelowego URL-u.
 - `theme-color`: PASS — `#0a0a0a` na wszystkich pięciu trasach.
 - Cache `og-image.jpg`, favicony i Apple Touch Icon: PASS — `public, max-age=2592000, stale-while-revalidate=86400`.
 
@@ -186,7 +187,7 @@ Cache-Control: private, no-cache, no-store, max-age=0, must-revalidate
 | `/oferta` | 1 | CollectionPage, BreadcrumbList | PASS |
 | `/polityka-prywatnosci` | 1 | WebPage, BreadcrumbList | PASS |
 
-Testy jednostkowe `structured-data` przechodzą, a wszystkie bloki z HTML dają się sparsować jako JSON. Oficjalny Google Rich Results Test pozostaje `NOT TESTED`; poprawność składniowa nie jest równoznaczna z kwalifikacją do rich result.
+Testy jednostkowe `structured-data` przechodzą, a wszystkie bloki z HTML dają się sparsować jako JSON. Ponowna kontrola publicznego HTML strony głównej z 2026-09-05 wykryła jeden poprawnie parsujący się graf JSON-LD z typami `WebSite`, `Organization`, `Person`, `ImageObject` i `WebPage`, bez błędów składniowych. Oficjalny Google Rich Results Test pozostaje `NOT TESTED`, ponieważ sesja nie udostępniała przeglądarki wymaganej do obsługi testera; poprawność składniowa nie jest równoznaczna z kwalifikacją do rich result. Dodatkowo URL-e w danych strukturalnych wskazują domenę `maleszykmedia.pl`, która nadal nie rozwiązuje się w DNS.
 
 ## 6. Analityka
 
