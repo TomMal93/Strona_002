@@ -245,6 +245,9 @@ Lokalna kontrola produkcyjnego buildu po zmianach P1 objęła wszystkie pięć t
 
 ### SEO i metadane po uruchomieniu domeny
 
+- [x] Zweryfikować na publicznym stagingu komplet canonicali, Open Graph, Twitter Cards i JSON-LD dla pięciu tras.
+- [x] Potwierdzić odpowiedzi HTTP `200` i pełne metadane dla Googlebota, Facebooka, LinkedIna i X na stagingu.
+- [x] Potwierdzić poprawność składni JSON-LD oraz przejście testów automatycznych danych strukturalnych.
 - [ ] Wykonać Google Rich Results Test dla publicznych tras.
 - [ ] Sprawdzić podgląd w Facebook Sharing Debugger.
 - [ ] Sprawdzić podgląd w LinkedIn Post Inspector.
@@ -252,11 +255,16 @@ Lokalna kontrola produkcyjnego buildu po zmianach P1 objęła wszystkie pięć t
 - [ ] Potwierdzić dostępność canonicali, `og:url`, `og:image`, robots, sitemap i URL-i JSON-LD pod docelową domeną.
 - [ ] Potwierdzić prawidłowe działanie Open Graph po stronie botów społecznościowych.
 
+Kontrola z 2026-09-06 na `https://strona-002.vercel.app/` potwierdziła komplet metadanych, poprawny JSON-LD, działające `robots.txt`, `sitemap.xml` i obraz OG `1200x630`. Symulowane żądania Googlebota, `facebookexternalhit`, LinkedInBot i Twitterbot zwróciły `200`, `text/html` i pełne znaczniki. Deployment generuje adresy dla `https://maleszykmedia.pl`, ale domena nie rozwiązuje się jeszcze w DNS, więc oficjalne walidatory i działanie podglądów na domenie docelowej pozostają do ponownego sprawdzenia po uruchomieniu DNS/TLS.
+
 ### Speed Insights
 
+- [x] Potwierdzić obecność `@vercel/speed-insights`, komponentu `<SpeedInsights />`, reguły CSP i publicznego skryptu pomiarowego na stagingu.
 - [ ] Potwierdzić w panelu Vercel, że Speed Insights rejestruje wizyty.
 - [ ] Po zebraniu ruchu potwierdzić LCP, INP i CLS.
 - [ ] Nie wdrażać GA4, GTM ani Consent Mode v2 bez nowej decyzji klienta.
+
+Kontrola z 2026-09-06 potwierdziła odpowiedź `200` dla `/_vercel/speed-insights/script.js` oraz obecność klienta Speed Insights w bundle. Bez dostępu do panelu projektu Vercel nie potwierdzono zapisanych wizyt ani wartości LCP, INP i CLS.
 
 ## P4 — przygotowanie domeny i wdrożenia
 
