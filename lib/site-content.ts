@@ -395,14 +395,15 @@ export const siteContent = {
       locationLabel: 'Gdzie pracuję',
       locationText:
         process.env.NEXT_PUBLIC_ABOUTME_PROFILE_LOCATION
-        || 'Pracuję w całej Polsce. Chętnie realizuję również projekty zagraniczne. Dobrze czuję się zarówno w terenie i błocie, jak i na ślubie, koncercie czy planie marki.',
+        || 'Śluby pełne emocji. Studniówki z energią. Eventy z charakterem. Koncerty w dynamicznych kadrach. Filmy promocyjne dla marek. Realizacje terenowe i ujęcia z drona. Cała Polska i zagranica.',
       specialtiesLabel: 'W czym się specjalizuję',
       specialties: [
-        'Filmy ślubne i rodzinne historie',
-        'Relacje z eventów i koncertów',
-        'Filmy promocyjne dla firm i marek',
-        'Produkcje terenowe, off-road i ujęcia z drona',
-        'Montaż materiałów z charakterem',
+        'Emocje zamknięte w filmowych kadrach',
+        'Historie opowiedziane obrazem i dźwiękiem',
+        'Gesty i spojrzenia, których nie da się powtórzyć',
+        'Energia wydarzeń, którą można poczuć ponownie',
+        'Charakter marki pokazany bez zbędnych słów',
+        'Wspomnienia, które z czasem nabierają wartości',
       ],
       gearLabel: 'Zaplecze techniczne',
       gear: [

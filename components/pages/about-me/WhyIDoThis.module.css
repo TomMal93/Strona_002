@@ -392,6 +392,7 @@
   border: 1px solid rgb(var(--c-gold) / 0.18);
   color: rgb(229 190 132 / 0.58);
   font-size: clamp(0.58rem, 0.85vw, 0.75rem);
+  text-align: center;
 }
 
 .quoteFooter p { margin: 0; }

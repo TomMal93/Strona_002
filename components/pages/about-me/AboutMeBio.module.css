@@ -176,7 +176,7 @@
 @media (hover: hover) and (pointer: fine) {
   .sectionTitle,
   .hudLabel,
-  .introLead [data-bio-word],
+  .introLead,
   .introMiddle,
   .introBody,
   .infoTitle,
@@ -204,7 +204,7 @@
     filter: drop-shadow(0 0 5px rgb(213 169 91 / .38));
   }
 
-  .introLead [data-bio-word]:hover {
+  .introLead:hover {
     color: rgb(255 229 177 / 1);
     text-shadow:
       0 0 10px rgb(255 225 165 / .4),
