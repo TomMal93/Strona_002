@@ -49,7 +49,6 @@
 
 .sectionKicker,
 .sceneNumber,
-.microLabel,
 .frameTop,
 .frameBottom,
 .tags,
@@ -154,7 +153,7 @@
   white-space: nowrap;
 }
 
-.sceneCopy > p:not(.microLabel) {
+.sceneCopy > p {
   margin: 0 0 1.25rem;
   color: rgb(255 255 255 / 0.55);
   font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
@@ -162,17 +161,11 @@
   line-height: 1.8;
 }
 
-.microLabel {
-  margin: 2rem 0 0.8rem;
-  color: rgb(220 174 108 / 0.58);
-  font-size: 0.68rem;
-  font-weight: 700;
-}
-
 .tags {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.45rem;
+  margin-top: 2rem;
 }
 
 .tags span {
@@ -252,13 +245,6 @@
 .missionBlock {
   margin-top: clamp(2.75rem, 4vw, 3.5rem);
   background: transparent;
-}
-
-.missionBlock > .microLabel {
-  margin: 0 0 0.85rem;
-  padding: 0;
-  color: rgb(220 174 108 / 0.58);
-  font-size: 0.65rem;
 }
 
 .missionGrid {
@@ -411,6 +397,140 @@
 .quoteFooter p { margin: 0; }
 .quoteMark { font: 4.5rem/0.4 Georgia, serif; color: rgb(var(--c-gold) / 0.46); }
 
+@media (hover: hover) and (pointer: fine) {
+  .sectionTitle,
+  .sectionKicker,
+  .sceneNumber,
+  .sceneCopy h3,
+  .sceneCopy > p,
+  .frameTop,
+  .frameBottom,
+  .quoteFrame blockquote,
+  .noteRow > span,
+  .noteRow strong,
+  .noteRow p,
+  .quoteFooter,
+  .quoteMark {
+    transition:
+      color 300ms ease,
+      text-shadow 300ms ease,
+      filter 300ms ease,
+      border-color 300ms ease,
+      background-color 300ms ease,
+      box-shadow 300ms ease;
+  }
+
+  .timelineDot { transition: box-shadow 300ms ease; }
+  .sceneRule { transition: filter 300ms ease; }
+
+  .sectionTitle:hover {
+    filter: drop-shadow(0 0 12px rgb(213 169 91 / 0.34));
+  }
+
+  .sectionKicker:hover {
+    color: rgb(255 238 175 / 0.72);
+    text-shadow: 0 0 12px rgb(213 169 91 / 0.28);
+  }
+
+  .sceneHeading:hover .sceneNumber {
+    color: rgb(255 225 165 / 0.96);
+    text-shadow: 0 0 12px rgb(213 169 91 / 0.38);
+  }
+
+  .sceneHeading:hover .timelineDot {
+    box-shadow:
+      0 0 0 4px rgb(var(--c-gold) / 0.12),
+      0 0 22px rgb(255 196 112 / 0.9);
+  }
+
+  .sceneHeading:hover .sceneRule {
+    filter: drop-shadow(0 0 5px rgb(213 169 91 / 0.42));
+  }
+
+  .sceneCopy h3:hover {
+    color: rgb(245 208 151 / 0.96);
+    text-shadow: 0 0 16px rgb(213 169 91 / 0.28);
+  }
+
+  .sceneCopy > p:hover {
+    color: rgb(255 248 232 / 0.76);
+    text-shadow: 0 0 10px rgb(213 169 91 / 0.18);
+  }
+
+  .tags span,
+  .frame,
+  .highlightLine,
+  .noteRow {
+    transition:
+      color 300ms ease,
+      border-color 300ms ease,
+      background-color 300ms ease,
+      box-shadow 300ms ease;
+  }
+
+  .tags span:hover {
+    border-color: rgb(var(--c-gold) / 0.52);
+    background: rgb(var(--c-gold) / 0.035);
+    color: rgb(255 232 190 / 0.9);
+    box-shadow: 0 0 16px rgb(var(--c-gold) / 0.1);
+  }
+
+  .frame:hover {
+    border-color: rgb(var(--c-gold) / 0.38);
+    box-shadow:
+      0 18px 50px rgb(0 0 0 / 0.22),
+      0 0 24px rgb(var(--c-gold) / 0.1);
+  }
+
+  .frame:hover .frameTop,
+  .frame:hover .frameBottom {
+    color: rgb(238 198 137 / 0.7);
+    text-shadow: 0 0 8px rgb(213 169 91 / 0.24);
+  }
+
+  .quoteFrame:hover blockquote {
+    color: rgb(255 226 181 / 0.94);
+    text-shadow:
+      0 2px 16px #000,
+      0 0 14px rgb(213 169 91 / 0.3);
+  }
+
+  .highlightLine:hover {
+    border-color: rgb(var(--c-gold) / 0.42);
+    background: rgb(var(--c-gold) / 0.025);
+    box-shadow: 0 0 18px rgb(var(--c-gold) / 0.08);
+  }
+
+  .noteRow:hover {
+    border-color: rgb(var(--c-gold) / 0.3);
+    background-color: rgb(var(--c-gold) / 0.018);
+    box-shadow: 0 7px 14px -14px rgb(var(--c-gold) / 0.45);
+  }
+
+  .noteRow:hover > span,
+  .noteRow:hover strong {
+    color: rgb(246 207 151 / 0.92);
+    text-shadow: 0 0 10px rgb(213 169 91 / 0.24);
+  }
+
+  .noteRow:hover p {
+    color: rgb(255 248 232 / 0.68);
+    text-shadow: 0 0 9px rgb(213 169 91 / 0.14);
+  }
+
+  .quoteFooter:hover {
+    border-color: rgb(var(--c-gold) / 0.34);
+    color: rgb(242 205 149 / 0.82);
+    text-shadow: 0 0 10px rgb(213 169 91 / 0.2);
+    box-shadow: 0 0 20px rgb(var(--c-gold) / 0.07);
+  }
+
+  .quoteFooter:hover .quoteMark {
+    color: rgb(var(--c-gold) / 0.72);
+    text-shadow: 0 0 14px rgb(213 169 91 / 0.28);
+  }
+}
+
 @media (width < 64rem) {
   .storyRail::before { left: 0.1rem; }
   .scene, .sceneTwo { grid-template-columns: 1fr 1.35fr; gap: 2rem; padding-left: 2rem; }
@@ -525,7 +645,7 @@
   .sceneCopy { display: contents; }
   .sceneHeading { order: 1; }
   .sceneCopy h3 { order: 2; }
-  .sceneCopy > p:not(.microLabel) { order: 3; }
+  .sceneCopy > p { order: 3; }
   .scene > .frame { order: 4; margin-block: 0.35rem 1.6rem; }
   .sceneThree > .frame { margin-bottom: 0.5rem; }
   .tagsBlock,
@@ -648,15 +768,10 @@
     font-size: 50px;
   }
 
-  .sceneCopy > p:not(.microLabel),
+  .sceneCopy > p,
   .noteRow p {
     /* 20.3125px * 0.64 zoom = 13px */
     font-size: 20.3125px;
-  }
-
-  .microLabel {
-    /* 14.84375px * 0.64 zoom = 9.5px */
-    font-size: 14.84375px;
   }
 
   .tags span,
@@ -716,15 +831,10 @@
     font-size: 18.75px;
   }
 
-  .sceneCopy > p:not(.microLabel),
+  .sceneCopy > p,
   .noteRow p {
     /* 17.5px * 0.8 zoom = 14px */
     font-size: 17.5px;
-  }
-
-  .microLabel {
-    /* 13.125px * 0.8 zoom = 10.5px */
-    font-size: 13.125px;
   }
 
   .tags span,
@@ -774,7 +884,7 @@
 }
 
 @media (max-width: 767px) {
-  .sceneCopy > p:not(.microLabel) {
+  .sceneCopy > p {
     font-size: 13px;
     line-height: 1.75;
   }

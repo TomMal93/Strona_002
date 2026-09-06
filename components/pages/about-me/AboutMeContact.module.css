@@ -246,6 +246,7 @@
     border-color 280ms ease,
     background-color 280ms ease,
     color 280ms ease,
+    text-shadow 300ms ease,
     transform 320ms ease,
     box-shadow 320ms ease;
 }
@@ -316,6 +317,82 @@
 .socialLink:hover {
   color: rgb(255 238 175 / 0.95);
   transform: translateY(-2px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sectionTitle,
+  .hudLabelLeft,
+  .hudLabelRight,
+  .subtitle,
+  .contactLabel,
+  .contactValue {
+    transition:
+      color 300ms ease,
+      text-shadow 300ms ease,
+      filter 300ms ease;
+  }
+
+  .sectionTitle:hover {
+    color: rgb(255 238 175 / 1);
+    text-shadow:
+      0 0 12px rgb(255 225 165 / 0.48),
+      0 0 24px rgb(213 169 91 / 0.3);
+  }
+
+  .sectionHeader:hover .hudLabelLeft,
+  .sectionHeader:hover .hudLabelRight {
+    color: rgb(255 238 175 / 0.76);
+    text-shadow: 0 0 9px rgb(213 169 91 / 0.22);
+  }
+
+  .sectionHeader:hover .hudLineLeft,
+  .sectionHeader:hover .hudLineRight {
+    filter: drop-shadow(0 0 5px rgb(213 169 91 / 0.38));
+  }
+
+  .subtitle:hover {
+    color: rgb(255 248 232 / 0.76);
+    text-shadow: 0 0 10px rgb(213 169 91 / 0.16);
+  }
+
+  .contactItem {
+    transition:
+      background-color 250ms ease,
+      box-shadow 300ms ease;
+  }
+
+  .contactItem:hover {
+    box-shadow: inset 0 0 18px rgb(var(--c-gold) / 0.06);
+  }
+
+  .contactItem:hover .contactLabel {
+    color: rgb(255 238 175 / 0.9);
+    text-shadow: 0 0 10px rgb(213 169 91 / 0.25);
+  }
+
+  .contactItem:hover .contactValue {
+    text-shadow: 0 0 10px rgb(213 169 91 / 0.22);
+  }
+
+  .button:hover {
+    text-shadow: 0 0 11px rgb(213 169 91 / 0.28);
+  }
+
+  .socialLink {
+    transition:
+      color 250ms ease,
+      transform 300ms ease,
+      filter 300ms ease;
+  }
+
+  .socialLink:hover {
+    filter: drop-shadow(0 0 7px rgb(213 169 91 / 0.46));
+  }
+
+  .hudLineLeft,
+  .hudLineRight {
+    transition: filter 300ms ease;
+  }
 }
 
 @media (max-width: 560px) {

@@ -23,10 +23,9 @@ function SceneHeading({ number }: { number: string }) {
   )
 }
 
-function Tags({ items, label }: { items: string[]; label: string }) {
+function Tags({ items }: { items: string[] }) {
   return (
     <div className={styles.tagsBlock}>
-      <p className={styles.microLabel}>{label}</p>
       <div className={styles.tags}>
         {items.map((item) => <span key={item}>{item}</span>)}
       </div>
@@ -113,7 +112,7 @@ export default function WhyIDoThis() {
                 <h3>Początek<br />każdej podróży</h3>
                 <p data-why-paragraph>{paragraphs[0]}</p>
                 <p data-why-paragraph>{paragraphs[1]}</p>
-                <Tags items={sceneTags[0]} label="Kluczowe emocje" />
+                <Tags items={sceneTags[0]} />
               </div>
 
               <figure className={styles.frame}>
@@ -151,7 +150,7 @@ export default function WhyIDoThis() {
                 <SceneHeading number="II" />
                 <h3>Odkrycie<br />głębszego sensu</h3>
                 <p data-why-paragraph>{paragraphs[2]}</p>
-                <Tags items={sceneTags[1]} label="Kluczowe elementy" />
+                <Tags items={sceneTags[1]} />
               </div>
             </article>
 
