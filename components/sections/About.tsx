@@ -73,9 +73,9 @@ export default function About() {
       ref={sectionRef}
       id="about"
       aria-label="O mnie"
-      className="section-dark-bg px-6 py-20 md:py-28 lg:px-10"
+      className={cn('section-dark-bg px-6 py-20 md:py-28 lg:px-10', styles.section)}
     >
-      <div className="mx-auto max-w-content">
+      <div className={cn('mx-auto max-w-content', styles.sectionContent)}>
         <div className={cn('mx-auto max-w-3xl', styles.sectionHeader)}>
           <h2
             ref={titleRef}
