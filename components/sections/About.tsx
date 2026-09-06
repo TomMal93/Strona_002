@@ -139,6 +139,7 @@ export default function About() {
                   muted
                   playsInline
                   preload="none"
+                  poster="/images/hero/hero-video-poster.webp"
                   className={cn(
                     'pointer-events-none relative z-10 h-full w-full origin-center translate-x-[-25%] scale-[1.725] object-contain object-center',
                     styles.aboutVideoMedia,

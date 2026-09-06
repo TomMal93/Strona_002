@@ -3,7 +3,7 @@
  * (CI / sandboxed build environments).
  *
  * Set env var before build:
- *   NEXT_FONT_GOOGLE_MOCKED_RESPONSES=/absolute/path/to/font-mocks.js
+ *   NEXT_FONT_GOOGLE_MOCKED_RESPONSES=/absolute/path/to/font-mocks.cjs
  *
  * In production (Vercel) this file is never used — fonts are fetched live.
  */

@@ -2,6 +2,7 @@
   "name": "strona-002",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,6 +15,10 @@
     "test": "node --experimental-strip-types --test tests/**/*.test.ts",
     "test:p2": "playwright test tests/e2e/p2.spec.ts --project=chromium --project=firefox",
     "test:p2:webkit": "playwright test tests/e2e/p2.spec.ts --project=webkit",
+    "test:p3": "playwright test tests/e2e/p3.spec.ts --project=chromium",
+    "test:p3:all": "playwright test tests/e2e/p3.spec.ts --project=chromium --project=firefox",
+    "test:p3:webkit": "playwright test tests/e2e/p3.spec.ts --project=webkit",
+    "test:p4": "playwright test tests/e2e/p4.spec.ts --project=chromium",
     "check": "npm run typecheck && npm run lint && npm run test"
   },
   "dependencies": {

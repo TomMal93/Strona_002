@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 
 const siteUrl = (process.env.SITE_URL ?? 'https://maleszyk.media').replace(/\/$/, '')
-const lastModified = process.env.SITE_LAST_MODIFIED ?? '2026-09-05'
+const lastModified = process.env.SITE_LAST_MODIFIED ?? '2026-09-06'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

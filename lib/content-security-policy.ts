@@ -15,7 +15,7 @@ export function createContentSecurityPolicy({
     form-action 'self';
     object-src 'none';
     script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDevelopment ? " 'unsafe-eval'" : ''};
-    style-src 'self' 'nonce-${nonce}';
+    style-src 'self'${isDevelopment ? " 'unsafe-inline'" : ` 'nonce-${nonce}'`};
     style-src-attr 'unsafe-inline';
     img-src 'self' data: blob: https://img.youtube.com;
     font-src 'self' data:;
