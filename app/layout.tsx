@@ -101,7 +101,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           nonce={nonce}
           dangerouslySetInnerHTML={{
             __html:
-              "try{if(sessionStorage.getItem('intro:played:v1')==='1')document.documentElement.classList.add('intro-played')}catch(e){}",
+              "try{const e=document.documentElement,s=matchMedia('(max-width: 767px)').matches;if(sessionStorage.getItem('intro:played:v1')==='1'||s)e.classList.add('intro-played');else e.classList.add('intro-active')}catch(e){document.documentElement.classList.add('intro-active')}",
           }}
         />
       </head>

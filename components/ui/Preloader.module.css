@@ -64,6 +64,11 @@
   align-items: center;
   gap: 1.1rem;
   padding-inline: 1.5rem;
+  visibility: hidden;
+}
+
+.wordmarkRowReady {
+  visibility: visible;
 }
 
 .wordmark {
@@ -78,6 +83,9 @@
   color: rgb(245 241 232);
   white-space: nowrap;
   opacity: 0;
+}
+
+.wordmarkRowReady .wordmark {
   animation: preloader-wordmark-in 400ms ease-out both;
 }
 
@@ -109,6 +117,9 @@
   opacity: 0;
   transform: scaleX(0.35);
   transform-origin: center center;
+}
+
+.wordmarkRowReady .divider {
   animation: preloader-divider-in 300ms 250ms ease-out both;
 }
 
@@ -119,6 +130,9 @@
   text-transform: uppercase;
   color: rgb(var(--c-khaki));
   opacity: 0;
+}
+
+.wordmarkRowReady .subtitle {
   animation: preloader-subtitle-in 200ms 400ms ease-out both;
 }
 
@@ -149,19 +163,19 @@
     animation: none;
   }
 
-  .wordmark,
-  .divider,
-  .subtitle {
+  .wordmarkRowReady .wordmark,
+  .wordmarkRowReady .divider,
+  .wordmarkRowReady .subtitle {
     animation: none;
     transform: none;
   }
 
-  .wordmark,
-  .divider {
+  .wordmarkRowReady .wordmark,
+  .wordmarkRowReady .divider {
     opacity: 1;
   }
 
-  .subtitle {
+  .wordmarkRowReady .subtitle {
     opacity: 0.7;
   }
 }

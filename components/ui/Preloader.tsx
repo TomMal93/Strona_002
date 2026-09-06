@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { usePreloaderGate } from './usePreloaderGate'
 import styles from './Preloader.module.css'
 
@@ -9,8 +9,16 @@ const FADE_OUT_MS = 400
 
 type Phase = 'visible' | 'leaving' | 'gone'
 
+function finishIntro() {
+  document.documentElement.classList.remove('intro-active')
+  document.body.classList.remove('intro-active')
+  window.dispatchEvent(new CustomEvent('intro:done'))
+}
+
 export default function Preloader() {
   const [phase, setPhase] = useState<Phase>('visible')
+  const [typographyReady, setTypographyReady] = useState(false)
+  const wordmarkRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     let alreadyPlayed = false
@@ -31,15 +39,40 @@ export default function Preloader() {
           // sessionStorage is optional.
         }
       }
-      document.body.classList.remove('intro-active')
-      window.dispatchEvent(new CustomEvent('intro:done'))
+      finishIntro()
       setPhase('gone')
       return
     }
 
+    document.documentElement.classList.add('intro-active')
     document.body.classList.add('intro-active')
     window.dispatchEvent(new CustomEvent('intro:active'))
   }, [])
+
+  useEffect(() => {
+    if (phase !== 'visible') return
+
+    const wordmark = wordmarkRef.current
+    if (!wordmark || !document.fonts) {
+      setTypographyReady(true)
+      return
+    }
+
+    const { fontFamily } = window.getComputedStyle(wordmark)
+    let cancelled = false
+
+    void document.fonts
+      .load(`400 16px ${fontFamily}`, 'MALESZYK.MEDIA Fotografia & Film')
+      .then(() => {
+        if (!cancelled) setTypographyReady(true)
+      }, () => {
+        if (!cancelled) setTypographyReady(true)
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [phase])
 
   const gate = usePreloaderGate(phase === 'visible')
 
@@ -51,10 +84,8 @@ export default function Preloader() {
     } catch {
       // sessionStorage is optional.
     }
-    document.body.classList.remove('intro-active')
-    window.dispatchEvent(new CustomEvent('intro:done'))
-
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      finishIntro()
       setPhase('gone')
       return
     }
@@ -65,11 +96,15 @@ export default function Preloader() {
   useEffect(() => {
     if (phase !== 'leaving') return
 
-    const timeoutId = window.setTimeout(() => setPhase('gone'), FADE_OUT_MS)
+    const timeoutId = window.setTimeout(() => {
+      finishIntro()
+      setPhase('gone')
+    }, FADE_OUT_MS)
     return () => window.clearTimeout(timeoutId)
   }, [phase])
 
   useEffect(() => () => {
+    document.documentElement.classList.remove('intro-active')
     document.body.classList.remove('intro-active')
   }, [])
 
@@ -84,8 +119,10 @@ export default function Preloader() {
       data-intro-overlay=""
     >
       <div aria-hidden="true" className={styles.halo} />
-      <div className={styles.wordmarkRow}>
-        <div className={styles.wordmark}>
+      <div
+        className={`${styles.wordmarkRow} ${typographyReady ? styles.wordmarkRowReady : ''}`}
+      >
+        <div ref={wordmarkRef} className={styles.wordmark}>
           MALESZYK
           <span className={styles.dot}>.</span>
           <span className={styles.media}>MEDIA</span>

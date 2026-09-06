@@ -39,7 +39,10 @@
     outline-offset: 3px;
   }
 
-  /* While the intro overlay is up, lock native scroll. Lenis is stopped via event listener. */
+  /* Lock native scroll before the first paint and keep it locked until the
+     overlay is gone. This prevents the scrollbar from shifting the centred
+     wordmark during hydration or the exit animation. */
+  html.intro-active,
   body.intro-active {
     overflow: hidden;
   }

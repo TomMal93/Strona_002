@@ -326,12 +326,15 @@ test.describe('P2 — zachowania runtime', () => {
     const firstPage = await firstContext.newPage()
     await firstPage.goto('/', { waitUntil: 'domcontentloaded' })
     await expect(firstPage.locator('[data-intro-overlay]')).toBeVisible()
+    await expect(firstPage.locator('html')).toHaveClass(/intro-active/)
+    await expect(firstPage.locator('body')).toHaveClass(/intro-active/)
     await expect(firstPage.locator('[data-intro-overlay]')).toBeHidden({ timeout: 4_000 })
     expect(await firstPage.evaluate(() => sessionStorage.getItem('intro:played:v1'))).toBe('1')
     await expect.poll(() => firstPage.evaluate(() => ({
+      rootLocked: document.documentElement.classList.contains('intro-active'),
       bodyLocked: document.body.classList.contains('intro-active'),
       lenisStopped: document.documentElement.classList.contains('lenis-stopped'),
-    }))).toEqual({ bodyLocked: false, lenisStopped: false })
+    }))).toEqual({ rootLocked: false, bodyLocked: false, lenisStopped: false })
     const initialScrollY = await firstPage.evaluate(() => scrollY)
     await firstPage.mouse.wheel(0, 900)
     await expect.poll(() => firstPage.evaluate(() => scrollY)).toBeGreaterThan(initialScrollY)
