@@ -9,7 +9,6 @@ export type AboutAnimationRefs = {
   titleRef: RefObject<HTMLHeadingElement>
   videoRef: RefObject<HTMLDivElement>
   viewfinderRef: RefObject<HTMLDivElement>
-  backdropRef: RefObject<HTMLDivElement>
   copyPanelRef: RefObject<HTMLDivElement>
   leadRef: RefObject<HTMLParagraphElement>
   descriptionRef: RefObject<HTMLParagraphElement>
@@ -21,7 +20,7 @@ export type AboutAnimationRefs = {
  * Orchestrated entrance for the About section (desktop & mobile).
  *
  * Sequence:
- * 1. Section title, HUD header & the dark viewfinder backdrop slide in first.
+ * 1. Section title and HUD header slide in first.
  * 2. Literally moments later: viewfinder HUD, portrait video, lead copy,
  *    statement panel, feature badges, and CTA buttons enter cleanly in order.
  */
@@ -35,11 +34,6 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     ).matches
-    // Firefox is much more expensive than Chromium when a large masked layer
-    // is translated. Keep the backdrop reveal opacity-only there; the CSS
-    // module also supplies a cheaper static visual fallback for Gecko.
-    const usesGeckoRenderer = CSS.supports('-moz-appearance', 'none')
-
     const getElements = () => {
       const viewfinder = refs.viewfinderRef.current
       const statement = refs.statementRef.current
@@ -49,7 +43,6 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
       return {
         title: refs.titleRef.current,
         viewfinder,
-        backdrop: refs.backdropRef.current,
         copyPanel: refs.copyPanelRef.current,
         video,
         lead: refs.leadRef.current,
@@ -95,7 +88,6 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
       if (prefersReducedMotion) {
         const allElements = [
           elements.title,
-          elements.backdrop,
           elements.copyPanel,
           elements.video,
           elements.lead,
@@ -127,14 +119,6 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
       }
 
       // Initial hidden states
-      if (elements.backdrop) {
-        elements.backdrop.style.opacity = '0'
-        elements.backdrop.style.visibility = 'hidden'
-        elements.backdrop.style.transform = usesGeckoRenderer
-          ? 'none'
-          : 'translate3d(0, 40px, 0)'
-      }
-
       if (elements.title) {
         elements.title.style.opacity = '0'
         elements.title.style.visibility = 'hidden'
@@ -242,7 +226,6 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
 
         const allAnimatedElements = [
           elements.title,
-          elements.backdrop,
           elements.copyPanel,
           elements.video,
           elements.lead,
@@ -266,12 +249,6 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
         }
 
         // Set GSAP initial states
-        if (elements.backdrop) {
-          gsap.set(elements.backdrop, {
-            autoAlpha: 0,
-            y: usesGeckoRenderer ? 0 : 40,
-          })
-        }
         if (elements.title) {
           gsap.set(elements.title, { autoAlpha: 0, y: 24 })
         }
@@ -326,20 +303,7 @@ export function useAboutAnimations(refs: AboutAnimationRefs): void {
           },
         })
 
-        // ── Phase 1: Czarne tło wjeżdża pierwsze + Title & HUD ────────────
-        if (elements.backdrop) {
-          tl.to(
-            elements.backdrop,
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.7,
-              ease: 'power3.out',
-            },
-            0,
-          )
-        }
-
+        // ── Phase 1: Title & HUD ─────────────────────────────────────────
         if (elements.title) {
           tl.to(
             elements.title,

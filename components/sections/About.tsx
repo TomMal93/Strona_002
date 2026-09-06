@@ -29,7 +29,6 @@ export default function About() {
   const videoRef = useRef<HTMLDivElement>(null!)
   const mobileVideoRef = useRef<HTMLDivElement>(null!)
   const viewfinderRef = useRef<HTMLDivElement>(null!)
-  const backdropRef = useRef<HTMLDivElement>(null!)
   const copyPanelRef = useRef<HTMLDivElement>(null!)
   const leadRef = useRef<HTMLParagraphElement>(null!)
   const descriptionRef = useRef<HTMLParagraphElement>(null!)
@@ -62,7 +61,6 @@ export default function About() {
     titleRef,
     videoRef,
     viewfinderRef,
-    backdropRef,
     copyPanelRef,
     leadRef,
     descriptionRef,
@@ -106,7 +104,6 @@ export default function About() {
 
         {/* One desktop viewfinder now frames the portrait and both copy panels. */}
         <div ref={viewfinderRef} className={styles.viewfinder}>
-          <div ref={backdropRef} className={styles.viewfinderBackdrop} aria-hidden="true" />
           <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTL} ${styles.outerCorner}`} />
           <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerTR} ${styles.outerCorner}`} />
           <span aria-hidden="true" className={`${styles.cornerMark} ${styles.cornerBL} ${styles.outerCorner}`} />
@@ -137,7 +134,6 @@ export default function About() {
               <div ref={videoRef} className={cn('relative mx-auto aspect-[3/4] w-3/4', styles.aboutVideoFrame)}>
                 <video
                   aria-label={siteContent.about.imageAlt}
-                  poster="/images/Hero.webp"
                   autoPlay
                   loop
                   muted

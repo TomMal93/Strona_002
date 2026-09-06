@@ -409,10 +409,6 @@
   display: none;
 }
 
-.viewfinderBackdrop {
-  display: none;
-}
-
 @media (width >= 48rem) {
   .viewfinder {
     position: relative;
@@ -425,29 +421,13 @@
     padding: 2.8rem 2rem 2rem;
   }
 
-  .viewfinderBackdrop {
-    display: block;
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .viewfinderBackdrop::before,
-  .viewfinderBackdrop::after {
+  .viewfinder::before {
     content: '';
     position: absolute;
     inset: calc(-6.6rem - 75px) calc(-9.36rem - 120px) calc(-6.6rem - 50px) calc(-11.23rem - 144px);
+    z-index: -1;
     pointer-events: none;
-  }
-
-  .viewfinderBackdrop::before {
-    z-index: -2;
     background: url('/images/about/about-brush-backdrop.webp') center / 100% 100% no-repeat;
-  }
-
-  .viewfinderBackdrop::after {
-    display: none;
   }
 
   .outerCorner {
@@ -1069,11 +1049,6 @@
   }
 
   .viewfinderRecText {
-    animation: none;
-  }
-
-  .viewfinderBackdrop::before,
-  .viewfinderBackdrop::after {
     animation: none;
   }
 
