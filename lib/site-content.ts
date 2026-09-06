@@ -343,7 +343,8 @@ export const siteContent = {
     },
     cta: {
       title: 'Porozmawiajmy o Twoim projekcie',
-      lead: 'Napisz, zadzwoń albo umów krótką rozmowę — powiem Ci, co mogę zrobić, a Ty zdecydujesz.',
+      lead:
+        'Zróbmy pierwszy krok.\nFilm ślubny, relacja z wydarzenia czy materiał dla Twojej marki. Opowiedz mi o swoim pomyśle, a razem stworzymy coś, do czego chce się wracać.',
       label: 'Zapytaj o termin',
       href: '/contact',
     },
