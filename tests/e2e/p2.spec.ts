@@ -364,6 +364,36 @@ test.describe('P2 — zachowania runtime', () => {
     await expect(rail).toBeVisible()
   })
 
+  test('powrót z kontaktu przez Stronę główną przewija do początku Hero', async ({ page }) => {
+    await skipIntro(page)
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await visit(page, '/oferta')
+
+    await page.getByRole('link', { name: 'Zapytaj o termin' }).click()
+    await expect(page).toHaveURL(/\/contact$/)
+
+    await page.getByRole('link', { name: 'STRONA GŁÓWNA', exact: true }).click()
+    await expect(page).toHaveURL(/\/#hero$/)
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(2)
+    await expect.poll(() => page.locator('#hero').evaluate((element) => (
+      Math.abs(element.getBoundingClientRect().top)
+    ))).toBeLessThan(2)
+  })
+
+  test('wejście na Ofertę z przewiniętej strony zaczyna się od góry', async ({ page }) => {
+    await skipIntro(page)
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await visit(page, '/')
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0)
+
+    await page.getByRole('link', { name: 'OFERTA', exact: true }).first().click()
+    await expect(page).toHaveURL(/\/oferta$/)
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(2)
+  })
+
   test('404 jest responsywne i zawiera działający powrót', async ({ page }) => {
     await skipIntro(page)
     await page.setViewportSize({ width: 360, height: 800 })
