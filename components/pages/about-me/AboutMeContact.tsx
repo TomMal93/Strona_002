@@ -66,7 +66,8 @@ export default function AboutMeContact() {
               </div>
 
               <p ref={subtitleRef} className={styles.subtitle}>
-                Masz wydarzenie, historię albo pomysł, który warto pokazać? Opowiedz mi o nim.
+                Masz wydarzenie, historię albo pomysł, który warto pokazać?<br />
+                Opowiedz mi o nim.<br />
                 Wspólnie ustalimy, jak zamienić go w film z charakterem.
               </p>
             </div>

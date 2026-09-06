@@ -360,7 +360,7 @@
   margin-bottom: 0.35rem;
   color: rgb(232 193 137 / 0.76);
   font-family: var(--font-bebas), sans-serif;
-  font-size: 1.25rem;
+  font-size: calc(1.25rem + 1px);
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -370,7 +370,7 @@
   margin: 0;
   color: rgb(255 255 255 / 0.48);
   font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.74rem;
+  font-size: calc(0.74rem + 2px);
   line-height: 1.65;
 }
 
@@ -769,10 +769,13 @@
     font-size: 50px;
   }
 
-  .sceneCopy > p,
-  .noteRow p {
+  .sceneCopy > p {
     /* 20.3125px * 0.64 zoom = 13px */
     font-size: 20.3125px;
+  }
+
+  .noteRow p {
+    font-size: 22.3125px;
   }
 
   .tags span,
@@ -801,8 +804,7 @@
   }
 
   .noteRow strong {
-    /* 21.875px * 0.64 zoom = 14px */
-    font-size: 21.875px;
+    font-size: 22.875px;
   }
 
   .quoteFooter {
@@ -832,10 +834,13 @@
     font-size: 18.75px;
   }
 
-  .sceneCopy > p,
-  .noteRow p {
+  .sceneCopy > p {
     /* 17.5px * 0.8 zoom = 14px */
     font-size: 17.5px;
+  }
+
+  .noteRow p {
+    font-size: 19.5px;
   }
 
   .tags span,
@@ -891,7 +896,7 @@
   }
 
   .noteRow p {
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.7;
   }
 }
