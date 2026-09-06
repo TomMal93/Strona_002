@@ -79,7 +79,7 @@
      only the surrounding black field is feathered into the section. */
   -webkit-mask-image:
     radial-gradient(
-      ellipse 47.75% 50% at 52.25% 50%,
+      ellipse 32% 50% at 68% 50%,
       #000 0%,
       #000 70%,
       rgb(0 0 0 / 0.78) 80%,
@@ -87,7 +87,7 @@
       transparent 100%
     ),
     radial-gradient(
-      ellipse 52% 47% at 50.25% 40%,
+      ellipse 33.125% 47% at 69.125% 40%,
       #000 0%,
       #000 56%,
       rgb(0 0 0 / 0.82) 70%,
@@ -95,7 +95,7 @@
       transparent 100%
     ),
     radial-gradient(
-      ellipse 49% 44% at 48.25% 72%,
+      ellipse 30.625% 44% at 66.625% 72%,
       #000 0%,
       #000 48%,
       rgb(0 0 0 / 0.78) 66%,
@@ -105,7 +105,7 @@
   -webkit-mask-composite: source-in, source-over;
   mask-image:
     radial-gradient(
-      ellipse 47.75% 50% at 52.25% 50%,
+      ellipse 32% 50% at 68% 50%,
       #000 0%,
       #000 70%,
       rgb(0 0 0 / 0.78) 80%,
@@ -113,7 +113,7 @@
       transparent 100%
     ),
     radial-gradient(
-      ellipse 52% 47% at 50.25% 40%,
+      ellipse 33.125% 47% at 69.125% 40%,
       #000 0%,
       #000 56%,
       rgb(0 0 0 / 0.82) 70%,
@@ -121,7 +121,7 @@
       transparent 100%
     ),
     radial-gradient(
-      ellipse 49% 44% at 48.25% 72%,
+      ellipse 30.625% 44% at 66.625% 72%,
       #000 0%,
       #000 48%,
       rgb(0 0 0 / 0.78) 66%,
@@ -434,8 +434,8 @@
         rgb(0 0 0 / 0.46) 54%,
         transparent 100%
       ),
-      url('/images/about/about-brush-backdrop.webp') center / 100% 100% no-repeat;
-    filter: blur(24px) brightness(0.58);
+      url('/images/about/about-brush-backdrop-blur-v3.webp') center / 100% 100% no-repeat;
+    filter: brightness(0.58);
   }
 
   .outerCorner {
