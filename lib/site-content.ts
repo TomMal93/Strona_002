@@ -86,7 +86,7 @@ export const siteContent = {
       },
       {
         quote:
-          'Relacja została zrealizowana fantastycznie. Kamera idealnie oddała klimat wydarzenia — energię sceny i wyjątkową atmosferę. Montaż jest dynamiczny, a ujęcia bardzo klimatyczne, dzięki czemu film świetnie oddaje charakter całego koncertu.',
+          'Relacja została zrealizowana fantastycznie. Film doskonale uchwycił energię sceny i wyjątkową atmosferę wydarzenia. Montaż jest dynamiczny, a ujęcia bardzo klimatyczne, dzięki czemu całość świetnie oddaje charakter koncertu.',
         author: 'Echo Rodu',
         context: 'Zespół muzyczny - Relacja z koncertu',
         tagline: 'KLIMAT',
@@ -211,8 +211,8 @@ export const siteContent = {
         label: 'KONTAKT',
         title: 'Napisz do mnie',
         description:
-          'Opisujesz swoje wydarzenie, termin i lokalizację. Odpowiadam w ciągu 24h z wstępnym planem.',
-        timeline: 'do 24h',
+          'Opisujesz swoje wydarzenie, termin i lokalizację. Odpowiadam w ciągu 48h z wstępnym planem.',
+        timeline: 'do 48h',
       },
       {
         number: '02',
@@ -243,7 +243,7 @@ export const siteContent = {
   faq: {
     title: 'FAQ',
     subtitle:
-      'Najczęściej zadawane pytania.\nOdpowiedzi, zanim zdążysz zapytać.',
+      'Odpowiedzi na pytania, które mogą pojawić się przed realizacją.',
     hudLabelLeft: 'ANSWERS',
     hudLabelRight: 'SCENE 07 / 08',
     items: [
