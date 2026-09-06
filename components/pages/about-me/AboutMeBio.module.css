@@ -323,7 +323,13 @@
     height: auto;
     background: linear-gradient(180deg, transparent, rgb(var(--c-gold) / .2) 30%, rgb(var(--c-gold) / .2) 70%, transparent);
   }
-  .infoTitle { font-size: 1rem; line-height: 1.15; }
+  .infoBlock + .infoBlock .infoTitle {
+    font-size: clamp(.65rem, 3.2vw, 1rem);
+    line-height: 1.15;
+    letter-spacing: .08em;
+    white-space: nowrap;
+  }
+  .mobileHiddenSpecialty { display: none; }
   .detailList li { font-size: .78rem; }
   .statsBlock { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 0; padding-block: 1.5rem; }
   .statItem { padding-inline: .2rem; }

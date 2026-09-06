@@ -96,7 +96,14 @@ export default function AboutMeBio() {
                 <article data-bio-block className={styles.infoBlock}>
                   <h3 className={styles.infoTitle}>{profile.specialtiesLabel}</h3>
                   <ul className={styles.detailList}>
-                    {profile.specialties.map((item) => <li key={item}>{item}</li>)}
+                    {profile.specialties.map((item) => (
+                      <li
+                        key={item}
+                        className={item === 'Dynamiczne tempo wydarzeń' ? styles.mobileHiddenSpecialty : undefined}
+                      >
+                        {item}
+                      </li>
+                    ))}
                   </ul>
                 </article>
               </div>
