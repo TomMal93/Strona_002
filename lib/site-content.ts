@@ -398,12 +398,12 @@ export const siteContent = {
         || 'Śluby pełne emocji. Studniówki z energią. Eventy z charakterem. Koncerty w dynamicznych kadrach. Filmy promocyjne dla marek. Realizacje terenowe i ujęcia z drona. Cała Polska i zagranica.',
       specialtiesLabel: 'W czym się specjalizuję',
       specialties: [
-        'Emocje zamknięte w filmowych kadrach',
-        'Historie opowiedziane obrazem i dźwiękiem',
-        'Gesty i spojrzenia, których nie da się powtórzyć',
-        'Energia wydarzeń, którą można poczuć ponownie',
-        'Charakter marki pokazany bez zbędnych słów',
-        'Wspomnienia, które z czasem nabierają wartości',
+        'Autentyczne emocje bez pozowania',
+        'Spójne historie opowiedziane obrazem',
+        'Naturalne gesty, reakcje i detale',
+        'Dynamiczne tempo wydarzeń',
+        'Wyrazisty charakter marki',
+        'Filmowy obraz, dźwięk i montaż',
       ],
       gearLabel: 'Zaplecze techniczne',
       gear: [
