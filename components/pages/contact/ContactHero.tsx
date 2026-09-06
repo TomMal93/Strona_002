@@ -252,6 +252,7 @@ export default function ContactHero() {
           <MonitorFigure
             forwardRef={monitorRef}
             className={styles.monitorDesktop}
+            priority
           />
         </div>
 
