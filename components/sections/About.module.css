@@ -427,7 +427,15 @@
     inset: calc(-6.6rem - 75px) calc(-9.36rem - 120px) calc(-6.6rem - 50px) calc(-11.23rem - 144px);
     z-index: -1;
     pointer-events: none;
-    background: url('/images/about/about-brush-backdrop.webp') center / 100% 100% no-repeat;
+    background:
+      radial-gradient(
+        ellipse 28% 46% at 28% 50%,
+        rgb(0 0 0 / 0.68) 0%,
+        rgb(0 0 0 / 0.46) 54%,
+        transparent 100%
+      ),
+      url('/images/about/about-brush-backdrop.webp') center / 100% 100% no-repeat;
+    filter: blur(24px) brightness(0.58);
   }
 
   .outerCorner {
