@@ -395,7 +395,7 @@ export const siteContent = {
       locationLabel: 'Gdzie pracuję',
       locationText:
         process.env.NEXT_PUBLIC_ABOUTME_PROFILE_LOCATION
-        || 'Śluby pełne emocji. Studniówki z energią. Eventy z charakterem. Koncerty w dynamicznych kadrach. Filmy promocyjne dla marek. Realizacje terenowe i ujęcia z drona. Cała Polska i zagranica.',
+        || 'Śluby pełne emocji. Eventy z charakterem. Filmy promocyjne dla marek. Realizacje terenowe i ujęcia z drona. Cała Polska i zagranica.',
       specialtiesLabel: 'W czym się specjalizuję',
       specialties: [
         'Autentyczne emocje bez pozowania',
