@@ -91,9 +91,11 @@ export function useWhyIDoThisVideoAnimations(refs: WhyIDoThisVideoAnimationRefs)
           }, '-=0.06')
         }
 
-        tl.to(titleRef.current, {
-          autoAlpha: 1, y: 0, duration: 0.62, ease: 'power3.out',
-        }, '-=0.08')
+        if (titleRef.current) {
+          tl.to(titleRef.current, {
+            autoAlpha: 1, y: 0, duration: 0.62, ease: 'power3.out',
+          }, '-=0.08')
+        }
 
         if (subtitleRef.current) {
           tl.to(subtitleRef.current, {

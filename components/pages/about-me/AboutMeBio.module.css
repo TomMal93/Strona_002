@@ -226,9 +226,20 @@
     text-shadow: 0 0 12px rgb(213 169 91 / .28);
   }
 
-  .detailList li:hover {
+  .infoBlock:hover .detailList li {
     color: rgb(255 246 225 / .78);
     text-shadow: 0 0 9px rgb(213 169 91 / .16);
+  }
+
+  .detailList li::before {
+    transition:
+      color 300ms ease,
+      text-shadow 300ms ease;
+  }
+
+  .infoBlock:hover .detailList li::before {
+    color: rgb(239 190 111 / 1);
+    text-shadow: 0 0 8px rgb(213 169 91 / .32);
   }
 
   .portraitFrame {
