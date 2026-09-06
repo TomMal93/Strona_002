@@ -204,7 +204,6 @@ export default function Promo() {
         >
           <span aria-hidden="true" className={styles.frameCodec}>H.265 / LOG3</span>
           <span aria-hidden="true" className={styles.frameDuration}>00:00:16</span>
-          <span aria-hidden="true" className={styles.framePreview}>Director&apos;s preview</span>
           <span aria-hidden="true" data-corner-mark className={`${styles.cornerMark} ${styles.cornerTL}`} />
           <span aria-hidden="true" data-corner-mark className={`${styles.cornerMark} ${styles.cornerTR}`} />
           <span aria-hidden="true" data-corner-mark className={`${styles.cornerMark} ${styles.cornerBL}`} />

@@ -83,8 +83,7 @@
 }
 
 .frameCodec,
-.frameDuration,
-.framePreview {
+.frameDuration {
   display: none;
 }
 
@@ -764,8 +763,7 @@
   }
 
   .frameCodec,
-  .frameDuration,
-  .framePreview {
+  .frameDuration {
     position: absolute;
     z-index: 5;
     display: block;
@@ -786,11 +784,6 @@
   .frameDuration {
     top: 0.65rem;
     right: 1.15rem;
-  }
-
-  .framePreview {
-    bottom: 0.72rem;
-    left: 1.15rem;
   }
 
   .ytGrid {

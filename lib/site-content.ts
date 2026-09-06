@@ -50,7 +50,7 @@ export const siteContent = {
     title: process.env.NEXT_PUBLIC_PROMO_TITLE || 'Moja praca w akcji',
     subtitle:
       process.env.NEXT_PUBLIC_PROMO_SUBTITLE
-      || 'Krótki przegląd tego, co robię - od scenariusza po montażownię.',
+      || 'Zobacz historie, które opowiedziałem obrazem.',
     heroVideo: {
       src: process.env.NEXT_PUBLIC_PROMO_VIDEO_SRC || '/videos/promo-reel.webm',
       poster: process.env.NEXT_PUBLIC_PROMO_VIDEO_POSTER || '/images/portfolio/promo-poster.webp',
@@ -123,7 +123,7 @@ export const siteContent = {
     title: process.env.NEXT_PUBLIC_SERVICES_TITLE || 'Oferta',
     subtitle:
       process.env.NEXT_PUBLIC_SERVICES_SUBTITLE
-      || 'Od pierwszego ujęcia po finalny montaż.\nTworzę filmy, które budzą emocje i zostają w pamięci.',
+      || 'Ważne chwile i dobre pomysły zasługują na wyjątkową oprawę.',
     ctaLabel:
       process.env.NEXT_PUBLIC_SERVICES_CTA_LABEL
       || 'Zapytaj o termin',
@@ -202,7 +202,7 @@ export const siteContent = {
   process: {
     title: 'Proces',
     subtitle:
-      'Ty przynosisz historię, ja dbam o każdy kolejny kadr.\nRazem przechodzimy od pomysłu do premiery.',
+      'Wspólnie ustalamy kierunek. Ja zamieniam go w gotowy film.',
     hudLabelLeft: 'WORKFLOW',
     hudLabelRight: 'SCENE 05 / 08',
     steps: [
